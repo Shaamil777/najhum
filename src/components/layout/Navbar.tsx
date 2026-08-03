@@ -1,8 +1,23 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.65) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -18,7 +33,13 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
+    <header
+      className={`fixed top-4 left-0 right-0 z-50 pointer-events-none transition-all duration-700 ease-out ${
+        isScrolled
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-12 pointer-events-none"
+      }`}
+    >
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 sm:px-10">
         {/* Left/Center: Logo + Main Nav Links combined in floating rounded pill */}
         <div className="flex items-center gap-6 sm:gap-8 rounded-full bg-[#f8f8f8] px-6 py-2.5 pointer-events-auto">
