@@ -4,22 +4,30 @@ This document defines the authoritative engineering, performance, responsiveness
 
 ---
 
-## 1. RESPONSIVE DESIGN & DEVICE-SPECIFIC LAYOUT STANDARDS
+## 1. UNIVERSAL RESPONSIVE EXCELLENCE & FOUR-TIER DEVICE LAYOUT STANDARDS
 
-Every section and component **MUST be meticulously optimized across three core screen breakpoints**:
+Every section, component, card, and interactive element **MUST be meticulously optimized across four distinct device viewport tiers**. Never build desktop-only layouts or generic responsive fallbacks; all UI builds must feel custom-tailored for each screen size:
 
 ### A. Mobile Phones (`< sm:` under 640px)
-- **High-Density Compact Layouts**: Avoid excessively long vertical pages. Use compact multi-column layouts (e.g., `grid-cols-2`) for cards and metrics where appropriate instead of stacking long single columns.
-- **Touch-Friendly & No Hover Dependency**: Ensure all interactive elements, buttons, and status tags are legible and interactive on touch screens without relying on mouse hover states.
-- **Responsive Typography & Spacing**: Use compact padding (`p-3.5 sm:p-6`) and prevent multi-line text wrapping on small screens by using responsive font sizing (`text-[8px] sm:text-xs`) and text clamping (`line-clamp-1`, `line-clamp-2`).
+- **High-Density Compact Bento & Grid Layouts**: Prevent endless vertical scrolling by converting tall stacked lists into compact horizontal bento grids (e.g., `grid-cols-2` or `grid-cols-3`) or swipable banners.
+- **Touch-Friendly & Zero Hover Contamination**: Interactive elements must work cleanly on touch screens. Never use global `hover:` or `group-hover:` styles that cause sticky hover states on touch devices; always scope hover interactions to desktop using `lg:hover:` and `lg:group-hover:`.
+- **Responsive Typography & Clamping**: Scale down headings and padding (`p-3 sm:p-5`), and use text clamping (`line-clamp-1`, `line-clamp-2`) for secondary descriptions on small screens.
 
 ### B. Tablets & iPads (`sm:` to `lg:` 640px – 1024px)
-- **Balanced Multi-Column Structures**: Utilize 2-column or 3-column grids (`sm:grid-cols-2 md:grid-cols-3`) with clean spacing.
-- **Readable Cards & Grids**: Ensure proper spacing, high readability, and clean alignment across both landscape and portrait orientations.
+- **Balanced Multi-Column Structures**: Utilize 2-column or 3-column bento grids (`sm:grid-cols-2 md:grid-cols-3`) with harmonious spacing.
+- **Touch Interaction Compliance**: Like mobile phones, tablets must use static, crisp card states without hover dependency (`lg:hover:` scoped only to desktop).
+- **Orientation Harmony**: Ensure layouts look balanced in both portrait and landscape iPad/tablet orientations.
 
-### C. Laptops, MacBooks & Desktops (`lg:`, `xl:`, `2xl:` 1024px+)
-- **Structured Desktop Layouts**: Utilize full multi-column grid structures (`lg:grid-cols-12`) with proper padding and visual balance.
-- **Viewport Fitting**: Ensure critical landing and hero experiences fit comfortably within standard laptop and desktop viewport heights (`min-h-screen` or `h-screen`) without awkward clipping.
+### C. Laptops & MacBooks (`lg:` 1024px – 1279px, `xl:` 1280px – 1535px)
+- **Compact High-End Laptop Layouts**: Specifically tailored for 13", 14", and 15" MacBook and laptop screens (`1024px – 1440px`).
+- **Controlled Proportions**: Keep main titles (`xl:text-5xl`), padding (`xl:py-24`), card widths (`xl:w-[75%]`), and spacing compact enough that sections never overflow, crowd, or require excessive vertical scrolling on laptop screens.
+- **Desktop Interactive Hover**: Enable refined micro-animations, lateral slides, and glow borders using `lg:hover:` and `lg:group-hover:`.
+
+### D. Windows Desktop Monitors & Full Screens (`2xl:` 1536px and wider)
+- **Grand, Expansive Desktop Scale**: Standard 1080p monitors (at 100% or 125% DPI) and 4K displays must use dedicated `2xl:` utilities so they are not constrained by MacBook laptop sizing.
+- **Restored Spacious Proportions**: Explicitly scale up section padding (`2xl:py-32 2xl:px-24`), grid spacing (`2xl:gap-28`), main headings (`2xl:text-6xl`), card widths (`2xl:w-[78%]`), and icon badges (`2xl:w-11 2xl:h-11`).
+- **Command-Center Grids**: Maximize wide-screen real estate (`2xl:max-w-[1536px]`) to deliver a high-impact, cinematic industrial aesthetic.
+
 
 ---
 
