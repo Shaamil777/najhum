@@ -30,7 +30,7 @@ export default function Hero() {
         if (playPromise !== undefined) {
           playPromise.catch(() => {
             videoEl.load();
-            videoEl.play().catch(() => {});
+            videoEl.play().catch(() => { });
           });
         }
       } else {
@@ -191,108 +191,115 @@ export default function Hero() {
       className="w-full min-h-screen bg-[#F8F8F8] px-4 sm:px-6 md:px-8 pt-20 sm:pt-19 pb-12 flex flex-col"
     >
       <div className="relative w-full h-[94vh] sm:h-[98vh] rounded-3xl overflow-hidden bg-najhum-black flex flex-col justify-between text-white shadow-2xl shrink-0">
-      {/* Dynamic Switching Video Background with Smooth Crossfade Transition */}
-      {videos.map((video, index) => (
-        <video
-          key={index}
-          ref={(el) => {
-            videoRefs.current[index] = el;
-          }}
-          autoPlay={index === 0}
-          muted
-          playsInline
-          preload="auto"
-          onEnded={handleVideoEnded}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-            activeVideoIndex === index ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
-          <source src={video.src} type={video.type} />
-          <source src={video.src} type="video/mp4" />
-        </video>
-      ))}
-
-      {/* High-Contrast Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10 pointer-events-none" />
-
-      {/* Left Side Vertical Video Indicators & Scroll Badge */}
-      <div className="absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 z-20 hidden sm:flex flex-col items-center gap-8">
-        <div className="flex flex-col items-center gap-3">
-          {videos.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveVideoIndex(index)}
-              aria-label={`Switch to video ${index + 1}`}
-              className={`w-1 rounded-full transition-all duration-700 cursor-pointer ${
-                activeVideoIndex === index
-                  ? "h-28 bg-white shadow-[0_0_16px_rgba(255,255,255,0.9)]"
-                  : "h-16 bg-white/30 hover:bg-white/60"
+        {/* Dynamic Switching Video Background with Smooth Crossfade Transition */}
+        {videos.map((video, index) => (
+          <video
+            key={index}
+            ref={(el) => {
+              videoRefs.current[index] = el;
+            }}
+            autoPlay={index === 0}
+            muted
+            playsInline
+            preload="auto"
+            onEnded={handleVideoEnded}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${activeVideoIndex === index ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
-            />
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center gap-2 mt-8 text-white/50">
-          <span
-            className="text-[10px] tracking-[0.3em] font-mono uppercase"
-            style={{ writingMode: "vertical-lr" }}
           >
-            SCROLL
-          </span>
-          <span className="text-white text-xs">&darr;</span>
+            <source src={video.src} type={video.type} />
+            <source src={video.src} type="video/mp4" />
+          </video>
+        ))}
+
+        {/* High-Contrast Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10 pointer-events-none" />
+
+        {/* Left Side Vertical Video Indicators & Scroll Badge */}
+        <div className="absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 z-20 hidden sm:flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-3">
+            {videos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveVideoIndex(index)}
+                aria-label={`Switch to video ${index + 1}`}
+                className={`w-1 rounded-full transition-all duration-700 cursor-pointer ${activeVideoIndex === index
+                    ? "h-28 bg-white shadow-[0_0_16px_rgba(255,255,255,0.9)]"
+                    : "h-16 bg-white/30 hover:bg-white/60"
+                  }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex flex-col items-center gap-2 mt-8 text-white/50">
+            <span
+              className="text-[10px] tracking-[0.3em] font-mono uppercase"
+              style={{ writingMode: "vertical-lr" }}
+            >
+              SCROLL
+            </span>
+            <span className="text-white text-xs">&darr;</span>
+          </div>
         </div>
-      </div>
 
-      {/* Left-Aligned Hero Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-20 lg:px-28 flex flex-col justify-center flex-1 my-auto py-4 sm:py-6">
-        <div className="flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-[0.25em] text-white/70 uppercase">
-          INNOVATION &bull; IoT &bull; AI &bull; SUSTAINABILITY
-        </div>
-
-        <h1 className="mt-3 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-tight">
-          <span className="block text-white">Turning Complex</span>
-          <span className="block text-white">Infrastructure Into</span>
-          <span className="block bg-gradient-to-r from-najhum-blue via-cyan-400 to-blue-300 bg-clip-text text-transparent">
-            Intelligent Operations
-          </span>
-        </h1>
-
-        <p className="mt-4 text-sm sm:text-base text-neutral-300 max-w-xl font-light leading-relaxed">
-          Najhum Technologies empowers businesses with intelligent IoT platforms, EV charging management, and energy solutions that simplify operations, reduce costs, and accelerate sustainable growth.
-        </p>
-
-        <div className="mt-6 flex flex-wrap items-center gap-4">
-          <button className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-xs sm:text-sm font-bold tracking-wider text-najhum-black shadow-lg transition-transform hover:scale-105 uppercase cursor-pointer">
-            <span>EXPLORE SOLUTIONS</span>
-            <span className="text-sm font-black">&rarr;</span>
-          </button>
-          <button className="flex items-center gap-2 rounded-lg border border-white/30 bg-white/5 px-6 py-3 text-xs sm:text-sm font-semibold tracking-wider text-white backdrop-blur-md transition-all hover:border-white hover:bg-white/10 uppercase cursor-pointer">
-            <span className="text-sm font-black">&#9658;</span> WATCH COMPANY PROFILE
-          </button>
-        </div>
-      </div>
-
-      {/* Bottom Horizontal Analytics & Metric Strip (Mapped Array) */}
-      <div className="relative z-20 w-full border-t border-white/10 bg-black/60 backdrop-blur-md px-4 sm:px-10 py-3 sm:py-3.5">
-        <div className="mx-auto flex max-w-7xl flex-nowrap items-center justify-between gap-2 sm:gap-6 text-white/85 overflow-x-auto">
-          {analyticsMetrics.map((metric, index) => (
-            <div key={index} className="flex items-center gap-2 sm:gap-6 whitespace-nowrap">
-              <div className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer hover:text-white transition-colors">
-                <span className={`text-sm sm:text-base md:text-lg font-medium tracking-normal ${metric.valueColor}`}>
-                  {metric.value}
-                </span>
-                <span className="text-[10px] sm:text-xs tracking-[0.15em] text-white/70 group-hover:text-white transition-colors uppercase">
-                  {metric.label}
-                </span>
-              </div>
-              {index < analyticsMetrics.length - 1 && (
-                <div className="h-5 sm:h-6 w-[1px] bg-white/15 flex-shrink-0 ml-2 sm:ml-4" />
-              )}
+        {/* Hero Content */}
+        <div className="relative z-20 w-full max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16 flex flex-col justify-center flex-1 my-auto py-4 sm:py-6">
+          {/* Right-Aligned Technical Categories / Domains */}
+          <div className="w-full flex flex-col items-end text-right mb-4 sm:mb-6">
+            <div className="w-16 sm:w-24 h-px bg-white/40 mb-3" />
+            <div className="text-xs sm:text-sm font-mono tracking-[0.25em] text-white/80 uppercase">
+              INDUSTRIAL IoT &bull; EV PLATFORMS &bull; SMART ENERGY &bull; AI
             </div>
-          ))}
+            <div className="mt-1.5 text-[10px] sm:text-xs font-mono tracking-[0.2em] text-white/50 uppercase">
+              Industry &bull; Mobility &bull; Energy &bull; Agriculture
+            </div>
+          </div>
+
+          {/* Left-Aligned Title, Description, and CTAs */}
+          <div className="max-w-4xl mt-10 sm:mt-16 md:mt-20 lg:mt-24">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bricolage font-black tracking-tight uppercase leading-tight">
+              <span className="block text-white">Powering Intelligent</span>
+              <span className="block bg-gradient-to-r from-najhum-blue via-cyan-400 to-blue-300 bg-clip-text text-transparent">
+                Infrastructure
+              </span>
+            </h1>
+
+            <p className="mt-4 text-sm sm:text-base text-neutral-300 max-w-xl font-light leading-relaxed">
+              Najhum Technologies empowers businesses with intelligent IoT platforms, EV charging management, and energy solutions that simplify operations, reduce costs, and accelerate sustainable growth.
+            </p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <button className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-xs sm:text-sm font-bold tracking-wider text-najhum-black shadow-lg transition-transform hover:scale-105 uppercase cursor-pointer">
+                <span>EXPLORE SOLUTIONS</span>
+                <span className="text-sm font-black">&rarr;</span>
+              </button>
+              <button className="flex items-center gap-2 rounded-lg border border-white/30 bg-white/5 px-6 py-3 text-xs sm:text-sm font-semibold tracking-wider text-white backdrop-blur-md transition-all hover:border-white hover:bg-white/10 uppercase cursor-pointer">
+                <span className="text-sm font-black">&#9658;</span> WATCH COMPANY PROFILE
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+
+        {/* Bottom Horizontal Analytics & Metric Strip (Mapped Array) */}
+        <div className="relative z-20 w-full border-t border-white/10 bg-black/60 backdrop-blur-md px-4 sm:px-10 py-3 sm:py-3.5">
+          <div className="mx-auto flex max-w-7xl flex-nowrap items-center justify-between gap-2 sm:gap-6 text-white/85 overflow-x-auto">
+            {analyticsMetrics.map((metric, index) => (
+              <div key={index} className="flex items-center gap-2 sm:gap-6 whitespace-nowrap">
+                <div className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer hover:text-white transition-colors">
+                  <span className={`text-sm sm:text-base md:text-lg font-medium tracking-normal ${metric.valueColor}`}>
+                    {metric.value}
+                  </span>
+                  <span className="text-[10px] sm:text-xs tracking-[0.15em] text-white/70 group-hover:text-white transition-colors uppercase">
+                    {metric.label}
+                  </span>
+                </div>
+                {index < analyticsMetrics.length - 1 && (
+                  <div className="h-5 sm:h-6 w-[1px] bg-white/15 flex-shrink-0 ml-2 sm:ml-4" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Trusted by Leading Enterprises Auto-Loop Logo Marquee (Part of Hero Section) */}

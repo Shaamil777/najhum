@@ -17,6 +17,9 @@
   --color-najhum-black: var(--najhum-black);
   --color-najhum-white: var(--najhum-white);
   --font-sans: var(--font-poppins), sans-serif;
+  --font-mono: var(--font-space-mono), monospace;
+  --font-bricolage: var(--font-bricolage), sans-serif;
+  --font-display: var(--font-bricolage), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
