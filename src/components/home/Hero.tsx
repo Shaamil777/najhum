@@ -208,7 +208,9 @@ export default function Hero() {
     desc: "Manage OCPP-compliant charging networks from one unified platform.",
     badge: "COMPATIBLE",
   },
+
 ];
+
 
   const enterpriseLogos = [
     {
@@ -328,9 +330,6 @@ export default function Hero() {
           <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono tracking-widest uppercase text-white/75 pointer-events-auto">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             <span>NAJHUM &bull; REAL-TIME ARCHITECTURE</span>
-            <span className="text-white/40 hidden md:inline ml-2">
-              EST. 2017 &bull; SCROLL &darr;
-            </span>
           </div>
 
           <div className="flex flex-col items-end text-right pointer-events-auto">
@@ -343,8 +342,143 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Seamless Zero-Gap Responsive Grid: Stacked on Mobile/Tablet, 12x6 Command Center on Desktop (lg+) fitted to 100vh for MacBook & Laptop sizes */}
-        <div className="relative z-10 w-full h-auto min-h-screen lg:h-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-12 lg:grid-rows-6 gap-0 pt-16 pb-4 px-4 sm:pt-20 sm:pb-6 sm:px-8 lg:pt-16 lg:pb-4 lg:px-10 xl:px-14">
+        {/* =====================================================================================
+            1. MOBILE, IPAD & TABLET HERO LAYOUT (< lg: under 1024px)
+            No scattered Bento/Image grids — Clean Title, Description & CTAs with matching Analytics below
+           ===================================================================================== */}
+        <div className="relative z-10 w-full block lg:hidden pt-24 pb-16 px-5 sm:px-8">
+          {/* Main Title, Description & CTAs Box */}
+          <div className="w-full  bg-najhum-black/30  p-6 sm:p-10 relative overflow-hidden">
+            {/* Subtle architectural grid pattern background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[10px] sm:text-xs font-mono tracking-widest uppercase text-cyan-400 mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                <span>01 // ARCHITECTURE &bull; IOT &amp; AI</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl font-bricolage font-black tracking-tight uppercase leading-none">
+                <span className="block text-white">Powering Intelligent</span>
+                <span className="block bg-gradient-to-r from-najhum-blue via-cyan-400 to-blue-300 bg-clip-text text-transparent">
+                  Infrastructure
+                </span>
+              </h1>
+
+              <p className="mt-3.5 text-sm sm:text-base text-neutral-300 max-w-xl font-light leading-relaxed">
+                Najhum Technologies empowers businesses with intelligent IoT platforms, EV charging management, and energy solutions that simplify operations, reduce costs, and accelerate sustainable growth.
+              </p>
+
+              <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <button
+                  onClick={() => scrollToSection("process")}
+                  className="flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider text-najhum-black shadow-lg transition-transform active:scale-95 uppercase cursor-pointer"
+                >
+                  <span>EXPLORE SOLUTIONS</span>
+                  <span className="text-xs sm:text-sm font-black">&rarr;</span>
+                </button>
+                <button
+                  onClick={() => scrollToSection("about")}
+                  className="flex items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/10 px-6 py-3.5 text-xs sm:text-sm font-semibold tracking-wider text-white backdrop-blur-md transition-all active:scale-95 uppercase cursor-pointer"
+                >
+                  <span className="text-xs sm:text-sm font-black">&#9658;</span> WATCH COMPANY PROFILE
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Analytics & Live Systems Section Below Title/CTA */}
+          <div className="mt-10 w-full">
+            <div className="flex items-center justify-between pb-3 border-b border-white/20 mb-6">
+              <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-white/90">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>TELEMETRY // LIVE SYSTEM ANALYTICS &amp; MODULES</span>
+              </div>
+              <span className="text-[10px] font-mono text-white/50 hidden sm:inline">100% ONLINE</span>
+            </div>
+
+            {/* Matching 2-col / 3-col Analytics Grid (White Architectural Cards) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 border border-neutral-200/40">
+              {[
+                {
+                  id: "m-iot",
+                  badge: "01 // PLATFORM",
+                  metric: "IoTRICs",
+                  title: "INDUSTRIAL IoT",
+                  desc: "Cloud platform for real-time asset monitoring, telemetry & predictive maintenance.",
+                  accent: "text-najhum-blue",
+                },
+                {
+                  id: "m-energy",
+                  badge: "02 // ENERGY",
+                  metric: "IEMS",
+                  title: "SMART ENERGY",
+                  desc: "Integrated energy & carbon management for factories and commercial facilities.",
+                  accent: "text-emerald-600",
+                },
+                {
+                  id: "m-ev",
+                  badge: "03 // MOBILITY",
+                  metric: "EVOLTICS",
+                  title: "EV CHARGING",
+                  desc: "Hardware-agnostic charging platform for fleet operators & public infrastructure.",
+                  accent: "text-blue-600",
+                },
+                {
+                  id: "m-esg",
+                  badge: "04 // SUSTAINABILITY",
+                  metric: "ESG",
+                  title: "CARBON MANAGEMENT",
+                  desc: "Monitor emissions, track sustainability KPIs & automate ESG compliance.",
+                  accent: "text-teal-600",
+                },
+                {
+                  id: "m-telemetry",
+                  badge: "05 // CONNECTIVITY",
+                  metric: "99.98%",
+                  title: "REAL-TIME DASHBOARDS",
+                  desc: "Live system telemetry, instant alert routing & automated operational workflows.",
+                  accent: "text-cyan-600",
+                },
+                {
+                  id: "m-ocpp",
+                  badge: "06 // PROTOCOL",
+                  metric: "OCPP 2.0.1",
+                  title: "HARDWARE AGNOSTIC",
+                  desc: "Seamless compatibility across diverse charger hardware & industrial sensor vendors.",
+                  accent: "text-indigo-600",
+                },
+              ].map((item) => (
+                <div
+                  key={item.id}
+                  className="border border-neutral-200 -ml-px -mt-px p-5 sm:p-6 bg-white text-najhum-black shadow-lg transition-all hover:scale-[1.01] hover:z-20 flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono tracking-widest text-neutral-500 mb-3">
+                    <span>{item.badge}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-najhum-black/30" />
+                  </div>
+                  <div>
+                    <div className={`text-2xl sm:text-3xl font-black tracking-tight font-bricolage ${item.accent}`}>
+                      {item.metric}
+                    </div>
+                    <div className="mt-1 text-xs font-mono font-bold uppercase tracking-wider text-najhum-black">
+                      {item.title}
+                    </div>
+                  </div>
+                  <p className="mt-3 text-xs text-neutral-600 font-normal leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* =====================================================================================
+            2. DESKTOP & MACBOOK COMMAND CENTER GRID (lg: 1024px+ only)
+            Seamless 12x6 zero-gap grid with interactive hover illumination
+           ===================================================================================== */}
+        <div className="relative z-10 w-full hidden lg:grid lg:h-screen lg:grid-cols-12 lg:grid-rows-6 gap-0 pt-16 pb-4 px-10 xl:px-14">
           {/* Main Title, Description & CTAs Block — Bordered Grid Cell with subtle blueprint grid */}
           <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-start-1 lg:col-span-7 lg:row-start-4 lg:row-span-3 flex flex-col justify-center p-6 sm:p-7 lg:p-8 xl:p-10 2xl:p-12 border border-white/25 -ml-px -mt-px rounded-none relative overflow-hidden z-20">
             {/* Subtle architectural grid pattern background */}
