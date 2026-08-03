@@ -652,7 +652,7 @@ export default function Hero() {
       </div>
 
       {/* Trusted by Leading Enterprises Auto-Loop Logo Marquee below Hero */}
-      <div className="w-full bg-[#F8F8F8] py-16 sm:py-20 text-najhum-black flex flex-col items-center justify-center overflow-hidden border-t border-neutral-200">
+      <div className="w-full bg-[#FFFFFF] py-16 sm:py-20 text-najhum-black flex flex-col items-center justify-center overflow-hidden">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-najhum-black">
             Trusted by Leading Enterprises
