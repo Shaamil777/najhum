@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
@@ -311,7 +312,7 @@ export default function Hero() {
             autoPlay={index === 0}
             muted
             playsInline
-            preload="auto"
+            preload={index === 0 ? "auto" : "metadata"}
             onEnded={handleVideoEnded}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
               activeVideoIndex === index ? "opacity-100 z-0" : "opacity-0 z-0"
@@ -326,18 +327,21 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/15 z-0 pointer-events-none" />
 
         {/* Absolute Header Bar: Brand on Left, Technical Categories on FAR RIGHT */}
-        <div className="absolute top-4 left-6 right-6 sm:top-5 sm:left-8 sm:right-8 lg:top-5 lg:left-10 lg:right-10 xl:left-14 xl:right-14 z-30 flex items-start justify-between pointer-events-none">
-          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono tracking-widest uppercase text-white/75 pointer-events-auto">
+        <div className="absolute top-4 left-4 right-4 sm:top-5 sm:left-8 sm:right-8 lg:top-5 lg:left-10 lg:right-10 xl:left-14 xl:right-14 z-30 flex items-start justify-between gap-2 pointer-events-none">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-xs font-mono tracking-wider sm:tracking-widest uppercase text-white/75 pointer-events-auto shrink-0">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span>NAJHUM &bull; REAL-TIME ARCHITECTURE</span>
+            <span className="sm:hidden">NAJHUM // ARCHITECTURE</span>
+            <span className="hidden sm:inline">NAJHUM &bull; REAL-TIME ARCHITECTURE</span>
           </div>
 
           <div className="flex flex-col items-end text-right pointer-events-auto">
-            <div className="text-[9px] sm:text-[10px] lg:text-[11px] font-mono tracking-[0.18em] text-white/80 uppercase">
-              INDUSTRIAL IoT &bull; EV PLATFORMS &bull; SMART ENERGY &bull; AI
+            <div className="text-[7px] sm:text-[10px] lg:text-[11px] font-mono tracking-wider sm:tracking-[0.18em] text-white/80 uppercase">
+              <span className="sm:hidden">IOT &bull; EV &bull; ENERGY &bull; AI</span>
+              <span className="hidden sm:inline">INDUSTRIAL IoT &bull; EV PLATFORMS &bull; SMART ENERGY &bull; AI</span>
             </div>
-            <div className="mt-0.5 text-[8px] sm:text-[9px] lg:text-[10px] font-mono tracking-[0.15em] text-white/45 uppercase">
-              Industry &bull; Mobility &bull; Energy &bull; Agriculture
+            <div className="mt-0.5 text-[6.5px] sm:text-[9px] lg:text-[10px] font-mono tracking-wider sm:tracking-[0.15em] text-white/45 uppercase">
+              <span className="sm:hidden">INDUSTRY &bull; MOBILITY &bull; ENERGY</span>
+              <span className="hidden sm:inline">Industry &bull; Mobility &bull; Energy &bull; Agriculture</span>
             </div>
           </div>
         </div>
@@ -389,16 +393,16 @@ export default function Hero() {
 
           {/* Analytics & Live Systems Section Below Title/CTA */}
           <div className="mt-10 w-full">
-            <div className="flex items-center justify-between pb-3 border-b border-white/20 mb-6">
-              <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-white/90">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>TELEMETRY // LIVE SYSTEM ANALYTICS &amp; MODULES</span>
+            <div className="flex items-center justify-between gap-2 pb-3 border-b border-white/20 mb-6">
+              <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono tracking-wider sm:tracking-widest uppercase text-white/90">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>INDUSTRIAL IoT // REAL-TIME OPERATIONAL INTELLIGENCE</span>
               </div>
-              <span className="text-[10px] font-mono text-white/50 hidden sm:inline">100% ONLINE</span>
+              <span className="text-[9px] sm:text-[10px] font-mono text-white/60 uppercase whitespace-nowrap hidden sm:inline">HARDWARE AGNOSTIC</span>
             </div>
 
-            {/* Matching 2-col / 3-col Analytics Grid (White Architectural Cards) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 border border-neutral-200/40">
+            {/* Matching 2-col / 3-col Analytics Grid (White Architectural Cards - Compact 2-Col on Mobile) */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-0 border border-neutral-200/40">
               {[
                 {
                   id: "m-iot",
@@ -451,21 +455,23 @@ export default function Hero() {
               ].map((item) => (
                 <div
                   key={item.id}
-                  className="border border-neutral-200 -ml-px -mt-px p-5 sm:p-6 bg-white text-najhum-black shadow-lg transition-all hover:scale-[1.01] hover:z-20 flex flex-col justify-between"
+                  className="border border-neutral-200 -ml-px -mt-px p-3.5 sm:p-6 bg-white text-najhum-black shadow-lg transition-all hover:scale-[1.01] hover:z-20 flex flex-col justify-between"
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono tracking-widest text-neutral-500 mb-3">
-                    <span>{item.badge}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-najhum-black/30" />
-                  </div>
                   <div>
-                    <div className={`text-2xl sm:text-3xl font-black tracking-tight font-bricolage ${item.accent}`}>
-                      {item.metric}
+                    <div className="flex items-center justify-between text-[8px] sm:text-[10px] font-mono tracking-wider sm:tracking-widest text-neutral-500 mb-1.5 sm:mb-3">
+                      <span className="truncate">{item.badge}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-najhum-black/30 shrink-0 hidden sm:inline-block" />
                     </div>
-                    <div className="mt-1 text-xs font-mono font-bold uppercase tracking-wider text-najhum-black">
-                      {item.title}
+                    <div>
+                      <div className={`text-lg sm:text-3xl font-black tracking-tight font-bricolage leading-none ${item.accent}`}>
+                        {item.metric}
+                      </div>
+                      <div className="mt-1 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-najhum-black line-clamp-1">
+                        {item.title}
+                      </div>
                     </div>
                   </div>
-                  <p className="mt-3 text-xs text-neutral-600 font-normal leading-relaxed">
+                  <p className="mt-1.5 sm:mt-3 text-[10px] sm:text-xs text-neutral-600 font-normal leading-snug line-clamp-2 sm:line-clamp-none">
                     {item.desc}
                   </p>
                 </div>
@@ -527,10 +533,13 @@ export default function Hero() {
               className={`${img.spanClass} group relative border border-white/25 -ml-px -mt-px rounded-none overflow-hidden transition-all duration-500 ease-out cursor-pointer select-none bg-transparent hover:scale-[1.01] hover:border-white hover:shadow-[0_0_50px_rgba(255,255,255,0.45)] hover:z-30 ${img.borderHover}`}
             >
               {/* Unsplash Image: 100% visible on mobile/tablet (<lg), 0% by default on desktop (lg:opacity-0), revealing 100% on hover */}
-              <img
+              <Image
                 src={img.imageUrl}
                 alt={img.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-100 lg:opacity-0 lg:group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                className="object-cover opacity-100 lg:opacity-0 lg:group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                loading="lazy"
               />
             </div>
           ))}
@@ -667,7 +676,7 @@ export default function Hero() {
 
           {/* Scrolling Marquee */}
           <div className="overflow-hidden py-6 sm:py-8">
-            <div className="animate-marquee items-center">
+            <div className="animate-marquee items-center will-change-transform">
               {duplicatedLogos.map((logo, index) => (
                 <div
                   key={index}
