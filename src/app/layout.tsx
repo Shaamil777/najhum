@@ -1,31 +1,98 @@
-import type { Metadata } from "next";
-import { Poppins, Space_Mono, Bricolage_Grotesque } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Space_Grotesk } from "next/font/google";
+import { siteConfig } from "@/config/site";
+import { Providers } from "./providers";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-sans" });
 
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Najhum | Next Generation Digital Excellence",
-  description: "Najhum is a region in the making for next-generation digital excellence and sustainable progress.",
+export const viewport: Viewport = {
+  themeColor: "#0b0b0c",
+  width: "device-width",
+  initialScale: 1,
 };
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.shortName}`,
+  },
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
+  icons: {
+    icon: [
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/favicon/site.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  keywords: [
+    "Najhum Group",
+    "Industrial IoT",
+    "Enterprise IoT Platform",
+    "EV Charging Solutions",
+    "Smart Mobility",
+    "Sustainability Platform",
+    "Digital Infrastructure",
+    "Smart City Solutions",
+    "Dubai Technology Company",
+  ],
+  category: "Technology",
+  authors: [{ name: "Najhum Group" }],
+  creator: "Najhum Group",
+  publisher: "Najhum Group",
+  referrer: "origin-when-cross-origin",
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  verification: {
+    google: "",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: siteConfig.name,
+  },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: "@najhum",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -33,14 +100,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${poppins.variable} ${spaceMono.variable} ${bricolage.variable} h-full antialiased font-sans`}
-    >
-      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)] font-sans">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} antialiased font-sans scroll-smooth`}>
+      <body className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)] font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white">
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

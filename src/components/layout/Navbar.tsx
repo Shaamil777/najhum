@@ -1,84 +1,41 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.65) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const navItems = [
-    { label: "Platform", id: "solutions" },
-    { label: "Solutions", id: "process" },
-    { label: "Portfolio", id: "whychoose" },
-    { label: "About", id: "about" },
+    { label: "Platforms", href: "/platforms" },
+    { label: "Products", href: "/products" },
+    { label: "Solutions", href: "/solutions" },
+    { label: "Portfolio", href: "/portfolio" },
+    { label: "About", href: "/about" },
+    { label: "Demo", href: "/demo" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
-    <header
-      className={`fixed top-4 left-0 right-0 z-50 pointer-events-none transition-all duration-700 ease-out ${
-        isScrolled
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 -translate-y-12 pointer-events-none"
-      }`}
-    >
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 sm:px-10">
-        {/* Left/Center: Logo + Main Nav Links combined in floating rounded pill */}
-        <div className="flex items-center gap-6 sm:gap-8 rounded-full bg-[#f8f8f8] px-6 py-2.5 pointer-events-auto">
+    <header className="fixed top-0 left-0 right-0 z-50 p-4 bg-neutral-950/80 backdrop-blur-md border-b border-white/10 flex items-center justify-between text-white">
+      <Link href="/" className="font-black text-xl tracking-tight transition-opacity hover:opacity-80">
+        najhum
+      </Link>
+      
+      <nav className="hidden md:flex items-center gap-6">
+        {navItems.map((item) => (
           <Link
-            href="/"
-            className="flex items-center gap-2.5 text-xl font-black tracking-tighter text-najhum-black transition-opacity hover:opacity-80"
+            key={item.label}
+            href={item.href}
+            className="text-xs font-mono text-neutral-400 uppercase tracking-widest transition-colors hover:text-white"
           >
-            <span className="inline-block h-3.5 w-3.5 rounded-full bg-najhum-blue"></span>
-            najhum
+            {item.label}
           </Link>
+        ))}
+      </nav>
 
-          <nav className="hidden md:flex items-center gap-6 text-xs sm:text-sm font-semibold text-najhum-grey">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.id)}
-                className="cursor-pointer transition-colors hover:text-najhum-black"
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        </div>
-
-        {/* Right side action links: Demo & Contact */}
-        <div className="flex items-center gap-3 pointer-events-auto">
-          <button
-            onClick={() => scrollToSection("impact")}
-            className="cursor-pointer rounded-full bg-[#f8f8f8] px-5 py-2.5 text-xs sm:text-sm font-bold text-najhum-black transition-all hover:bg-neutral-100"
-          >
-            Demo
-          </button>
-          <button
-            onClick={() => scrollToSection("cta")}
-            className="cursor-pointer rounded-full bg-najhum-black px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md transition-all hover:opacity-90 hover:scale-105"
-          >
-            Contact
-          </button>
-        </div>
+      <div className="flex items-center gap-4">
+        <Link 
+          href="/contact" 
+          className="px-4 py-2 text-xs font-bold uppercase tracking-widest bg-white text-neutral-950 rounded hover:bg-neutral-200 transition-colors"
+        >
+          Book Demo
+        </Link>
       </div>
     </header>
   );
