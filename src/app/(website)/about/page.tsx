@@ -1,11 +1,11 @@
-import AboutHero from "@/components/about/AboutHero";
-import AboutIntro from "@/components/about/AboutIntro";
-import AboutPlatform from "@/components/about/AboutPlatform";
-import AboutMethodology from "@/components/about/AboutMethodology";
-import AboutDifferentiator from "@/components/about/AboutDifferentiator";
-import AboutTrust from "@/components/about/AboutTrust";
-import AboutPresence from "@/components/about/AboutPresence";
-import AboutCta from "@/components/about/AboutCta";
+import AboutHero from "@/components/sections/about/AboutHero";
+import AboutIntro from "@/components/sections/about/AboutIntro";
+import AboutPlatform from "@/components/sections/about/AboutPlatform";
+import AboutMethodology from "@/components/sections/about/AboutMethodology";
+import AboutDifferentiator from "@/components/sections/about/AboutDifferentiator";
+import AboutTrust from "@/components/sections/about/AboutTrust";
+import AboutPresence from "@/components/sections/about/AboutPresence";
+import AboutCta from "@/components/sections/about/AboutCta";
 
 export default function AboutPage() {
   return (

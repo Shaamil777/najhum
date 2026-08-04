@@ -1,10 +1,10 @@
-import ProductsHero from "@/components/products/ProductsHero";
-import ProductsGrid from "@/components/products/ProductsGrid";
-import ProductsWhyChoose from "@/components/products/ProductsWhyChoose";
-import ProductsIndustries from "@/components/products/ProductsIndustries";
-import ProductsStandards from "@/components/products/ProductsStandards";
-import ProductsDeployment from "@/components/products/ProductsDeployment";
-import ProductsCta from "@/components/products/ProductsCta";
+import ProductsHero from "@/components/sections/products/ProductsHero";
+import ProductsGrid from "@/components/sections/products/ProductsGrid";
+import ProductsWhyChoose from "@/components/sections/products/ProductsWhyChoose";
+import ProductsIndustries from "@/components/sections/products/ProductsIndustries";
+import ProductsStandards from "@/components/sections/products/ProductsStandards";
+import ProductsDeployment from "@/components/sections/products/ProductsDeployment";
+import ProductsCta from "@/components/sections/products/ProductsCta";
 
 export default function ProductsPage() {
   return (

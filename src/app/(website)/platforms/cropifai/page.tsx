@@ -1,14 +1,14 @@
-import CropifaiHero from "@/components/cropifai/CropifaiHero";
-import CropifaiPerformance from "@/components/cropifai/CropifaiPerformance";
-import CropifaiArchitecture from "@/components/cropifai/CropifaiArchitecture";
-import CropifaiInterface from "@/components/cropifai/CropifaiInterface";
-import CropifaiWorkflow from "@/components/cropifai/CropifaiWorkflow";
-import CropifaiMethodology from "@/components/cropifai/CropifaiMethodology";
-import CropifaiHardware from "@/components/cropifai/CropifaiHardware";
-import CropifaiSolutions from "@/components/cropifai/CropifaiSolutions";
-import CropifaiWhyChoose from "@/components/cropifai/CropifaiWhyChoose";
-import CropifaiCta from "@/components/cropifai/CropifaiCta";
-import CropifaiEcosystem from "@/components/cropifai/CropifaiEcosystem";
+import CropifaiHero from "@/components/sections/cropifai/CropifaiHero";
+import CropifaiPerformance from "@/components/sections/cropifai/CropifaiPerformance";
+import CropifaiArchitecture from "@/components/sections/cropifai/CropifaiArchitecture";
+import CropifaiInterface from "@/components/sections/cropifai/CropifaiInterface";
+import CropifaiWorkflow from "@/components/sections/cropifai/CropifaiWorkflow";
+import CropifaiMethodology from "@/components/sections/cropifai/CropifaiMethodology";
+import CropifaiHardware from "@/components/sections/cropifai/CropifaiHardware";
+import CropifaiSolutions from "@/components/sections/cropifai/CropifaiSolutions";
+import CropifaiWhyChoose from "@/components/sections/cropifai/CropifaiWhyChoose";
+import CropifaiCta from "@/components/sections/cropifai/CropifaiCta";
+import CropifaiEcosystem from "@/components/sections/cropifai/CropifaiEcosystem";
 
 export default function CropifaiPage() {
   return (

@@ -1,0 +1,65 @@
+@theme inline {
+
+    /* ========= COLORS ========= */
+
+    --color-background: #fafaf8;
+    --color-background-alt: #f5f5f4;
+
+    --color-surface: #ffffff;
+    --color-surface-alt: #f8fafc;
+
+    --color-foreground: #111827;
+    --color-muted: #6b7280;
+
+    --color-primary: #2b7ddd;
+    --color-primary-hover: #1d6ed8;
+    --color-primary-light: #eaf3ff;
+
+    --color-border: #e5e7eb;
+    --color-border-strong: #d1d5db;
+
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+
+    --color-dark: #0b0f14;
+    --color-dark-surface: #141a21;
+
+    /* ========= TYPOGRAPHY ========= */
+
+    --font-display: var(--font-display);
+
+    --text-display-xl: 5rem;
+    --text-display: 4rem;
+
+    --text-h1: 3.5rem;
+    --text-h2: 3rem;
+    --text-h3: 2.25rem;
+    --text-h4: 1.75rem;
+
+    --text-body-lg: 1.125rem;
+    --text-body: 1rem;
+    --text-small: .875rem;
+
+    /* ========= RADIUS ========= */
+
+    --radius-xs: .25rem;
+    --radius-sm: .5rem;
+    --radius-md: .75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+
+    /* ========= SHADOW ========= */
+
+    --shadow-card: 0 12px 32px rgba(15, 23, 42, .08);
+    --shadow-lg: 0 24px 64px rgba(15, 23, 42, .12);
+
+    /* ========= LAYOUT ========= */
+
+    --spacing-section: 8rem;
+    --spacing-container: 90rem;
+
+    /* ========= MOTION ========= */
+
+    --ease-standard: cubic-bezier(.22, 1, .36, 1);
+}

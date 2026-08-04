@@ -1,12 +1,12 @@
-import DemoHero from "@/components/demo/DemoHero";
-import DemoTrustMetrics from "@/components/demo/DemoTrustMetrics";
-import DemoDashboardUI from "@/components/demo/DemoDashboardUI";
-import DemoPlatformPortfolios from "@/components/demo/DemoPlatformPortfolios";
-import DemoModules from "@/components/demo/DemoModules";
-import DemoArchitecture from "@/components/demo/DemoArchitecture";
-import DemoTechStack from "@/components/demo/DemoTechStack";
-import DemoEnterpriseFeatures from "@/components/demo/DemoEnterpriseFeatures";
-import DemoCta from "@/components/demo/DemoCta";
+import DemoHero from "@/components/sections/demo/DemoHero";
+import DemoTrustMetrics from "@/components/sections/demo/DemoTrustMetrics";
+import DemoDashboardUI from "@/components/sections/demo/DemoDashboardUI";
+import DemoPlatformPortfolios from "@/components/sections/demo/DemoPlatformPortfolios";
+import DemoModules from "@/components/sections/demo/DemoModules";
+import DemoArchitecture from "@/components/sections/demo/DemoArchitecture";
+import DemoTechStack from "@/components/sections/demo/DemoTechStack";
+import DemoEnterpriseFeatures from "@/components/sections/demo/DemoEnterpriseFeatures";
+import DemoCta from "@/components/sections/demo/DemoCta";
 
 export default function DemoPage() {
   return (

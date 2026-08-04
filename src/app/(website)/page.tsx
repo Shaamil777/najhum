@@ -1,13 +1,13 @@
-import Hero from "@/components/home/Hero";
-import About from "@/components/home/About";
-import Solutions from "@/components/home/Solutions";
-import Process from "@/components/home/Process";
-import Impact from "@/components/home/Impact";
-import WhyChoose from "@/components/home/WhyChoose";
-import Trust from "@/components/home/Trust";
-import Analytics from "@/components/home/Analytics";
-import Faq from "@/components/home/Faq";
-import Cta from "@/components/home/Cta";
+import Hero from "@/components/sections/home/Hero";
+import About from "@/components/sections/home/About";
+import Solutions from "@/components/sections/home/Solutions";
+import Process from "@/components/sections/home/Process";
+import Impact from "@/components/sections/home/Impact";
+import WhyChoose from "@/components/sections/home/WhyChoose";
+import Trust from "@/components/sections/home/Trust";
+import Analytics from "@/components/sections/home/Analytics";
+import Faq from "@/components/sections/home/Faq";
+import Cta from "@/components/sections/home/Cta";
 
 export default function Home() {
   return (

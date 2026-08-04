@@ -1,6 +1,6 @@
-import PlatformsHero from "@/components/platforms/PlatformsHero";
-import PlatformsGrid from "@/components/platforms/PlatformsGrid";
-import PlatformsCta from "@/components/platforms/PlatformsCta";
+import PlatformsHero from "@/components/sections/platforms/PlatformsHero";
+import PlatformsGrid from "@/components/sections/platforms/PlatformsGrid";
+import PlatformsCta from "@/components/sections/platforms/PlatformsCta";
 
 export default function PlatformsPage() {
   return (

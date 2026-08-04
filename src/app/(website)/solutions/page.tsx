@@ -1,6 +1,6 @@
-import SolutionsHero from "@/components/solutions/SolutionsHero";
-import SolutionsGrid from "@/components/solutions/SolutionsGrid";
-import SolutionsCta from "@/components/solutions/SolutionsCta";
+import SolutionsHero from "@/components/sections/solutions/SolutionsHero";
+import SolutionsGrid from "@/components/sections/solutions/SolutionsGrid";
+import SolutionsCta from "@/components/sections/solutions/SolutionsCta";
 
 export default function SolutionsPage() {
   return (

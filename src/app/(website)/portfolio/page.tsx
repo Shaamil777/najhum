@@ -1,8 +1,8 @@
-import PortfolioHero from "@/components/portfolio/PortfolioHero";
-import PortfolioMetrics from "@/components/portfolio/PortfolioMetrics";
-import PortfolioIndustries from "@/components/portfolio/PortfolioIndustries";
-import PortfolioProjects from "@/components/portfolio/PortfolioProjects";
-import PortfolioCta from "@/components/portfolio/PortfolioCta";
+import PortfolioHero from "@/components/sections/portfolio/PortfolioHero";
+import PortfolioMetrics from "@/components/sections/portfolio/PortfolioMetrics";
+import PortfolioIndustries from "@/components/sections/portfolio/PortfolioIndustries";
+import PortfolioProjects from "@/components/sections/portfolio/PortfolioProjects";
+import PortfolioCta from "@/components/sections/portfolio/PortfolioCta";
 
 export default function PortfolioPage() {
   return (
