@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Syne } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { Providers } from "./providers";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const syne = Syne({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["400", "600", "700", "800"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["400", "500", "600", "700", "800", "900"] });
 
 export const viewport: Viewport = {
   themeColor: "#0b0b0c",
@@ -101,8 +101,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} ${syne.variable} antialiased font-sans scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)] font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white">
+    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} antialiased font-sans scroll-smooth`}>
+      <body className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)] font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
         <Providers>
           {children}
         </Providers>

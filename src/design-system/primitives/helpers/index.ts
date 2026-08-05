@@ -12,3 +12,6 @@ export type { AspectRatioProps } from "./AspectRatio";
 
 export { VisuallyHidden } from "./VisuallyHidden";
 export type { VisuallyHiddenProps } from "./VisuallyHidden";
+
+export { GridPattern } from "./GridPattern";
+export type { GridPatternProps } from "./GridPattern";

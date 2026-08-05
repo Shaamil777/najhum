@@ -51,10 +51,10 @@ export default function Navbar() {
           <Image
             src="/logo/logo.png"
             alt={siteConfig.name}
-            width={120}
-            height={40}
+            width={160}
+            height={53}
             priority
-            className="h-9 w-auto object-contain"
+            className="h-12 w-auto object-contain"
           />
         </Link>
 

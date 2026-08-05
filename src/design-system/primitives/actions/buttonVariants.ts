@@ -45,13 +45,15 @@ export const VARIANT_STYLES: Record<ButtonVariant, string> = {
     "bg-dark text-white",
     "hover:bg-dark-surface",
     "focus-visible:ring-dark",
-    "border border-transparent"
+    "border border-transparent",
+    "shadow-md shadow-dark/20 inset-ring inset-ring-white/15"
   ),
   secondary: cn(
     "bg-surface text-foreground",
     "hover:bg-background-alt",
     "focus-visible:ring-foreground",
-    "border border-border"
+    "border border-border",
+    "shadow-sm shadow-foreground/5 inset-ring inset-ring-white/50 dark:inset-ring-white/5"
   ),
   outline: cn(
     "bg-transparent text-foreground",

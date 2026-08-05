@@ -25,13 +25,13 @@ export function CTAButton() {
       className={cn(
         BASE_STYLES,
         VARIANT_STYLES["primary"],
-        SIZE_STYLES["sm"],
+        SIZE_STYLES["md"],
         "hidden md:inline-flex" // Hidden on mobile, MobileNav handles its own CTA
       )}
     >
       <span className="flex items-center gap-2">
-        Let's Talk
-        <ArrowRight className="w-3.5 h-3.5" />
+        Contact
+        <ArrowRight className="w-4 h-4" />
       </span>
     </Link>
   );
