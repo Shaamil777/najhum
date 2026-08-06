@@ -7,17 +7,24 @@
 
 export const homeContent = {
   hero: {
-    badge: "Next Generation Solutions",
-    headline: "Digital Excellence and Sustainable Progress",
-    subheadline: "Empowering enterprises with cutting-edge platforms designed for scale, security, and unparalleled performance.",
+    titlePart1: "THE",
+    titlePart2: "FUTURE OF",
+    titlePart3: "ENTERPRISE",
+    subheadline: "Designed for seamless integration and refined operational intelligence, letting your infrastructure adapt instantly.",
     primaryCta: { 
-      label: "Explore Platforms", 
+      label: "EXPLORE COLLECTION", 
       href: "/platforms" 
     },
-    secondaryCta: { 
-      label: "Contact Us", 
-      href: "/contact" 
-    }
+    cardText: "ENGINEERED TO\nDELIVER CLARITY,\nSCALE, AND\nCONTROL.",
+    cardCta: { 
+      label: "DISCOVER", 
+      href: "/products" 
+    },
+    kpis: [
+      { value: "5K+", label: "Active Deployments" },
+      { value: "24/7", label: "Real-Time Monitoring" },
+      { value: "99%", label: "Operational Precision" }
+    ]
   },
   analytics: {
     badge: "Enterprise Platform",
@@ -90,6 +97,22 @@ export const homeContent = {
         accent: "#F59E0B",
         cta: "Learn More →"
       }
+    ]
+  },
+  about: {
+    badge: "+ WHO WE ARE",
+    leftContent: "We build enterprise platforms that transform industrial infrastructure into intelligent, connected ecosystems. By combining Industrial IoT, smart energy, EV mobility, and cloud technologies, we help organizations improve visibility, optimize operations, and accelerate digital transformation.",
+    headline: "Engineering the Future of\nConnected Infrastructure",
+    description: "Our solutions are designed to integrate seamlessly with existing infrastructure, enabling real-time monitoring, predictive insights, and scalable automation across mission-critical operations.",
+    buttonLabel: "Inside the studio",
+    trustStrip: [
+      "Industrial IoT", "EV Infrastructure", "Smart Energy", "Enterprise Software", "Cloud Platforms", "Hardware Agnostic", "Real-Time Intelligence", "Predictive Analytics"
+    ],
+    stats: [
+      { id: "established", title: "ESTABLISHED", value: "2017", label: "Building enterprise platforms for Industrial IoT, smart energy, and intelligent infrastructure." },
+      { id: "core", title: "CORE PLATFORMS", value: "04", label: "IoTRICs, EVOLTICS, IEMS, and SOLAAS working together as one connected ecosystem." },
+      { id: "support", title: "ENTERPRISE SUPPORT", value: "24/7", label: "Continuous monitoring, operational visibility, and technical support for mission-critical deployments." },
+      { id: "deployment", title: "DEPLOYMENT OPTIONS", value: "Cloud • Edge • Hybrid", label: "Flexible deployment models designed to integrate with enterprise infrastructure at any scale." }
     ]
   },
   cta: {
