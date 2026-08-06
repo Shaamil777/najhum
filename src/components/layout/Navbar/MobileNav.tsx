@@ -61,7 +61,7 @@ export function MobileNav() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-[100] bg-background flex flex-col pt-4 px-6 overflow-y-auto"
+              className="fixed inset-0 z-[100] bg-background flex flex-col pt-4 px-4 overflow-y-auto"
             >
               {/* Header Area inside menu */}
               <div className="flex items-center justify-between h-12 mb-8">

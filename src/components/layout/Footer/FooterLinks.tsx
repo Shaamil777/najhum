@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 
 export function FooterLinks() {
   return (
-    <div className="w-full py-16 px-6 grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+    <div className="w-full py-16 px-8 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-12 max-w-full mx-auto">
       <div className="flex flex-col md:col-span-2">
         <h4 className="text-xl font-black uppercase tracking-widest mb-4">
           {siteConfig.shortName}

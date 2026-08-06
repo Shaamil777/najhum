@@ -19,7 +19,7 @@ export default function CtaBanner({
   secondaryAction,
 }: CtaBannerProps) {
   return (
-    <div className="w-full py-24 px-6 bg-neutral-900 text-white flex flex-col items-center justify-center text-center">
+    <div className="w-full py-24 px-8 lg:px-16 bg-neutral-900 text-white flex flex-col items-center justify-center text-center">
       <div className="max-w-3xl mx-auto flex flex-col items-center">
         <h2 className="text-3xl sm:text-5xl font-black tracking-tight uppercase">
           {title}

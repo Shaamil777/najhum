@@ -40,7 +40,7 @@ export default function Navbar() {
           : "bg-transparent border-transparent py-4"
       )}
     >
-      <div className="max-w-[var(--spacing-container)] mx-auto px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-[var(--spacing-container)] mx-auto px-8 lg:px-16 flex items-center justify-between">
         
         {/* Logo */}
         <Link 

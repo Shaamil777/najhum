@@ -60,7 +60,7 @@ export function Container({
       className={cn(
         "w-full mx-auto",
         sizeMap[size],
-        padded && "px-6 lg:px-8",
+        padded && "px-8 lg:px-16",
         className
       )}
       {...props}

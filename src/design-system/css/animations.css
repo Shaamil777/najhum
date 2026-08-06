@@ -32,3 +32,52 @@
 .animate-marquee {
   animation: marquee 30s linear infinite;
 }
+
+/* === Najhum Ecosystem Animations === */
+
+@keyframes flowParticle {
+  0% { offset-distance: 0%; opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(14, 165, 255, 0.3), 0 0 60px rgba(14, 165, 255, 0.1);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(14, 165, 255, 0.5), 0 0 100px rgba(14, 165, 255, 0.2);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes electricFlicker {
+  0%, 100% { opacity: 0.6; }
+  25% { opacity: 0.9; }
+  50% { opacity: 0.4; }
+  75% { opacity: 1; }
+}
+
+@keyframes beamGrow {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-electric-flicker {
+  animation: electricFlicker 2s ease-in-out infinite;
+}
+
+.animate-float-card {
+  animation: floatCard 6s ease-in-out infinite;
+}

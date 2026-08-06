@@ -20,7 +20,7 @@ export default function FaqSection({ title = "Frequently Asked Questions", items
   };
 
   return (
-    <div className="w-full py-16 px-6 border-y border-neutral-200">
+    <div className="w-full py-16 px-8 lg:px-16 border-y border-neutral-200">
       <div className="max-w-3xl mx-auto">
         <p className="text-sm font-medium tracking-widest uppercase text-neutral-500 mb-8 text-center">
           {title}

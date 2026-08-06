@@ -1,6 +1,6 @@
 import Hero from "@/components/sections/home/Hero";
 import About from "@/components/sections/home/About";
-import Solutions from "@/components/sections/home/Solutions";
+import Platforms from "@/components/sections/home/Platforms";
 import Process from "@/components/sections/home/Process";
 import Impact from "@/components/sections/home/Impact";
 import WhyChoose from "@/components/sections/home/WhyChoose";
@@ -14,7 +14,7 @@ export default function Home() {
     <div className="flex flex-col w-full">
       <Hero />
       <About />
-      <Solutions />
+      <Platforms />
       <Process />
       <Impact />
       <WhyChoose />
