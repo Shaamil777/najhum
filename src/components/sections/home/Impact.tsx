@@ -14,19 +14,19 @@ const poppins = Poppins({
 export default function Impact() {
   return (
     <section 
-      className={`relative w-full bg-zinc-50 py-24 sm:py-32 ${poppins.variable} ${poppins.className}`}
+      className={`relative w-full bg-white py-24 sm:py-32 ${poppins.variable} ${poppins.className}`}
       style={{
         '--font-display': 'var(--font-poppins)',
         '--font-sans': 'var(--font-poppins)'
       } as React.CSSProperties}
     >
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] gap-16 lg:gap-24 relative items-start">
+      <div className="max-w-[1536px] mx-auto px-6 sm:px-8 lg:px-12 md:scale-[0.9] lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 md:origin-top transition-transform duration-300 md:-mb-24 lg:-mb-32 xl:-mb-16 2xl:mb-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] gap-12 lg:gap-12 xl:gap-24 relative items-start">
           
           {/* Left Sticky Column */}
           <div className="lg:sticky lg:top-24 flex flex-col justify-center h-auto lg:h-[calc(100vh-6rem)] pb-12 lg:pb-0">
             <div className="max-w-xl lg:-ml-4 xl:-ml-12">
-              <h2 className="font-display normal-case text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold tracking-tighter leading-[1] text-zinc-900 mb-8 whitespace-pre-line">
+              <h2 className="font-display normal-case text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5.5rem] font-bold tracking-tighter leading-[1] text-zinc-900 mb-8 whitespace-pre-line">
                 Build
                 Intelligent
                 Operations.
@@ -40,7 +40,7 @@ export default function Impact() {
                 Explore Platforms
               </MarketingButton>
 
-              <div className="flex gap-10 mt-20">
+              <div className="flex gap-10 mt-12 md:mt-16 lg:mt-20">
                 <div className="flex flex-col gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#4c3bcf] flex items-center justify-center text-white">
                     <Cpu className="w-5 h-5" />
@@ -62,10 +62,10 @@ export default function Impact() {
           </div>
 
           {/* Right Scrolling Column (Cards) */}
-          <div className="flex flex-col gap-8 pb-32">
+          <div className="flex flex-col gap-8 pb-16 md:pb-24 lg:pb-32">
             
             {/* Card 1 */}
-            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-10 sm:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
+            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-8 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
               <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#cbd5e1_2px,transparent_2px)] [background-size:24px_24px] opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
               <div className="relative z-10 flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-8">
                 <span className="text-sm font-semibold tracking-widest text-zinc-400 uppercase">{homeContent.impact.card1.label1}</span>
@@ -87,8 +87,8 @@ export default function Impact() {
             </Card>
 
             {/* Card 2 */}
-            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-6 sm:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-6 sm:p-8 lg:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 xl:gap-6">
                 
                 {/* 1. Industrial IoT */}
                 <div className="relative bg-zinc-50 border border-zinc-100 rounded-[2rem] p-8 overflow-hidden group hover:-translate-y-1 hover:shadow-md transition-all duration-300 cursor-default min-h-[220px]">
@@ -143,7 +143,7 @@ export default function Impact() {
                 </div>
 
                 {/* The green image box */}
-                <div className="sm:col-span-2 lg:col-span-2 bg-[#a3e635] rounded-[2rem] p-8 relative overflow-hidden flex flex-col items-start min-h-[220px] hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                <div className="sm:col-span-2 2xl:col-span-2 bg-[#a3e635] rounded-[2rem] p-8 relative overflow-hidden flex flex-col items-start min-h-[220px] hover:shadow-lg transition-all duration-300 cursor-pointer group">
                   <h4 className="normal-case text-zinc-900 font-bold text-2xl leading-tight w-1/2 mb-auto relative z-10">
                     {homeContent.impact.card2.featureTitle}
                   </h4>
@@ -159,7 +159,7 @@ export default function Impact() {
             </Card>
 
             {/* Card 3 */}
-            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-10 sm:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
+            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-8 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
               <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#cbd5e1_2px,transparent_2px)] [background-size:24px_24px] opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
               <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start gap-8 mb-12">
                 <div className="flex flex-col gap-1">
@@ -187,7 +187,7 @@ export default function Impact() {
             </Card>
 
             {/* Card 4 */}
-            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-10 sm:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
+            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-8 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
               <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#cbd5e1_2px,transparent_2px)] [background-size:24px_24px] opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
               <div className="relative z-10 flex flex-col h-full justify-between">
                 <div>
@@ -221,7 +221,7 @@ export default function Impact() {
             </Card>
             
             {/* Card 5 */}
-            <Card variant="elevated" className="bg-zinc-900 border-none rounded-[2.5rem] p-10 sm:p-12 shadow-[0_20px_50px_-12px_rgba(24,24,27,0.5)] text-white relative overflow-hidden group">
+            <Card variant="elevated" className="bg-zinc-900 border-none rounded-[2.5rem] p-8 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(24,24,27,0.5)] text-white relative overflow-hidden group">
               <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#52525b_2px,transparent_2px)] [background-size:24px_24px] opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
               {/* Ambient glows */}
               <div className="absolute -top-20 -right-20 w-72 h-72 bg-[#3b82f6] rounded-full blur-[100px] opacity-30 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none" />
@@ -252,7 +252,7 @@ export default function Impact() {
             </Card>
 
             {/* Card 6 */}
-            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-10 sm:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between min-h-[300px] relative overflow-hidden group">
+            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-8 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between min-h-[300px] relative overflow-hidden group">
                <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#cbd5e1_2px,transparent_2px)] [background-size:24px_24px] opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
                <div className="relative z-10">
                  <span className="text-sm font-semibold tracking-widest text-[#3b82f6] uppercase mb-4 block">
