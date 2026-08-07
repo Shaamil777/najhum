@@ -120,5 +120,56 @@ export const homeContent = {
     subheadline: "Join industry leaders who trust Najhum to power their next-generation digital platforms.",
     primaryCta: { label: "Get Started", href: "/contact" },
     secondaryCta: { label: "Learn More", href: "/about" }
+  },
+  impact: {
+    card1: {
+      label1: "Challenge 01",
+      label2: "Industrial Operations",
+      title: "Disconnected Infrastructure",
+      description: "Industrial assets, sensors, energy systems, and enterprise platforms often operate in silos, limiting visibility, efficiency, and operational control.",
+      outcomeLabel: "Outcome:",
+      outcome: "Unified Operational Visibility"
+    },
+
+    card2: {
+      items: [
+        { id: "1", title: "Industrial", subtitle: "IoT" },
+        { id: "2", title: "EV", subtitle: "Charging" },
+        { id: "3", title: "Smart", subtitle: "Energy" },
+        { id: "4", title: "Managed", subtitle: "Services" }
+      ],
+      featureTitle: "Integrated Solutions"
+    },
+
+    card3: {
+      title1: "Operational",
+      title2: "Intelligence",
+      description: "Transform real-time industrial data into actionable insights through centralized dashboards, predictive analytics, and intelligent automation."
+    },
+
+    card4: {
+      title1: "Energy",
+      title2: "Optimization",
+      description: "Monitor energy consumption, identify inefficiencies, and improve operational performance through intelligent energy management.",
+      outcomeLabel: "Outcome:",
+      outcome: "Lower Energy Costs"
+    },
+
+    card5: {
+      label: "PREDICTIVE INSIGHTS",
+      title1: "Predictive",
+      title2: "Maintenance",
+      description: "Detect equipment anomalies before failures occur using AI-powered monitoring, automated alerts, and predictive maintenance analytics.",
+      button: "DISCOVER MORE"
+    },
+
+    card6: {
+      label: "GET STARTED",
+      title1: "Ready to Build",
+      title2: "Smarter Operations?",
+      description: "Partner with Najhum to modernize your infrastructure through Industrial IoT, smart energy, EV charging, and enterprise software solutions designed for long-term operational success.",
+
+      button: "BOOK A DEMO"
+    }
   }
 };
