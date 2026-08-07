@@ -1,23 +1,27 @@
 /* Typography base styles — plain CSS, not inside @theme */
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  color: var(--color-foreground);
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    color: var(--color-foreground);
+  }
+
+  p {
+    line-height: 1.75;
+    color: var(--color-muted);
+  }
 }
 
-p {
-  line-height: 1.75;
-  color: var(--color-muted);
-}
+@layer components {
+  .lead {
+    font-size: var(--text-body-lg);
+    color: var(--color-muted);
+  }
 
-.lead {
-  font-size: var(--text-body-lg);
-  color: var(--color-muted);
-}
-
-.small {
-  font-size: var(--text-small);
+  .small {
+    font-size: var(--text-small);
+  }
 }
