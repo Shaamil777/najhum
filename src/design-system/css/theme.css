@@ -2,64 +2,73 @@
 
     /* ========= COLORS ========= */
 
-    --color-background: #fafaf8;
-    --color-background-alt: #f5f5f4;
+    --color-background: #ffffff;
+    --color-background-alt: #f8fafc; /* Very light blue-grey */
 
     --color-surface: #ffffff;
-    --color-surface-alt: #f8fafc;
+    --color-surface-alt: #f1f5f9; /* Slate 100 */
 
-    --color-foreground: #111827;
-    --color-muted: #6b7280;
+    --color-foreground: #0f172a; /* Slate 900 */
+    --color-muted: #64748b; /* Slate 500 */
 
-    --color-primary: #2b7ddd;
-    --color-primary-hover: #1d6ed8;
-    --color-primary-light: #eaf3ff;
+    /* Logo Blue */
+    --color-primary: #3b82f6; /* Bright logo blue */
+    --color-primary-hover: #2563eb; 
+    --color-primary-light: #eff6ff; 
+    
+    /* Logo Grey */
+    --color-accent: #6b7280; /* Neutral logo grey */
+    --color-accent-hover: #4b5563; 
+    --color-accent-light: #f3f4f6; 
 
-    --color-border: #e5e7eb;
-    --color-border-strong: #d1d5db;
+    --color-border: #e2e8f0;
+    --color-border-strong: #cbd5e1;
 
-    --color-success: #22c55e;
+    --color-success: #10b981;
     --color-warning: #f59e0b;
     --color-danger: #ef4444;
 
-    --color-dark: #0b0f14;
-    --color-dark-surface: #141a21;
+    --color-dark: #0f172a;
+    --color-dark-surface: #1e293b;
 
     /* ========= TYPOGRAPHY ========= */
 
     --font-display: var(--font-display);
+    --font-sans: var(--font-sans);
 
-    --text-display-xl: 5rem;
-    --text-display: 4rem;
+    --text-display-xl: 5.5rem;
+    --text-display: 4.5rem;
 
-    --text-h1: 3.5rem;
+    --text-h1: 3.75rem;
     --text-h2: 3rem;
     --text-h3: 2.25rem;
-    --text-h4: 1.75rem;
+    --text-h4: 1.5rem;
 
     --text-body-lg: 1.125rem;
     --text-body: 1rem;
     --text-small: .875rem;
 
     /* ========= RADIUS ========= */
-
-    --radius-xs: .25rem;
-    --radius-sm: .5rem;
-    --radius-md: .75rem;
-    --radius-lg: 1rem;
-    --radius-xl: 1.5rem;
+    /* Playful but structured rounded corners */
+    --radius-xs: .5rem;
+    --radius-sm: .75rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+    --radius-full: 9999px;
 
     /* ========= SHADOW ========= */
-
-    --shadow-card: 0 12px 32px rgba(15, 23, 42, .08);
-    --shadow-lg: 0 24px 64px rgba(15, 23, 42, .12);
+    /* Softer, tech-blue glowing shadows */
+    --shadow-card: 0 10px 40px -10px rgba(37, 99, 235, 0.12);
+    --shadow-lg: 0 20px 50px -12px rgba(37, 99, 235, 0.20);
+    --shadow-glow: 0 0 30px rgba(37, 99, 235, 0.3);
 
     /* ========= LAYOUT ========= */
 
-    --spacing-section: 8rem;
-    --spacing-container: 100%;
+    --spacing-section: 6rem;
+    --spacing-container: 1536px;
 
     /* ========= MOTION ========= */
-
-    --ease-standard: cubic-bezier(.22, 1, .36, 1);
+    /* Smooth fluid tech motion */
+    --ease-standard: cubic-bezier(0.34, 1.56, 0.64, 1);
 }

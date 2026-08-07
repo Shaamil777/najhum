@@ -1,139 +1,96 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { homeContent } from "@/content/home";
-import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 
 export default function About() {
   const { about } = homeContent;
+  const containerRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const yHeadline = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const yLeft = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section className="w-full bg-[#f8f8f8] text-neutral-900 font-sans border-t border-neutral-200">
+    <section ref={containerRef} className="w-full bg-background text-foreground font-sans relative overflow-hidden">
+      {/* Section Dotted Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.25] pointer-events-none" 
+        style={{ backgroundImage: 'radial-gradient(var(--color-muted) 1px, transparent 1px)', backgroundSize: '16px 16px' }} 
+      />
       
       {/* 
         Main 4-column Grid Container 
-        Using grid-cols-4 on large screens to perfectly match the reference layout.
       */}
-      <div className="w-full px-4 md:px-6 lg:px-8 pb-4 lg:pb-8 mx-auto grid grid-cols-1 lg:grid-cols-4 border-l border-r border-dashed border-neutral-300">
+      <div className="max-w-[var(--spacing-container)] w-full px-4 md:px-6 lg:px-8 pb-4 lg:pb-12 mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
         
         {/* =======================
             TOP ROW (Content) 
         ======================= */}
         
         {/* Column 1: Left Content */}
-        <div className="p-8 lg:p-12 lg:border-r border-dashed border-neutral-300 flex flex-col justify-between">
-          <div>
-            <p className="text-[10px] font-black tracking-widest uppercase text-neutral-500 mb-16 lg:mb-24 flex items-center gap-2">
-              <span className="text-neutral-900">+</span> {about.badge.replace("+ ", "")}
+        <div className="col-span-1 p-8 lg:p-10 flex flex-col justify-between bg-white/60 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm relative min-h-[300px] lg:min-h-[480px] hover:bg-white/80 transition-colors duration-500">
+          <motion.div>
+            <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-muted mb-16 lg:mb-24 flex items-center gap-3">
+              <span className="text-primary font-mono text-xs">/</span> {about.badge.replace("+ ", "")}
             </p>
             
-            <p className="text-base lg:text-lg text-neutral-600 leading-relaxed max-w-[280px]">
+            <p className="text-base lg:text-lg text-muted leading-relaxed max-w-[280px]">
               {about.leftContent}
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Columns 2 & 3: Huge Headline */}
-        <div className="col-span-1 lg:col-span-2 p-8 lg:p-12 lg:border-r border-dashed border-neutral-300 flex items-start lg:pt-32">
+        <div className="col-span-1 lg:col-span-2 p-6 lg:p-10 flex items-center justify-center bg-white/60 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm relative min-h-[300px] lg:min-h-[480px] hover:bg-white/80 transition-colors duration-500 text-center">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-neutral-900 whitespace-pre-line"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
+            }}
+            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-black tracking-tighter leading-[1] text-foreground whitespace-pre-line"
           >
-            {about.headline}
+            {about.headline.split(' ').map((word, i) => {
+              const isAccent = word.toLowerCase() === 'impossible' || word.toLowerCase() === 'future';
+              return (
+                <motion.span 
+                  key={i} 
+                  variants={{
+                    hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
+                    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } }
+                  }}
+                  className={`inline-block mr-2 lg:mr-4 ${isAccent ? 'text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent' : ''}`}
+                >
+                  {word}
+                </motion.span>
+              );
+            })}
           </motion.h2>
         </div>
 
         {/* Column 4: Description */}
-        <div className="p-8 lg:p-12 flex flex-col justify-center lg:pt-32">
-          <p className="text-base lg:text-lg text-neutral-600 leading-relaxed font-medium">
+        <div className="col-span-1 p-8 lg:p-10 flex flex-col justify-center bg-white/60 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm relative min-h-[300px] lg:min-h-[480px] hover:bg-white/80 transition-colors duration-500">
+          <p className="text-base lg:text-lg text-muted leading-relaxed font-medium">
             {about.description}
           </p>
         </div>
 
 
-        {/* =======================
-            MIDDLE ROW (Marquee) 
-        ======================= */}
-        <div className="col-span-1 lg:col-span-4 border-t border-b border-dashed border-neutral-300 flex items-center justify-between bg-[#f8f8f8] relative overflow-hidden h-16 lg:h-20">
-          
-          <div className="flex-1 flex overflow-hidden mask-image-linear-gradient">
-            <motion.div 
-              className="flex items-center gap-12 lg:gap-24 whitespace-nowrap w-max"
-              animate={{ x: ["-50%", "0%"] }}
-              transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-            >
-              {/* Group 1 - Trust Strip */}
-              <div className="flex items-center gap-12 lg:gap-24">
-                {about.trustStrip.map((item: string, index: number) => (
-                  <div key={`g1-${index}`} className="flex items-center gap-12 lg:gap-24">
-                    <span className="text-sm lg:text-base font-black tracking-widest text-neutral-500 uppercase">{item}</span>
-                    <span className="text-neutral-300">•</span>
-                  </div>
-                ))}
-              </div>
-              {/* Group 2 - Exact Duplicate for seamless loop */}
-              <div className="flex items-center gap-12 lg:gap-24">
-                {about.trustStrip.map((item: string, index: number) => (
-                  <div key={`g2-${index}`} className="flex items-center gap-12 lg:gap-24">
-                    <span className="text-sm lg:text-base font-black tracking-widest text-neutral-500 uppercase">{item}</span>
-                    <span className="text-neutral-300">•</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
 
-          <button className="h-full px-8 bg-neutral-200/50 hover:bg-neutral-200 transition-colors flex items-center gap-4 text-xs font-bold tracking-tight z-10 border-l border-dashed border-neutral-300 shrink-0">
-            {about.buttonLabel}
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
 
 
         {/* =======================
-            BOTTOM ROW (Cards) 
+            BOTTOM ROW (Cards removed per request)
         ======================= */}
-        
-        {about.stats.map((stat, i) => (
-          <div 
-            key={stat.id} 
-            className={`p-6 lg:p-8 ${i !== 3 ? 'lg:border-r border-dashed border-neutral-300' : ''}`}
-          >
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-lg p-6 lg:p-8 shadow-sm h-full flex flex-col justify-between hover:shadow-md transition-shadow"
-            >
-              <div className="mb-12">
-                <div className="w-8 flex gap-1 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-neutral-800"></div>
-                  <div className="w-2 h-2 rounded-full bg-neutral-800"></div>
-                  <div className="w-2 h-2 rounded-full bg-neutral-800"></div>
-                  <div className="w-2 h-2 rounded-full bg-neutral-800"></div>
-                </div>
-                <h3 className="text-[10px] font-mono tracking-widest uppercase text-neutral-500 leading-relaxed">
-                  {stat.title}
-                </h3>
-              </div>
-              
-              <div>
-                <div className="text-4xl lg:text-6xl font-black text-neutral-900 tracking-tighter mb-4">
-                  {stat.value}
-                </div>
-                <p className="text-xs lg:text-sm text-neutral-500 font-medium leading-relaxed max-w-[160px]">
-                  {stat.label}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        ))}
 
       </div>
     </section>

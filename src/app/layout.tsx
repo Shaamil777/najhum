@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins, Inter } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { Providers } from "./providers";
+import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
-const poppins = Poppins({ subsets: ["latin"], variable: "--font-sans", weight: ["300", "400", "500", "600", "700"], display: "swap" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["400", "500", "600", "700", "800", "900"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap", weight: ["300", "400", "500", "600", "700"] });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["400", "500", "600", "700", "800", "900"] });
 
 export const viewport: Viewport = {
   themeColor: "#0b0b0c",
@@ -101,9 +102,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${inter.variable} antialiased font-sans scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)] font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${inter.variable} antialiased font-sans scroll-smooth`}>
+      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
         <Providers>
+          <Navbar />
           {children}
         </Providers>
       </body>

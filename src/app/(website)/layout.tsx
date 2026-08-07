@@ -8,7 +8,7 @@ export default function WebsiteLayout({
 }>) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="flex-1 w-full flex flex-col">{children}</main>
       <Footer />
     </>

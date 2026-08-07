@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/home/Hero";
+import TrustedClients from "@/components/sections/home/TrustedClients";
 import About from "@/components/sections/home/About";
 import Platforms from "@/components/sections/home/Platforms";
 import Process from "@/components/sections/home/Process";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       <Hero />
+      <TrustedClients />
       <About />
       <Platforms />
       <Process />
