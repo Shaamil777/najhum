@@ -65,42 +65,38 @@ export const homeContent = {
     }
   },
   platforms: {
-    label: "Our Platform Ecosystem",
-    title: "Enterprise Software Platforms",
-    description: "Powering Industrial IoT, EV infrastructure, and smart energy through enterprise-grade software platforms built for real-time operations.",
+    label: "THE ENGINE OF OPERATION",
+    title: "Proprietary high performance platforms",
+    description: "",
     items: [
       {
         id: "iotrics",
         title: "IoTRICS",
-        description: "The complete operating system for industrial IoT with military-grade security.",
-        accent: "#06B6D4",
-        cta: "Learn More →"
+        description: "The complete operating system for industrial IoT. Connect millions of data points across any network protocol with military-grade security.",
+        features: [
+          "Multi-protocol ingestion (MQTT, LoRa)",
+          "Advanced Rules Engine",
+          "Customizable Executive Dashboards"
+        ],
+        cta: "EXPLORE IOTRICS",
+        label: "CORE PLATFORM"
       },
       {
         id: "evoltics",
         title: "EVOLTICS",
-        description: "Advanced EV charger management with smart load balancing.",
-        accent: "#0EA5FF",
-        cta: "Learn More →"
+        description: "Advanced EV charger management. Load balancing and payment gateway integration.",
+        cta: "Details"
       },
       {
         id: "cropifai",
         title: "CropifAI",
         description: "AI-driven agricultural insights for food security and yield optimization.",
-        accent: "#22C55E",
-        cta: "Learn More →"
-      },
-      {
-        id: "solaas",
-        title: "SOLAAS",
-        description: "Cloud-based managed service platform for scalable enterprise deployment.",
-        accent: "#F59E0B",
-        cta: "Learn More →"
+        cta: "Details"
       }
     ]
   },
   about: {
-    badge: "+ WHO WE ARE",
+    badge: "+ Who we are",
     leftContent: "We build enterprise platforms that transform industrial infrastructure into intelligent, connected ecosystems. By combining Industrial IoT, smart energy, EV mobility, and cloud technologies, we help organizations improve visibility, optimize operations, and accelerate digital transformation.",
     headline: "Engineering the Future of\nConnected Infrastructure",
     description: "Our solutions are designed to integrate seamlessly with existing infrastructure, enabling real-time monitoring, predictive insights, and scalable automation across mission-critical operations.",

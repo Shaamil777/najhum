@@ -1,92 +1,78 @@
-"use client";
-
 import React from "react";
+import { Poppins } from "next/font/google";
+import { homeContent } from "@/content/home";
+import DottedWorldMap from "./about/DottedWorldMap";
+import { ArrowRight } from "lucide-react";
+
+const poppins = Poppins({ 
+  subsets: ["latin"], 
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins"
+});
 
 export default function About() {
   return (
-    <section className="relative w-full h-[100svh] min-h-[700px] bg-zinc-50 overflow-hidden flex flex-col justify-center z-10">
-      
-      {/* Content Overlay */}
-      <div className="relative z-20 w-full max-w-[1700px] mx-auto px-6 lg:px-12 pointer-events-none grid grid-cols-1 lg:grid-cols-2 gap-12 h-full py-24 md:py-32">
-        {/* Left Content */}
-        <div className="w-full pointer-events-auto flex flex-col justify-center h-full">
-          <p className="text-sm font-semibold tracking-widest text-neutral-500 mb-4">
-            Who we are
-          </p>
-          <h2 className="text-[3.25rem] md:text-[3.75rem] lg:text-[4.25rem] font-bold tracking-tighter text-[#0f172a] mb-8 leading-[1.05]">
-            Building intelligent<br />
-            infrastructure<br />
-            since 2017
-          </h2>
-          <p className="text-[#64748b] text-[17px] md:text-[18px] leading-relaxed max-w-[40rem]">
-            We deliver intelligent IIoT solutions that connect physical assets, sensors, cloud infrastructure, and AI-driven analytics—transforming operational data into smarter decisions and measurable business outcomes.
-          </p>
-        </div>
+    <section 
+      className={`relative w-full bg-[#f8f9fa] py-24 sm:py-32 ${poppins.variable} ${poppins.className} overflow-hidden sticky top-0 z-0`}
+      style={{
+        '--font-display': 'var(--font-poppins)',
+        '--font-sans': 'var(--font-poppins)'
+      } as React.CSSProperties}
+    >
+      <div className="max-w-[1536px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* Left Column: Content */}
+          <div className="flex flex-col">
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="text-sm font-medium text-zinc-500">
+                {homeContent.about.badge}
+              </span>
+            </div>
+            
+            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-zinc-900 mb-6 whitespace-pre-line">
+              {homeContent.about.headline}
+            </h2>
+            
+            <p className="text-base text-zinc-500 mb-4 leading-relaxed">
+              {homeContent.about.leftContent}
+            </p>
+            
+            <p className="text-base text-zinc-500 mb-10 leading-relaxed">
+              {homeContent.about.description}
+            </p>
 
-        {/* Right Content / Dot Grid */}
-        <div className="w-full relative h-full min-h-[400px] lg:min-h-0 pointer-events-auto overflow-hidden">
-          {/* Base Dot Grid */}
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #94a3b8 1.5px, transparent 1.5px)',
-              backgroundSize: '96px 96px',
-              backgroundPosition: '0 0',
-            }}
-          />
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+              {homeContent.about.stats.slice(0, 2).map((stat) => (
+                <div key={stat.id} className="flex flex-col border-l-2 border-zinc-200 pl-6">
+                  <span className="text-3xl font-black tracking-tighter text-zinc-900 mb-2">{stat.value}</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">{stat.title}</span>
+                  <p className="text-xs text-zinc-400 leading-relaxed">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+            
+            <div>
+              <a href="/about" className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-[#4c3bcf] group">
+                <span className="group-hover:underline underline-offset-4">{homeContent.about.buttonLabel}</span>
+                <div className="w-8 h-8 rounded-full bg-[#4c3bcf]/10 flex items-center justify-center group-hover:bg-[#4c3bcf] group-hover:text-white transition-colors duration-300">
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </a>
+            </div>
+          </div>
 
-          {(() => {
-            const CELLS: [number, number, boolean?][] = [
-              // Main center-left organic blob
-              [1, 2], [2, 2], [2, 3], [3, 2, true], [3, 3], [4, 3, true], [4, 4], [5, 4],
-              // Top right cascading cluster
-              [0, 5], [0, 6, true], [1, 6], [1, 7], [2, 7],
-              // Bottom left cluster
-              [5, 2], [6, 2], [6, 3, true], [7, 3],
-              // Scattered connecting satellites
-              [1, 4], [3, 5, true], [4, 7], [6, 6, true]
-            ];
+          {/* Right Column: Dotted World Map */}
+          <div className="relative w-full">
+            {/* Soft background glow */}
+            <div className="absolute inset-0 bg-blue-100/50 rounded-full blur-3xl opacity-50 pointer-events-none transform -translate-x-1/4" />
+            <DottedWorldMap />
+          </div>
 
-            const hasCell = (r: number, c: number) => CELLS.some(([row, col]) => row === r && col === c);
-
-            return CELLS.map(([row, col, isBlue], i) => {
-              const emptyTop = !hasCell(row - 1, col);
-              const emptyBottom = !hasCell(row + 1, col);
-              const emptyLeft = !hasCell(row, col - 1);
-              const emptyRight = !hasCell(row, col + 1);
-
-              let cornerClasses = "";
-              if (emptyTop && emptyLeft) cornerClasses += " rounded-tl-xl";
-              if (emptyTop && emptyRight) cornerClasses += " rounded-tr-xl";
-              if (emptyBottom && emptyLeft) cornerClasses += " rounded-bl-xl";
-              if (emptyBottom && emptyRight) cornerClasses += " rounded-br-xl";
-
-              const bgColorClass = isBlue 
-                ? 'bg-blue-500' 
-                : (row + col) % 2 === 0 ? 'bg-[#f8f7f4]' : 'bg-white';
-              
-              const hoverColorClass = isBlue ? 'hover:bg-blue-400' : 'hover:bg-white';
-
-              return (
-                <div 
-                  key={i}
-                  className={`absolute ${cornerClasses} transition-all duration-300 hover:-translate-y-1
-                    shadow-[inset_1.5px_1.5px_2px_rgba(255,255,255,0.6),inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06),0_6px_20px_-4px_rgba(0,0,0,0.05)]
-                    hover:shadow-[inset_1.5px_1.5px_2px_rgba(255,255,255,0.9),inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.04),0_12px_30px_-4px_rgba(0,0,0,0.08)]
-                    ${bgColorClass} ${hoverColorClass}
-                  `}
-                  style={{ 
-                    top: `calc(48px + 96px * ${row})`, 
-                    left: `calc(48px + 96px * ${col})`, 
-                    width: '96px', 
-                    height: '96px' 
-                  }} 
-                />
-              );
-            });
-          })()}
         </div>
       </div>
     </section>
   );
 }
+

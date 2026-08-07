@@ -36,8 +36,8 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 border-b",
         isScrolled
-          ? "bg-surface/85 backdrop-blur-lg border-border shadow-sm py-2"
-          : "bg-transparent border-transparent py-4"
+          ? "bg-surface/95 backdrop-blur-lg border-border shadow-sm py-2 text-foreground"
+          : "bg-transparent border-transparent py-4 text-white dark"
       )}
     >
       <div className="max-w-[var(--spacing-container)] mx-auto px-8 lg:px-16 flex items-center justify-between">
@@ -54,7 +54,7 @@ export default function Navbar() {
             width={160}
             height={53}
             priority
-            className="h-12 w-auto object-contain"
+            className="h-12 w-auto object-contain transition-all duration-300 drop-shadow-sm"
           />
         </Link>
 

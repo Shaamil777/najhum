@@ -35,7 +35,7 @@ export function NavItem({ title, href }: NavItemProps) {
         underline="never"
         className={cn(
           "relative z-10 text-sm font-semibold tracking-wide px-4 py-2 transition-colors duration-200",
-          isActive ? "text-primary" : "text-foreground"
+          isActive ? "text-primary" : "text-inherit hover:opacity-80"
         )}
       >
         {title}

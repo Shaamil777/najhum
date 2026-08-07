@@ -25,9 +25,9 @@ const DoubleChevron = ({ index, dotColor }: { index: number, dotColor: string })
       viewBox="0 0 14 16"
       aria-hidden="true"
       focusable="false"
-      className="shrink-0 overflow-visible"
+      className="shrink-0 overflow-visible text-current"
     >
-      <g fill={dotColor}>
+      <g fill="currentColor">
         {dots.map((p, i) => (
           <circle
             key={i}
@@ -70,8 +70,8 @@ export const AntiMetalButton = React.forwardRef<HTMLButtonElement, AntiMetalButt
         ref={ref}
         className={cn(
           "group/btn relative inline-flex h-11 w-40 overflow-hidden rounded-xl transition-transform active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-          "bg-[linear-gradient(180deg,#1a1a1a_0%,#0a0a0a_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_12px_rgba(0,0,0,0.18)]",
-          "dark:bg-[linear-gradient(180deg,#ffffff_0%,#ededed_100%)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_4px_12px_rgba(0,0,0,0.35)]",
+          "bg-[linear-gradient(180deg,#ffffff_0%,#ededed_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_4px_12px_rgba(0,0,0,0.35)] text-[#0a0a0a]",
+          "dark:bg-[linear-gradient(180deg,#1a1a1a_0%,#0a0a0a_100%)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_12px_rgba(0,0,0,0.18)] dark:text-white",
           className
         )}
         {...props}
@@ -91,7 +91,7 @@ export const AntiMetalButton = React.forwardRef<HTMLButtonElement, AntiMetalButt
           }
         `}</style>
 
-        <span className="absolute inset-y-0 right-4 flex items-center text-[14px] font-medium tracking-tight text-white dark:text-[#0a0a0a]">
+        <span className="absolute inset-y-0 right-4 flex items-center text-[14px] font-medium tracking-tight">
           {content}
         </span>
 
