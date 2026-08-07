@@ -1,97 +1,91 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { homeContent } from "@/content/home";
-import { ChevronRight } from "lucide-react";
+import React from "react";
 
 export default function About() {
-  const { about } = homeContent;
-  const containerRef = useRef<HTMLElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const yHeadline = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const yLeft = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
   return (
-    <section ref={containerRef} className="w-full bg-background text-foreground font-sans relative overflow-hidden">
-      {/* Section Dotted Background Pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.25] pointer-events-none" 
-        style={{ backgroundImage: 'radial-gradient(var(--color-muted) 1px, transparent 1px)', backgroundSize: '16px 16px' }} 
-      />
+    <section className="relative w-full h-[100svh] min-h-[700px] bg-zinc-50 overflow-hidden flex flex-col justify-center z-10">
       
-      {/* 
-        Main 4-column Grid Container 
-      */}
-      <div className="max-w-[var(--spacing-container)] w-full px-4 md:px-6 lg:px-8 pb-4 lg:pb-12 mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
-        
-        {/* =======================
-            TOP ROW (Content) 
-        ======================= */}
-        
-        {/* Column 1: Left Content */}
-        <div className="col-span-1 p-8 lg:p-10 flex flex-col justify-between bg-white/60 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm relative min-h-[300px] lg:min-h-[480px] hover:bg-white/80 transition-colors duration-500">
-          <motion.div>
-            <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-muted mb-16 lg:mb-24 flex items-center gap-3">
-              <span className="text-primary font-mono text-xs">/</span> {about.badge.replace("+ ", "")}
-            </p>
-            
-            <p className="text-base lg:text-lg text-muted leading-relaxed max-w-[280px]">
-              {about.leftContent}
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Columns 2 & 3: Huge Headline */}
-        <div className="col-span-1 lg:col-span-2 p-6 lg:p-10 flex items-center justify-center bg-white/60 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm relative min-h-[300px] lg:min-h-[480px] hover:bg-white/80 transition-colors duration-500 text-center">
-          <motion.h2 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
-            }}
-            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] font-black tracking-tighter leading-[1] text-foreground whitespace-pre-line"
-          >
-            {about.headline.split(' ').map((word, i) => {
-              const isAccent = word.toLowerCase() === 'impossible' || word.toLowerCase() === 'future';
-              return (
-                <motion.span 
-                  key={i} 
-                  variants={{
-                    hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-                    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } }
-                  }}
-                  className={`inline-block mr-2 lg:mr-4 ${isAccent ? 'text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent' : ''}`}
-                >
-                  {word}
-                </motion.span>
-              );
-            })}
-          </motion.h2>
-        </div>
-
-        {/* Column 4: Description */}
-        <div className="col-span-1 p-8 lg:p-10 flex flex-col justify-center bg-white/60 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm relative min-h-[300px] lg:min-h-[480px] hover:bg-white/80 transition-colors duration-500">
-          <p className="text-base lg:text-lg text-muted leading-relaxed font-medium">
-            {about.description}
+      {/* Content Overlay */}
+      <div className="relative z-20 w-full max-w-[1700px] mx-auto px-6 lg:px-12 pointer-events-none grid grid-cols-1 lg:grid-cols-2 gap-12 h-full py-24 md:py-32">
+        {/* Left Content */}
+        <div className="w-full pointer-events-auto flex flex-col justify-center h-full">
+          <p className="text-sm font-semibold tracking-widest text-neutral-500 mb-4">
+            Who we are
+          </p>
+          <h2 className="text-[3.25rem] md:text-[3.75rem] lg:text-[4.25rem] font-bold tracking-tighter text-[#0f172a] mb-8 leading-[1.05]">
+            Building intelligent<br />
+            infrastructure<br />
+            since 2017
+          </h2>
+          <p className="text-[#64748b] text-[17px] md:text-[18px] leading-relaxed max-w-[40rem]">
+            We deliver intelligent IIoT solutions that connect physical assets, sensors, cloud infrastructure, and AI-driven analytics—transforming operational data into smarter decisions and measurable business outcomes.
           </p>
         </div>
 
+        {/* Right Content / Dot Grid */}
+        <div className="w-full relative h-full min-h-[400px] lg:min-h-0 pointer-events-auto overflow-hidden">
+          {/* Base Dot Grid */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #94a3b8 1.5px, transparent 1.5px)',
+              backgroundSize: '96px 96px',
+              backgroundPosition: '0 0',
+            }}
+          />
 
+          {(() => {
+            const CELLS: [number, number, boolean?][] = [
+              // Main center-left organic blob
+              [1, 2], [2, 2], [2, 3], [3, 2, true], [3, 3], [4, 3, true], [4, 4], [5, 4],
+              // Top right cascading cluster
+              [0, 5], [0, 6, true], [1, 6], [1, 7], [2, 7],
+              // Bottom left cluster
+              [5, 2], [6, 2], [6, 3, true], [7, 3],
+              // Scattered connecting satellites
+              [1, 4], [3, 5, true], [4, 7], [6, 6, true]
+            ];
 
+            const hasCell = (r: number, c: number) => CELLS.some(([row, col]) => row === r && col === c);
 
+            return CELLS.map(([row, col, isBlue], i) => {
+              const emptyTop = !hasCell(row - 1, col);
+              const emptyBottom = !hasCell(row + 1, col);
+              const emptyLeft = !hasCell(row, col - 1);
+              const emptyRight = !hasCell(row, col + 1);
 
-        {/* =======================
-            BOTTOM ROW (Cards removed per request)
-        ======================= */}
+              let cornerClasses = "";
+              if (emptyTop && emptyLeft) cornerClasses += " rounded-tl-xl";
+              if (emptyTop && emptyRight) cornerClasses += " rounded-tr-xl";
+              if (emptyBottom && emptyLeft) cornerClasses += " rounded-bl-xl";
+              if (emptyBottom && emptyRight) cornerClasses += " rounded-br-xl";
 
+              const bgColorClass = isBlue 
+                ? 'bg-blue-500' 
+                : (row + col) % 2 === 0 ? 'bg-[#f8f7f4]' : 'bg-white';
+              
+              const hoverColorClass = isBlue ? 'hover:bg-blue-400' : 'hover:bg-white';
+
+              return (
+                <div 
+                  key={i}
+                  className={`absolute ${cornerClasses} transition-all duration-300 hover:-translate-y-1
+                    shadow-[inset_1.5px_1.5px_2px_rgba(255,255,255,0.6),inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06),0_6px_20px_-4px_rgba(0,0,0,0.05)]
+                    hover:shadow-[inset_1.5px_1.5px_2px_rgba(255,255,255,0.9),inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.04),0_12px_30px_-4px_rgba(0,0,0,0.08)]
+                    ${bgColorClass} ${hoverColorClass}
+                  `}
+                  style={{ 
+                    top: `calc(48px + 96px * ${row})`, 
+                    left: `calc(48px + 96px * ${col})`, 
+                    width: '96px', 
+                    height: '96px' 
+                  }} 
+                />
+              );
+            });
+          })()}
+        </div>
       </div>
     </section>
   );
