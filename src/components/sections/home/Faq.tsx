@@ -14,7 +14,7 @@ export default function Faq() {
   };
 
   return (
-    <section className="w-full bg-white py-24 sm:py-32 overflow-hidden relative font-poppins">
+    <section className="w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden relative font-poppins">
       {/* Background ambient grids matching the rest of the site's light mode */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:32px_32px] opacity-10 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[linear-gradient(to_right,#60a5fa_1px,transparent_1px),linear-gradient(to_bottom,#60a5fa_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05] z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
@@ -26,7 +26,7 @@ export default function Faq() {
           <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
             {faq.label}
           </span>
-          <h2 className="font-poppins normal-case text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
+          <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
             {faq.headline}
           </h2>
         </div>

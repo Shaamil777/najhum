@@ -8,17 +8,17 @@ export default function WhyChoose() {
   const { whyChoose } = homeContent;
 
   return (
-    <section className="relative w-full bg-white py-16 sm:py-24 overflow-hidden font-poppins">
+    <section className="relative w-full bg-white py-12 sm:py-16 lg:py-24 overflow-hidden font-poppins">
       
       {/* Header */}
       <div className="flex flex-col items-center text-center mb-16 relative z-20 px-6">
         <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
           {whyChoose.label}
         </span>
-        <h2 className="font-poppins normal-case text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
+        <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
           Smarter. Unified. <span className="text-primary">Future-Ready.</span>
         </h2>
-        <p className="text-lg md:text-xl text-zinc-500 max-w-2xl">
+        <p className="text-base sm:text-lg lg:text-xl text-zinc-500 max-w-2xl">
           {whyChoose.subtitle}
         </p>
       </div>

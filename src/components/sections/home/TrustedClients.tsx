@@ -24,7 +24,7 @@ const clients = [
 export default function TrustedClients() {
   return (
     <section 
-      className={`w-full bg-white py-16 border-b border-neutral-200 ${poppins.variable} ${poppins.className}`}
+      className={`w-full bg-white py-10 sm:py-16 border-b border-neutral-200 ${poppins.variable} ${poppins.className}`}
       style={{
         '--font-display': 'var(--font-poppins)',
         '--font-sans': 'var(--font-poppins)'
@@ -42,10 +42,10 @@ export default function TrustedClients() {
             return (
               <div 
                 key={i} 
-                className="flex items-center justify-center gap-3 py-12 border-b-2 border-r-2 border-zinc-200 border-dotted grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-300 group cursor-default"
+                className="flex items-center justify-center gap-2 sm:gap-3 py-8 sm:py-10 lg:py-12 border-b-2 border-r-2 border-zinc-200 border-dotted grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-300 group cursor-default"
               >
-                <Icon className="w-5 h-5 text-zinc-800 group-hover:text-[#4c3bcf] transition-colors" />
-                <span className="font-display font-bold text-lg tracking-tight text-zinc-800">
+                <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-800 group-hover:text-[#4c3bcf] transition-colors" />
+                <span className="font-display font-bold text-base sm:text-lg tracking-tight text-zinc-800">
                   {client.name}
                 </span>
               </div>

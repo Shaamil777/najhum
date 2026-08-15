@@ -102,7 +102,7 @@ export default function Analytics() {
   const operationalIntelligence = analytics.operationalIntelligence || [];
 
   return (
-    <section className="w-full bg-[#fffff] text-zinc-900 py-32 overflow-hidden relative font-poppins">
+    <section className="w-full bg-[#fffff] text-zinc-900 py-16 sm:py-24 lg:py-32 overflow-hidden relative font-poppins">
       {/* Background subtle grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-80" />
       
@@ -111,10 +111,10 @@ export default function Analytics() {
         <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
           {analytics.badge}
         </span>
-        <h2 className="font-poppins normal-case text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
+        <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
           {analytics.headline} <span className="text-primary">{analytics.headlineItalic}</span>
         </h2>
-        <p className="text-lg md:text-xl text-zinc-500 max-w-2xl">
+        <p className="text-base sm:text-lg lg:text-xl text-zinc-500 max-w-2xl">
           {analytics.description}
         </p>
       </div>
