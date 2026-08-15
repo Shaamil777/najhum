@@ -59,7 +59,7 @@ export default function Navbar() {
         </Link>
 
         {/* Center: Desktop Links */}
-        <div className="hidden md:flex flex-1 justify-center">
+        <div className="hidden lg:flex flex-1 justify-center">
           <DesktopNav />
         </div>
 

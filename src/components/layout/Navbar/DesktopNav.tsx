@@ -11,7 +11,7 @@ import { MegaMenu } from "./MegaMenu";
  */
 export function DesktopNav() {
   return (
-    <nav aria-label="Main Navigation" className="hidden md:block">
+    <nav aria-label="Main Navigation" className="hidden lg:block">
       <Cluster gap="lg">
         <MegaMenu
           title="Platforms"
