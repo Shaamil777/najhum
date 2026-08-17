@@ -1,189 +1,245 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { evolticsContent } from "@/content/platforms";
+import {
+  Layers,
+  ShieldCheck,
+  Cpu,
+  Activity,
+  Sparkles,
+  Headphones,
+  ArrowUpRight,
+  CheckCircle2,
+  Zap,
+  Flame,
+  Workflow
+} from "lucide-react";
 
-const cards = evolticsContent.solutions.cards;
+const rawCards = evolticsContent.solutions.cards;
+
+const enhancedCards = [
+  {
+    ...rawCards[0],
+    icon: Layers,
+    tag: "END-TO-END",
+    badge: "Single SLA Accountability",
+    highlights: ["Licensing & Approvals", "Hardware & Installation", "Unified Operator CPMS"],
+    accentColor: "from-blue-500/20 to-primary/10"
+  },
+  {
+    ...rawCards[1],
+    icon: ShieldCheck,
+    tag: "REGULATORY",
+    badge: "DEWA • TAQA • FEWA",
+    highlights: ["CPO License Acceleration", "Grid Authority Liaison", "Statutory Compliance Audit"],
+    accentColor: "from-emerald-500/20 to-teal-500/10"
+  },
+  {
+    ...rawCards[2],
+    icon: Cpu,
+    tag: "HARDWARE AGNOSTIC",
+    badge: "OCPP 1.6J / 2.0.1",
+    highlights: ["Zero Brand Lock-in", "Multi-Vendor AC & DC", "Direct Firmware Management"],
+    accentColor: "from-purple-500/20 to-indigo-500/10"
+  },
+  {
+    ...rawCards[3],
+    icon: Activity,
+    tag: "TELEMETRY",
+    badge: "Sub-Second Monitoring",
+    highlights: ["Live Power Distribution", "Remote Diagnostics & Reset", "Smart Dynamic Load Balancing"],
+    accentColor: "from-cyan-500/20 to-blue-500/10"
+  },
+  {
+    ...rawCards[4],
+    icon: Sparkles,
+    tag: "BRANDING",
+    badge: "Tenant Branded Apps",
+    highlights: ["Custom Driver Mobile App", "White-Label CPMS Portal", "Custom Invoicing & Tariffs"],
+    accentColor: "from-amber-500/20 to-orange-500/10"
+  },
+  {
+    ...rawCards[5],
+    icon: Headphones,
+    tag: "RELIABILITY",
+    badge: "99.9% Uptime SLA",
+    highlights: ["24/7 Field Engineering", "Predictive Maintenance", "Rapid-Response Dispatch"],
+    accentColor: "from-sky-500/20 to-primary/10"
+  }
+];
 
 export default function EvolticsSolutions() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const [dimensions, setDimensions] = useState({ cardWidth: 450, gap: 48, windowWidth: 1200 });
-
-  useEffect(() => {
-    const updateSize = () => {
-      const w = window.innerWidth;
-      if (w < 768) {
-        setDimensions({ cardWidth: w * 0.80, gap: 16, windowWidth: w });
-      } else if (w < 1024) {
-        setDimensions({ cardWidth: 380, gap: 32, windowWidth: w });
-      } else {
-        setDimensions({ cardWidth: 450, gap: 48, windowWidth: w });
-      }
-    };
-    
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  const totalWidth = cards.length * dimensions.cardWidth + (cards.length - 1) * dimensions.gap;
-  const maxTranslate = Math.max(1, totalWidth - dimensions.windowWidth + 200);
-  
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    // The padding inside the viewport so the first card is visible, and the last card stops at the right edge
-    ["0%", `-${maxTranslate}px`]
-  );
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="w-full bg-[#2a2a2a] border-b border-neutral-800">
+    <section className="w-full py-32 bg-dark text-white relative overflow-hidden font-sans border-b border-neutral-800">
       
-      {/* Header content in normal DOM flow (scrolls away) */}
-      <div className="w-full px-6 md:px-24 py-32 md:py-48 z-10">
-        <p className="text-sm md:text-base font-semibold tracking-widest uppercase text-blue-400 mb-2 md:mb-4">
-          EVOLTICS CORE
-        </p>
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white lg:max-w-2xl xl:max-w-3xl">
-            What Powers the Evoltics Advantage
-          </h2>
-          <p className="text-neutral-300 text-base md:text-xl leading-relaxed lg:max-w-lg lg:pb-2">
-            A connected approach that brings together technology, regulatory expertise, flexibility and long-term operational support to deliver a seamless EV charging experience.
-          </p>
-        </div>
+      {/* Background Architectural Tech Grid & Ambient Glow */}
+      <div className="absolute inset-0 pointer-events-none opacity-25">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_20%,#000_20%,transparent_100%)]" />
       </div>
 
-      {/* Horizontal Scroll Area */}
-      <div ref={containerRef} className="h-[500vh] w-full relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
-          {/* Scrollable Track */}
-          <motion.div 
-            className="flex items-start pl-6 md:pl-24" 
-            style={{ x, gap: `${dimensions.gap}px` }}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-primary/15 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">
+        
+        {/* Header Area */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center space-x-2 bg-primary/15 border border-primary/30 px-3.5 py-1.5 rounded-full mb-6"
+            >
+              <Workflow className="w-3.5 h-3.5 text-blue-400" />
+              <span className="text-[11px] font-bold tracking-[0.2em] text-blue-400 uppercase">
+                Evoltics Core Architecture
+              </span>
+            </motion.div>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]"
+            >
+              What Powers the <br className="hidden sm:block" />
+              <span className="bg-gradient-to-r from-blue-400 via-primary to-cyan-300 bg-clip-text text-transparent">
+                Evoltics Advantage
+              </span>
+            </motion.h2>
+          </div>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="text-neutral-400 text-base lg:text-lg max-w-md leading-relaxed"
           >
-          {cards.map((card, index) => (
-            <SolutionCard 
-              key={index}
-              index={index}
-              card={card}
-              cardWidth={dimensions.cardWidth}
-              gap={dimensions.gap}
-              windowWidth={dimensions.windowWidth}
-              scrollYProgress={scrollYProgress}
-              maxTranslate={maxTranslate}
-            />
-          ))}
-        </motion.div>
+            A connected approach that unifies technology, regulatory compliance, hardware flexibility, and 24/7 SLA operational support.
+          </motion.p>
         </div>
+
+        {/* 6-Card Enterprise Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {enhancedCards.map((card, idx) => {
+            const Icon = card.icon;
+            const isHovered = hoveredIdx === idx;
+
+            return (
+              <motion.div
+                key={card.num}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                onMouseEnter={() => setHoveredIdx(idx)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className="group relative bg-dark-surface/60 hover:bg-dark-surface/90 border border-white/10 hover:border-primary/50 rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/10 overflow-hidden"
+              >
+                {/* Background Ambient Card Glow */}
+                <div 
+                  className={`absolute inset-0 bg-gradient-to-br ${card.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} 
+                />
+
+                {/* Card Top Strip */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-2.5">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-[0.2em] text-neutral-400 uppercase bg-white/5 px-2.5 py-1 rounded border border-white/5">
+                        {card.tag}
+                      </span>
+                    </div>
+
+                    <span className="text-xs font-mono font-bold text-neutral-500 group-hover:text-primary transition-colors">
+                      {card.num}
+                    </span>
+                  </div>
+
+                  {/* Visual Pattern Image Container */}
+                  <div className="w-full h-36 relative mb-6 rounded-xl bg-black/40 border border-white/5 overflow-hidden flex items-center justify-center p-4">
+                    <Image
+                      src={`/images/elvotics/card_${idx + 1}.png`}
+                      alt={card.title}
+                      fill
+                      className="object-contain p-2 opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark-surface/90 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {/* Title & Description */}
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed mb-6">
+                    {card.description}
+                  </p>
+                </div>
+
+                {/* Card Bottom Highlights */}
+                <div className="relative z-10 pt-4 border-t border-white/10 space-y-2">
+                  {card.highlights.map((highlight, hIdx) => (
+                    <div key={hIdx} className="flex items-center space-x-2 text-xs text-neutral-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                      <span>{highlight}</span>
+                    </div>
+                  ))}
+
+                  <div className="pt-3 flex items-center justify-between">
+                    <span className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider">
+                      {card.badge}
+                    </span>
+                    <div className="w-6 h-6 rounded-full bg-white/5 group-hover:bg-primary/20 flex items-center justify-center text-neutral-400 group-hover:text-primary transition-colors">
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+                </div>
+
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Banner Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-16 bg-gradient-to-r from-dark-surface via-dark-surface/80 to-dark-surface border border-white/10 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-6"
+        >
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0">
+              <Zap className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-base font-bold text-white mb-0.5">
+                Ready to deploy an enterprise-grade charging network?
+              </h4>
+              <p className="text-xs text-neutral-400">
+                Experience seamless integration across DEWA, TAQA, and FEWA utility jurisdictions.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-4 shrink-0">
+            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-xl">
+              100% Turnkey Solution
+            </span>
+          </div>
+        </motion.div>
+
       </div>
     </section>
-  );
-}
-
-function SolutionCard({ 
-  index, 
-  card, 
-  cardWidth, 
-  gap,
-  windowWidth,
-  scrollYProgress,
-  maxTranslate
-}: { 
-  index: number; 
-  card: typeof cards[0]; 
-  cardWidth: number;
-  gap: number;
-  windowWidth: number;
-  scrollYProgress: MotionValue<number>;
-  maxTranslate: number;
-}) {
-  // Staggered pattern based on the reference image (High, Lowest, Middle)
-  const pattern = index % 3;
-  let marginTop = "0px";
-  if (pattern === 0) marginTop = "0px";
-  else if (pattern === 1) marginTop = "min(140px, 15vh)"; // Scales down if viewport is short
-  else marginTop = "min(70px, 7.5vh)";
-  
-  const isUp = index % 2 === 0;
-
-  // Calculate the scroll progress needed to center this specific card
-  const localX = index * (cardWidth + gap);
-  const leftPadding = windowWidth >= 768 ? 96 : 24; // pl-24 is 96px, pl-6 is 24px
-  const targetTrackX = (windowWidth / 2) - (cardWidth / 2) - localX - leftPadding;
-  
-  const centerP = -targetTrackX / maxTranslate;
-  const clampedCenterP = Math.max(0, Math.min(1, centerP));
-  
-  const screenRange = (windowWidth / maxTranslate) * 0.8;
-  
-  const scale = useTransform(scrollYProgress, (val) => {
-    const distance = Math.abs(val - clampedCenterP);
-    // Add safety check to prevent divide by zero
-    const safeRange = Math.max(0.01, screenRange);
-    if (distance > safeRange) return 0.85;
-    
-    // progress is 0 at center, 1 at the edge of the range
-    const progress = distance / safeRange;
-    return 1 - (progress * 0.15); // scales smoothly from 1 down to 0.85
-  });
-
-  return (
-    <motion.div 
-      className="shrink-0 relative overflow-hidden rounded-[5px] bg-[#0d52c6] border border-blue-500/30 shadow-2xl flex flex-col"
-      style={{ 
-        width: `${cardWidth}px`, 
-        height: 'min(600px, 65vh)', // Increased height dynamically
-        marginTop,
-        scale
-      }}
-    >
-      {/* Inner Decorative Border (5px inset) */}
-      <div className="absolute top-[5px] left-[5px] right-[5px] bottom-[5px] border border-blue-400/30 rounded-[3px] pointer-events-none z-20"></div>
-
-      {/* Top Left Badge */}
-      <div className="absolute top-6 left-6 z-10">
-        <span className="px-3 py-1 bg-white/20 backdrop-blur-md rounded text-white text-xs font-semibold tracking-widest border border-white/20">
-          {card.num}
-        </span>
-      </div>
-
-      {/* Top Right Arrow Box */}
-      <div className="absolute top-6 right-6 z-10 w-8 h-8 bg-white flex items-center justify-center rounded shadow-sm hover:scale-105 transition-transform cursor-pointer">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0b3a8c" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="7" y1="17" x2="17" y2="7"></line>
-          <polyline points="7 7 17 7 17 17"></polyline>
-        </svg>
-      </div>
-
-      {/* Background Image Decor */}
-      <div className="absolute inset-x-8 md:inset-x-12 top-16 md:top-24 bottom-24 md:bottom-32 z-0 pointer-events-none opacity-80">
-        <Image 
-          src={`/images/elvotics/card_${index + 1}.png`} 
-          alt="Card pattern" 
-          fill
-          className="object-contain object-top"
-          sizes="(max-width: 768px) 80vw, 450px"
-        />
-      </div>
-
-      {/* Content Bottom */}
-      <div className="mt-auto p-6 md:p-8 z-10">
-        <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-white">
-          {card.title}
-        </h3>
-        <p className="text-blue-100 text-sm md:text-base leading-relaxed opacity-90">
-          {card.description}
-        </p>
-      </div>
-    </motion.div>
   );
 }
