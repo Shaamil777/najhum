@@ -167,7 +167,7 @@ function SolutionCard({
       {/* Background Image Decor */}
       <div className="absolute inset-x-8 md:inset-x-12 top-16 md:top-24 bottom-24 md:bottom-32 z-0 pointer-events-none opacity-80">
         <Image 
-          src={`/images/elvotics/card_${(index % 3) + 1}.png`} 
+          src={`/images/elvotics/card_${index + 1}.png`} 
           alt="Card pattern" 
           fill
           className="object-contain object-top"
