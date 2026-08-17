@@ -78,10 +78,13 @@ export default function EvolticsEcosystem() {
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-20 lg:py-32">
         
         {/* Header */}
-        <div className="px-6 md:px-12 lg:px-20 mb-8 md:mb-16 shrink-0">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase">
+        <div className="px-6 md:px-12 lg:px-20 mb-8 md:mb-16 shrink-0 max-w-4xl">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase mb-4">
             EXPLORE THE EVOLTICS ECOSYSTEM
           </h2>
+          <p className="text-neutral-600 text-lg md:text-xl leading-relaxed">
+            Integrated solutions for smarter, scalable EV charging infrastructure.
+          </p>
         </div>
 
         {/* Cards Wrapper */}

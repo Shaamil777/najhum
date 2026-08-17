@@ -66,5 +66,39 @@ export const evolticsContent = {
         category: "Service",
       }
     ]
+  },
+  solutions: {
+    cards: [
+      {
+        num: "01",
+        title: "ONE PARTNER",
+        description: "One accountable partner across licensing, regulatory approvals, software and maintenance, giving businesses a single point of responsibility throughout the charging journey."
+      },
+      {
+        num: "02",
+        title: "REGULATORY EXPERTISE",
+        description: "Proven experience navigating DEWA, TAQA and FEWA approval processes, helping businesses move through regulatory requirements with greater efficiency."
+      },
+      {
+        num: "03",
+        title: "BRAND-AGNOSTIC TECHNOLOGY",
+        description: "Our CPMS works with OCPP-compliant chargers, giving businesses the flexibility to choose compatible hardware without being locked into a single brand."
+      },
+      {
+        num: "04",
+        title: "IoT-ENABLED PLATFORM",
+        description: "An IoT-enabled EV charger management platform providing real-time remote monitoring and intelligent management of charging infrastructure at scale."
+      },
+      {
+        num: "05",
+        title: "WHITE LABEL READY",
+        description: "Deploy your own branded charging network with greater control over the customer experience, platform identity and overall charging journey."
+      },
+      {
+        num: "06",
+        title: "24/7 SUPPORT & AMC",
+        description: "Comprehensive maintenance contracts with rapid-response support, helping protect charger uptime, infrastructure performance and long-term investment."
+      }
+    ]
   }
 };
