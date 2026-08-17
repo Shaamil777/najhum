@@ -20,19 +20,51 @@ export default function EvolticsEcosystem() {
     offset: ["start start", "end end"],
   });
 
-  const [cardWidth, setCardWidth] = useState(800);
+  const [dimensions, setDimensions] = useState({ cardWidth: 800, stickyOffset: 160, paddingLeft: 32 });
 
   useEffect(() => {
     const updateSize = () => {
-      setCardWidth(Math.min(window.innerWidth * 0.9, 800));
+      const w = window.innerWidth;
+      
+      // Scale down the sticky offset for smaller screens so the stack fits
+      let offset = 160;
+      if (w < 640) offset = 16;
+      else if (w < 768) offset = 32;
+      else if (w < 1024) offset = 48; // Optimized offset for tablets
+      else if (w < 1280) offset = 120;
+      else offset = 160;
+      
+      // Calculate max width for the card so the entire stack fits on screen
+      // We want the total stack to take up ~90vw (up to a max container width of 1400px)
+      const desiredStackWidth = Math.min(w * 0.9, 1400);
+      const calculatedCWidth = desiredStackWidth - (cards.length - 1) * offset;
+      
+      // Card width should ideally fit the stack math, bounded by reasonable card limits
+      let cWidth = Math.max(Math.min(calculatedCWidth, 800), 280);
+      
+      const actualStackWidth = cWidth + (cards.length - 1) * offset;
+      let centeredPadding = Math.max((w - actualStackWidth) / 2, 16);
+      
+      // RESTORE DESKTOP BEHAVIOR: keep original left alignment and card size logic
+      if (w >= 1024) {
+         centeredPadding = 80; // Restored original fixed left padding aligned with header
+         
+         // Optimize for MacBook sizes: shrink card width so it doesn't overflow the right edge
+         const maxAvailableDesktop = w - centeredPadding - 32; // 32px safe area on the right
+         const calculatedDesktopCard = maxAvailableDesktop - (cards.length - 1) * offset;
+         
+         cWidth = Math.max(Math.min(calculatedDesktopCard, 800), 400); 
+      }
+      
+      setDimensions({ cardWidth: cWidth, stickyOffset: offset, paddingLeft: centeredPadding });
     };
+    
     updateSize(); // Initial call
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  // Increased sticky offset so more of the underlying cards are visible when stacked
-  const STICKY_OFFSET = 160; 
+  const { cardWidth, stickyOffset: STICKY_OFFSET, paddingLeft } = dimensions;
   const GAP = 16; 
   const CARD_SPACING = cardWidth + GAP;
   const N = cards.length;
@@ -46,14 +78,14 @@ export default function EvolticsEcosystem() {
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-20 lg:py-32">
         
         {/* Header */}
-        <div className="px-6 md:px-12 lg:px-20 mb-12 md:mb-16 shrink-0">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase">
+        <div className="px-6 md:px-12 lg:px-20 mb-8 md:mb-16 shrink-0">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase">
             EXPLORE THE EVOLTICS ECOSYSTEM
           </h2>
         </div>
 
         {/* Cards Wrapper */}
-        <div className="relative w-full h-[450px] md:h-[500px]">
+        <div className="relative w-full h-[380px] sm:h-[450px] md:h-[500px]">
           {cards.map((card, index) => (
             <EcosystemCard 
               key={index}
@@ -63,6 +95,8 @@ export default function EvolticsEcosystem() {
               N={N}
               CARD_SPACING={CARD_SPACING}
               STICKY_OFFSET={STICKY_OFFSET}
+              cardWidth={cardWidth}
+              paddingLeft={paddingLeft}
             />
           ))}
         </div>
@@ -78,9 +112,11 @@ interface CardProps {
   N: number;
   CARD_SPACING: number;
   STICKY_OFFSET: number;
+  cardWidth: number;
+  paddingLeft: number;
 }
 
-function EcosystemCard({ index, card, scrollYProgress, N, CARD_SPACING, STICKY_OFFSET }: CardProps) {
+function EcosystemCard({ index, card, scrollYProgress, N, CARD_SPACING, STICKY_OFFSET, cardWidth, paddingLeft }: CardProps) {
   const x = useTransform(scrollYProgress, (p) => {
     // Total distance the entire group needs to scroll left
     const maxScroll = (N - 1) * (CARD_SPACING - STICKY_OFFSET);
@@ -91,9 +127,6 @@ function EcosystemCard({ index, card, scrollYProgress, N, CARD_SPACING, STICKY_O
     
     // The position where this card should stop and stack
     const stickyX = index * STICKY_OFFSET;
-    
-    // We add 32px (2rem) as initial left padding for the whole stack
-    const paddingLeft = 32; 
     
     return Math.max(stickyX + paddingLeft, targetX + paddingLeft);
   });
@@ -109,34 +142,34 @@ function EcosystemCard({ index, card, scrollYProgress, N, CARD_SPACING, STICKY_O
       className={`absolute top-0 h-full border-l shadow-[-12px_0_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl md:rounded-3xl ${bgClass}`}
       style={{
         x,
-        width: '90vw',
+        width: `${cardWidth}px`,
         maxWidth: '800px',
         zIndex: index, // Natural stacking order
       }}
     >
-      <div className="p-8 md:p-12 h-full flex flex-col justify-between relative">
+      <div className="p-6 md:p-12 h-full flex flex-col justify-between relative">
         {/* Decorative Dot */}
-        <div className={`absolute top-10 right-10 w-3 h-3 rounded-full opacity-80 ${dotClass}`} />
+        <div className={`absolute top-6 right-6 md:top-10 md:right-10 w-2.5 h-2.5 md:w-3 md:h-3 rounded-full opacity-80 ${dotClass}`} />
 
         {/* Top section: Title and Description */}
-        <div className="mt-4">
-          <h3 className="text-2xl md:text-3xl lg:text-[32px] font-semibold mb-6 leading-tight pr-12 text-white">
-            <span className={`${textSubtleClass} mr-3`}>{card.num} —</span>
+        <div className="mt-2 md:mt-4">
+          <h3 className="text-xl md:text-3xl lg:text-[32px] font-semibold mb-3 md:mb-6 leading-tight pr-6 md:pr-12 text-white">
+            <span className={`${textSubtleClass} mr-2 md:mr-3 block sm:inline mb-1 sm:mb-0`}>{card.num} —</span>
             {card.title}
           </h3>
-          <p className={`${textMutedClass} text-sm md:text-base leading-relaxed max-w-[90%] font-medium`}>
+          <p className={`${textMutedClass} text-xs md:text-base leading-relaxed max-w-[95%] md:max-w-[90%] font-medium`}>
             {card.description}
           </p>
         </div>
 
         {/* Bottom section: Metadata */}
-        <div className={`flex justify-between items-end text-xs md:text-sm font-semibold uppercase tracking-wide ${textSubtleClass}`}>
-          <div className="flex gap-8 md:gap-12">
+        <div className={`flex justify-between items-end text-[10px] md:text-sm font-semibold uppercase tracking-wide ${textSubtleClass}`}>
+          <div className="flex gap-4 md:gap-12">
             <span className={textMutedClass}>{card.category}</span>
           </div>
           <div className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors group">
-            <span className="capitalize normal-case text-sm">Read article</span>
-            <span className={`text-lg group-hover:translate-x-1 transition-transform group-hover:text-white ${textMutedClass}`}>›</span>
+            <span className="capitalize normal-case text-xs md:text-sm">Read article</span>
+            <span className={`text-sm md:text-lg group-hover:translate-x-1 transition-transform group-hover:text-white ${textMutedClass}`}>›</span>
           </div>
         </div>
       </div>
