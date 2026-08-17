@@ -10,38 +10,9 @@ const poppins = Poppins({
   variable: "--font-poppins"
 });
 
-const journeySteps = [
-  {
-    num: "1",
-    title: "CONSULTATION",
-    desc: "Understand your requirements and charging objectives.",
-  },
-  {
-    num: "2",
-    title: "SITE SURVEY",
-    desc: "Assess electrical capacity, parking layout and grid requirements. We handle the technical details.",
-  },
-  {
-    num: "3",
-    title: "REGULATORY",
-    desc: "Manage DEWA, TAQA & FEWA approvals end-to-end.",
-  },
-  {
-    num: "4",
-    title: "INSTALLATION",
-    desc: "Engineering, civil works, charger mounting and network integration.",
-  },
-  {
-    num: "5",
-    title: "GO-LIVE",
-    desc: "CPMS setup, testing, commissioning and operator training.",
-  },
-  {
-    num: "6",
-    title: "MAINTENANCE",
-    desc: "Ongoing monitoring, preventive maintenance and compliance support.",
-  }
-];
+import { evolticsContent } from "@/content/platforms";
+
+const journeySteps = evolticsContent.journey.steps;
 
 // Exact grid placement to recreate the waterfall layout
 const layoutClasses = [
@@ -67,6 +38,8 @@ export default function EvolticsJourney() {
         <img src="/images/elvotics/journey_img_1.svg" alt="" className="w-full h-auto object-contain object-right" />
       </div>
 
+
+
       <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Header */}
@@ -80,7 +53,7 @@ export default function EvolticsJourney() {
         </div>
 
         {/* WATERFALL GRID CONTAINER */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-8 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 mt-8 relative">
            
            {journeySteps.map((step, index) => {
              return (
@@ -91,9 +64,9 @@ export default function EvolticsJourney() {
                  viewport={{ once: true, margin: "-10% 0px" }}
                  transition={{ duration: 0.5, delay: index * 0.1 }}
                  className={`
-                    bg-[#2a2a2a] border-2 border-neutral-900 rounded-xl p-5 md:p-6 
+                    bg-[#2a2a2a] border-2 border-neutral-900 rounded-md p-5 md:p-6 
                     shadow-[4px_4px_0px_#2445c7] hover:shadow-[6px_6px_0px_#2445c7] hover:-translate-y-1 
-                    transition-all duration-300 relative z-10 flex flex-col justify-start min-h-[160px]
+                    transition-all duration-300 relative z-10 flex flex-col justify-start
                     ${layoutClasses[index]}
                  `}
                >
