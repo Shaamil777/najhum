@@ -72,7 +72,7 @@ export default function EvolticsEcosystem() {
   return (
     <section 
       ref={containerRef} 
-      className={`w-full bg-neutral-50 text-neutral-900 ${poppins.className} relative h-[400vh]`}
+      className={`w-full bg-white text-neutral-900 ${poppins.className} relative h-[400vh]`}
     >
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-20 lg:py-32">
@@ -168,7 +168,7 @@ function EcosystemCard({ index, card, scrollYProgress, N, CARD_SPACING, STICKY_O
             <span className={textMutedClass}>{card.category}</span>
           </div>
           <div className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors group">
-            <span className="capitalize normal-case text-xs md:text-sm">Read article</span>
+            <span className="capitalize normal-case text-xs md:text-sm">Explore solution</span>
             <span className={`text-sm md:text-lg group-hover:translate-x-1 transition-transform group-hover:text-white ${textMutedClass}`}>›</span>
           </div>
         </div>

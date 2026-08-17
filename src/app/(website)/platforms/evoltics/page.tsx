@@ -12,10 +12,10 @@ export default function EvolticsPage() {
     <div className="flex flex-col w-full">
       <EvolticsHero />
       <EvolticsAbout />
-      <EvolticsEcosystem />
+      <EvolticsSolutions />
       <EvolticsComparison />
       <EvolticsPlatform />
-      <EvolticsSolutions />
+      <EvolticsEcosystem />
       <EvolticsJourney />
       <EvolticsCta />
     </div>
