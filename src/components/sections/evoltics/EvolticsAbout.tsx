@@ -100,21 +100,9 @@ export default function EvolticsAbout() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">
         
-        {/* Header Badge & Title */}
+        {/* Header Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 lg:mb-20 gap-8">
           <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center space-x-2.5 bg-primary/10 border border-primary/25 px-3.5 py-1.5 rounded-full mb-5"
-            >
-              <Globe2 className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[11px] font-bold tracking-[0.18em] text-primary uppercase">
-                UAE Strategic Outlook
-              </span>
-            </motion.div>
-
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
