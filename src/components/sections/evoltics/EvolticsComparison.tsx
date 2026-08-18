@@ -87,17 +87,6 @@ export default function EvolticsComparison() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-primary-light border border-primary/20 px-3.5 py-1.5 rounded-full mb-5"
-          >
-            <Split className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[11px] font-bold tracking-[0.18em] text-primary uppercase">
-              Strategic Transformation
-            </span>
-          </motion.div>
 
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -252,33 +241,6 @@ export default function EvolticsComparison() {
 
         </div>
 
-        {/* Bottom Turnkey Guarantee Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-12 bg-surface border border-border p-6 lg:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm"
-        >
-          <div className="flex items-center space-x-4">
-            <div className="w-11 h-11 rounded-xl bg-success/10 border border-success/20 flex items-center justify-center text-success shrink-0">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="text-sm font-bold text-foreground mb-0.5">
-                Zero Regulatory Guesswork
-              </h4>
-              <p className="text-xs text-muted">
-                Pre-engineered compliance workflows aligned with DEWA, TAQA, and FEWA standards from day one.
-              </p>
-            </div>
-          </div>
-
-          <div className="inline-flex items-center space-x-2 text-xs font-bold text-primary bg-primary-light border border-primary/20 px-4 py-2 rounded-xl shrink-0">
-            <Zap className="w-3.5 h-3.5" />
-            <span>Turnkey Execution</span>
-          </div>
-        </motion.div>
 
       </div>
     </section>

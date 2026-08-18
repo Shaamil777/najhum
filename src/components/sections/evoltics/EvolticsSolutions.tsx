@@ -89,17 +89,6 @@ export default function EvolticsSolutions() {
         {/* Header Area */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
           <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center space-x-2 bg-primary/15 border border-primary/30 px-3.5 py-1.5 rounded-full mb-6"
-            >
-              <Workflow className="w-3.5 h-3.5 text-blue-400" />
-              <span className="text-[11px] font-bold tracking-[0.2em] text-blue-400 uppercase">
-                Evoltics Core Architecture
-              </span>
-            </motion.div>
 
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}

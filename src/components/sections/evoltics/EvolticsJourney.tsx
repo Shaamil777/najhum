@@ -76,17 +76,6 @@ export default function EvolticsJourney() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 bg-primary-light border border-primary/20 px-3.5 py-1.5 rounded-full mb-5"
-          >
-            <Rocket className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[11px] font-bold tracking-[0.18em] text-primary uppercase">
-              End-to-End Deployment
-            </span>
-          </motion.div>
 
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}

@@ -80,17 +80,6 @@ export default function EvolticsPlatform() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/25 px-3.5 py-1.5 rounded-full mb-5"
-            >
-              <Cpu className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[11px] font-bold tracking-[0.18em] text-primary uppercase">
-                Proprietary CPMS Platform
-              </span>
-            </motion.div>
 
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
