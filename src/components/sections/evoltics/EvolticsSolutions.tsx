@@ -402,70 +402,76 @@ export default function EvolticsSolutions() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[550vh] bg-white text-zinc-900 font-sans"
+      className="relative w-full h-[550vh] bg-background-alt text-foreground font-sans"
     >
-      {/* Subtle architectural grid background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,transparent_40%,rgba(241,245,249,0.8)_100%)]" />
-      </div>
 
       {/* ── Sticky viewport ── */}
       <div className="sticky top-0 h-screen w-full flex flex-col pt-18 sm:pt-20 lg:pt-10 pb-3 sm:pb-4 lg:pb-6 z-10 overflow-hidden">
 
         {/* ════════════════════════════════════════════════════════════════════════
-            DESKTOP PRESENTATION (lg and up) — 100% Preserved Stack Layout
+            DESKTOP PRESENTATION (lg and up) — Side-by-side Layout
            ════════════════════════════════════════════════════════════════════════ */}
-        <div className="hidden lg:flex container mx-auto px-6 lg:px-16 max-w-7xl flex-col h-full relative z-10 justify-between">
+        <div className="hidden lg:flex container mx-auto px-6 lg:px-8 xl:px-12 2xl:px-16 max-w-[1500px] flex-row h-full relative z-10 items-center justify-between gap-4 lg:gap-8 xl:gap-20">
 
-          {/* Desktop Header row */}
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 shrink-0">
-            <div className="lg:max-w-md xl:max-w-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-5 h-[2px] bg-primary block" />
-                <span className="text-[11px] font-bold text-primary uppercase tracking-[0.2em]">
-                  Core Architectural Advantages
-                </span>
-              </div>
+          {/* Desktop Left Side: Content */}
+          <div className="w-[340px] lg:w-[360px] xl:w-[550px] shrink-0 flex flex-col justify-center gap-6 lg:gap-8 xl:gap-12">
+            
+            <div className="flex flex-col gap-4">
 
-              <h2 className="text-2xl sm:text-3xl lg:text-[2.3rem] xl:text-[2.5rem] font-black tracking-tight text-zinc-950 leading-[1.1]">
+
+              <h2 className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-zinc-950 leading-[1.05]">
                 WHAT POWERS THE <br />
                 <span className="text-primary font-black">EVOLTICS ADVANTAGE</span>
               </h2>
 
-              <p className="mt-2 text-xs sm:text-sm text-zinc-500 max-w-sm leading-relaxed">
+              <p className="text-sm lg:text-xs xl:text-base text-zinc-500 leading-relaxed max-w-md">
                 A connected approach that unifies technology, regulatory compliance, hardware flexibility, and 24/7 SLA operational support.
               </p>
             </div>
 
-            {/* Desktop Counter */}
-            <div className="flex flex-col lg:items-end gap-2 shrink-0 lg:pt-1">
+            {/* Desktop Counter & Progress */}
+            <div className="flex flex-col gap-3">
               <div className="flex items-baseline gap-1.5 font-mono">
-                <span className="text-2xl sm:text-3xl font-black text-zinc-950 tracking-tight">
+                <span className="text-3xl lg:text-2xl xl:text-4xl font-black text-zinc-950 tracking-tight">
                   {String(activeStep + 1).padStart(2, "0")}
                 </span>
-                <span className="text-sm font-semibold text-zinc-300">/</span>
-                <span className="text-sm font-bold text-zinc-400">
+                <span className="text-sm lg:text-xs xl:text-base font-semibold text-zinc-300">/</span>
+                <span className="text-sm lg:text-xs xl:text-base font-bold text-zinc-400">
                   {String(advantageCards.length).padStart(2, "0")}
                 </span>
               </div>
-              <div className="flex gap-1.5 items-center">
+              <div className="flex gap-1.5 items-center w-full max-w-[280px] lg:max-w-[220px] xl:max-w-[340px]">
                 {advantageCards.map((_, i) => (
                   <div
                     key={i}
                     className={cn(
-                      "h-1.5 rounded-full transition-all duration-300 ease-out",
-                      activeStep === i ? "w-7 bg-primary" : "w-5 bg-zinc-200"
+                      "h-1.5 xl:h-2 rounded-full transition-all duration-300 ease-out",
+                      activeStep === i ? "w-8 xl:w-12 bg-primary" : "flex-1 bg-zinc-200"
                     )}
                   />
                 ))}
               </div>
             </div>
+
+            {/* Desktop Scroll Indicator */}
+            <div className="flex items-center gap-3 pt-2">
+              <div className="w-4 h-7 xl:w-5 xl:h-9 rounded-full border-2 border-zinc-400/80 flex items-start justify-center p-1 shrink-0">
+                <motion.div
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-1 h-1 xl:h-1.5 bg-zinc-500 rounded-full"
+                />
+              </div>
+              <span className="text-[11px] lg:text-[10px] xl:text-[13px] font-medium text-zinc-500 tracking-wide">
+                Scroll to explore advantage sequence
+              </span>
+            </div>
+
           </div>
 
-          {/* Desktop Central Card Stage */}
-          <div className="flex-1 flex flex-col justify-center items-center relative min-h-0">
-            <div className="relative" style={{ width: ACTIVE_W, height: CARD_H }}>
+          {/* Desktop Right Side: Card Stage */}
+          <div className="flex-1 flex justify-center lg:justify-start xl:justify-center items-center relative h-full min-w-0 pl-0 lg:pl-0 xl:pl-10">
+            <div className="relative lg:scale-[0.80] xl:scale-110 2xl:scale-125 lg:origin-left xl:origin-center lg:translate-x-2 lg:translate-y-8 xl:translate-x-12 xl:translate-y-16 transition-transform duration-300" style={{ width: ACTIVE_W, height: CARD_H }}>
               {advantageCards.map((card, index) => (
                 <DesktopStackCard
                   key={card.num}
@@ -479,20 +485,6 @@ export default function EvolticsSolutions() {
             </div>
           </div>
 
-          {/* Desktop Scroll Indicator */}
-          <div className="shrink-0 flex flex-col items-center justify-center gap-1 pt-1 pb-1 text-center">
-            <div className="w-4 h-7 rounded-full border-2 border-zinc-400/80 flex items-start justify-center p-1">
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                className="w-1 h-1 bg-zinc-500 rounded-full"
-              />
-            </div>
-            <span className="text-[10px] sm:text-[11px] font-medium text-zinc-500 tracking-wide">
-              Scroll to explore advantage sequence
-            </span>
-          </div>
-
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════════
@@ -503,12 +495,7 @@ export default function EvolticsSolutions() {
           {/* Mobile Header Row */}
           <div className="shrink-0">
             <div className="flex items-center justify-between mb-1">
-              <div className="flex items-center gap-1.5">
-                <span className="w-3.5 h-[2px] bg-primary block" />
-                <span className="text-[9px] font-bold text-primary uppercase tracking-[0.18em]">
-                  Architectural Advantages
-                </span>
-              </div>
+
               {/* Mobile Counter */}
               <div className="font-mono text-xs font-bold text-zinc-500">
                 <span className="text-sm font-black text-zinc-950">{String(activeStep + 1).padStart(2, "0")}</span>

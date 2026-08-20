@@ -57,7 +57,7 @@ export default function EvolticsJourney() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="w-full py-28 bg-background relative overflow-hidden font-sans border-b border-border">
+    <section className="w-full py-28 bg-background relative overflow-hidden font-sans">
       
       {/* Background Grid */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
@@ -82,7 +82,7 @@ export default function EvolticsJourney() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.15]"
+            className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.05] uppercase"
           >
             Your Deployment Journey
           </motion.h2>

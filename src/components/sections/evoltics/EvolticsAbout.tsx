@@ -92,7 +92,7 @@ export default function EvolticsAbout() {
   const [selectedMilestone, setSelectedMilestone] = useState<number>(1); // Default to 2026 (Expansion)
 
   return (
-    <section className="w-full py-28 bg-background-alt text-foreground relative overflow-hidden font-sans border-b border-border">
+    <section className="w-full py-28 bg-background-alt text-foreground relative overflow-hidden font-sans">
       {/* Background Architectural Grid & Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_10%,#000_15%,transparent_100%)]" />
@@ -108,7 +108,7 @@ export default function EvolticsAbout() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.15]"
+              className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.05] uppercase"
             >
               UAE EV Market Outlook
             </motion.h2>

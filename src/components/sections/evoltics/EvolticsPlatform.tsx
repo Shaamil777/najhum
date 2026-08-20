@@ -29,14 +29,10 @@ import {
 type DashboardTab = "fleet" | "load" | "revenue";
 
 const features = [
-  { icon: Activity, title: "Real-Time Telemetry", desc: "Sub-second heartbeat & live socket states" },
-  { icon: Zap, title: "Live Charging Sessions", desc: "Session control, remote start/stop & power curve" },
-  { icon: Scale, title: "Smart Load Management", desc: "Dynamic peak shaving & EV-Grid balancing" },
-  { icon: BadgeDollarSign, title: "Dynamic Pricing", desc: "Time-of-use tariffs & automated surge rates" },
-  { icon: Wrench, title: "Remote Diagnostics", desc: "OCPP error logs & automated firmware reboot" },
-  { icon: Receipt, title: "Revenue & Billing", desc: "Automated VAT invoicing & UAE payment gateways" },
-  { icon: Truck, title: "Fleet Management", desc: "Depot priority charging & RFID authorization" },
-  { icon: Network, title: "Multi-Site Operations", desc: "Unified dashboard across all 7 emirates" },
+  { icon: Server, title: "Hardware Agnostic", desc: "Works with any OCPP-compliant charger brand" },
+  { icon: BarChart3, title: "Real-Time Analytics", desc: "Live dashboard with revenue, sessions & energy data" },
+  { icon: Layers, title: "White Label Ready", desc: "Full branding customisation for your business" },
+  { icon: Network, title: "Open APIs", desc: "Integrate with your own apps or third-party platforms" },
 ];
 
 const mockStations = [
@@ -68,14 +64,14 @@ export default function EvolticsPlatform() {
   if (!mounted) return null;
 
   return (
-    <section className="w-full py-28 bg-background-alt relative overflow-hidden font-sans border-t border-border">
+    <section className="w-full py-28 bg-background-alt relative overflow-hidden font-sans ">
       
       {/* Background Architectural Grid & Radial Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_15%,transparent_100%)]" />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">
+      <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
@@ -86,10 +82,10 @@ export default function EvolticsPlatform() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.15]"
+              className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.05] uppercase"
             >
-              Centralized IoT <br />
-              <span className="text-primary">Charging Management</span>
+              CPMS — Charge Point <br />
+              <span className="text-primary font-black">Management System</span>
             </motion.h2>
           </div>
 
@@ -98,24 +94,27 @@ export default function EvolticsPlatform() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="text-muted text-base lg:text-lg max-w-md leading-relaxed"
+            className="text-muted text-base lg:text-lg max-w-md leading-relaxed italic"
           >
-            A high-availability, hardware-agnostic CPMS engine engineered to monitor, optimize, and monetize EV charging infrastructure across the UAE.
+            World's first IoT-enabled EV Charger Management Platform.
           </motion.p>
         </div>
 
         {/* Main Interactive Stage */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
           
-          {/* Left Column: 8 Feature Capabilities */}
-          <div className="lg:col-span-4 flex flex-col space-y-3">
-            <div className="mb-2">
-              <span className="text-[11px] font-bold text-muted uppercase tracking-[0.2em]">
-                Platform Capabilities
-              </span>
+          {/* Left Column: 4 Feature Capabilities */}
+          <div className="lg:col-span-4 flex flex-col space-y-4">
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold text-foreground mb-3 leading-tight">
+                Everything you need <br className="hidden lg:block"/> in one CPMS
+              </h3>
+              <p className="text-sm text-muted leading-relaxed">
+                Connect and control all your EV infrastructure from a single platform. Manage revenue, users, energy output, and more with our open, interoperable, hardware-agnostic software.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
               {features.map((feat, i) => {
                 const Icon = feat.icon;
                 return (
@@ -125,16 +124,16 @@ export default function EvolticsPlatform() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="p-3.5 rounded-xl bg-surface border border-border/80 hover:border-primary/40 hover:bg-surface-alt/50 transition-all flex items-start space-x-3.5 group shadow-sm"
+                    className="p-4 rounded-xl bg-surface border border-border/80 hover:border-primary/40 hover:bg-surface-alt/50 transition-all flex items-start space-x-4 group shadow-sm"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0 mt-0.5">
-                      <Icon className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                      <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">
+                      <h4 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">
                         {feat.title}
                       </h4>
-                      <p className="text-[11px] text-muted leading-tight mt-0.5">
+                      <p className="text-xs text-muted leading-relaxed mt-1">
                         {feat.desc}
                       </p>
                     </div>

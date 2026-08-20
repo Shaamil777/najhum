@@ -1,20 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import {
-  XCircle,
-  CheckCircle2,
-  AlertTriangle,
-  ShieldCheck,
-  Zap,
-  Sparkles,
-  ArrowRight,
-  Split,
-  Layers,
-  Activity,
-  Cpu
-} from "lucide-react";
+import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ComparisonItem {
   id: string;
@@ -73,175 +62,124 @@ const comparisonData: ComparisonItem[] = [
 ];
 
 export default function EvolticsComparison() {
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-
   return (
-    <section className="w-full py-28 bg-background relative overflow-hidden font-sans border-b border-border">
+    <section className="w-full relative overflow-hidden font-sans">
       
-      {/* Background Architectural Grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-35">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_75%_50%_at_50%_0%,#000_15%,transparent_100%)]" />
+      {/* Background Split (Desktop Only) */}
+      <div className="absolute inset-0 pointer-events-none hidden lg:flex">
+        {/* Left Side Bg */}
+        <div className="w-1/2 bg-[#fcfcfc] relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-200/40 rounded-full blur-[120px]" />
+        </div>
+        {/* Right Side Bg */}
+        <div className="w-1/2 bg-blue-50/40 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px]" />
+        </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">
-        
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.15]"
-          >
-            Traditional Complexity vs. <br className="hidden sm:block" />
-            <span className="text-primary">The Evoltics Advantage</span>
-          </motion.h2>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="mt-4 text-muted text-base lg:text-lg leading-relaxed max-w-2xl mx-auto"
-          >
-            Why progressive asset owners and fleet operators transition from fractured multi-vendor setups to a cohesive, turnkey ecosystem.
-          </motion.p>
-        </div>
-
-        {/* Comparison Matrix Split Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative">
+      <div className="container mx-auto relative z-10 max-w-[1400px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 xl:gap-32">
           
-          {/* Column 1: Traditional Path */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-surface-alt/80 border border-border/80 rounded-3xl p-8 lg:p-10 flex flex-col justify-between shadow-sm relative overflow-hidden"
-          >
-            <div>
-              {/* Column Header */}
-              <div className="flex items-center justify-between pb-6 border-b border-border/80 mb-8">
-                <div>
-                  <span className="text-[10px] font-bold tracking-[0.2em] text-muted uppercase block mb-1">
-                    The Conventional Model
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-foreground tracking-tight">
-                    Traditional Path
-                  </h3>
-                </div>
-                <div className="w-10 h-10 rounded-2xl bg-danger/10 border border-danger/20 flex items-center justify-center text-danger shrink-0">
-                  <XCircle className="w-5 h-5" />
-                </div>
-              </div>
+          {/* LEFT COLUMN: Traditional */}
+          <div className="py-20 lg:py-32 px-6 flex flex-col items-center lg:items-end border-b lg:border-b-0 border-border/40 bg-[#fcfcfc] lg:bg-transparent">
+            
+            <h2 className="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-600 mb-16 text-center lg:text-right w-full">
+              Instead of
+            </h2>
 
-              {/* Items List */}
-              <div className="space-y-8">
-                {comparisonData.map((item, idx) => (
-                  <div 
+            <div className="space-y-6 w-full flex flex-col items-center lg:items-end">
+              {comparisonData.map((item, idx) => {
+                let staggerClass = "";
+                if (idx === 0) staggerClass = "lg:mr-12";
+                if (idx === 1) staggerClass = "lg:mr-0";
+                if (idx === 2) staggerClass = "lg:mr-16";
+
+                return (
+                  <motion.div
                     key={item.id}
-                    onMouseEnter={() => setHoveredRow(idx)}
-                    onMouseLeave={() => setHoveredRow(null)}
-                    className={`p-5 rounded-2xl border transition-all duration-300 ${
-                      hoveredRow === idx 
-                        ? 'bg-danger/5 border-danger/30 translate-x-1' 
-                        : 'bg-surface border-border/60'
-                    }`}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className={cn(
+                      "bg-white border border-zinc-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
+                      staggerClass
+                    )}
                   >
-                    <div className="flex items-center space-x-2.5 mb-2">
-                      <XCircle className="w-4 h-4 text-danger/80 shrink-0" />
-                      <span className="text-xs font-bold tracking-wider text-danger uppercase">
-                        {item.traditional.title}
-                      </span>
-                    </div>
-
-                    <h4 className="text-base font-bold text-foreground mb-1.5">
+                    <span className="text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-2 block">
+                      {item.traditional.title}
+                    </span>
+                    <h4 className="text-base font-semibold text-zinc-800 mb-2 leading-snug">
                       {item.traditional.description}
                     </h4>
-                    <p className="text-xs text-muted leading-relaxed">
+                    <p className="text-[13px] text-zinc-500 leading-relaxed">
                       {item.traditional.details}
                     </p>
-                  </div>
-                ))}
-              </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-border/80 flex items-center justify-between text-xs text-muted">
-              <span>Overall Project Friction:</span>
-              <span className="font-bold text-danger">High Overhead & Delays</span>
+            {/* Left Col Bottom Tag */}
+            <div className="mt-12 w-full max-w-[400px] text-center lg:text-right">
+               <p className="text-xs text-zinc-500">Overall Project Friction: <span className="font-bold text-zinc-700">High Overhead & Delays</span></p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Column 2: The Evoltics Path (Recommended) */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-surface border-2 border-primary rounded-3xl p-8 lg:p-10 flex flex-col justify-between shadow-xl shadow-primary/10 relative overflow-hidden"
-          >
-            {/* Top Ambient Highlight Glow */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          {/* RIGHT COLUMN: Evoltics */}
+          <div className="py-20 lg:py-32 px-6 flex flex-col items-center lg:items-start bg-blue-50/30 lg:bg-transparent">
+            
+            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-center lg:text-left w-full">
+              Evoltics <span className="font-serif italic font-normal text-primary">gives</span>
+            </h2>
 
-            <div>
-              {/* Column Header */}
-              <div className="flex items-center justify-between pb-6 border-b border-border mb-8 relative z-10">
-                <div>
-                  <div className="inline-flex items-center space-x-1.5 bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-1.5">
-                    <Sparkles className="w-3 h-3" />
-                    <span>Recommended Standard</span>
-                  </div>
-                  <h3 className="text-2xl font-extrabold text-foreground tracking-tight">
-                    The Evoltics Path
-                  </h3>
-                </div>
-                <div className="w-10 h-10 rounded-2xl bg-primary-light border border-primary/25 flex items-center justify-center text-primary shrink-0">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-              </div>
+            <div className="space-y-6 w-full flex flex-col items-center lg:items-start">
+              {comparisonData.map((item, idx) => {
+                let staggerClass = "";
+                if (idx === 0) staggerClass = "lg:ml-0";
+                if (idx === 1) staggerClass = "lg:ml-12";
+                if (idx === 2) staggerClass = "lg:ml-6";
 
-              {/* Items List */}
-              <div className="space-y-8 relative z-10">
-                {comparisonData.map((item, idx) => (
-                  <div 
+                return (
+                  <motion.div
                     key={item.id}
-                    onMouseEnter={() => setHoveredRow(idx)}
-                    onMouseLeave={() => setHoveredRow(null)}
-                    className={`p-5 rounded-2xl border transition-all duration-300 ${
-                      hoveredRow === idx 
-                        ? 'bg-primary-light/60 border-primary shadow-md -translate-x-1' 
-                        : 'bg-surface-alt/50 border-border/80'
-                    }`}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className={cn(
+                      "bg-white lg:bg-[#f6f9fc] backdrop-blur-sm border border-primary/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] shadow-primary/5 rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
+                      staggerClass
+                    )}
                   >
-                    <div className="flex items-center space-x-2.5 mb-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                      <span className="text-xs font-bold tracking-wider text-primary uppercase">
-                        {item.evoltics.title}
-                      </span>
+                    <div className="flex items-start gap-4">
+                      <div className="mt-0.5 shrink-0">
+                        <Check className="w-5 h-5 text-primary" strokeWidth={3} />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-bold tracking-wider text-primary/70 uppercase mb-2 block">
+                          {item.evoltics.title}
+                        </span>
+                        <h4 className="text-base font-bold text-zinc-900 mb-2 leading-snug">
+                          {item.evoltics.description}
+                        </h4>
+                        <p className="text-[13px] text-zinc-600 leading-relaxed">
+                          {item.evoltics.details}
+                        </p>
+                      </div>
                     </div>
-
-                    <h4 className="text-base font-bold text-foreground mb-1.5">
-                      {item.evoltics.description}
-                    </h4>
-                    <p className="text-xs text-muted leading-relaxed">
-                      {item.evoltics.details}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-border flex items-center justify-between text-xs text-muted relative z-10">
-              <span>Deployment Timeline:</span>
-              <span className="font-bold text-primary">Up to 60% Faster Delivery</span>
+            {/* Right Col Bottom Tag */}
+            <div className="mt-12 w-full max-w-[400px] text-center lg:text-left">
+               <p className="text-xs text-primary/80">Deployment Timeline: <span className="font-bold text-primary">Up to 60% Faster Delivery</span></p>
             </div>
-          </motion.div>
+          </div>
 
         </div>
-
-
       </div>
     </section>
   );
