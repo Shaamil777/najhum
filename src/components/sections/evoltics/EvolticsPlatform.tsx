@@ -29,10 +29,12 @@ import {
 type DashboardTab = "fleet" | "load" | "revenue";
 
 const features = [
-  { icon: Server, title: "Hardware Agnostic", desc: "Works with any OCPP-compliant charger brand" },
-  { icon: BarChart3, title: "Real-Time Analytics", desc: "Live dashboard with revenue, sessions & energy data" },
-  { icon: Layers, title: "White Label Ready", desc: "Full branding customisation for your business" },
-  { icon: Network, title: "Open APIs", desc: "Integrate with your own apps or third-party platforms" },
+  { icon: Server, title: "Hardware Agnostic", desc: "Integrate and setup any OCPP-compliant charger in a few clicks and start charging." },
+  { icon: BarChart3, title: "Dashboard & Analytics", desc: "Monitor your charging network with real-time data insights, charts and statistics." },
+  { icon: Layers, title: "White Label Ready", desc: "Host a self-branded CPMS from your custom domain with personal brand logo and colors." },
+  { icon: BadgeDollarSign, title: "Dynamic Price Plans", desc: "Create multiple pricing groups with independent rates for public and private users." },
+  { icon: Receipt, title: "Auto-Payment Settlements", desc: "Smart settlement system auto-calculates fees and distributes net revenue monthly." },
+  { icon: ShieldCheck, title: "Public-Private Mode", desc: "Set charger accessibility for employees or visitors as private, or open to the public." },
 ];
 
 const mockStations = [
@@ -144,7 +146,7 @@ export default function EvolticsPlatform() {
           </div>
 
           {/* Right Column: Live Enterprise Dashboard Showcase */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 lg:mt-12 xl:mt-16">
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}

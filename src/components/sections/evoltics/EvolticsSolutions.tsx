@@ -89,20 +89,110 @@ const advantageCards: AdvantageCardData[] = [
   }
 ];
 
-// ─── Stack Geometry (derived from Reference Image 2) ─────────────────────────
-//
-// Active card width: ~500px (compact, not 840px)
-// Per-card vertical strip exposure: ~50px
-// Per-card width narrowing: 20px (very subtle)
-// Per-card scale reduction: 0.015 (barely perceptible, editorial)
-//
-const ACTIVE_W = 620;       // px — active card width (medium scale)
-const CARD_H = 370;         // px — fixed card height (enforced via overflow-hidden)
-const STEP_Y = 50;          // px — exposed header strip per depth level (equals header section height)
-const WIDTH_STEP = 20;      // px — narrowing per depth level
-const SCALE_STEP = 0.015;   // scale reduction per depth level (ratio, unchanged)
+// ─── Stack Geometry & Shared Logic ─────────────────────────────────────────────
 
-// ─── Individual Desktop Card Component (Untouched) ────────────────────────────
+const ACTIVE_W = 620;
+const CARD_H = 370;
+const STEP_Y = 50;
+const WIDTH_STEP = 20;
+const SCALE_STEP = 0.015;
+
+const SCROLL_THRESHOLDS: [number, number][] = [
+  [0.08, 0.17],
+  [0.25, 0.34],
+  [0.42, 0.51],
+  [0.59, 0.68],
+  [0.76, 0.85]
+];
+
+const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+
+const computeActiveIndex = (pos: number): number => {
+  let activeIdx = 0;
+  for (let i = 0; i < SCROLL_THRESHOLDS.length; i++) {
+    const [ta, tb] = SCROLL_THRESHOLDS[i];
+    if (pos < ta) break;
+    if (pos >= tb) {
+      activeIdx = i + 1;
+    } else {
+      activeIdx = i + clamp01((pos - ta) / (tb - ta));
+      break;
+    }
+  }
+  return activeIdx;
+};
+
+// ─── Shared Card Content ──────────────────────────────────────────────────────
+
+function CardContent({ card, index }: { card: AdvantageCardData, index: number }) {
+  const Icon = card.icon;
+  return (
+    <>
+      {/* Header */}
+      <div className="flex items-center justify-between pb-2 lg:pb-[10px] border-b border-zinc-100 lg:border-[#f4f4f5] gap-2 lg:gap-0">
+        <div className="flex items-center gap-1.5 lg:gap-2 min-w-0 shrink-0 lg:shrink">
+          <span className="text-[11px] font-mono font-bold text-zinc-400 shrink-0">{card.num}</span>
+          <span className="text-[8.5px] lg:text-[10px] font-bold tracking-wider lg:tracking-[0.15em] uppercase px-2 lg:px-2.5 py-0.5 rounded lg:rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/70 shrink-0">
+            {card.tag}
+          </span>
+        </div>
+        <div className="flex items-center gap-1 lg:gap-1.5 text-primary text-[8.5px] lg:text-[10px] font-bold tracking-wider uppercase shrink-0 lg:ml-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+          <span className="truncate max-w-[160px]">{card.badge}</span>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="grid grid-cols-[1fr_auto] gap-3 lg:gap-4 items-center py-2.5 lg:pt-[18px] lg:pb-[15px]">
+        <div className="min-w-0">
+          <div className="w-8 h-8 lg:w-11 lg:h-11 rounded-lg lg:rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary mb-1.5 lg:mb-3 shadow-xs lg:shadow-sm shrink-0">
+            <Icon className="w-4 h-4 lg:w-[22px] lg:h-[22px]" />
+          </div>
+          <h3 className="text-base sm:text-lg lg:text-[21px] font-black tracking-tight text-zinc-950 mb-1 lg:mb-2 leading-tight lg:leading-snug">
+            {card.title}
+          </h3>
+          <p className="text-[11px] lg:text-[12px] text-zinc-500 leading-relaxed lg:line-clamp-3">
+            {card.description}
+          </p>
+        </div>
+        <div className="w-18 h-18 sm:w-22 sm:h-22 lg:w-[135px] lg:h-[120px] flex items-center justify-center shrink-0">
+          <Image
+            src={card.imageSrc}
+            alt={card.title}
+            width={150}
+            height={125}
+            priority={index === 0}
+            className="w-full h-full object-contain drop-shadow-sm select-none"
+          />
+        </div>
+      </div>
+
+      {/* Key Pillars */}
+      <div className="pt-2 lg:pt-[15px] border-t border-zinc-100 lg:border-[#f4f4f5]">
+        <div className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.15em] lg:tracking-[0.2em] text-zinc-400 mb-1.5 lg:mb-[10px]">
+          KEY ARCHITECTURAL PILLARS
+        </div>
+        <div className="flex lg:items-center lg:justify-between lg:gap-2">
+          <div className="space-y-1 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-2 flex-1">
+            {card.highlights.map((highlight, hIdx) => (
+              <div key={hIdx} className="flex items-center lg:items-start gap-1.5 px-2 lg:px-2.5 py-1.5 lg:py-2 rounded-lg bg-zinc-50/90 border border-zinc-200/60">
+                <div className="w-3.5 h-3.5 rounded-full border border-blue-500 flex items-center justify-center text-primary shrink-0 lg:mt-[1px]">
+                  <Check className="w-2 h-2 stroke-[2.5]" />
+                </div>
+                <span className="text-[9.5px] lg:text-[10px] font-semibold text-zinc-800 leading-none lg:leading-tight truncate lg:whitespace-normal">{highlight}</span>
+              </div>
+            ))}
+          </div>
+          <div className="hidden lg:flex w-8 h-8 rounded-full border border-blue-200 items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer shrink-0 ml-1">
+            <ArrowRight className="w-4 h-4" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ─── StackCard Components ────────────────────────────────────────────────────
 
 interface StackCardProps {
   card: AdvantageCardData;
@@ -113,64 +203,16 @@ interface StackCardProps {
 }
 
 function DesktopStackCard({ card, index, totalCards, scrollYProgress, isReducedMotion }: StackCardProps) {
-  const Icon = card.icon;
-
-  const T: [number, number][] = [
-    [0.08, 0.17],
-    [0.25, 0.34],
-    [0.42, 0.51],
-    [0.59, 0.68],
-    [0.76, 0.85]
-  ];
-
-  const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-
-  const computeDepth = (pos: number): number => {
-    let activeIdx = 0;
-    for (let i = 0; i < T.length; i++) {
-      const [ta, tb] = T[i];
-      if (pos < ta) break;
-      if (pos >= tb) {
-        activeIdx = i + 1;
-      } else {
-        activeIdx = i + clamp01((pos - ta) / (tb - ta));
-        break;
-      }
-    }
-    if (isReducedMotion) return index - Math.round(activeIdx);
-    return index - activeIdx;
-  };
-
-  const y = useTransform(scrollYProgress, (pos) => {
-    const depth = computeDepth(pos);
-    if (depth < 0) return Math.abs(depth) * 200;
-    return -depth * STEP_Y;
+  const depth = useTransform(scrollYProgress, (pos) => {
+    const activeIdx = computeActiveIndex(pos);
+    return isReducedMotion ? index - Math.round(activeIdx) : index - activeIdx;
   });
 
-  const scale = useTransform(scrollYProgress, (pos) => {
-    const depth = computeDepth(pos);
-    if (depth < 0) return 1 + Math.abs(depth) * 0.02;
-    return Math.max(0.88, 1 - depth * SCALE_STEP);
-  });
-
-  const opacity = useTransform(scrollYProgress, (pos) => {
-    const depth = computeDepth(pos);
-    if (depth <= -0.3) return 0;
-    if (depth < 0) return clamp01(1 + depth * 3.33);
-    return 1;
-  });
-
-  const width = useTransform(scrollYProgress, (pos) => {
-    const depth = computeDepth(pos);
-    const d = Math.max(0, depth);
-    return Math.max(ACTIVE_W - (totalCards - 1) * WIDTH_STEP, ACTIVE_W - d * WIDTH_STEP);
-  });
-
-  const zIndex = useTransform(scrollYProgress, (pos) => {
-    const depth = computeDepth(pos);
-    if (depth < 0) return 55;
-    return Math.max(10, 50 - Math.round(depth) * 5);
-  });
+  const y = useTransform(depth, d => d < 0 ? Math.abs(d) * 200 : -d * STEP_Y);
+  const scale = useTransform(depth, d => d < 0 ? 1 + Math.abs(d) * 0.02 : Math.max(0.88, 1 - d * SCALE_STEP));
+  const opacity = useTransform(depth, d => d <= -0.3 ? 0 : d < 0 ? clamp01(1 + d * 3.33) : 1);
+  const width = useTransform(depth, d => Math.max(ACTIVE_W - (totalCards - 1) * WIDTH_STEP, ACTIVE_W - Math.max(0, d) * WIDTH_STEP));
+  const zIndex = useTransform(depth, d => d < 0 ? 55 : Math.max(10, 50 - Math.round(d) * 5));
 
   return (
     <motion.div
@@ -178,201 +220,36 @@ function DesktopStackCard({ card, index, totalCards, scrollYProgress, isReducedM
       className="absolute top-0 left-1/2 -translate-x-1/2 will-change-transform"
     >
       <div
-        className="bg-white rounded-2xl border border-zinc-200/90 overflow-hidden"
+        className="bg-white rounded-2xl border border-zinc-200/90 overflow-hidden flex flex-col justify-between"
         style={{
           height: CARD_H,
           padding: "20px",
           boxShadow: "0 16px 40px -10px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.02)"
         }}
       >
-        <div className="flex items-center justify-between" style={{ paddingBottom: "10px", borderBottom: "1px solid #f4f4f5" }}>
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="text-[11px] font-mono font-bold text-zinc-400 shrink-0">{card.num}</span>
-            <span className="text-[10px] font-bold tracking-[0.15em] uppercase px-2.5 py-0.5 rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/70 shrink-0">
-              {card.tag}
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 text-primary text-[10px] font-bold tracking-wider uppercase shrink-0 ml-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-            <span className="truncate max-w-[160px]">{card.badge}</span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-[1fr_auto] gap-4 items-center" style={{ paddingTop: "18px", paddingBottom: "15px" }}>
-          <div className="min-w-0">
-            <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary mb-3 shadow-sm shrink-0">
-              <Icon className="w-[22px] h-[22px]" />
-            </div>
-            <h3 className="text-[21px] font-black tracking-tight text-zinc-950 mb-2 leading-snug">
-              {card.title}
-            </h3>
-            <p className="text-[12px] text-zinc-500 leading-relaxed line-clamp-3">
-              {card.description}
-            </p>
-          </div>
-
-          <div className="flex items-center justify-center shrink-0" style={{ width: 135, height: 120 }}>
-            <Image
-              src={card.imageSrc}
-              alt={card.title}
-              width={150}
-              height={125}
-              priority={index === 0}
-              className="w-full h-full object-contain drop-shadow-sm select-none"
-            />
-          </div>
-        </div>
-
-        <div style={{ paddingTop: "15px", borderTop: "1px solid #f4f4f5" }}>
-          <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-400" style={{ marginBottom: "10px" }}>
-            KEY ARCHITECTURAL PILLARS
-          </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="grid grid-cols-3 gap-2 flex-1">
-              {card.highlights.map((highlight, hIdx) => (
-                <div key={hIdx} className="flex items-start gap-1.5 px-2.5 py-2 rounded-lg bg-zinc-50/90 border border-zinc-200/60">
-                  <div className="w-3.5 h-3.5 rounded-full border border-blue-500 flex items-center justify-center text-primary shrink-0 mt-[1px]">
-                    <Check className="w-2 h-2 stroke-[2.5]" />
-                  </div>
-                  <span className="text-[10px] font-semibold text-zinc-800 leading-tight">{highlight}</span>
-                </div>
-              ))}
-            </div>
-            <div className="w-8 h-8 rounded-full border border-blue-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer shrink-0 ml-1">
-              <ArrowRight className="w-4 h-4" />
-            </div>
-          </div>
-        </div>
+        <CardContent card={card} index={index} />
       </div>
     </motion.div>
   );
 }
 
-// ─── Individual Mobile Card Component (Horizontal Scroll-Driven Sequence) ─────
-
-interface MobileCardProps {
-  card: AdvantageCardData;
-  index: number;
-  totalCards: number;
-  scrollYProgress: MotionValue<number>;
-  isReducedMotion: boolean | null;
-}
-
-function MobileSequenceCard({ card, index, scrollYProgress, isReducedMotion }: MobileCardProps) {
-  const Icon = card.icon;
-
-  const T: [number, number][] = [
-    [0.08, 0.17],
-    [0.25, 0.34],
-    [0.42, 0.51],
-    [0.59, 0.68],
-    [0.76, 0.85]
-  ];
-
-  const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-
-  const computeActiveIdx = (pos: number): number => {
-    let activeIdx = 0;
-    for (let i = 0; i < T.length; i++) {
-      const [ta, tb] = T[i];
-      if (pos < ta) break;
-      if (pos >= tb) {
-        activeIdx = i + 1;
-      } else {
-        activeIdx = i + clamp01((pos - ta) / (tb - ta));
-        break;
-      }
-    }
-    return activeIdx;
-  };
-
-  // Horizontal translation: moves smoothly from right (+115%) to center (0%) to left (-115%)
-  const x = useTransform(scrollYProgress, (pos) => {
-    if (isReducedMotion) return "0%";
-    const activeIdx = computeActiveIdx(pos);
-    const rel = index - activeIdx;
-    return `${rel * 115}%`;
+function MobileSequenceCard({ card, index, scrollYProgress, isReducedMotion }: StackCardProps) {
+  const activeIdxValue = useTransform(scrollYProgress, computeActiveIndex);
+  
+  const x = useTransform(activeIdxValue, idx => isReducedMotion ? "0%" : `${(index - idx) * 115}%`);
+  const opacity = useTransform(activeIdxValue, idx => {
+    const rel = Math.abs(index - idx);
+    return rel >= 1.0 ? 0 : Math.max(0, 1 - rel * 1.5);
   });
-
-  // Opacity: only visible around its active window
-  const opacity = useTransform(scrollYProgress, (pos) => {
-    const activeIdx = computeActiveIdx(pos);
-    const rel = Math.abs(index - activeIdx);
-    if (rel >= 1.0) return 0;
-    return Math.max(0, 1 - rel * 1.5);
-  });
-
-  const scale = useTransform(scrollYProgress, (pos) => {
-    if (isReducedMotion) return 1;
-    const activeIdx = computeActiveIdx(pos);
-    const rel = Math.abs(index - activeIdx);
-    return Math.max(0.92, 1 - rel * 0.08);
-  });
+  const scale = useTransform(activeIdxValue, idx => isReducedMotion ? 1 : Math.max(0.92, 1 - Math.abs(index - idx) * 0.08));
 
   return (
     <motion.div
       style={{ x, opacity, scale }}
       className="absolute inset-x-0 mx-auto w-full max-w-[360px] sm:max-w-[420px] will-change-transform pointer-events-auto"
     >
-      <div
-        className="bg-white rounded-2xl border border-zinc-200/90 overflow-hidden shadow-lg p-4 sm:p-5 flex flex-col justify-between"
-      >
-        {/* Mobile Header Strip */}
-        <div className="flex items-center justify-between pb-2 border-b border-zinc-100 gap-2">
-          <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-[11px] font-mono font-bold text-zinc-400">{card.num}</span>
-            <span className="text-[8.5px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200/70">
-              {card.tag}
-            </span>
-          </div>
-          <div className="flex items-center gap-1 text-primary text-[8.5px] font-bold tracking-wider uppercase shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-            <span>{card.badge}</span>
-          </div>
-        </div>
-
-        {/* Mobile Body */}
-        <div className="grid grid-cols-[1fr_auto] gap-3 items-center py-2.5">
-          <div className="min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-primary mb-1.5 shadow-xs shrink-0">
-              <Icon className="w-4 h-4" />
-            </div>
-            <h3 className="text-base sm:text-lg font-black tracking-tight text-zinc-950 mb-1 leading-tight">
-              {card.title}
-            </h3>
-            <p className="text-[11px] text-zinc-500 leading-relaxed">
-              {card.description}
-            </p>
-          </div>
-
-          <div className="w-18 h-18 sm:w-22 sm:h-22 flex items-center justify-center shrink-0">
-            <Image
-              src={card.imageSrc}
-              alt={card.title}
-              width={90}
-              height={80}
-              priority={index === 0}
-              className="w-full h-full object-contain drop-shadow-sm select-none"
-            />
-          </div>
-        </div>
-
-        {/* Mobile Key Pillars */}
-        <div className="pt-2 border-t border-zinc-100">
-          <div className="text-[8px] font-bold uppercase tracking-[0.15em] text-zinc-400 mb-1.5">
-            KEY ARCHITECTURAL PILLARS
-          </div>
-          <div className="space-y-1">
-            {card.highlights.map((highlight, hIdx) => (
-              <div key={hIdx} className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-zinc-50/90 border border-zinc-200/60">
-                <div className="w-3.5 h-3.5 rounded-full border border-blue-500 flex items-center justify-center text-primary shrink-0">
-                  <Check className="w-2 h-2 stroke-[2.5]" />
-                </div>
-                <span className="text-[9.5px] font-semibold text-zinc-800 leading-none truncate">{highlight}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="bg-white rounded-2xl border border-zinc-200/90 overflow-hidden shadow-lg p-4 sm:p-5 flex flex-col justify-between">
+        <CardContent card={card} index={index} />
       </div>
     </motion.div>
   );
