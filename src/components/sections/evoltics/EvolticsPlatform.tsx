@@ -37,34 +37,7 @@ const features = [
   { icon: ShieldCheck, title: "Public-Private Mode", desc: "Set charger accessibility for employees or visitors as private, or open to the public." },
 ];
 
-const mockStations = [
-  { id: "EV-DXB-01", location: "Downtown Hub", chargers: 12, active: 11, power: "320 kW", status: "Optimal" },
-  { id: "EV-DXB-04", location: "Dubai Marina", chargers: 8, active: 8, power: "240 kW", status: "Peak Load" },
-  { id: "EV-AUH-02", location: "Yas Island Hub", chargers: 16, active: 14, power: "480 kW", status: "Optimal" },
-  { id: "EV-SHJ-01", location: "Al Majaz Depot", chargers: 6, active: 5, power: "150 kW", status: "Optimal" },
-];
-
-const mockSessions = [
-  { id: "SES-8492", vehicle: "Porsche Taycan", port: "DC CCS2 (350kW)", soc: "84%", rate: "142 kW", cost: "AED 64.50" },
-  { id: "SES-8493", vehicle: "Tesla Model Y", port: "DC CCS2 (150kW)", soc: "62%", rate: "110 kW", cost: "AED 42.10" },
-  { id: "SES-8494", vehicle: "Audi e-tron GT", port: "DC CCS2 (350kW)", soc: "91%", rate: "45 kW", cost: "AED 78.20" },
-];
-
 export default function EvolticsPlatform() {
-  const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<DashboardTab>("fleet");
-  const [livePower, setLivePower] = useState(1.24);
-
-  useEffect(() => {
-    setMounted(true);
-    const interval = setInterval(() => {
-      setLivePower((prev) => +(prev + (Math.random() * 0.04 - 0.02)).toFixed(2));
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
     <section className="w-full py-28 bg-white relative overflow-hidden font-sans ">
       
@@ -151,294 +124,48 @@ export default function EvolticsPlatform() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-dark rounded-2xl border border-white/10 shadow-2xl overflow-hidden relative"
+              className="bg-surface-alt rounded-2xl border border-border shadow-sm overflow-hidden relative min-h-[400px] sm:min-h-[500px] flex flex-col"
             >
               
               {/* Dashboard Browser Frame Bar */}
-              <div className="bg-dark-surface px-4 sm:px-5 py-3 sm:py-3.5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
+              <div className="bg-surface px-4 sm:px-5 py-3 sm:py-3.5 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 relative z-20">
                 <div className="flex items-center space-x-3 w-full sm:w-auto overflow-hidden">
                   <div className="flex space-x-1.5 shrink-0">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                   </div>
-                  <div className="h-3 w-px bg-white/10 shrink-0" />
-                  <span className="text-[10px] sm:text-[11px] font-mono text-neutral-400 truncate">
+                  <div className="h-3 w-px bg-border shrink-0" />
+                  <span className="text-[10px] sm:text-[11px] font-mono text-muted truncate">
                     evoltics.cloud/admin/control-hub
                   </span>
                 </div>
-
-                <div className="flex items-center self-start sm:self-auto shrink-0">
-                  <div className="flex items-center space-x-2 px-2 sm:px-2.5 py-1 bg-green-500/10 border border-green-500/20 rounded-md">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-                    <span className="text-[9px] sm:text-[10px] font-bold tracking-widest text-green-400 uppercase">
-                      <span className="hidden sm:inline">Telemetry </span>Active
-                    </span>
-                  </div>
-                </div>
               </div>
 
-              {/* Dashboard Sub-Header with Interactive Tabs */}
-              <div className="px-4 sm:px-6 py-4 bg-dark-surface/60 border-b border-white/5 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+              {/* Placeholder Content */}
+              <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 text-center relative z-10">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-primary)_0%,transparent_70%)] opacity-[0.03] pointer-events-none" />
                 
-                {/* Scrollable Tabs Wrapper */}
-                <div className="w-full xl:w-auto overflow-x-auto pb-1 xl:pb-0 -mb-1 xl:mb-0 scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <style dangerouslySetInnerHTML={{__html: `
-                    .hide-scrollbar-platform::-webkit-scrollbar { display: none; }
-                  `}} />
-                  <div className="flex items-center space-x-2 bg-black/40 p-1 rounded-xl border border-white/5 w-max hide-scrollbar-platform">
-                    <button
-                      onClick={() => setActiveTab("fleet")}
-                      className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 shrink-0 ${
-                        activeTab === "fleet" 
-                          ? 'bg-primary text-white shadow-sm' 
-                          : 'text-neutral-400 hover:text-white'
-                      }`}
-                    >
-                      <Radio className="w-3.5 h-3.5" />
-                      <span>Live Network Topology</span>
-                    </button>
-
-                    <button
-                      onClick={() => setActiveTab("load")}
-                      className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 shrink-0 ${
-                        activeTab === "load" 
-                          ? 'bg-primary text-white shadow-sm' 
-                          : 'text-neutral-400 hover:text-white'
-                      }`}
-                    >
-                      <Sliders className="w-3.5 h-3.5" />
-                      <span>Smart Load & V2G</span>
-                    </button>
-
-                    <button
-                      onClick={() => setActiveTab("revenue")}
-                      className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 shrink-0 ${
-                        activeTab === "revenue" 
-                          ? 'bg-primary text-white shadow-sm' 
-                          : 'text-neutral-400 hover:text-white'
-                      }`}
-                    >
-                      <BadgeDollarSign className="w-3.5 h-3.5" />
-                      <span>Revenue & Tariffs</span>
-                    </button>
-                  </div>
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <BarChart3 className="w-10 h-10 sm:w-12 sm:h-12" />
                 </div>
-
-                <div className="flex items-center space-x-4 text-xs font-mono text-neutral-400 shrink-0">
-                  <span>Aggregate Load: <strong className="text-white">{livePower} MW</strong></span>
-                </div>
+                
+                <h3 className="text-xl sm:text-2xl font-black text-foreground mb-3 tracking-tight">
+                  CPMS Dashboard
+                </h3>
+                <p className="text-sm sm:text-base text-muted max-w-md mx-auto mb-8 leading-relaxed">
+                  Connect your charging endpoints to unlock real-time monitoring, dynamic load balancing, and automated revenue settlements.
+                </p>
+                
+                <button className="bg-primary text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-primary/30 hover:bg-primary/90 hover:-translate-y-0.5 transition-all flex items-center gap-2 group">
+                  <span>View Dashboard</span>
+                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </button>
               </div>
 
-              {/* Dashboard Dynamic Content View */}
-              <div className="p-4 sm:p-6 min-h-[300px] sm:min-h-[420px]">
-                <AnimatePresence mode="wait">
-                  
-                  {/* TAB 1: Live Network Topology */}
-                  {activeTab === "fleet" && (
-                    <motion.div
-                      key="fleet"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.25 }}
-                      className="space-y-6"
-                    >
-                      {/* Metric Stat Strip */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Active Chargers</span>
-                          <span className="text-base sm:text-xl font-bold font-mono text-white">48 <span className="text-[10px] sm:text-xs text-neutral-500 font-normal">/ 50</span></span>
-                        </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Network Uptime</span>
-                          <span className="text-base sm:text-xl font-bold font-mono text-emerald-400">99.98%</span>
-                        </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Live Dispense</span>
-                          <span className="text-base sm:text-xl font-bold font-mono text-blue-400">{livePower} MW</span>
-                        </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Avg Latency</span>
-                          <span className="text-base sm:text-xl font-bold font-mono text-white">18ms</span>
-                        </div>
-                      </div>
-
-                      {/* Map & Station List Split */}
-                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                        
-                        {/* Interactive Topology Visualizer */}
-                        <div className="md:col-span-7 bg-dark-surface/40 border border-white/5 rounded-xl p-3 sm:p-4 relative min-h-[160px] sm:min-h-[220px] flex flex-col justify-between overflow-hidden">
-                          <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-15" />
-                          
-                          <div className="flex items-center justify-between relative z-10">
-                            <span className="text-[9px] sm:text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
-                              UAE Hub Distribution <span className="hidden sm:inline">(OCPP 2.0.1)</span>
-                            </span>
-                            <span className="text-[9px] sm:text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
-                              4 Clusters
-                            </span>
-                          </div>
-
-                          {/* Pulsing Regional Nodes */}
-                          <div className="relative h-20 sm:h-36 z-10">
-                            {/* Dubai Node */}
-                            <div className="absolute top-[35%] left-[55%]">
-                              <motion.div animate={{ scale: [1, 2.2], opacity: [0.6, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute -inset-1 bg-primary rounded-full" />
-                              <div className="w-3.5 h-3.5 rounded-full bg-primary flex items-center justify-center text-[8px] font-bold text-white shadow-lg shadow-primary">DXB</div>
-                            </div>
-
-                            {/* Abu Dhabi Node */}
-                            <div className="absolute top-[60%] left-[30%]">
-                              <motion.div animate={{ scale: [1, 2.2], opacity: [0.6, 0] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.3 }} className="absolute -inset-1 bg-emerald-500 rounded-full" />
-                              <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center text-[8px] font-bold text-white shadow-lg shadow-emerald-500">AUH</div>
-                            </div>
-
-                            {/* Sharjah Node */}
-                            <div className="absolute top-[25%] left-[70%]">
-                              <motion.div animate={{ scale: [1, 2.2], opacity: [0.6, 0] }} transition={{ duration: 2.4, repeat: Infinity, delay: 0.6 }} className="absolute -inset-1 bg-blue-400 rounded-full" />
-                              <div className="w-3.5 h-3.5 rounded-full bg-blue-400 flex items-center justify-center text-[8px] font-bold text-white shadow-lg shadow-blue-400">SHJ</div>
-                            </div>
-
-                            {/* Connecting Mesh lines */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40">
-                              <line x1="55%" y1="35%" x2="30%" y2="60%" stroke="var(--color-primary)" strokeWidth="1.5" strokeDasharray="3 3" />
-                              <line x1="55%" y1="35%" x2="70%" y2="25%" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="3 3" />
-                            </svg>
-                          </div>
-
-                          <div className="flex items-center justify-between text-[10px] text-neutral-400 relative z-10 pt-2 border-t border-white/5">
-                            <span>Auto Fault-Isolation: <strong className="text-emerald-400">ENABLED</strong></span>
-                            <span>WebSocket Heartbeat: <strong className="text-white">500ms</strong></span>
-                          </div>
-                        </div>
-
-                        {/* Station Cluster Feed */}
-                        <div className="md:col-span-5 space-y-1.5 sm:space-y-2">
-                          {mockStations.map((st) => (
-                            <div key={st.id} className="p-2 sm:p-2.5 rounded-lg bg-dark-surface/50 border border-white/5 flex items-center justify-between">
-                              <div>
-                                <span className="text-[11px] sm:text-xs font-bold text-white block">{st.location}</span>
-                                <span className="text-[9px] sm:text-[10px] font-mono text-neutral-400">{st.id} • {st.active}/{st.chargers} ports</span>
-                              </div>
-                              <div className="text-right">
-                                <span className="text-[11px] sm:text-xs font-mono font-bold text-primary block">{st.power}</span>
-                                <span className="text-[8px] sm:text-[9px] text-emerald-400 font-semibold">{st.status}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* TAB 2: Smart Load & Grid (V2G) */}
-                  {activeTab === "load" && (
-                    <motion.div
-                      key="load"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.25 }}
-                      className="space-y-6"
-                    >
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Peak Load Shaved</span>
-                          <span className="text-sm sm:text-2xl font-bold font-mono text-emerald-400">-28.4%</span>
-                          <p className="text-[9px] sm:text-[10px] text-neutral-400 sm:mt-1 hidden sm:block">Grid demand smoothing active</p>
-                        </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">V2G Readiness</span>
-                          <span className="text-sm sm:text-2xl font-bold font-mono text-blue-400">ISO 15118-20</span>
-                          <p className="text-[9px] sm:text-[10px] text-neutral-400 sm:mt-1 hidden sm:block">Bi-directional enabled</p>
-                        </div>
-                        <div className="col-span-2 md:col-span-1 bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl flex md:block items-center justify-between md:justify-start">
-                          <div>
-                            <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Transformer Headroom</span>
-                            <span className="text-sm sm:text-2xl font-bold font-mono text-white">420 kVA</span>
-                          </div>
-                          <p className="text-[9px] sm:text-[10px] text-neutral-400 sm:mt-1 text-right md:text-left">Safe operating capacity</p>
-                        </div>
-                      </div>
-
-                      {/* Power Curve Graphic */}
-                      <div className="bg-dark-surface/40 border border-white/5 rounded-xl p-3 sm:p-5">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 sm:mb-4">
-                          <span className="text-[11px] sm:text-xs font-bold text-white">Dynamic Load Distribution Curve</span>
-                          <span className="text-[9px] sm:text-[10px] text-emerald-400 font-mono mt-1 sm:mt-0">Real-time Solar & Grid Balance</span>
-                        </div>
-                        <div className="h-16 sm:h-32 flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-4">
-                          {[35, 42, 58, 65, 80, 95, 88, 72, 60, 50, 40, 48, 62, 75, 82, 90, 85, 70, 55, 45].map((val, idx) => (
-                            <div key={idx} className="flex-1 flex flex-col items-center gap-1">
-                              <div 
-                                style={{ height: `${val}%` }} 
-                                className={`w-full rounded-t-[1px] sm:rounded-t-sm transition-all ${
-                                  val > 85 ? 'bg-amber-400' : 'bg-primary'
-                                }`} 
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        <div className="flex justify-between text-[9px] text-neutral-500 font-mono mt-2 pt-2 border-t border-white/5">
-                          <span>00:00</span>
-                          <span>06:00</span>
-                          <span>12:00 (Solar Peak)</span>
-                          <span>18:00 (Fleet Surge)</span>
-                          <span>23:59</span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* TAB 3: Revenue & Dynamic Tariffs */}
-                  {activeTab === "revenue" && (
-                    <motion.div
-                      key="revenue"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.25 }}
-                      className="space-y-4"
-                    >
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Today&apos;s Revenue</span>
-                          <span className="text-sm sm:text-2xl font-bold font-mono text-white">AED 14,280</span>
-                        </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Total Dispensed</span>
-                          <span className="text-sm sm:text-2xl font-bold font-mono text-blue-400">18.4 MWh</span>
-                        </div>
-                        <div className="col-span-2 sm:col-span-1 bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl flex sm:block items-center justify-between sm:justify-start">
-                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0 sm:mb-1">Active Multiplier</span>
-                          <span className="text-sm sm:text-2xl font-bold font-mono text-emerald-400">1.0x <span className="hidden sm:inline">(Standard)</span></span>
-                        </div>
-                      </div>
-
-                      {/* Live Transaction Stream */}
-                      <div className="bg-dark-surface/40 border border-white/5 rounded-xl p-3 sm:p-4">
-                        <span className="text-[11px] sm:text-xs font-bold text-white block mb-2 sm:mb-3">Live Active Charging Transactions</span>
-                        <div className="space-y-1.5 sm:space-y-2">
-                          {mockSessions.map((ses) => (
-                            <div key={ses.id} className="p-2 sm:p-3 bg-dark-surface/60 border border-white/5 rounded-lg flex items-center justify-between text-xs">
-                              <div>
-                                <span className="font-bold text-white block text-[11px] sm:text-xs">{ses.vehicle}</span>
-                                <span className="text-[9px] sm:text-[10px] font-mono text-neutral-400">{ses.id} • <span className="hidden sm:inline">{ses.port}</span></span>
-                              </div>
-                              <div className="text-right">
-                                <span className="font-bold font-mono text-emerald-400 block text-[11px] sm:text-xs">{ses.cost}</span>
-                                <span className="text-[9px] sm:text-[10px] text-neutral-400">{ses.soc} • {ses.rate}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                </AnimatePresence>
+              {/* Decorative faint background grid */}
+              <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:2rem_2rem]" />
               </div>
 
             </motion.div>

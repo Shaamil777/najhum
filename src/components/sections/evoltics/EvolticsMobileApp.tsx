@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2, Apple, Play } from "lucide-react";
 
@@ -182,7 +183,9 @@ export default function EvolticsMobileApp() {
           className="flex flex-row items-center justify-center gap-2 sm:gap-4 mt-12 sm:mt-16 lg:mt-24 px-4 sm:px-0"
         >
           <button className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none">
-            <Apple className="w-5 h-5 sm:w-7 sm:h-7 shrink-0" />
+            <div className="w-5 h-5 sm:w-7 sm:h-7 shrink-0 relative pb-1">
+              <Image src="/images/elvotics/apple-icon.png" alt="Apple" fill className="object-contain brightness-0 invert" />
+            </div>
             <div className="flex flex-col items-start leading-none">
               <span className="text-[7px] sm:text-[10px] uppercase tracking-widest mb-0.5 sm:mb-1 opacity-80 whitespace-nowrap">Download on the</span>
               <span className="text-xs sm:text-base font-bold whitespace-nowrap">App Store</span>
