@@ -87,37 +87,37 @@ export default function EvolticsProducts() {
   return (
     <section className="w-full py-24 lg:py-32 bg-surface relative overflow-hidden font-sans">
       
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-16 lg:mb-24">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-6">
-          <div className="max-w-2xl">
-            <span className="text-sm font-bold tracking-widest text-primary uppercase mb-3 block">
+      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-0 lg:mb-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-0 lg:mb-0">
+          <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-primary uppercase mb-2 sm:mb-3 block">
               Hardware & Solutions
             </span>
-            <h2 className="text-3xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] uppercase">
-              Explore Our <br />
+            <h2 className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase">
+              Explore Our <br className="hidden sm:block" />
               <span className="text-primary font-black">Product Range</span>
             </h2>
           </div>
           
-          <div className="flex items-center gap-4">
-            <p className="text-muted text-sm lg:text-base max-w-sm italic hidden lg:block mr-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-4 mt-2 md:mt-0">
+            <p className="text-muted text-[13px] sm:text-base lg:text-lg max-w-sm italic text-center md:text-left hidden md:block mr-0 md:mr-6">
               Cutting-edge EV charging hardware built for reliability and scale.
             </p>
-            {/* Slider Navigation Buttons */}
-            <div className="flex gap-3">
+            {/* Slider Navigation Buttons (Hidden on Mobile & Tablet) */}
+            <div className="hidden lg:flex gap-3">
               <button 
                 onClick={scrollLeft}
-                className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
                 aria-label="Previous product"
               >
-                <ArrowRight className="w-5 h-5 rotate-180" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 rotate-180" />
               </button>
               <button 
                 onClick={scrollRight}
-                className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
                 aria-label="Next product"
               >
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function EvolticsProducts() {
       </div>
 
       {/* Manual & Auto Scroll Container */}
-      <div className="relative w-full overflow-hidden flex items-center h-[550px] lg:h-[650px] mask-edges">
+      <div className="relative w-full overflow-hidden flex flex-col justify-center h-[420px] md:h-[480px] lg:h-[650px] mask-edges">
         <style dangerouslySetInnerHTML={{__html: `
           .mask-edges {
             mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
@@ -144,23 +144,23 @@ export default function EvolticsProducts() {
           ref={scrollContainerRef}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="flex gap-6 lg:gap-8 px-[10vw] py-12 overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full scroll-smooth"
+          className="flex gap-6 lg:gap-8 px-[10vw] pt-0 pb-4 md:py-6 lg:py-12 overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full scroll-smooth"
         >
           {duplicatedProducts.map((product, idx) => {
-            // Stagger pattern: Even cards go up, Odd cards go down
+            // Stagger pattern: Even cards go up, Odd cards go down (only on lg desktop and above)
             const isEven = idx % 2 === 0;
-            const staggerClass = isEven ? "-translate-y-8 lg:-translate-y-12" : "translate-y-8 lg:translate-y-12";
+            const staggerClass = isEven ? "lg:-translate-y-12" : "lg:translate-y-12";
 
             return (
               <div 
                 key={`${product.id}-${idx}`}
                 className={cn(
-                  "w-[280px] lg:w-[340px] shrink-0 group relative transition-transform duration-500 ease-out snap-center",
+                  "w-[280px] md:w-[320px] lg:w-[340px] shrink-0 group relative transition-transform duration-500 ease-out snap-center",
                   staggerClass
                 )}
               >
                 {/* Card Background / Border wrapper */}
-                <div className="bg-background rounded-3xl border border-border overflow-hidden h-[400px] lg:h-[480px] flex flex-col group-hover:border-primary/40 group-hover:shadow-2xl group-hover:shadow-primary/10 transition-all duration-300">
+                <div className="bg-background rounded-3xl border border-border overflow-hidden h-[400px] md:h-[440px] lg:h-[480px] flex flex-col group-hover:border-primary/40 group-hover:shadow-2xl group-hover:shadow-primary/10 transition-all duration-300">
                   
                   {/* Top Image Area */}
                   <div className={cn("h-[55%] w-full relative overflow-hidden p-6 flex flex-col justify-between", product.imagePlaceholder)}>
@@ -200,6 +200,24 @@ export default function EvolticsProducts() {
             );
           })}
         </div>
+      </div>
+
+      {/* Mobile & Tablet Only Navigation Buttons */}
+      <div className="flex lg:hidden items-center justify-center gap-4 mt-6">
+        <button 
+          onClick={scrollLeft}
+          className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
+          aria-label="Previous product"
+        >
+          <ArrowRight className="w-5 h-5 rotate-180" />
+        </button>
+        <button 
+          onClick={scrollRight}
+          className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
+          aria-label="Next product"
+        >
+          <ArrowRight className="w-5 h-5" />
+        </button>
       </div>
     </section>
   );

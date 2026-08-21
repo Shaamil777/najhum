@@ -129,33 +129,33 @@ function CardContent({ card, index }: { card: AdvantageCardData, index: number }
   return (
     <>
       {/* Header */}
-      <div className="flex items-center justify-between pb-2 lg:pb-[10px] border-b border-zinc-100 lg:border-[#f4f4f5] gap-2 lg:gap-0">
-        <div className="flex items-center gap-1.5 lg:gap-2 min-w-0 shrink-0 lg:shrink">
+      <div className="flex items-center justify-between pb-2 md:pb-[10px] border-b border-zinc-100 md:border-[#f4f4f5] gap-2 md:gap-0">
+        <div className="flex items-center gap-1.5 md:gap-2 min-w-0 shrink-0 md:shrink">
           <span className="text-[11px] font-mono font-bold text-zinc-400 shrink-0">{card.num}</span>
-          <span className="text-[8.5px] lg:text-[10px] font-bold tracking-wider lg:tracking-[0.15em] uppercase px-2 lg:px-2.5 py-0.5 rounded lg:rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/70 shrink-0">
+          <span className="text-[8.5px] md:text-[10px] font-bold tracking-wider md:tracking-[0.15em] uppercase px-2 md:px-2.5 py-0.5 rounded md:rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/70 shrink-0">
             {card.tag}
           </span>
         </div>
-        <div className="flex items-center gap-1 lg:gap-1.5 text-primary text-[8.5px] lg:text-[10px] font-bold tracking-wider uppercase shrink-0 lg:ml-2">
+        <div className="flex items-center gap-1 md:gap-1.5 text-primary text-[8.5px] md:text-[10px] font-bold tracking-wider uppercase shrink-0 md:ml-2">
           <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
           <span className="truncate max-w-[160px]">{card.badge}</span>
         </div>
       </div>
 
       {/* Body */}
-      <div className="grid grid-cols-[1fr_auto] gap-3 lg:gap-4 items-center py-2.5 lg:pt-[18px] lg:pb-[15px]">
+      <div className="grid grid-cols-[1fr_auto] gap-3 md:gap-4 items-center py-2.5 md:pt-[18px] md:pb-[15px]">
         <div className="min-w-0">
-          <div className="w-8 h-8 lg:w-11 lg:h-11 rounded-lg lg:rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary mb-1.5 lg:mb-3 shadow-xs lg:shadow-sm shrink-0">
-            <Icon className="w-4 h-4 lg:w-[22px] lg:h-[22px]" />
+          <div className="w-8 h-8 md:w-11 md:h-11 rounded-lg md:rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary mb-1.5 md:mb-3 shadow-xs md:shadow-sm shrink-0">
+            <Icon className="w-4 h-4 md:w-[22px] md:h-[22px]" />
           </div>
-          <h3 className="text-base sm:text-lg lg:text-[21px] font-black tracking-tight text-zinc-950 mb-1 lg:mb-2 leading-tight lg:leading-snug">
+          <h3 className="text-base sm:text-lg md:text-[21px] font-black tracking-tight text-zinc-950 mb-1 md:mb-2 leading-tight md:leading-snug">
             {card.title}
           </h3>
-          <p className="text-[11px] lg:text-[12px] text-zinc-500 leading-relaxed lg:line-clamp-3">
+          <p className="text-[11px] md:text-[12px] text-zinc-500 leading-relaxed md:line-clamp-3">
             {card.description}
           </p>
         </div>
-        <div className="w-18 h-18 sm:w-22 sm:h-22 lg:w-[135px] lg:h-[120px] flex items-center justify-center shrink-0">
+        <div className="w-18 h-18 sm:w-22 sm:h-22 md:w-[135px] md:h-[120px] flex items-center justify-center shrink-0">
           <Image
             src={card.imageSrc}
             alt={card.title}
@@ -168,22 +168,22 @@ function CardContent({ card, index }: { card: AdvantageCardData, index: number }
       </div>
 
       {/* Key Pillars */}
-      <div className="pt-2 lg:pt-[15px] border-t border-zinc-100 lg:border-[#f4f4f5]">
-        <div className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.15em] lg:tracking-[0.2em] text-zinc-400 mb-1.5 lg:mb-[10px]">
+      <div className="pt-2 md:pt-[15px] border-t border-zinc-100 md:border-[#f4f4f5]">
+        <div className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] text-zinc-400 mb-1.5 md:mb-[10px]">
           KEY ARCHITECTURAL PILLARS
         </div>
-        <div className="flex lg:items-center lg:justify-between lg:gap-2">
-          <div className="space-y-1 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-2 flex-1">
+        <div className="flex md:items-center md:justify-between md:gap-2">
+          <div className="space-y-1 md:space-y-0 md:grid md:grid-cols-3 md:gap-2 flex-1">
             {card.highlights.map((highlight, hIdx) => (
-              <div key={hIdx} className="flex items-center lg:items-start gap-1.5 px-2 lg:px-2.5 py-1.5 lg:py-2 rounded-lg bg-zinc-50/90 border border-zinc-200/60">
-                <div className="w-3.5 h-3.5 rounded-full border border-blue-500 flex items-center justify-center text-primary shrink-0 lg:mt-[1px]">
+              <div key={hIdx} className="flex items-center md:items-start gap-1.5 px-2 md:px-2.5 py-1.5 md:py-2 rounded-lg bg-zinc-50/90 border border-zinc-200/60">
+                <div className="w-3.5 h-3.5 rounded-full border border-blue-500 flex items-center justify-center text-primary shrink-0 md:mt-[1px]">
                   <Check className="w-2 h-2 stroke-[2.5]" />
                 </div>
-                <span className="text-[9.5px] lg:text-[10px] font-semibold text-zinc-800 leading-none lg:leading-tight truncate lg:whitespace-normal">{highlight}</span>
+                <span className="text-[9.5px] md:text-[10px] font-semibold text-zinc-800 leading-none md:leading-tight truncate md:whitespace-normal">{highlight}</span>
               </div>
             ))}
           </div>
-          <div className="hidden lg:flex w-8 h-8 rounded-full border border-blue-200 items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer shrink-0 ml-1">
+          <div className="hidden md:flex w-8 h-8 rounded-full border border-blue-200 items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer shrink-0 ml-1">
             <ArrowRight className="w-4 h-4" />
           </div>
         </div>
@@ -246,9 +246,9 @@ function MobileSequenceCard({ card, index, scrollYProgress, isReducedMotion }: S
   return (
     <motion.div
       style={{ x, opacity, scale }}
-      className="absolute inset-x-0 mx-auto w-full max-w-[360px] sm:max-w-[420px] will-change-transform pointer-events-auto"
+      className="absolute inset-x-0 mx-auto w-full max-w-[360px] sm:max-w-[420px] md:max-w-[620px] h-full will-change-transform pointer-events-auto"
     >
-      <div className="bg-white rounded-2xl border border-zinc-200/90 overflow-hidden shadow-lg p-4 sm:p-5 flex flex-col justify-between">
+      <div className="bg-white rounded-2xl md:rounded-3xl border border-zinc-200/90 overflow-hidden shadow-xl md:shadow-2xl p-4 sm:p-5 md:p-8 flex flex-col justify-between h-full">
         <CardContent card={card} index={index} />
       </div>
     </motion.div>
@@ -367,26 +367,25 @@ export default function EvolticsSolutions() {
         {/* ════════════════════════════════════════════════════════════════════════
             MOBILE PRESENTATION (< lg) — Purpose-Built Horizontal Card Sequence
            ════════════════════════════════════════════════════════════════════════ */}
-        <div className="flex lg:hidden flex-col h-full justify-between px-4 sm:px-6 relative z-10 w-full max-w-lg mx-auto">
+        <div className="flex lg:hidden flex-col h-full justify-center px-4 sm:px-6 md:px-8 relative z-10 w-full max-w-lg md:max-w-3xl mx-auto pt-8">
 
           {/* Mobile Header Row */}
-          <div className="shrink-0">
-            <div className="flex items-center justify-between mb-1">
-
+          <div className="shrink-0 w-full mb-6 sm:mb-8 text-center flex flex-col items-center">
+            <div className="flex items-center justify-center mb-1.5">
               {/* Mobile Counter */}
-              <div className="font-mono text-xs font-bold text-zinc-500">
-                <span className="text-sm font-black text-zinc-950">{String(activeStep + 1).padStart(2, "0")}</span>
+              <div className="font-mono text-xs md:text-sm font-bold text-zinc-500">
+                <span className="text-sm md:text-base font-black text-zinc-950">{String(activeStep + 1).padStart(2, "0")}</span>
                 <span className="text-zinc-300 mx-0.5">/</span>
                 <span>{String(advantageCards.length).padStart(2, "0")}</span>
               </div>
             </div>
 
-            <h2 className="text-lg sm:text-xl font-black tracking-tight text-zinc-950 leading-tight">
-              WHAT POWERS THE <span className="text-primary font-black">EVOLTICS ADVANTAGE</span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-zinc-950 leading-tight">
+              WHAT POWERS THE <span className="text-primary font-black block sm:inline">EVOLTICS ADVANTAGE</span>
             </h2>
 
             {/* Mobile Progress Bar */}
-            <div className="flex gap-1 items-center mt-1.5">
+            <div className="flex gap-1 items-center justify-center w-full max-w-[240px] mt-4">
               {advantageCards.map((_, i) => (
                 <div
                   key={i}
@@ -400,7 +399,7 @@ export default function EvolticsSolutions() {
           </div>
 
           {/* Mobile Center Stage: Horizontal Card Sequence */}
-          <div className="flex-1 flex items-center justify-center relative w-full overflow-hidden my-auto py-1">
+          <div className="relative w-full h-[380px] sm:h-[420px] md:h-[480px] shrink-0 flex items-center justify-center my-4 md:my-8">
             {advantageCards.map((card, index) => (
               <MobileSequenceCard
                 key={card.num}
@@ -414,7 +413,7 @@ export default function EvolticsSolutions() {
           </div>
 
           {/* Mobile Bottom Indicator */}
-          <div className="shrink-0 flex items-center justify-center gap-2 py-1 text-center">
+          <div className="shrink-0 flex items-center justify-center gap-2 mt-6 text-center">
             <div className="w-3 h-4.5 rounded-full border-1.5 border-zinc-400/80 flex items-start justify-center p-0.5">
               <motion.div
                 animate={{ y: [0, 3, 0] }}

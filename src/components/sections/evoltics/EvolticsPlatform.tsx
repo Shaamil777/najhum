@@ -76,17 +76,16 @@ export default function EvolticsPlatform() {
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
-          <div className="max-w-2xl">
-
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 sm:mb-16 gap-3 sm:gap-8">
+          <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.05] uppercase"
+              className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
             >
-              CPMS — Charge Point <br />
+              CPMS — Charge Point <br className="hidden sm:block" />
               <span className="text-primary font-black">Management System</span>
             </motion.h2>
           </div>
@@ -96,7 +95,7 @@ export default function EvolticsPlatform() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="text-muted text-base lg:text-lg max-w-md leading-relaxed italic"
+            className="text-muted text-[13px] sm:text-base lg:text-lg max-w-md leading-relaxed italic text-center lg:text-left mx-auto lg:mx-0 mt-2 sm:mt-0"
           >
             World's first IoT-enabled EV Charger Management Platform.
           </motion.p>
@@ -107,16 +106,16 @@ export default function EvolticsPlatform() {
           
           {/* Left Column: 4 Feature Capabilities */}
           <div className="lg:col-span-4 flex flex-col space-y-4">
-            <div className="mb-4">
-              <h3 className="text-2xl font-bold text-foreground mb-3 leading-tight">
+            <div className="mb-4 sm:mb-6 text-center lg:text-left">
+              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground mb-2 sm:mb-3 leading-tight">
                 Everything you need <br className="hidden lg:block"/> in one CPMS
               </h3>
-              <p className="text-sm text-muted leading-relaxed">
+              <p className="text-[12px] sm:text-sm md:text-base text-muted leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 Connect and control all your EV infrastructure from a single platform. Manage revenue, users, energy output, and more with our open, interoperable, hardware-agnostic software.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
               {features.map((feat, i) => {
                 const Icon = feat.icon;
                 return (
@@ -126,16 +125,16 @@ export default function EvolticsPlatform() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="p-4 rounded-xl bg-surface border border-border/80 hover:border-primary/40 hover:bg-surface-alt/50 transition-all flex items-start space-x-4 group shadow-sm"
+                    className="p-3 sm:p-4 rounded-xl bg-surface border border-border/80 hover:border-primary/40 hover:bg-surface-alt/50 transition-all flex flex-col sm:flex-row lg:flex-row items-start space-y-2 sm:space-y-0 sm:space-x-4 lg:space-x-4 group shadow-sm"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
-                      <Icon className="w-5 h-5" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 border border-primary/15 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">
+                      <h4 className="text-[11px] sm:text-sm font-bold text-foreground group-hover:text-primary transition-colors leading-tight mb-1 sm:mb-0">
                         {feat.title}
                       </h4>
-                      <p className="text-xs text-muted leading-relaxed mt-1">
+                      <p className="text-[10px] sm:text-xs text-muted leading-relaxed sm:mt-1 line-clamp-3 sm:line-clamp-none">
                         {feat.desc}
                       </p>
                     </div>
@@ -156,76 +155,83 @@ export default function EvolticsPlatform() {
             >
               
               {/* Dashboard Browser Frame Bar */}
-              <div className="bg-dark-surface px-5 py-3.5 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="flex space-x-1.5">
+              <div className="bg-dark-surface px-4 sm:px-5 py-3 sm:py-3.5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
+                <div className="flex items-center space-x-3 w-full sm:w-auto overflow-hidden">
+                  <div className="flex space-x-1.5 shrink-0">
                     <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                     <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                   </div>
-                  <div className="h-3 w-px bg-white/10" />
-                  <span className="text-[11px] font-mono text-neutral-400">
+                  <div className="h-3 w-px bg-white/10 shrink-0" />
+                  <span className="text-[10px] sm:text-[11px] font-mono text-neutral-400 truncate">
                     evoltics.cloud/admin/control-hub
                   </span>
                 </div>
 
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center space-x-2 px-2.5 py-1 bg-green-500/10 border border-green-500/20 rounded-md">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[10px] font-bold tracking-widest text-green-400 uppercase">
-                      Telemetry Active
+                <div className="flex items-center self-start sm:self-auto shrink-0">
+                  <div className="flex items-center space-x-2 px-2 sm:px-2.5 py-1 bg-green-500/10 border border-green-500/20 rounded-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
+                    <span className="text-[9px] sm:text-[10px] font-bold tracking-widest text-green-400 uppercase">
+                      <span className="hidden sm:inline">Telemetry </span>Active
                     </span>
                   </div>
                 </div>
               </div>
 
               {/* Dashboard Sub-Header with Interactive Tabs */}
-              <div className="px-6 py-4 bg-dark-surface/60 border-b border-white/5 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center space-x-2 bg-black/40 p-1 rounded-xl border border-white/5">
-                  <button
-                    onClick={() => setActiveTab("fleet")}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
-                      activeTab === "fleet" 
-                        ? 'bg-primary text-white shadow-sm' 
-                        : 'text-neutral-400 hover:text-white'
-                    }`}
-                  >
-                    <Radio className="w-3.5 h-3.5" />
-                    <span>Live Network Topology</span>
-                  </button>
+              <div className="px-4 sm:px-6 py-4 bg-dark-surface/60 border-b border-white/5 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+                
+                {/* Scrollable Tabs Wrapper */}
+                <div className="w-full xl:w-auto overflow-x-auto pb-1 xl:pb-0 -mb-1 xl:mb-0 scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <style dangerouslySetInnerHTML={{__html: `
+                    .hide-scrollbar-platform::-webkit-scrollbar { display: none; }
+                  `}} />
+                  <div className="flex items-center space-x-2 bg-black/40 p-1 rounded-xl border border-white/5 w-max hide-scrollbar-platform">
+                    <button
+                      onClick={() => setActiveTab("fleet")}
+                      className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 shrink-0 ${
+                        activeTab === "fleet" 
+                          ? 'bg-primary text-white shadow-sm' 
+                          : 'text-neutral-400 hover:text-white'
+                      }`}
+                    >
+                      <Radio className="w-3.5 h-3.5" />
+                      <span>Live Network Topology</span>
+                    </button>
 
-                  <button
-                    onClick={() => setActiveTab("load")}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
-                      activeTab === "load" 
-                        ? 'bg-primary text-white shadow-sm' 
-                        : 'text-neutral-400 hover:text-white'
-                    }`}
-                  >
-                    <Sliders className="w-3.5 h-3.5" />
-                    <span>Smart Load & V2G</span>
-                  </button>
+                    <button
+                      onClick={() => setActiveTab("load")}
+                      className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 shrink-0 ${
+                        activeTab === "load" 
+                          ? 'bg-primary text-white shadow-sm' 
+                          : 'text-neutral-400 hover:text-white'
+                      }`}
+                    >
+                      <Sliders className="w-3.5 h-3.5" />
+                      <span>Smart Load & V2G</span>
+                    </button>
 
-                  <button
-                    onClick={() => setActiveTab("revenue")}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 ${
-                      activeTab === "revenue" 
-                        ? 'bg-primary text-white shadow-sm' 
-                        : 'text-neutral-400 hover:text-white'
-                    }`}
-                  >
-                    <BadgeDollarSign className="w-3.5 h-3.5" />
-                    <span>Revenue & Tariffs</span>
-                  </button>
+                    <button
+                      onClick={() => setActiveTab("revenue")}
+                      className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center space-x-2 shrink-0 ${
+                        activeTab === "revenue" 
+                          ? 'bg-primary text-white shadow-sm' 
+                          : 'text-neutral-400 hover:text-white'
+                      }`}
+                    >
+                      <BadgeDollarSign className="w-3.5 h-3.5" />
+                      <span>Revenue & Tariffs</span>
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-4 text-xs font-mono text-neutral-400">
+                <div className="flex items-center space-x-4 text-xs font-mono text-neutral-400 shrink-0">
                   <span>Aggregate Load: <strong className="text-white">{livePower} MW</strong></span>
                 </div>
               </div>
 
               {/* Dashboard Dynamic Content View */}
-              <div className="p-6 min-h-[420px]">
+              <div className="p-4 sm:p-6 min-h-[300px] sm:min-h-[420px]">
                 <AnimatePresence mode="wait">
                   
                   {/* TAB 1: Live Network Topology */}
@@ -239,22 +245,22 @@ export default function EvolticsPlatform() {
                       className="space-y-6"
                     >
                       {/* Metric Stat Strip */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <div className="bg-dark-surface/60 border border-white/5 p-3.5 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Active Chargers</span>
-                          <span className="text-xl font-bold font-mono text-white">48 <span className="text-xs text-neutral-500 font-normal">/ 50</span></span>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Active Chargers</span>
+                          <span className="text-base sm:text-xl font-bold font-mono text-white">48 <span className="text-[10px] sm:text-xs text-neutral-500 font-normal">/ 50</span></span>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-3.5 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Network Uptime</span>
-                          <span className="text-xl font-bold font-mono text-emerald-400">99.98%</span>
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Network Uptime</span>
+                          <span className="text-base sm:text-xl font-bold font-mono text-emerald-400">99.98%</span>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-3.5 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Live Dispense</span>
-                          <span className="text-xl font-bold font-mono text-blue-400">{livePower} MW</span>
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Live Dispense</span>
+                          <span className="text-base sm:text-xl font-bold font-mono text-blue-400">{livePower} MW</span>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-3.5 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Avg Latency</span>
-                          <span className="text-xl font-bold font-mono text-white">18ms</span>
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-3.5 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Avg Latency</span>
+                          <span className="text-base sm:text-xl font-bold font-mono text-white">18ms</span>
                         </div>
                       </div>
 
@@ -262,20 +268,20 @@ export default function EvolticsPlatform() {
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                         
                         {/* Interactive Topology Visualizer */}
-                        <div className="md:col-span-7 bg-dark-surface/40 border border-white/5 rounded-xl p-4 relative min-h-[220px] flex flex-col justify-between overflow-hidden">
+                        <div className="md:col-span-7 bg-dark-surface/40 border border-white/5 rounded-xl p-3 sm:p-4 relative min-h-[160px] sm:min-h-[220px] flex flex-col justify-between overflow-hidden">
                           <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-15" />
                           
                           <div className="flex items-center justify-between relative z-10">
-                            <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
-                              UAE Hub Distribution (OCPP 2.0.1)
+                            <span className="text-[9px] sm:text-[11px] font-bold text-neutral-400 uppercase tracking-widest">
+                              UAE Hub Distribution <span className="hidden sm:inline">(OCPP 2.0.1)</span>
                             </span>
-                            <span className="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
-                              4 Clusters Active
+                            <span className="text-[9px] sm:text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                              4 Clusters
                             </span>
                           </div>
 
                           {/* Pulsing Regional Nodes */}
-                          <div className="relative h-36 z-10">
+                          <div className="relative h-20 sm:h-36 z-10">
                             {/* Dubai Node */}
                             <div className="absolute top-[35%] left-[55%]">
                               <motion.div animate={{ scale: [1, 2.2], opacity: [0.6, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute -inset-1 bg-primary rounded-full" />
@@ -308,16 +314,16 @@ export default function EvolticsPlatform() {
                         </div>
 
                         {/* Station Cluster Feed */}
-                        <div className="md:col-span-5 space-y-2">
+                        <div className="md:col-span-5 space-y-1.5 sm:space-y-2">
                           {mockStations.map((st) => (
-                            <div key={st.id} className="p-2.5 rounded-lg bg-dark-surface/50 border border-white/5 flex items-center justify-between">
+                            <div key={st.id} className="p-2 sm:p-2.5 rounded-lg bg-dark-surface/50 border border-white/5 flex items-center justify-between">
                               <div>
-                                <span className="text-xs font-bold text-white block">{st.location}</span>
-                                <span className="text-[10px] font-mono text-neutral-400">{st.id} • {st.active}/{st.chargers} ports</span>
+                                <span className="text-[11px] sm:text-xs font-bold text-white block">{st.location}</span>
+                                <span className="text-[9px] sm:text-[10px] font-mono text-neutral-400">{st.id} • {st.active}/{st.chargers} ports</span>
                               </div>
                               <div className="text-right">
-                                <span className="text-xs font-mono font-bold text-primary block">{st.power}</span>
-                                <span className="text-[9px] text-emerald-400 font-semibold">{st.status}</span>
+                                <span className="text-[11px] sm:text-xs font-mono font-bold text-primary block">{st.power}</span>
+                                <span className="text-[8px] sm:text-[9px] text-emerald-400 font-semibold">{st.status}</span>
                               </div>
                             </div>
                           ))}
@@ -337,36 +343,38 @@ export default function EvolticsPlatform() {
                       transition={{ duration: 0.25 }}
                       className="space-y-6"
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div className="bg-dark-surface/60 border border-white/5 p-4 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Peak Load Shaved</span>
-                          <span className="text-2xl font-bold font-mono text-emerald-400">-28.4%</span>
-                          <p className="text-[10px] text-neutral-400 mt-1">Grid demand smoothing active</p>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Peak Load Shaved</span>
+                          <span className="text-sm sm:text-2xl font-bold font-mono text-emerald-400">-28.4%</span>
+                          <p className="text-[9px] sm:text-[10px] text-neutral-400 sm:mt-1 hidden sm:block">Grid demand smoothing active</p>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-4 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">V2G Readiness</span>
-                          <span className="text-2xl font-bold font-mono text-blue-400">ISO 15118-20</span>
-                          <p className="text-[10px] text-neutral-400 mt-1">Bi-directional enabled</p>
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">V2G Readiness</span>
+                          <span className="text-sm sm:text-2xl font-bold font-mono text-blue-400">ISO 15118-20</span>
+                          <p className="text-[9px] sm:text-[10px] text-neutral-400 sm:mt-1 hidden sm:block">Bi-directional enabled</p>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-4 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Transformer Headroom</span>
-                          <span className="text-2xl font-bold font-mono text-white">420 kVA</span>
-                          <p className="text-[10px] text-neutral-400 mt-1">Safe operating capacity</p>
+                        <div className="col-span-2 md:col-span-1 bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl flex md:block items-center justify-between md:justify-start">
+                          <div>
+                            <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Transformer Headroom</span>
+                            <span className="text-sm sm:text-2xl font-bold font-mono text-white">420 kVA</span>
+                          </div>
+                          <p className="text-[9px] sm:text-[10px] text-neutral-400 sm:mt-1 text-right md:text-left">Safe operating capacity</p>
                         </div>
                       </div>
 
                       {/* Power Curve Graphic */}
-                      <div className="bg-dark-surface/40 border border-white/5 rounded-xl p-5">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-xs font-bold text-white">Dynamic Load Distribution Curve</span>
-                          <span className="text-[10px] text-emerald-400 font-mono">Real-time Solar & Grid Balance</span>
+                      <div className="bg-dark-surface/40 border border-white/5 rounded-xl p-3 sm:p-5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 sm:mb-4">
+                          <span className="text-[11px] sm:text-xs font-bold text-white">Dynamic Load Distribution Curve</span>
+                          <span className="text-[9px] sm:text-[10px] text-emerald-400 font-mono mt-1 sm:mt-0">Real-time Solar & Grid Balance</span>
                         </div>
-                        <div className="h-32 flex items-end gap-1.5 pt-4">
+                        <div className="h-16 sm:h-32 flex items-end gap-1 sm:gap-1.5 pt-2 sm:pt-4">
                           {[35, 42, 58, 65, 80, 95, 88, 72, 60, 50, 40, 48, 62, 75, 82, 90, 85, 70, 55, 45].map((val, idx) => (
                             <div key={idx} className="flex-1 flex flex-col items-center gap-1">
                               <div 
                                 style={{ height: `${val}%` }} 
-                                className={`w-full rounded-t-sm transition-all ${
+                                className={`w-full rounded-t-[1px] sm:rounded-t-sm transition-all ${
                                   val > 85 ? 'bg-amber-400' : 'bg-primary'
                                 }`} 
                               />
@@ -394,34 +402,34 @@ export default function EvolticsPlatform() {
                       transition={{ duration: 0.25 }}
                       className="space-y-4"
                     >
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="bg-dark-surface/60 border border-white/5 p-4 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Today&apos;s Revenue</span>
-                          <span className="text-2xl font-bold font-mono text-white">AED 14,280</span>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Today&apos;s Revenue</span>
+                          <span className="text-sm sm:text-2xl font-bold font-mono text-white">AED 14,280</span>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-4 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Total Energy Dispensed</span>
-                          <span className="text-2xl font-bold font-mono text-blue-400">18.4 MWh</span>
+                        <div className="bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5 sm:mb-1">Total Dispensed</span>
+                          <span className="text-sm sm:text-2xl font-bold font-mono text-blue-400">18.4 MWh</span>
                         </div>
-                        <div className="bg-dark-surface/60 border border-white/5 p-4 rounded-xl">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-1">Active Billing Multiplier</span>
-                          <span className="text-2xl font-bold font-mono text-emerald-400">1.0x (Standard)</span>
+                        <div className="col-span-2 sm:col-span-1 bg-dark-surface/60 border border-white/5 p-2 sm:p-4 rounded-xl flex sm:block items-center justify-between sm:justify-start">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-0 sm:mb-1">Active Multiplier</span>
+                          <span className="text-sm sm:text-2xl font-bold font-mono text-emerald-400">1.0x <span className="hidden sm:inline">(Standard)</span></span>
                         </div>
                       </div>
 
                       {/* Live Transaction Stream */}
-                      <div className="bg-dark-surface/40 border border-white/5 rounded-xl p-4">
-                        <span className="text-xs font-bold text-white block mb-3">Live Active Charging Transactions</span>
-                        <div className="space-y-2">
+                      <div className="bg-dark-surface/40 border border-white/5 rounded-xl p-3 sm:p-4">
+                        <span className="text-[11px] sm:text-xs font-bold text-white block mb-2 sm:mb-3">Live Active Charging Transactions</span>
+                        <div className="space-y-1.5 sm:space-y-2">
                           {mockSessions.map((ses) => (
-                            <div key={ses.id} className="p-3 bg-dark-surface/60 border border-white/5 rounded-lg flex items-center justify-between text-xs">
+                            <div key={ses.id} className="p-2 sm:p-3 bg-dark-surface/60 border border-white/5 rounded-lg flex items-center justify-between text-xs">
                               <div>
-                                <span className="font-bold text-white block">{ses.vehicle}</span>
-                                <span className="text-[10px] font-mono text-neutral-400">{ses.id} • {ses.port}</span>
+                                <span className="font-bold text-white block text-[11px] sm:text-xs">{ses.vehicle}</span>
+                                <span className="text-[9px] sm:text-[10px] font-mono text-neutral-400">{ses.id} • <span className="hidden sm:inline">{ses.port}</span></span>
                               </div>
                               <div className="text-right">
-                                <span className="font-bold font-mono text-emerald-400 block">{ses.cost}</span>
-                                <span className="text-[10px] text-neutral-400">{ses.soc} • {ses.rate}</span>
+                                <span className="font-bold font-mono text-emerald-400 block text-[11px] sm:text-xs">{ses.cost}</span>
+                                <span className="text-[9px] sm:text-[10px] text-neutral-400">{ses.soc} • {ses.rate}</span>
                               </div>
                             </div>
                           ))}
@@ -441,13 +449,14 @@ export default function EvolticsPlatform() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between px-2 gap-4"
+              className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 w-full"
             >
-              <div className="flex items-center space-x-4">
-                <span className="text-xs font-semibold text-muted uppercase tracking-wider">
+              {/* Infrastructure Partners Card */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-4 w-full sm:w-auto bg-surface sm:bg-transparent border border-border sm:border-transparent px-4 py-3 sm:p-0 rounded-xl shadow-sm sm:shadow-none">
+                <span className="text-[10px] sm:text-xs font-semibold text-muted uppercase tracking-wider text-center sm:text-left">
                   Infrastructure Partners:
                 </span>
-                <div className="flex items-center space-x-4 opacity-70">
+                <div className="flex items-center justify-center space-x-4 sm:space-x-4 opacity-80 mt-1 sm:mt-0">
                   <span className="text-sm font-black text-foreground hover:text-primary transition-colors cursor-pointer">DEWA</span>
                   <span className="text-sm font-black text-foreground hover:text-primary transition-colors cursor-pointer">TAQA</span>
                   <span className="text-sm font-black text-foreground hover:text-primary transition-colors cursor-pointer">FEWA</span>
@@ -455,8 +464,8 @@ export default function EvolticsPlatform() {
               </div>
 
               {/* Prominent Outside Certification Badge */}
-              <div className="flex items-center space-x-4 bg-surface border border-border px-5 py-3 rounded-xl shadow-sm cursor-pointer group hover:border-primary/40 transition-colors overflow-hidden">
-                <div className="w-14 h-14 relative flex items-center justify-center -ml-1">
+              <div className="flex items-center justify-center sm:justify-start space-x-3 sm:space-x-4 bg-surface border border-border px-4 sm:px-5 py-2 sm:py-3 rounded-xl shadow-sm cursor-pointer group hover:border-primary/40 transition-colors overflow-hidden shrink-0 w-full sm:w-auto">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 relative flex items-center justify-center -ml-1">
                   <Image 
                     src="/logo/occplogo.png" 
                     alt="OCPP 2.0.1 Certified" 
@@ -465,9 +474,9 @@ export default function EvolticsPlatform() {
                     className="object-contain opacity-90 group-hover:opacity-100 transition-all scale-[1.3] group-hover:scale-[1.4]" 
                   />
                 </div>
-                <div className="flex flex-col pr-2">
-                  <span className="text-sm font-bold text-foreground leading-none mb-1">OCPP 2.0.1</span>
-                  <span className="text-[10px] text-muted uppercase tracking-widest font-semibold">Certified Network Protocol</span>
+                <div className="flex flex-col pr-1 sm:pr-2 text-left">
+                  <span className="text-xs sm:text-sm font-bold text-foreground leading-none mb-1">OCPP 2.0.1</span>
+                  <span className="text-[9px] sm:text-[10px] text-muted uppercase tracking-widest font-semibold">Certified Network Protocol</span>
                 </div>
               </div>
             </motion.div>

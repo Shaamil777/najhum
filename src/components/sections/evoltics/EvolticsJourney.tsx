@@ -57,7 +57,7 @@ export default function EvolticsJourney() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="w-full py-28 bg-background relative overflow-hidden font-sans">
+    <section className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans">
       
       {/* Background Grid */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
@@ -75,14 +75,14 @@ export default function EvolticsJourney() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-20">
 
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.05] uppercase"
+            className="text-[1.65rem] sm:text-3xl md:text-4xl xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
           >
             Your Deployment Journey
           </motion.h2>
@@ -92,14 +92,14 @@ export default function EvolticsJourney() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="mt-4 text-muted text-base lg:text-lg leading-relaxed max-w-2xl mx-auto"
+            className="mt-3 sm:mt-4 text-muted text-[13px] sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto"
           >
             From first consultation to long-term maintenance — a structured, transparent path to operational EV charging infrastructure.
           </motion.p>
         </div>
 
         {/* Journey Visual Path — Desktop Horizontal */}
-        <div className="hidden lg:block mb-16">
+        <div className="hidden md:block mb-12 lg:mb-16">
           <div className="relative">
             
             {/* Horizontal Connected Line */}
@@ -114,7 +114,7 @@ export default function EvolticsJourney() {
             </div>
 
             {/* Step Nodes */}
-            <div className="grid grid-cols-6 gap-4 relative">
+            <div className="grid grid-cols-6 gap-2 lg:gap-4 relative">
               {journeySteps.map((step, idx) => {
                 const Icon = stepIcons[idx];
                 const isActive = activeStep === idx;
@@ -131,15 +131,15 @@ export default function EvolticsJourney() {
                     className="flex flex-col items-center text-center group cursor-pointer focus:outline-none"
                   >
                     {/* Node Circle Wrapper to block the line */}
-                    <div className="relative z-10 bg-background rounded-2xl mb-4">
-                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 border-2 ${
+                    <div className="relative z-10 bg-background rounded-2xl mb-2 lg:mb-4">
+                      <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center transition-all duration-300 border-2 ${
                         isActive 
                           ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-110' 
                           : isPast
                             ? 'bg-primary/15 text-primary border-primary/40'
                             : 'bg-surface text-muted border-border group-hover:border-primary/40 group-hover:text-primary'
                       }`}>
-                        <Icon className="w-6 h-6" />
+                        <Icon className="w-5 h-5 lg:w-6 lg:h-6" />
                       </div>
                     </div>
 
@@ -151,7 +151,7 @@ export default function EvolticsJourney() {
                     </span>
 
                     {/* Step Title */}
-                    <span className={`text-sm font-bold transition-colors ${
+                    <span className={`text-[11px] lg:text-sm font-bold transition-colors ${
                       isActive ? 'text-foreground' : 'text-muted'
                     }`}>
                       {step.title}
@@ -163,9 +163,9 @@ export default function EvolticsJourney() {
           </div>
         </div>
 
-        {/* Journey Visual Path — Mobile Vertical */}
-        <div className="lg:hidden mb-10">
-          <div className="flex flex-col">
+        {/* Journey Visual Path — Mobile 3x2 Grid */}
+        <div className="md:hidden mb-6">
+          <div className="grid grid-cols-3 gap-2">
             {journeySteps.map((step, idx) => {
               const Icon = stepIcons[idx];
               const isActive = activeStep === idx;
@@ -174,26 +174,23 @@ export default function EvolticsJourney() {
                 <button
                   key={idx}
                   onClick={() => setActiveStep(idx)}
-                  className={`flex items-center space-x-4 p-4 rounded-xl text-left transition-all border mb-2 ${
+                  className={`flex flex-col items-center text-center p-2.5 rounded-xl transition-all border ${
                     isActive 
-                      ? 'bg-primary/10 border-primary/40' 
+                      ? 'bg-primary/10 border-primary/40 shadow-sm' 
                       : 'bg-surface border-border/60 hover:border-primary/30'
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${
-                    isActive ? 'bg-primary text-white' : 'bg-surface-alt text-muted border border-border'
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mb-1.5 transition-all ${
+                    isActive ? 'bg-primary text-white shadow-md shadow-primary/20' : 'bg-surface-alt text-muted border border-border'
                   }`}>
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4 h-4" />
                   </div>
-                  <div>
-                    <span className={`text-xs font-bold uppercase tracking-wider block ${isActive ? 'text-primary' : 'text-muted'}`}>
-                      Step {step.num}
-                    </span>
-                    <span className={`text-sm font-bold ${isActive ? 'text-foreground' : 'text-muted'}`}>
-                      {step.title}
-                    </span>
-                  </div>
-                  <ChevronRight className={`w-4 h-4 ml-auto shrink-0 transition-colors ${isActive ? 'text-primary' : 'text-muted/40'}`} />
+                  <span className={`text-[8px] font-bold uppercase tracking-wider block mb-0.5 ${isActive ? 'text-primary' : 'text-muted'}`}>
+                    Step {step.num}
+                  </span>
+                  <span className={`text-[9px] font-bold leading-tight ${isActive ? 'text-foreground' : 'text-muted'}`}>
+                    {step.title}
+                  </span>
                 </button>
               );
             })}
@@ -208,42 +205,42 @@ export default function EvolticsJourney() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="bg-surface border border-border rounded-3xl p-8 lg:p-10 shadow-sm relative overflow-hidden"
+            className="bg-surface border border-border rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-8 lg:p-10 shadow-sm relative overflow-hidden"
           >
             {/* Ambient Glow */}
             <div className="absolute top-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6 md:gap-8 lg:gap-12 items-start relative z-10">
               
               {/* Left: Step Overview */}
-              <div className="lg:col-span-7 space-y-5">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/25">
-                    {React.createElement(stepIcons[activeStep], { className: "w-6 h-6" })}
+              <div className="md:col-span-1 lg:col-span-7 space-y-3 sm:space-y-4 md:space-y-5">
+                <div className="flex items-center space-x-3 sm:space-x-4">
+                  <div className="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-primary text-white items-center justify-center shadow-md shadow-primary/25 shrink-0">
+                    {React.createElement(stepIcons[activeStep], { className: "w-5 h-5 sm:w-6 sm:h-6" })}
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] block">
+                    <span className="text-[9px] sm:text-[10px] font-bold text-primary uppercase tracking-[0.2em] block">
                       Step {journeySteps[activeStep].num} of 6
                     </span>
-                    <h3 className="text-2xl font-extrabold text-foreground tracking-tight">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground tracking-tight leading-tight">
                       {journeySteps[activeStep].title}
                     </h3>
                   </div>
                 </div>
 
-                <p className="text-base text-foreground/80 leading-relaxed">
+                <p className="text-[12px] sm:text-[13px] md:text-base text-foreground/80 leading-relaxed">
                   {journeySteps[activeStep].desc}
                 </p>
 
-                <div className="pt-2">
-                  <span className="text-[11px] font-bold text-muted uppercase tracking-widest block mb-3">
+                <div className="pt-1 md:pt-2">
+                  <span className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-muted uppercase tracking-widest block mb-2 sm:mb-3">
                     Phase Deliverables
                   </span>
-                  <div className="space-y-2.5">
+                  <div className="space-y-1.5 sm:space-y-2 md:space-y-2.5">
                     {stepDetails[activeStep].deliverables.map((del, i) => (
-                      <div key={i} className="flex items-start space-x-2.5 bg-surface-alt/70 p-3 rounded-xl border border-border/60">
-                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm font-medium text-foreground">{del}</span>
+                      <div key={i} className="flex items-start space-x-2 sm:space-x-2.5 bg-surface-alt/70 p-2 sm:p-2.5 md:p-3 rounded-lg sm:rounded-xl border border-border/60">
+                        <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0 mt-0.5 sm:mt-0.5" />
+                        <span className="text-[11px] sm:text-[12px] md:text-sm font-medium text-foreground leading-snug">{del}</span>
                       </div>
                     ))}
                   </div>
@@ -251,24 +248,26 @@ export default function EvolticsJourney() {
               </div>
 
               {/* Right: Timeline & Output Metrics */}
-              <div className="lg:col-span-5 space-y-6">
+              <div className="md:col-span-1 lg:col-span-5 space-y-3 sm:space-y-4 md:space-y-6 flex flex-col justify-between h-full">
                 
-                <div className="bg-surface-alt border border-border rounded-2xl p-6">
-                  <span className="text-[10px] font-bold text-muted uppercase tracking-[0.2em] block mb-3">
-                    Estimated Duration
-                  </span>
-                  <div className="text-3xl font-black text-foreground tracking-tight">
-                    {stepDetails[activeStep].duration}
+                <div className="flex sm:flex-col gap-3 sm:gap-4 md:gap-6">
+                  <div className="flex-1 bg-surface-alt border border-border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6">
+                    <span className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-muted uppercase tracking-[0.2em] block mb-1.5 sm:mb-2 md:mb-3">
+                      Est. Duration
+                    </span>
+                    <div className="text-lg sm:text-2xl md:text-3xl font-black text-foreground tracking-tight">
+                      {stepDetails[activeStep].duration}
+                    </div>
                   </div>
-                </div>
 
-                <div className="bg-primary/5 border border-primary/15 rounded-2xl p-6">
-                  <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] block mb-2">
-                    Phase Output
-                  </span>
-                  <p className="text-sm font-semibold text-foreground leading-relaxed">
-                    {stepDetails[activeStep].output}
-                  </p>
+                  <div className="flex-1 bg-primary/5 border border-primary/15 rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6">
+                    <span className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-[0.2em] block mb-1.5 sm:mb-2">
+                      Phase Output
+                    </span>
+                    <p className="text-[11px] sm:text-[13px] md:text-sm font-semibold text-foreground leading-relaxed">
+                      {stepDetails[activeStep].output}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Navigation Arrows */}
@@ -302,23 +301,23 @@ export default function EvolticsJourney() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center"
+          className="mt-6 sm:mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center"
         >
-          <div className="bg-surface-alt border border-border rounded-xl p-4">
-            <span className="text-2xl font-black text-foreground block">6</span>
-            <span className="text-[11px] text-muted font-semibold uppercase tracking-wider">Phases</span>
+          <div className="bg-surface-alt border border-border rounded-xl p-3 sm:p-4">
+            <span className="text-xl sm:text-2xl font-black text-foreground block">6</span>
+            <span className="text-[9px] sm:text-[11px] text-muted font-semibold uppercase tracking-wider">Phases</span>
           </div>
-          <div className="bg-surface-alt border border-border rounded-xl p-4">
-            <span className="text-2xl font-black text-foreground block">12–20</span>
-            <span className="text-[11px] text-muted font-semibold uppercase tracking-wider">Weeks Average</span>
+          <div className="bg-surface-alt border border-border rounded-xl p-3 sm:p-4">
+            <span className="text-xl sm:text-2xl font-black text-foreground block">12–20</span>
+            <span className="text-[9px] sm:text-[11px] text-muted font-semibold uppercase tracking-wider">Weeks Average</span>
           </div>
-          <div className="bg-surface-alt border border-border rounded-xl p-4">
-            <span className="text-2xl font-black text-primary block">1</span>
-            <span className="text-[11px] text-muted font-semibold uppercase tracking-wider">Partner</span>
+          <div className="bg-surface-alt border border-border rounded-xl p-3 sm:p-4">
+            <span className="text-xl sm:text-2xl font-black text-primary block">1</span>
+            <span className="text-[9px] sm:text-[11px] text-muted font-semibold uppercase tracking-wider">Partner</span>
           </div>
-          <div className="bg-surface-alt border border-border rounded-xl p-4">
-            <span className="text-2xl font-black text-success block">100%</span>
-            <span className="text-[11px] text-muted font-semibold uppercase tracking-wider">Turnkey</span>
+          <div className="bg-surface-alt border border-border rounded-xl p-3 sm:p-4">
+            <span className="text-xl sm:text-2xl font-black text-success block">100%</span>
+            <span className="text-[9px] sm:text-[11px] text-muted font-semibold uppercase tracking-wider">Turnkey</span>
           </div>
         </motion.div>
 
