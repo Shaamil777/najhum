@@ -6,6 +6,7 @@ import EvolticsPlatform from "@/components/sections/evoltics/EvolticsPlatform";
 import EvolticsMobileApp from "@/components/sections/evoltics/EvolticsMobileApp";
 import EvolticsSolutions from "@/components/sections/evoltics/EvolticsSolutions";
 import EvolticsJourney from "@/components/sections/evoltics/EvolticsJourney";
+import EvolticsFaq from "@/components/sections/evoltics/EvolticsFaq";
 import EvolticsCta from "@/components/sections/evoltics/EvolticsCta";
 
 import { Poppins } from "next/font/google";
@@ -33,6 +34,7 @@ export default function EvolticsPage() {
       <EvolticsMobileApp />
       <EvolticsEcosystem />
       <EvolticsJourney />
+      <EvolticsFaq />
       <EvolticsCta />
     </div>
   );

@@ -16,9 +16,20 @@ export default function Footer() {
         
         {/* Copyright Bar */}
         <div className="w-full py-8 text-center text-sm font-medium text-zinc-400 border-t border-zinc-100 max-w-[1400px] mx-auto px-6 lg:px-12 mt-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-center transition-transform duration-300">
-            <span>&copy; {new Date().getFullYear()} Najhum Technologies. All rights reserved.</span>
-            <div className="flex gap-8 text-[0.85rem] font-semibold tracking-wide uppercase text-zinc-400">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-center transition-transform duration-300">
+            <span className="flex-1 text-left">&copy; {new Date().getFullYear()} Najhum Technologies. All rights reserved.</span>
+            
+            <a 
+              href="https://dexiko.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 flex-1 justify-center opacity-70 hover:opacity-100 transition-opacity"
+            >
+              <span className="text-xs uppercase tracking-widest font-semibold">Developed by</span>
+              <img src="/images/footer/dexiko.png" alt="Dexiko" className="h-4 object-contain brightness-0 opacity-60" />
+            </a>
+
+            <div className="flex gap-8 text-[0.85rem] font-semibold tracking-wide uppercase text-zinc-400 flex-1 justify-end">
               <a href="#" className="hover:text-primary transition-colors">Privacy</a>
               <a href="#" className="hover:text-primary transition-colors">Terms</a>
               <a href="#" className="hover:text-primary transition-colors">Legal</a>

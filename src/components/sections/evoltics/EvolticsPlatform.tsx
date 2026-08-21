@@ -66,7 +66,7 @@ export default function EvolticsPlatform() {
   if (!mounted) return null;
 
   return (
-    <section className="w-full py-28 bg-background-alt relative overflow-hidden font-sans ">
+    <section className="w-full py-28 bg-white relative overflow-hidden font-sans ">
       
       {/* Background Architectural Grid & Radial Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">

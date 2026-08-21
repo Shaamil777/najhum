@@ -130,15 +130,17 @@ export default function EvolticsJourney() {
                     onClick={() => setActiveStep(idx)}
                     className="flex flex-col items-center text-center group cursor-pointer focus:outline-none"
                   >
-                    {/* Node Circle */}
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 border-2 relative z-10 ${
-                      isActive 
-                        ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-110' 
-                        : isPast
-                          ? 'bg-primary/15 text-primary border-primary/40'
-                          : 'bg-surface text-muted border-border group-hover:border-primary/40 group-hover:text-primary'
-                    }`}>
-                      <Icon className="w-6 h-6" />
+                    {/* Node Circle Wrapper to block the line */}
+                    <div className="relative z-10 bg-background rounded-2xl mb-4">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 border-2 ${
+                        isActive 
+                          ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-110' 
+                          : isPast
+                            ? 'bg-primary/15 text-primary border-primary/40'
+                            : 'bg-surface text-muted border-border group-hover:border-primary/40 group-hover:text-primary'
+                      }`}>
+                        <Icon className="w-6 h-6" />
+                      </div>
                     </div>
 
                     {/* Step Number */}

@@ -68,7 +68,7 @@ export default function EvolticsComparison() {
       {/* Background Split (Desktop Only) */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">
         {/* Left Side Bg */}
-        <div className="w-1/2 bg-[#fcfcfc] relative overflow-hidden">
+        <div className="w-1/2 bg-white relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-200/40 rounded-full blur-[120px]" />
         </div>
         {/* Right Side Bg */}
@@ -81,7 +81,7 @@ export default function EvolticsComparison() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 xl:gap-32">
           
           {/* LEFT COLUMN: Traditional */}
-          <div className="py-20 lg:py-32 px-6 flex flex-col items-center lg:items-end border-b lg:border-b-0 border-border/40 bg-[#fcfcfc] lg:bg-transparent">
+          <div className="py-20 lg:py-32 px-6 flex flex-col items-center lg:items-end border-b lg:border-b-0 border-border/40 bg-white lg:bg-transparent">
             
             <h2 className="text-3xl lg:text-4xl font-medium tracking-tight text-zinc-600 mb-16 text-center lg:text-right w-full">
               Instead of
