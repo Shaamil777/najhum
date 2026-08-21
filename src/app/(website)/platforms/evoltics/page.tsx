@@ -7,6 +7,7 @@ import EvolticsProducts from "@/components/sections/evoltics/EvolticsProducts";
 import EvolticsMobileApp from "@/components/sections/evoltics/EvolticsMobileApp";
 import EvolticsSolutions from "@/components/sections/evoltics/EvolticsSolutions";
 import EvolticsJourney from "@/components/sections/evoltics/EvolticsJourney";
+import EvolticsCarbonCredit from "@/components/sections/evoltics/EvolticsCarbonCredit";
 import EvolticsFaq from "@/components/sections/evoltics/EvolticsFaq";
 import EvolticsCta from "@/components/sections/evoltics/EvolticsCta";
 
@@ -36,6 +37,7 @@ export default function EvolticsPage() {
       <EvolticsMobileApp />
       <EvolticsEcosystem />
       <EvolticsJourney />
+      <EvolticsCarbonCredit />
       <EvolticsFaq />
       <EvolticsCta />
     </div>
