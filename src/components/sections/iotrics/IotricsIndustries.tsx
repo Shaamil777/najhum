@@ -103,8 +103,8 @@ export default function IotricsIndustries() {
           </motion.div>
         </div>
 
-        {/* Grid Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-neutral-800/80">
+        {/* ═══ DESKTOP GRID (lg+) ═══ */}
+        <div className="hidden lg:grid grid-cols-4 border-t border-l border-neutral-800/80">
           {industries.map((item, idx) => (
             <motion.div
               key={idx}
@@ -143,6 +143,30 @@ export default function IotricsIndustries() {
                   {item.desc}
                 </p>
               </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ═══ MOBILE GRID (< lg) ═══ */}
+        <div className="grid grid-cols-2 lg:hidden gap-3 sm:gap-4">
+          {industries.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.04 }}
+              className="bg-neutral-900/60 border border-neutral-800/60 rounded-2xl p-5 flex flex-col"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <item.icon className="w-4 h-4 text-blue-400" />
+                <span className="text-2xl font-bold tracking-tighter text-neutral-700">
+                  {item.number}
+                </span>
+              </div>
+              <h3 className="text-[13px] font-semibold text-white leading-snug">
+                {item.title}
+              </h3>
             </motion.div>
           ))}
         </div>

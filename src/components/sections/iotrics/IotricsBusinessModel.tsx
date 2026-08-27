@@ -162,75 +162,65 @@ export default function IotricsBusinessModel() {
         {/* ════════════════════════════════════════════════════════════════════════
             MOBILE COMBINED VIEW (< lg)
            ════════════════════════════════════════════════════════════════════════ */}
-        <div className="flex lg:hidden flex-col items-center px-4 sm:px-6 py-16 bg-blue-50/20">
+        <div className="flex lg:hidden flex-col items-center px-4 py-12">
           
-          <div className="text-center mb-12">
-            <span className="text-blue-600 font-bold tracking-widest uppercase mb-2 text-xs">BUSINESS MODELS</span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
-              SOLAAS <span className="text-neutral-400 font-normal mx-2">vs</span> PAAS
+          <div className="text-center mb-8">
+            <span className="text-blue-600 font-bold tracking-widest uppercase mb-1 text-[10px] block">Business Models</span>
+            <h2 className="text-xl font-bold tracking-tight text-neutral-900">
+              SOLAAS <span className="text-neutral-300 font-normal mx-1">vs</span> PAAS
             </h2>
           </div>
 
-          <div className="w-full max-w-md md:max-w-3xl flex flex-col md:flex-row gap-8 md:gap-12 bg-white rounded-3xl shadow-sm border border-neutral-200 p-6 sm:p-8">
+          {/* Two stacked compact cards */}
+          <div className="w-full max-w-md space-y-3">
             
-            {/* SOLAAS Side */}
-            <div className="w-full md:w-1/2 flex flex-col">
-              <span className="text-[11px] font-bold tracking-wider text-neutral-400 uppercase mb-2">Model 01</span>
-              <h3 className="text-xl font-bold text-neutral-900 mb-6">SOLAAS</h3>
-              
-              <div className="space-y-5 flex-1">
+            {/* SOLAAS Card */}
+            <div className="bg-white rounded-2xl border border-neutral-200 p-5">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <span className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase block">01</span>
+                  <h3 className="text-lg font-bold text-neutral-900">SOLAAS</h3>
+                </div>
+                <span className="text-[11px] text-neutral-400 font-medium">Solution-as-a-Service</span>
+              </div>
+              <div className="space-y-2.5">
                 {solaasPoints.map((text, idx) => (
-                  <div key={`mobile-solaas-${idx}`} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-neutral-400 shrink-0 mt-0.5" strokeWidth={3} />
-                    <p className="text-[13px] text-neutral-600 leading-relaxed">{text}</p>
+                  <div key={`m-s-${idx}`} className="flex items-start gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 shrink-0 mt-[7px]" />
+                    <p className="text-[12px] text-neutral-600 leading-relaxed">{text}</p>
                   </div>
                 ))}
               </div>
+              <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-2">
+                <Target className="w-3 h-3 text-neutral-400" />
+                <p className="text-[11px] text-neutral-500 font-medium">Complete IoT solution without an internal team</p>
+              </div>
             </div>
 
-            {/* Divider */}
-            <div className="hidden md:block w-px bg-neutral-200/50 self-stretch" />
-            <div className="md:hidden h-px bg-neutral-200/50 w-full" />
-
-            {/* PAAS Side */}
-            <div className="w-full md:w-1/2 flex flex-col">
-              <span className="text-[11px] font-bold tracking-wider text-blue-500 uppercase mb-2">Model 02</span>
-              <h3 className="text-xl font-bold text-neutral-900 mb-6">PAAS</h3>
-              
-              <div className="space-y-5 flex-1">
+            {/* PAAS Card */}
+            <div className="bg-blue-50/40 rounded-2xl border border-blue-100 p-5">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <span className="text-[10px] font-bold tracking-wider text-blue-500 uppercase block">02</span>
+                  <h3 className="text-lg font-bold text-neutral-900">PAAS</h3>
+                </div>
+                <span className="text-[11px] text-blue-500 font-medium">Platform-as-a-Service</span>
+              </div>
+              <div className="space-y-2.5">
                 {paasPoints.map((text, idx) => (
-                  <div key={`mobile-paas-${idx}`} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" strokeWidth={3} />
-                    <p className="text-[13px] text-neutral-700 leading-relaxed">{text}</p>
+                  <div key={`m-p-${idx}`} className="flex items-start gap-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[7px]" />
+                    <p className="text-[12px] text-neutral-700 leading-relaxed">{text}</p>
                   </div>
                 ))}
+              </div>
+              <div className="mt-4 pt-3 border-t border-blue-100 flex items-center gap-2">
+                <Target className="w-3 h-3 text-blue-500" />
+                <p className="text-[11px] text-blue-600 font-medium">Enterprises with existing IoT infrastructure</p>
               </div>
             </div>
 
           </div>
-
-          {/* Best For Tags (Mobile) */}
-          <div className="w-full max-w-md md:max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-            <div className="relative bg-white border border-neutral-200 rounded-2xl p-5 text-left shadow-sm">
-               <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1 h-1/2 bg-neutral-300 rounded-r-full" />
-               <p className="text-[11px] uppercase tracking-widest font-bold text-neutral-400 mb-2 pl-3 flex items-center gap-2">
-                 <Target className="w-3.5 h-3.5" /> Ideal Fit
-               </p>
-               <p className="text-[13px] text-neutral-700 font-medium pl-3">
-                 Most deployments needing a complete IoT solution without an internal team.
-               </p>
-            </div>
-            <div className="relative bg-white border border-blue-100 rounded-2xl p-5 text-left shadow-[0_4px_20px_rgb(59,130,246,0.06)]">
-               <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1 h-1/2 bg-blue-500 rounded-r-full" />
-               <p className="text-[11px] uppercase tracking-widest font-bold text-blue-500 mb-2 pl-3 flex items-center gap-2">
-                 <Target className="w-3.5 h-3.5" /> Ideal Fit
-               </p>
-               <p className="text-[13px] text-neutral-900 font-medium pl-3">
-                 Enterprises with existing IoT infrastructure or in-house technical teams.
-               </p>
-            </div>
-          </div>
-
         </div>
 
       </div>
