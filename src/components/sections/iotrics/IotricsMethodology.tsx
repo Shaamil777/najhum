@@ -52,10 +52,10 @@ export default function IotricsMethodology() {
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
+        <div className="grid grid-cols-3 gap-2 md:gap-0 relative">
           
-          {/* Connecting line (desktop) */}
-          <div className="absolute top-[52px] left-[16.66%] right-[16.66%] h-px bg-neutral-200 hidden md:block z-0" />
+          {/* Connecting line */}
+          <div className="absolute top-[32px] md:top-[52px] left-[16.66%] right-[16.66%] h-px bg-neutral-200 z-0" />
 
           {steps.map((s, idx) => (
             <motion.div
@@ -64,30 +64,25 @@ export default function IotricsMethodology() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className="flex flex-col items-center text-center px-8 sm:px-12 relative z-10"
+              className="flex flex-col items-center text-center px-1 sm:px-4 md:px-8 lg:px-12 relative z-10"
             >
               {/* Step circle */}
-              <div className="w-[104px] h-[104px] rounded-full bg-neutral-50 border border-neutral-200 flex items-center justify-center mb-8 relative">
-                <s.icon className="w-6 h-6 text-neutral-900" strokeWidth={1.5} />
-                <span className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-neutral-900 text-white text-[11px] font-bold flex items-center justify-center">
+              <div className="w-16 h-16 md:w-[104px] md:h-[104px] rounded-full bg-neutral-50 border border-neutral-200 flex items-center justify-center mb-4 md:mb-8 relative bg-white">
+                <s.icon className="w-4 h-4 md:w-6 md:h-6 text-neutral-900" strokeWidth={1.5} />
+                <span className="absolute -top-1 -right-1 w-5 h-5 md:w-7 md:h-7 rounded-full bg-neutral-900 text-white text-[9px] md:text-[11px] font-bold flex items-center justify-center">
                   {s.step}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-neutral-900 mb-3 tracking-tight">
+              <h3 className="text-[13px] sm:text-base md:text-xl font-bold text-neutral-900 mb-1 md:mb-3 tracking-tight">
                 {s.title}
               </h3>
 
               {/* Description */}
-              <p className="text-neutral-500 text-[15px] leading-relaxed max-w-[280px]">
+              <p className="text-neutral-500 text-[11px] sm:text-sm md:text-[15px] leading-snug md:leading-relaxed max-w-[280px]">
                 {s.desc}
               </p>
-
-              {/* Mobile connector */}
-              {idx < steps.length - 1 && (
-                <div className="w-px h-12 bg-neutral-200 my-8 md:hidden" />
-              )}
             </motion.div>
           ))}
         </div>
