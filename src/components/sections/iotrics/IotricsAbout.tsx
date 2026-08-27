@@ -15,8 +15,8 @@ export default function IotricsAbout() {
   }, []);
 
   return (
-    <section className="w-full py-24 bg-white text-neutral-900 border-b border-neutral-200 overflow-hidden font-[family-name:var(--font-poppins)]">
-      <div className="container mx-auto px-6 lg:px-16 max-w-7xl">
+    <section className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-[family-name:var(--font-poppins)]">
+      <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
         
         {/* Header Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 lg:mb-20 gap-4 sm:gap-8">
@@ -147,11 +147,11 @@ export default function IotricsAbout() {
             <div className="absolute top-1/2 left-[5%] right-[5%] h-[2px] bg-neutral-200 -z-20 translate-y-[-50%] border-t-2 border-dashed border-neutral-300" />
             
             {/* Moving Pulse Animation */}
-            <div className="absolute top-1/2 left-[5%] right-[5%] h-[2px] -z-10 translate-y-[-50%] overflow-hidden">
+            <div className="absolute top-1/2 left-[5%] right-[5%] h-[2px] -z-10 translate-y-[-50%] overflow-visible pointer-events-none">
               <motion.div 
-                className="w-1/3 h-full bg-gradient-to-r from-transparent via-blue-500 to-transparent absolute top-0"
+                className="w-12 md:w-20 h-[3px] rounded-full bg-blue-500 shadow-[0_0_12px_4px_rgba(59,130,246,0.8)] absolute top-1/2 -translate-y-1/2"
                 animate={{
-                  left: ["-33%", "100%"]
+                  left: ["0%", "100%"]
                 }}
                 transition={{
                   duration: 9, // 6 nodes * 1.5s
