@@ -15,7 +15,7 @@ export default function IotricsAbout() {
   }, []);
 
   return (
-    <section className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-[family-name:var(--font-poppins)]">
+    <section className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
         
         {/* Header Title */}

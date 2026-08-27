@@ -25,7 +25,7 @@ export default function IotricsHero() {
   }, []);
 
   return (
-    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden font-sans flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white">
+    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -51,7 +51,7 @@ export default function IotricsHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 font-display text-white uppercase"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 text-white uppercase"
         >
           SMARTER CONNECTED <br /> OPERATIONS
         </motion.h1>

@@ -104,7 +104,7 @@ export default function IotricsCore() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="w-full py-24 sm:py-32 bg-white text-neutral-900 font-[family-name:var(--font-poppins)]">
+    <section className="w-full py-24 sm:py-32 bg-white text-neutral-900 font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px] flex flex-col items-center">
         
         <div className="text-center max-w-4xl mx-auto flex flex-col items-center mb-16 lg:mb-24">
@@ -194,7 +194,7 @@ export default function IotricsCore() {
                     <span className="text-blue-400 text-xs font-bold tracking-widest uppercase mb-3 block">
                       Core Capability
                     </span>
-                    <h4 className="text-3xl sm:text-4xl font-bold mb-6 text-white leading-tight font-display">
+                    <h4 className="text-3xl sm:text-4xl font-bold mb-6 text-white leading-tight">
                       {coreModules[activeIndex].subtitle}
                     </h4>
                     <p className="text-neutral-400 leading-relaxed text-base sm:text-lg mb-8">
