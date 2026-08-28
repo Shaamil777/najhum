@@ -7,7 +7,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap", weight: ["300", "400", "500", "600", "700"] });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["400", "500", "600", "700", "800", "900"] });
-const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", display: "swap", weight: ["300", "400", "500", "600", "700"] });
+const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", display: "swap", weight: ["300", "400", "500", "600", "700", "800", "900"] });
 
 export const viewport: Viewport = {
   themeColor: "#0b0b0c",

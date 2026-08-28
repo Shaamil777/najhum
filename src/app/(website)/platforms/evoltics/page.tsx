@@ -1,13 +1,14 @@
 import EvolticsHero from "@/components/sections/evoltics/EvolticsHero";
 import EvolticsAbout from "@/components/sections/evoltics/EvolticsAbout";
-import EvolticsSolutions from "@/components/sections/evoltics/EvolticsSolutions";
-import EvolticsProducts from "@/components/sections/evoltics/EvolticsProducts";
-import EvolticsCpms from "@/components/sections/evoltics/EvolticsCpms";
-import EvolticsMobileApp from "@/components/sections/evoltics/EvolticsMobileApp";
-import EvolticsWhiteLabel from "@/components/sections/evoltics/EvolticsWhiteLabel";
-import EvolticsCarbonCredit from "@/components/sections/evoltics/EvolticsCarbonCredit";
 import EvolticsEcosystem from "@/components/sections/evoltics/EvolticsEcosystem";
+import EvolticsComparison from "@/components/sections/evoltics/EvolticsComparison";
+import EvolticsPlatform from "@/components/sections/evoltics/EvolticsPlatform";
+import EvolticsProducts from "@/components/sections/evoltics/EvolticsProducts";
+import EvolticsMobileApp from "@/components/sections/evoltics/EvolticsMobileApp";
+import EvolticsSolutions from "@/components/sections/evoltics/EvolticsSolutions";
 import EvolticsJourney from "@/components/sections/evoltics/EvolticsJourney";
+import EvolticsCarbonCredit from "@/components/sections/evoltics/EvolticsCarbonCredit";
+import EvolticsFaq from "@/components/sections/evoltics/EvolticsFaq";
 import EvolticsCta from "@/components/sections/evoltics/EvolticsCta";
 
 import { Poppins } from "next/font/google";
@@ -30,13 +31,14 @@ export default function EvolticsPage() {
       <EvolticsHero />
       <EvolticsAbout />
       <EvolticsSolutions />
-      <EvolticsEcosystem />
+      <EvolticsComparison />
+      <EvolticsPlatform />
       <EvolticsProducts />
-      <EvolticsCpms />
       <EvolticsMobileApp />
-      <EvolticsWhiteLabel />
-      <EvolticsCarbonCredit />
+      <EvolticsEcosystem />
       <EvolticsJourney />
+      <EvolticsCarbonCredit />
+      <EvolticsFaq />
       <EvolticsCta />
     </div>
   );
