@@ -22,9 +22,6 @@ export const siteConfig = {
   },
   mainNav: [
     { title: "Platforms", href: "/platforms" },
-    { title: "Products", href: "/products" },
-    { title: "Solutions", href: "/solutions" },
-    { title: "Portfolio", href: "/portfolio" },
     { title: "About", href: "/about" },
     { title: "Contact", href: "/contact" },
   ],
