@@ -85,21 +85,26 @@ export default function IotricsHero() {
       </div>
 
       {/* Trusted By Companies */}
-      <div className="container mx-auto px-6 lg:px-16 mt-auto relative z-10 w-full flex flex-col items-center">
-        <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest mb-6 text-center drop-shadow-sm">
-          TRUSTED BY COMPANIES WORLDWIDE
-        </p>
-        <div className="flex justify-between items-center w-full max-w-6xl gap-2 sm:gap-4 lg:gap-8 px-4">
-          {clients.map((client, idx) => (
-            <Image 
-              key={idx}
-              src={client.src} 
-              alt={client.name} 
-              width={160} 
-              height={50} 
-              className="object-contain h-6 sm:h-8 lg:h-10 w-auto min-w-0 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
-            />
-          ))}
+      <div className="w-full mt-auto relative z-10 flex flex-col items-center pt-8 pb-20 overflow-hidden">
+        {/* Tiny grid effect background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:0.5rem_0.5rem] [mask-image:radial-gradient(ellipse_40%_50%_at_50%_50%,#000_0%,transparent_100%)] pointer-events-none" />
+
+        <div className="container mx-auto px-6 lg:px-16 relative z-10 flex flex-col items-center">
+          <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest mb-6 text-center drop-shadow-sm">
+            TRUSTED BY COMPANIES WORLDWIDE
+          </p>
+          <div className="flex justify-between items-center w-full max-w-6xl gap-2 sm:gap-4 lg:gap-8 px-4">
+            {clients.map((client, idx) => (
+              <Image 
+                key={idx}
+                src={client.src} 
+                alt={client.name} 
+                width={160} 
+                height={50} 
+                className="object-contain h-6 sm:h-8 lg:h-10 w-auto min-w-0 brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
+              />
+            ))}
+          </div>
         </div>
       </div>
 

@@ -45,13 +45,7 @@ export default function CropifaiInterface() {
                </svg>
             </div>
 
-            {/* Mobile Mockup Placeholder */}
-            <div className="absolute -bottom-10 right-0 w-[28%] min-w-[120px] max-w-[160px] aspect-[9/19] bg-[#F4F5F7] rounded-3xl overflow-hidden shadow-2xl border-[6px] border-[#0F1115]">
-               <svg className="absolute inset-0 w-full h-full text-neutral-300" preserveAspectRatio="none">
-                 <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1.5" />
-                 <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1.5" />
-               </svg>
-            </div>
+
           </div>
           
         </div>
