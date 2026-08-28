@@ -1,56 +1,42 @@
 @theme inline {
-
-    /* ========= COLORS ========= */
-
-    --color-background: #ffffff;
-    --color-background-alt: #f8fafc; /* Very light blue-grey */
-
-    --color-surface: #ffffff;
-    --color-surface-alt: #f1f5f9; /* Slate 100 */
-
-    --color-foreground: #0f172a; /* Slate 900 */
-    --color-muted: #64748b; /* Slate 500 */
-
-    /* Logo Blue */
-    --color-primary: #3b82f6; /* Bright logo blue */
-    --color-primary-hover: #2563eb; 
-    --color-primary-light: #eff6ff; 
+    /* Color mapping to CSS variables so we can easily swap them via themes */
+    --color-background: var(--theme-bg);
+    --color-background-alt: var(--theme-bg-alt);
+    --color-surface: var(--theme-surface);
+    --color-surface-alt: var(--theme-surface-alt);
+    --color-foreground: var(--theme-fg);
+    --color-muted: var(--theme-muted);
     
-    /* Logo Grey */
-    --color-accent: #6b7280; /* Neutral logo grey */
-    --color-accent-hover: #4b5563; 
-    --color-accent-light: #f3f4f6; 
-
-    --color-border: #e2e8f0;
-    --color-border-strong: #cbd5e1;
-
+    --color-primary: var(--theme-primary);
+    --color-primary-hover: var(--theme-primary-hover);
+    --color-primary-light: var(--theme-primary-light);
+    
+    --color-accent: var(--theme-accent);
+    --color-accent-hover: var(--theme-accent-hover);
+    --color-accent-light: var(--theme-accent-light);
+    
+    --color-border: var(--theme-border);
+    --color-border-strong: var(--theme-border-strong);
+    
     --color-success: #10b981;
     --color-warning: #f59e0b;
     --color-danger: #ef4444;
 
-    --color-dark: #0f172a;
-    --color-dark-surface: #1e293b;
-
-    /* ========= TYPOGRAPHY ========= */
-
-    --font-display: var(--font-display);
-    --font-sans: var(--font-sans);
-    --font-poppins: var(--font-poppins);
+    /* Typography, Radius, Shadow, Layout remain same or map to css vars */
+    --font-display: var(--font-display-base);
+    --font-sans: var(--font-sans-base);
+    --font-poppins: var(--font-poppins-base);
 
     --text-display-xl: 5.5rem;
     --text-display: 4.5rem;
-
     --text-h1: 3.75rem;
     --text-h2: 3rem;
     --text-h3: 2.25rem;
     --text-h4: 1.5rem;
-
     --text-body-lg: 1.125rem;
     --text-body: 1rem;
     --text-small: .875rem;
 
-    /* ========= RADIUS ========= */
-    /* Playful but structured rounded corners */
     --radius-xs: .5rem;
     --radius-sm: .75rem;
     --radius-md: 1rem;
@@ -58,18 +44,85 @@
     --radius-xl: 2rem;
     --radius-full: 9999px;
 
-    /* ========= SHADOW ========= */
-    /* Softer, tech-blue glowing shadows */
-    --shadow-card: 0 10px 40px -10px rgba(37, 99, 235, 0.12);
-    --shadow-lg: 0 20px 50px -12px rgba(37, 99, 235, 0.20);
-    --shadow-glow: 0 0 30px rgba(37, 99, 235, 0.3);
-
-    /* ========= LAYOUT ========= */
+    --shadow-card: var(--theme-shadow-card);
+    --shadow-lg: var(--theme-shadow-lg);
+    --shadow-glow: var(--theme-shadow-glow);
 
     --spacing-section: 6rem;
     --spacing-container: 1536px;
-
-    /* ========= MOTION ========= */
-    /* Smooth fluid tech motion */
     --ease-standard: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  :root, [data-theme="light"] {
+    --theme-bg: #ffffff;
+    --theme-bg-alt: #f8fafc;
+    --theme-surface: #ffffff;
+    --theme-surface-alt: #f1f5f9;
+    --theme-fg: #0f172a;
+    --theme-muted: #64748b;
+    
+    --theme-primary: #3b82f6;
+    --theme-primary-hover: #2563eb;
+    --theme-primary-light: #eff6ff;
+    
+    --theme-accent: #6b7280;
+    --theme-accent-hover: #4b5563;
+    --theme-accent-light: #f3f4f6;
+    
+    --theme-border: #e2e8f0;
+    --theme-border-strong: #cbd5e1;
+
+    --theme-shadow-card: 0 10px 40px -10px rgba(37, 99, 235, 0.12);
+    --theme-shadow-lg: 0 20px 50px -12px rgba(37, 99, 235, 0.20);
+    --theme-shadow-glow: 0 0 30px rgba(37, 99, 235, 0.3);
+  }
+
+  [data-theme="dark"] {
+    --theme-bg: #020617; /* Very dark slate */
+    --theme-bg-alt: #0f172a;
+    --theme-surface: #0f172a;
+    --theme-surface-alt: #1e293b;
+    --theme-fg: #f8fafc;
+    --theme-muted: #94a3b8;
+    
+    --theme-primary: #60a5fa;
+    --theme-primary-hover: #3b82f6;
+    --theme-primary-light: #1e3a8a;
+    
+    --theme-accent: #9ca3af;
+    --theme-accent-hover: #d1d5db;
+    --theme-accent-light: #374151;
+    
+    --theme-border: #1e293b;
+    --theme-border-strong: #334155;
+
+    --theme-shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    --theme-shadow-lg: 0 20px 50px -12px rgba(0, 0, 0, 0.7);
+    --theme-shadow-glow: 0 0 30px rgba(96, 165, 250, 0.4);
+  }
+
+  [data-theme="neon"] {
+    --theme-bg: #09090b;
+    --theme-bg-alt: #18181b;
+    --theme-surface: #18181b;
+    --theme-surface-alt: #27272a;
+    --theme-fg: #fafafa;
+    --theme-muted: #a1a1aa;
+    
+    --theme-primary: #d946ef; /* Fuchsia */
+    --theme-primary-hover: #c026d3;
+    --theme-primary-light: #701a75;
+    
+    --theme-accent: #06b6d4; /* Cyan */
+    --theme-accent-hover: #0891b2;
+    --theme-accent-light: #164e63;
+    
+    --theme-border: #27272a;
+    --theme-border-strong: #3f3f46;
+
+    --theme-shadow-card: 0 10px 40px -10px rgba(217, 70, 239, 0.2);
+    --theme-shadow-lg: 0 20px 50px -12px rgba(217, 70, 239, 0.3);
+    --theme-shadow-glow: 0 0 30px rgba(217, 70, 239, 0.6);
+  }
 }

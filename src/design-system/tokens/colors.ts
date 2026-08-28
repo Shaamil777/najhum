@@ -1,25 +1,46 @@
 export const colors = {
-  background: "#FAFAF8",
-  backgroundAlt: "#F3F4F6",
-
-  surface: "#FFFFFF",
-  surfaceAlt: "#F8F9FB",
-
-  foreground: "#111827",
-  foregroundMuted: "#6B7280",
-
-  primary: "#2B7DDD",
-  primaryHover: "#1D6ED8",
-  primaryLight: "#EAF3FF",
-
-  border: "#E5E7EB",
-  borderStrong: "#D1D5DB",
-
-  success: "#22C55E",
-  warning: "#F59E0B",
-  danger: "#EF4444",
-
-  dark: "#0B0F14",
-  darkSurface: "#141A21",
+  light: {
+    background: "#ffffff",
+    backgroundAlt: "#f8fafc",
+    surface: "#ffffff",
+    surfaceAlt: "#f1f5f9",
+    foreground: "#0f172a",
+    muted: "#64748b",
+    primary: "#3b82f6",
+    primaryHover: "#2563eb",
+    primaryLight: "#eff6ff",
+    accent: "#6b7280",
+    border: "#e2e8f0",
+  },
+  dark: {
+    background: "#020617",
+    backgroundAlt: "#0f172a",
+    surface: "#0f172a",
+    surfaceAlt: "#1e293b",
+    foreground: "#f8fafc",
+    muted: "#94a3b8",
+    primary: "#60a5fa",
+    primaryHover: "#3b82f6",
+    primaryLight: "#1e3a8a",
+    accent: "#9ca3af",
+    border: "#1e293b",
+  },
+  neon: {
+    background: "#09090b",
+    backgroundAlt: "#18181b",
+    surface: "#18181b",
+    surfaceAlt: "#27272a",
+    foreground: "#fafafa",
+    muted: "#a1a1aa",
+    primary: "#d946ef",
+    primaryHover: "#c026d3",
+    primaryLight: "#701a75",
+    accent: "#06b6d4",
+    border: "#27272a",
+  },
+  common: {
+    success: "#10b981",
+    warning: "#f59e0b",
+    danger: "#ef4444",
+  }
 };
-

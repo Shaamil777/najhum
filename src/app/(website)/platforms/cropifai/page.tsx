@@ -1,9 +1,8 @@
 import CropifaiHero from "@/components/sections/cropifai/CropifaiHero";
-import CropifaiPerformance from "@/components/sections/cropifai/CropifaiPerformance";
+import CropifaiAbout from "@/components/sections/cropifai/CropifaiAbout";
 import CropifaiArchitecture from "@/components/sections/cropifai/CropifaiArchitecture";
 import CropifaiInterface from "@/components/sections/cropifai/CropifaiInterface";
 import CropifaiWorkflow from "@/components/sections/cropifai/CropifaiWorkflow";
-import CropifaiMethodology from "@/components/sections/cropifai/CropifaiMethodology";
 import CropifaiHardware from "@/components/sections/cropifai/CropifaiHardware";
 import CropifaiSolutions from "@/components/sections/cropifai/CropifaiSolutions";
 import CropifaiWhyChoose from "@/components/sections/cropifai/CropifaiWhyChoose";
@@ -14,13 +13,12 @@ export default function CropifaiPage() {
   return (
     <div className="flex flex-col w-full">
       <CropifaiHero />
-      <CropifaiPerformance />
+      <CropifaiAbout />
       <CropifaiArchitecture />
+      <CropifaiSolutions />
       <CropifaiInterface />
       <CropifaiWorkflow />
-      <CropifaiMethodology />
       <CropifaiHardware />
-      <CropifaiSolutions />
       <CropifaiWhyChoose />
       <CropifaiCta />
       <CropifaiEcosystem />

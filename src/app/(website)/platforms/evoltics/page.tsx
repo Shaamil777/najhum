@@ -1,9 +1,12 @@
 import EvolticsHero from "@/components/sections/evoltics/EvolticsHero";
 import EvolticsAbout from "@/components/sections/evoltics/EvolticsAbout";
-import EvolticsEcosystem from "@/components/sections/evoltics/EvolticsEcosystem";
-import EvolticsComparison from "@/components/sections/evoltics/EvolticsComparison";
-import EvolticsPlatform from "@/components/sections/evoltics/EvolticsPlatform";
 import EvolticsSolutions from "@/components/sections/evoltics/EvolticsSolutions";
+import EvolticsProducts from "@/components/sections/evoltics/EvolticsProducts";
+import EvolticsCpms from "@/components/sections/evoltics/EvolticsCpms";
+import EvolticsMobileApp from "@/components/sections/evoltics/EvolticsMobileApp";
+import EvolticsWhiteLabel from "@/components/sections/evoltics/EvolticsWhiteLabel";
+import EvolticsCarbonCredit from "@/components/sections/evoltics/EvolticsCarbonCredit";
+import EvolticsEcosystem from "@/components/sections/evoltics/EvolticsEcosystem";
 import EvolticsJourney from "@/components/sections/evoltics/EvolticsJourney";
 import EvolticsCta from "@/components/sections/evoltics/EvolticsCta";
 
@@ -27,9 +30,12 @@ export default function EvolticsPage() {
       <EvolticsHero />
       <EvolticsAbout />
       <EvolticsSolutions />
-      <EvolticsComparison />
-      <EvolticsPlatform />
       <EvolticsEcosystem />
+      <EvolticsProducts />
+      <EvolticsCpms />
+      <EvolticsMobileApp />
+      <EvolticsWhiteLabel />
+      <EvolticsCarbonCredit />
       <EvolticsJourney />
       <EvolticsCta />
     </div>
