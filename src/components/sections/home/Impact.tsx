@@ -1,5 +1,6 @@
 import { ArrowRight, Cpu, Zap, Target, BatteryCharging, Server } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { MarketingButton } from "@/design-system/primitives/actions/MarketingButton";
 import { Card } from "@/design-system/primitives/surfaces/Card";
 import { homeContent } from "@/content/home";
@@ -36,9 +37,11 @@ export default function Impact() {
                 Transform industrial infrastructure with connected platforms for Industrial IoT, smart energy, EV mobility, and enterprise automation.
               </p>
               
-              <MarketingButton icon={ArrowRight}>
-                Explore Platforms
-              </MarketingButton>
+              <Link href="/platforms" className="inline-block">
+                <MarketingButton icon={ArrowRight}>
+                  Explore Platforms
+                </MarketingButton>
+              </Link>
 
               <div className="flex gap-6 sm:gap-10 mt-8 md:mt-16 lg:mt-20">
                 <div className="flex flex-col gap-3">
@@ -266,9 +269,11 @@ export default function Impact() {
                  </p>
                </div>
                
-               <div className="flex items-center justify-center gap-3 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold text-sm tracking-wider hover:-translate-y-1 hover:shadow-xl hover:bg-zinc-800 transition-all cursor-pointer w-fit">
-                 {homeContent.impact.card6.button} <ArrowRight className="w-4 h-4" />
-               </div>
+               <Link href="/contact" className="inline-block">
+                 <div className="flex items-center justify-center gap-3 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold text-sm tracking-wider hover:-translate-y-1 hover:shadow-xl hover:bg-zinc-800 transition-all cursor-pointer w-fit">
+                   {homeContent.impact.card6.button} <ArrowRight className="w-4 h-4" />
+                 </div>
+               </Link>
             </Card>
 
           </div>

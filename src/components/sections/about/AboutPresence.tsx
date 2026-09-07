@@ -32,31 +32,31 @@ export default function AboutPresence() {
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
 
-        {/* ── Asymmetric Grid Layout ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        {/* ── Centered Layout ── */}
+        <div className="flex flex-col items-center max-w-2xl mx-auto text-center">
 
-          {/* Left Column — Content (narrower, offset) */}
-          <div className="lg:col-span-5 lg:pt-12">
+          <div className="w-full flex flex-col items-center">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-px bg-primary" />
               <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-primary">
                 Global Presence
               </span>
+              <div className="w-10 h-px bg-primary" />
             </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-[1.1] tracking-tight mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-[1.1] tracking-tight mb-6 text-center">
               Strategic Hub <br />
               in the <span className="text-primary">UAE</span>
             </h2>
 
-            <p className="text-base text-neutral-500 leading-relaxed mb-10 max-w-md">
+            <p className="text-base text-neutral-500 leading-relaxed mb-10 max-w-md text-center">
               Expanding globally through cloud-first platforms and industry partnerships.
             </p>
 
             {/* Contact Cards */}
-            <div className="flex flex-col gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row gap-4 mb-10 w-full justify-center">
               {/* Address Card */}
-              <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow group">
+              <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow group flex-1 text-left">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
                     <MapPin className="w-5 h-5" />
@@ -71,7 +71,7 @@ export default function AboutPresence() {
               </div>
 
               {/* Phone Card */}
-              <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow group">
+              <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow group flex-1 text-left">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0 group-hover:scale-110 transition-transform">
                     <Phone className="w-5 h-5" />
@@ -87,46 +87,10 @@ export default function AboutPresence() {
             </div>
 
             {/* Cloud-first badge */}
-            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900 text-white text-xs font-bold tracking-widest uppercase">
+            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900 text-white text-xs font-bold tracking-widest uppercase mt-4">
               <Globe2 className="w-4 h-4 text-primary" />
               Cloud-First Global Reach
             </div>
-          </div>
-
-          {/* Right Column — Map (wider, asymmetric) */}
-          <div className="lg:col-span-7 relative">
-            {/* Map container with unique shape */}
-            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-neutral-300/30 border border-neutral-200/60">
-              {/* Decorative top-right badge */}
-              <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-md rounded-xl px-4 py-3 shadow-lg border border-neutral-100 flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs font-bold text-neutral-900">Najhum HQ — Live</span>
-              </div>
-
-              {/* Google Maps Embed */}
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.2!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43348a67e24b%3A0x6719b50b6dda70c!2sNajhum%20Technologies!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
-                width="100%"
-                height="500"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-[400px] md:h-[500px] lg:h-[550px]"
-                title="Najhum Technologies Location"
-              />
-            </div>
-
-            {/* Floating "View on Maps" button */}
-            <a
-              href="https://maps.google.com/?q=Najhum+Technologies+Dubai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute -bottom-5 left-8 z-20 inline-flex items-center gap-2 bg-neutral-950 text-white px-6 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-2xl hover:bg-primary transition-colors group"
-            >
-              View on Google Maps
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
           </div>
 
         </div>

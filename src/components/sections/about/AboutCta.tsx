@@ -58,7 +58,7 @@ export default function AboutCta() {
           </Link>
 
           <Link
-            href="/demo"
+            href="/contact"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/5 text-white rounded-full font-bold uppercase tracking-widest text-sm border border-white/10 hover:bg-white/10 transition-colors group"
           >
             Book a Demo

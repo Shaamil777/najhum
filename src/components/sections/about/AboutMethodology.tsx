@@ -45,7 +45,7 @@ export default function AboutMethodology() {
     },
     {
       code: "PHASE_03",
-      title: "Decide",
+      title: "Collaborate",
       description:
         "Proprietary ML models convert raw signals into actionable boardroom intelligence and autonomous field responses.",
       icon: BrainCircuit,
@@ -100,7 +100,7 @@ export default function AboutMethodology() {
             <span className="text-neutral-600">•</span>
             <span className="text-primary">Connect</span>
             <span className="text-neutral-600">•</span>
-            <span className="text-violet-400">Decide</span>
+            <span className="text-violet-400">Collaborate</span>
           </div>
         </div>
 

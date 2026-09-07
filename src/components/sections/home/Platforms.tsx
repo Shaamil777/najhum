@@ -119,19 +119,19 @@ export default function Platforms() {
                 {[
                   { 
                     step: "01", 
-                    title: "Connect", 
+                    title: "Collect", 
                     desc: "Seamlessly integrate industrial infrastructure, legacy sensors, EV chargers, and enterprise systems into a unified operational ecosystem using open communication protocols.",
                     metric: "100% Hardware Agnostic"
                   },
                   { 
                     step: "02", 
-                    title: "Compute", 
+                    title: "Connect", 
                     desc: "Process millions of data points in real-time across cloud and edge. We utilize advanced predictive analytics to transform raw telemetry into actionable intelligence.",
                     metric: "Sub-millisecond Latency"
                   },
                   { 
                     step: "03", 
-                    title: "Control", 
+                    title: "Collaborate", 
                     desc: "Automate mission-critical decisions and orchestrate operations autonomously. Execute load balancing, preemptive maintenance, and dynamic workflows.",
                     metric: "Zero-Touch Operations"
                   }

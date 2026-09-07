@@ -1,150 +1,186 @@
-import { homeContent } from "@/content/home";
-import { Check, X, Database, Hexagon, Monitor, Eye, Settings, Network, Zap, Brain, Box, BarChart3, ArrowRight } from "lucide-react";
+"use client";
 
-const centerIcons = [Monitor, Eye, Settings, Network, Zap, Brain];
-const traditionalIcons = [Monitor, Database, Settings, Box, Zap, BarChart3];
+import React from "react";
+import { motion } from "framer-motion";
+import { Check, ArrowRight, BarChart3 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { homeContent } from "@/content/home";
+import Link from "next/link";
 
 export default function WhyChoose() {
   const { whyChoose } = homeContent;
 
   return (
-    <section className="relative w-full bg-white py-12 sm:py-16 lg:py-24 overflow-hidden font-poppins">
+    <section className="relative w-full py-12 sm:py-16 lg:py-24 overflow-hidden font-sans bg-white">
       
-      {/* Header */}
-      <div className="flex flex-col items-center text-center mb-16 relative z-20 px-6">
-        <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
-          {whyChoose.label}
-        </span>
-        <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
-          Smarter. Unified. <span className="text-primary">Future-Ready.</span>
-        </h2>
-        <p className="text-base sm:text-lg lg:text-xl text-zinc-500 max-w-2xl">
-          {whyChoose.subtitle}
-        </p>
+      {/* Background Split (Desktop Only) */}
+      <div className="absolute inset-0 pointer-events-none hidden lg:flex">
+        {/* Left Side Bg */}
+        <div className="w-1/2 bg-white relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-200/40 rounded-full blur-[120px]" />
+        </div>
+        {/* Right Side Bg */}
+        <div className="w-1/2 bg-blue-50/40 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px]" />
+        </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10 lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
+      <div className="container mx-auto relative z-10 max-w-[1400px] px-4 sm:px-6">
         
-        {/* Background Ambient Pixel Grids */}
-        {/* Left Grey Grids */}
-        <div className="absolute top-10 -left-10 w-96 h-96 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:32px_32px] opacity-20 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
-        
-        {/* Right Blue Grids */}
-        <div className="absolute top-20 -right-10 w-[500px] h-[500px] bg-[linear-gradient(to_right,#60a5fa_1px,transparent_1px),linear-gradient(to_bottom,#60a5fa_1px,transparent_1px)] bg-[size:32px_32px] opacity-25 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
-
-        {/* Desktop Comparison Grid */}
-        <div className="hidden lg:grid grid-cols-[1fr_260px_1fr] w-full relative z-10 drop-shadow-xl">
-           
-           {/* Row 0: Headers */}
-           <div className="bg-gradient-to-b from-blue-50/80 to-white rounded-t-3xl border-t border-l border-r border-zinc-200 pt-6 pb-5 px-8 flex items-center justify-center relative">
-              <div className="bg-white border border-zinc-200 rounded-full py-2 px-6 flex items-center shadow-sm">
-                 <span className="font-bold text-black tracking-widest text-[0.8rem]">{whyChoose.competitorLabel.toUpperCase()}</span>
-              </div>
-           </div>
-           
-           <div className="bg-transparent"></div>
-           
-           <div className="bg-primary rounded-t-3xl pt-6 pb-5 px-8 flex items-center justify-center relative overflow-hidden">
-              <div className="bg-white/15 border border-white/20 rounded-full py-2 px-6 flex items-center relative z-10 shadow-sm backdrop-blur-sm">
-                 <span className="font-bold text-white tracking-widest text-[0.8rem]">{whyChoose.najhumLabel.toUpperCase()}</span>
-              </div>
-           </div>
-
-           {/* Rows 1-N */}
-           {whyChoose.features.map((f, i) => {
-              const CenterIcon = centerIcons[i];
-              const TradIcon = traditionalIcons[i];
-              const isLast = i === whyChoose.features.length - 1;
-              return (
-                <div className="contents" key={i}>
-                  {/* Left Cell */}
-                  <div className={`bg-gradient-to-r from-blue-50/30 to-white px-8 py-6 flex items-center justify-between border-l border-r border-zinc-200 ${isLast ? 'rounded-b-3xl border-b' : 'border-b border-zinc-100'}`}>
-                     <div className="flex items-center gap-4 max-w-[85%]">
-                        <TradIcon className="w-5 h-5 text-zinc-400 flex-shrink-0" />
-                        <p className="text-black text-[0.9rem] leading-relaxed font-medium">{f.competitor}</p>
-                     </div>
-                     <div className="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center flex-shrink-0">
-                       <X className="w-3 h-3 text-zinc-400" />
-                     </div>
-                  </div>
-
-                  {/* Center Cell */}
-                  <div className="relative flex flex-col items-center justify-center py-4">
-                     {/* Dotted connecting line */}
-                     <div className="absolute top-1/2 left-0 right-0 border-t-2 border-dotted border-blue-300 -z-10 -translate-y-1/2" />
-                     {/* Dots on the ends of the line */}
-                     <div className="absolute top-1/2 left-0 w-1.5 h-1.5 rounded-full bg-blue-400 -translate-y-1/2 -translate-x-1/2" />
-                     <div className="absolute top-1/2 right-0 w-1.5 h-1.5 rounded-full bg-blue-400 -translate-y-1/2 translate-x-1/2" />
-                     
-                     <div className="w-10 h-10 rounded-full bg-white border border-blue-200 shadow-sm flex items-center justify-center z-10 text-blue-500 mb-2">
-                        <CenterIcon className="w-4 h-4" />
-                     </div>
-                     <span className="text-[9px] font-bold text-zinc-800 tracking-widest text-center uppercase max-w-[100px] leading-tight mt-1">
-                       {f.name}
-                     </span>
-                  </div>
-
-                  {/* Right Cell */}
-                  <div className={`bg-primary px-8 py-6 flex items-center gap-4 relative overflow-hidden ${isLast ? 'rounded-b-3xl' : 'border-b border-white/10'}`}>
-                     <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 shadow-inner relative z-10">
-                       <Check className="w-3 h-3 text-white" />
-                     </div>
-                     <p className="text-white text-[0.95rem] leading-relaxed font-medium relative z-10 max-w-[90%]">{f.najhum}</p>
-                  </div>
-                </div>
-              );
-           })}
+        {/* Header */}
+        <div className="flex flex-col items-center text-center mb-16 lg:mb-0 lg:hidden relative z-20">
+          <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
+            {whyChoose.label}
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 mb-6">
+            Smarter. Unified. <span className="text-primary">Future-Ready.</span>
+          </h2>
+          <p className="text-base sm:text-lg text-zinc-500 max-w-2xl">
+            {whyChoose.subtitle}
+          </p>
         </div>
 
-        {/* Mobile Comparison (Stacked) */}
-        <div className="lg:hidden flex flex-col gap-8 relative z-10">
-           {/* Mobile Traditional */}
-           <div className="bg-gradient-to-b from-blue-50/50 to-white rounded-3xl border border-zinc-200 shadow-lg overflow-hidden">
-             <div className="bg-transparent py-4 px-6 border-b border-zinc-200 flex items-center justify-center">
-                <div className="bg-white border border-zinc-200 rounded-full py-1.5 px-5 flex items-center shadow-sm">
-                   <span className="font-bold text-black text-[0.75rem] tracking-widest">{whyChoose.competitorLabel.toUpperCase()}</span>
-                </div>
-             </div>
-             <div className="flex flex-col">
-                {whyChoose.features.map((f, i) => (
-                  <div key={i} className={`p-6 flex flex-col gap-2 ${i !== whyChoose.features.length - 1 ? 'border-b border-zinc-100' : ''}`}>
-                     <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">{f.name}</span>
-                     <div className="flex items-start justify-between gap-4">
-                        <p className="text-black text-sm leading-relaxed font-medium">{f.competitor}</p>
-                        <div className="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <X className="w-3 h-3 text-zinc-400" />
-                        </div>
-                     </div>
-                  </div>
-                ))}
-             </div>
-           </div>
+        {/* ════════════════════════════════════════════════════════════════════════
+            DESKTOP SPLIT VIEW (lg and up)
+           ════════════════════════════════════════════════════════════════════════ */}
+        <div className="hidden lg:grid grid-cols-2 gap-8 xl:gap-32">
+          
+          {/* LEFT COLUMN: Traditional */}
+          <div className="py-24 flex flex-col items-end bg-transparent">
+            
+            <h2 className="text-4xl font-medium tracking-tight text-zinc-600 mb-16 text-right w-full">
+              Instead of
+            </h2>
 
-           {/* Mobile Najhum */}
-           <div className="bg-primary rounded-3xl shadow-xl overflow-hidden relative">
-             <div className="bg-white/10 py-4 px-6 border-b border-white/10 flex items-center justify-center relative z-10">
-                <div className="bg-white/15 border border-white/20 rounded-full py-1.5 px-5 flex items-center shadow-sm backdrop-blur-sm">
-                   <span className="font-bold text-white text-[0.75rem] tracking-widest">{whyChoose.najhumLabel.toUpperCase()}</span>
+            <div className="space-y-6 w-full flex flex-col items-end">
+              {whyChoose.features.map((f, idx) => {
+                // simple stagger
+                let staggerClass = "mr-6";
+                if (idx % 3 === 0) staggerClass = "mr-12";
+                if (idx % 3 === 1) staggerClass = "mr-0";
+                
+                return (
+                  <motion.div
+                    key={`desktop-trad-${idx}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className={cn(
+                      "bg-white border border-zinc-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
+                      staggerClass
+                    )}
+                  >
+                    <span className="text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-1.5 block">
+                      {f.name}
+                    </span>
+                    <h4 className="text-base font-semibold text-zinc-800 leading-snug">
+                      {f.competitor}
+                    </h4>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Najhum */}
+          <div className="py-24 flex flex-col items-start bg-transparent">
+            
+            <h2 className="text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-left w-full">
+              Najhum <span className="font-serif italic font-normal text-primary">gives</span>
+            </h2>
+
+            <div className="space-y-6 w-full flex flex-col items-start">
+              {whyChoose.features.map((f, idx) => {
+                let staggerClass = "ml-6";
+                if (idx % 3 === 0) staggerClass = "ml-0";
+                if (idx % 3 === 1) staggerClass = "ml-12";
+
+                return (
+                  <motion.div
+                    key={`desktop-najhum-${idx}`}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className={cn(
+                      "bg-[#f6f9fc] backdrop-blur-sm border border-primary/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] shadow-primary/5 rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
+                      staggerClass
+                    )}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="mt-0.5 shrink-0">
+                        <Check className="w-5 h-5 text-primary" strokeWidth={3} />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-bold tracking-wider text-primary/70 uppercase mb-1.5 block">
+                          {f.name}
+                        </span>
+                        <h4 className="text-base font-bold text-zinc-900 leading-snug">
+                          {f.najhum}
+                        </h4>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════════════════════════════════
+            MOBILE COMBINED VIEW (< lg)
+           ════════════════════════════════════════════════════════════════════════ */}
+        <div className="flex lg:hidden flex-col items-center py-8">
+          
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-900 mb-10 text-center w-full max-w-sm md:max-w-2xl">
+            {whyChoose.competitorLabel} <span className="text-zinc-400 font-normal">vs</span> <span className="font-serif italic font-normal text-primary">{whyChoose.najhumLabel}</span>
+          </h2>
+
+          <div className="space-y-5 w-full max-w-md md:max-w-3xl">
+            {whyChoose.features.map((f, idx) => (
+              <motion.div
+                key={`mobile-combined-${idx}`}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-white border border-border shadow-sm rounded-3xl p-5 sm:p-6 md:p-8 w-full relative overflow-hidden flex flex-col md:flex-row md:items-stretch gap-5 md:gap-0"
+              >
+                {/* Traditional Side */}
+                <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-border/50 pb-5 md:pb-0 md:pr-8 mb-5 md:mb-0">
+                  <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-1.5 md:mb-2 block">
+                    Instead of: {f.name}
+                  </span>
+                  <h4 className="text-[14px] md:text-[15px] font-semibold text-zinc-500 leading-snug line-through decoration-zinc-300">
+                    {f.competitor}
+                  </h4>
                 </div>
-             </div>
-             <div className="flex flex-col relative z-10">
-                {whyChoose.features.map((f, i) => (
-                  <div key={i} className={`p-6 flex flex-col gap-2 ${i !== whyChoose.features.length - 1 ? 'border-b border-white/10' : ''}`}>
-                     <span className="text-xs font-bold text-blue-200 uppercase tracking-wider">{f.name}</span>
-                     <div className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
-                          <Check className="w-3 h-3 text-white" />
-                        </div>
-                        <p className="text-white text-sm leading-relaxed font-medium">{f.najhum}</p>
-                     </div>
+
+                {/* Najhum Side */}
+                <div className="w-full md:w-1/2 relative md:pl-8">
+                  <div className="absolute -left-5 sm:-left-6 md:-left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 hidden md:block" />
+                  <div className="absolute -left-6 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 md:hidden" />
+                  
+                  <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-primary uppercase mb-2 block">
+                    {whyChoose.najhumLabel} Gives: {f.name}
+                  </span>
+                  <div className="flex items-start gap-2.5 md:gap-3">
+                    <Check className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0 mt-0.5" strokeWidth={3} />
+                    <div>
+                      <h4 className="text-[14px] md:text-[15px] font-bold text-zinc-900 leading-snug">
+                        {f.najhum}
+                      </h4>
+                    </div>
                   </div>
-                ))}
-             </div>
-           </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA Banner */}
-        <div className="mt-12 bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative z-20">
+        <div className="mt-12 lg:mt-20 bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative z-20 max-w-5xl mx-auto">
            <div className="flex items-center gap-6">
               <div className="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
                  <BarChart3 className="w-8 h-8 text-primary" />
@@ -157,9 +193,11 @@ export default function WhyChoose() {
            
            <div className="flex flex-col items-center md:items-end gap-3 flex-shrink-0 w-full md:w-auto mt-4 md:mt-0 md:pl-8 md:border-l border-zinc-100">
               <span className="text-sm font-medium text-zinc-500">Ready to transform your operations?</span>
-              <button className="w-full md:w-auto bg-primary hover:bg-primary-hover transition-colors text-white font-semibold py-3 px-8 rounded-full flex items-center justify-center gap-2">
-                 Request a Demo <ArrowRight className="w-4 h-4" />
-              </button>
+              <Link href="/contact" className="w-full md:w-auto">
+                <button className="w-full bg-primary hover:bg-blue-700 transition-colors text-white font-semibold py-3 px-8 rounded-full flex items-center justify-center gap-2">
+                   Request a Demo <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
            </div>
         </div>
 

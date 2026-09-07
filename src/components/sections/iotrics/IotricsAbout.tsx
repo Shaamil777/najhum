@@ -1,18 +1,29 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Thermometer, Droplets, CloudRain, Zap, Signal, Activity, Wifi, Bluetooth, Satellite, Cloud, Target, BarChart3, Factory, Cpu, ChevronRight, Bell } from "lucide-react";
+
+const pipelineNodes = [
+  { icon: Factory, label: "ASSETS", text: "One connected intelligence layer for your entire infrastructure." },
+  { icon: Cpu, label: "SENSORS", text: "Industrial-grade sensors capture critical data across your assets." },
+  { icon: Signal, label: "CONNECTIVITY", text: "Resilient connectivity ensures your data reaches the platform securely." },
+  { icon: Cloud, label: "IOTRICS CLOUD", text: "A unified cloud platform to ingest, process, and store operational data." },
+  { icon: BarChart3, label: "INSIGHTS", text: "Real-time visualization and analytics to help you make smarter decisions." },
+  { icon: Target, label: "ACTION", text: "Configurable alerts and automated triggers for immediate response." },
+];
 
 export default function IotricsAbout() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (isHovered) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 6);
-    }, 1500); // 1.5 seconds per step
+    }, 2000); // 2 seconds per step
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered]);
 
   return (
     <section className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-poppins">
@@ -163,32 +174,46 @@ export default function IotricsAbout() {
             
             {/* Pipeline Nodes */}
             <div className="grid grid-cols-3 gap-y-10 gap-x-2 sm:gap-x-4 lg:flex lg:justify-between lg:gap-0 relative">
-              {[
-                { icon: Factory, label: "ASSETS" },
-                { icon: Cpu, label: "SENSORS" },
-                { icon: Signal, label: "CONNECTIVITY" },
-                { icon: Cloud, label: "IOTRICS CLOUD" },
-                { icon: BarChart3, label: "INSIGHTS" },
-                { icon: Target, label: "ACTION" },
-              ].map((node, i) => {
+              {pipelineNodes.map((node, i) => {
                 const isActive = i === activeIndex;
                 const isPast = i < activeIndex;
 
                 return (
-                <div key={i} className="flex flex-col items-center bg-white px-1 sm:px-2 z-10">
-                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 bg-white transition-all duration-500 ${isActive ? 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-110' : isPast ? 'border-blue-200' : 'border-neutral-100 text-neutral-300'}`}>
-                     <node.icon className={`w-5 h-5 md:w-6 md:h-6 transition-colors duration-500 ${isActive ? 'text-blue-500' : isPast ? 'text-blue-400' : 'text-neutral-300'}`} />
+                <div 
+                  key={i} 
+                  className="flex flex-col items-center bg-white px-1 sm:px-2 z-10 cursor-pointer group"
+                  onMouseEnter={() => {
+                    setActiveIndex(i);
+                    setIsHovered(true);
+                  }}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
+                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 bg-white transition-all duration-500 ${isActive ? 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-110' : isPast ? 'border-blue-200' : 'border-neutral-100 text-neutral-300'} group-hover:border-blue-400`}>
+                     <node.icon className={`w-5 h-5 md:w-6 md:h-6 transition-colors duration-500 ${isActive ? 'text-blue-500' : isPast ? 'text-blue-400' : 'text-neutral-300'} group-hover:text-blue-500`} />
                   </div>
-                  <span className={`mt-3 md:mt-4 text-[9px] md:text-xs font-bold uppercase tracking-wider text-center transition-colors duration-500 ${isActive ? 'text-blue-600' : isPast ? 'text-blue-400' : 'text-neutral-400'}`}>
+                  <span className={`mt-3 md:mt-4 text-[9px] md:text-xs font-bold uppercase tracking-wider text-center transition-colors duration-500 ${isActive ? 'text-blue-600' : isPast ? 'text-blue-400' : 'text-neutral-400'} group-hover:text-blue-500`}>
                     {node.label}
                   </span>
                 </div>
               )})}
             </div>
           </div>
-          <p className="text-center text-[15px] sm:text-lg font-medium text-neutral-800 px-4">
-            One connected intelligence layer for your entire infrastructure.
-          </p>
+          
+          {/* Dynamic tagline */}
+          <div className="h-12 flex items-center justify-center overflow-hidden w-full px-4">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`tagline-${activeIndex}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="text-center text-[14px] sm:text-[17px] font-medium text-neutral-800"
+              >
+                {pipelineNodes[activeIndex].text}
+              </motion.p>
+            </AnimatePresence>
+          </div>
         </div>
 
       </div>

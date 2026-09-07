@@ -6,7 +6,7 @@ import PortfolioCta from "@/components/sections/portfolio/PortfolioCta";
 
 export default function PortfolioPage() {
   return (
-    <div className="flex flex-col w-full pt-20">
+    <div className="flex flex-col w-full">
       <PortfolioHero />
       <PortfolioMetrics />
       <PortfolioIndustries />

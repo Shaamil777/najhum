@@ -9,7 +9,7 @@ import AboutCta from "@/components/sections/about/AboutCta";
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col w-full pt-20">
+    <div className="flex flex-col w-full">
       <AboutHero />
       <AboutIntro />
       <AboutPlatform />

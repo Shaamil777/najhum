@@ -7,19 +7,19 @@ import { Wifi, Cpu, Settings } from "lucide-react";
 const steps = [
   {
     step: "01",
-    title: "Connect",
+    title: "Collect",
     desc: "Integrate sensors, assets, and infrastructure into a unified ecosystem using open communication protocols.",
     icon: Wifi,
   },
   {
     step: "02",
-    title: "Compute",
+    title: "Connect",
     desc: "Process real-time data across cloud and edge to transform raw telemetry into actionable intelligence.",
     icon: Cpu,
   },
   {
     step: "03",
-    title: "Control",
+    title: "Collaborate",
     desc: "Automate decisions, orchestrate workflows, and execute operational responses without manual intervention.",
     icon: Settings,
   },

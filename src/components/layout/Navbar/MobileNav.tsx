@@ -52,7 +52,7 @@ export function MobileNav() {
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
         aria-label="Toggle navigation menu"
-        className="p-2 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm transition-colors hover:bg-surface-alt"
+        className="p-2 text-inherit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm transition-colors hover:bg-surface-alt/10"
       >
         <Menu className="w-6 h-6" />
       </button>

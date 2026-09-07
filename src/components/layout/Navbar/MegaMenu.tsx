@@ -71,7 +71,7 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
         className={cn(
           "relative z-10 flex items-center gap-1 text-sm font-semibold tracking-wide px-4 py-2 transition-colors duration-200",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md",
-          isParentActive ? "text-primary" : "text-foreground"
+          isParentActive ? "text-primary" : "text-inherit hover:opacity-80"
         )}
         aria-expanded={isOpen}
         aria-haspopup="true"
