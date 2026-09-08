@@ -27,8 +27,8 @@ export const siteConfig = {
   ],
   footerNav: {
     platforms: [
-      { title: "IoTRICS", href: "/platforms/iotrics" },
       { title: "EVOLTICS", href: "/platforms/evoltics" },
+      { title: "IoTRICS", href: "/platforms/iotrics" },
       { title: "CropifAI", href: "/platforms/cropifai" },
     ],
     company: [

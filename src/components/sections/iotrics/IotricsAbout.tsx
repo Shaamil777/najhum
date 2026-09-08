@@ -26,7 +26,7 @@ export default function IotricsAbout() {
   }, [isHovered]);
 
   return (
-    <section className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-poppins">
+    <section id="solutions" className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
         
         {/* Header Title */}
@@ -117,7 +117,7 @@ export default function IotricsAbout() {
             <div className="grid grid-cols-5 gap-2 text-neutral-400 mt-auto pt-6 sm:pt-8 border-t border-neutral-100">
               <div className="flex flex-col items-center text-center gap-2"><Signal className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Cellular</span></div>
               <div className="flex flex-col items-center text-center gap-2"><Activity className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Fiber</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">LoRaWAN</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] font-semibold tracking-wider">LoRaWAN</span></div>
               <div className="flex flex-col items-center text-center gap-2"><Bluetooth className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">BLE</span></div>
               <div className="flex flex-col items-center text-center gap-2"><Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Satellite</span></div>
             </div>

@@ -1,6 +1,37 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { ArrowRight } from "lucide-react";
+
+const getSocialIcon = (name: string) => {
+  const className = "w-5 h-5";
+  switch (name.toLowerCase()) {
+    case "linkedin": 
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      );
+    case "facebook": 
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      );
+    case "instagram": 
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      );
+    default: 
+      return null;
+  }
+};
 
 export function FooterLinks() {
   return (
@@ -8,24 +39,31 @@ export function FooterLinks() {
       
       {/* Brand Column */}
       <div className="flex flex-col">
-        <h4 className="text-4xl sm:text-5xl font-bold tracking-tighter mb-6 text-zinc-900 normal-case">
-          {siteConfig.shortName}<span className="text-primary">.</span>
-        </h4>
+        <Link href="/" className="mb-8 block w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm">
+          <Image
+            src="/logo/logo.png"
+            alt={siteConfig.name}
+            width={160}
+            height={53}
+            className="h-10 sm:h-12 w-auto object-contain brightness-0"
+          />
+        </Link>
         <p className="text-zinc-500 text-lg max-w-md leading-relaxed mb-10">
           {siteConfig.description}
         </p>
         
         {/* Social / External Links */}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3">
           {Object.entries(siteConfig.links).map(([name, url]) => (
             <a
               key={name}
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-zinc-50 hover:bg-primary border border-zinc-100 hover:border-primary text-zinc-600 hover:text-white rounded-full transition-all duration-300 text-sm font-bold tracking-widest uppercase shadow-sm hover:shadow-md"
+              aria-label={name}
+              className="w-12 h-12 flex items-center justify-center bg-zinc-50 hover:bg-primary border border-zinc-200 hover:border-primary text-zinc-600 hover:text-white rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
             >
-              {name}
+              {getSocialIcon(name)}
             </a>
           ))}
         </div>

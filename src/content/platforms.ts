@@ -58,6 +58,18 @@ export const evolticsContent = {
         title: "INSTALLATION SERVICES",
         description: "End-to-end EV charger installation professionally managed from site assessment through commissioning. Services include engineering design, civil works, charger mounting and wiring, network integration, OCPP configuration, testing, safety certification and operator handover.",
         category: "Service",
+      },
+      {
+        num: "05",
+        title: "AMC SERVICES",
+        description: "Preventive and corrective maintenance with dedicated support.",
+        category: "Service",
+      },
+      {
+        num: "06",
+        title: "REGULATORY APPROVALS",
+        description: "DEWA, TAQA, and FEWA approvals managed end-to-end.",
+        category: "Compliance",
       }
     ]
   },

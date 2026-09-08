@@ -153,7 +153,7 @@ export default function CropifaiHardware() {
                 {tags.map((tag, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs lg:text-sm font-bold text-white uppercase tracking-wider">{tag}</span>
+                    <span className="text-xs lg:text-sm font-bold text-white tracking-wider">{tag}</span>
                   </div>
                 ))}
               </div>

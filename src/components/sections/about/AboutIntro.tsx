@@ -134,10 +134,10 @@ export default function AboutIntro() {
                 <div className="w-8 h-1 bg-primary rounded-full mt-2" />
               </div>
 
-              {/* Stat 3: Global HQ */}
+              {/* Stat 3: Served in */}
               <div className="relative bg-neutral-50 border border-neutral-100 rounded-2xl p-6 overflow-hidden group hover:shadow-lg transition-shadow">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-blue-500/10 transition-colors" />
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Global HQ</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Served in</span>
                 <span className="text-4xl md:text-5xl font-black font-display text-neutral-900 block mb-1">Dubai</span>
                 <div className="w-8 h-1 bg-blue-500 rounded-full mt-2" />
               </div>

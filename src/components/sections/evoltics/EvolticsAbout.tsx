@@ -15,7 +15,8 @@ import {
   Layers,
   CheckCircle2,
   Clock,
-  Sparkles
+  Sparkles,
+  Info
 } from "lucide-react";
 
 interface MilestoneData {
@@ -143,8 +144,19 @@ export default function EvolticsAbout() {
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-muted uppercase">
                   PROJECTION_2030
                 </span>
-                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                <div className="flex items-center gap-2 relative z-20">
+                  <a 
+                    href="https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
+                    title="View Source"
+                  >
+                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  </a>
+                  <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                  </div>
                 </div>
               </div>
 
@@ -195,8 +207,19 @@ export default function EvolticsAbout() {
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-muted uppercase">
                   CAPACITY REQUIRED
                 </span>
-                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
-                  <BatteryCharging className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                <div className="flex items-center gap-2 relative z-20">
+                  <a 
+                    href="https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
+                    title="View Source"
+                  >
+                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  </a>
+                  <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
+                    <BatteryCharging className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                  </div>
                 </div>
               </div>
 
@@ -245,8 +268,19 @@ export default function EvolticsAbout() {
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-muted uppercase">
                   TARGET GOAL
                 </span>
-                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-success/10 flex items-center justify-center text-success group-hover:scale-110 transition-transform">
-                  <Leaf className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                <div className="flex items-center gap-2 relative z-20">
+                  <a 
+                    href="https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/environment-and-energy/the-uae-net-zero-2050-strategy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
+                    title="View Source"
+                  >
+                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  </a>
+                  <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-success/10 flex items-center justify-center text-success group-hover:scale-110 transition-transform">
+                    <Leaf className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                  </div>
                 </div>
               </div>
 

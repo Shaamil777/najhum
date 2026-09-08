@@ -33,7 +33,7 @@ export const homeContent = {
     description: "\"An integrated ecosystem connecting Industrial IoT, EV infrastructure, smart energy, and operational intelligence through a unified enterprise platform.\"",
     trustSignals: [
       {
-        kpiValue: "7+",
+        kpiValue: "9+",
         title: "YEARS OF EXPERIENCE",
         description: "Delivering Industrial IoT and enterprise technology solutions since 2017."
       },
@@ -107,6 +107,12 @@ export const homeContent = {
     description: "",
     items: [
       {
+        id: "evoltics",
+        title: "EVOLTICS",
+        description: "Advanced EV charger management. Load balancing and payment gateway integration.",
+        cta: "Details"
+      },
+      {
         id: "iotrics",
         title: "IoTRICS",
         description: "The complete operating system for industrial IoT. Connect millions of data points across any network protocol with military-grade security.",
@@ -115,14 +121,8 @@ export const homeContent = {
           "Advanced Rules Engine",
           "Customizable Executive Dashboards"
         ],
-        cta: "EXPLORE IOTRICS",
+        cta: "EXPLORE IoTRICS",
         label: "CORE PLATFORM"
-      },
-      {
-        id: "evoltics",
-        title: "EVOLTICS",
-        description: "Advanced EV charger management. Load balancing and payment gateway integration.",
-        cta: "Details"
       },
       {
         id: "cropifai",
@@ -143,7 +143,7 @@ export const homeContent = {
     ],
     stats: [
       { id: "established", title: "ESTABLISHED", value: "2017", label: "Building enterprise platforms for Industrial IoT, smart energy, and intelligent infrastructure." },
-      { id: "core", title: "CORE PLATFORMS", value: "04", label: "IoTRICs, EVOLTICS, IEMS, and SOLAAS working together as one connected ecosystem." },
+      { id: "core", title: "CORE PLATFORMS", value: "04", label: "IoTRICS, EVOLTICS, IEMS, and SOLAAS working together as one connected ecosystem." },
       { id: "support", title: "ENTERPRISE SUPPORT", value: "24/7", label: "Continuous monitoring, operational visibility, and technical support for mission-critical deployments." },
       { id: "deployment", title: "DEPLOYMENT OPTIONS", value: "Cloud • Edge • Hybrid", label: "Flexible deployment models designed to integrate with enterprise infrastructure at any scale." }
     ]

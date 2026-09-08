@@ -72,14 +72,6 @@ const advantageCards: AdvantageCardData[] = [
     highlights: ["Live Power Distribution", "Remote Diagnostics & Reset", "Dynamic Load Balancing"]
   },
   {
-    ...rawCards[4],
-    icon: Sparkles,
-    tag: "BRANDING",
-    badge: "TENANT BRANDED APPS",
-    imageSrc: "/images/elvotics/card_5.png",
-    highlights: ["Custom Driver Mobile App", "White-Label CPMS Portal", "Custom Invoicing & Tariffs"]
-  },
-  {
     ...rawCards[5],
     icon: Headphones,
     tag: "RELIABILITY",
@@ -98,11 +90,10 @@ const WIDTH_STEP = 20;
 const SCALE_STEP = 0.015;
 
 const SCROLL_THRESHOLDS: [number, number][] = [
-  [0.08, 0.17],
-  [0.25, 0.34],
-  [0.42, 0.51],
-  [0.59, 0.68],
-  [0.76, 0.85]
+  [0.1, 0.2],
+  [0.3, 0.4],
+  [0.5, 0.6],
+  [0.7, 0.8]
 ];
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
@@ -163,6 +154,7 @@ function CardContent({ card, index }: { card: AdvantageCardData, index: number }
             height={125}
             priority={index === 0}
             className="w-full h-full object-contain drop-shadow-sm select-none"
+            style={{ filter: "brightness(0) invert(41%) sepia(89%) saturate(1212%) hue-rotate(193deg) brightness(99%) contrast(98%)" }}
           />
         </div>
       </div>
@@ -268,12 +260,11 @@ export default function EvolticsSolutions() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest < 0.17)      setActiveStep(0);
-    else if (latest < 0.34) setActiveStep(1);
-    else if (latest < 0.51) setActiveStep(2);
-    else if (latest < 0.68) setActiveStep(3);
-    else if (latest < 0.85) setActiveStep(4);
-    else                    setActiveStep(5);
+    if (latest < 0.2)      setActiveStep(0);
+    else if (latest < 0.4) setActiveStep(1);
+    else if (latest < 0.6) setActiveStep(2);
+    else if (latest < 0.8) setActiveStep(3);
+    else                   setActiveStep(4);
   });
 
   return (

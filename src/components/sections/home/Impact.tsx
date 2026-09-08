@@ -48,7 +48,7 @@ export default function Impact() {
                   <div className="w-10 h-10 rounded-full bg-[#4c3bcf] flex items-center justify-center text-white">
                     <Cpu className="w-5 h-5" />
                   </div>
-                  <p className="text-sm font-medium text-[#4c3bcf] max-w-[140px] leading-snug">
+                  <p className="text-sm font-medium text-[#4c3bcf] whitespace-nowrap leading-snug">
                     Industrial IoT<br/>Enterprise Platforms
                   </p>
                 </div>
@@ -56,7 +56,7 @@ export default function Impact() {
                   <div className="w-10 h-10 rounded-full bg-[#4c3bcf] flex items-center justify-center text-white">
                     <Zap className="w-5 h-5" />
                   </div>
-                  <p className="text-sm font-medium text-[#4c3bcf] max-w-[140px] leading-snug">
+                  <p className="text-sm font-medium text-[#4c3bcf] whitespace-nowrap leading-snug">
                     Smart Energy<br/>& EV Infrastructure
                   </p>
                 </div>

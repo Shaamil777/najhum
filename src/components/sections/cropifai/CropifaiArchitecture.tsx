@@ -19,7 +19,7 @@ export default function CropifaiArchitecture() {
           <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-2">
             SYSTEM ARCHITECTURE
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-white leading-tight normal-case">
             The CropifAI Connected Ecosystem
           </h2>
         </div>
@@ -64,14 +64,14 @@ export default function CropifaiArchitecture() {
                     <div className="w-20 h-20 sm:w-28 sm:h-28 bg-white rounded-2xl flex items-center justify-center text-primary shadow-[0_0_50px_rgba(34,197,94,0.6)] z-10 mb-4 transition-transform hover:scale-105 cursor-pointer">
                       <Icon className="w-10 h-10 sm:w-14 sm:h-14" strokeWidth={2} />
                     </div>
-                    <h3 className="text-sm sm:text-base font-bold text-center whitespace-nowrap">{node.name}</h3>
+                    <h3 className="text-sm sm:text-base font-bold text-center whitespace-nowrap normal-case">{node.name}</h3>
                   </>
                 ) : (
                   <>
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-white/40 bg-primary flex items-center justify-center text-white/90 z-10 mb-3 hover:border-white transition-all hover:scale-110 cursor-pointer shadow-lg">
                       <Icon className="w-7 h-7 sm:w-8 sm:h-8" strokeWidth={1.5} />
                     </div>
-                    <h3 className="text-[11px] sm:text-sm font-medium text-white/80 text-center leading-tight max-w-[100px]">
+                    <h3 className="text-[11px] sm:text-sm font-medium text-white/80 text-center leading-tight max-w-[100px] normal-case">
                       {node.name.split(' ').map((word, i) => <React.Fragment key={i}>{word}<br/></React.Fragment>)}
                     </h3>
                   </>

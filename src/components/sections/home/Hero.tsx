@@ -2,8 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { homeContent } from "@/content/home";
-import { AntiMetalButton } from "@/components/ui/anti-metal-button"; // HMR trigger
+import { ArrowRight } from "lucide-react";
 
 const clients = [
   { name: "ARC", src: "/logo/client%20logos/ARC_Logo-2.svg" },
@@ -34,6 +35,31 @@ export default function Hero() {
 
       {/* Vignette Overlay for readable text */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 z-0"></div>
+
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto flex-grow h-full mb-24 mt-20">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-[1.1] uppercase font-display">
+          {hero.titlePart1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-hover">{hero.titlePart2}</span> <br className="hidden sm:block" /> {hero.titlePart3}
+        </h1>
+        <p className="text-lg md:text-xl text-neutral-300 max-w-2xl mb-10 leading-relaxed">
+          {hero.subheadline}
+        </p>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full sm:w-auto">
+          <Link
+            href={hero.primaryCta.href}
+            className="inline-flex items-center justify-center space-x-2.5 bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-md font-bold text-sm transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            <span>{hero.primaryCta.label}</span>
+          </Link>
+          <Link
+            href={hero.cardCta.href}
+            className="inline-flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 px-8 py-4 rounded-md font-bold text-sm transition-all shadow-sm hover:border-white/40"
+          >
+            <span>{hero.cardCta.label}</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
 
       {/* Logo Marquee at Bottom */}
       <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex items-center h-24 z-20">

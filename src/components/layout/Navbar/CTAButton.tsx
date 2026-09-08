@@ -7,8 +7,8 @@ export function CTAButton() {
       <Link href="/contact" className="focus-visible:outline-none">
         <AntiMetalButton 
           label="Contact" 
-          accentFrom="#4c3bcf" 
-          accentTo="#5a48df" 
+          accentFrom="var(--color-primary)" 
+          accentTo="var(--color-primary-hover)" 
           dotColor="#ffffff"
         />
       </Link>

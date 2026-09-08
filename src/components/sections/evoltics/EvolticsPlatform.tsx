@@ -142,25 +142,15 @@ export default function EvolticsPlatform() {
                 </div>
               </div>
 
-              {/* Placeholder Content */}
-              <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 text-center relative z-10">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-primary)_0%,transparent_70%)] opacity-[0.03] pointer-events-none" />
-                
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                  <BarChart3 className="w-10 h-10 sm:w-12 sm:h-12" />
-                </div>
-                
-                <h3 className="text-xl sm:text-2xl font-black text-foreground mb-3 tracking-tight">
-                  CPMS Dashboard
-                </h3>
-                <p className="text-sm sm:text-base text-muted max-w-md mx-auto mb-8 leading-relaxed">
-                  Connect your charging endpoints to unlock real-time monitoring, dynamic load balancing, and automated revenue settlements.
-                </p>
-                
-                <button className="bg-primary text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-primary/30 hover:bg-primary/90 hover:-translate-y-0.5 transition-all flex items-center gap-2 group">
-                  <span>View Dashboard</span>
-                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </button>
+              {/* Dashboard Image Content */}
+              <div className="flex-1 relative z-10 w-full h-full min-h-[400px]">
+                <Image
+                  src="/images/elvotics/cpmsDahsboard.jpeg"
+                  alt="CPMS Dashboard Interface"
+                  fill
+                  className="object-cover object-left-top"
+                  priority
+                />
               </div>
 
               {/* Decorative faint background grid */}
@@ -183,10 +173,11 @@ export default function EvolticsPlatform() {
                 <span className="text-[10px] sm:text-xs font-semibold text-muted uppercase tracking-wider text-center sm:text-left">
                   Infrastructure Partners:
                 </span>
-                <div className="flex items-center justify-center space-x-4 sm:space-x-4 opacity-80 mt-1 sm:mt-0">
-                  <span className="text-sm font-black text-foreground hover:text-primary transition-colors cursor-pointer">DEWA</span>
-                  <span className="text-sm font-black text-foreground hover:text-primary transition-colors cursor-pointer">TAQA</span>
-                  <span className="text-sm font-black text-foreground hover:text-primary transition-colors cursor-pointer">FEWA</span>
+                <div className="flex items-center justify-center space-x-4 sm:space-x-5 opacity-90 mt-2 sm:mt-0">
+                  <Image src="/logo/client logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" alt="DEWA" width={60} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/taqa-seeklogo.png" alt="TAQA" width={60} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/fewa.webp" alt="FEWA" width={60} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/SEWA.png" alt="SEWA" width={60} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
                 </div>
               </div>
 

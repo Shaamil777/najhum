@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       <Hero />
-      {/* Sticky Scroll Container */}
+      {/* Scroll Container */}
       <div className="relative z-10 bg-white">
         <About />
         <Platforms />

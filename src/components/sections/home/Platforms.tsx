@@ -70,7 +70,7 @@ export default function Platforms() {
                     
                     {/* Header: Title */}
                     <div className="flex justify-between items-start mb-6">
-                      <h3 className={`font-display font-bold ${titleColor} tracking-tighter leading-[1.1] text-3xl sm:text-4xl lg:text-5xl pr-4`}>
+                      <h3 className={`font-display font-bold normal-case ${titleColor} tracking-tighter leading-[1.1] text-3xl sm:text-4xl lg:text-5xl pr-4`}>
                         {card.title}
                       </h3>
                     </div>

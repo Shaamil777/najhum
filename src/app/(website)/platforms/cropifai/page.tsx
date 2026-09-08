@@ -7,7 +7,7 @@ import CropifaiHardware from "@/components/sections/cropifai/CropifaiHardware";
 import CropifaiSolutions from "@/components/sections/cropifai/CropifaiSolutions";
 import CropifaiWhyChoose from "@/components/sections/cropifai/CropifaiWhyChoose";
 import CropifaiCta from "@/components/sections/cropifai/CropifaiCta";
-import CropifaiEcosystem from "@/components/sections/cropifai/CropifaiEcosystem";
+
 
 export default function CropifaiPage() {
   return (
@@ -21,7 +21,6 @@ export default function CropifaiPage() {
       <CropifaiHardware />
       <CropifaiWhyChoose />
       <CropifaiCta />
-      <CropifaiEcosystem />
     </div>
   );
 }
