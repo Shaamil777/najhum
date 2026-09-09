@@ -75,10 +75,10 @@ export default function EvolticsPlatform() {
         </div>
 
         {/* Main Interactive Stage */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-16">
           
           {/* Left Column: 4 Feature Capabilities */}
-          <div className="lg:col-span-4 flex flex-col space-y-4">
+          <div className="lg:col-span-4 flex flex-col space-y-4 h-full">
             <div className="mb-4 sm:mb-6 text-center lg:text-left">
               <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground mb-2 sm:mb-3 leading-tight">
                 Everything you need <br className="hidden lg:block"/> in one CPMS
@@ -118,13 +118,13 @@ export default function EvolticsPlatform() {
           </div>
 
           {/* Right Column: Live Enterprise Dashboard Showcase */}
-          <div className="lg:col-span-8 lg:mt-12 xl:mt-16">
+          <div className="lg:col-span-8 flex flex-col h-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-surface-alt rounded-2xl border border-border shadow-sm overflow-hidden relative min-h-[400px] sm:min-h-[500px] flex flex-col"
+              className="bg-surface-alt rounded-2xl border border-border shadow-sm overflow-hidden relative flex-1 flex flex-col"
             >
               
               {/* Dashboard Browser Frame Bar */}

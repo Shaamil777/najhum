@@ -16,7 +16,7 @@ export default function AboutHero() {
   const stats = [
     { label: "FOUNDED", value: "2017", icon: Activity },
     { label: "CORE PLATFORMS", value: "3+", icon: Cpu },
-    { label: "SERVED IN", value: "Dubai", icon: Globe2 },
+    { label: "SERVER IN", value: "Dubai", icon: Globe2 },
     { label: "IOT EXPERTISE", value: "Industrial", icon: BarChart3 },
   ];
 

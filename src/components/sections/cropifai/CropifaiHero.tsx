@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -37,15 +36,25 @@ export default function CropifaiHero() {
       {/* Main Hero Container */}
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-5xl flex flex-col items-center text-center mt-auto mb-auto">
         
+        {/* Small badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+        >
+          <span className="text-sm font-bold tracking-widest uppercase text-white">CROPifAI Platform</span>
+        </motion.div>
+
         {/* Main Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 font-display text-white"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 font-display text-white uppercase"
         >
-          GUARDING <br />
-          <span className="text-primary">RESOURCES.</span> GROWING GREENER.
+          BEYOND PRECISION. <br />
+          <span className="text-primary">CULTIVATING THE FUTURE.</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -55,7 +64,7 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl sm:text-2xl font-medium mb-6 text-neutral-200 tracking-wide"
         >
-          cropifAI™ — Smart Agriculture & IoT Solution
+          AI & IoT-Powered Smart Agriculture Solutions
         </motion.h2>
 
         {/* Description */}
@@ -65,7 +74,7 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg sm:text-xl text-neutral-300 leading-relaxed max-w-3xl mb-10"
         >
-          A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations while saving up to 38% on water consumption.
+          A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -94,37 +103,6 @@ export default function CropifaiHero() {
           </Link>
         </motion.div>
 
-      </div>
-
-      {/* Logo Marquee at Bottom */}
-      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
-        <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
-          TRUSTED BY COMPANIES WORLDWIDE
-        </p>
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee {
-            animation: marquee 30s linear infinite;
-            width: max-content;
-          }
-        `}</style>
-        
-        <div className="flex animate-marquee items-center w-full mt-2">
-          {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((num, i) => (
-            <div key={i} className="flex flex-none items-center justify-center mx-4 px-8 py-2 bg-transparent opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 min-w-[160px]">
-              <Image 
-                src={`/logo/elvotics_logo/${num}.png`} 
-                alt={`Trusted Partner ${num}`} 
-                width={160} 
-                height={50} 
-                className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-              />
-            </div>
-          ))}
-        </div>
       </div>
 
     </section>
