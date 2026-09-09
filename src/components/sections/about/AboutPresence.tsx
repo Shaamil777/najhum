@@ -5,29 +5,7 @@ export default function AboutPresence() {
   return (
     <section className="relative w-full py-24 md:py-32 bg-[#f5f7fa] overflow-hidden">
 
-      {/* ── Geometric Background Elements ── */}
-
-      {/* Large circle outline */}
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full border-2 border-neutral-200/60 pointer-events-none" />
-      <div className="absolute -bottom-64 -left-64 w-[700px] h-[700px] rounded-full border border-neutral-200/40 pointer-events-none" />
-
-      {/* Rotated diamond */}
-      <div className="absolute top-1/3 right-[8%] w-24 h-24 border border-primary/15 rotate-45 pointer-events-none hidden lg:block" />
-      <div className="absolute bottom-[15%] left-[12%] w-16 h-16 border border-neutral-300/40 rotate-12 rounded-lg pointer-events-none hidden lg:block" />
-
-      {/* Dot cluster */}
-      <div className="absolute top-20 left-[20%] pointer-events-none hidden lg:block">
-        <div className="grid grid-cols-4 gap-3">
-          {Array.from({ length: 16 }).map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-neutral-300/50" />
-          ))}
-        </div>
-      </div>
-
-      {/* Diagonal accent line */}
-      <div className="absolute top-0 right-[30%] w-px h-full bg-gradient-to-b from-transparent via-primary/10 to-transparent pointer-events-none" />
-
-      {/* Soft glow */}
+      {/* Soft center glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
