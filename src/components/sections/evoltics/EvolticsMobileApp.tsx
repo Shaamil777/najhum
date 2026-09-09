@@ -133,28 +133,22 @@ export default function EvolticsMobileApp() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="order-2 relative w-[220px] sm:w-[280px] md:w-[240px] lg:w-[300px] xl:w-[340px] h-[440px] sm:h-[580px] md:h-[480px] lg:h-[620px] xl:h-[680px] rounded-[2rem] sm:rounded-[3rem] bg-surface border-[6px] sm:border-[8px] border-surface-alt flex flex-col items-center justify-center overflow-hidden group shadow-xl sm:shadow-2xl mx-auto"
+            className="order-2 relative w-[220px] sm:w-[280px] md:w-[240px] lg:w-[300px] xl:w-[340px] h-[440px] sm:h-[580px] md:h-[480px] lg:h-[620px] xl:h-[680px] rounded-[2.5rem] sm:rounded-[3.2rem] bg-black border-[7px] sm:border-[9px] border-[#18181b] shadow-2xl flex flex-col items-center justify-center overflow-hidden mx-auto"
           >
-            {/* Phone Notch/Dynamic Island */}
-            <div className="absolute top-0 inset-x-0 h-6 bg-surface-alt flex justify-center items-end pb-1.5 rounded-b-3xl w-32 mx-auto z-20">
-              <div className="w-14 h-1.5 bg-black/10 rounded-full" />
-            </div>
-            
-            <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-            
-            <div className="text-center z-10 p-6">
-              <div className="w-14 h-14 bg-surface-alt rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-sm border border-border">
-                <svg className="w-7 h-7 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-base font-bold text-foreground mb-2">App Mockup</h3>
-              <p className="text-xs text-muted max-w-[200px] mx-auto">
-                Insert your mobile UI here
-              </p>
+            {/* Phone Notch / Dynamic Island */}
+            <div className="absolute top-3 inset-x-0 h-4 sm:h-5 bg-black rounded-full w-20 sm:w-24 mx-auto z-20 flex items-center justify-end pr-2 pointer-events-none">
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[#18181b] rounded-full border border-neutral-800" />
             </div>
 
-            {/* <Image src="/path" fill className="object-cover" alt="" /> */}
+            {/* Actual Evoltics Mobile App Image */}
+            <Image 
+              src="/images/app_image.jpeg" 
+              alt="Evoltics Mobile App" 
+              fill 
+              priority 
+              className="object-cover" 
+              sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 340px" 
+            />
           </motion.div>
 
           {/* Right Features */}
