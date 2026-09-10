@@ -7,12 +7,12 @@ import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function CropifaiArchitecture() {
   const nodes = [
-    { name: "Field Sensors", icon: Cpu, shift: "translate-y-0" },
-    { name: "LoRaWAN Gateway", icon: RadioTower, shift: "translate-y-12" },
-    { name: "Internet / 4G", icon: Globe, shift: "-translate-y-12" },
-    { name: "CropifAI Cloud", icon: Cloud, shift: "translate-y-0", isMain: true },
-    { name: "Cloud Integration", icon: Database, shift: "-translate-y-12" },
-    { name: "Dashboard", icon: LayoutDashboard, shift: "translate-y-12" },
+    { name: "Field Sensors", icon: Cpu, position: "middle" },
+    { name: "LoRaWAN Gateway", icon: RadioTower, position: "bottom" },
+    { name: "Internet / 4G", icon: Globe, position: "top" },
+    { name: "CropifAI Cloud", icon: Cloud, position: "middle", isMain: true },
+    { name: "Cloud Integration", icon: Database, position: "top" },
+    { name: "Dashboard", icon: LayoutDashboard, position: "bottom" },
   ];
 
   const features = [
@@ -60,36 +60,39 @@ export default function CropifaiArchitecture() {
 
         {/* Visual Flow Timeline */}
         <div className="relative w-full max-w-5xl mx-auto flex items-center justify-between min-h-[300px] px-2 sm:px-6 mb-24 hidden md:flex">
-          {/* Curved Connecting SVG Line */}
-          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[120px] z-0 pointer-events-none px-12 sm:px-24">
-            <svg 
-              className="w-full h-full overflow-visible" 
-              preserveAspectRatio="none" 
-              viewBox="0 0 100 100"
-            >
-              <motion.path 
+          
+          {/* Main Horizontal Connecting Line with Animation */}
+          <div className="absolute left-[5%] right-[5%] top-1/2 -translate-y-1/2 h-[4px] z-0 pointer-events-none">
+            <svg className="w-full h-full">
+              <motion.line
+                x1="0" y1="50%" x2="100%" y2="50%"
+                stroke="rgba(255,255,255,0.3)"
+                strokeWidth="2"
+                strokeDasharray="6 6"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
-                d="M 0,50 
-                   C 10,50 10,100 20,100 
-                   C 30,100 30,0 40,0 
-                   C 50,0 50,50 60,50 
-                   C 70,50 70,0 80,0 
-                   C 90,0 90,100 100,100" 
-                fill="none" 
-                stroke="rgba(255,255,255,0.3)" 
-                strokeWidth="3" 
-                vectorEffect="non-scaling-stroke"
-                strokeDasharray="6 6"
               />
             </svg>
+          </div>
+
+          {/* Traveling Data Packet Glow */}
+          <div className="absolute left-[5%] right-[5%] top-1/2 -translate-y-1/2 h-[4px] z-10 pointer-events-none overflow-visible">
+             <motion.div 
+               className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_20px_4px_rgba(255,255,255,0.8)]"
+               initial={{ left: "0%", opacity: 0 }}
+               whileInView={{ left: "100%", opacity: [0, 1, 1, 0] }}
+               viewport={{ once: true }}
+               transition={{ duration: 2.5, delay: 1.5, ease: "easeInOut", repeat: Infinity, repeatDelay: 1.5 }}
+             />
           </div>
 
           {nodes.map((node, index) => {
             const Icon = node.icon;
             const isMain = node.isMain;
+            const isTop = node.position === "top";
+            const isBottom = node.position === "bottom";
 
             return (
               <motion.div 
@@ -98,25 +101,58 @@ export default function CropifaiArchitecture() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
-                className={`relative z-10 flex flex-col items-center min-w-[70px] sm:min-w-[120px] ${node.shift}`}
+                className={`relative z-10 flex flex-col items-center min-w-[70px] sm:min-w-[120px] ${isTop ? '-translate-y-16' : isBottom ? 'translate-y-16' : ''}`}
               >
-                {isMain ? (
-                  <>
-                    <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center text-primary shadow-[0_0_60px_rgba(255,255,255,0.3)] z-10 mb-4 transition-transform hover:scale-110 cursor-pointer">
-                      <Icon className="w-12 h-12" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-base font-bold text-center whitespace-nowrap text-white">{node.name}</h3>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-16 h-16 rounded-full border-2 border-white/40 bg-white/10 backdrop-blur-md flex items-center justify-center text-white z-10 mb-3 hover:border-white hover:bg-white/20 transition-all hover:scale-110 cursor-pointer shadow-lg">
-                      <Icon className="w-7 h-7" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-sm font-bold text-white/90 text-center leading-tight max-w-[100px]">
-                      {node.name.split(' ').map((word, i) => <React.Fragment key={i}>{word}<br/></React.Fragment>)}
-                    </h3>
-                  </>
+                {/* Animated Vertical Connectors */}
+                {isTop && (
+                  <div className="absolute top-[100%] left-1/2 -translate-x-1/2 w-[4px] h-[64px] z-0 pointer-events-none">
+                    <svg className="w-full h-full">
+                      <motion.line
+                        x1="50%" y1="100%" x2="50%" y2="0"
+                        stroke="rgba(255,255,255,0.3)"
+                        strokeWidth="2"
+                        strokeDasharray="4 4"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                      />
+                    </svg>
+                  </div>
                 )}
+                {isBottom && (
+                  <div className="absolute bottom-[100%] left-1/2 -translate-x-1/2 w-[4px] h-[64px] z-0 pointer-events-none">
+                    <svg className="w-full h-full">
+                      <motion.line
+                        x1="50%" y1="0" x2="50%" y2="100%"
+                        stroke="rgba(255,255,255,0.3)"
+                        strokeWidth="2"
+                        strokeDasharray="4 4"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                      />
+                    </svg>
+                  </div>
+                )}
+
+                {/* Node Content */}
+                <div className={`flex items-center gap-3 relative z-10 ${isTop ? 'flex-col-reverse' : 'flex-col'}`}>
+                  {isMain ? (
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-3xl flex items-center justify-center text-primary shadow-[0_0_60px_rgba(255,255,255,0.3)] transition-transform hover:scale-110 cursor-pointer">
+                      <Icon className="w-10 h-10 sm:w-12 sm:h-12" strokeWidth={2} />
+                    </div>
+                  ) : (
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-white/40 bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:border-white hover:bg-white/20 transition-all hover:scale-110 cursor-pointer shadow-lg">
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={2} />
+                    </div>
+                  )}
+                  
+                  <h3 className={`text-sm font-bold text-white/90 text-center leading-tight max-w-[100px] ${isMain ? 'text-white text-base' : ''}`}>
+                    {node.name.split(' ').map((word, i) => <React.Fragment key={i}>{word}<br/></React.Fragment>)}
+                  </h3>
+                </div>
               </motion.div>
             );
           })}

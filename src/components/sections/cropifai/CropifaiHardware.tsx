@@ -2,7 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Droplets, Zap, Clock, FlaskConical, AlertTriangle, ListTree } from "lucide-react";
+import { ShieldCheck, Droplets, Zap, Clock, FlaskConical, AlertTriangle, ListTree, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function CropifaiHardware() {
@@ -33,12 +34,38 @@ export default function CropifaiHardware() {
     }
   ];
 
-  const products = [
-    { name: "Ph Sensor", image: "/images/cropifai/sensor.jpg" },
-    { name: "Soil Sensor", image: "/images/cropifai/soil.jpg" },
-    { name: "Solenoid Valve", image: "/images/cropifai/solenoid.jpg" },
-    { name: "Smart Controller", image: "/images/cropifai/smart-valve.jpg" },
-    { name: "Weather Station", image: "/images/cropifai/weather.jpg" },
+  const timelineProducts = [
+    { 
+      name: "Industrial Soil Sensor", 
+      image: "/products/cropifai/soilsensor.png",
+      description: "Multi-parameter soil sensing for precision agriculture.",
+      features: ["Soil Moisture & Temp", "Electrical Conductivity (EC)", "pH Level", "NPK (N, P, K)"]
+    },
+    { 
+      name: "LoRaWAN Weather Station", 
+      image: "/products/cropifai/LoRaWan_iotWeatherStation.png",
+      description: "Comprehensive environmental monitoring with 15km range.",
+      features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
+    },
+    { 
+      name: "Solenoid Valve Controller", 
+      image: "/products/cropifai/solenoidValveController.png",
+      description: "Automated irrigation control for multiple zones.",
+      features: ["0–100% Flow Control", "Open/Close Precision", "Multicast Control"]
+    },
+    { 
+      name: "Smart Valve Controller", 
+      image: "/products/cropifai/SmartValveController.png",
+      description: "Intelligent autonomous operation for off-grid deployment.",
+      features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
+    },
+    { 
+      name: "Industrial pH Sensor", 
+      image: "/products/cropifai/Phsensor.png",
+      description: "High-precision pH monitoring for optimal nutrient uptake.",
+      features: ["Real-time pH Tracking", "Anti-Fouling Design", "Automatic Calibration"]
+    },
+
   ];
 
   const tags = ["Ruggedized for Desert", "LoRaWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"];
@@ -122,85 +149,79 @@ export default function CropifaiHardware() {
           ))}
         </div>
 
-        {/* Products Display Container */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="bg-[#09090b] rounded-[3rem] p-10 md:p-16 lg:p-20 relative overflow-hidden shadow-2xl mb-32 border border-white/10"
-        >
-          {/* Subtle grid pattern background */}
-          <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-          
-          <div className="relative z-10">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 mb-20">
-              {products.map((prod, idx) => (
-                <div key={idx} className="flex flex-col items-center text-center gap-6 group cursor-pointer">
-                  <div className="relative w-32 h-32 lg:w-40 lg:h-40 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden transition-all duration-500 shadow-xl group-hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] group-hover:-translate-y-2 group-hover:bg-white/10">
-                    {/* Placeholder content since we don't have the actual images */}
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-500 group-hover:text-white transition-colors duration-500">
-                       <Zap className="w-6 h-6 opacity-50" />
-                    </div>
-                  </div>
-                  <p className="text-sm lg:text-base font-bold text-zinc-400 leading-tight group-hover:text-white transition-colors duration-300">
-                    {prod.name}
-                  </p>
-                </div>
-              ))}
+        {/* Tags Bar */}
+        <div className="bg-white/60 backdrop-blur-md border border-zinc-200 shadow-sm rounded-3xl p-6 lg:p-8 flex flex-wrap justify-center items-center gap-x-12 gap-y-6 mb-32 max-w-5xl mx-auto">
+          {tags.map((tag, idx) => (
+            <div key={idx} className="flex items-center gap-3">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+              <span className="text-sm lg:text-base font-bold text-zinc-800 tracking-widest uppercase">{tag}</span>
             </div>
+          ))}
+        </div>
 
-            {/* Tags Bar */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 lg:p-8 flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
-              {tags.map((tag, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <ShieldCheck className="w-5 h-5 text-primary" />
-                  <span className="text-sm lg:text-base font-bold text-white tracking-widest uppercase">{tag}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Automated Water Flow Control Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white border border-zinc-200 shadow-xl shadow-zinc-200/50 rounded-[3rem] p-10 md:p-16 lg:p-20 relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/5 rounded-[100%] blur-[80px] pointer-events-none" />
+        {/* Scroll Timeline Product Showcase */}
+        <div className="relative w-full max-w-6xl mx-auto pt-10 mb-40">
           
-          <div className="text-center mb-16 relative z-10">
-            <h2 className="text-4xl md:text-5xl font-black font-display text-zinc-900 leading-tight tracking-tight mb-6">
-              Automated Water <span className="text-primary">Flow Control</span>
-            </h2>
-            <p className="text-lg text-zinc-500 font-medium max-w-2xl mx-auto">
-              Precision irrigation management for large-scale agricultural applications, completely automated via the cloud.
-            </p>
+          <div className="text-center mb-24">
+            <h2 className="text-3xl md:text-5xl font-black text-zinc-900 tracking-tight">Our Smart Ecosystem</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 mb-16">
-            {flowControls.map((control, idx) => (
-              <div key={idx} className="bg-zinc-50 rounded-3xl p-8 border border-zinc-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300 group">
-                <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-100 shadow-sm flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                  <control.icon className="w-6 h-6" />
+          {/* Central Line (Desktop) / Side Line (Mobile) */}
+          <div className="absolute left-8 md:left-1/2 top-40 bottom-0 w-[2px] bg-zinc-200 md:-translate-x-1/2 rounded-full" />
+
+          {timelineProducts.map((prod, idx) => {
+            const isEven = idx % 2 === 0;
+            return (
+              <div key={idx} className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-0 mb-32 last:mb-0 group">
+                
+                {/* Center Timeline Node */}
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  className="absolute left-[26px] md:left-1/2 w-4 h-4 bg-white border-4 border-primary rounded-full md:-translate-x-1/2 shadow-[0_0_15px_rgba(34,197,94,0.4)] z-10"
+                />
+
+                {/* Image Block */}
+                <div className={`w-full md:w-1/2 pl-20 pr-4 md:px-16 flex ${isEven ? 'md:justify-end' : 'md:justify-start'} order-1 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
+                   <motion.div 
+                     initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                     whileInView={{ opacity: 1, x: 0 }}
+                     viewport={{ once: true, margin: "-100px" }}
+                     className="relative w-full max-w-[400px] aspect-square bg-white rounded-[2rem] border border-zinc-200 shadow-xl shadow-zinc-200/50 flex items-center justify-center p-8 overflow-hidden group-hover:border-primary/30 transition-colors"
+                   >
+                     <Image src={prod.image} alt={prod.name} fill className="object-contain p-8 transition-transform duration-700 group-hover:scale-110" />
+                   </motion.div>
                 </div>
-                <h4 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-primary transition-colors">{control.title}</h4>
-                <p className="text-zinc-500 font-medium leading-relaxed">{control.desc}</p>
+
+                {/* Text Block */}
+                <div className={`w-full md:w-1/2 pl-20 pr-4 md:px-16 flex flex-col justify-center order-2 ${isEven ? 'md:order-2 md:text-left' : 'md:order-1 md:text-right md:items-end'}`}>
+                   <motion.div 
+                     initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                     whileInView={{ opacity: 1, x: 0 }}
+                     viewport={{ once: true, margin: "-100px" }}
+                     className="w-full max-w-[400px]"
+                   >
+                     <span className="text-primary font-bold tracking-widest text-xs uppercase mb-3 block">0{idx + 1}</span>
+                     <h3 className="text-2xl lg:text-4xl font-black text-zinc-900 mb-4 leading-tight tracking-tight">{prod.name}</h3>
+                     <p className="text-base lg:text-lg text-zinc-500 mb-8 leading-relaxed">{prod.description}</p>
+                     <ul className="space-y-4 inline-flex flex-col text-left">
+                       {prod.features.map((f, i) => (
+                         <li key={i} className={`flex items-center gap-3 text-zinc-700 font-semibold ${!isEven ? 'md:flex-row-reverse md:text-right' : ''}`}>
+                           <CheckCircle2 className="w-5 h-5 text-primary shrink-0" /> {f}
+                         </li>
+                       ))}
+                     </ul>
+                   </motion.div>
+                </div>
+
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          {/* Footer block */}
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-zinc-400 uppercase tracking-widest relative z-10">
-            <span>IP67 Rated</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>Solar / Battery / Mains</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>External Antenna</span>
-          </div>
 
-        </motion.div>
 
       </Container>
     </section>

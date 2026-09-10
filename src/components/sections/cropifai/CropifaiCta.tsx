@@ -1,45 +1,103 @@
-import React from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
+import { AntiMetalButton } from "@/components/ui/anti-metal-button";
 
 export default function CropifaiCta() {
-  return (
-    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-neutral-900">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/20 blur-[100px] rounded-[100%] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-display text-white mb-6 leading-tight tracking-tight">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Optimize</span> Your Agricultural Operations?
-          </h2>
-          
-          <p className="text-lg md:text-xl text-neutral-300 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-            Join the leading agri-enterprises saving millions of gallons of water and boosting crop yields with CropifAI's intelligent, data-driven ecosystem.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link 
-              href="/demo" 
-              className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 px-8 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-sm overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.5)]"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Schedule a Demo
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </span>
-              <div className="absolute inset-0 bg-emerald-500 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-            </Link>
+  const [isHovered, setIsHovered] = useState(false);
+  const [pixelState, setPixelState] = useState<Map<number, 'solid' | 'light'>>(new Map());
 
-            <Link 
-              href="/contact" 
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-5 bg-white/5 text-white rounded-full font-bold uppercase tracking-widest text-sm border border-white/10 hover:bg-white/10 transition-colors"
-            >
-              <Phone className="w-5 h-5 text-neutral-400" />
-              Contact Sales
-            </Link>
+  useEffect(() => {
+    if (!isHovered) {
+      setPixelState(new Map());
+      return;
+    }
+
+    // Function to generate a new set of random pixels
+    const generatePixels = () => {
+      const newState = new Map<number, 'solid' | 'light'>();
+      // Pick 8 solid primary pixels
+      for (let i = 0; i < 8; i++) {
+        newState.set(Math.floor(Math.random() * 600), 'solid');
+      }
+      // Pick 15 light primary pixels
+      for (let i = 0; i < 15; i++) {
+        const idx = Math.floor(Math.random() * 600);
+        if (!newState.has(idx)) newState.set(idx, 'light');
+      }
+      setPixelState(newState);
+    };
+
+    // Initial generation immediately when hovered
+    generatePixels();
+
+    // Re-generate every 1200ms for a slower, calmer twinkling effect
+    const interval = setInterval(generatePixels, 1200);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  return (
+    <section className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden border-t border-zinc-200">
+      
+      {/* Background Interactive Pixel Grid */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+         {/* The faint background lines are provided by this div */}
+         <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:64px_64px] z-0 pointer-events-none" />
+         
+         {/* Interactive Grid Cells */}
+         <div className="absolute inset-0 flex flex-wrap content-start">
+            {Array.from({ length: 600 }).map((_, i) => {
+               const pState = pixelState.get(i);
+               
+               let bgClass = '';
+               if (isHovered && pState) {
+                 if (pState === 'solid') bgClass = 'bg-primary shadow-sm';
+                 else if (pState === 'light') bgClass = 'bg-primary/20';
+               }
+               
+               return (
+                 <div 
+                   key={i}
+                   className={`w-[64px] h-[64px] border border-transparent rounded-md transition-all duration-[1200ms] ease-in-out z-0 hover:z-10 hover:border-primary hover:bg-primary/5 ${bgClass}`}
+                 />
+               );
+            })}
+         </div>
+      </div>
+      
+      {/* 
+        We use pointer-events-none on the container so mouse events pass through to the grid behind it,
+        and pointer-events-auto on the inner content so the button and text can still be interacted with.
+      */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-20 flex flex-col items-center justify-center min-h-[40vh] pointer-events-none lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
+          {/* Content & Button */}
+          <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
+             <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.05]">
+                Ready to Optimize <br className="hidden sm:block" />
+                Your <span className="text-primary">Agriculture?</span>
+             </h2>
+             <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
+                Join leading agri-enterprises saving millions of gallons of water and boosting crop yields with <span className="text-primary font-medium">CropifAI's intelligent, data-driven ecosystem.</span>
+             </p>
+             
+             {/* Scaled-up Contact Button */}
+             <div 
+               className="scale-110 sm:scale-125 transition-transform duration-300"
+               onMouseEnter={() => setIsHovered(true)}
+               onMouseLeave={() => setIsHovered(false)}
+             >
+                <Link href="/contact" className="focus-visible:outline-none block">
+                  <AntiMetalButton 
+                    label="Contact Sales" 
+                    accentFrom="var(--color-primary)" 
+                    accentTo="var(--color-primary)" 
+                    dotColor="#ffffff"
+                    className="dark shadow-xl hover:shadow-primary/30"
+                  />
+                </Link>
+             </div>
           </div>
-        </div>
       </div>
     </section>
   );
