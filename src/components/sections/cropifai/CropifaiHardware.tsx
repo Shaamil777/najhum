@@ -191,7 +191,7 @@ export default function CropifaiHardware() {
                      viewport={{ once: true, margin: "-100px" }}
                      className="relative w-full max-w-[400px] aspect-square bg-white rounded-[2rem] border border-zinc-200 shadow-xl shadow-zinc-200/50 flex items-center justify-center p-8 overflow-hidden group-hover:border-primary/30 transition-colors"
                    >
-                     <Image src={prod.image} alt={prod.name} fill className="object-contain p-8 transition-transform duration-700 group-hover:scale-110" />
+                     <Image src={prod.image} alt={prod.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-contain p-8 transition-transform duration-700 group-hover:scale-110" />
                    </motion.div>
                 </div>
 

@@ -41,7 +41,7 @@ export default function CropifaiArchitecture() {
   return (
     <section className="relative w-full py-24 lg:py-32 bg-primary overflow-hidden font-sans text-white">
       {/* Background Decor */}
-      <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-10 mix-blend-overlay pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" />
       <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-black/10 to-transparent pointer-events-none" />
 
       <Container size="xl" className="relative z-10">
