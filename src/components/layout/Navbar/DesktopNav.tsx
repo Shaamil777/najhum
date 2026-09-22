@@ -21,6 +21,8 @@ export function DesktopNav() {
             description: "Explore our enterprise-grade digital solutions.",
           }))}
         />
+        <NavItem title="Solutions" href="/solutions" />
+        <NavItem title="Products" href="/products" />
         <NavItem title="About" href="/about" />
       </Cluster>
     </nav>

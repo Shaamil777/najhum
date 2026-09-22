@@ -23,6 +23,8 @@ interface NavItemData {
 
 const navItems: NavItemData[] = [
   { title: "Home", href: "/" },
+  { title: "Solutions", href: "/solutions" },
+  { title: "Products", href: "/products" },
   { title: "About", href: "/about" },
   {
     title: "Platforms",
