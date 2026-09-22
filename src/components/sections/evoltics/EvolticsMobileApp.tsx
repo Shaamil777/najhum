@@ -176,7 +176,12 @@ export default function EvolticsMobileApp() {
           transition={{ delay: 0.4 }}
           className="flex flex-row items-center justify-center gap-2 sm:gap-4 mt-12 sm:mt-16 lg:mt-24 px-4 sm:px-0"
         >
-          <button className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none">
+          <a
+            href="https://apps.apple.com/us/app/evoltics/id6463776459"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none cursor-pointer"
+          >
             <div className="w-5 h-5 sm:w-7 sm:h-7 shrink-0 relative pb-1">
               <Image src="/images/elvotics/apple-icon.png" alt="Apple" fill className="object-contain brightness-0 invert" />
             </div>
@@ -184,15 +189,20 @@ export default function EvolticsMobileApp() {
               <span className="text-[7px] sm:text-[10px] uppercase tracking-widest mb-0.5 sm:mb-1 opacity-80 whitespace-nowrap">Download on the</span>
               <span className="text-xs sm:text-base font-bold whitespace-nowrap">App Store</span>
             </div>
-          </button>
+          </a>
           
-          <button className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-primary text-white hover:bg-primary-hover transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.evoltics&hl=en_IN"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-primary text-white hover:bg-primary-hover transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none cursor-pointer"
+          >
             <Play className="w-4 h-4 sm:w-6 sm:h-6 fill-current shrink-0" />
             <div className="flex flex-col items-start leading-none ml-0 sm:ml-1">
               <span className="text-[7px] sm:text-[10px] uppercase tracking-widest mb-0.5 sm:mb-1 opacity-90 whitespace-nowrap">GET IT ON</span>
               <span className="text-xs sm:text-base font-bold whitespace-nowrap">Google Play</span>
             </div>
-          </button>
+          </a>
         </motion.div>
 
       </div>

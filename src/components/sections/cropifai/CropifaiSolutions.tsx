@@ -1,61 +1,64 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Target, Droplets, BrainCircuit, CloudCog, ArrowRight, Zap } from "lucide-react";
+import { Target, Droplets, BrainCircuit, CloudCog, Zap, ArrowRight } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function CropifaiSolutions() {
   const solutions = [
     {
+      code: "CORE 01",
       title: "Precision Farming",
-      description: "Multi-depth soil sensors, weather monitoring, crop health tracking",
+      description: "Multi-depth soil sensors, weather monitoring, and crop health tracking.",
+      tag: "Soil & Crop Telemetry",
+      bgImage: "/images/cropify/precision_farming.jpg",
       icon: Target,
-      color: "from-blue-500/20 to-blue-500/0",
-      accent: "text-blue-400"
     },
     {
+      code: "CORE 02",
       title: "Smart Irrigation",
-      description: "Automated valve control, fertigation, water flow optimization",
+      description: "Automated valve control, fertigation, and water flow optimization.",
+      tag: "Automated Valve Flow",
+      bgImage: "/images/cropify/smart_irrigation.jpg",
       icon: Droplets,
-      color: "from-teal-500/20 to-teal-500/0",
-      accent: "text-teal-400"
     },
     {
+      code: "CORE 03",
       title: "AI/ML Analytics",
-      description: "Satellite imagery, NDVI analysis, yield prediction, recommendations",
+      description: "Satellite imagery, NDVI analysis, yield prediction, and recommendations.",
+      tag: "Predictive Yield Models",
+      bgImage: "/images/cropify/aiml_analytics.jpg",
       icon: BrainCircuit,
-      color: "from-purple-500/20 to-purple-500/0",
-      accent: "text-purple-400"
     },
     {
+      code: "CORE 04",
       title: "Cloud Platform",
-      description: "Real-time dashboards, remote monitoring, multi-site management",
+      description: "Real-time dashboards, remote monitoring, and multi-site management.",
+      tag: "IoTRICs Central Hub",
+      bgImage: "/images/cropify/cloud_platform.jpg",
       icon: CloudCog,
-      color: "from-pink-500/20 to-pink-500/0",
-      accent: "text-pink-400"
     },
   ];
 
-  const flowSteps = ["Sense", "Analyze", "Decide", "Irrigate"];
-
   return (
-    <section id="solutions" className="relative w-full py-24 lg:py-32 bg-slate-50 text-slate-900 overflow-hidden font-sans border-y border-slate-200/60">
+    <section id="solutions" className="relative w-full py-20 lg:py-28 bg-slate-50 text-slate-900 overflow-hidden font-sans border-y border-slate-200/60">
       
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <Container size="xl" className="relative z-10">
+      <Container size="full" className="max-w-[1536px] px-4 sm:px-6 xl:px-8 relative z-10">
         
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-20 lg:mb-24">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-14 lg:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-5 backdrop-blur-sm"
           >
-            <Zap className="w-4 h-4" />
+            <Zap className="w-3.5 h-3.5" />
             Core Solutions
           </motion.div>
           
@@ -64,7 +67,7 @@ export default function CropifaiSolutions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-slate-900 leading-tight tracking-tight mb-8"
+            className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-slate-900 leading-tight tracking-tight mb-5"
           >
             The Future of <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">Smart Agriculture</span>
@@ -75,74 +78,78 @@ export default function CropifaiSolutions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-3xl"
+            className="text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl"
           >
             A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-24">
+        {/* 4 Cards in a Single Row on Desktop (lg:grid-cols-4) with the exact About page card design & brand color palette */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
             return (
               <motion.div 
                 key={index} 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
-                className="group relative bg-white rounded-[2rem] p-8 border border-slate-100 hover:border-primary/20 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                transition={{ delay: index * 0.08, duration: 0.5 }}
+                className="group relative bg-[#edf4ff] border border-blue-100 rounded-[1.75rem] p-5 sm:p-6 xl:p-7 flex flex-col justify-between min-h-[250px] sm:min-h-[260px] xl:min-h-[270px] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
               >
-                {/* Glow effect on hover */}
-                <div className={`absolute top-0 inset-x-0 h-32 bg-gradient-to-b ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-sm">
-                    <Icon className={`w-8 h-8 ${solution.accent}`} strokeWidth={1.5} />
+                {/* Background Image with smooth gradient fade matching About section */}
+                <div className="absolute top-0 right-0 bottom-0 w-[55%] sm:w-[58%] lg:w-[60%] pointer-events-none overflow-hidden rounded-r-[1.75rem]">
+                  <Image
+                    src={solution.bgImage}
+                    alt={solution.title}
+                    fill
+                    className="object-cover object-right group-hover:scale-105 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 1024px) 100vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#edf4ff] via-[#edf4ff]/85 to-transparent" />
+                </div>
+
+                {/* Decorative Floating Icon Badge Overlay */}
+                <div className="absolute top-5 right-5 z-10 pointer-events-none">
+                  <div className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs border border-white/80 shadow-xs flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-4 h-4" />
                   </div>
-                  
-                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 tracking-tight">
+                </div>
+
+                {/* Card Content Top */}
+                <div className="relative z-10 max-w-[170px] sm:max-w-[190px] lg:max-w-[165px] xl:max-w-[190px]">
+                  {/* Core Number Label */}
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                    <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500">
+                      {solution.code}
+                    </span>
+                    <div className="w-5 sm:w-6 h-px bg-slate-400/50" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-base sm:text-lg xl:text-xl font-extrabold text-slate-900 mb-2 tracking-tight">
                     {solution.title}
                   </h3>
-                  
-                  <p className="text-sm text-slate-600 leading-relaxed font-medium mt-auto">
+
+                  {/* Description */}
+                  <p className="text-[11px] sm:text-xs xl:text-[13px] text-slate-600 leading-relaxed font-medium">
                     {solution.description}
                   </p>
+                </div>
+
+                {/* Card CTA Bottom */}
+                <div className="relative z-10 pt-5 sm:pt-6 mt-auto flex items-center">
+                  <div className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-bold text-primary">
+                    <span>{solution.tag}</span>
+                    <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 group-hover:bg-primary group-hover:text-white">
+                      <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
-
-        {/* Process Flow */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="relative max-w-5xl mx-auto"
-        >
-          <div className="absolute inset-0 bg-primary/5 blur-[40px] rounded-full pointer-events-none" />
-          
-          <div className="relative bg-white border border-slate-100 rounded-[2.5rem] py-6 px-8 md:px-16 flex flex-wrap items-center justify-center gap-4 md:gap-8 shadow-xl shadow-slate-200/50 backdrop-blur-xl">
-            <p className="w-full text-center text-xs font-bold tracking-[0.2em] text-slate-400 uppercase mb-4 md:hidden">Workflow</p>
-            
-            {flowSteps.map((step, index) => (
-              <React.Fragment key={index}>
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 border border-slate-100 text-primary text-xs font-black shadow-sm">
-                    0{index + 1}
-                  </span>
-                  <span className="text-lg md:text-2xl font-black font-display text-slate-800 tracking-wide">
-                    {step}
-                  </span>
-                </div>
-                {index < flowSteps.length - 1 && (
-                  <ArrowRight className="w-5 h-5 text-slate-300 hidden md:block" />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </motion.div>
 
       </Container>
     </section>

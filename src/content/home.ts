@@ -7,13 +7,18 @@
 
 export const homeContent = {
   hero: {
-    titlePart1: "THE",
-    titlePart2: "FUTURE OF",
-    titlePart3: "ENTERPRISE",
-    subheadline: "Designed for seamless integration and refined operational intelligence, letting your infrastructure adapt instantly.",
+    badge: "",
+    titlePart1: "THE FUTURE OF",
+    titlePart2: "INTELLIGENT",
+    titlePart3: "INFRASTRUCTURE",
+    subheadline: "Unified enterprise IoT, smart EV mobility, and agricultural intelligence platforms engineered to transform mission-critical operations with real-time clarity.",
     primaryCta: { 
-      label: "EXPLORE COLLECTION", 
-      href: "/platforms" 
+      label: "About Us", 
+      href: "/about" 
+    },
+    secondaryCta: { 
+      label: "Contact Us", 
+      href: "/contact" 
     },
     cardText: "ENGINEERED TO\nDELIVER CLARITY,\nSCALE, AND\nCONTROL.",
     cardCta: { 
@@ -156,21 +161,58 @@ export const homeContent = {
   },
   impact: {
     card1: {
-      label1: "Challenge 01",
-      label2: "Industrial Operations",
-      title: "Disconnected Infrastructure",
-      description: "Industrial assets, sensors, energy systems, and enterprise platforms often operate in silos, limiting visibility, efficiency, and operational control.",
-      outcomeLabel: "Outcome:",
-      outcome: "Unified Operational Visibility"
+      id: "1",
+      label1: "CHALLENGE 01",
+      label2: "SAFETY",
+      title: "Personnel Hazards",
+      description: "Manual monitoring of hazardous industrial environments.",
+      outcomeLabel: "OUTCOME:",
+      outcome: "100% Visibility"
     },
 
     card2: {
       items: [
-        { id: "1", title: "Industrial", subtitle: "IoT" },
-        { id: "2", title: "EV", subtitle: "Charging" },
-        { id: "3", title: "Smart", subtitle: "Energy" },
-        { id: "4", title: "Managed", subtitle: "Services" }
+        { 
+          id: "2",
+          challengeLabel: "CHALLENGE 02",
+          category: "EV NETWORKS", 
+          title: "Fragmented Charging", 
+          description: "Complexity in managing multi-site charger availability and billing.",
+          outcome: "99.9% Uptime"
+        },
+        { 
+          id: "3", 
+          challengeLabel: "CHALLENGE 03",
+          category: "ENERGY COSTS", 
+          title: "Rising Utility Expenses", 
+          description: "High operational costs due to inefficient peak-load management.",
+          outcome: "25% Reduction"
+        },
+        { 
+          id: "4", 
+          challengeLabel: "CHALLENGE 04",
+          category: "WATER USAGE", 
+          title: "Undetected Leaks", 
+          description: "Non-revenue water loss across large-scale facility networks.",
+          outcome: "Zero-Leak Ops"
+        },
+        { 
+          id: "5", 
+          challengeLabel: "CHALLENGE 05",
+          category: "FACILITIES", 
+          title: "Manual FM Tasks", 
+          description: "Inefficient maintenance schedules based on time rather than data.",
+          outcome: "Predictive FM"
+        }
       ],
+      feature: {
+        id: "6",
+        challengeLabel: "CHALLENGE 06",
+        category: "AGRICULTURE",
+        title: "Climate Volatility",
+        description: "Inconsistent crop yields due to unpredictable moisture levels.",
+        outcome: "30% Yield Gain"
+      },
       featureTitle: "Integrated Solutions"
     },
 

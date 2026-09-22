@@ -7,11 +7,13 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const clients = [
+  { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
+  { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
+  { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
   { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
   { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
   { name: "Space42", src: "/logo/client%20logos/space42.png" },
   { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
-  { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
   { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
 ];
 
@@ -71,15 +73,23 @@ export default function IotricsHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full sm:w-auto"
+          className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-auto"
         >
-          <Link
+          <a
             href="#solutions"
-            className="inline-flex items-center justify-center space-x-2.5 bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-md font-bold text-sm transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0"
+            onClick={(e) => {
+              const el = document.getElementById("solutions");
+              if (el) {
+                e.preventDefault();
+                el.scrollIntoView({ behavior: "smooth" });
+                window.history.pushState(null, "", "#solutions");
+              }
+            }}
+            className="inline-flex items-center justify-center space-x-2 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <span>Explore IoTRICs</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          </a>
         </motion.div>
 
       </div>

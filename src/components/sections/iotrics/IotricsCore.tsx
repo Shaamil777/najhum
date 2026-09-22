@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Activity, Bell, Eye, Zap, Map, BarChart3, CheckCircle2 } from "lucide-react";
 
@@ -129,10 +130,10 @@ export default function IotricsCore() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 w-full text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 w-full text-left items-center">
           
-          {/* Left Column: Accordion List */}
-          <div className="lg:col-span-5 flex flex-col border-t border-neutral-200">
+          {/* Left Column: Accordion List (shown second on mobile, first on desktop) */}
+          <div className="order-2 lg:order-1 lg:col-span-5 flex flex-col border-t border-neutral-200">
             {coreModules.map((module, index) => {
               const isActive = activeIndex === index;
               return (
@@ -198,62 +199,33 @@ export default function IotricsCore() {
             </div>
           </div>
 
-          {/* ═══ DESKTOP-ONLY Right Column: Detailed Data Box ═══ */}
-          <div className="hidden lg:flex lg:col-span-7 w-full items-stretch h-full">
-            <div className="w-full flex flex-col justify-between p-8 sm:p-10 lg:p-12 bg-neutral-950 rounded-2xl text-white shadow-2xl relative overflow-hidden">
-              
-              {/* Subtle background glow for right column */}
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+          {/* Right Column: Live Enterprise Dashboard Showcase (shown first on mobile, second on desktop) */}
+          <div className="order-1 lg:order-2 flex flex-col lg:col-span-7 w-full justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-neutral-50 rounded-2xl border border-neutral-200/80 shadow-2xl overflow-hidden relative w-full flex flex-col group"
+            >
+              {/* Dashboard Image Content - Full Natural Dimensions, Never Cropped */}
+              <div className="relative z-10 w-full overflow-hidden bg-neutral-50">
+                <Image
+                  src="/images/iotrics/dashboardiortics.png"
+                  alt="IoTRICs Enterprise Dashboard Interface"
+                  width={2880}
+                  height={1572}
+                  priority
+                  className="w-full h-auto block object-contain select-none"
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 60vw, 900px"
+                />
+              </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full flex flex-col relative z-10 h-full"
-                >
-                  <div className="mb-10">
-                    <span className="text-blue-400 text-xs font-bold tracking-widest uppercase mb-3 block">
-                      Core Capability
-                    </span>
-                    <h4 className="text-3xl sm:text-4xl font-bold mb-6 text-white leading-tight">
-                      {coreModules[activeIndex].subtitle}
-                    </h4>
-                    <p className="text-neutral-400 leading-relaxed text-base sm:text-lg mb-8">
-                      {coreModules[activeIndex].description}
-                    </p>
-                    
-                    {/* Key Capabilities List */}
-                    <div className="mb-8">
-                      <h5 className="text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-white/10 pb-2 inline-block">
-                        Key Capabilities
-                      </h5>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
-                        {coreModules[activeIndex].keyCapabilities.map((cap, i) => (
-                          <li key={i} className="flex items-start gap-2 text-neutral-300 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-                            <span>{cap}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Tags Bottom Bar */}
-                  <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 mt-auto">
-                    {coreModules[activeIndex].tags.map((tag, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-[10px] font-bold tracking-widest text-neutral-300 uppercase">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                </motion.div>
-              </AnimatePresence>
-            </div>
+              {/* Decorative faint background grid */}
+              <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f6_1px,transparent_1px),linear-gradient(to_bottom,#3b82f6_1px,transparent_1px)] bg-[size:2rem_2rem]" />
+              </div>
+            </motion.div>
           </div>
           
         </div>

@@ -11,7 +11,6 @@ import {
   Stack 
 } from "@/design-system";
 import { ChevronDown } from "lucide-react";
-import NextLink from "next/link";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -65,13 +64,13 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* The trigger link */}
-      <NextLink
-        href={parentHref}
+      {/* The trigger (hover-only dropdown, no navigation to /platforms) */}
+      <button
+        type="button"
         className={cn(
-          "relative z-10 flex items-center gap-1 text-sm font-semibold tracking-wide px-4 py-2 transition-colors duration-200",
+          "relative z-10 flex items-center gap-1 text-sm font-semibold tracking-wide px-4 py-2 transition-colors duration-200 cursor-default",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md",
-          isParentActive ? "text-primary" : "text-inherit hover:opacity-80"
+          (isParentActive || isOpen) ? "text-primary" : "text-inherit hover:text-primary"
         )}
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -83,7 +82,7 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
             isOpen && "rotate-180"
           )} 
         />
-      </NextLink>
+      </button>
 
       {/* Magic Pill Hover Effect */}
       <AnimatePresence>

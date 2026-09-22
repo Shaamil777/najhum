@@ -57,7 +57,7 @@ export default function EvolticsJourney() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans">
+    <section id="journey" className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans scroll-mt-20">
       
       {/* Background Grid */}
       <div className="absolute inset-0 pointer-events-none opacity-30">

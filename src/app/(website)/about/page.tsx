@@ -13,7 +13,7 @@ export default function AboutPage() {
       <AboutHero />
       <AboutIntro />
       <AboutPlatform />
-      <AboutMethodology />
+      {/* <AboutMethodology /> */}
       <AboutDifferentiator />
       <AboutTrust />
       <AboutPresence />

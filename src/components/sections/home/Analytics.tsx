@@ -66,10 +66,10 @@ function ParallaxRow({ children, baseVelocity = 100 }: ParallaxProps) {
     <div className="overflow-hidden flex m-0 relative max-w-[100vw]">
       <motion.div className="flex whitespace-nowrap flex-nowrap w-max items-center" style={{ x }}>
         {/* Render 4 identical sets to seamlessly loop */}
-        <div className="flex gap-6 pr-6">{children}</div>
-        <div className="flex gap-6 pr-6">{children}</div>
-        <div className="flex gap-6 pr-6">{children}</div>
-        <div className="flex gap-6 pr-6">{children}</div>
+        <div className="flex gap-3 sm:gap-6 pr-3 sm:pr-6">{children}</div>
+        <div className="flex gap-3 sm:gap-6 pr-3 sm:pr-6">{children}</div>
+        <div className="flex gap-3 sm:gap-6 pr-3 sm:pr-6">{children}</div>
+        <div className="flex gap-3 sm:gap-6 pr-3 sm:pr-6">{children}</div>
       </motion.div>
     </div>
   );
@@ -78,18 +78,18 @@ function ParallaxRow({ children, baseVelocity = 100 }: ParallaxProps) {
 // Reusable card for the analytics data
 function AnalyticsCard({ data, label }: { data: any, label?: string }) {
   return (
-    <div className="w-[260px] sm:w-[320px] min-h-[180px] flex-shrink-0 bg-white border border-zinc-200 rounded-2xl p-6 flex flex-col justify-between group hover:border-zinc-300 transition-colors duration-300">
-       <div className="flex flex-col gap-2 whitespace-normal">
+    <div className="w-[185px] sm:w-[260px] lg:w-[320px] min-h-[145px] sm:min-h-[170px] lg:min-h-[180px] flex-shrink-0 bg-white border border-zinc-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 flex flex-col justify-between group hover:border-zinc-300 transition-colors duration-300 shadow-2xs">
+       <div className="flex flex-col gap-1 sm:gap-2 whitespace-normal">
          {label && (
-           <span className="text-primary text-[10px] font-bold tracking-widest uppercase mb-1">
+           <span className="text-primary text-[9px] sm:text-[10px] font-bold tracking-widest uppercase mb-0.5 sm:mb-1">
              {label}
            </span>
          )}
-         <h3 className="text-lg font-semibold text-zinc-900 leading-tight font-poppins">{data.title}</h3>
-         <p className="text-zinc-500 text-xs leading-relaxed">{data.description}</p>
+         <h3 className="text-sm sm:text-base lg:text-lg font-bold text-zinc-900 leading-tight font-poppins">{data.title}</h3>
+         <p className="text-zinc-500 text-[11px] sm:text-xs leading-relaxed line-clamp-2 sm:line-clamp-none">{data.description}</p>
        </div>
-       <div className="mt-6 pt-3">
-         <span className="text-4xl font-bold font-poppins tracking-tight text-zinc-400 line-clamp-1 break-all">{data.kpiValue}</span>
+       <div className="mt-3 sm:mt-6 pt-2 sm:pt-3 border-t border-zinc-100/60">
+         <span className="text-2xl sm:text-3xl lg:text-4xl font-bold font-poppins tracking-tight text-zinc-400 line-clamp-1 break-all">{data.kpiValue}</span>
        </div>
     </div>
   );
@@ -102,19 +102,19 @@ export default function Analytics() {
   const operationalIntelligence = analytics.operationalIntelligence || [];
 
   return (
-    <section className="w-full bg-[#fffff] text-zinc-900 py-16 sm:py-24 lg:py-32 overflow-hidden relative font-poppins">
+    <section className="w-full bg-[#fffff] text-zinc-900 py-12 sm:py-20 lg:py-32 overflow-hidden relative font-poppins">
       {/* Background subtle grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-80" />
       
       {/* Header */}
-      <div className="flex flex-col items-center text-center mb-16 relative z-20 px-6">
-        <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
+      <div className="flex flex-col items-center text-center mb-8 sm:mb-16 relative z-20 px-4 sm:px-6">
+        <span className="text-xs sm:text-sm font-semibold tracking-widest text-primary uppercase mb-2 sm:mb-4 flex items-center gap-3 sm:gap-4 before:h-px before:w-6 sm:before:w-8 before:bg-blue-200 after:h-px after:w-6 sm:after:w-8 after:bg-blue-200">
           {analytics.badge}
         </span>
-        <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
+        <h2 className="font-poppins normal-case text-2xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-3 sm:mb-6">
           {analytics.headline} <span className="text-primary">{analytics.headlineItalic}</span>
         </h2>
-        <p className="text-base sm:text-lg lg:text-xl text-zinc-500 max-w-2xl">
+        <p className="text-xs sm:text-base lg:text-xl text-zinc-500 max-w-2xl px-2">
           {analytics.description}
         </p>
       </div>
@@ -122,7 +122,7 @@ export default function Analytics() {
       <div className="lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
 
       {/* Infinite Scroll Velocity Parallax Rows */}
-      <div className="relative z-10 flex flex-col gap-4 w-full mt-12 overflow-visible">
+      <div className="relative z-10 flex flex-col gap-2.5 sm:gap-4 w-full mt-6 sm:mt-12 overflow-visible">
         <ParallaxRow baseVelocity={-0.8}>
            {trustSignals.map((data, i) => (
              <AnalyticsCard key={`row1-${i}`} data={data} label="Verified Trust Signal" />

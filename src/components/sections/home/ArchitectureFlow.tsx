@@ -29,13 +29,13 @@ const itemVariants: Variants = {
 
 export default function ArchitectureFlow() {
   return (
-    <div className="relative w-full mt-16 lg:mt-32 pt-8 lg:pt-16 border-t border-zinc-200/50 z-10">
+    <div className="relative w-full mt-10 sm:mt-16 lg:mt-32 pt-6 sm:pt-8 lg:pt-16 border-t border-zinc-200/50 z-10">
       <div className="w-full relative z-20">
-        <div className="text-center mb-16">
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-zinc-900 mb-4">
+        <div className="text-center mb-6 sm:mb-12 lg:mb-16">
+          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 mb-2 sm:mb-4">
             Intelligent Data Flow
           </h3>
-          <p className="text-sm md:text-base text-zinc-500 max-w-2xl mx-auto px-4">
+          <p className="text-xs sm:text-sm md:text-base text-zinc-500 max-w-2xl mx-auto px-4">
             Transforming physical infrastructure into actionable intelligence through a seamless, secure, and scalable architecture.
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function ArchitectureFlow() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="relative flex flex-col lg:flex-row items-center justify-between w-full max-w-6xl mx-auto gap-4 lg:gap-0 px-6 lg:px-0"
+          className="relative flex flex-col lg:flex-row items-center justify-between w-full max-w-6xl mx-auto gap-1.5 sm:gap-3 lg:gap-0 px-4 sm:px-6 lg:px-0"
         >
           {/* Animated Background Line */}
           <div className="hidden lg:block absolute top-[35%] left-[5%] right-[5%] h-[2px] bg-zinc-200 -translate-y-1/2 z-0 overflow-hidden rounded-full">
@@ -64,39 +64,39 @@ export default function ArchitectureFlow() {
                 {/* Step Node */}
                 <motion.div 
                   variants={itemVariants}
-                  className={`relative z-10 flex flex-col items-center justify-start p-6 w-full lg:w-[18%] bg-white rounded-2xl border transition-all duration-500 hover:-translate-y-2 group ${
+                  className={`relative z-10 flex flex-col items-center justify-start p-3 sm:p-5 lg:p-6 w-[62%] min-w-[200px] max-w-[230px] sm:w-[48%] sm:max-w-[250px] lg:w-[18%] lg:max-w-none bg-white rounded-2xl border transition-all duration-500 hover:-translate-y-2 group ${
                     step.highlight 
                       ? "border-primary/30 shadow-[0_8px_30px_rgb(0,0,0,0.12)] shadow-primary/20 ring-1 ring-primary/10" 
-                      : "border-zinc-200 shadow-sm hover:shadow-md hover:border-zinc-300"
+                      : "border-zinc-200 shadow-xs hover:shadow-md hover:border-zinc-300"
                   }`}
                 >
                   {/* Icon Container */}
-                  <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mb-4 lg:mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${
+                  <div className={`w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl flex items-center justify-center mb-2 sm:mb-4 lg:mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${
                     step.highlight 
                       ? "bg-gradient-to-br from-primary to-primary-hover text-white shadow-lg shadow-primary/30" 
                       : "bg-zinc-50 text-zinc-700 border border-zinc-100 group-hover:bg-white group-hover:border-zinc-200"
                   }`}>
-                    <step.icon className={`w-6 h-6 lg:w-7 lg:h-7 ${step.highlight ? "" : "text-zinc-600 group-hover:text-primary transition-colors"}`} strokeWidth={1.5} />
+                    <step.icon className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 ${step.highlight ? "" : "text-zinc-600 group-hover:text-primary transition-colors"}`} strokeWidth={1.5} />
                   </div>
                   
                   {/* Text */}
-                  <h4 className={`text-sm font-bold mb-2 text-center ${step.highlight ? "text-primary" : "text-zinc-900"}`}>
+                  <h4 className={`text-xs sm:text-sm font-bold mb-0.5 sm:mb-2 text-center ${step.highlight ? "text-primary" : "text-zinc-900"}`}>
                     {step.title}
                   </h4>
-                  <p className="text-[11px] md:text-xs text-zinc-500 text-center leading-relaxed">
+                  <p className="text-[11px] md:text-xs text-zinc-500 text-center leading-snug sm:leading-relaxed">
                     {step.desc}
                   </p>
 
                   {/* Highlight glow effect */}
                   {step.highlight && (
-                    <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-colors pointer-events-none" />
+                    <div className="absolute inset-0 bg-primary/5 rounded-xl sm:rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-colors pointer-events-none" />
                   )}
                 </motion.div>
 
                 {/* Connecting Chevron for Mobile */}
                 {!isLast && (
-                  <motion.div variants={itemVariants} className="lg:hidden flex justify-center py-2 text-zinc-300">
-                    <ChevronRight className="w-5 h-5 rotate-90" />
+                  <motion.div variants={itemVariants} className="lg:hidden flex justify-center py-1 text-zinc-300">
+                    <ChevronRight className="w-4 h-4 rotate-90" />
                   </motion.div>
                 )}
               </React.Fragment>

@@ -269,8 +269,9 @@ export default function EvolticsSolutions() {
 
   return (
     <section
+      id="solutions"
       ref={containerRef}
-      className="relative w-full h-[550vh] bg-white text-foreground font-sans"
+      className="relative w-full h-[550vh] bg-white text-foreground font-sans scroll-mt-20"
     >
 
       {/* ── Sticky viewport ── */}

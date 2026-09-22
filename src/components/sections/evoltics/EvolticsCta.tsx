@@ -38,7 +38,7 @@ export default function EvolticsCta() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full bg-white py-20 sm:py-28 lg:py-36 overflow-hidden border-t border-border">
+    <section id="contact" className="relative w-full bg-white py-20 sm:py-28 lg:py-36 overflow-hidden border-t border-border scroll-mt-20">
       
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">

@@ -77,14 +77,14 @@ export default function AboutDifferentiator() {
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Cards */}
-        <div className="flex flex-col gap-20 md:gap-28">
+        <div className="flex flex-col gap-12 sm:gap-16 md:gap-28">
           {differentiators.map((diff, idx) => {
             const isReversed = idx % 2 !== 0;
 
             return (
               <div
                 key={idx}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center transition-all duration-700 ${
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center transition-all duration-700 ${
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-16"
@@ -95,9 +95,9 @@ export default function AboutDifferentiator() {
                 <div
                   className={`relative ${
                     isReversed ? "lg:order-2" : "lg:order-1"
-                  }`}
+                  } w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-none mx-auto`}
                 >
-                  <div className={`relative rounded-3xl overflow-hidden border ${diff.accentBorder} bg-neutral-50 p-6 md:p-10 group`}>
+                  <div className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border ${diff.accentBorder} bg-neutral-50 p-4 sm:p-6 md:p-10 group shadow-xs sm:shadow-sm`}>
                     {/* Glow behind image */}
                     <div
                       className={`absolute inset-0 ${diff.glowColor} opacity-40 blur-3xl pointer-events-none`}
@@ -115,14 +115,14 @@ export default function AboutDifferentiator() {
 
                   {/* Floating stat badge */}
                   <div
-                    className={`absolute -bottom-5 ${
-                      isReversed ? "-left-3 md:-left-5" : "-right-3 md:-right-5"
-                    } bg-neutral-950 text-white rounded-2xl px-6 py-4 shadow-2xl z-20`}
+                    className={`absolute -bottom-3 sm:-bottom-5 ${
+                      isReversed ? "-left-2 sm:-left-3 md:-left-5" : "-right-2 sm:-right-3 md:-right-5"
+                    } bg-neutral-950 text-white rounded-xl sm:rounded-2xl px-4 py-2.5 sm:px-6 sm:py-4 shadow-xl sm:shadow-2xl z-20`}
                   >
-                    <span className={`text-3xl md:text-4xl font-black ${diff.accentColor}`}>
+                    <span className={`text-2xl sm:text-3xl md:text-4xl font-black ${diff.accentColor}`}>
                       {diff.stat}
                     </span>
-                    <span className="block text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 mt-1">
+                    <span className="block text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 mt-0.5 sm:mt-1">
                       {diff.statLabel}
                     </span>
                   </div>
@@ -135,11 +135,11 @@ export default function AboutDifferentiator() {
                   }`}
                 >
 
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-tight tracking-tight mb-6">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-tight tracking-tight mb-3 sm:mb-6">
                     {diff.title}
                   </h3>
 
-                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-lg">
+                  <p className="text-sm sm:text-base md:text-lg text-neutral-500 leading-relaxed max-w-lg">
                     {diff.description}
                   </p>
                 </div>

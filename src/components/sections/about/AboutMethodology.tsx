@@ -71,8 +71,9 @@ export default function AboutMethodology() {
 
   return (
     <section
+      id="technology"
       ref={sectionRef}
-      className="relative w-full py-24 md:py-32 bg-[#f4f7fa] text-slate-900 overflow-hidden"
+      className="relative w-full py-24 md:py-32 bg-[#f4f7fa] text-slate-900 overflow-hidden scroll-mt-20"
     >
       {/* ── Keyframe Animations for Flowing Data Line ── */}
       <style>{`

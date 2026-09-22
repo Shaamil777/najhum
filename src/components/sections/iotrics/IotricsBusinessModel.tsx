@@ -2,17 +2,108 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, Target } from "lucide-react";
+import { Zap, Box, CheckCircle2, XCircle, Check, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const solaasPoints = [
+interface ComparisonItem {
+  id: string;
+  solaas: {
+    title: string;
+    description: string;
+    details: string;
+  };
+  paas: {
+    title: string;
+    description: string;
+    details: string;
+  };
+}
+
+const comparisonData: ComparisonItem[] = [
+  {
+    id: "capex",
+    solaas: {
+      title: "CAPITAL EXPENDITURE",
+      description: "Zero Upfront Hardware Cost",
+      details: "We supply all devices, gateways, and connectivity under a comprehensive subscription."
+    },
+    paas: {
+      title: "ASSET OWNERSHIP",
+      description: "Full Hardware Ownership",
+      details: "Make a one-time purchase for all hardware, giving you complete permanent ownership of the assets."
+    }
+  },
+  {
+    id: "costs",
+    solaas: {
+      title: "RECURRING EXPENSES",
+      description: "Predictable OpEx Structure",
+      details: "Fixed monthly or annual pricing with no surprise maintenance or replacement bills."
+    },
+    paas: {
+      title: "RECURRING EXPENSES",
+      description: "Lower Ongoing Costs",
+      details: "Your recurring subscription strictly covers the cloud platform and data storage, significantly reducing operational expenses."
+    }
+  },
+  {
+    id: "management",
+    solaas: {
+      title: "MAINTENANCE & SUPPORT",
+      description: "Fully Managed Service",
+      details: "Enjoy total peace of mind. We handle AMC, warranty, installation, and the entire device lifecycle."
+    },
+    paas: {
+      title: "INFRASTRUCTURE CONTROL",
+      description: "Complete Client Control",
+      details: "Manage your own infrastructure, deployment, and device maintenance according to your internal IT policies."
+    }
+  }
+];
+
+const scopeData = {
+  solaas: {
+    included: [
+      "Annual Maintenance (AMC) covering hardware & software",
+      "Warranty coverage for the full active subscription period",
+      "Supply of IP-rated & non-IP-rated devices",
+      "Configuration, commissioning & radio planning",
+      "Outdoor gateway supply & monthly connectivity charges",
+    ],
+    excluded: [
+      "Platform customizations or feature changes",
+      "On-site civil works (drilling, structural mounting)",
+      "Client-side IT infrastructure, computers, or internet",
+      "Site acquisition, poles, or power arrangements",
+    ]
+  },
+  paas: {
+    included: [
+      "Cloud-based monitoring platform & data visualization",
+      "Data storage & historical data access",
+      "Basic analytics, reporting & alert management",
+      "User access management & role-based permissions",
+      "Platform maintenance, updates & security patches",
+    ],
+    excluded: [
+      "Platform customizations",
+      "On-site civil works (drilling, structural mounting)",
+      "Internet connectivity, computers, or laptops",
+      "Gateways in case of no coverage",
+      "AI Module and related dashboards",
+    ]
+  }
+};
+
+// Previous list points preserved for reference
+const originalSolaasPoints = [
   "Hardware, software, connectivity, and maintenance bundled into a monthly subscription",
   "Minimal CAPEX with no large upfront investment required",
   "Najhum manages deployment, configuration, updates, and ongoing support",
   "Scale from a single sensor to thousands without changing your infrastructure"
 ];
 
-const paasPoints = [
+const originalPaasPoints = [
   "Platform licensing for organizations managing their own IoT infrastructure",
   "API access for integration with existing systems",
   "Integration with enterprise platforms and operational systems",
@@ -22,206 +113,391 @@ const paasPoints = [
 
 export default function IotricsBusinessModel() {
   return (
-    <section className="w-full relative overflow-hidden font-poppins">
+    <section className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200">
       
       {/* Background Split (Desktop Only) */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">
-        {/* Left Side Bg (SOLAAS - Highlighted) */}
-        <div className="w-1/2 bg-blue-50/40 relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px]" />
+        {/* Left Side Bg */}
+        <div className="w-1/2 bg-white relative overflow-hidden border-r border-zinc-200/50">
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
         </div>
-        {/* Right Side Bg (PAAS - Neutral) */}
-        <div className="w-1/2 bg-white relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neutral-200/40 rounded-full blur-[120px]" />
+        {/* Right Side Bg */}
+        <div className="w-1/2 bg-zinc-50 relative overflow-hidden">
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px]" />
         </div>
       </div>
 
       <div className="container mx-auto relative z-10 max-w-[1400px]">
         
+        {/* Header Title (Centered) */}
+        <div className="text-center w-full pt-20 pb-8 lg:pt-32 lg:pb-12 px-4 relative z-20">
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">OUR BUSINESS MODELS</p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 tracking-tight leading-tight mb-6">
+            Two Ways to Work With Us
+          </h2>
+          <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
+            Choose the deployment model that best fits your capital structure and operational preferences.
+          </p>
+        </div>
+
         {/* ════════════════════════════════════════════════════════════════════════
             DESKTOP SPLIT VIEW (lg and up)
            ════════════════════════════════════════════════════════════════════════ */}
-        <div className="hidden lg:grid grid-cols-2 gap-8 xl:gap-32">
+        <div className="hidden lg:grid grid-cols-2 gap-8 xl:gap-32 px-8">
           
-          {/* LEFT COLUMN: SOLAAS */}
-          <div className="py-24 flex flex-col items-end bg-transparent">
+          {/* LEFT COLUMN: SolaaS */}
+          <div className="pb-20 lg:pb-28 flex flex-col items-end bg-transparent pt-12">
             
-            <div className="w-full text-right mb-12">
-              <span className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-2 block">Deployment Model 01</span>
-              <h2 className="text-4xl font-bold tracking-tight text-neutral-900">
-                SOLAAS
-              </h2>
-              <p className="text-blue-600 mt-2 text-lg">Solution-as-a-Service</p>
-            </div>
+            <h2 className="normal-case text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-right w-full" style={{ textTransform: "none" }}>
+              <span className="text-primary font-bold">SolaaS</span> Model
+            </h2>
 
-            <div className="space-y-8 w-full flex flex-col items-end">
-              {solaasPoints.map((text, idx) => {
+            <div className="space-y-6 w-full flex flex-col items-end">
+              {comparisonData.map((item, idx) => {
                 let staggerClass = "";
                 if (idx === 0) staggerClass = "mr-12";
                 if (idx === 1) staggerClass = "mr-0";
                 if (idx === 2) staggerClass = "mr-16";
-                if (idx === 3) staggerClass = "mr-6";
 
                 return (
                   <motion.div
-                    key={`desktop-solaas-${idx}`}
+                    key={`desktop-solaas-${item.id}`}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     className={cn(
-                      "flex items-start gap-4 max-w-[400px] w-full",
+                      "bg-white border border-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
                       staggerClass
                     )}
                   >
-                    <div className="mt-1 w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 border border-blue-100 shadow-sm">
-                      <Check className="w-4 h-4 text-blue-600" strokeWidth={3} />
+                    <div className="flex items-start gap-4 flex-row-reverse text-right">
+                      <div className="mt-0.5 shrink-0">
+                        <Zap className="w-5 h-5 text-primary" strokeWidth={2.5} />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-bold tracking-wider text-primary/70 uppercase mb-1.5 block">
+                          {item.solaas.title}
+                        </span>
+                        <h4 className="text-base font-bold text-zinc-900 mb-2 leading-snug">
+                          {item.solaas.description}
+                        </h4>
+                        <p className="text-[13px] text-zinc-600 leading-relaxed">
+                          {item.solaas.details}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-[15px] text-neutral-700 leading-relaxed">
-                      {text}
-                    </p>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Left Col Bottom Tag */}
-            <div className="mt-16 w-full max-w-[400px] text-right relative group">
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-blue-200/50 rounded-2xl blur-xl transition-all opacity-0 group-hover:opacity-100" />
-               <div className="relative bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-blue-100 shadow-[0_4px_20px_rgb(59,130,246,0.08)] hover:shadow-[0_4px_25px_rgb(59,130,246,0.12)] transition-all">
-                 <div className="absolute top-1/2 -translate-y-1/2 right-0 w-1 h-1/2 bg-blue-500 rounded-l-full" />
-                 <p className="text-[11px] text-blue-600 uppercase tracking-widest mb-2 font-bold flex items-center justify-end gap-2">
-                   Ideal Fit <Target className="w-3.5 h-3.5 text-blue-500" />
-                 </p>
-                 <p className="text-[14px] text-neutral-800 font-medium leading-relaxed pr-3">
-                   Most deployments needing a complete IoT solution without maintaining an internal team.
-                 </p>
-               </div>
-            </div>
+            {/* Scope of SolaaS (Disabled - Code Preserved) */}
+            {false && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="w-full max-w-[500px] bg-white border border-zinc-200/50 shadow-sm rounded-[2rem] p-8 mt-16"
+                >
+                  <h3 className="text-lg font-bold text-zinc-900 mb-6 border-b border-zinc-100 pb-4">Scope of Delivery</h3>
+                  
+                  <div className="mb-8">
+                    <h4 className="text-[13px] font-bold tracking-wider text-green-700 uppercase mb-4 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" /> Included
+                    </h4>
+                    <ul className="space-y-3">
+                      {scopeData.solaas.included.map((inc, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-[14px] text-zinc-600">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                          <span className="leading-snug">{inc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-[13px] font-bold tracking-wider text-red-600 uppercase mb-4 flex items-center gap-2">
+                      <XCircle className="w-4 h-4" /> Excluded
+                    </h4>
+                    <ul className="space-y-3">
+                      {scopeData.solaas.excluded.map((exc, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-[14px] text-zinc-500">
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
+                          <span className="leading-snug">{exc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+
+                <div className="mt-8 w-full max-w-[500px] text-center">
+                   <p className="text-xs text-zinc-500">Best For: <span className="font-bold text-zinc-700">OpEx Budgets & Turnkey Operations</span></p>
+                </div>
+              </>
+            )}
           </div>
 
-          {/* RIGHT COLUMN: PAAS */}
-          <div className="py-24 flex flex-col items-start bg-transparent">
+          {/* RIGHT COLUMN: PaaS */}
+          <div className="pb-20 lg:pb-28 flex flex-col items-start bg-transparent pt-12">
             
-            <div className="w-full text-left mb-12">
-              <span className="text-sm font-bold tracking-widest text-neutral-400 uppercase mb-2 block">Deployment Model 02</span>
-              <h2 className="text-4xl font-bold tracking-tight text-neutral-800">
-                PAAS
-              </h2>
-              <p className="text-neutral-500 mt-2 text-lg">Platform-as-a-Service</p>
-            </div>
+            <h2 className="normal-case text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-left w-full" style={{ textTransform: "none" }}>
+              <span className="text-blue-600 font-bold">PaaS</span> Model
+            </h2>
 
-            <div className="space-y-8 w-full flex flex-col items-start">
-              {paasPoints.map((text, idx) => {
+            <div className="space-y-6 w-full flex flex-col items-start">
+              {comparisonData.map((item, idx) => {
                 let staggerClass = "";
                 if (idx === 0) staggerClass = "ml-0";
                 if (idx === 1) staggerClass = "ml-12";
                 if (idx === 2) staggerClass = "ml-6";
-                if (idx === 3) staggerClass = "ml-16";
-                if (idx === 4) staggerClass = "ml-4";
 
                 return (
                   <motion.div
-                    key={`desktop-paas-${idx}`}
+                    key={`desktop-paas-${item.id}`}
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     className={cn(
-                      "flex items-start gap-4 max-w-[400px] w-full",
+                      "bg-white backdrop-blur-sm border border-blue-600/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
                       staggerClass
                     )}
                   >
-                    <div className="mt-1 w-7 h-7 rounded-full bg-neutral-100 flex items-center justify-center shrink-0 border border-neutral-200">
-                      <Check className="w-4 h-4 text-neutral-500" strokeWidth={3} />
+                    <div className="flex items-start gap-4">
+                      <div className="mt-0.5 shrink-0">
+                        <Box className="w-5 h-5 text-blue-600" strokeWidth={2.5} />
+                      </div>
+                      <div>
+                        <span className="text-[11px] font-bold tracking-wider text-blue-600/70 uppercase mb-1.5 block">
+                          {item.paas.title}
+                        </span>
+                        <h4 className="text-base font-bold text-zinc-900 mb-2 leading-snug">
+                          {item.paas.description}
+                        </h4>
+                        <p className="text-[13px] text-zinc-600 leading-relaxed">
+                          {item.paas.details}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-[15px] text-neutral-600 leading-relaxed">
-                      {text}
-                    </p>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Right Col Bottom Tag */}
-            <div className="mt-16 w-full max-w-[400px] text-left relative group">
-               <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-100/80 rounded-2xl blur-xl transition-all opacity-0 group-hover:opacity-100" />
-               <div className="relative bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-neutral-200/80 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_25px_rgb(0,0,0,0.06)] transition-all">
-                 <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1 h-1/2 bg-neutral-300 rounded-r-full" />
-                 <p className="text-[11px] text-neutral-400 uppercase tracking-widest mb-2 font-bold flex items-center gap-2">
-                   <Target className="w-3.5 h-3.5 text-neutral-400" /> Ideal Fit
-                 </p>
-                 <p className="text-[14px] text-neutral-700 font-medium leading-relaxed pl-3">
-                   Enterprises with existing IoT infrastructure or in-house technical teams.
-                 </p>
-               </div>
-            </div>
+            {/* Scope of PaaS (Disabled - Code Preserved) */}
+            {false && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="w-full max-w-[500px] bg-white border border-zinc-200/50 shadow-sm rounded-[2rem] p-8 mt-16"
+                >
+                  <h3 className="text-lg font-bold text-zinc-900 mb-6 border-b border-zinc-100 pb-4">Scope of Delivery</h3>
+                  
+                  <div className="mb-8">
+                    <h4 className="text-[13px] font-bold tracking-wider text-green-700 uppercase mb-4 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" /> Included
+                    </h4>
+                    <ul className="space-y-3">
+                      {scopeData.paas.included.map((inc, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-[14px] text-zinc-600">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                          <span className="leading-snug">{inc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-[13px] font-bold tracking-wider text-red-600 uppercase mb-4 flex items-center gap-2">
+                      <XCircle className="w-4 h-4" /> Excluded
+                    </h4>
+                    <ul className="space-y-3">
+                      {scopeData.paas.excluded.map((exc, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-[14px] text-zinc-500">
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
+                          <span className="leading-snug">{exc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+
+                <div className="mt-8 w-full max-w-[500px] text-center">
+                   <p className="text-xs text-zinc-500">Best For: <span className="font-bold text-zinc-700">CapEx Budgets & In-house IT Teams</span></p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
         {/* ════════════════════════════════════════════════════════════════════════
             MOBILE COMBINED VIEW (< lg)
            ════════════════════════════════════════════════════════════════════════ */}
-        <div className="flex lg:hidden flex-col items-center px-4 py-12">
+        <div className="flex lg:hidden flex-col items-center px-4 sm:px-6 py-12">
           
-          <div className="text-center mb-8">
-            <span className="text-blue-600 font-bold tracking-widest uppercase mb-1 text-[10px] block">Business Models</span>
-            <h2 className="text-xl font-bold tracking-tight text-neutral-900">
-              SOLAAS <span className="text-neutral-300 font-normal mx-1">vs</span> PAAS
-            </h2>
+          {/* Main Comparisons */}
+          <div className="space-y-6 w-full max-w-md md:max-w-3xl">
+            {comparisonData.map((item, idx) => (
+              <motion.div
+                key={`mobile-combined-${item.id}`}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-white border border-zinc-200 shadow-sm rounded-3xl p-5 sm:p-6 md:p-8 w-full relative overflow-hidden flex flex-col md:flex-row md:items-stretch gap-8 md:gap-0"
+              >
+                {/* SolaaS Side */}
+                <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-zinc-100 pb-8 md:pb-0 md:pr-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Zap className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="font-bold text-zinc-900">SolaaS</span>
+                  </div>
+                  <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-primary uppercase mb-1.5 md:mb-2 block">
+                    {item.solaas.title}
+                  </span>
+                  <h4 className="text-[14px] md:text-[15px] font-semibold text-zinc-800 leading-snug mb-2">
+                    {item.solaas.description}
+                  </h4>
+                  <p className="text-[12px] md:text-[13px] text-zinc-500 leading-relaxed">
+                    {item.solaas.details}
+                  </p>
+                </div>
+
+                {/* PaaS Side */}
+                <div className="w-full md:w-1/2 relative md:pl-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                      <Box className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <span className="font-bold text-zinc-900">PaaS</span>
+                  </div>
+                  <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-blue-600 uppercase mb-2 block">
+                    {item.paas.title}
+                  </span>
+                  <h4 className="text-[14px] md:text-[15px] font-bold text-zinc-800 leading-snug mb-2">
+                    {item.paas.description}
+                  </h4>
+                  <p className="text-[12px] md:text-[13px] text-zinc-500 leading-relaxed">
+                    {item.paas.details}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Two stacked compact cards */}
-          <div className="w-full max-w-md space-y-3">
-            
-            {/* SOLAAS Card */}
-            <div className="bg-blue-50/40 rounded-2xl border border-blue-100 p-5">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider text-blue-500 uppercase block">01</span>
-                  <h3 className="text-lg font-bold text-neutral-900">SOLAAS</h3>
-                </div>
-                <span className="text-[11px] text-blue-500 font-medium">Solution-as-a-Service</span>
-              </div>
-              <div className="space-y-2.5">
-                {solaasPoints.map((text, idx) => (
-                  <div key={`m-s-${idx}`} className="flex items-start gap-2.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-[7px]" />
-                    <p className="text-[12px] text-neutral-700 leading-relaxed">{text}</p>
+          {/* Scope Accompanying Section for Mobile (Disabled - Code Preserved) */}
+          {false && (
+            <div className="w-full max-w-md md:max-w-3xl space-y-6 mt-12">
+              <h3 className="text-2xl font-bold text-zinc-900 text-center mb-6">Scope of Delivery</h3>
+              
+              {/* SolaaS Scope */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white border border-zinc-200 shadow-sm rounded-3xl p-6"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Zap className="w-4 h-4 text-primary" />
                   </div>
-                ))}
-              </div>
-              <div className="mt-4 pt-3 border-t border-blue-100 flex items-center gap-2">
-                <Target className="w-3 h-3 text-blue-500" />
-                <p className="text-[11px] text-blue-600 font-medium">Complete IoT solution without an internal team</p>
-              </div>
-            </div>
-
-            {/* PAAS Card */}
-            <div className="bg-white rounded-2xl border border-neutral-200 p-5">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase block">02</span>
-                  <h3 className="text-lg font-bold text-neutral-900">PAAS</h3>
+                  <span className="font-bold text-zinc-900">SolaaS Model Scope</span>
                 </div>
-                <span className="text-[11px] text-neutral-400 font-medium">Platform-as-a-Service</span>
-              </div>
-              <div className="space-y-2.5">
-                {paasPoints.map((text, idx) => (
-                  <div key={`m-p-${idx}`} className="flex items-start gap-2.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 shrink-0 mt-[7px]" />
-                    <p className="text-[12px] text-neutral-600 leading-relaxed">{text}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center gap-2">
-                <Target className="w-3 h-3 text-neutral-400" />
-                <p className="text-[11px] text-neutral-500 font-medium">Enterprises with existing IoT infrastructure</p>
-              </div>
-            </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-[12px] font-bold tracking-wider text-green-700 uppercase mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" /> Included
+                  </h4>
+                  <ul className="space-y-2">
+                    {scopeData.solaas.included.map((inc, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-[13px] text-zinc-600">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                        <span className="leading-snug">{inc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-          </div>
+                <div>
+                  <h4 className="text-[12px] font-bold tracking-wider text-red-600 uppercase mb-3 flex items-center gap-2">
+                    <XCircle className="w-4 h-4" /> Excluded
+                  </h4>
+                  <ul className="space-y-2">
+                    {scopeData.solaas.excluded.map((exc, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-[13px] text-zinc-500">
+                        <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
+                        <span className="leading-snug">{exc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+
+              {/* PaaS Scope */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white border border-zinc-200 shadow-sm rounded-3xl p-6"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                    <Box className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <span className="font-bold text-zinc-900">PaaS Model Scope</span>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-[12px] font-bold tracking-wider text-green-700 uppercase mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" /> Included
+                  </h4>
+                  <ul className="space-y-2">
+                    {scopeData.paas.included.map((inc, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-[13px] text-zinc-600">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
+                        <span className="leading-snug">{inc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-[12px] font-bold tracking-wider text-red-600 uppercase mb-3 flex items-center gap-2">
+                    <XCircle className="w-4 h-4" /> Excluded
+                  </h4>
+                  <ul className="space-y-2">
+                    {scopeData.paas.excluded.map((exc, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-[13px] text-zinc-500">
+                        <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
+                        <span className="leading-snug">{exc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </div>
+          )}
+
         </div>
+
+        {/* 
+          Previous Simple Checklist Design preserved below (code not deleted)
+          Change `false &&` to `true &&` if needed to re-render.
+        */}
+        {false && (
+          <div className="hidden">
+            <div className="space-y-4">
+              {originalSolaasPoints.map((p, i) => <p key={i}>{p}</p>)}
+              {originalPaasPoints.map((p, i) => <p key={i}>{p}</p>)}
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

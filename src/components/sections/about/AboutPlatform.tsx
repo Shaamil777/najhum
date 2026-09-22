@@ -52,7 +52,7 @@ export default function AboutPlatform() {
   ];
 
   return (
-    <section className="relative w-full py-20 md:py-28 bg-[#fbfcfd] text-slate-900 overflow-hidden">
+    <section id="technology" className="relative w-full py-20 md:py-28 bg-[#fbfcfd] text-slate-900 overflow-hidden scroll-mt-16">
       {/* Subtle Ambient Decorative Arcs */}
       <div className="absolute -top-48 -left-48 w-[600px] h-[600px] rounded-full border border-blue-100/50 pointer-events-none" />
       <div className="absolute -top-64 -right-48 w-[700px] h-[700px] rounded-full border border-blue-100/40 pointer-events-none" />

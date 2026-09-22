@@ -17,6 +17,8 @@ const carouselLogos = [
 const gridLogos = [
   { name: "Al Rostamani Communications", src: "/logo/client logos/ARC_Logo.png" },
   { name: "DEWA", src: "/logo/client logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
+  { name: "ADAA", src: "/logo/client logos/adaa_gov.png" },
+  { name: "UAEAA", src: "/logo/client logos/uaeaa_gov.png" },
   { name: "Aramtec", src: "/logo/client logos/Aramteclogo_400x.avif" },
   { name: "ATGC", src: "/logo/client logos/atgc-logo.svg" },
   { name: "Al Mulla Group", src: "/logo/client logos/Al_Mulla_Group_Logo.svg" },

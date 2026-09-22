@@ -1,35 +1,52 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
-import { siteConfig } from "@/config/site";
-import { Button, Heading, Stack, Divider } from "@/design-system";
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import FocusLock from "react-focus-lock";
-import { BASE_STYLES, VARIANT_STYLES, SIZE_STYLES } from "@/design-system/primitives/actions/buttonVariants";
 import { cn } from "@/lib/utils";
 
-/**
- * MobileNav
- *
- * Renders the hamburger toggle and the fullscreen overlay menu.
- * Uses Framer Motion for entrance/exit animations.
- * Client Component for state management and active route highlighting.
- * Uses react-focus-lock to trap focus inside the menu when open.
- */
+interface SubItem {
+  title: string;
+  href: string;
+}
+
+interface NavItemData {
+  title: string;
+  href?: string;
+  isPlatforms?: boolean;
+  subItems?: SubItem[];
+}
+
+const navItems: NavItemData[] = [
+  { title: "Home", href: "/" },
+  { title: "About", href: "/about" },
+  {
+    title: "Platforms",
+    isPlatforms: true,
+    subItems: [
+      { title: "IoTRICS", href: "/platforms/iotrics" },
+      { title: "EVOLTICS", href: "/platforms/evoltics" },
+      { title: "CropifAI", href: "/platforms/cropifai" },
+    ],
+  },
+  { title: "Contact", href: "/contact" },
+];
+
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [platformsExpanded, setPlatformsExpanded] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Prevent background scrolling when menu is open
+  // Prevent body scrolling when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -41,110 +58,210 @@ export function MobileNav() {
     };
   }, [isOpen]);
 
-  const toggle = () => setIsOpen(!isOpen);
+  // Close menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  const toggle = () => setIsOpen((prev) => !prev);
   const close = () => setIsOpen(false);
 
   return (
-    <div className="lg:hidden flex items-center">
-      {/* Toggle Button */}
-      <button
-        onClick={toggle}
-        aria-expanded={isOpen}
-        aria-controls="mobile-menu"
-        aria-label="Toggle navigation menu"
-        className="p-2 text-inherit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm transition-colors hover:bg-surface-alt/10"
-      >
-        <Menu className="w-6 h-6" />
-      </button>
+    <>
+      {/* ═══ Closed State Floating Pill Header (Mobile) ═══ */}
+      <header className="fixed top-3.5 sm:top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] max-w-xl z-50 flex items-center justify-between bg-white rounded-full border border-neutral-200 shadow-[0_8px_30px_rgb(0,0,0,0.07)] h-16 pl-6 pr-3 transition-all duration-200">
+        <Link
+          href="/"
+          className="flex items-center shrink-0 focus:outline-none"
+          aria-label="Najhum Home"
+        >
+          <Image
+            src="/logo/logo.png"
+            alt="Najhum"
+            width={130}
+            height={44}
+            priority
+            className="h-8 w-auto object-contain"
+          />
+        </Link>
 
-      {/* Fullscreen Overlay */}
+        <button
+          onClick={toggle}
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={isOpen}
+          className="w-11 h-11 rounded-full bg-neutral-50 hover:bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 transition-all shadow-xs active:scale-95 cursor-pointer shrink-0"
+        >
+          <Menu className="w-5 h-5 text-neutral-900" strokeWidth={2} />
+        </button>
+      </header>
+
+      {/* ═══ Open State Overlay & Dropdown Menu ═══ */}
       {mounted &&
         createPortal(
           <AnimatePresence>
             {isOpen && (
-              <FocusLock>
+              <div className="fixed inset-0 z-[100]">
+                {/* Backdrop */}
                 <motion.div
-                  id="mobile-menu"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="fixed inset-0 z-[100] bg-background flex flex-col pt-4 px-4 overflow-y-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={close}
+                  className="fixed inset-0 bg-black/40 backdrop-blur-xs"
+                />
+
+                {/* Open State Floating Header */}
+                <header className="fixed top-3.5 sm:top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] max-w-xl z-[101] flex items-center justify-between bg-white rounded-full border border-neutral-200 shadow-[0_8px_30px_rgb(0,0,0,0.07)] h-16 pl-6 pr-3">
+                  <Link
+                    href="/"
+                    onClick={close}
+                    className="flex items-center shrink-0 focus:outline-none"
+                    aria-label="Najhum Home"
+                  >
+                    <Image
+                      src="/logo/logo.png"
+                      alt="Najhum"
+                      width={130}
+                      height={44}
+                      priority
+                      className="h-8 w-auto object-contain"
+                    />
+                  </Link>
+
+                  <button
+                    onClick={close}
+                    type="button"
+                    aria-label="Close menu"
+                    aria-expanded={true}
+                    className="w-11 h-11 rounded-full bg-neutral-50 hover:bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 transition-all shadow-xs active:scale-95 cursor-pointer shrink-0"
+                  >
+                    <X className="w-5 h-5 text-neutral-900" strokeWidth={2} />
+                  </button>
+                </header>
+
+                {/* Floating Dropdown Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                  className="fixed top-[5.5rem] left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2.5rem)] max-w-xl z-[101] max-h-[calc(100vh-6.75rem)] overflow-y-auto bg-white rounded-[30px] border border-neutral-200 shadow-2xl shadow-black/15 p-5 flex flex-col font-sans"
                 >
-                  {/* Header Area inside menu */}
-                  <div className="flex items-center justify-between h-12 mb-8">
-                    <Heading level={2} variant="h3" noUppercase className="tracking-tight">
-                      Menu
-                    </Heading>
-                    <button
-                      onClick={close}
-                      aria-label="Close navigation menu"
-                      className="p-2 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm transition-colors hover:bg-surface-alt"
-                    >
-                      <X className="w-6 h-6" />
-                    </button>
-                  </div>
-
-                  {/* Links */}
-                  <nav className="flex-1 flex flex-col gap-6 pb-24">
-                    <Stack gap="lg" className="mb-4">
-                      {siteConfig.mainNav.map((item) => {
-                        const isActive =
-                          pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
+                  <nav className="flex flex-col space-y-1">
+                    {navItems.map((item) => {
+                      if (item.isPlatforms && item.subItems) {
+                        const isPlatformsActive = pathname?.startsWith("/platforms");
                         return (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            onClick={close}
-                            className={cn(
-                              "text-2xl font-black uppercase tracking-tighter transition-colors",
-                              isActive ? "text-primary" : "text-foreground hover:text-primary/80"
-                            )}
-                          >
-                            {item.title}
-                          </Link>
+                          <div key={item.title} className="flex flex-col">
+                            {/* Platforms Header Toggle */}
+                            <button
+                              type="button"
+                              onClick={() => setPlatformsExpanded((prev) => !prev)}
+                              className={cn(
+                                "w-full flex items-center justify-between px-4 py-3 rounded-2xl text-left transition-colors cursor-pointer",
+                                isPlatformsActive
+                                  ? "bg-primary/10 text-primary font-bold"
+                                  : "text-neutral-800 font-semibold hover:bg-neutral-50 hover:text-primary"
+                              )}
+                            >
+                              <span className="text-sm sm:text-base tracking-wide">
+                                {item.title}
+                              </span>
+                              <ChevronDown
+                                className={cn(
+                                  "w-4 h-4 transition-transform duration-200",
+                                  platformsExpanded ? "rotate-180" : "rotate-0",
+                                  isPlatformsActive ? "text-primary" : "text-neutral-400"
+                                )}
+                              />
+                            </button>
+
+                            {/* Sub-items */}
+                            <AnimatePresence initial={false}>
+                              {platformsExpanded && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="overflow-hidden flex flex-col pl-4 sm:pl-5 pr-1 py-1 space-y-1"
+                                >
+                                  {item.subItems.map((sub) => {
+                                    const isSubActive = pathname === sub.href;
+                                    return (
+                                      <Link
+                                        key={sub.title}
+                                        href={sub.href}
+                                        onClick={close}
+                                        className={cn(
+                                          "flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors text-xs sm:text-sm font-semibold",
+                                          isSubActive
+                                            ? "bg-primary/10 text-primary font-bold"
+                                            : "text-neutral-600 hover:text-primary hover:bg-neutral-50"
+                                        )}
+                                      >
+                                        <span>{sub.title}</span>
+                                        {isSubActive && (
+                                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                                        )}
+                                      </Link>
+                                    );
+                                  })}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
                         );
-                      })}
-                    </Stack>
+                      }
 
-                    <Divider />
+                      const isActive =
+                        item.href === "/"
+                          ? pathname === "/"
+                          : Boolean(item.href && pathname?.startsWith(item.href));
 
-                    <Stack gap="md" className="mt-4">
-                      {siteConfig.footerNav.platforms.map((item) => {
-                        const isActive =
-                          pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
-                        return (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            onClick={close}
-                            className={cn(
-                              "text-lg font-semibold transition-colors",
-                              isActive ? "text-primary" : "text-muted hover:text-primary/80"
-                            )}
-                          >
-                            {item.title}
-                          </Link>
-                        );
-                      })}
-                    </Stack>
-
-                    <div className="mt-auto pt-8">
-                      <Link
-                        href="/contact"
-                        onClick={close}
-                        className={cn(BASE_STYLES, VARIANT_STYLES["primary"], SIZE_STYLES["lg"], "w-full")}
-                      >
-                        Contact
-                      </Link>
-                    </div>
+                      return (
+                        <Link
+                          key={item.title}
+                          href={item.href || "#"}
+                          onClick={close}
+                          className={cn(
+                            "flex items-center justify-between px-4 py-3 rounded-2xl text-left transition-colors text-sm sm:text-base font-semibold",
+                            isActive
+                              ? "bg-primary/10 text-primary font-bold"
+                              : "text-neutral-800 hover:bg-neutral-50 hover:text-primary"
+                          )}
+                        >
+                          <span className="tracking-wide">{item.title}</span>
+                          {isActive && (
+                            <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+                          )}
+                        </Link>
+                      );
+                    })}
                   </nav>
+
+                  {/* Divider */}
+                  <div className="w-full h-px bg-neutral-100 my-3.5" />
+
+                  {/* Bottom Brand CTA Button */}
+                  <Link
+                    href="/contact"
+                    onClick={close}
+                    className="w-full bg-primary hover:bg-primary-hover active:scale-[0.99] text-white font-bold py-3.5 sm:py-4 px-6 rounded-full flex items-center justify-center gap-2.5 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all text-sm sm:text-base group cursor-pointer"
+                  >
+                    <span>Contact Us</span>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-primary flex items-center justify-center shrink-0 ml-1.5 shadow-xs group-hover:translate-x-0.5 transition-transform">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </Link>
                 </motion.div>
-              </FocusLock>
+              </div>
             )}
           </AnimatePresence>,
           document.body
         )}
-    </div>
+    </>
   );
 }

@@ -13,7 +13,7 @@ export default function DottedWorldMap() {
   const svgMap = useMemo(() => {
     const map = new DottedMap({ height: 60, grid: 'vertical' });
 
-    // Mark GCC Countries in brand blue (#4c3bcf) by filling the region
+    // Mark GCC Countries in brand blue (#3B82F6) by filling the region
     for (let lat = 16.5; lat <= 31.5; lat += 0.5) {
       for (let lng = 36.0; lng <= 60.0; lng += 0.5) {
         let isGCC = false;
@@ -41,7 +41,7 @@ export default function DottedWorldMap() {
           map.addPin({
             lat,
             lng,
-            svgOptions: { color: '#4c3bcf', radius: 0.52 } // Size > 0.5 removes grid gaps, creating a solid fill
+            svgOptions: { color: '#3B82F6', radius: 0.52 } // Size > 0.5 removes grid gaps, creating a solid fill
           });
         }
       }

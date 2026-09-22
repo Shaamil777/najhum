@@ -97,7 +97,7 @@ const scopeData = {
 
 export default function CropifaiBusinessModels() {
   return (
-    <section className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200">
+    <section id="business-models" className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200 scroll-mt-20">
       
       {/* Background Split (Desktop Only) */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">

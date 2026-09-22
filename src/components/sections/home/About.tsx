@@ -56,9 +56,9 @@ export default function About() {
             </div>
             
             <div>
-              <a href="/about" className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-[#4c3bcf] group">
+              <a href="/about" className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-[#3B82F6] group">
                 <span className="group-hover:underline underline-offset-4">{homeContent.about.buttonLabel}</span>
-                <div className="w-8 h-8 rounded-full bg-[#4c3bcf]/10 flex items-center justify-center group-hover:bg-[#4c3bcf] group-hover:text-white transition-colors duration-300">
+                <div className="w-8 h-8 rounded-full bg-[#3B82F6]/10 flex items-center justify-center group-hover:bg-[#3B82F6] group-hover:text-white transition-colors duration-300">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </a>

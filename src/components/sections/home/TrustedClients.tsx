@@ -44,7 +44,7 @@ export default function TrustedClients() {
                 key={i} 
                 className="flex items-center justify-center gap-2 sm:gap-3 py-8 sm:py-10 lg:py-12 border-b-2 border-r-2 border-zinc-200 border-dotted grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-300 group cursor-default"
               >
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-800 group-hover:text-[#4c3bcf] transition-colors" />
+                <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-800 group-hover:text-[#3B82F6] transition-colors" />
                 <span className="font-display font-bold text-base sm:text-lg tracking-tight text-zinc-800">
                   {client.name}
                 </span>

@@ -22,14 +22,14 @@ export default function CropifaiPage() {
       <CropifaiArchitecture />
       <CropifaiSolutions />
       <CropifaiInterface />
-      <CropifaiWorkflow />
       <CropifaiHardware />
       <CropifaiWaterFlow />
+      {/* <CropifaiWorkflow /> */}
       <CropifaiWhyChoose />
       <CropifaiImpact />
 
-      <CropifaiBusinessModels />
-      <CropifaiClients />
+      {/* <CropifaiBusinessModels /> */}
+      {/* <CropifaiClients /> */}
       <CropifaiCta />
     </div>
   );

@@ -135,7 +135,7 @@ function EcosystemCard({ index, card, scrollYProgress, N, CARD_SPACING, STICKY_O
   });
 
   const isBlue = index % 2 === 1;
-  const bgClass = isBlue ? "bg-[#4c3bcf]/95 border-blue-800/50" : "bg-[#2a2a2a]/95 border-neutral-800/80";
+  const bgClass = isBlue ? "bg-[#3B82F6]/95 border-blue-800/50" : "bg-[#2a2a2a]/95 border-neutral-800/80";
   const textMutedClass = isBlue ? "text-blue-200" : "text-zinc-400";
   const textSubtleClass = isBlue ? "text-blue-300" : "text-zinc-500";
   const dotClass = isBlue ? "bg-blue-400" : "bg-zinc-700";

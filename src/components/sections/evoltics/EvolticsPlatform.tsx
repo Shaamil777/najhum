@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Activity,
   Zap,
@@ -16,7 +16,6 @@ import {
   MapPin,
   BarChart3,
   Cpu,
-  Layers,
   Radio,
   Sliders,
   ShieldCheck,
@@ -31,13 +30,13 @@ type DashboardTab = "fleet" | "load" | "revenue";
 const features = [
   { icon: Server, title: "Hardware Agnostic", desc: "Integrate and setup any OCPP-compliant charger in a few clicks and start charging." },
   { icon: BarChart3, title: "Dashboard & Analytics", desc: "Monitor your charging network with real-time data insights, charts and statistics." },
-  { icon: Layers, title: "White Label Ready", desc: "Host a self-branded CPMS from your custom domain with personal brand logo and colors." },
   { icon: BadgeDollarSign, title: "Dynamic Price Plans", desc: "Create multiple pricing groups with independent rates for public and private users." },
   { icon: Receipt, title: "Auto-Payment Settlements", desc: "Smart settlement system auto-calculates fees and distributes net revenue monthly." },
   { icon: ShieldCheck, title: "Public-Private Mode", desc: "Set charger accessibility for employees or visitors as private, or open to the public." },
 ];
 
 export default function EvolticsPlatform() {
+
   return (
     <section className="w-full py-28 bg-white relative overflow-hidden font-sans ">
       
@@ -75,17 +74,14 @@ export default function EvolticsPlatform() {
         </div>
 
         {/* Main Interactive Stage */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
           
-          {/* Left Column: 4 Feature Capabilities */}
-          <div className="lg:col-span-4 flex flex-col space-y-4 h-full">
-            <div className="mb-4 sm:mb-6 text-center lg:text-left">
-              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground mb-2 sm:mb-3 leading-tight">
+          {/* Left Column: 6 Feature Capabilities */}
+          <div className="lg:col-span-4 flex flex-col space-y-4">
+            <div className="mb-3 sm:mb-4 text-center lg:text-left">
+              <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground leading-tight">
                 Everything you need <br className="hidden lg:block"/> in one CPMS
               </h3>
-              <p className="text-[12px] sm:text-sm md:text-base text-muted leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Connect and control all your EV infrastructure from a single platform. Manage revenue, users, energy output, and more with our open, interoperable, hardware-agnostic software.
-              </p>
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
@@ -118,38 +114,24 @@ export default function EvolticsPlatform() {
           </div>
 
           {/* Right Column: Live Enterprise Dashboard Showcase */}
-          <div className="lg:col-span-8 flex flex-col h-full">
+          <div className="lg:col-span-8 flex flex-col w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-surface-alt rounded-2xl border border-border shadow-sm overflow-hidden relative flex-1 flex flex-col"
+              className="bg-surface-alt rounded-2xl border border-border shadow-sm overflow-hidden relative w-full flex flex-col"
             >
-              
-              {/* Dashboard Browser Frame Bar */}
-              <div className="bg-surface px-4 sm:px-5 py-3 sm:py-3.5 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 relative z-20">
-                <div className="flex items-center space-x-3 w-full sm:w-auto overflow-hidden">
-                  <div className="flex space-x-1.5 shrink-0">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                  </div>
-                  <div className="h-3 w-px bg-border shrink-0" />
-                  <span className="text-[10px] sm:text-[11px] font-mono text-muted truncate">
-                    evoltics.cloud/admin/control-hub
-                  </span>
-                </div>
-              </div>
-
-              {/* Dashboard Image Content */}
-              <div className="flex-1 relative z-10 w-full h-full min-h-[400px]">
+              {/* Dashboard Image Content - Full Natural Dimensions, Never Cropped */}
+              <div className="relative z-10 w-full overflow-hidden bg-surface-alt">
                 <Image
                   src="/images/elvotics/cpmsDahsboard.jpeg"
                   alt="CPMS Dashboard Interface"
-                  fill
-                  className="object-cover object-left-top"
+                  width={2560}
+                  height={1400}
                   priority
+                  className="w-full h-auto block object-contain select-none"
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 66vw, 1000px"
                 />
               </div>
 

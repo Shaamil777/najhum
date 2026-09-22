@@ -12,13 +12,13 @@ export function DarkModeCTA({ label, href, className, ...props }: DarkModeCTAPro
     <Link 
       href={href}
       className={cn(
-        "group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 rounded-full bg-[#0a0a0a] border border-zinc-800 hover:border-[#4c3bcf] hover:shadow-[0_0_20px_rgba(76,59,207,0.4)] overflow-hidden uppercase tracking-wider",
+        "group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold text-white transition-all duration-300 rounded-full bg-[#0a0a0a] border border-zinc-800 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] overflow-hidden uppercase tracking-wider",
         className
       )}
       {...props}
     >
       {/* Moving Background Beam */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#4c3bcf]/30 to-transparent -translate-x-full group-hover:animate-[marquee_2s_linear_infinite]" />
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#3B82F6]/30 to-transparent -translate-x-full group-hover:animate-[marquee_2s_linear_infinite]" />
       
       {/* Content */}
       <span className="relative z-10 flex items-center gap-2">

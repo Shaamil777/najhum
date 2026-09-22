@@ -16,43 +16,43 @@ const impacts = [
 
 export default function CropifaiImpact() {
   return (
-    <section className="relative w-full py-24 lg:py-32 bg-white overflow-hidden font-sans border-t border-zinc-100">
+    <section className="relative w-full py-14 lg:py-20 bg-white overflow-hidden font-sans border-t border-zinc-100">
       <Container size="xl" className="relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">PROVEN IMPACT</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 tracking-tight leading-tight mb-6">
-            Measurable Results, Real-World Impact
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-2.5">PROVEN IMPACT</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-zinc-900 tracking-tight leading-tight mb-3">
+            Real-World Impact
           </h2>
-          <p className="text-lg text-zinc-500">
+          <p className="text-sm md:text-base text-zinc-500">
             Field-proven technology deployed across residential, commercial, and agricultural projects.
           </p>
         </div>
 
-        {/* Impact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Impact Grid with reduced card sizes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {impacts.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`relative bg-white rounded-3xl p-8 border ${item.border} hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden`}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.06, duration: 0.4 }}
+              className={`relative bg-white rounded-2xl p-5 sm:p-6 border ${item.border} hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden`}
             >
               {/* Subtle background glow on hover */}
-              <div className={`absolute -right-12 -top-12 w-32 h-32 ${item.bg} rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500`} />
+              <div className={`absolute -right-10 -top-10 w-28 h-28 ${item.bg} rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none`} />
               
               <div className="relative z-10">
-                <span className="text-sm font-semibold text-zinc-500 block mb-2">Up to</span>
-                <div className={`text-5xl md:text-6xl font-black font-display ${item.color} mb-6 tracking-tighter`}>
+                <span className="text-xs font-semibold text-zinc-400 block mb-1">Up to</span>
+                <div className={`text-3xl sm:text-4xl lg:text-[42px] font-black font-display ${item.color} mb-3 tracking-tight leading-none`}>
                   {item.value}
                 </div>
-                <h4 className="text-xl font-bold text-zinc-900 mb-2 leading-tight">
+                <h4 className="text-sm sm:text-base font-bold text-zinc-900 mb-1 leading-snug">
                   {item.title}
                 </h4>
-                <p className="text-sm text-zinc-500 font-medium">
+                <p className="text-xs text-zinc-500 font-medium leading-relaxed">
                   {item.desc}
                 </p>
               </div>

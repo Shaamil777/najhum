@@ -32,44 +32,51 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 border-b",
-        isScrolled
-          ? "bg-surface/95 backdrop-blur-lg border-border shadow-sm py-2 text-foreground"
-          : "bg-transparent border-transparent py-4 text-white dark"
-      )}
-    >
-      <div className="max-w-[var(--spacing-container)] mx-auto px-8 lg:px-16 flex items-center justify-between">
-        
-        {/* Logo */}
-        <Link 
-          href="/" 
-          className="flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" 
-          aria-label={siteConfig.name}
-        >
-          <Image
-            src="/logo/logo.png"
-            alt={siteConfig.name}
-            width={160}
-            height={53}
-            priority
-            className="h-12 w-auto object-contain transition-all duration-300 drop-shadow-sm"
-          />
-        </Link>
+    <>
+      {/* ── Desktop Navigation (lg and up) ── */}
+      <header
+        className={cn(
+          "hidden lg:block fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 border-b",
+          isScrolled
+            ? "bg-surface/95 backdrop-blur-lg border-border shadow-sm py-2 text-foreground"
+            : "bg-transparent border-transparent py-4 text-white dark"
+        )}
+      >
+        <div className="max-w-[var(--spacing-container)] mx-auto px-8 lg:px-16 flex items-center justify-between">
+          
+          {/* Logo */}
+          <Link 
+            href="/" 
+            className="flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" 
+            aria-label={siteConfig.name}
+          >
+            <Image
+              src="/logo/logo.png"
+              alt={siteConfig.name}
+              width={160}
+              height={53}
+              priority
+              className="h-12 w-auto object-contain transition-all duration-300 drop-shadow-sm"
+            />
+          </Link>
 
-        {/* Center: Desktop Links */}
-        <div className="hidden lg:flex flex-1 justify-center">
-          <DesktopNav />
-        </div>
+          {/* Center: Desktop Links */}
+          <div className="flex-1 flex justify-center">
+            <DesktopNav />
+          </div>
 
-        {/* Right: Actions & Mobile Toggle */}
-        <div className="flex items-center justify-end gap-4 shrink-0">
-          <CTAButton />
-          <MobileNav />
+          {/* Right: Actions */}
+          <div className="flex items-center justify-end gap-4 shrink-0">
+            <CTAButton />
+          </div>
+          
         </div>
-        
+      </header>
+
+      {/* ── Mobile Navigation (< lg) ── */}
+      <div className="lg:hidden">
+        <MobileNav />
       </div>
-    </header>
+    </>
   );
 }

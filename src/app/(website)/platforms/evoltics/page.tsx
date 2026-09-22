@@ -33,7 +33,7 @@ export default function EvolticsPage() {
       <EvolticsSolutions />
       <EvolticsComparison />
       <EvolticsPlatform />
-      <EvolticsProducts />
+      {/* <EvolticsProducts /> */}
       <EvolticsMobileApp />
       <EvolticsEcosystem />
       <EvolticsJourney />

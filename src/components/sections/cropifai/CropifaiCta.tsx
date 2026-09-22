@@ -38,7 +38,7 @@ export default function CropifaiCta() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden border-t border-zinc-200">
+    <section id="contact" className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden border-t border-zinc-200 scroll-mt-20">
       
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">

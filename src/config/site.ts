@@ -33,7 +33,6 @@ export const siteConfig = {
     ],
     company: [
       { title: "About Us", href: "/about" },
-      { title: "Portfolio", href: "/portfolio" },
       { title: "Contact", href: "/contact" },
     ]
   }
