@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import Cta from "@/components/sections/home/Cta";
@@ -14,7 +15,11 @@ const product = {
   name: "Evoltx Pro Industrial Router",
   model: "EV-RT-9000",
   shortDesc: "High-performance industrial 5G router built for mission-critical IoT and edge computing applications in harsh environments.",
-  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+  images: [
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2940&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2940&auto=format&fit=crop"
+  ],
   overview: "The Evoltx Pro Industrial Router offers unprecedented connectivity, combining dual-SIM 5G failover with advanced edge processing capabilities. Engineered for maximum reliability, it ensures seamless data transmission for remote industrial sites, smart cities, and autonomous fleets. The ruggedized enclosure and industrial-grade components guarantee uptime even in the most demanding conditions.",
   features: [
     "Dual-SIM 5G / LTE Advanced Pro with automatic failover.",
@@ -62,6 +67,7 @@ const product = {
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
   // In a real scenario, fetch product by slug here.
+  const [activeImage, setActiveImage] = useState(product.images[0]);
 
   return (
     <div className="flex flex-col w-full bg-white text-neutral-900 pt-28 pb-12">
@@ -69,16 +75,37 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       <div className="max-w-6xl mx-auto px-6 w-full">
         {/* 1. Hero & Overview (Simplified) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-20">
-          {/* Image */}
-          <div className="w-full aspect-square bg-neutral-100 rounded-xl overflow-hidden relative border border-neutral-200">
-            <Image 
-              src={product.image} 
-              alt={product.name} 
-              fill
-              className="object-cover mix-blend-multiply"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
+          {/* Image Gallery */}
+          <div className="flex flex-col gap-4">
+            {/* Main Image */}
+            <div className="w-full aspect-square bg-neutral-100 rounded-xl overflow-hidden relative border border-neutral-200">
+              <Image 
+                src={activeImage} 
+                alt={product.name} 
+                fill
+                className="object-cover mix-blend-multiply transition-opacity duration-300"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+            {/* Thumbnails */}
+            <div className="grid grid-cols-4 gap-4">
+              {product.images.map((img, idx) => (
+                <button 
+                  key={idx} 
+                  onClick={() => setActiveImage(img)}
+                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${activeImage === img ? 'border-neutral-900 opacity-100' : 'border-transparent opacity-60 hover:opacity-100 hover:border-neutral-200'}`}
+                >
+                  <Image 
+                    src={img} 
+                    alt={`${product.name} thumbnail ${idx + 1}`} 
+                    fill
+                    className="object-cover"
+                    sizes="25vw"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
           
           {/* Product Details */}
