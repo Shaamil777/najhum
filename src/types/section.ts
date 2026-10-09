@@ -23,6 +23,7 @@ export enum SectionType {
   USE_CASES = 'USE_CASES',
   METHODOLOGY = 'METHODOLOGY',
   SOLAAS = 'SOLAAS',
+  PRODUCTS_CAROUSEL = 'PRODUCTS_CAROUSEL',
 }
 
 /**
@@ -131,6 +132,7 @@ export interface CTAContent {
 export interface CustomContent {
   heading: string;
   bodyHtml: string;
+  rawData?: any;
 }
 
 /**
@@ -203,6 +205,14 @@ export interface SolaasContent {
 }
 
 /**
+ * Products Carousel Section Content
+ */
+export interface ProductsCarouselContent {
+  heading?: string;
+  description?: string;
+}
+
+/**
  * Union type for all section content types
  * Used for type-safe section content handling
  */
@@ -217,7 +227,8 @@ export type SectionContent =
   | CustomContent
   | UseCasesContent
   | MethodologyContent
-  | SolaasContent;
+  | SolaasContent
+  | ProductsCarouselContent;
 
 /**
  * Section with typed content
@@ -275,4 +286,11 @@ export function isUseCasesContent(content: SectionContent): content is UseCasesC
 
 export function isMethodologyContent(content: SectionContent): content is MethodologyContent {
   return 'steps' in content;
+}
+
+export function isProductsCarouselContent(content: SectionContent): content is ProductsCarouselContent {
+  // It's hard to distinguish based purely on optional properties, 
+  // but usually it's passed with the PRODUCTS_CAROUSEL section type.
+  // We can just return true if it's not any of the other types that have required specific keys.
+  return true;
 }

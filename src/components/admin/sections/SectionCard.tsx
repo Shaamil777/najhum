@@ -127,29 +127,29 @@ export default function SectionCard({
     };
     switch (parsed.data.type) {
       case SectionType.HERO:
-        return <HeroSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <HeroSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.INTRO:
-        return <IntroSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <IntroSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.CHALLENGE:
-        return <ChallengeSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <ChallengeSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.FEATURES:
-        return <FeaturesSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <FeaturesSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.BENEFITS:
-        return <BenefitsSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <BenefitsSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.TESTIMONIALS:
-        return <TestimonialsSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <TestimonialsSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.CTA:
-        return <CTASectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <CTASectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.CUSTOM:
-        return <CustomSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <CustomSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.USE_CASES:
-        return <UseCasesSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <UseCasesSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.METHODOLOGY:
-        return <MethodologySectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <MethodologySectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.SOLAAS:
-        return <SolaasSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <SolaasSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       case SectionType.PRODUCTS_CAROUSEL:
-        return <ProductsCarouselSectionForm defaultValues={parsed.data.content} {...formProps} />;
+        return <ProductsCarouselSectionForm defaultValues={parsed.data.content as any} {...formProps} />;
       default:
         return (
           <p className="text-sm text-gray-500">

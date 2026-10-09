@@ -8,7 +8,7 @@ import { iotricsContent } from '../src/content/iotrics';
 import { cropifaiContent } from '../src/content/cropifai';
 import { aboutContent } from '../src/content/about';
 import { demoContent } from '../src/content/demo';
-import { solaasContent } from '../src/content/solaas';
+import { defaultSolaasContent } from '../src/content/solaas';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
@@ -23,7 +23,7 @@ async function main() {
     { slug: 'cropifai', title: 'CropifAI Platform', content: cropifaiContent },
     { slug: 'about', title: 'About Us', content: aboutContent },
     { slug: 'demo', title: 'Request a Demo', content: demoContent },
-    { slug: 'solaas', title: 'SolaaS', content: solaasContent }
+    { slug: 'solaas', title: 'SolaaS', content: defaultSolaasContent }
   ];
 
   for (const page of pages) {

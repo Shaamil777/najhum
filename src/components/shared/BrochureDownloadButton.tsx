@@ -6,13 +6,13 @@ import { FileText, X } from "lucide-react";
 interface BrochureDownloadButtonProps {
   brochureUrl?: string | null;
   className?: string;
-  size?: "default" | "sm" | "lg" | "icon";
+  size?: "sm" | "md" | "lg";
 }
 
 export default function BrochureDownloadButton({
   brochureUrl,
   className = "",
-  size = "default"
+  size = "md"
 }: BrochureDownloadButtonProps) {
   const [showModal, setShowModal] = useState(false);
   const [phone, setPhone] = useState("");
