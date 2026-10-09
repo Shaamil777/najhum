@@ -10,7 +10,7 @@ import {
   useReducedMotion,
   MotionValue
 } from "framer-motion";
-import { evolticsContent } from "@/content/platforms";
+import { evolticsContent } from "@/content/evoltics";
 import {
   Layers,
   ShieldCheck,

@@ -3,21 +3,25 @@
 import React, { useRef } from "react";
 import { Activity, Router, Wifi, Cloud, BarChart3, LayoutDashboard, Settings2, Target } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import { demoContent } from "@/content/demo";
 
 export default function DemoArchitecture() {
+  const { architecture } = demoContent;
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-10%" });
 
-  const steps = [
-    { icon: <Activity className="w-4 h-4 md:w-5 md:h-5" />, label: "Sensors", desc: "Data Collection" },
-    { icon: <Router className="w-4 h-4 md:w-5 md:h-5" />, label: "Gateways", desc: "Edge Aggregation" },
-    { icon: <Wifi className="w-4 h-4 md:w-5 md:h-5" />, label: "Network", desc: "Secure Transfer" },
-    { icon: <Cloud className="w-4 h-4 md:w-5 md:h-5" />, label: "Cloud", desc: "Data Ingestion" },
-    { icon: <BarChart3 className="w-4 h-4 md:w-5 md:h-5" />, label: "Analytics", desc: "AI Processing" },
-    { icon: <Settings2 className="w-4 h-4 md:w-5 md:h-5" />, label: "Automation", desc: "Rule Engine" },
-    { icon: <LayoutDashboard className="w-4 h-4 md:w-5 md:h-5" />, label: "Dashboards", desc: "Visualization" },
-    { icon: <Target className="w-4 h-4 md:w-5 md:h-5 text-white" />, label: "Decisions", desc: "Actions", isEnd: true },
-  ];
+  const iconMap: Record<string, React.ElementType> = {
+    Activity, Router, Wifi, Cloud, BarChart3, LayoutDashboard, Settings2, Target
+  };
+
+  const steps = architecture.steps.map(step => {
+    const Icon = iconMap[step.iconName] || Activity;
+    const isEnd = step.isEnd;
+    return {
+      ...step,
+      icon: <Icon className={`w-4 h-4 md:w-5 md:h-5 ${isEnd ? 'text-white' : ''}`} />
+    };
+  });
 
   return (
     <section className="w-full bg-white py-16 md:py-20 border-b border-neutral-200 overflow-hidden font-sans">
@@ -27,11 +31,11 @@ export default function DemoArchitecture() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 mb-12">
           <div className="text-center md:text-left">
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-900 leading-tight">
-              Data Pipeline Architecture
+              {architecture.title}
             </h2>
           </div>
           <p className="text-neutral-500 text-sm md:text-base max-w-sm text-center md:text-right">
-            End-to-end operational flow from physical asset telemetry to actionable command center intelligence.
+            {architecture.description}
           </p>
         </div>
 

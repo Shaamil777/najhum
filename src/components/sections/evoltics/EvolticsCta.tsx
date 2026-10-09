@@ -9,10 +9,7 @@ export default function EvolticsCta() {
   const [pixelState, setPixelState] = useState<Map<number, 'solid' | 'light'>>(new Map());
 
   useEffect(() => {
-    if (!isHovered) {
-      setPixelState(new Map());
-      return;
-    }
+    if (!isHovered) return;
 
     // Function to generate a new set of random pixels
     const generatePixels = () => {
@@ -48,7 +45,7 @@ export default function EvolticsCta() {
         {/* Interactive Grid Cells */}
         <div className="absolute inset-0 flex flex-wrap content-start">
           {Array.from({ length: 600 }).map((_, i) => {
-            const pState = pixelState.get(i);
+            const pState = (isHovered ? pixelState.get(i) : undefined);
             
             let bgClass = '';
             if (isHovered && pState) {

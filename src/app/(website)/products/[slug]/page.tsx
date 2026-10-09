@@ -9,6 +9,7 @@ import {
   ArrowRight,
   FileText
 } from "lucide-react";
+import BrochureDownloadButton from "@/components/shared/BrochureDownloadButton";
 
 // Mock Product Data
 const product = {
@@ -20,6 +21,7 @@ const product = {
     "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2940&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2940&auto=format&fit=crop"
   ],
+  brochureUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
   overview: "The Evoltx Pro Industrial Router offers unprecedented connectivity, combining dual-SIM 5G failover with advanced edge processing capabilities. Engineered for maximum reliability, it ensures seamless data transmission for remote industrial sites, smart cities, and autonomous fleets. The ruggedized enclosure and industrial-grade components guarantee uptime even in the most demanding conditions.",
   features: [
     "Dual-SIM 5G / LTE Advanced Pro with automatic failover.",
@@ -124,9 +126,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <Button className="gap-2">
                 Request a Quote <ArrowRight className="w-4 h-4" />
               </Button>
-              <Button variant="outline" className="gap-2">
-                <FileText className="w-4 h-4" /> Request Brochure
-              </Button>
+              <BrochureDownloadButton brochureUrl={product.brochureUrl} />
             </div>
 
             <div>
@@ -217,9 +217,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <p className="text-neutral-600 mb-8 max-w-2xl mx-auto">
             Get the complete product brochure, including full technical specifications, compliance certificates, and detailed dimension drawings.
           </p>
-          <Button className="gap-2" size="lg">
-            <FileText className="w-5 h-5" /> Request Brochure
-          </Button>
+          <BrochureDownloadButton brochureUrl={product.brochureUrl} size="lg" className="bg-neutral-900 text-white hover:bg-neutral-800" />
         </div>
 
       </div>

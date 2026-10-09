@@ -5,29 +5,21 @@ import { motion } from "framer-motion";
 import { Radio, PlugZap, Sprout, ArrowRight } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
 import Link from "next/link";
-
-const ecosystems = [
-  {
-    title: "IoTRICs",
-    desc: "Universal industrial IoT platform for real-time asset monitoring.",
-    icon: Radio,
-    href: "/platforms/iotrics"
-  },
-  {
-    title: "EVOLTICS",
-    desc: "Comprehensive management software for EV charging networks.",
-    icon: PlugZap,
-    href: "/platforms/evoltics"
-  },
-  {
-    title: "CropifAI",
-    desc: "AI-driven precision agriculture for optimized resource use.",
-    icon: Sprout,
-    href: "/platforms/cropifai"
-  }
-];
+import { contactContent } from "@/content/contact";
 
 export default function ContactExplore() {
+  const { explore } = contactContent;
+
+  const iconMap: Record<string, React.ElementType> = {
+    Radio,
+    PlugZap,
+    Sprout
+  };
+
+  const ecosystems = explore.ecosystems.map((item) => ({
+    ...item,
+    icon: iconMap[item.iconName] || Radio
+  }));
   return (
     <section className="w-full py-24 sm:py-32 bg-stone-50 font-poppins border-b border-neutral-200">
       <Container size="xl">
@@ -40,7 +32,7 @@ export default function ContactExplore() {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-neutral-900 leading-[1.1]"
           >
-            Explore The Najhum Ecosystem
+            {explore.title}
           </motion.h2>
         </div>
 
@@ -73,7 +65,7 @@ export default function ContactExplore() {
                 
                 {/* Link */}
                 <div className="flex items-center text-sm font-bold text-neutral-900 group-hover:text-primary transition-colors duration-300">
-                  Learn More <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                  {explore.linkLabel} <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </Link>
             </motion.div>

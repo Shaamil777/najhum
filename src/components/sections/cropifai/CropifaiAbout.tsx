@@ -3,12 +3,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Database, Wifi, Lightbulb } from "lucide-react";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiAbout() {
+  const { about } = cropifaiContent;
+  const stepsConfig = about.steps;
   const steps = [
-    { num: "1", icon: Database, title: "COLLECT", desc: "Intelligent sensors capture soil, water & environmental data" },
-    { num: "2", icon: Wifi, title: "CONNECT", desc: "LoRaWAN & cloud connectivity from remote field locations" },
-    { num: "3", icon: Lightbulb, title: "COLLABORATE", desc: "AI-driven dashboards turn data into actionable insights" },
+    { ...stepsConfig[0], icon: Database },
+    { ...stepsConfig[1], icon: Wifi },
+    { ...stepsConfig[2], icon: Lightbulb },
   ];
 
   return (
@@ -38,14 +41,14 @@ export default function CropifaiAbout() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">THE PLATFORM</p>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{about.header.tag}</p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 mb-6 leading-tight tracking-tight">
-              Smart Agriculture, <br />
-              Powered by <span className="text-primary">AI & IoT</span>
+              {about.header.titlePart1} <br />
+              {about.header.titlePart2} <span className="text-primary">{about.header.highlight}</span>
             </h2>
             
             <p className="text-lg md:text-xl text-zinc-600 leading-relaxed font-medium mb-12 max-w-3xl">
-              CropifAI™ is an intelligent, end-to-end platform combining rugged IoT sensors, advanced AI analytics, and cloud technology to fully automate your agricultural operations. We bridge the gap between physical infrastructure and digital intelligence.
+              {about.header.description}
             </p>
           </motion.div>
 

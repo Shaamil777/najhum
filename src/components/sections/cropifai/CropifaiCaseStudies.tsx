@@ -5,47 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Droplets, ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/design-system/primitives/layout/Container";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiCaseStudies() {
+  const { caseStudies } = cropifaiContent;
+  const cases = caseStudies.cases;
   const [activeCase, setActiveCase] = useState<number>(0);
-
-  const cases = [
-    {
-      id: 0,
-      client: "Emaar",
-      title: "The Greens, Dubai",
-      mode: "Proof of Concept",
-      location: "The Greens, Dubai",
-      launched: "March 2020",
-      challenge: "Traditional irrigation causing excessive water waste, inefficient practices, and high maintenance costs in residential community.",
-      solution: "Retrofitted existing irrigation with wireless IoT sensors, smart valve controllers, integrated with IoTRICs cloud dashboard.",
-      result: "38% reduction in water consumption with optimized irrigation, remote monitoring, and enhanced plant health.",
-      metric: "38%",
-      metricLabel: "Water Savings Achieved",
-      image: "/images/cropifai/the-greens.jpg", // Placeholder or actual image path if available
-    },
-    {
-      id: 1,
-      client: "Al Rostamani Properties",
-      title: "Garden Villa",
-      mode: "Commercial Deployment",
-      location: "Dubai",
-      launched: "2021",
-      challenge: "Need for sustainable environments and optimized watering to reduce carbon footprint and operational costs.",
-      solution: "Deployed a full cycle system: Sense (Real-time monitoring) → Decide (Smart engine) → Irrigate (Automated cut-off) → Analyze (Central reports).",
-      result: "Reduced water consumption, healthier crop growth, zero electrical cabling (solar-powered), and lower operational costs.",
-      metric: "100%",
-      metricLabel: "Wireless & Solar-Powered",
-      image: "/images/cropifai/garden-villa.jpg", // Placeholder
-      outcomes: [
-        "Reduced water consumption through smart scheduling",
-        "Healthier crop growth with optimized soil moisture",
-        "No electrical cabling — wireless & solar-powered",
-        "Reduced carbon emissions & lower operational cost"
-      ],
-      components: "Soil Sensors • Smart Controllers • Cloud Monitoring Platform"
-    }
-  ];
 
   return (
     <section className="relative w-full py-24 lg:py-32 bg-zinc-900 overflow-hidden font-sans text-white">
@@ -56,12 +21,12 @@ export default function CropifaiCaseStudies() {
         
         {/* Header */}
         <div className="text-left mb-16 md:mb-20 max-w-2xl">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">CASE STUDIES</p>
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{caseStudies.header.tag}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-white tracking-tight leading-tight mb-6">
-            Real-World Impact
+            {caseStudies.header.title}
           </h2>
           <p className="text-lg text-zinc-400">
-            See how leading organizations are transforming their infrastructure with our smart agriculture and irrigation solutions.
+            {caseStudies.header.description}
           </p>
         </div>
 

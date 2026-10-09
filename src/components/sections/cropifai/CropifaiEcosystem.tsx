@@ -5,35 +5,19 @@ import { motion } from "framer-motion";
 import { Radio, PlugZap, Sprout, Leaf, ArrowRight } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
 import Link from "next/link";
+import { cropifaiContent } from "@/content/cropifai";
+
+const ecosystemData = cropifaiContent.ecosystem.items;
 
 const ecosystems = [
-  {
-    title: "IoTRICs",
-    desc: "IoT platforms for connected assets, real-time data, and operational intelligence.",
-    icon: Radio,
-    href: "/platforms/iotrics"
-  },
-  {
-    title: "EVOLTICS",
-    desc: "Smart EV charging management for connected and sustainable mobility.",
-    icon: PlugZap,
-    href: "/platforms/evoltics"
-  },
-  {
-    title: "Smart Irrigation",
-    desc: "IoT-powered irrigation and precision agriculture for smarter water management.",
-    icon: Sprout,
-    href: "/"
-  },
-  {
-    title: "ESG & Sustainability",
-    desc: "Data-driven energy and carbon solutions for measurable sustainability.",
-    icon: Leaf,
-    href: "/"
-  }
+  { ...ecosystemData[0], icon: Radio },
+  { ...ecosystemData[1], icon: PlugZap },
+  { ...ecosystemData[2], icon: Sprout },
+  { ...ecosystemData[3], icon: Leaf }
 ];
 
 export default function CropifaiEcosystem() {
+  const { ecosystem } = cropifaiContent;
   return (
     <section className="relative w-full py-24 sm:py-32 bg-[#FFFFF] font-sans overflow-hidden">
       
@@ -48,7 +32,7 @@ export default function CropifaiEcosystem() {
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-px bg-primary" />
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-primary">
-              CORPORATE GROUP
+              {ecosystem.header.tag}
             </span>
           </div>
           
@@ -58,7 +42,7 @@ export default function CropifaiEcosystem() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl lg:text-6xl font-black font-display tracking-tight text-neutral-900 leading-[1.1]"
           >
-            Explore the Najhum Ecosystem
+            {ecosystem.header.title}
           </motion.h2>
         </div>
 

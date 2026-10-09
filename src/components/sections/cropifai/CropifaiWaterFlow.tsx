@@ -4,16 +4,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/design-system/primitives/layout/Container";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiWaterFlow() {
-  const flowControls = [
-    { title: "Solenoid Valve Control", desc: "Percentage control 0–100%, open/close precision" },
-    { title: "Autonomous Operation", desc: "Solar-powered, battery backup, works off-grid" },
-    { title: "Cycle Irrigation", desc: "Set start time, duration, capacity, cycle number" },
-    { title: "Fertigation Dosing", desc: "Automated nutrient dosing, variable-rate application" },
-    { title: "Safety Alarms", desc: "Web notifications for flow, pressure, sensor breakdown" },
-    { title: "Multicast Control", desc: "Bulk valve control across multiple zones simultaneously" },
-  ];
+  const { waterFlow } = cropifaiContent;
+  const flowControls = waterFlow.flowControls;
 
   return (
     <section className="w-full py-16 lg:py-20 bg-white relative overflow-hidden font-sans border-b border-zinc-200">
@@ -42,7 +37,7 @@ export default function CropifaiWaterFlow() {
               {/* Actual Image */}
               <div className="relative w-full h-full flex items-center justify-center">
                 <Image 
-                  src="/products/cropifai/SolarPoweredWaterFlowSensor.png" 
+                  src={waterFlow.image} 
                   alt="Automated Water Flow Controller" 
                   fill 
                   sizes="(max-width: 768px) 100vw, 380px"
@@ -62,10 +57,10 @@ export default function CropifaiWaterFlow() {
           >
             <div className="mb-6 lg:mb-8">
               <span className="text-primary font-black tracking-widest text-xs uppercase mb-2 block">
-                SMART IRRIGATION & AUTOMATION
+                {waterFlow.header.tag}
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-4xl font-black text-[#1a2b4b] leading-tight tracking-tight mb-2">
-                Automated Water Flow Control
+                {waterFlow.header.title}
               </h2>
             </div>
 
@@ -86,9 +81,9 @@ export default function CropifaiWaterFlow() {
             {/* Spec tags box */}
             <div className="bg-[#f1f5f9] rounded-2xl p-5 lg:p-6 w-fit shadow-xs border border-zinc-200/50">
               <ul className="space-y-2 text-[13px] font-medium text-[#64748b]">
-                <li>IP67 Rated Enclosure</li>
-                <li>Flexible Power: Solar / Battery / Mains</li>
-                <li>Internal & External Antenna Options</li>
+                {waterFlow.specs.map((spec, idx) => (
+                  <li key={idx}>{spec}</li>
+                ))}
               </ul>
             </div>
           </motion.div>

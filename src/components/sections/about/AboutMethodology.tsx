@@ -2,10 +2,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Radar, Wifi, BrainCircuit } from "lucide-react";
+import { aboutContent } from "@/content/about";
 
 export default function AboutMethodology() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const { methodology } = aboutContent;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -18,56 +20,23 @@ export default function AboutMethodology() {
     return () => observer.disconnect();
   }, []);
 
-  const phases = [
-    {
-      code: "PHASE_01",
-      title: "COLLECT",
-      tag: "Real-time Insight",
-      tagDot: "bg-blue-500",
-      description:
-        "We deploy ruggedized sensors across your physical infrastructure to capture high-fidelity operational data at the source.",
-      icon: Radar,
-      titleColor: "text-blue-600",
-      badgeBg: "bg-blue-600",
-      ringBorder:
-        "border-blue-200/80 bg-blue-50/50 group-hover:border-blue-400/90 group-hover:bg-blue-50/80 group-hover:shadow-[0_0_35px_rgba(59,130,246,0.18)]",
-      iconBg:
-        "bg-blue-100/70 border border-blue-200/70 group-hover:bg-blue-100 group-hover:border-blue-300",
-      iconColor: "text-blue-600",
-    },
-    {
-      code: "PHASE_02",
-      title: "CONNECT",
-      tag: "Secure Connectivity",
-      tagDot: "bg-emerald-500",
-      description:
-        "Data is securely transmitted via NB-IoT, LoRaWAN, or 5G private networks to our central processing ecosystem.",
-      icon: Wifi,
-      titleColor: "text-emerald-500",
-      badgeBg: "bg-emerald-500",
-      ringBorder:
-        "border-emerald-200/80 bg-emerald-50/50 group-hover:border-emerald-400/90 group-hover:bg-emerald-50/80 group-hover:shadow-[0_0_35px_rgba(16,185,129,0.18)]",
-      iconBg:
-        "bg-emerald-100/70 border border-emerald-200/70 group-hover:bg-emerald-100 group-hover:border-emerald-300",
-      iconColor: "text-emerald-600",
-    },
-    {
-      code: "PHASE_03",
-      title: "COLLABORATE",
-      tag: "Intelligent Outcomes",
-      tagDot: "bg-violet-500",
-      description:
-        "Proprietary ML models convert raw signals into actionable boardroom intelligence and autonomous field responses.",
-      icon: BrainCircuit,
-      titleColor: "text-violet-600",
-      badgeBg: "bg-violet-600",
-      ringBorder:
-        "border-violet-200/80 bg-violet-50/50 group-hover:border-violet-400/90 group-hover:bg-violet-50/80 group-hover:shadow-[0_0_35px_rgba(139,92,246,0.18)]",
-      iconBg:
-        "bg-violet-100/70 border border-violet-200/70 group-hover:bg-violet-100 group-hover:border-violet-300",
-      iconColor: "text-violet-600",
-    },
+  const iconMap: Record<string, React.ElementType> = {
+    Radar,
+    Wifi,
+    BrainCircuit
+  };
+
+  const styleMapping = [
+    { tagDot: "bg-blue-500", titleColor: "text-blue-600", badgeBg: "bg-blue-600", ringBorder: "border-blue-200/80 bg-blue-50/50 group-hover:border-blue-400/90 group-hover:bg-blue-50/80 group-hover:shadow-[0_0_35px_rgba(59,130,246,0.18)]", iconBg: "bg-blue-100/70 border border-blue-200/70 group-hover:bg-blue-100 group-hover:border-blue-300", iconColor: "text-blue-600" },
+    { tagDot: "bg-emerald-500", titleColor: "text-emerald-500", badgeBg: "bg-emerald-500", ringBorder: "border-emerald-200/80 bg-emerald-50/50 group-hover:border-emerald-400/90 group-hover:bg-emerald-50/80 group-hover:shadow-[0_0_35px_rgba(16,185,129,0.18)]", iconBg: "bg-emerald-100/70 border border-emerald-200/70 group-hover:bg-emerald-100 group-hover:border-emerald-300", iconColor: "text-emerald-600" },
+    { tagDot: "bg-violet-500", titleColor: "text-violet-600", badgeBg: "bg-violet-600", ringBorder: "border-violet-200/80 bg-violet-50/50 group-hover:border-violet-400/90 group-hover:bg-violet-50/80 group-hover:shadow-[0_0_35px_rgba(139,92,246,0.18)]", iconBg: "bg-violet-100/70 border border-violet-200/70 group-hover:bg-violet-100 group-hover:border-violet-300", iconColor: "text-violet-600" }
   ];
+
+  const phases = methodology.phases.map((phase, idx) => ({
+    ...phase,
+    icon: iconMap[phase.iconName] || Radar,
+    ...styleMapping[idx % styleMapping.length]
+  }));
 
   return (
     <section
@@ -113,19 +82,19 @@ export default function AboutMethodology() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="h-px w-8 bg-slate-300" />
             <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-slate-400">
-              The Methodology
+              {methodology.badge}
             </span>
             <span className="h-px w-8 bg-slate-300" />
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-slate-900 leading-tight tracking-tight mb-5">
-            HOW DATA BECOMES <span className="text-blue-600">DECISIONS</span>
+            {methodology.titlePart1} <span className="text-blue-600">{methodology.titlePart2}</span>
           </h2>
           <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-bold tracking-widest uppercase">
-            <span className="text-blue-600">Collect</span>
+            <span className="text-blue-600">{methodology.steps[0]}</span>
             <span className="text-slate-300">•</span>
-            <span className="text-emerald-500">Connect</span>
+            <span className="text-emerald-500">{methodology.steps[1]}</span>
             <span className="text-slate-300">•</span>
-            <span className="text-violet-600">Collaborate</span>
+            <span className="text-violet-600">{methodology.steps[2]}</span>
           </div>
         </div>
 
@@ -294,7 +263,7 @@ export default function AboutMethodology() {
           <div className="inline-flex items-center justify-center gap-4 max-w-full">
             <span className="h-px w-12 sm:w-20 bg-slate-300/80" />
             <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-slate-400 text-center">
-              Technology For A More Resilient Tomorrow
+              {methodology.footerStatement}
             </span>
             <span className="h-px w-12 sm:w-20 bg-slate-300/80" />
           </div>

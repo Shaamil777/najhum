@@ -8,6 +8,7 @@ import { DesktopNav } from "./DesktopNav";
 import { MobileNav } from "./MobileNav";
 import { CTAButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 /**
  * Navbar
@@ -18,6 +19,18 @@ import { cn } from "@/lib/utils";
  */
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const [solutions, setSolutions] = useState<Array<{ title: string; slug: string; metaDescription: string | null }>>([]);
+
+  useEffect(() => {
+    if (pathname.startsWith('/admin')) return;
+    const controller = new AbortController();
+    fetch('/api/solutions/published', { signal: controller.signal })
+      .then((response) => { if (!response.ok) throw new Error('Failed to load solutions'); return response.json(); })
+      .then((data) => setSolutions(data.solutions || []))
+      .catch((error) => { if (error.name !== 'AbortError') console.error(error); });
+    return () => controller.abort();
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +43,8 @@ export default function Navbar() {
     
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (pathname.startsWith('/admin')) return null;
 
   return (
     <>
@@ -62,7 +77,7 @@ export default function Navbar() {
 
           {/* Center: Desktop Links */}
           <div className="flex-1 flex justify-center">
-            <DesktopNav />
+            <DesktopNav solutions={solutions} />
           </div>
 
           {/* Right: Actions */}
@@ -75,7 +90,7 @@ export default function Navbar() {
 
       {/* ── Mobile Navigation (< lg) ── */}
       <div className="lg:hidden">
-        <MobileNav />
+        <MobileNav solutions={solutions} />
       </div>
     </>
   );

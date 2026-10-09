@@ -1,4 +1,5 @@
 "use client";
+import { useHydrated } from "@/lib/utils/use-hydrated";
 
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
@@ -38,15 +39,11 @@ const navItems: NavItemData[] = [
   { title: "Contact", href: "/contact" },
 ];
 
-export function MobileNav() {
+export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: string; slug: string }> }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHydrated();
   const [platformsExpanded, setPlatformsExpanded] = useState(true);
   const pathname = usePathname();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Prevent body scrolling when mobile menu is open
   useEffect(() => {
@@ -59,11 +56,6 @@ export function MobileNav() {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
-
-  // Close menu on route change
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
 
   const toggle = () => setIsOpen((prev) => !prev);
   const close = () => setIsOpen(false);
@@ -242,6 +234,10 @@ export function MobileNav() {
                         </Link>
                       );
                     })}
+                    {solutions.length > 0 && <div className="border-t border-neutral-100 pt-3 mt-3">
+                      <p className="px-4 mb-2 text-xs font-bold uppercase tracking-wider text-neutral-500">Published solutions</p>
+                      {solutions.map((solution) => <Link key={solution.slug} href={`/solutions/${solution.slug}`} onClick={close} className="block rounded-xl px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-primary/10 hover:text-primary">{solution.title}</Link>)}
+                    </div>}
                   </nav>
 
                   {/* Divider */}

@@ -76,7 +76,7 @@ function ParallaxRow({ children, baseVelocity = 100 }: ParallaxProps) {
 }
 
 // Reusable card for the analytics data
-function AnalyticsCard({ data, label }: { data: any, label?: string }) {
+function AnalyticsCard({ data, label }: { data: (typeof homeContent.analytics.trustSignals)[number], label?: string }) {
   return (
     <div className="w-[185px] sm:w-[260px] lg:w-[320px] min-h-[145px] sm:min-h-[170px] lg:min-h-[180px] flex-shrink-0 bg-white border border-zinc-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 flex flex-col justify-between group hover:border-zinc-300 transition-colors duration-300 shadow-2xs">
        <div className="flex flex-col gap-1 sm:gap-2 whitespace-normal">

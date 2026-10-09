@@ -2,116 +2,15 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Zap, Box, CheckCircle2, XCircle, Check, Target } from "lucide-react";
+import { CheckCircle2, XCircle, Zap, Box } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { iotricsContent } from "@/content/iotrics";
 
-interface ComparisonItem {
-  id: string;
-  solaas: {
-    title: string;
-    description: string;
-    details: string;
-  };
-  paas: {
-    title: string;
-    description: string;
-    details: string;
-  };
-}
-
-const comparisonData: ComparisonItem[] = [
-  {
-    id: "capex",
-    solaas: {
-      title: "CAPITAL EXPENDITURE",
-      description: "Zero Upfront Hardware Cost",
-      details: "We supply all devices, gateways, and connectivity under a comprehensive subscription."
-    },
-    paas: {
-      title: "ASSET OWNERSHIP",
-      description: "Full Hardware Ownership",
-      details: "Make a one-time purchase for all hardware, giving you complete permanent ownership of the assets."
-    }
-  },
-  {
-    id: "costs",
-    solaas: {
-      title: "RECURRING EXPENSES",
-      description: "Predictable OpEx Structure",
-      details: "Fixed monthly or annual pricing with no surprise maintenance or replacement bills."
-    },
-    paas: {
-      title: "RECURRING EXPENSES",
-      description: "Lower Ongoing Costs",
-      details: "Your recurring subscription strictly covers the cloud platform and data storage, significantly reducing operational expenses."
-    }
-  },
-  {
-    id: "management",
-    solaas: {
-      title: "MAINTENANCE & SUPPORT",
-      description: "Fully Managed Service",
-      details: "Enjoy total peace of mind. We handle AMC, warranty, installation, and the entire device lifecycle."
-    },
-    paas: {
-      title: "INFRASTRUCTURE CONTROL",
-      description: "Complete Client Control",
-      details: "Manage your own infrastructure, deployment, and device maintenance according to your internal IT policies."
-    }
-  }
-];
-
-const scopeData = {
-  solaas: {
-    included: [
-      "Annual Maintenance (AMC) covering hardware & software",
-      "Warranty coverage for the full active subscription period",
-      "Supply of IP-rated & non-IP-rated devices",
-      "Configuration, commissioning & radio planning",
-      "Outdoor gateway supply & monthly connectivity charges",
-    ],
-    excluded: [
-      "Platform customizations or feature changes",
-      "On-site civil works (drilling, structural mounting)",
-      "Client-side IT infrastructure, computers, or internet",
-      "Site acquisition, poles, or power arrangements",
-    ]
-  },
-  paas: {
-    included: [
-      "Cloud-based monitoring platform & data visualization",
-      "Data storage & historical data access",
-      "Basic analytics, reporting & alert management",
-      "User access management & role-based permissions",
-      "Platform maintenance, updates & security patches",
-    ],
-    excluded: [
-      "Platform customizations",
-      "On-site civil works (drilling, structural mounting)",
-      "Internet connectivity, computers, or laptops",
-      "Gateways in case of no coverage",
-      "AI Module and related dashboards",
-    ]
-  }
-};
-
-// Previous list points preserved for reference
-const originalSolaasPoints = [
-  "Hardware, software, connectivity, and maintenance bundled into a monthly subscription",
-  "Minimal CAPEX with no large upfront investment required",
-  "Najhum manages deployment, configuration, updates, and ongoing support",
-  "Scale from a single sensor to thousands without changing your infrastructure"
-];
-
-const originalPaasPoints = [
-  "Platform licensing for organizations managing their own IoT infrastructure",
-  "API access for integration with existing systems",
-  "Integration with enterprise platforms and operational systems",
-  "Custom dashboard development and white-labelling available",
-  "Dedicated technical support and onboarding"
-];
+const comparisonData = iotricsContent.businessModel.comparison;
+const scopeData = iotricsContent.businessModel.scope;
 
 export default function IotricsBusinessModel() {
+  const { businessModel } = iotricsContent;
   return (
     <section className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200">
       
@@ -131,12 +30,12 @@ export default function IotricsBusinessModel() {
         
         {/* Header Title (Centered) */}
         <div className="text-center w-full pt-20 pb-8 lg:pt-32 lg:pb-12 px-4 relative z-20">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">OUR BUSINESS MODELS</p>
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{businessModel.header.tag}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 tracking-tight leading-tight mb-6">
-            Two Ways to Work With Us
+            {businessModel.header.title}
           </h2>
           <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-            Choose the deployment model that best fits your capital structure and operational preferences.
+            {businessModel.header.description}
           </p>
         </div>
 
@@ -490,14 +389,6 @@ export default function IotricsBusinessModel() {
           Previous Simple Checklist Design preserved below (code not deleted)
           Change `false &&` to `true &&` if needed to re-render.
         */}
-        {false && (
-          <div className="hidden">
-            <div className="space-y-4">
-              {originalSolaasPoints.map((p, i) => <p key={i}>{p}</p>)}
-              {originalPaasPoints.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
-          </div>
-        )}
 
       </div>
     </section>

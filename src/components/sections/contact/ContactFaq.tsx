@@ -3,35 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
-
-const faqs = [
-  {
-    question: "What does Najhum Group specialize in?",
-    answer: "Najhum Group specializes in intelligent IoT, sustainable EV mobility, smart energy management, and data-driven technology solutions that help organizations operate more efficiently and sustainably."
-  },
-  {
-    question: "What is IoTRICs?",
-    answer: "IoTRICs is Najhum's comprehensive IoT platform for asset visibility and operational intelligence. It enables real-time data collection, monitoring, visualization, alerts, and analytics across different types of infrastructure."
-  },
-  {
-    question: "What is EVOLTICS?",
-    answer: "EVOLTICS is Najhum's electric vehicle charging management platform. It allows operators to connect and manage OCPP-compliant chargers through a unified dashboard while providing real-time network monitoring, revenue management, smart load management, and maintenance alerts."
-  },
-  {
-    question: "Can Najhum's solutions work with existing hardware?",
-    answer: "Yes. Najhum's platforms are designed to be hardware agnostic, allowing diverse infrastructure and, in the case of EVOLTICS, OCPP-compliant chargers from different manufacturers to be connected and managed through a unified platform."
-  },
-  {
-    question: "What industries can Najhum support?",
-    answer: "IoTRICs is designed as an industry-agnostic platform and can support applications across areas such as logistics, facilities management, industrial operations, and smart city infrastructure."
-  },
-  {
-    question: "Does Najhum offer managed technology solutions?",
-    answer: "Yes. Through its Solution as a Service (Solaas) model, Najhum provides an end-to-end managed ecosystem covering deployment, network configuration, updates, scalability, and platform access."
-  }
-];
+import { contactContent } from "@/content/contact";
 
 export default function ContactFaq() {
+  const { faq } = contactContent;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleOpen = (index: number) => {
@@ -49,16 +24,16 @@ export default function ContactFaq() {
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 relative z-20">
           <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
-            FAQ
+            {faq.badge}
           </span>
           <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
-            Frequently Asked Questions
+            {faq.title}
           </h2>
         </div>
 
         {/* Accordion Container */}
         <div className="flex flex-col gap-4">
-          {faqs.map((item, index) => {
+          {faq.items.map((item, index) => {
             const isOpen = openIndex === index;
             
             return (

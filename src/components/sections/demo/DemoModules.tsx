@@ -3,37 +3,11 @@
 import React from "react";
 import { Activity, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { demoContent } from "@/content/demo";
 
 export default function DemoModules() {
-  const modules = [
-    {
-      platform: "IoTRICs",
-      title: "Unified IoT Platform",
-      description: "Connect physical assets, sensors, and infrastructure. Deliver real-time visibility, intelligent alerts, and actionable insights to operate smarter and more efficiently.",
-      image: "/images/iotrics/dashboardiortics.png",
-      color: "bg-blue-500",
-      textColor: "text-blue-500",
-      badgeColor: "bg-blue-50 text-blue-600 border-blue-100",
-    },
-    {
-      platform: "EVOLTICS",
-      title: "Intelligent EV Charging",
-      description: "Deploy and scale intelligent EV charging networks with real-time IoT telemetry, automated load management, and complete operational control.",
-      image: "/images/elvotics/cpmsDahsboard.jpeg",
-      color: "bg-emerald-500",
-      textColor: "text-emerald-500",
-      badgeColor: "bg-emerald-50 text-emerald-600 border-emerald-100",
-    },
-    {
-      platform: "CropifAI",
-      title: "Smart Agriculture Solutions",
-      description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.",
-      image: "/images/cropify/dashboardcropify.png",
-      color: "bg-amber-500",
-      textColor: "text-amber-500",
-      badgeColor: "bg-amber-50 text-amber-600 border-amber-100",
-    }
-  ];
+  const { modules } = demoContent;
+  const items = modules.items;
 
   return (
     <section className="w-full bg-white py-16 md:py-24  overflow-hidden font-sans relative">
@@ -51,7 +25,7 @@ export default function DemoModules() {
             >
               <Activity className="w-3.5 h-3.5 text-neutral-500" />
               <p className="text-[9px] font-bold tracking-widest text-neutral-500 uppercase">
-                Live Environments
+                {modules.badge}
               </p>
             </motion.div>
             <motion.h2 
@@ -61,7 +35,7 @@ export default function DemoModules() {
               transition={{ delay: 0.1 }}
               className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-neutral-900 leading-tight"
             >
-              Launch Command Dashboards.
+              {modules.title}
             </motion.h2>
           </div>
           
@@ -72,13 +46,13 @@ export default function DemoModules() {
             transition={{ delay: 0.2 }}
             className="text-neutral-500 max-w-sm text-sm md:text-base text-left md:text-right"
           >
-            Explore real-time data streams and predictive analytics across our live infrastructure instances.
+            {modules.description}
           </motion.p>
         </div>
 
         {/* Alternating Dashboard Rows */}
         <div className="flex flex-col gap-16 md:gap-24">
-          {modules.map((mod, index) => {
+          {items.map((mod, index) => {
             const isReversed = index % 2 !== 0;
 
             return (
@@ -147,7 +121,7 @@ export default function DemoModules() {
                   </p>
                   
                   <button className="group flex items-center gap-2.5 px-6 py-3 bg-black text-white rounded-full font-bold uppercase tracking-wider text-[10px] hover:bg-neutral-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
-                    Launch Dashboard
+                    {modules.buttonLabel}
                     <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center transform group-hover:translate-x-1 transition-transform">
                       <ExternalLink className="w-2.5 h-2.5" />
                     </div>

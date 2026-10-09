@@ -4,98 +4,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Zap, Box, CheckCircle2, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { cropifaiContent } from "@/content/cropifai";
 
-interface ComparisonItem {
-  id: string;
-  solaas: {
-    title: string;
-    description: string;
-    details: string;
-  };
-  paas: {
-    title: string;
-    description: string;
-    details: string;
-  };
-}
-
-const comparisonData: ComparisonItem[] = [
-  {
-    id: "capex",
-    solaas: {
-      title: "CAPITAL EXPENDITURE",
-      description: "Zero Upfront Hardware Cost",
-      details: "We supply all devices, gateways, and connectivity under a comprehensive subscription."
-    },
-    paas: {
-      title: "ASSET OWNERSHIP",
-      description: "Full Hardware Ownership",
-      details: "Make a one-time purchase for all hardware, giving you complete permanent ownership of the assets."
-    }
-  },
-  {
-    id: "costs",
-    solaas: {
-      title: "RECURRING EXPENSES",
-      description: "Predictable OpEx Structure",
-      details: "Fixed monthly or annual pricing with no surprise maintenance or replacement bills."
-    },
-    paas: {
-      title: "RECURRING EXPENSES",
-      description: "Lower Ongoing Costs",
-      details: "Your recurring subscription strictly covers the cloud platform and data storage, significantly reducing operational expenses."
-    }
-  },
-  {
-    id: "management",
-    solaas: {
-      title: "MAINTENANCE & SUPPORT",
-      description: "Fully Managed Service",
-      details: "Enjoy total peace of mind. We handle AMC, warranty, installation, and the entire device lifecycle."
-    },
-    paas: {
-      title: "INFRASTRUCTURE CONTROL",
-      description: "Complete Client Control",
-      details: "Manage your own infrastructure, deployment, and device maintenance according to your internal IT policies."
-    }
-  }
-];
-
-const scopeData = {
-  solaas: {
-    included: [
-      "Annual Maintenance (AMC) covering hardware & software",
-      "Warranty coverage for the full active subscription period",
-      "Supply of IP-rated & non-IP-rated devices",
-      "Configuration, commissioning & radio planning",
-      "Outdoor gateway supply & monthly connectivity charges",
-    ],
-    excluded: [
-      "Platform customizations or feature changes",
-      "On-site civil works (drilling, structural mounting)",
-      "Client-side IT infrastructure, computers, or internet",
-      "Site acquisition, poles, or power arrangements",
-    ]
-  },
-  paas: {
-    included: [
-      "Cloud-based monitoring platform & data visualization",
-      "Data storage & historical data access",
-      "Basic analytics, reporting & alert management",
-      "User access management & role-based permissions",
-      "Platform maintenance, updates & security patches",
-    ],
-    excluded: [
-      "Platform customizations",
-      "On-site civil works (drilling, structural mounting)",
-      "Internet connectivity, computers, or laptops",
-      "Gateways in case of no coverage",
-      "AI Module and related dashboards",
-    ]
-  }
-};
+const comparisonData = cropifaiContent.businessModels.comparison;
+const scopeData = cropifaiContent.businessModels.scope;
 
 export default function CropifaiBusinessModels() {
+  const { businessModels } = cropifaiContent;
   return (
     <section id="business-models" className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200 scroll-mt-20">
       
@@ -115,12 +30,12 @@ export default function CropifaiBusinessModels() {
         
         {/* Header Title (Centered) */}
         <div className="text-center w-full pt-20 pb-8 lg:pt-32 lg:pb-12 px-4 relative z-20">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">OUR BUSINESS MODELS</p>
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{businessModels.header.tag}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 tracking-tight leading-tight mb-6">
-            Two Ways to Work With Us
+            {businessModels.header.title}
           </h2>
           <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-            Choose the deployment model that best fits your capital structure and operational preferences.
+            {businessModels.header.description}
           </p>
         </div>
 

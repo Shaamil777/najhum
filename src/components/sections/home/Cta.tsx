@@ -13,10 +13,7 @@ export default function Cta() {
   const [pixelState, setPixelState] = useState<Map<number, 'solid' | 'light'>>(new Map());
 
   useEffect(() => {
-    if (!isHovered) {
-      setPixelState(new Map());
-      return;
-    }
+    if (!isHovered) return;
 
     // Function to generate a new set of random pixels
     const generatePixels = () => {
@@ -52,7 +49,7 @@ export default function Cta() {
          {/* Interactive Grid Cells */}
          <div className="absolute inset-0 flex flex-wrap content-start">
             {Array.from({ length: 600 }).map((_, i) => {
-               const pState = pixelState.get(i);
+               const pState = (isHovered ? pixelState.get(i) : undefined);
                
                let bgClass = '';
                if (isHovered && pState) {
@@ -82,7 +79,7 @@ export default function Cta() {
                 Your <span className="text-primary">Operations?</span>
              </h2>
              <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
-                Connect <span className="text-primary">industrial assets</span>, optimize <span className="text-primary">energy</span>, and unlock <span className="text-primary font-medium">real-time operational intelligence</span> with Najhum's enterprise platforms.
+                Connect <span className="text-primary">industrial assets</span>, optimize <span className="text-primary">energy</span>, and unlock <span className="text-primary font-medium">real-time operational intelligence</span> with Najhum&apos;s enterprise platforms.
              </p>
              
              {/* Scaled-up Contact Button */}

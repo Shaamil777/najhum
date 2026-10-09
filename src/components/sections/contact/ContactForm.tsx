@@ -7,8 +7,31 @@ import { Textarea } from "@/design-system/primitives/forms/Textarea";
 import { Button } from "@/design-system/primitives/actions/Button";
 import { ShieldCheck, Clock, Zap, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, type FormEvent } from 'react';
+import { siteConfig } from '@/config/site';
+import { contactContent } from "@/content/contact";
 
 export default function ContactForm() {
+  const { form: formContent } = contactContent;
+  const [draftOpened, setDraftOpened] = useState(false);
+  function openEnquiryDraft(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const value = (name: string) => {
+      const field = form.elements.namedItem(name);
+      return field instanceof HTMLSelectElement ? field.selectedOptions[0]?.textContent || '' : String(data.get(name) || '').trim();
+    };
+    const subject = `Consultation enquiry: ${value('companyName') || value('fullName')}`;
+    const body = [
+      `Name: ${value('fullName')}`, `Company: ${value('companyName')}`,
+      `Email: ${value('email')}`, `Phone: ${value('phone')}`,
+      `Country: ${value('country')}`, `Industry: ${value('industry')}`,
+      `Interested solution: ${value('solution')}`, '', value('goals'),
+    ].join('\n');
+    window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setDraftOpened(true);
+  }
   return (
     <section className="relative w-full py-16 sm:py-24 lg:py-32 bg-background overflow-hidden">
       
@@ -30,13 +53,13 @@ export default function ContactForm() {
           >
             <span className="text-[10px] sm:text-[11px] font-bold text-primary uppercase tracking-[0.2em] block mb-4 flex items-center gap-3">
               <span className="w-8 h-px bg-primary/30" />
-              Start Your Project
+              {formContent.badge}
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] mb-6 uppercase">
-              How Can We <span className="text-primary">Help?</span>
+              {formContent.titlePart1}<span className="text-primary">{formContent.titlePart2}</span>
             </h2>
             <p className="text-base sm:text-lg text-muted leading-relaxed max-w-md">
-              Complete the form and our technical lead will reach out to discuss your specific infrastructure and automation requirements.
+              {formContent.description}
             </p>
           </motion.div>
 
@@ -47,27 +70,20 @@ export default function ContactForm() {
             transition={{ delay: 0.1 }}
             className="flex flex-col gap-4 mt-4"
           >
-            {/* Info Card 1 */}
-            <div className="flex items-start gap-4 p-5 sm:p-6 bg-surface border border-border rounded-2xl shadow-sm hover:border-primary/30 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all text-primary">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-sm sm:text-base font-bold text-foreground mb-1 tracking-tight">Direct Access to Experts</h3>
-                <p className="text-[13px] sm:text-sm text-muted leading-relaxed">Skip the sales pitch. Talk directly to our solution architects and engineers.</p>
-              </div>
-            </div>
-
-            {/* Info Card 2 */}
-            <div className="flex items-start gap-4 p-5 sm:p-6 bg-surface border border-border rounded-2xl shadow-sm hover:border-primary/30 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all text-primary">
-                <Clock className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-sm sm:text-base font-bold text-foreground mb-1 tracking-tight">24h Priority Response</h3>
-                <p className="text-[13px] sm:text-sm text-muted leading-relaxed">Our team prioritizes enterprise inquiries. Expect a comprehensive response within one business day.</p>
-              </div>
-            </div>
+            {formContent.infoCards.map((card, idx) => {
+              const Icon = card.iconName === "ShieldCheck" ? ShieldCheck : (card.iconName === "Clock" ? Clock : Zap);
+              return (
+                <div key={idx} className="flex items-start gap-4 p-5 sm:p-6 bg-surface border border-border rounded-2xl shadow-sm hover:border-primary/30 transition-colors group">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all text-primary">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-foreground mb-1 tracking-tight">{card.title}</h3>
+                    <p className="text-[13px] sm:text-sm text-muted leading-relaxed">{card.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </motion.div>
 
         </div>
@@ -85,16 +101,18 @@ export default function ContactForm() {
             {/* Subtle glow inside the form card */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-            <form className="flex flex-col gap-5 sm:gap-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-5 sm:gap-6 relative z-10" onSubmit={openEnquiryDraft}>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 <Input 
                   id="fullName" 
+                  name="fullName" required maxLength={150} autoComplete="name"
                   label="Full Name" 
                   placeholder="John Doe" 
                 />
                 <Input 
                   id="companyName" 
+                  name="companyName" maxLength={150} autoComplete="organization"
                   label="Company Name" 
                   placeholder="Enter your organization" 
                 />
@@ -103,12 +121,14 @@ export default function ContactForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 <Input 
                   id="email" 
+                  name="email" required maxLength={254} autoComplete="email"
                   type="email" 
                   label="Business Email" 
                   placeholder="john@company.com" 
                 />
                 <Input 
                   id="phone" 
+                  name="phone" maxLength={50} autoComplete="tel"
                   type="tel" 
                   label="Phone Number" 
                   placeholder="+971 00 000 0000" 
@@ -118,6 +138,7 @@ export default function ContactForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 <Select
                   id="country"
+                  name="country" required
                   label="Country"
                   placeholder="United Arab Emirates"
                   options={[
@@ -131,6 +152,7 @@ export default function ContactForm() {
                 />
                 <Select
                   id="industry"
+                  name="industry" required
                   label="Industry"
                   placeholder="Facility Management"
                   options={[
@@ -145,6 +167,7 @@ export default function ContactForm() {
 
               <Select
                 id="solution"
+                name="solution" required
                 label="Interested Solution"
                 placeholder="IoTRICs (Industrial IoT)"
                 options={[
@@ -157,6 +180,7 @@ export default function ContactForm() {
 
               <Textarea
                 id="goals"
+                name="goals" required maxLength={1500}
                 label="What are you trying to monitor, automate, or improve?"
                 placeholder="Describe your project goals, challenges, or requirements..."
                 rows={4}
@@ -164,6 +188,7 @@ export default function ContactForm() {
 
               <div className="pt-4 mt-2 border-t border-border/50">
                 <Button 
+                  type="submit"
                   variant="primary" 
                   size="lg" 
                   fullWidth 
@@ -171,8 +196,11 @@ export default function ContactForm() {
                   icon={<ArrowRight className="w-5 h-5" />}
                   iconPosition="right"
                 >
-                  Request Consultation
+                  Open Enquiry Email
                 </Button>
+                <p role="status" className="mt-4 text-sm text-muted text-center">
+                  {draftOpened ? 'Your email app has been requested. Review the draft and send it to complete your enquiry.' : `Opens a prefilled draft in your email app. Send it to ${siteConfig.contact.email} to request a consultation.`}
+                </p>
                 <div className="flex items-center justify-center gap-2 mt-5 text-muted">
                   <ShieldCheck className="w-4 h-4 opacity-70" />
                   <p className="text-center text-[11px] sm:text-xs font-medium uppercase tracking-wider">

@@ -4,44 +4,24 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/design-system/primitives/layout/Container";
-
-const carouselLogos = [
-  { name: "SPACE42", src: "/logo/client logos/space42-logo.webp" },
-  { name: "Nokia", src: "/logo/client logos/nokia-seeklogo.svg" },
-  { name: "Thuraya", src: "/logo/client logos/Thuraya-logo.webp" },
-  { name: "e&", src: "/logo/client logos/etisalat-seeklogo.svg" },
-  { name: "du", src: "/logo/client logos/du-seeklogo.svg" },
-  { name: "Emaar", src: "/logo/client logos/emaar-seeklogo.svg" },
-];
-
-const gridLogos = [
-  { name: "Al Rostamani Communications", src: "/logo/client logos/ARC_Logo.png" },
-  { name: "DEWA", src: "/logo/client logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
-  { name: "ADAA", src: "/logo/client logos/adaa_gov.png" },
-  { name: "UAEAA", src: "/logo/client logos/uaeaa_gov.png" },
-  { name: "Aramtec", src: "/logo/client logos/Aramteclogo_400x.avif" },
-  { name: "ATGC", src: "/logo/client logos/atgc-logo.svg" },
-  { name: "Al Mulla Group", src: "/logo/client logos/Al_Mulla_Group_Logo.svg" },
-  { name: "Al Rostamani Properties", src: "/logo/client logos/Al-Rostamani.png" },
-  { name: "Gargash", src: "/logo/client logos/gargash.svg" },
-  { name: "DTC", src: "/logo/client logos/dtclogo.jpg" },
-  { name: "The Dubai Mall", src: "/logo/client logos/dubaimall.png" },
-  { name: "Ski Dubai", src: "/logo/client logos/ski_dubai_logo.png" },
-];
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiClients() {
+  const { clients } = cropifaiContent;
+  const carouselLogos = clients.carouselLogos;
+  const gridLogos = clients.gridLogos;
   return (
     <section className="relative w-full py-24 bg-white overflow-hidden font-sans border-t border-zinc-100">
       <Container size="xl" className="relative z-10 flex flex-col items-center">
         
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">OUR CLIENTS</p>
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">{clients.header.tag}</p>
           <h2 className="text-3xl md:text-4xl font-black font-display text-zinc-900 mb-4">
-            Our Strategic Partners & Clients
+            {clients.header.title}
           </h2>
           <p className="text-zinc-500 font-medium">
-            Building a smarter future together — trusted by industry leaders across the UAE and beyond.
+            {clients.header.description}
           </p>
         </div>
 

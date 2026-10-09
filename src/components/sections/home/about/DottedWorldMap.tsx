@@ -1,14 +1,11 @@
 "use client";
+import { useHydrated } from "@/lib/utils/use-hydrated";
 
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import DottedMap from 'dotted-map';
 
 export default function DottedWorldMap() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHydrated();
 
   const svgMap = useMemo(() => {
     const map = new DottedMap({ height: 60, grid: 'vertical' });

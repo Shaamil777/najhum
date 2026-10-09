@@ -5,41 +5,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Target, Droplets, BrainCircuit, CloudCog, Zap, ArrowRight } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiSolutions() {
+  const { solutions: sols } = cropifaiContent;
   const solutions = [
-    {
-      code: "CORE 01",
-      title: "Precision Farming",
-      description: "Multi-depth soil sensors, weather monitoring, and crop health tracking.",
-      tag: "Soil & Crop Telemetry",
-      bgImage: "/images/cropify/precision_farming.jpg",
-      icon: Target,
-    },
-    {
-      code: "CORE 02",
-      title: "Smart Irrigation",
-      description: "Automated valve control, fertigation, and water flow optimization.",
-      tag: "Automated Valve Flow",
-      bgImage: "/images/cropify/smart_irrigation.jpg",
-      icon: Droplets,
-    },
-    {
-      code: "CORE 03",
-      title: "AI/ML Analytics",
-      description: "Satellite imagery, NDVI analysis, yield prediction, and recommendations.",
-      tag: "Predictive Yield Models",
-      bgImage: "/images/cropify/aiml_analytics.jpg",
-      icon: BrainCircuit,
-    },
-    {
-      code: "CORE 04",
-      title: "Cloud Platform",
-      description: "Real-time dashboards, remote monitoring, and multi-site management.",
-      tag: "IoTRICs Central Hub",
-      bgImage: "/images/cropify/cloud_platform.jpg",
-      icon: CloudCog,
-    },
+    { ...sols.items[0], icon: Target },
+    { ...sols.items[1], icon: Droplets },
+    { ...sols.items[2], icon: BrainCircuit },
+    { ...sols.items[3], icon: CloudCog },
   ];
 
   return (
@@ -59,7 +33,7 @@ export default function CropifaiSolutions() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-5 backdrop-blur-sm"
           >
             <Zap className="w-3.5 h-3.5" />
-            Core Solutions
+            {sols.header.tag}
           </motion.div>
           
           <motion.h2 
@@ -69,8 +43,8 @@ export default function CropifaiSolutions() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-slate-900 leading-tight tracking-tight mb-5"
           >
-            The Future of <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">Smart Agriculture</span>
+            {sols.header.titlePart1} <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">{sols.header.titlePart2}</span>
           </motion.h2>
           
           <motion.p 
@@ -80,7 +54,7 @@ export default function CropifaiSolutions() {
             transition={{ delay: 0.2 }}
             className="text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl"
           >
-            A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.
+            {sols.header.description}
           </motion.p>
         </div>
 

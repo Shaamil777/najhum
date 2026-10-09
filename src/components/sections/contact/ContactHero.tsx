@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { Container } from "@/design-system/primitives/layout/Container";
 import { ArrowDown } from "lucide-react";
+import { contactContent } from "@/content/contact";
 
 export default function ContactHero() {
+  const { hero } = contactContent;
   return (
     <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-32 bg-background overflow-hidden flex flex-col justify-center ">
       
@@ -25,8 +27,8 @@ export default function ContactHero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6 uppercase font-display"
         >
-          Let's Build The <br className="hidden sm:block" />
-          <span className="text-primary">Future</span> Together.
+          {hero.titlePart1} <br className="hidden sm:block" />
+          <span className="text-primary">{hero.titlePart2}</span>{hero.titlePart3}
         </motion.h1>
 
         {/* Subtitle */}
@@ -36,7 +38,7 @@ export default function ContactHero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-muted leading-relaxed max-w-2xl mb-12"
         >
-          Whether you're looking for enterprise IoT deployment, a complete EV charging network, or precision agriculture, our team of experts is ready to help.
+          {hero.description}
         </motion.p>
 
         {/* Scroll Indicator */}

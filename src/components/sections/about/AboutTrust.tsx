@@ -2,27 +2,26 @@
 
 import React from "react";
 import Image from "next/image";
-
-const clients = [
-  { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
-  { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
-  { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
-  { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
-  { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
-  { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
-  { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
-  { name: "Space42", src: "/logo/client%20logos/space42.png" },
-];
-
-const industries = [
-  "Energy",
-  "Telecommunications",
-  "Smart Buildings",
-  "Commercial Real Estate",
-  "Industrial Facilities",
-];
+import { aboutContent } from "@/content/about";
+import { homeContent } from "@/content/home";
 
 export default function AboutTrust() {
+  const { trust } = aboutContent;
+  
+  // Use clients from another part or hardcode/reuse since they are imported differently, 
+  // actually let's keep the local clients array since they have paths, or move them to content later.
+  // For now we'll keep the clients array in this file as it was or use it from somewhere.
+  const clients = [
+    { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
+    { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
+    { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
+    { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
+    { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
+    { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
+    { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
+    { name: "Space42", src: "/logo/client%20logos/space42.png" },
+  ];
+
   return (
     <section className="relative w-full py-28 md:py-36 bg-neutral-950 text-white overflow-hidden">
 
@@ -36,18 +35,18 @@ export default function AboutTrust() {
         {/* Header */}
         <div className="text-center mb-16 md:mb-20">
           <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-neutral-500 block mb-4">
-            Trusted Across Industries
+            {trust.badge}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-white leading-tight tracking-tight mb-6">
-            Powering Intelligent Infrastructure <br className="hidden md:block" />
-            for Leading Organizations
+            {trust.titlePart1} <br className="hidden md:block" />
+            {trust.titlePart2}
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-neutral-400">
-            <span>Supporting organizations across</span>
-            {industries.map((industry, idx) => (
+            <span>{trust.subtitleText}</span>
+            {trust.industries.map((industry, idx) => (
               <span key={idx} className="flex items-center gap-2">
                 <span className="font-semibold text-white">{industry}</span>
-                {idx < industries.length - 1 && (
+                {idx < trust.industries.length - 1 && (
                   <span className="text-primary">•</span>
                 )}
               </span>
@@ -110,7 +109,7 @@ export default function AboutTrust() {
             <span className="text-3xl text-primary font-display">&ldquo;</span>
           </div>
           <p className="text-xl md:text-2xl lg:text-3xl font-medium text-neutral-200 leading-relaxed italic">
-            From enterprise campuses to national infrastructure, Najhum delivers intelligent solutions that scale.
+            {trust.quote}
           </p>
         </div>
       </div>

@@ -14,7 +14,7 @@ import {
   ChevronRight
 } from "lucide-react";
 
-import { evolticsContent } from "@/content/platforms";
+import { evolticsContent } from "@/content/evoltics";
 
 const journeySteps = evolticsContent.journey.steps;
 

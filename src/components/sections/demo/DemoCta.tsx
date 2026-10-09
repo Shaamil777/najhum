@@ -1,6 +1,8 @@
 import { Share2 } from "lucide-react";
+import { demoContent } from "@/content/demo";
 
 export default function DemoCta() {
+  const { cta } = demoContent;
   return (
     <section className="w-full bg-black py-20 md:py-32 border-b border-neutral-800">
       <div className="container-base">
@@ -8,13 +10,13 @@ export default function DemoCta() {
           {/* Left Content */}
           <div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-              Want to See Your Own<br />Infrastructure Live?
+              {cta.titlePart1}<br />{cta.titlePart2}
             </h2>
             <p className="text-base md:text-lg text-neutral-400 leading-relaxed mb-10 max-w-md">
-              Book a personalized session with our engineering team to map your physical assets to a digital twin prototype.
+              {cta.description}
             </p>
             <button className="px-6 py-4 bg-white text-black text-[10px] font-bold tracking-widest uppercase rounded hover:bg-neutral-200 transition-colors">
-              CONNECT WITH AN ARCHITECT
+              {cta.buttonLabel}
             </button>
           </div>
           

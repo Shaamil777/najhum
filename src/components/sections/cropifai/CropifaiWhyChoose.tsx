@@ -4,58 +4,19 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Droplets, Leaf, TrendingDown, Globe2 } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiWhyChoose() {
+  const { whyChoose } = cropifaiContent;
+  
   const features = [
-    {
-      title: "Water Conservation",
-      description: "Save millions of gallons annually through precision delivery systems that only water when the plant needs it.",
-      icon: Droplets,
-    },
-    {
-      title: "Crop Quality",
-      description: "Ensure optimal growing conditions for maximum yield and quality by monitoring key soil and environmental metrics.",
-      icon: Leaf,
-    },
-    {
-      title: "Cost Reduction",
-      description: "Lower energy bills, labor costs, and fertilizer expenses through targeted, automated resource distribution.",
-      icon: TrendingDown,
-    },
-    {
-      title: "Sustainability",
-      description: "Meet environmental goals with eco-friendly smart agriculture practices that reduce your overall carbon footprint.",
-      icon: Globe2,
-    },
+    { ...whyChoose.features[0], icon: Droplets },
+    { ...whyChoose.features[1], icon: Leaf },
+    { ...whyChoose.features[2], icon: TrendingDown },
+    { ...whyChoose.features[3], icon: Globe2 },
   ];
 
-  const roadmap = [
-    {
-      num: "1",
-      title: "Initial Assessment",
-      description: "Reviewing farm topography and crop requirements.",
-    },
-    {
-      num: "2",
-      title: "Field Survey",
-      description: "Sensor placement optimization and network coverage testing.",
-    },
-    {
-      num: "3",
-      title: "Hardware Deployment",
-      description: "Installation of IoT sensors, gateways, and controllers.",
-    },
-    {
-      num: "4",
-      title: "Cloud Integration",
-      description: "Live data feed activation and dashboard configuration.",
-    },
-    {
-      num: "5",
-      title: "AI Optimization",
-      description: "Model training and autonomous irrigation active.",
-    },
-  ];
+  const roadmap = whyChoose.roadmap;
 
   return (
     <section className="relative w-full py-24 md:py-32 bg-zinc-50 text-zinc-900 overflow-hidden font-sans border-b border-zinc-200">
@@ -73,10 +34,10 @@ export default function CropifaiWhyChoose() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">BENEFITS</p>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{whyChoose.header.tag}</p>
             <h2 className="text-4xl md:text-5xl font-black font-display text-zinc-900 leading-tight tracking-tight mb-12">
-              Why Choose <br />
-              <span className="text-primary">cropifAI™?</span>
+              {whyChoose.header.titlePart1} <br />
+              <span className="text-primary">{whyChoose.header.titlePart2}</span>
             </h2>
             
             <div className="flex flex-col gap-10">
@@ -104,7 +65,7 @@ export default function CropifaiWhyChoose() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
             
             <h3 className="text-2xl md:text-3xl font-black font-display text-zinc-900 mb-10 tracking-tight">
-              Implementation Roadmap
+              {whyChoose.roadmapTitle}
             </h3>
             
             <div className="relative border-l-2 border-zinc-100 ml-4 flex flex-col gap-8 pb-4">

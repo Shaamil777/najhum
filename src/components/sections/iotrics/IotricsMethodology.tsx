@@ -4,28 +4,18 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Wifi, Cpu, Settings } from "lucide-react";
 
+import { iotricsContent } from "@/content/iotrics";
+
+const stepsData = iotricsContent.methodology.steps;
+
 const steps = [
-  {
-    step: "01",
-    title: "Collect",
-    desc: "Integrate sensors, assets, and infrastructure into a unified ecosystem using open communication protocols.",
-    icon: Wifi,
-  },
-  {
-    step: "02",
-    title: "Connect",
-    desc: "Process real-time data across cloud and edge to transform raw telemetry into actionable intelligence.",
-    icon: Cpu,
-  },
-  {
-    step: "03",
-    title: "Collaborate",
-    desc: "Automate decisions, orchestrate workflows, and execute operational responses without manual intervention.",
-    icon: Settings,
-  },
+  { ...stepsData[0], icon: Wifi },
+  { ...stepsData[1], icon: Cpu },
+  { ...stepsData[2], icon: Settings },
 ];
 
 export default function IotricsMethodology() {
+  const { methodology } = iotricsContent;
   return (
     <section className="w-full bg-white py-24 sm:py-32 overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
@@ -38,7 +28,7 @@ export default function IotricsMethodology() {
             viewport={{ once: true }}
             className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 leading-[1.1] mb-4"
           >
-            The 3C Methodology
+            {methodology.header.title}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -47,7 +37,7 @@ export default function IotricsMethodology() {
             transition={{ delay: 0.1 }}
             className="text-neutral-500 text-lg leading-relaxed"
           >
-            Our framework for transforming physical infrastructure into intelligent, connected operations.
+            {methodology.header.description}
           </motion.p>
         </div>
 

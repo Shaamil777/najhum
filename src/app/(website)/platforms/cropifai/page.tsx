@@ -8,6 +8,7 @@ import CropifaiWaterFlow from "@/components/sections/cropifai/CropifaiWaterFlow"
 import CropifaiSolutions from "@/components/sections/cropifai/CropifaiSolutions";
 import CropifaiWhyChoose from "@/components/sections/cropifai/CropifaiWhyChoose";
 import CropifaiImpact from "@/components/sections/cropifai/CropifaiImpact";
+import PlatformProductsServer from "@/components/shared/PlatformProductsServer";
 
 import CropifaiBusinessModels from "@/components/sections/cropifai/CropifaiBusinessModels";
 import CropifaiClients from "@/components/sections/cropifai/CropifaiClients";
@@ -22,6 +23,7 @@ export default function CropifaiPage() {
       <CropifaiArchitecture />
       <CropifaiSolutions />
       <CropifaiInterface />
+      <PlatformProductsServer platformId="cropifai" />
       <CropifaiHardware />
       <CropifaiWaterFlow />
       {/* <CropifaiWorkflow /> */}

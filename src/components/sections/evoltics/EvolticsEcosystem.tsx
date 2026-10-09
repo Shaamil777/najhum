@@ -9,7 +9,7 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-import { evolticsContent } from "@/content/platforms";
+import { evolticsContent } from "@/content/evoltics";
 
 const cards = evolticsContent.ecosystem.cards;
 

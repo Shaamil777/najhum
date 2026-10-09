@@ -5,44 +5,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2, Apple, Play } from "lucide-react";
 
-const appFeatures = [
-  {
-    title: "In-App Wallet",
-    desc: "Pay for charging with a pre-loaded wallet. Add or withdraw funds at any time via the app.",
-  },
-  {
-    title: "Charger Filter",
-    desc: "Filter stations by connector type (CCS, CHAdeMO, Type 2) or network.",
-  },
-  {
-    title: "Live Charging",
-    desc: "View real-time battery %, power output, energy delivered and time remaining.",
-  },
-  {
-    title: "Charger Booking",
-    desc: "Reserve a charging slot in advance — no more waiting. Coming soon.",
-    badge: "UPCOMING"
-  },
-  {
-    title: "Trip Planner",
-    desc: "Plan long trips with automatic charging stops based on your vehicle's range.",
-    badge: "UPCOMING"
-  },
-  {
-    title: "Notifications",
-    desc: "Real-time alerts when charging completes or special offers are available.",
-  },
-  {
-    title: "Reviews & Ratings",
-    desc: "Read and write reviews for charging locations to help the community.",
-  },
-  {
-    title: "White Label App",
-    desc: "Operators can deploy a fully branded version of the app under their identity.",
-  }
-];
+import { evolticsContent } from "@/content/evoltics";
 
-const FeatureItem = ({ feat, side }: { feat: any, side: "left" | "right" }) => (
+const appFeatures = evolticsContent.mobileApp.features;
+
+const FeatureItem = ({ feat, side }: { feat: { title: string; desc: string; badge?: string }, side: "left" | "right" }) => (
   <div className={`flex flex-col ${side === 'left' ? 'md:items-end md:text-right text-left' : 'md:items-start md:text-left text-left'} bg-surface/50 md:bg-transparent p-3 sm:p-4 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-transparent h-full`}>
     <div className={`flex items-start md:items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2 md:mb-3 ${side === 'left' ? 'md:flex-row-reverse' : ''}`}>
       <div className="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 mt-0.5 md:mt-0">
@@ -64,6 +31,7 @@ const FeatureItem = ({ feat, side }: { feat: any, side: "left" | "right" }) => (
 );
 
 export default function EvolticsMobileApp() {
+  const { mobileApp } = evolticsContent;
   return (
     <section className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans">
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
@@ -81,7 +49,7 @@ export default function EvolticsMobileApp() {
             transition={{ delay: 0.1 }}
             className="text-[1.65rem] sm:text-3xl md:text-4xl xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] mb-2 sm:mb-4 uppercase"
           >
-            Mobile App — <span className="text-primary font-black">for EV Drivers</span>
+            {mobileApp.header.titlePart1} <span className="text-primary font-black">{mobileApp.header.titlePart2}</span>
           </motion.h2>
           
           <motion.p 
@@ -91,7 +59,7 @@ export default function EvolticsMobileApp() {
             transition={{ delay: 0.15 }}
             className="text-muted text-[13px] sm:text-base lg:text-lg leading-relaxed italic mb-6 lg:mb-8 max-w-2xl mx-auto"
           >
-            Empowering eco-conscious drivers with seamless control and sustainability.
+            {mobileApp.header.subtitle}
           </motion.p>
           
           <motion.div
@@ -102,9 +70,9 @@ export default function EvolticsMobileApp() {
             className="bg-surface/60 border border-border/80 p-4 sm:p-6 lg:p-8 rounded-3xl shadow-sm text-left mx-auto relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
-            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3 text-center">The Evoltics App</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3 text-center">{mobileApp.header.cardTitle}</h3>
             <p className="text-[12px] sm:text-sm lg:text-[15px] text-foreground/80 leading-relaxed text-center max-w-3xl mx-auto">
-              Our Evoltics app helps users locate nearby charging stations, monitor their charging progress, and make payments. It provides real-time charging station availability and status updates, ensuring drivers always have access to the charging infrastructure they need.
+              {mobileApp.header.cardDesc}
             </p>
           </motion.div>
         </div>
@@ -177,7 +145,7 @@ export default function EvolticsMobileApp() {
           className="flex flex-row items-center justify-center gap-2 sm:gap-4 mt-12 sm:mt-16 lg:mt-24 px-4 sm:px-0"
         >
           <a
-            href="https://apps.apple.com/us/app/evoltics/id6463776459"
+            href={mobileApp.links.ios}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none cursor-pointer"
@@ -192,7 +160,7 @@ export default function EvolticsMobileApp() {
           </a>
           
           <a
-            href="https://play.google.com/store/apps/details?id=com.evoltics&hl=en_IN"
+            href={mobileApp.links.android}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-primary text-white hover:bg-primary-hover transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none cursor-pointer"

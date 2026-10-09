@@ -6,18 +6,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const clients = [
-  { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
-  { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
-  { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
-  { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
-  { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
-  { name: "Space42", src: "/logo/client%20logos/space42.png" },
-  { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
-  { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
-];
+import { iotricsContent } from "@/content/iotrics";
+
+const clients = iotricsContent.hero.clients;
 
 export default function IotricsHero() {
+  const { hero } = iotricsContent;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -55,7 +49,7 @@ export default function IotricsHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 text-white uppercase"
         >
-          SMARTER CONNECTED <br /> OPERATIONS
+          {hero.title.line1} <br /> {hero.title.line2}
         </motion.h1>
 
         {/* Description */}
@@ -65,7 +59,7 @@ export default function IotricsHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg sm:text-xl text-neutral-300 leading-relaxed max-w-3xl mb-10"
         >
-          IoTRICs connects your physical assets, sensors, and infrastructure to a unified IoT platform—delivering real-time visibility, intelligent alerts, and actionable insights to help you operate smarter and more efficiently.
+          {hero.description}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -87,7 +81,7 @@ export default function IotricsHero() {
             }}
             className="inline-flex items-center justify-center space-x-2 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
-            <span>Explore IoTRICs</span>
+            <span>{hero.cta.primary}</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </a>
         </motion.div>
@@ -97,7 +91,7 @@ export default function IotricsHero() {
       {/* Logo Marquee at Bottom */}
       <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
         <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
-          TRUSTED BY COMPANIES WORLDWIDE
+          {hero.marqueeText}
         </p>
         <style>{`
           @keyframes marquee {

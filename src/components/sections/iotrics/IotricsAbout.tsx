@@ -4,16 +4,22 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Thermometer, Droplets, CloudRain, Zap, Signal, Activity, Wifi, Bluetooth, Satellite, Cloud, Target, BarChart3, Factory, Cpu, ChevronRight, Bell } from "lucide-react";
 
+import { iotricsContent } from "@/content/iotrics";
+
+const pipelineNodesConfig = iotricsContent.about.pipeline;
+const cardsData = iotricsContent.about.cards;
+
 const pipelineNodes = [
-  { icon: Factory, label: "ASSETS", text: "One connected intelligence layer for your entire infrastructure." },
-  { icon: Cpu, label: "SENSORS", text: "Industrial-grade sensors capture critical data across your assets." },
-  { icon: Signal, label: "CONNECTIVITY", text: "Resilient connectivity ensures your data reaches the platform securely." },
-  { icon: Cloud, label: "IOTRICS CLOUD", text: "A unified cloud platform to ingest, process, and store operational data." },
-  { icon: BarChart3, label: "INSIGHTS", text: "Real-time visualization and analytics to help you make smarter decisions." },
-  { icon: Target, label: "ACTION", text: "Configurable alerts and automated triggers for immediate response." },
+  { icon: Factory, label: pipelineNodesConfig[0].label, text: pipelineNodesConfig[0].text },
+  { icon: Cpu, label: pipelineNodesConfig[1].label, text: pipelineNodesConfig[1].text },
+  { icon: Signal, label: pipelineNodesConfig[2].label, text: pipelineNodesConfig[2].text },
+  { icon: Cloud, label: pipelineNodesConfig[3].label, text: pipelineNodesConfig[3].text },
+  { icon: BarChart3, label: pipelineNodesConfig[4].label, text: pipelineNodesConfig[4].text },
+  { icon: Target, label: pipelineNodesConfig[5].label, text: pipelineNodesConfig[5].text },
 ];
 
 export default function IotricsAbout() {
+  const { about } = iotricsContent;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -39,8 +45,8 @@ export default function IotricsAbout() {
               transition={{ delay: 0.1 }}
               className="text-[1.75rem] sm:text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-neutral-900 leading-[1.1] sm:leading-[1.05] uppercase"
             >
-              From Physical Assets <br className="hidden md:block" />
-              to Actionable Intelligence
+              {about.header.titlePart1} <br className="hidden md:block" />
+              {about.header.titlePart2}
             </motion.h2>
           </div>
 
@@ -51,9 +57,7 @@ export default function IotricsAbout() {
             transition={{ delay: 0.15 }}
             className="text-neutral-500 text-sm sm:text-base lg:text-lg max-w-lg leading-relaxed"
           >
-            IoTRICs connects your physical infrastructure to a unified IoT platform. 
-            Collect data in real-time, transmit it securely, and turn it into actionable 
-            insights for smarter operations.
+            {about.header.description}
           </motion.p>
         </div>
 
@@ -69,12 +73,12 @@ export default function IotricsAbout() {
             className="flex flex-col p-6 sm:p-8 md:p-10 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group"
           >
             <div className="flex items-center mb-4 sm:mb-6 gap-3">
-              <span className="text-blue-600 font-bold text-xl sm:text-2xl">01</span>
-              <span className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 uppercase">COLLECT</span>
+              <span className="text-blue-600 font-bold text-xl sm:text-2xl">{cardsData[0].num}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 uppercase">{cardsData[0].label}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">Capture What Matters</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">{cardsData[0].title}</h3>
             <p className="text-sm sm:text-base text-neutral-600 mb-8 sm:mb-12 leading-relaxed flex-grow">
-              Industrial-grade sensors capture critical environmental and operational data across your assets.
+              {cardsData[0].description}
             </p>
             
             {/* Arrow */}
@@ -100,12 +104,12 @@ export default function IotricsAbout() {
             className="flex flex-col p-6 sm:p-8 md:p-10 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group"
           >
             <div className="flex items-center mb-4 sm:mb-6 gap-3">
-              <span className="text-emerald-500 font-bold text-xl sm:text-2xl">02</span>
-              <span className="text-xs sm:text-sm font-bold tracking-widest text-emerald-500 uppercase">CONNECT</span>
+              <span className="text-emerald-500 font-bold text-xl sm:text-2xl">{cardsData[1].num}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-emerald-500 uppercase">{cardsData[1].label}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">Move Data Reliably</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">{cardsData[1].title}</h3>
             <p className="text-sm sm:text-base text-neutral-600 mb-8 sm:mb-12 leading-relaxed flex-grow">
-              Resilient connectivity options ensure your data reaches the platform from anywhere, every time.
+              {cardsData[1].description}
             </p>
 
             {/* Arrow */}
@@ -132,12 +136,12 @@ export default function IotricsAbout() {
             className="flex flex-col p-6 sm:p-8 md:p-10 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group"
           >
             <div className="flex items-center mb-4 sm:mb-6 gap-3">
-              <span className="text-indigo-600 font-bold text-xl sm:text-2xl">03</span>
-              <span className="text-xs sm:text-sm font-bold tracking-widest text-indigo-600 uppercase">COLLABORATE</span>
+              <span className="text-indigo-600 font-bold text-xl sm:text-2xl">{cardsData[2].num}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-indigo-600 uppercase">{cardsData[2].label}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">Turn Data Into Decisions</h3>
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">{cardsData[2].title}</h3>
             <p className="text-sm sm:text-base text-neutral-600 mb-8 sm:mb-12 leading-relaxed flex-grow">
-              Powerful cloud intelligence delivers real-time visualization, alerts, and predictive insights to help you act faster.
+              {cardsData[2].description}
             </p>
 
             {/* Dummy Icons Row */}

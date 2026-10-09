@@ -1,7 +1,7 @@
 import { type HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-export interface CardMediaProps extends HTMLAttributes<HTMLDivElement> {}
+export type CardMediaProps = HTMLAttributes<HTMLDivElement>;
 
 /**
  * CardMedia

@@ -8,7 +8,7 @@ const clients = [
   { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
   { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
   { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
-  { name: "ARC", src: "/logo/client%20logos/ARC_Logo-2.svg" },
+  { name: "ARC", src: "/logo/client%20logos/adaa_gov.svg" },
   { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
   { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
   { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },

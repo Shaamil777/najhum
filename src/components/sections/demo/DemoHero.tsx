@@ -3,8 +3,10 @@
 import React from "react";
 import { ArrowRight, Image as ImageIcon, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { demoContent } from "@/content/demo";
 
 export default function DemoHero() {
+  const { hero } = demoContent;
   return (
     <section className="w-full bg-white pt-32 pb-16 md:pt-48 md:pb-24 font-sans overflow-hidden">
       <div className="container-base max-w-[1200px]">
@@ -19,7 +21,7 @@ export default function DemoHero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl md:text-6xl lg:text-7xl font-black text-neutral-900 tracking-tighter leading-[1.05] mb-6"
             >
-              Command Your<br />Ecosystem.
+              {hero.titlePart1}<br />{hero.titlePart2}
             </motion.h1>
             
             <motion.p 
@@ -28,7 +30,7 @@ export default function DemoHero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-base md:text-lg text-neutral-500 leading-relaxed mb-10 max-w-[420px]"
             >
-              Witness the convergence of industrial hardware and predictive AI. Stream live telemetry from remote assets and govern complex operations through a single, unified interface.
+              {hero.description}
             </motion.p>
             
             <motion.div 
@@ -38,11 +40,11 @@ export default function DemoHero() {
               className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
             >
               <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-black text-white text-[10px] font-bold tracking-widest uppercase rounded-lg shadow-xl shadow-black/10 hover:-translate-y-0.5 hover:shadow-2xl hover:bg-neutral-900 transition-all duration-300">
-                Explore Dashboards
+                {hero.buttonExplore}
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button className="w-full sm:w-auto flex items-center justify-center px-8 py-4 bg-white border-2 border-neutral-200 text-neutral-900 text-[10px] font-bold tracking-widest uppercase rounded-lg hover:border-neutral-300 hover:bg-neutral-50 transition-colors duration-300">
-                Book Guided Demo
+                {hero.buttonDemo}
               </button>
             </motion.div>
           </div>

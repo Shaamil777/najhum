@@ -4,66 +4,23 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Building2, Snowflake, Hotel, Factory, Truck, Building, Tractor, ShoppingCart, Zap } from "lucide-react";
 
+import { iotricsContent } from "@/content/iotrics";
+
+const industriesData = iotricsContent.industries.items;
+
 const industries = [
-  {
-    number: "01",
-    title: "Facilities Management",
-    desc: "Monitor building environments, equipment, energy consumption, and critical infrastructure from one connected platform.",
-    icon: Building2,
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    number: "02",
-    title: "Cold Storage",
-    desc: "Track temperature, humidity, and environmental conditions in real time to maintain critical storage conditions and respond to abnormal conditions.",
-    icon: Snowflake,
-    image: "https://images.unsplash.com/photo-1551313158-73d016a829ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29sZCUyMHN0b3JhZ2V8ZW58MHx8MHx8fDA%3D"
-  },
-  {
-    number: "03",
-    title: "Hospitality",
-    desc: "Monitor guest environments, energy usage, equipment, and facility conditions to improve operational efficiency and service reliability.",
-    icon: Hotel,
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    number: "04",
-    title: "Industrial & Manufacturing",
-    desc: "Connect industrial assets and equipment to monitor operational conditions, identify anomalies, and improve efficiency.",
-    icon: Factory,
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    number: "05",
-    title: "Logistics",
-    desc: "Track assets and operational conditions across distributed locations, helping teams gain greater visibility across their logistics operations.",
-    icon: Truck,
-    image: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    number: "06",
-    title: "Smart Cities & Infrastructure",
-    desc: "Connect distributed infrastructure and environmental systems to create real-time visibility across smart-city operations.",
-    icon: Building,
-    image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    number: "07",
-    title: "Agriculture",
-    desc: "Monitor environmental and operational conditions across agricultural environments using connected sensors and real-time data.",
-    icon: Tractor,
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    number: "08",
-    title: "Retail",
-    desc: "Connect and monitor retail environments, assets, and operational conditions through a centralized IoT platform.",
-    icon: ShoppingCart,
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop"
-  }
+  { ...industriesData[0], icon: Building2 },
+  { ...industriesData[1], icon: Snowflake },
+  { ...industriesData[2], icon: Hotel },
+  { ...industriesData[3], icon: Factory },
+  { ...industriesData[4], icon: Truck },
+  { ...industriesData[5], icon: Building },
+  { ...industriesData[6], icon: Tractor },
+  { ...industriesData[7], icon: ShoppingCart }
 ];
 
 export default function IotricsIndustries() {
+  const { industries: industriesContent } = iotricsContent;
   return (
     <section className="w-full bg-[#111111] text-white py-24 sm:py-32 font-poppins border-b border-neutral-900">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
@@ -77,7 +34,7 @@ export default function IotricsIndustries() {
               viewport={{ once: true }}
               className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1] mb-2"
             >
-              One IoT Platform.
+              {industriesContent.header.titlePart1}
             </motion.h2>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -86,7 +43,7 @@ export default function IotricsIndustries() {
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-500 leading-[1.1]"
             >
-              Built for Every Industry.
+              {industriesContent.header.titlePart2}
             </motion.h2>
           </div>
           
@@ -98,7 +55,7 @@ export default function IotricsIndustries() {
             className="max-w-md"
           >
             <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
-              From facilities and manufacturing to logistics and smart infrastructure, IoTRICs adapts to the environments where real-time asset visibility, monitoring, and intelligence matter most.
+              {industriesContent.header.description}
             </p>
           </motion.div>
         </div>

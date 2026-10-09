@@ -4,36 +4,20 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, RadioTower, Cloud, Database, LayoutDashboard } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
+import { cropifaiContent } from "@/content/cropifai";
+
+const pipelineData = cropifaiContent.architecture.pipeline;
 
 const pipelineNodes = [
-  {
-    icon: Cpu,
-    label: "FIELD SENSORS",
-    text: "Industrial soil moisture, weather, and environmental sensors capture real-time agricultural telemetry."
-  },
-  {
-    icon: RadioTower,
-    label: "LoRaWAN GATEWAY",
-    text: "Long-range, low-power LoRaWAN gateways collect telemetry across up to 15km radius without cellular dependencies."
-  },
-  {
-    icon: Cloud,
-    label: "CROPIFAI CLOUD",
-    text: "A unified IoT cloud platform to ingest, process, and analyze high-frequency field telemetry in real-time."
-  },
-  {
-    icon: Database,
-    label: "CLOUD INTEGRATION",
-    text: "API-ready integrations connecting farm operations to ERPs, SCADA systems, AWS, Azure, and local servers."
-  },
-  {
-    icon: LayoutDashboard,
-    label: "DASHBOARD",
-    text: "Intuitive farm maps, live moisture analytics, automated valve control triggers, and instant alerts."
-  },
+  { icon: Cpu, ...pipelineData[0] },
+  { icon: RadioTower, ...pipelineData[1] },
+  { icon: Cloud, ...pipelineData[2] },
+  { icon: Database, ...pipelineData[3] },
+  { icon: LayoutDashboard, ...pipelineData[4] },
 ];
 
 export default function CropifaiArchitecture() {
+  const { architecture } = cropifaiContent;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -58,13 +42,13 @@ export default function CropifaiArchitecture() {
         {/* Header Content */}
         <div className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto">
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
-            SYSTEM ARCHITECTURE
+            {architecture.header.tag}
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-slate-900 leading-tight tracking-tight mb-6">
-            Seamless Interoperability
+            {architecture.header.title}
           </h2>
           <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
-            An ecosystem built for scale and flexibility, connecting your physical fields to any digital platform.
+            {architecture.header.description}
           </p>
         </div>
 

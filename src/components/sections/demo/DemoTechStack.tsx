@@ -3,15 +3,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Radio, Server } from "lucide-react";
+import { demoContent } from "@/content/demo";
 
 export default function DemoTechStack() {
-  const connectivityTags = [
-    "LoRaWAN", "NB-IoT", "MQTT", "Modbus", "OPC-UA", "5G/eSIM"
-  ];
-  
-  const infrastructureTags = [
-    "Kube-IoT Clusters", "AWS Greengrass", "Edge Computing", "AI/ML Models", "Kafka Streams"
-  ];
+  const { techStack } = demoContent;
+  const connectivityTags = techStack.connectivity.tags;
+  const infrastructureTags = techStack.infrastructure.tags;
 
   return (
     <section className="w-full bg-[#0a0a0a] py-20 md:py-24 font-sans">
@@ -26,7 +23,7 @@ export default function DemoTechStack() {
               viewport={{ once: true }}
               className="text-3xl md:text-4xl font-black tracking-tight text-white mb-4 leading-tight"
             >
-              Technology Ecosystem.
+              {techStack.title}
             </motion.h2>
             
             <motion.p 
@@ -36,7 +33,7 @@ export default function DemoTechStack() {
               transition={{ delay: 0.1 }}
               className="text-base text-neutral-400 leading-relaxed mb-6"
             >
-              Built on industry-leading protocols and robust infrastructure to ensure seamless interoperability and military-grade security.
+              {techStack.description}
             </motion.p>
           </div>
           
@@ -53,7 +50,7 @@ export default function DemoTechStack() {
               <div className="flex items-center gap-2 mb-6">
                 <Radio className="w-4 h-4 text-neutral-500" />
                 <h3 className="text-[11px] font-bold tracking-widest text-neutral-500 uppercase">
-                  Connectivity & Protocols
+                  {techStack.connectivity.badge}
                 </h3>
               </div>
               <div className="bg-neutral-900 border border-neutral-800 p-[1px] grid grid-cols-2 sm:grid-cols-3 gap-[1px] rounded-xl overflow-hidden shadow-2xl">
@@ -87,7 +84,7 @@ export default function DemoTechStack() {
               <div className="flex items-center gap-2 mb-6">
                 <Server className="w-4 h-4 text-neutral-500" />
                 <h3 className="text-[11px] font-bold tracking-widest text-neutral-500 uppercase">
-                  Infrastructure & Compute
+                  {techStack.infrastructure.badge}
                 </h3>
               </div>
               

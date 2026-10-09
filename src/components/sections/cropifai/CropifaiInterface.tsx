@@ -9,15 +9,17 @@ import {
   RefreshCw,
   BarChart3
 } from "lucide-react";
-
-const features = [
-  { icon: Map, title: "Visual Map Representation", desc: "Pinpoint exact device locations and irrigation zones across farms." },
-  { icon: Activity, title: "Real-Time Telemetry", desc: "Live sensor monitoring for multi-depth soil moisture and climate." },
-  { icon: RefreshCw, title: "Over-the-Air (OTA) Control", desc: "Remote valve automation, scheduling, and firmware updates." },
-  { icon: BarChart3, title: "Data Analytics & Trends", desc: "Historical water consumption charts, NDVI analysis, and yield insights." },
-];
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiInterface() {
+  const { interface: iface } = cropifaiContent;
+  const featuresData = iface.features;
+  const features = [
+    { icon: Map, ...featuresData[0] },
+    { icon: Activity, ...featuresData[1] },
+    { icon: RefreshCw, ...featuresData[2] },
+    { icon: BarChart3, ...featuresData[3] },
+  ];
   return (
     <section className="w-full py-28 bg-white relative overflow-hidden font-sans">
       
@@ -38,8 +40,8 @@ export default function CropifaiInterface() {
               transition={{ delay: 0.1 }}
               className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
             >
-              CENTRALIZED MANAGEMENT — <br className="hidden sm:block" />
-              <span className="text-primary font-black">CLOUD PLATFORM</span>
+              {iface.header.titlePart1} <br className="hidden sm:block" />
+              <span className="text-primary font-black">{iface.header.titlePart2}</span>
             </motion.h2>
           </div>
 
@@ -50,7 +52,7 @@ export default function CropifaiInterface() {
             transition={{ delay: 0.15 }}
             className="text-muted text-[13px] sm:text-base lg:text-lg max-w-md leading-relaxed italic text-center lg:text-left mx-auto lg:mx-0 mt-2 sm:mt-0"
           >
-            Powered by IoTRICs, providing an intuitive, multi-tenant interface for remote agricultural management and device oversight.
+            {iface.header.description}
           </motion.p>
         </div>
 
@@ -61,7 +63,7 @@ export default function CropifaiInterface() {
           <div className="lg:col-span-4 flex flex-col space-y-4">
             <div className="mb-3 sm:mb-4 text-center lg:text-left">
               <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground leading-tight">
-                Everything you need <br className="hidden lg:block"/> in one Platform
+                {iface.sidebar.titleLine1} <br className="hidden lg:block"/> {iface.sidebar.titleLine2}
               </h3>
             </div>
 

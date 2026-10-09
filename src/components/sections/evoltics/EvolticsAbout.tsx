@@ -18,6 +18,7 @@ import {
   Sparkles,
   Info
 } from "lucide-react";
+import { evolticsContent } from "@/content/evoltics";
 
 interface MilestoneData {
   year: string;
@@ -30,66 +31,10 @@ interface MilestoneData {
   impactMetric: string;
 }
 
-const timelineData: MilestoneData[] = [
-  {
-    year: "2023",
-    phase: "Phase 01",
-    tag: "FOUNDATION",
-    status: "completed",
-    title: "Green Mobility Inception",
-    desc: "Dubai Green Mobility Initiative v1 launch and foundational CPO regulatory framework establishment.",
-    deliverables: [
-      "Initial public charging network rollout",
-      "DEWA EV Green Charger integration",
-      "Unified tariff & billing sandbox"
-    ],
-    impactMetric: "Network Genesis"
-  },
-  {
-    year: "2026",
-    phase: "Phase 02",
-    tag: "EXPANSION",
-    status: "active",
-    title: "Mandatory Infrastructure",
-    desc: "Enforcement of mandatory EV charging infrastructure requirements for all new commercial and residential developments.",
-    deliverables: [
-      "Mandatory parking bay electrification",
-      "Interoperable OCPP 2.0.1 compliance",
-      "Standardized municipal building codes"
-    ],
-    impactMetric: "+350% Deployment Rate"
-  },
-  {
-    year: "2030",
-    phase: "Phase 03",
-    tag: "OPTIMISATION",
-    status: "upcoming",
-    title: "Smart Grid & V2G Integration",
-    desc: "Nationwide smart grid orchestration enabling Vehicle-to-Grid (V2G) bidirectional power flow and dynamic load balancing.",
-    deliverables: [
-      "V2G bidirectional energy exchange",
-      "AI-driven peak demand shifting",
-      "Automated renewable energy absorption"
-    ],
-    impactMetric: "40% EV Adoption"
-  },
-  {
-    year: "2050",
-    phase: "Phase 04",
-    tag: "NET ZERO",
-    status: "target",
-    title: "100% Electrified Mobility",
-    desc: "Complete decarbonization of public, commercial, and private transport in full lockstep with the UAE Net Zero 2050 Charter.",
-    deliverables: [
-      "100% zero-emission fleet transition",
-      "Autonomous green logistics corridors",
-      "Fully closed-loop renewable grid"
-    ],
-    impactMetric: "Net Zero Emissions"
-  }
-];
+const timelineData: MilestoneData[] = evolticsContent.about.roadmap.milestones as MilestoneData[];
 
 export default function EvolticsAbout() {
+  const { about } = evolticsContent;
   const [selectedMilestone, setSelectedMilestone] = useState<number>(1); // Default to 2026 (Expansion)
 
   return (
@@ -111,7 +56,7 @@ export default function EvolticsAbout() {
               transition={{ delay: 0.1 }}
               className="text-[1.75rem] sm:text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
             >
-              UAE EV Market Outlook
+              {about.header.title}
             </motion.h2>
           </div>
 
@@ -122,7 +67,7 @@ export default function EvolticsAbout() {
             transition={{ delay: 0.15 }}
             className="text-muted text-sm sm:text-base lg:text-lg max-w-lg leading-relaxed"
           >
-            Positioned at the nexus of the UAE’s green mobility vision, aligning cutting-edge CPMS infrastructure with federal electrification goals.
+            {about.header.description}
           </motion.p>
         </div>
 
@@ -142,11 +87,11 @@ export default function EvolticsAbout() {
             <div>
               <div className="flex items-center justify-between mb-3 sm:mb-6">
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-muted uppercase">
-                  PROJECTION_2030
+                  {about.pillars[0].tag}
                 </span>
                 <div className="flex items-center gap-2 relative z-20">
                   <a 
-                    href="https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
+                    href={about.pillars[0].sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
@@ -163,10 +108,10 @@ export default function EvolticsAbout() {
               {/* Visual Circular Gauge + Metric */}
               <div className="flex items-baseline gap-2 sm:gap-4 my-1 sm:my-2">
                 <span className="text-4xl sm:text-6xl font-black font-display text-foreground tracking-tight">
-                  40%
+                  {about.pillars[0].value}
                 </span>
                 <span className="inline-flex items-center text-[9px] sm:text-xs font-bold text-primary bg-primary/10 px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded sm:rounded-md">
-                  Target
+                  {about.pillars[0].badge}
                 </span>
               </div>
 
@@ -181,14 +126,12 @@ export default function EvolticsAbout() {
                 />
               </div>
 
-              <p className="text-[11px] sm:text-sm text-muted leading-relaxed">
-                Projected EV adoption in UAE by 2030, accelerated by the federal <span className="font-semibold text-foreground">Green Mobility Strategy</span> and smart city initiatives.
-              </p>
+              <p className="text-[11px] sm:text-sm text-muted leading-relaxed" dangerouslySetInnerHTML={{ __html: about.pillars[0].description.replace('Green Mobility Strategy', '<span class="font-semibold text-foreground">Green Mobility Strategy</span>') }} />
             </div>
 
             <div className="mt-4 sm:mt-8 pt-3 sm:pt-4 border-t border-border flex items-center justify-between text-[10px] sm:text-xs text-muted">
-              <span>National Fleet Shift</span>
-              <span className="font-bold text-foreground">1 in 2.5 Vehicles</span>
+              <span>{about.pillars[0].footerLabel}</span>
+              <span className="font-bold text-foreground">{about.pillars[0].footerValue}</span>
             </div>
           </motion.div>
 
@@ -205,11 +148,11 @@ export default function EvolticsAbout() {
             <div>
               <div className="flex items-center justify-between mb-3 sm:mb-6">
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-muted uppercase">
-                  CAPACITY REQUIRED
+                  {about.pillars[1].tag}
                 </span>
                 <div className="flex items-center gap-2 relative z-20">
                   <a 
-                    href="https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
+                    href={about.pillars[1].sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
@@ -225,10 +168,10 @@ export default function EvolticsAbout() {
 
               <div className="flex items-baseline gap-2 sm:gap-4 my-1 sm:my-2">
                 <span className="text-4xl sm:text-6xl font-black font-display text-foreground tracking-tight">
-                  42k+
+                  {about.pillars[1].value}
                 </span>
                 <span className="inline-flex items-center text-[9px] sm:text-xs font-bold text-amber-600 bg-amber-500/10 px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded sm:rounded-md">
-                  By 2035
+                  {about.pillars[1].badge}
                 </span>
               </div>
 
@@ -243,13 +186,13 @@ export default function EvolticsAbout() {
               </div>
 
               <p className="text-[11px] sm:text-sm text-muted leading-relaxed">
-                New charging points required across the UAE by 2035 to sustain the surging electric vehicle fleet and inter-emirate transit.
+                {about.pillars[1].description}
               </p>
             </div>
 
             <div className="mt-4 sm:mt-8 pt-3 sm:pt-4 border-t border-border flex items-center justify-between text-[10px] sm:text-xs text-muted">
-              <span>Grid Density Demand</span>
-              <span className="font-bold text-foreground">High Growth (AC & DC)</span>
+              <span>{about.pillars[1].footerLabel}</span>
+              <span className="font-bold text-foreground">{about.pillars[1].footerValue}</span>
             </div>
           </motion.div>
 
@@ -266,11 +209,11 @@ export default function EvolticsAbout() {
             <div>
               <div className="flex items-center justify-between mb-3 sm:mb-6">
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-muted uppercase">
-                  TARGET GOAL
+                  {about.pillars[2].tag}
                 </span>
                 <div className="flex items-center gap-2 relative z-20">
                   <a 
-                    href="https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/environment-and-energy/the-uae-net-zero-2050-strategy"
+                    href={about.pillars[2].sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
@@ -286,7 +229,7 @@ export default function EvolticsAbout() {
 
               <div className="flex items-baseline gap-2 sm:gap-4 my-1 sm:my-2">
                 <span className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-success tracking-tight">
-                  NET ZERO
+                  {about.pillars[2].value}
                 </span>
               </div>
 
@@ -294,18 +237,16 @@ export default function EvolticsAbout() {
               <div className="flex items-center space-x-2 mt-2 sm:mt-4 mb-3 sm:mb-5">
                 <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-success bg-success/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">
                   <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-                  UAE Net Zero 2050 Charter
+                  {about.pillars[2].badge}
                 </span>
               </div>
 
-              <p className="text-[11px] sm:text-sm text-muted leading-relaxed">
-                Full alignment with the <span className="font-semibold text-foreground">UAE Net Zero 2050 Charter</span> through resilient, sustainable, and smart IoT infrastructure.
-              </p>
+              <p className="text-[11px] sm:text-sm text-muted leading-relaxed" dangerouslySetInnerHTML={{ __html: about.pillars[2].description.replace('UAE Net Zero 2050 Charter', '<span class="font-semibold text-foreground">UAE Net Zero 2050 Charter</span>') }} />
             </div>
 
             <div className="mt-4 sm:mt-8 pt-3 sm:pt-4 border-t border-border flex items-center justify-between text-[10px] sm:text-xs text-muted">
-              <span>Emissions Reductions</span>
-              <span className="font-bold text-success">100% Decarbonized</span>
+              <span>{about.pillars[2].footerLabel}</span>
+              <span className="font-bold text-success">{about.pillars[2].footerValue}</span>
             </div>
           </motion.div>
 
@@ -320,15 +261,15 @@ export default function EvolticsAbout() {
               <div className="flex items-center space-x-2 mb-2">
                 <Milestone className="w-4 h-4 text-primary" />
                 <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] text-primary uppercase">
-                  Regulatory & Engineering Roadmap
+                  {about.roadmap.badge}
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-foreground tracking-tight">
-                National Electrification Timeline
+                {about.roadmap.title}
               </h3>
             </div>
             <p className="text-[11px] sm:text-xs text-muted max-w-sm">
-              Click milestones below to explore phase deliverables, grid protocols, and strategic milestones.
+              {about.roadmap.description}
             </p>
           </div>
 
@@ -418,14 +359,14 @@ export default function EvolticsAbout() {
                   <div>
                     <div className="mb-4">
                       <span className="text-[10px] font-bold tracking-[0.2em] text-muted uppercase">
-                        Strategic Target Indicator
+                        {about.roadmap.indicatorLabel}
                       </span>
                     </div>
                     <div className="text-2xl font-black text-foreground mb-1">
                       {timelineData[selectedMilestone].impactMetric}
                     </div>
                     <span className="text-xs text-muted block mb-4">
-                      National mandate priority index
+                      {about.roadmap.indicatorDesc}
                     </span>
                   </div>
 

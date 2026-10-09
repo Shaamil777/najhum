@@ -3,7 +3,7 @@ import EvolticsAbout from "@/components/sections/evoltics/EvolticsAbout";
 import EvolticsEcosystem from "@/components/sections/evoltics/EvolticsEcosystem";
 import EvolticsComparison from "@/components/sections/evoltics/EvolticsComparison";
 import EvolticsPlatform from "@/components/sections/evoltics/EvolticsPlatform";
-import EvolticsProducts from "@/components/sections/evoltics/EvolticsProducts";
+import PlatformProductsServer from "@/components/shared/PlatformProductsServer";
 import EvolticsMobileApp from "@/components/sections/evoltics/EvolticsMobileApp";
 import EvolticsSolutions from "@/components/sections/evoltics/EvolticsSolutions";
 import EvolticsJourney from "@/components/sections/evoltics/EvolticsJourney";
@@ -33,7 +33,7 @@ export default function EvolticsPage() {
       <EvolticsSolutions />
       <EvolticsComparison />
       <EvolticsPlatform />
-      {/* <EvolticsProducts /> */}
+      <PlatformProductsServer platformId="evoltics" />
       <EvolticsMobileApp />
       <EvolticsEcosystem />
       <EvolticsJourney />

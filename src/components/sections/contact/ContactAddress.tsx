@@ -3,58 +3,66 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, Clock } from "lucide-react";
-
-const addressDetails = [
-  {
-    title: "Visit Us",
-    icon: MapPin,
-    content: (
-      <div className="flex flex-col gap-2">
-        <p className="text-neutral-400">Dubai Office</p>
-        <p className="text-neutral-400">Building 5, Dubai Design District (d3)</p>
-        <p className="text-neutral-400">Dubai, UAE</p>
-        <a href="#" className="text-sm font-semibold text-white underline underline-offset-4 mt-2 hover:text-blue-400 transition-colors inline-block">
-          View on Maps
-        </a>
-      </div>
-    )
-  },
-  {
-    title: "Email Us",
-    icon: Mail,
-    content: (
-      <div className="flex flex-col gap-2">
-        <p className="text-neutral-400"><span className="text-neutral-600">General:</span> info@najhum.com</p>
-        <p className="text-neutral-400"><span className="text-neutral-600">Sales:</span> sales@najhum.com</p>
-        <p className="text-neutral-400"><span className="text-neutral-600">Support:</span> support@najhum.com</p>
-      </div>
-    )
-  },
-  {
-    title: "Call Us",
-    icon: Phone,
-    content: (
-      <div className="flex flex-col gap-2">
-        <p className="text-neutral-400"><span className="text-neutral-600">Sales:</span> +971 (0)4 123 4567</p>
-        <p className="text-neutral-400"><span className="text-neutral-600">Tech:</span> +971 (0)4 123 4568</p>
-        <p className="text-neutral-400"><span className="text-neutral-600">BD:</span> +971 (0)4 123 4569</p>
-      </div>
-    )
-  },
-  {
-    title: "Business Hours",
-    icon: Clock,
-    content: (
-      <div className="flex flex-col gap-2">
-        <p className="text-neutral-400">Monday - Friday</p>
-        <p className="text-neutral-400 mb-2">9:00 AM - 6:00 PM (GST)</p>
-        <p className="text-neutral-500 italic text-sm">Closed on weekends and public holidays.</p>
-      </div>
-    )
-  }
-];
+import { contactContent } from "@/content/contact";
 
 export default function ContactAddress() {
+  const { address } = contactContent;
+
+  const iconMap: Record<string, React.ElementType> = {
+    MapPin,
+    Mail,
+    Phone,
+    Clock
+  };
+
+  const addressDetails = address.details.map((item) => {
+    const Icon = iconMap[item.iconName] || MapPin;
+    
+    let content;
+    if (item.type === "address") {
+      content = (
+        <div className="flex flex-col gap-2">
+          <p className="text-neutral-400">{item.location}</p>
+          <p className="text-neutral-400">{item.addressLine1}</p>
+          <p className="text-neutral-400">{item.addressLine2}</p>
+          <a href="#" className="text-sm font-semibold text-white underline underline-offset-4 mt-2 hover:text-blue-400 transition-colors inline-block">
+            {item.linkText}
+          </a>
+        </div>
+      );
+    } else if (item.type === "emails") {
+      content = (
+        <div className="flex flex-col gap-2">
+          {item.emails?.map((email, idx) => (
+            <p key={idx} className="text-neutral-400"><span className="text-neutral-600">{email.label}:</span> {email.address}</p>
+          ))}
+        </div>
+      );
+    } else if (item.type === "phones") {
+      content = (
+        <div className="flex flex-col gap-2">
+          {item.phones?.map((phone, idx) => (
+            <p key={idx} className="text-neutral-400"><span className="text-neutral-600">{phone.label}:</span> {phone.number}</p>
+          ))}
+        </div>
+      );
+    } else if (item.type === "hours") {
+      content = (
+        <div className="flex flex-col gap-2">
+          <p className="text-neutral-400">{item.days}</p>
+          <p className="text-neutral-400 mb-2">{item.hours}</p>
+          <p className="text-neutral-500 italic text-sm">{item.note}</p>
+        </div>
+      );
+    }
+
+    return {
+      title: item.title,
+      icon: Icon,
+      content
+    };
+  });
+
   return (
     <section className="w-full bg-[#111111] text-white py-24 sm:py-32 font-poppins border-b border-neutral-900 overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
@@ -68,7 +76,7 @@ export default function ContactAddress() {
               viewport={{ once: true }}
               className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1] mb-2"
             >
-              Global Presence.
+              {address.headerTitle1}
             </motion.h2>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -77,7 +85,7 @@ export default function ContactAddress() {
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-500 leading-[1.1]"
             >
-              Local Support.
+              {address.headerTitle2}
             </motion.h2>
           </div>
           
@@ -89,7 +97,7 @@ export default function ContactAddress() {
             className="max-w-md"
           >
             <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
-              Reach out to our teams across different departments. We're here to help you build the future of connected infrastructure.
+              {address.headerDescription}
             </p>
           </motion.div>
         </div>

@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { 
-  Card, 
-  CardBody, 
-  Grid, 
+import {
+  Card,
+  CardBody,
+  Grid,
   Text,
   Link as DesignLink,
-  Stack 
+  Stack
 } from "@/design-system";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -51,15 +51,10 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
     };
   }, []);
 
-  // Close menu when route changes
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
   const isParentActive = pathname === parentHref || (parentHref !== "/" && pathname?.startsWith(parentHref));
 
   return (
-    <div 
+    <div
       className="relative flex items-center justify-center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -76,11 +71,11 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
         aria-haspopup="true"
       >
         {title}
-        <ChevronDown 
+        <ChevronDown
           className={cn(
-            "w-4 h-4 transition-transform duration-200", 
+            "w-4 h-4 transition-transform duration-200",
             isOpen && "rotate-180"
-          )} 
+          )}
         />
       </button>
 
@@ -108,11 +103,11 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
       )}
 
       {/* The dropdown content */}
-      <div 
+      <div
         className={cn(
           "absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-200 z-50",
-          isOpen 
-            ? "opacity-100 translate-y-0 pointer-events-auto" 
+          isOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-2 pointer-events-none"
         )}
       >
@@ -123,9 +118,9 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
                 const isChildActive = pathname === item.href;
                 return (
                   <Stack key={item.title} gap="xs">
-                    <DesignLink 
-                      href={item.href} 
-                      underline="never" 
+                    <DesignLink
+                      href={item.href} onClick={() => setIsOpen(false)}
+                      underline="never"
                       className={cn(
                         "font-bold text-sm",
                         isChildActive ? "text-primary" : "text-foreground"

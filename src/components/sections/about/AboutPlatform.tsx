@@ -4,52 +4,21 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Wifi, Sprout, Droplets, BarChart3 } from "lucide-react";
+import { aboutContent } from "@/content/about";
 
 export default function AboutPlatform() {
-  const platforms = [
-    {
-      code: "CORE 01",
-      name: "IOTRICS",
-      description:
-        "Advanced IoT asset management and sensor integration for real-time visibility across global supply chains.",
-      href: "/platforms/iotrics",
-      bgImage: "/images/about/iotrics_bg.jpg",
-      cardBg: "bg-[#edf4ff]",
-      borderColor: "border-blue-100",
-      gradientOverlay: "from-[#edf4ff] via-[#edf4ff]/85 to-transparent",
-      accentColor: "text-primary",
-      ctaBg: "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white",
-      badgeType: "iotrics",
-    },
-    {
-      code: "CORE 02",
-      name: "EVOLTICS",
-      description:
-        "Energy management and optimization platform designed for smart cities and high-consumption industrial plants.",
-      href: "/platforms/evoltics",
-      bgImage: "/images/about/evoltics_bg.jpg",
-      cardBg: "bg-[#fffcf5]",
-      borderColor: "border-amber-100",
-      gradientOverlay: "from-[#fffcf5] via-[#fffcf5]/85 to-transparent",
-      accentColor: "text-amber-600",
-      ctaBg: "bg-amber-100 text-amber-600 group-hover:bg-amber-600 group-hover:text-white",
-      badgeType: "evoltics",
-    },
-    {
-      code: "CORE 03",
-      name: "CROPIFAI",
-      description:
-        "AI-driven agricultural intelligence focused on soil health, yield optimization, and resource sustainability.",
-      href: "/platforms/cropifai",
-      bgImage: "/images/about/cropifai_bg.jpg",
-      cardBg: "bg-[#f2fcf5]",
-      borderColor: "border-emerald-100",
-      gradientOverlay: "from-[#f2fcf5] via-[#f2fcf5]/85 to-transparent",
-      accentColor: "text-emerald-600",
-      ctaBg: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
-      badgeType: "cropifai",
-    },
+  const { platform } = aboutContent;
+
+  const styleMapping = [
+    { bgImage: "/images/about/iotrics_bg.jpg", cardBg: "bg-[#edf4ff]", borderColor: "border-blue-100", gradientOverlay: "from-[#edf4ff] via-[#edf4ff]/85 to-transparent", accentColor: "text-primary", ctaBg: "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white" },
+    { bgImage: "/images/about/evoltics_bg.jpg", cardBg: "bg-[#fffcf5]", borderColor: "border-amber-100", gradientOverlay: "from-[#fffcf5] via-[#fffcf5]/85 to-transparent", accentColor: "text-amber-600", ctaBg: "bg-amber-100 text-amber-600 group-hover:bg-amber-600 group-hover:text-white" },
+    { bgImage: "/images/about/cropifai_bg.jpg", cardBg: "bg-[#f2fcf5]", borderColor: "border-emerald-100", gradientOverlay: "from-[#f2fcf5] via-[#f2fcf5]/85 to-transparent", accentColor: "text-emerald-600", ctaBg: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white" },
   ];
+
+  const platforms = platform.platforms.map((p, idx) => ({
+    ...p,
+    ...styleMapping[idx % styleMapping.length]
+  }));
 
   return (
     <section id="technology" className="relative w-full py-20 md:py-28 bg-[#fbfcfd] text-slate-900 overflow-hidden scroll-mt-16">
@@ -63,18 +32,17 @@ export default function AboutPlatform() {
           <div className="flex items-center justify-center gap-3 mb-3.5">
             <div className="w-10 h-px bg-slate-300" />
             <span className="text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase text-slate-500">
-              The Architecture
+              {platform.badge}
             </span>
             <div className="w-10 h-px bg-slate-300" />
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight mb-3.5 normal-case">
-            One Group. <span className="text-primary">Three Intelligent Platforms.</span>
+            {platform.titlePart1} <span className="text-primary">{platform.titlePart2}</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Purpose-built platforms addressing critical global challenges through
-            intelligent technology, real-world impact, and long-term sustainability.
+            {platform.description}
           </p>
         </div>
 
@@ -157,7 +125,7 @@ export default function AboutPlatform() {
         <div className="flex items-center justify-center gap-4 mt-16 sm:mt-20">
           <div className="w-12 sm:w-16 h-px bg-slate-200" />
           <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-slate-400 text-center">
-            Technology for a More Resilient Tomorrow
+            {platform.footerStatement}
           </span>
           <div className="w-12 sm:w-16 h-px bg-slate-200" />
         </div>

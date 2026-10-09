@@ -3,16 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AntiMetalButton } from "@/components/ui/anti-metal-button";
+import { iotricsContent } from "@/content/iotrics";
 
 export default function IotricsCta() {
+  const { cta } = iotricsContent;
   const [isHovered, setIsHovered] = useState(false);
   const [pixelState, setPixelState] = useState<Map<number, 'solid' | 'light'>>(new Map());
 
   useEffect(() => {
-    if (!isHovered) {
-      setPixelState(new Map());
-      return;
-    }
+    if (!isHovered) return;
 
     const generatePixels = () => {
       const newState = new Map<number, 'solid' | 'light'>();
@@ -41,7 +40,7 @@ export default function IotricsCta() {
         
         <div className="absolute inset-0 flex flex-wrap content-start">
           {Array.from({ length: 600 }).map((_, i) => {
-            const pState = pixelState.get(i);
+            const pState = (isHovered ? pixelState.get(i) : undefined);
             
             let bgClass = '';
             if (isHovered && pState) {
@@ -64,13 +63,11 @@ export default function IotricsCta() {
         <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
           
           <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.08]">
-            Ready to Connect <br className="hidden sm:block" />
-            Your <span className="text-primary">Operations?</span>
+            {cta.title.line1} <br className="hidden sm:block" />
+            {cta.title.line2} <span className="text-primary">{cta.title.highlight}</span>
           </h2>
 
-          <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
-            Partner with <span className="text-primary font-semibold">IoTRICs</span> for end-to-end IoT deployment, real-time monitoring, and intelligent insights across your connected infrastructure.
-          </p>
+          <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl" dangerouslySetInnerHTML={{ __html: cta.description.replace('IoTRICs', '<span class="text-primary font-semibold">IoTRICs</span>') }} />
           
           <div 
             className="scale-110 sm:scale-125 transition-transform duration-300"
@@ -79,7 +76,7 @@ export default function IotricsCta() {
           >
             <Link href="/contact" className="focus-visible:outline-none block">
               <AntiMetalButton 
-                label="Get Started" 
+                label={cta.button} 
                 accentFrom="var(--color-primary)" 
                 accentTo="var(--color-primary)" 
                 dotColor="#ffffff"

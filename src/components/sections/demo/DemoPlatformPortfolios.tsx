@@ -4,37 +4,24 @@ import React from "react";
 import { Factory, Zap, Tractor, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { demoContent } from "@/content/demo";
 
 export default function DemoPlatformPortfolios() {
-  const portfolios = [
-    {
-      icon: Factory,
-      title: "IoTRICs",
-      description: "General Industrial IoT management suite for mixed assets and infrastructure monitoring.",
-      category: "INDUSTRIAL AUTOMATION",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop",
-      color: "group-hover:text-blue-400",
-      link: "/platforms/iotrics"
-    },
-    {
-      icon: Zap,
-      title: "EVOLTICS",
-      description: "Specialized grid-edge analytics for smart meters, EV networks, and renewable energy storage.",
-      category: "ENERGY INTELLIGENCE",
-      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800&auto=format&fit=crop",
-      color: "group-hover:text-emerald-400",
-      link: "/platforms/evoltics"
-    },
-    {
-      icon: Tractor,
-      title: "CropifAI",
-      description: "Agritech platform focused on yield optimization and precision soil analysis via satellite and on-site sensors.",
-      category: "PRECISION AGRI",
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop",
-      color: "group-hover:text-amber-400",
-      link: "/platforms/cropifai"
-    }
-  ];
+  const { portfolios: portfoliosContent } = demoContent;
+
+  const iconMap: Record<string, React.ElementType> = {
+    Factory,
+    Zap,
+    Tractor
+  };
+
+  const portfolios = portfoliosContent.items.map(item => {
+    const Icon = iconMap[item.iconName] || Factory;
+    return {
+      ...item,
+      icon: Icon
+    };
+  });
 
   return (
     <section className="w-full bg-[#0a0a0a] text-white py-24 md:py-32 border-b border-neutral-900 overflow-hidden">
@@ -48,7 +35,7 @@ export default function DemoPlatformPortfolios() {
             viewport={{ once: true }}
             className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase mb-3"
           >
-            Our Ecosystem
+            {portfoliosContent.badge}
           </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
@@ -57,7 +44,7 @@ export default function DemoPlatformPortfolios() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight"
           >
-            Platform Portfolios.
+            {portfoliosContent.title}
           </motion.h2>
         </div>
 
@@ -117,7 +104,7 @@ export default function DemoPlatformPortfolios() {
 
         {/* Mobile Swipe Indicator */}
         <div className="flex md:hidden items-center justify-center gap-2 mt-8 text-neutral-500 opacity-80">
-          <span className="text-[10px] font-bold tracking-widest uppercase">Swipe to view more</span>
+          <span className="text-[10px] font-bold tracking-widest uppercase">{portfoliosContent.swipeText}</span>
           <ArrowRight className="w-3.5 h-3.5 animate-pulse" />
         </div>
 

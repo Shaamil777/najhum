@@ -2,16 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { AntiMetalButton } from "@/components/ui/anti-metal-button";
+import { contactContent } from "@/content/contact";
 
 export default function ContactCta() {
+  const { cta } = contactContent;
   const [isHovered, setIsHovered] = useState(false);
   const [pixelState, setPixelState] = useState<Map<number, 'solid' | 'light'>>(new Map());
 
   useEffect(() => {
-    if (!isHovered) {
-      setPixelState(new Map());
-      return;
-    }
+    if (!isHovered) return;
 
     const generatePixels = () => {
       const newState = new Map<number, 'solid' | 'light'>();
@@ -43,7 +42,7 @@ export default function ContactCta() {
         
         <div className="absolute inset-0 flex flex-wrap content-start">
           {Array.from({ length: 600 }).map((_, i) => {
-            const pState = pixelState.get(i);
+            const pState = (isHovered ? pixelState.get(i) : undefined);
             
             let bgClass = '';
             if (isHovered && pState) {
@@ -66,12 +65,12 @@ export default function ContactCta() {
         <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
           
           <h2 className="font-poppins text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.08]">
-            Ready to Transform <br className="hidden sm:block" />
-            Your <span className="text-primary">Operations?</span>
+            {cta.titlePart1} <br className="hidden sm:block" />
+            {cta.titlePart2} <span className="text-primary">{cta.titlePart3}</span>
           </h2>
 
           <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
-            Connect <span className="text-primary font-semibold">industrial assets</span>, optimize energy, and unlock real-time operational intelligence with Najhum's enterprise platforms.
+            {cta.descriptionPart1}<span className="text-primary font-semibold">{cta.descriptionHighlight}</span>{cta.descriptionPart2}
           </p>
           
           {/* Scaled-up Action Button */}
@@ -85,7 +84,7 @@ export default function ContactCta() {
               className="focus-visible:outline-none block"
             >
               <AntiMetalButton 
-                label="Get in Touch" 
+                label={cta.buttonLabel}
                 accentFrom="var(--color-primary)" 
                 accentTo="var(--color-primary)" 
                 dotColor="#ffffff"

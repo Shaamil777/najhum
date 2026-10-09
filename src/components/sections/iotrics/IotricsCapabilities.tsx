@@ -5,85 +5,9 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, TrendingUp } from "lucide-react";
 
-interface CapabilityItem {
-  id: string;
-  num: string;
-  shortTitle: string;
-  title: string;
-  description: string;
-  tag: string;
-  image: string;
-  badge: string;
-}
+import { iotricsContent } from "@/content/iotrics";
 
-const capabilitiesData: CapabilityItem[] = [
-  {
-    id: "01",
-    num: "01",
-    shortTitle: "Data Acquisition",
-    title: "Monitoring & Data Acquisition",
-    description:
-      "Continuous data capture from any sensor, any asset, any geography. Fixed and mobile deployments supported.",
-    tag: "OPTIMIZATION_ALPHA",
-    image: "/images/iotrics/capability_1.jpg",
-    badge: "Real-Time Ingestion",
-  },
-  {
-    id: "02",
-    num: "02",
-    shortTitle: "Alerts & Events",
-    title: "Intelligent Alerts & Events",
-    description:
-      "Configurable threshold-based alerts via SMS, email, and push notification. Full event logging for traceability.",
-    tag: "ALERT_LOGIC_BETA",
-    image: "/images/iotrics/capability_2.jpg",
-    badge: "Threshold Triggers",
-  },
-  {
-    id: "03",
-    num: "03",
-    shortTitle: "Environmental Visibility",
-    title: "Environmental & Asset Visibility",
-    description:
-      "Temperature, humidity, energy, water, air quality, and asset status — all centralised in one dashboard view.",
-    tag: "CONDITION_GAMMA",
-    image: "/images/iotrics/capability_3.jpg",
-    badge: "Facility Environment",
-  },
-  {
-    id: "04",
-    num: "04",
-    shortTitle: "Energy Intelligence",
-    title: "Energy & Resource Intelligence",
-    description:
-      "Sub-meter monitoring, load analysis, peak demand detection, and ESG reporting — all from one platform.",
-    tag: "SUBMETER_DELTA",
-    image: "/images/iotrics/capability_4.jpg",
-    badge: "Smart Metering",
-  },
-  {
-    id: "05",
-    num: "05",
-    shortTitle: "Movement Tracking",
-    title: "Movement & Utilisation Tracking",
-    description:
-      "Mobile asset location, logistics visibility, fleet and equipment tracking — real-time, always current.",
-    tag: "TELEMATICS_EPSILON",
-    image: "/images/iotrics/capability_5.jpg",
-    badge: "Fleet Logistics",
-  },
-  {
-    id: "06",
-    num: "06",
-    shortTitle: "Analytics & Compliance",
-    title: "Analytics, Reporting & Compliance",
-    description:
-      "Historical data, trend analysis, automated report generation, and audit-ready exports on demand.",
-    tag: "AUDIT_COMPLIANCE_ZETA",
-    image: "/images/iotrics/capability_6.jpg",
-    badge: "Audit Reports",
-  },
-];
+const capabilitiesData = iotricsContent.capabilities.items;
 
 export default function IotricsCapabilities() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -113,13 +37,13 @@ export default function IotricsCapabilities() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-12">
           <div className="max-w-2xl">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#3B82F6] mb-3 block">
-              6 CORE CAPABILITIES
+              {iotricsContent.capabilities.header.tag}
             </span>
             <h2
               className="normal-case text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-900 tracking-tight leading-tight"
               style={{ textTransform: "none" }}
             >
-              Everything you need to run data-driven operations
+              {iotricsContent.capabilities.header.title}
             </h2>
           </div>
 

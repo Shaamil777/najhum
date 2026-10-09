@@ -4,8 +4,10 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiHero() {
+  const { hero } = cropifaiContent;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6 }}
           className="mb-6 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
         >
-          <span className="text-sm font-bold tracking-widest uppercase text-white">CROPifAI Platform</span>
+          <span className="text-sm font-bold tracking-widest uppercase text-white">{hero.badge}</span>
         </motion.div>
 
         {/* Main Headline */}
@@ -53,8 +55,8 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 font-display text-white uppercase"
         >
-          BEYOND PRECISION. <br />
-          <span className="text-primary">CULTIVATING THE FUTURE.</span>
+          {hero.title.line1} <br />
+          <span className="text-primary">{hero.title.line2}</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -64,7 +66,7 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl sm:text-2xl font-medium mb-6 text-neutral-200 tracking-wide"
         >
-          AI & IoT-Powered Smart Agriculture Solutions
+          {hero.subtitle}
         </motion.h2>
 
         {/* Description */}
@@ -74,7 +76,7 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg sm:text-xl text-neutral-300 leading-relaxed max-w-3xl mb-10"
         >
-          A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.
+          {hero.description}
         </motion.p>
 
         {/* CTA Buttons - Single row pill buttons on mobile and desktop */}
@@ -96,7 +98,7 @@ export default function CropifaiHero() {
             }}
             className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
-            <span>Explore Solutions</span>
+            <span>{hero.buttons.explore}</span>
           </a>
 
           <a
@@ -114,7 +116,7 @@ export default function CropifaiHero() {
             {/* Tiny grid effect inside button */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.15)_1px,transparent_1px)] bg-[size:0.5rem_0.5rem] opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
             
-            <span className="relative z-10">Business Models</span>
+            <span className="relative z-10">{hero.buttons.models}</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>

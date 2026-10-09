@@ -5,78 +5,19 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Droplets, Zap, Clock, FlaskConical, AlertTriangle, ListTree, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/design-system/primitives/layout/Container";
+import { cropifaiContent } from "@/content/cropifai";
 
 export default function CropifaiHardware() {
-  const categories = [
-    {
-      title: "Soil Sensors",
-      color: "text-emerald-700",
-      borderColor: "border-emerald-200",
-      bgColor: "bg-emerald-50",
-      glow: "group-hover:shadow-[0_20px_60px_-15px_rgba(16,185,129,0.3)]",
-      features: ["Soil Moisture", "Electrical Conductivity (EC)", "pH Level", "Temperature", "NPK (N, P, K)", "Soil Heat Flux"]
-    },
-    {
-      title: "Water Sensors",
-      color: "text-blue-700",
-      borderColor: "border-blue-200",
-      bgColor: "bg-blue-50",
-      glow: "group-hover:shadow-[0_20px_60px_-15px_rgba(59,130,246,0.3)]",
-      features: ["pH", "Electrical Conductivity (EC)", "Hardness (Ca²⁺, Mg²⁺)", "TDS", "Salinity (Fertigation)"]
-    },
-    {
-      title: "Weather Station",
-      color: "text-teal-700",
-      borderColor: "border-teal-200",
-      bgColor: "bg-teal-50",
-      glow: "group-hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.3)]",
-      features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall", "Solar-Powered", "LoRaWAN (15km range)"]
-    }
-  ];
-
-  const timelineProducts = [
-    { 
-      name: "Industrial Soil Sensor", 
-      image: "/products/cropifai/soilsensor.png",
-      description: "Multi-parameter soil sensing for precision agriculture.",
-      features: ["Soil Moisture & Temp", "Electrical Conductivity (EC)", "pH Level", "NPK (N, P, K)"]
-    },
-    { 
-      name: "LoRaWAN Weather Station", 
-      image: "/products/cropifai/LoRaWan_iotWeatherStation.png",
-      description: "Comprehensive environmental monitoring with 15km range.",
-      features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
-    },
-    { 
-      name: "Solenoid Valve Controller", 
-      image: "/products/cropifai/solenoidValveController.png",
-      description: "Automated irrigation control for multiple zones.",
-      features: ["0–100% Flow Control", "Open/Close Precision", "Multicast Control"]
-    },
-    { 
-      name: "Smart Valve Controller", 
-      image: "/products/cropifai/SmartValveController.png",
-      description: "Intelligent autonomous operation for off-grid deployment.",
-      features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
-    },
-    { 
-      name: "Industrial pH Sensor", 
-      image: "/products/cropifai/Phsensor.png",
-      description: "High-precision pH monitoring for optimal nutrient uptake.",
-      features: ["Real-time pH Tracking", "Anti-Fouling Design", "Automatic Calibration"]
-    },
-
-  ];
-
-  const tags = ["Ruggedized for Desert", "LoRaWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"];
+  const { hardware } = cropifaiContent;
+  const { categories, timelineProducts, tags, flowControls: flowControlsData } = hardware;
 
   const flowControls = [
-    { icon: Droplets, title: "Solenoid Valve Control", desc: "Percentage control 0–100%, open/close precision" },
-    { icon: Zap, title: "Autonomous Operation", desc: "Solar-powered, battery backup, works off-grid" },
-    { icon: Clock, title: "Cycle Irrigation", desc: "Set start time, duration, capacity, cycle number" },
-    { icon: FlaskConical, title: "Fertigation Dosing", desc: "Automated nutrient dosing, variable-rate application" },
-    { icon: AlertTriangle, title: "Safety Alarms", desc: "Web notifications for flow, pressure, sensor breakdown" },
-    { icon: ListTree, title: "Multicast Control", desc: "Bulk valve control across multiple zones simultaneously" },
+    { icon: Droplets, ...flowControlsData[0] },
+    { icon: Zap, ...flowControlsData[1] },
+    { icon: Clock, ...flowControlsData[2] },
+    { icon: FlaskConical, ...flowControlsData[3] },
+    { icon: AlertTriangle, ...flowControlsData[4] },
+    { icon: ListTree, ...flowControlsData[5] },
   ];
 
   return (
@@ -100,7 +41,7 @@ export default function CropifaiHardware() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-6"
               >
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Hardware & Sensors
+                {hardware.header.tag}
               </motion.div>
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
@@ -109,7 +50,7 @@ export default function CropifaiHardware() {
                 transition={{ delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 leading-tight tracking-tight mb-6"
               >
-                Crop & Soil Sensing <br /> Systems
+                {hardware.header.titlePart1} <br /> {hardware.header.titlePart2}
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -118,7 +59,7 @@ export default function CropifaiHardware() {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-zinc-500 font-medium leading-relaxed"
               >
-                Industrial-grade IoT devices built to withstand harsh desert conditions while delivering pinpoint accuracy.
+                {hardware.header.description}
               </motion.p>
             </div>
 

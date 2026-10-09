@@ -5,103 +5,21 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Activity, Bell, Eye, Zap, Map, BarChart3, CheckCircle2 } from "lucide-react";
 
+import { iotricsContent } from "@/content/iotrics";
+
+const modulesData = iotricsContent.core.modules;
+
 const coreModules = [
-  {
-    id: "monitoring",
-    title: "01 — MONITORING & DATA ACQUISITION",
-    icon: Activity,
-    subtitle: "Capture What Matters",
-    description: "IoTRICs continuously collects real-time data from physical assets across geographically distributed locations, supporting multiple sensor types and deployment environments.",
-    keyCapabilities: [
-      "Multi-sensor data collection",
-      "Real-time asset monitoring",
-      "Fixed and mobile deployments",
-      "Environmental and operational data capture",
-      "Support for geographically distributed assets"
-    ],
-    tags: ["REAL-TIME", "MULTI-SENSOR", "ANY ASSET", "ANY LOCATION"]
-  },
-  {
-    id: "alerts",
-    title: "02 — INTELLIGENT ALERTS & EVENTS",
-    icon: Bell,
-    subtitle: "Know When Something Needs Attention",
-    description: "IoTRICs identifies abnormal conditions and triggers configurable alerts so teams can respond quickly when operational thresholds are exceeded.",
-    keyCapabilities: [
-      "Threshold-based alerts",
-      "SMS, email & push notifications",
-      "Abnormal-condition detection",
-      "Event logging",
-      "Faster operational response"
-    ],
-    tags: ["SMART ALERTS", "THRESHOLDS", "NOTIFICATIONS", "EVENT LOGGING"]
-  },
-  {
-    id: "visibility",
-    title: "03 — ENVIRONMENTAL & ASSET VISIBILITY",
-    icon: Eye,
-    subtitle: "See Your Infrastructure in Real Time",
-    description: "Monitor critical environmental and asset conditions from a centralized platform. IoTRICs brings information such as temperature, humidity, water levels, air quality, energy, pressure, and vibration into a unified operational view.",
-    keyCapabilities: [
-      "Temperature & Humidity monitoring",
-      "Water-level & Air-quality monitoring",
-      "Energy, pressure & vibration monitoring",
-      "Asset condition visibility",
-      "Centralized dashboard view"
-    ],
-    tags: ["TEMPERATURE", "HUMIDITY", "WATER", "AIR QUALITY"]
-  },
-  {
-    id: "energy",
-    title: "04 — ENERGY & RESOURCE INTELLIGENCE",
-    icon: Zap,
-    subtitle: "Turn Consumption Data Into Efficiency",
-    description: "IoTRICs enables advanced monitoring of energy and resource consumption, helping organizations understand load patterns and identify opportunities for greater efficiency and sustainability.",
-    keyCapabilities: [
-      "Consumption monitoring",
-      "Load-pattern analysis",
-      "Energy & Resource visibility",
-      "Efficiency insights",
-      "Sustainability initiatives",
-      "Peak-load and demand management"
-    ],
-    tags: ["ENERGY", "CONSUMPTION", "LOAD ANALYSIS", "EFFICIENCY"]
-  },
-  {
-    id: "tracking",
-    title: "05 — MOVEMENT & UTILISATION TRACKING",
-    icon: Map,
-    subtitle: "Know Where Your Assets Are — And How They're Used",
-    description: "Track asset utilization and operational movement to improve visibility across fleets, equipment, and mobile assets.",
-    keyCapabilities: [
-      "Asset utilization tracking",
-      "Mobile asset visibility",
-      "Fleet monitoring",
-      "Equipment tracking",
-      "Movement visibility",
-      "Data-driven performance evaluation"
-    ],
-    tags: ["ASSET TRACKING", "UTILISATION", "FLEET", "MOBILITY"]
-  },
-  {
-    id: "analytics",
-    title: "06 — ANALYTICS, REPORTING & COMPLIANCE",
-    icon: BarChart3,
-    subtitle: "Turn Data Into Better Decisions",
-    description: "IoTRICs transforms collected operational data into actionable intelligence through real-time dashboards, historical analysis, predictive analytics, reporting, and compliance support.",
-    keyCapabilities: [
-      "Real-time dashboards",
-      "Historical data & Trend analysis",
-      "Predictive analytics",
-      "Reporting & Audit support",
-      "Performance evaluation",
-      "Compliance visibility"
-    ],
-    tags: ["DASHBOARDS", "ANALYTICS", "REPORTING", "COMPLIANCE"]
-  }
+  { ...modulesData[0], icon: Activity },
+  { ...modulesData[1], icon: Bell },
+  { ...modulesData[2], icon: Eye },
+  { ...modulesData[3], icon: Zap },
+  { ...modulesData[4], icon: Map },
+  { ...modulesData[5], icon: BarChart3 }
 ];
 
 export default function IotricsCore() {
+  const { core } = iotricsContent;
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -116,7 +34,7 @@ export default function IotricsCore() {
             transition={{ delay: 0.1 }}
             className="text-[1.75rem] sm:text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-neutral-900 leading-[1.1] sm:leading-[1.05] uppercase mb-6"
           >
-            The Intelligence Layer Behind Your Operations
+            {core.header.title}
           </motion.h2>
 
           <motion.p 
@@ -126,7 +44,7 @@ export default function IotricsCore() {
             transition={{ delay: 0.2 }}
             className="text-neutral-500 text-lg sm:text-xl max-w-2xl leading-relaxed"
           >
-            End-to-end capabilities to capture data, monitor assets, and generate actionable insights for your operations in real time.
+            {core.header.description}
           </motion.p>
         </div>
 
@@ -194,7 +112,7 @@ export default function IotricsCore() {
             
             <div className="mt-8 lg:mt-10 pt-2 flex justify-center lg:justify-start">
               <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-8 rounded-md transition-colors text-xs sm:text-sm tracking-wider uppercase shadow-md shadow-blue-500/20 w-full sm:w-auto">
-                EXPLORE OUR MODULES
+                {core.cta}
               </button>
             </div>
           </div>

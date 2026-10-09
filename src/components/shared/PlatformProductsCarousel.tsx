@@ -43,12 +43,17 @@ const dummyProducts = [
   },
 ];
 
-export default function EvolticsProducts() {
+export default function PlatformProductsCarousel({ products = dummyProducts }: { products?: any[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   
-  // We duplicate the array multiple times to create a long scrolling list
-  const duplicatedProducts = [...dummyProducts, ...dummyProducts, ...dummyProducts, ...dummyProducts];
+  // If no products exist, don't render the section
+  if (!products || products.length === 0) return null;
+  
+  // We duplicate the array multiple times to create a long scrolling list if there are few items
+  const duplicatedProducts = products.length < 5 
+    ? [...products, ...products, ...products, ...products] 
+    : [...products, ...products];
 
   // Auto-scroll logic
   useEffect(() => {
@@ -163,17 +168,22 @@ export default function EvolticsProducts() {
                 <div className="bg-background rounded-3xl border border-border overflow-hidden h-[400px] md:h-[440px] lg:h-[480px] flex flex-col group-hover:border-primary/40 group-hover:shadow-2xl group-hover:shadow-primary/10 transition-all duration-300">
                   
                   {/* Top Image Area */}
-                  <div className={cn("h-[55%] w-full relative overflow-hidden p-6 flex flex-col justify-between", product.imagePlaceholder)}>
+                  <div className={cn("h-[55%] w-full relative overflow-hidden p-6 flex flex-col justify-between", product.imagePlaceholder || "bg-gradient-to-br from-blue-100 to-blue-50")}>
+                    {product.imageUrl && (
+                      <img src={product.imageUrl} alt={product.name || product.title} className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                    )}
                     <div className="flex justify-end items-start relative z-10">
                       <span className="text-[10px] font-bold tracking-widest text-foreground/60 uppercase bg-white/40 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm">
-                        {product.category}
+                        {product.category || "Hardware"}
                       </span>
                     </div>
                     
-                    {/* Mockup Placeholder Text inside Image area */}
-                    <div className="relative z-10 text-center opacity-40 group-hover:opacity-60 transition-opacity">
-                      <span className="text-xs font-bold uppercase tracking-widest text-foreground mix-blend-overlay">Product Render</span>
-                    </div>
+                    {/* Mockup Placeholder Text inside Image area if no image */}
+                    {!product.imageUrl && (
+                      <div className="relative z-10 text-center opacity-40 group-hover:opacity-60 transition-opacity">
+                        <span className="text-xs font-bold uppercase tracking-widest text-foreground mix-blend-overlay">Product Render</span>
+                      </div>
+                    )}
 
                     {/* Gradient Overlay for bottom blending */}
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background to-transparent z-0" />
@@ -183,10 +193,10 @@ export default function EvolticsProducts() {
                   <div className="h-[45%] p-6 flex flex-col justify-between relative z-10 bg-background">
                     <div>
                       <h3 className="text-lg lg:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
-                        {product.title}
+                        {product.name || product.title}
                       </h3>
                       <p className="text-xs lg:text-sm text-muted leading-relaxed line-clamp-3">
-                        {product.desc}
+                        {product.description || product.desc}
                       </p>
                     </div>
 

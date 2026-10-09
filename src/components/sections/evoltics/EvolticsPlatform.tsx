@@ -69,7 +69,7 @@ export default function EvolticsPlatform() {
             transition={{ delay: 0.15 }}
             className="text-muted text-[13px] sm:text-base lg:text-lg max-w-md leading-relaxed italic text-center lg:text-left mx-auto lg:mx-0 mt-2 sm:mt-0"
           >
-            World's first IoT-enabled EV Charger Management Platform.
+            World&apos;s first IoT-enabled EV Charger Management Platform.
           </motion.p>
         </div>
 

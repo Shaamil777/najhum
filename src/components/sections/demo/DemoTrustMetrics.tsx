@@ -1,12 +1,8 @@
 import React from "react";
+import { demoContent } from "@/content/demo";
 
 export default function DemoTrustMetrics() {
-  const metrics = [
-    { label: "ACTIVE INSTANCES", value: "48+", suffix: "DASHBOARDS" },
-    { label: "MARKET REACH", value: "12+", suffix: "INDUSTRIES" },
-    { label: "LIVE NODES", value: "4,200+", suffix: "DEVICES" },
-    { label: "NETWORK STABILITY", value: "99.98%", suffix: "AVAILABILITY" },
-  ];
+  const { trustMetrics: metrics } = demoContent;
 
   return (
     <section className="w-full bg-white border-b border-neutral-200">

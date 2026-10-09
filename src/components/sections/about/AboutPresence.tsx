@@ -1,7 +1,9 @@
 import React from "react";
 import { MapPin, Phone, Globe2, ArrowUpRight } from "lucide-react";
+import { aboutContent } from "@/content/about";
 
 export default function AboutPresence() {
+  const { presence } = aboutContent;
   return (
     <section className="relative w-full py-24 md:py-32 bg-[#f5f7fa] overflow-hidden">
 
@@ -17,18 +19,18 @@ export default function AboutPresence() {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-px bg-primary" />
               <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-primary">
-                Global Presence
+                {presence.badge}
               </span>
               <div className="w-10 h-px bg-primary" />
             </div>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-[1.1] tracking-tight mb-6 text-center">
-              Strategic Hub <br />
-              in the <span className="text-primary">UAE</span>
+              {presence.titlePart1} <br />
+              {presence.titlePart2} <span className="text-primary">{presence.titlePart3}</span>
             </h2>
 
             <p className="text-base text-neutral-500 leading-relaxed mb-10 max-w-md text-center">
-              Expanding globally through cloud-first platforms and industry partnerships.
+              {presence.description}
             </p>
 
             {/* Contact Cards */}
@@ -40,9 +42,9 @@ export default function AboutPresence() {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-neutral-900 mb-1">Dubai, United Arab Emirates</h4>
+                    <h4 className="text-sm font-bold text-neutral-900 mb-1">{presence.address.title}</h4>
                     <p className="text-sm text-neutral-500 leading-relaxed">
-                      in5 Design — Zaa&apos;beel Second — Dubai Design District
+                      {presence.address.description}
                     </p>
                   </div>
                 </div>
@@ -55,9 +57,9 @@ export default function AboutPresence() {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-neutral-900 mb-1">Get in Touch</h4>
-                    <a href="tel:+971525699979" className="text-sm text-primary font-semibold hover:underline">
-                      +971 52 569 9979
+                    <h4 className="text-sm font-bold text-neutral-900 mb-1">{presence.contact.title}</h4>
+                    <a href={`tel:${presence.contact.phone.replace(/\s+/g, '')}`} className="text-sm text-primary font-semibold hover:underline">
+                      {presence.contact.phone}
                     </a>
                   </div>
                 </div>
@@ -67,7 +69,7 @@ export default function AboutPresence() {
             {/* Cloud-first badge */}
             <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900 text-white text-xs font-bold tracking-widest uppercase mt-4">
               <Globe2 className="w-4 h-4 text-primary" />
-              Cloud-First Global Reach
+              {presence.cloudBadge}
             </div>
           </div>
 

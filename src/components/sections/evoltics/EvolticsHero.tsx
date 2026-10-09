@@ -5,8 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { evolticsContent } from "@/content/evoltics";
 
 export default function EvolticsHero() {
+  const { hero } = evolticsContent;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -45,9 +47,9 @@ export default function EvolticsHero() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 font-display text-white normal-case"
           style={{ textTransform: "none" }}
         >
-          World&apos;s First IoT-Enabled <br className="hidden sm:block" />
+          {hero.title.line1} <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] via-blue-400 to-blue-200">
-            EV Charging Solution
+            {hero.title.line2}
           </span>
         </motion.h1>
 
@@ -59,7 +61,7 @@ export default function EvolticsHero() {
           className="text-lg sm:text-xl font-medium mb-6 text-neutral-200 tracking-wide normal-case"
           style={{ textTransform: "none" }}
         >
-          Intelligent Telemetry, Automated Power Balancing & End-to-End Infrastructure
+          {hero.subtitle}
         </motion.h2>
 
         {/* Description */}
@@ -69,7 +71,7 @@ export default function EvolticsHero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-2xl mb-10"
         >
-          Deploy and scale intelligent EV charging networks with real-time IoT telemetry, automated load management, and complete operational control.
+          {hero.description}
         </motion.p>
 
         {/* CTA Buttons - Single row pill buttons on mobile and desktop */}
@@ -91,7 +93,7 @@ export default function EvolticsHero() {
             }}
             className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
-            <span>Explore Solutions</span>
+            <span>{hero.cta.primary}</span>
           </a>
 
           <a
@@ -106,7 +108,7 @@ export default function EvolticsHero() {
             }}
             className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-sm hover:border-white/40 cursor-pointer"
           >
-            <span>Start EV Journey</span>
+            <span>{hero.cta.secondary}</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </a>
         </motion.div>
@@ -116,7 +118,7 @@ export default function EvolticsHero() {
       {/* Logo Marquee at Bottom */}
       <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
         <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
-          TRUSTED BY COMPANIES WORLDWIDE
+          {hero.marqueeText}
         </p>
         <style>{`
           @keyframes marquee {
