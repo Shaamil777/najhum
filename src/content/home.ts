@@ -7,18 +7,18 @@
 
 export const homeContent = {
   hero: {
-    badge: "Industrial IoT · EV mobility · Smart agriculture",
-    titlePart1: "CONNECTED ASSETS.",
-    titlePart2: "SMARTER",
-    titlePart3: "DECISIONS.",
-    subheadline: "Connect your infrastructure, see what matters in real time, and turn operational data into action with Najhum’s enterprise platforms.",
+    badge: "",
+    titlePart1: "THE FUTURE OF",
+    titlePart2: "INTELLIGENT",
+    titlePart3: "INFRASTRUCTURE",
+    subheadline: "Unified enterprise IoT, smart EV mobility, and agricultural intelligence platforms engineered to transform mission-critical operations with real-time clarity.",
     primaryCta: { 
-      label: "Request a Demo",
-      href: "/contact"
+      label: "About Us", 
+      href: "/about" 
     },
     secondaryCta: { 
-      label: "Explore Platforms",
-      href: "#platforms"
+      label: "Contact Us", 
+      href: "/contact" 
     },
     cardText: "ENGINEERED TO\nDELIVER CLARITY,\nSCALE, AND\nCONTROL.",
     cardCta: { 
@@ -48,9 +48,9 @@ export const homeContent = {
         description: "Serving organizations across the UAE and GCC region."
       },
       {
-        kpiValue: "3",
+        kpiValue: "4",
         title: "CORE PLATFORMS",
-        description: "IoTRICS, EVOLTICS, and CropifAI enterprise platforms."
+        description: "IoTRICS, EVOLTICS, IEMS & SOLAAS enterprise platforms."
       },
       {
         kpiValue: "12+",
@@ -80,9 +80,9 @@ export const homeContent = {
         description: "Continuous monitoring and real-time operational visibility across connected assets."
       },
       {
-        kpiValue: "3",
+        kpiValue: "4",
         title: "Enterprise Platforms",
-        description: "Purpose-built platforms for Industrial IoT, EV charging, and precision agriculture."
+        description: "Integrated solutions covering Industrial IoT, EV Charging, Energy Management, and Managed Services."
       },
       {
         kpiValue: "12+",
@@ -120,7 +120,7 @@ export const homeContent = {
       {
         id: "iotrics",
         title: "IoTRICS",
-        description: "Connect industrial assets, monitor live data, and automate workflows through one IoT platform.",
+        description: "The complete operating system for industrial IoT. Connect millions of data points across any network protocol with military-grade security.",
         features: [
           "Multi-protocol ingestion (MQTT, LoRa)",
           "Advanced Rules Engine",
@@ -139,25 +139,25 @@ export const homeContent = {
   },
   about: {
     badge: "+ Who we are",
-    leftContent: "Based in Dubai, we build platforms that connect industrial assets, EV charging networks, and agricultural infrastructure. From integration to ongoing support, our team helps you put operational data to work.",
-    headline: "Built in Dubai.\nConnected to your operations.",
-    description: "Integrate with your existing infrastructure and choose a deployment that fits your business.",
-    buttonLabel: "Meet Najhum",
+    leftContent: "We build enterprise platforms that transform industrial infrastructure into intelligent, connected ecosystems. By combining Industrial IoT, smart energy, EV mobility, and cloud technologies, we help organizations improve visibility, optimize operations, and accelerate digital transformation.",
+    headline: "Engineering the Future of\nConnected Infrastructure",
+    description: "Our solutions are designed to integrate seamlessly with existing infrastructure, enabling real-time monitoring, predictive insights, and scalable automation across mission-critical operations.",
+    buttonLabel: "Inside the studio",
     trustStrip: [
       "Industrial IoT", "EV Infrastructure", "Smart Energy", "Enterprise Software", "Cloud Platforms", "Hardware Agnostic", "Real-Time Intelligence", "Predictive Analytics"
     ],
     stats: [
       { id: "established", title: "ESTABLISHED", value: "2017", label: "Building enterprise platforms for Industrial IoT, smart energy, and intelligent infrastructure." },
-      { id: "core", title: "CORE PLATFORMS", value: "03", label: "IoTRICS, EVOLTICS, and CropifAI." },
+      { id: "core", title: "CORE PLATFORMS", value: "04", label: "IoTRICS, EVOLTICS, IEMS, and SOLAAS working together as one connected ecosystem." },
       { id: "support", title: "ENTERPRISE SUPPORT", value: "24/7", label: "Continuous monitoring, operational visibility, and technical support for mission-critical deployments." },
       { id: "deployment", title: "DEPLOYMENT OPTIONS", value: "Cloud • Edge • Hybrid", label: "Flexible deployment models designed to integrate with enterprise infrastructure at any scale." }
     ]
   },
   cta: {
-    headline: "Let’s connect your next big idea.",
-    subheadline: "Tell us about your infrastructure. We’ll help you find the right platform and walk you through a tailored demonstration.",
-    primaryCta: { label: "Request a Demo", href: "/contact" },
-    secondaryCta: { label: "Explore Solutions", href: "/solutions" }
+    headline: "Ready to Transform Your Operations?",
+    subheadline: "Connect industrial assets, optimize energy, and unlock real-time operational intelligence with Najhum's enterprise platforms.",
+    primaryCta: { label: "Get Started", href: "/contact" },
+    secondaryCta: { label: "Learn More", href: "/about" }
   },
   impact: {
     card1: {

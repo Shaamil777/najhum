@@ -1,61 +1,101 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { Pause, Play } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { homeContent } from "@/content/home";
-import { homeContainer, HomeLink } from "./HomePrimitives";
 
 const clients = [
   { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
   { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
+  { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
+  { name: "ARC", src: "/logo/client%20logos/adaa_gov.svg" },
   { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
   { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
+  { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
   { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
   { name: "Space42", src: "/logo/client%20logos/space42.png" },
 ];
 
 export default function Hero() {
   const { hero } = homeContent;
-  const [playBackground, setPlayBackground] = useState(false);
 
   return (
-    <section aria-labelledby="home-hero-heading" className="relative isolate w-full bg-slate-950 text-white">
-      <div className="relative isolate overflow-hidden">
-        <Image src="/images/hero/hero_main_tech.png" alt="" fill sizes="100vw" loading="eager" className="-z-20 object-cover object-[65%_center] opacity-60" />
-        {playBackground && (
-          <video autoPlay loop muted playsInline poster="/images/hero/hero_main_tech.png" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60">
-            <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
-          </video>
-        )}
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 via-slate-950/75 to-slate-950/20" />
-        <div className={`${homeContainer} relative flex min-h-[min(860px,90svh)] flex-col justify-center pt-32 pb-24 sm:pt-40 sm:pb-28`}>
-          <p className="mb-6 max-w-xl text-xs leading-6 font-semibold tracking-[0.16em] text-blue-300 uppercase">{hero.badge}</p>
-          <h1 id="home-hero-heading" className="max-w-5xl font-display text-[clamp(2.65rem,6.6vw,6.5rem)] leading-[0.98] font-bold tracking-[-0.04em] text-white uppercase">
-            {hero.titlePart1}<br />
-            <span className="text-blue-400">{hero.titlePart2}</span> {hero.titlePart3}
-          </h1>
-          <p className="mt-7 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">{hero.subheadline}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <HomeLink href={hero.primaryCta.href}>{hero.primaryCta.label}</HomeLink>
-            <HomeLink href={hero.secondaryCta.href} secondary light>{hero.secondaryCta.label}</HomeLink>
-          </div>
-          <button type="button" aria-pressed={playBackground} onClick={() => setPlayBackground(!playBackground)} className="absolute right-6 bottom-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-slate-950/60 px-4 text-xs text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 sm:right-8 lg:right-12">
-            {playBackground ? <Pause size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}
-            {playBackground ? "Stop background video" : "Play background video"}
-          </button>
+    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white bg-black">
+      
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+      >
+        <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
+      </video>
+
+      {/* Vignette Overlay for readable text */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-black/85 z-0"></div>
+
+      {/* Main Hero Container */}
+      <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-5xl flex flex-col items-center text-center mt-auto mb-auto">
+        
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-[1.08] uppercase font-display">
+          {hero.titlePart1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-primary-hover">{hero.titlePart2}</span> <br className="hidden sm:block" /> {hero.titlePart3}
+        </h1>
+        
+        <p className="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl leading-relaxed mb-8 sm:mb-10">
+          {hero.subheadline}
+        </p>
+
+        {/* CTA Buttons - Single row pill buttons on mobile and desktop */}
+        <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto max-w-sm sm:max-w-none mx-auto">
+          <Link
+            href={hero.primaryCta.href}
+            className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 group"
+          >
+            <span>{hero.primaryCta.label}</span>
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+
+          <Link
+            href={hero.secondaryCta.href}
+            className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2.5 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-sm hover:border-white/40 hover:-translate-y-0.5 active:translate-y-0 group"
+          >
+            <span>{hero.secondaryCta.label}</span>
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
         </div>
+
       </div>
-      <div className="border-t border-white/15 bg-slate-950 py-7 sm:py-9">
-        <div className={`${homeContainer} flex flex-col gap-7 lg:flex-row lg:items-center lg:gap-12`}>
-          <p className="shrink-0 text-center text-xs font-semibold tracking-[0.14em] text-slate-400 uppercase lg:w-40 lg:text-left">Trusted by companies worldwide</p>
-          <ul aria-label="Client companies" className="grid flex-1 grid-cols-3 items-center gap-x-6 gap-y-7 sm:grid-cols-6">
-            {clients.map(client => (
-              <li key={client.name} className="flex justify-center">
-                <Image src={client.src} alt={client.name} width={150} height={45} className="h-8 w-full max-w-32 object-contain brightness-0 invert opacity-80" />
-              </li>
-            ))}
-          </ul>
+
+      {/* Logo Marquee at Bottom */}
+      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
+        <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
+          TRUSTED BY COMPANIES WORLDWIDE
+        </p>
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            animation: marquee 30s linear infinite;
+            width: max-content;
+          }
+        `}</style>
+        
+        <div className="flex animate-marquee items-center w-full mt-2">
+          {[...clients, ...clients, ...clients, ...clients].map((client, i) => {
+            return (
+              <div key={i} className="flex flex-none items-center justify-center mx-4 px-8 py-2 bg-transparent opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 min-w-[160px]">
+                <img 
+                  src={client.src} 
+                  alt={client.name} 
+                  className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
