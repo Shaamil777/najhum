@@ -16,7 +16,7 @@ export default async function middleware(request: NextRequest) {
 
     if (!token) {
       // Redirect to login if no token present
-      return NextResponse.redirect(new URL('/admin/login', request.url));
+      return NextResponse.redirect(new URL('/admin/login', request.nextUrl));
     }
 
     try {
@@ -27,7 +27,7 @@ export default async function middleware(request: NextRequest) {
     } catch (error) {
       // Token is invalid or expired, redirect to login
       console.log('[MIDDLEWARE] Token verification failed:', error);
-      const response = NextResponse.redirect(new URL('/admin/login', request.url));
+      const response = NextResponse.redirect(new URL('/admin/login', request.nextUrl));
       // Clear the invalid token
       response.cookies.delete('admin_token');
       return addSecurityHeaders(response);
