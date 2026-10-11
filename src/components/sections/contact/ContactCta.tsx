@@ -30,7 +30,12 @@ export default function ContactCta() {
   }, [isHovered]);
 
   const handleScrollToForm = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const firstField = document.getElementById("fullName");
+    firstField?.scrollIntoView({
+      block: "center",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+    firstField?.focus({ preventScroll: true });
   };
 
   return (
@@ -79,18 +84,15 @@ export default function ContactCta() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <button 
+            <AntiMetalButton
+              type="button"
               onClick={handleScrollToForm}
-              className="focus-visible:outline-none block"
-            >
-              <AntiMetalButton 
-                label={cta.buttonLabel}
-                accentFrom="var(--color-primary)" 
-                accentTo="var(--color-primary)" 
-                dotColor="#ffffff"
-                className="dark shadow-xl hover:shadow-primary/30"
-              />
-            </button>
+              label={cta.buttonLabel}
+              accentFrom="var(--color-primary)"
+              accentTo="var(--color-primary)"
+              dotColor="#ffffff"
+              className="dark shadow-xl hover:shadow-primary/30 focus-visible:ring-blue-500"
+            />
           </div>
 
         </div>

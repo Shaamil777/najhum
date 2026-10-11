@@ -23,6 +23,7 @@ export enum SectionType {
   USE_CASES = 'USE_CASES',
   METHODOLOGY = 'METHODOLOGY',
   SOLAAS = 'SOLAAS',
+  PRODUCTS_CAROUSEL = 'PRODUCTS_CAROUSEL',
 }
 
 /**
@@ -131,6 +132,7 @@ export interface CTAContent {
 export interface CustomContent {
   heading: string;
   bodyHtml: string;
+  rawData?: any;
 }
 
 /**
@@ -217,7 +219,13 @@ export type SectionContent =
   | CustomContent
   | UseCasesContent
   | MethodologyContent
-  | SolaasContent;
+  | SolaasContent
+  | ProductsCarouselContent;
+
+export interface ProductsCarouselContent {
+  heading?: string;
+  description?: string;
+}
 
 /**
  * Section with typed content

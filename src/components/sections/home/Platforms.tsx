@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Cpu, Leaf, Plus, Radio, ScanLine, Workflow, Zap } from "lucide-react";
 import { homeContent } from "@/content/home";
+import { homeContainer, homeHeading } from "./HomePrimitives";
 
 const platformDetails = {
   evoltics: {
@@ -55,16 +56,16 @@ export default function Platforms() {
       className="relative z-10 scroll-mt-20 overflow-hidden border-y border-slate-200 bg-[#f4f6f8] py-16 sm:py-20 lg:py-28"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[linear-gradient(to_right,#dfe5ed_1px,transparent_1px)] bg-[size:calc(100%/12)_100%] [mask-image:linear-gradient(to_bottom,black,transparent)] opacity-60" />
-      <div className="relative mx-auto max-w-[1536px] px-6 sm:px-8 lg:px-12">
+      <div className={`relative ${homeContainer}`}>
         <motion.div {...reveal} transition={{ duration: reducedMotion ? 0 : 0.7, ease }} className="mb-10 lg:mb-14">
-          <div className="mb-6 flex items-center gap-3 text-[10px] font-bold tracking-[0.18em] text-primary uppercase sm:text-xs">
+          <div className="mb-6 flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-primary uppercase">
             <Plus size={16} aria-hidden="true" />
             <span>{homeContent.platforms.label}</span>
             <span aria-hidden="true" className="h-px flex-1 bg-slate-300" />
             <span className="hidden font-mono text-slate-500 sm:block">NAJHUM / PLATFORMS</span>
           </div>
           <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16">
-            <h2 id={`${id}-heading`} className="font-display text-[clamp(2.25rem,4.5vw,4.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-slate-950 uppercase">
+            <h2 id={`${id}-heading`} className={homeHeading}>
               One ecosystem.<br />
               <span className="text-primary">Built for impact.</span>
             </h2>
@@ -72,7 +73,7 @@ export default function Platforms() {
               <p className="text-sm leading-7 text-slate-600 sm:text-base">
                 From connected industries to electric mobility and smarter agriculture. Purpose-built platforms that turn your infrastructure into intelligence.
               </p>
-              <span className="mt-5 inline-flex items-center gap-2 text-[10px] font-semibold tracking-[0.14em] text-slate-500 uppercase">
+              <span className="mt-5 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.1em] text-slate-500 uppercase">
                 <span aria-hidden="true" className="h-1.5 w-1.5 bg-primary" />
                 Three platforms. One connected vision.
               </span>
@@ -103,7 +104,7 @@ export default function Platforms() {
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/15" />
                   <div aria-hidden="true" className="absolute top-4 left-4 flex h-9 w-9 items-center justify-center rounded-full bg-primary font-mono text-xs text-white">0{index + 1}</div>
                   <Plus aria-hidden="true" size={20} strokeWidth={1} className="absolute top-5 right-5 text-white/80" />
-                  <div className="absolute right-5 bottom-5 left-5 flex items-center gap-2 text-[9px] font-semibold tracking-[0.12em] text-white uppercase lg:text-[10px]">
+                  <div className="absolute right-5 bottom-5 left-5 flex items-center gap-2 text-xs font-semibold tracking-[0.06em] text-white uppercase">
                     <Icon size={15} aria-hidden="true" className="shrink-0 text-blue-300" />
                     {details.category}
                   </div>
@@ -117,7 +118,7 @@ export default function Platforms() {
                   </p>
                   <ul className={`mt-6 mb-7 space-y-2.5 border-t pt-5 ${featured ? "border-white/15 text-slate-300" : "border-slate-200 text-slate-600"}`}>
                     {details.features.map(feature => (
-                      <li key={feature} className="flex items-center gap-2.5 text-xs">
+                      <li key={feature} className="flex items-center gap-2.5 text-sm">
                         <span aria-hidden="true" className="h-1 w-1 shrink-0 bg-primary" />
                         {feature}
                       </li>
@@ -126,7 +127,7 @@ export default function Platforms() {
                   <Link
                     href={`/platforms/${platform.id}`}
                     aria-label={`Explore ${platform.title}`}
-                    className={`mt-auto flex min-h-11 items-center justify-between gap-3 rounded-sm text-xs font-semibold tracking-wide focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${featured ? "text-white" : "text-slate-950"}`}
+                    className={`mt-auto flex min-h-11 items-center justify-between gap-3 rounded-sm text-sm font-semibold tracking-wide focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${featured ? "text-white" : "text-slate-950"}`}
                   >
                     Explore platform
                     <span className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-primary group-hover:text-white group-focus-within:bg-primary group-focus-within:text-white ${featured ? "bg-primary text-white" : "bg-blue-50 text-primary"}`}>
@@ -143,7 +144,7 @@ export default function Platforms() {
         <div className="mt-12 border-t border-slate-300 pt-8 sm:mt-14 lg:mt-16 lg:pt-10">
           <div className="grid gap-8 lg:grid-cols-[1fr_2.5fr] lg:gap-12">
             <motion.div {...reveal} transition={{ duration: reducedMotion ? 0 : 0.7, ease }}>
-              <span className="text-[10px] font-bold tracking-[0.16em] text-primary uppercase">The Najhum 3C approach</span>
+              <span className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">The Najhum 3C approach</span>
               <h3 className="mt-3 font-display text-2xl leading-tight font-bold text-slate-950 uppercase">Connected<br className="hidden lg:block" /> by design.</h3>
               <Link href="/about" className="mt-3 inline-flex min-h-11 items-center gap-3 text-xs font-semibold text-slate-600 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
                 Our approach <ArrowRight size={15} aria-hidden="true" />

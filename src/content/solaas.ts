@@ -10,3 +10,6 @@ export const defaultSolaasContent = {
     { title: 'Multi-Platform Access', description: 'Web, mobile, and API access from day one.' },
   ],
 };
+
+export const solaasContent = defaultSolaasContent;
+

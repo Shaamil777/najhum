@@ -1,8 +1,10 @@
 import { FooterLinks } from "./FooterLinks";
+import { siteConfig } from "@/config/site";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-slate-50/50 text-slate-900 flex flex-col font-poppins relative overflow-hidden border-t border-slate-200 mt-24">
+    <footer className="w-full bg-slate-50/50 text-slate-900 flex flex-col font-sans relative overflow-hidden border-t border-slate-200">
       {/* Top accent gradient border */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent pointer-events-none" />
 
@@ -27,19 +29,21 @@ export default function Footer() {
               className="group flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
             >
               <span className="text-[11px] uppercase tracking-wider font-medium text-slate-400">Developed by</span>
-              <img 
+              <Image
                 src="/images/footer/dexiko.png" 
                 alt="Dexiko" 
+                width={80}
+                height={20}
                 className="h-3.5 w-auto object-contain opacity-65 group-hover:opacity-100 transition-all relative -translate-y-[2px]" 
               />
             </a>
 
-            <div className="flex items-center gap-6 text-xs text-slate-400">
-              <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500">
+              <a href={`mailto:${siteConfig.contact.email}?subject=Privacy%20enquiry`} className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Privacy enquiries</a>
               <span className="text-slate-300">•</span>
-              <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+              <a href={`mailto:${siteConfig.contact.email}?subject=Terms%20enquiry`} className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Terms enquiries</a>
               <span className="text-slate-300">•</span>
-              <a href="#" className="hover:text-primary transition-colors">Security</a>
+              <a href={`mailto:${siteConfig.contact.email}?subject=Security%20enquiry`} className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Security enquiries</a>
             </div>
           </div>
         </div>

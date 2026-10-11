@@ -2,21 +2,26 @@ import { prisma } from "@/lib/db/prisma";
 import PlatformProductsCarousel from "./PlatformProductsCarousel";
 
 export default async function PlatformProductsServer({ platformId }: { platformId: string }) {
-  const products = await prisma.product.findMany({
-    where: {
-      platforms: {
-        has: platformId,
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        platforms: {
+          has: platformId,
+        },
+        isDraft: false,
       },
-      isDraft: false,
-    },
-    orderBy: {
-      order: "asc",
-    },
-  });
+      orderBy: {
+        order: "asc",
+      },
+    });
 
-  if (!products || products.length === 0) {
+    if (!products || products.length === 0) {
+      return null;
+    }
+
+    return <PlatformProductsCarousel products={products} />;
+  } catch (error) {
+    console.error(`Failed to load products for platform "${platformId}":`, error);
     return null;
   }
-
-  return <PlatformProductsCarousel products={products} />;
 }

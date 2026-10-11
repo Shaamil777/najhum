@@ -5,9 +5,9 @@ import { Providers } from "./providers";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap", weight: ["300", "400", "500", "600", "700"] });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["400", "500", "600", "700", "800", "900"] });
-const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", display: "swap", weight: ["300", "400", "500", "600", "700", "800", "900"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans-base", display: "swap", weight: ["300", "400", "500", "600", "700"] });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-display-base", display: "swap", weight: ["400", "500", "600", "700", "800", "900"] });
+const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins-base", display: "swap", weight: ["300", "400", "500", "600", "700", "800", "900"] });
 
 export const viewport: Viewport = {
   themeColor: "#0b0b0c",
@@ -103,7 +103,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${inter.variable} ${poppins.variable} antialiased font-sans scroll-smooth`}>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${outfit.variable} ${inter.variable} ${poppins.variable} antialiased font-sans scroll-smooth`}>
       <body className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
         <Providers>
           <Navbar />

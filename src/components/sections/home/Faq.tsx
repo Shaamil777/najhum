@@ -1,83 +1,42 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { homeContent } from "@/content/home";
+import { useId, useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { homeContent } from "@/content/home";
+import { homeContainer, homeHeading, HomeEyebrow, HomeLink } from "./HomePrimitives";
 
 export default function Faq() {
   const { faq } = homeContent;
+  const id = useId();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggleOpen = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section className="w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden relative font-poppins">
-      {/* Background ambient grids matching the rest of the site's light mode */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:32px_32px] opacity-10 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[linear-gradient(to_right,#60a5fa_1px,transparent_1px),linear-gradient(to_bottom,#60a5fa_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05] z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
-
-      <div className="max-w-[1000px] mx-auto px-6 lg:px-12 relative z-10 lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
-        
-        {/* Header (matching WhyChoose & Analytics styling) */}
-        <div className="flex flex-col items-center text-center mb-16 relative z-20">
-          <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
-            {faq.label}
-          </span>
-          <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
-            {faq.headline}
-          </h2>
-        </div>
-
-        {/* Accordion Container */}
-        <div className="flex flex-col gap-4">
-          {faq.items.map((item, index) => {
-            const isOpen = openIndex === index;
-            
-            return (
-              <div 
-                key={index} 
-                className={`border rounded-2xl transition-colors duration-300 ${
-                  isOpen ? 'border-primary/20 bg-blue-50/30' : 'border-zinc-200 bg-white hover:border-zinc-300 shadow-sm hover:shadow-md'
-                }`}
-              >
-                <button
-                  onClick={() => toggleOpen(index)}
-                  className="w-full flex items-center justify-between text-left px-5 py-4 sm:px-6 sm:py-5 focus-visible:outline-none"
-                >
-                  <span className={`text-base sm:text-lg font-medium pr-8 transition-colors duration-300 ${
-                    isOpen ? 'text-primary' : 'text-zinc-900'
-                  }`}>
-                    {item.question}
-                  </span>
-                  
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300 shadow-sm ${
-                    isOpen ? 'bg-primary text-white' : 'bg-zinc-50 border border-zinc-200 text-zinc-500'
-                  }`}>
-                    {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                  </div>
-                </button>
-                
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 sm:px-8 pb-8 pt-0 text-zinc-500 leading-relaxed max-w-3xl">
-                        {item.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+    <section aria-labelledby={`${id}-heading`} className="bg-white py-16 sm:py-20 lg:py-28">
+      <div className={homeContainer}>
+        <HomeEyebrow>{faq.label}</HomeEyebrow>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+          <div>
+            <h2 id={`${id}-heading`} className={homeHeading}>Your questions.<br /><span className="text-primary">Answered.</span></h2>
+            <p className="mt-6 mb-7 max-w-sm text-base leading-7 text-slate-600">Find out how our platforms fit your infrastructure, industry, and team.</p>
+            <HomeLink href="/contact" secondary>Talk to our team</HomeLink>
+          </div>
+          <div className="space-y-3">
+            {faq.items.map((item, index) => {
+              const isOpen = openIndex === index;
+              const triggerId = `${id}-question-${index}`;
+              const panelId = `${id}-answer-${index}`;
+              return (
+                <div key={item.question} className={`overflow-hidden rounded-2xl border ${isOpen ? "border-blue-200 bg-blue-50/40" : "border-slate-200 bg-white"}`}>
+                  <h3 className="normal-case">
+                    <button id={triggerId} type="button" aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenIndex(isOpen ? null : index)} className="flex min-h-16 w-full items-center justify-between gap-5 rounded-2xl p-5 text-left font-sans text-base leading-6 font-medium text-slate-950 hover:bg-slate-50 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-blue-600 sm:p-6">
+                      {item.question}
+                      {isOpen ? <Minus size={20} aria-hidden="true" className="shrink-0 text-blue-600" /> : <Plus size={20} aria-hidden="true" className="shrink-0 text-slate-500" />}
+                    </button>
+                  </h3>
+                  <div id={panelId} role="region" aria-labelledby={triggerId} hidden={!isOpen} className="px-5 pb-6 text-sm leading-7 text-slate-600 sm:px-6">{item.answer}</div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
