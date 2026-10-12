@@ -11,7 +11,7 @@ export default function WhyChoose() {
   const { whyChoose } = homeContent;
 
   return (
-    <section className="relative w-full py-12 sm:py-16 lg:py-24 overflow-hidden font-sans bg-white">
+    <section className="relative w-full pt-10 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 overflow-hidden font-sans bg-white">
       
       {/* Background Split (Desktop Only) */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">
@@ -46,7 +46,7 @@ export default function WhyChoose() {
         <div className="hidden lg:grid grid-cols-2 gap-8 xl:gap-32">
           
           {/* LEFT COLUMN: Traditional */}
-          <div className="py-24 flex flex-col items-end bg-transparent">
+          <div className="pt-4 lg:pt-6 pb-8 lg:pb-10 flex flex-col items-end bg-transparent">
             
             <h2 className="text-4xl font-medium tracking-tight text-zinc-600 mb-16 text-right w-full">
               Instead of
@@ -72,7 +72,7 @@ export default function WhyChoose() {
                     )}
                   >
                     <span className="text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-1.5 block">
-                      {f.name}
+                      {f.id ? `${f.id} · ` : ""}{f.name}
                     </span>
                     <h4 className="text-base font-semibold text-zinc-800 leading-snug">
                       {f.competitor}
@@ -84,7 +84,7 @@ export default function WhyChoose() {
           </div>
 
           {/* RIGHT COLUMN: Najhum */}
-          <div className="py-24 flex flex-col items-start bg-transparent">
+          <div className="pt-4 lg:pt-6 pb-8 lg:pb-10 flex flex-col items-start bg-transparent">
             
             <h2 className="text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-left w-full">
               Najhum <span className="font-serif italic font-normal text-primary">gives</span>
@@ -114,7 +114,7 @@ export default function WhyChoose() {
                       </div>
                       <div>
                         <span className="text-[11px] font-bold tracking-wider text-primary/70 uppercase mb-1.5 block">
-                          {f.name}
+                          {f.id ? `${f.id} · ` : ""}{f.name}
                         </span>
                         <h4 className="text-base font-bold text-zinc-900 leading-snug">
                           {f.najhum}
@@ -150,7 +150,7 @@ export default function WhyChoose() {
                 {/* Traditional Side */}
                 <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-border/50 pb-5 md:pb-0 md:pr-8 mb-5 md:mb-0">
                   <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-1.5 md:mb-2 block">
-                    Instead of: {f.name}
+                    {f.id ? `${f.id} · ` : ""}Instead of: {f.name}
                   </span>
                   <h4 className="text-[14px] md:text-[15px] font-semibold text-zinc-500 leading-snug line-through decoration-zinc-300">
                     {f.competitor}
@@ -163,7 +163,7 @@ export default function WhyChoose() {
                   <div className="absolute -left-6 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 md:hidden" />
                   
                   <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-primary uppercase mb-2 block">
-                    {whyChoose.najhumLabel} Gives: {f.name}
+                    {f.id ? `${f.id} · ` : ""}{whyChoose.najhumLabel} Gives: {f.name}
                   </span>
                   <div className="flex items-start gap-2.5 md:gap-3">
                     <Check className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0 mt-0.5" strokeWidth={3} />
@@ -180,7 +180,7 @@ export default function WhyChoose() {
         </div>
 
         {/* Bottom CTA Banner */}
-        <div className="mt-12 lg:mt-20 bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative z-20 max-w-5xl mx-auto">
+        <div className="mt-4 sm:mt-6 lg:mt-8 bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative z-20 max-w-5xl mx-auto">
            <div className="flex items-center gap-6">
               <div className="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
                  <BarChart3 className="w-8 h-8 text-primary" />

@@ -4,23 +4,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { homeContent } from "@/content/home";
 
-const clients = [
-  { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
-  { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
-  { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
-  { name: "ARC", src: "/logo/client%20logos/adaa_gov.svg" },
-  { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
-  { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
-  { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
-  { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
-  { name: "Space42", src: "/logo/client%20logos/space42.png" },
-];
+import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function Hero() {
   const { hero } = homeContent;
 
   return (
-    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white bg-black">
+    <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white bg-black">
       
       {/* Background Video */}
       <video
@@ -69,34 +59,8 @@ export default function Hero() {
       </div>
 
       {/* Logo Marquee at Bottom */}
-      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
-        <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
-          TRUSTED BY COMPANIES WORLDWIDE
-        </p>
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee {
-            animation: marquee 30s linear infinite;
-            width: max-content;
-          }
-        `}</style>
-        
-        <div className="flex animate-marquee items-center w-full mt-2">
-          {[...clients, ...clients, ...clients, ...clients].map((client, i) => {
-            return (
-              <div key={i} className="flex flex-none items-center justify-center mx-4 px-8 py-2 bg-transparent opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 min-w-[160px]">
-                <img 
-                  src={client.src} 
-                  alt={client.name} 
-                  className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-                />
-              </div>
-            );
-          })}
-        </div>
+      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent z-20 pt-2 pb-3 sm:pb-4">
+        <ClientMarquee title="TRUSTED BY COMPANIES WORLDWIDE" />
       </div>
     </section>
   );

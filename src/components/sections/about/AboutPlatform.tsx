@@ -121,14 +121,6 @@ export default function AboutPlatform() {
           ))}
         </div>
 
-        {/* Bottom Closing Statement */}
-        <div className="flex items-center justify-center gap-4 mt-16 sm:mt-20">
-          <div className="w-12 sm:w-16 h-px bg-slate-200" />
-          <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-slate-400 text-center">
-            {platform.footerStatement}
-          </span>
-          <div className="w-12 sm:w-16 h-px bg-slate-200" />
-        </div>
       </div>
     </section>
   );

@@ -5,10 +5,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/design-system/primitives/layout/Container";
 import { cropifaiContent } from "@/content/cropifai";
+import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function CropifaiClients() {
   const { clients } = cropifaiContent;
-  const carouselLogos = clients.carouselLogos;
   const gridLogos = clients.gridLogos;
   return (
     <section className="relative w-full py-24 bg-white overflow-hidden font-sans border-t border-zinc-100">
@@ -27,37 +27,7 @@ export default function CropifaiClients() {
 
         {/* Carousel Row (Strategic / Telecom / Major Partners) */}
         <div className="w-full relative mb-20">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-          
-          <style>{`
-            @keyframes scroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(calc(-200px * 6)); }
-            }
-            .animate-scroll {
-              animation: scroll 25s linear infinite;
-              display: flex;
-              width: calc(200px * 12);
-            }
-          `}</style>
-
-          <div className="overflow-hidden w-full h-24">
-            <div className="animate-scroll">
-              {[...carouselLogos, ...carouselLogos].map((logo, index) => (
-                <div key={index} className="w-[200px] h-full flex items-center justify-center px-6 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                  <div className="relative w-full h-12">
-                    <Image
-                      src={logo.src}
-                      alt={logo.name}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ClientMarquee theme="light" />
         </div>
 
         {/* Static Grid (Regional / Specialized Clients) */}

@@ -17,8 +17,8 @@
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 .animate-fade-in {
@@ -30,7 +30,14 @@
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  display: flex !important;
+  width: max-content !important;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* === Najhum Ecosystem Animations === */

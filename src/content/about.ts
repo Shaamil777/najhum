@@ -91,34 +91,33 @@ export const aboutContent = {
     footerStatement: "Technology For A More Resilient Tomorrow"
   },
   platform: {
-    badge: "The Architecture",
+    badge: "The Platforms",
     titlePart1: "One Group. ",
     titlePart2: "Three Intelligent Platforms.",
-    description: "Purpose-built platforms addressing critical global challenges through intelligent technology, real-world impact, and long-term sustainability.",
+    description: "Three platforms, one company. Each built for a different kind of operation, each running on the same sensing, connectivity and cloud layer.",
     platforms: [
       {
         code: "CORE 01",
-        name: "IOTRICS",
-        description: "Advanced IoT asset management and sensor integration for real-time visibility across global supply chains.",
+        name: "IoTRICS",
+        description: "Industrial monitoring for facilities, utilities and cold chain — sensors, alerts and live dashboards on one platform.",
         href: "/platforms/iotrics",
         badgeType: "iotrics"
       },
       {
         code: "CORE 02",
         name: "EVOLTICS",
-        description: "Energy management and optimization platform designed for smart cities and high-consumption industrial plants.",
+        description: "EV charging management for any OCPP charger — one network for access, uptime, session records and driver payments.",
         href: "/platforms/evoltics",
         badgeType: "evoltics"
       },
       {
         code: "CORE 03",
-        name: "CROPIFAI",
-        description: "AI-driven agricultural intelligence focused on soil health, yield optimization, and resource sustainability.",
+        name: "CropifAI",
+        description: "Agricultural monitoring and irrigation control — soil moisture, flow and valve scheduling from one dashboard.",
         href: "/platforms/cropifai",
         badgeType: "cropifai"
       }
-    ],
-    footerStatement: "Technology for a More Resilient Tomorrow"
+    ]
   },
   presence: {
     badge: "Global Presence",

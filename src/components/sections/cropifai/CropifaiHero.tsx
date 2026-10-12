@@ -17,7 +17,7 @@ export default function CropifaiHero() {
   }, []);
 
   return (
-    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden font-sans flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white">
+    <section className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-20 sm:pb-24 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">

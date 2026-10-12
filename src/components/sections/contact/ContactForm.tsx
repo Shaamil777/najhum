@@ -33,7 +33,7 @@ export default function ContactForm() {
     setDraftOpened(true);
   }
   return (
-    <section className="relative w-full py-16 sm:py-24 lg:py-32 bg-background overflow-hidden">
+    <section id="contact-form" className="relative w-full py-16 sm:py-24 lg:py-32 bg-background overflow-hidden scroll-mt-20 sm:scroll-mt-28">
       
       {/* Background Grids & Ambient Effects */}
       <div className="absolute inset-0 pointer-events-none opacity-40">

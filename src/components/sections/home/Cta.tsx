@@ -39,7 +39,7 @@ export default function Cta() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden">
+    <section className="relative w-full bg-white pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
       
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -71,14 +71,14 @@ export default function Cta() {
         We use pointer-events-none on the container so mouse events pass through to the grid behind it,
         and pointer-events-auto on the inner content so the button and text can still be interacted with.
       */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-20 flex flex-col items-center justify-center min-h-[40vh] pointer-events-none lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-20 flex flex-col items-center justify-center pointer-events-none">
           {/* Content & Button */}
           <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
              <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.05]">
                 Ready to Transform <br className="hidden sm:block" />
                 Your <span className="text-primary">Operations?</span>
              </h2>
-             <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
+             <p className="text-lg sm:text-xl text-zinc-500 mb-8 sm:mb-10 leading-relaxed max-w-2xl">
                 Connect <span className="text-primary">industrial assets</span>, optimize <span className="text-primary">energy</span>, and unlock <span className="text-primary font-medium">real-time operational intelligence</span> with Najhum&apos;s enterprise platforms.
              </p>
              

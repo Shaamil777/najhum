@@ -6,6 +6,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { evolticsContent } from "@/content/evoltics";
+import ClientMarquee, { ClientLogo } from "@/components/ui/ClientMarquee";
+
+const evolticsLogos: ClientLogo[] = [1, 2, 3, 4, 5, 6].map((num) => ({
+  name: `Trusted Partner ${num}`,
+  src: `/logo/elvotics_logo/${num}.png`,
+  className: "max-h-8 max-w-[130px]",
+}));
 
 export default function EvolticsHero() {
   const { hero } = evolticsContent;
@@ -18,7 +25,7 @@ export default function EvolticsHero() {
   }, []);
 
   return (
-    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden font-sans flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white">
+    <section className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -116,34 +123,8 @@ export default function EvolticsHero() {
       </div>
 
       {/* Logo Marquee at Bottom */}
-      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
-        <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
-          {hero.marqueeText}
-        </p>
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee {
-            animation: marquee 30s linear infinite;
-            width: max-content;
-          }
-        `}</style>
-        
-        <div className="flex animate-marquee items-center w-full mt-2">
-          {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((num, i) => (
-            <div key={i} className="flex flex-none items-center justify-center mx-4 px-8 py-2 bg-transparent opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 min-w-[160px]">
-              <Image 
-                src={`/logo/elvotics_logo/${num}.png`} 
-                alt={`Trusted Partner ${num}`} 
-                width={160} 
-                height={50} 
-                className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-              />
-            </div>
-          ))}
-        </div>
+      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent z-20 pt-2 pb-3 sm:pb-4">
+        <ClientMarquee title={hero.marqueeText} logos={evolticsLogos} />
       </div>
 
     </section>

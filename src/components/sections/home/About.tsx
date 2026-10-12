@@ -10,12 +10,11 @@ const poppins = Poppins({
   variable: "--font-poppins"
 });
 
-import ArchitectureFlow from "./ArchitectureFlow";
 
 export default function About() {
   return (
     <section 
-      className={`relative w-full min-h-[100dvh] bg-[#f8f9fa] py-8 sm:py-16 lg:py-32 ${poppins.variable} ${poppins.className} sticky bottom-0 z-0 overflow-hidden`}
+      className={`relative w-full bg-[#f8f9fa] py-8 sm:py-16 lg:py-32 ${poppins.variable} ${poppins.className} overflow-hidden sticky top-0 z-0`}
       style={{
         '--font-display': 'var(--font-poppins)',
         '--font-sans': 'var(--font-poppins)'
@@ -73,9 +72,6 @@ export default function About() {
           </div>
 
         </div>
-
-        {/* Architecture Flow Diagram */}
-        <ArchitectureFlow />
       </div>
     </section>
   );

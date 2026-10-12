@@ -12,18 +12,18 @@ export const homeContent = {
     titlePart2: "INTELLIGENT",
     titlePart3: "INFRASTRUCTURE",
     subheadline: "Unified enterprise IoT, smart EV mobility, and agricultural intelligence platforms engineered to transform mission-critical operations with real-time clarity.",
-    primaryCta: { 
-      label: "About Us", 
-      href: "/about" 
+    primaryCta: {
+      label: "Request a Demo",
+      href: "/contact#contact-form"
     },
-    secondaryCta: { 
-      label: "Contact Us", 
-      href: "/contact" 
+    secondaryCta: {
+      label: "Contact Us",
+      href: "/contact"
     },
     cardText: "ENGINEERED TO\nDELIVER CLARITY,\nSCALE, AND\nCONTROL.",
-    cardCta: { 
-      label: "DISCOVER", 
-      href: "/products" 
+    cardCta: {
+      label: "DISCOVER",
+      href: "/products"
     },
     kpis: [
       { value: "5K+", label: "Active Deployments" },
@@ -36,73 +36,75 @@ export const homeContent = {
     headline: "Intelligent",
     headlineItalic: "Operations Grid",
     description: "\"An integrated ecosystem connecting Industrial IoT, EV infrastructure, smart energy, and operational intelligence through a unified enterprise platform.\"",
+    row1Label: "The Company",
+    row2Label: "The Platform",
     trustSignals: [
       {
-        kpiValue: "9+",
-        title: "YEARS OF EXPERIENCE",
-        description: "Delivering Industrial IoT and enterprise technology solutions since 2017."
+        kpiValue: "2017",
+        title: "ESTABLISHED",
+        description: "Industrial IoT and EV infrastructure since 2017."
       },
       {
         kpiValue: "Dubai, UAE",
         title: "HEADQUARTERS",
-        description: "Serving organizations across the UAE and GCC region."
+        description: "in5 Innovation Centre, Dubai Design District."
       },
       {
-        kpiValue: "4",
-        title: "CORE PLATFORMS",
-        description: "IoTRICS, EVOLTICS, IEMS & SOLAAS enterprise platforms."
+        kpiValue: "3",
+        title: "PLATFORMS",
+        description: "IoTRICS, EVOLTICS and cropifAI."
       },
       {
-        kpiValue: "12+",
-        title: "INDUSTRIES SERVED",
-        description: "Supporting manufacturing, utilities, mobility, energy, and smart infrastructure."
+        kpiValue: "2",
+        title: "COMMERCIAL MODELS",
+        description: "SolaaS and PaaS."
       },
       {
-        kpiValue: "24/7",
-        title: "ENTERPRISE SUPPORT",
-        description: "Continuous technical assistance and platform monitoring for mission-critical operations."
+        kpiValue: "GCC",
+        title: "COVERAGE",
+        description: "Deployments across the UAE and wider GCC."
       },
       {
-        kpiValue: "AI • IoT • Cloud",
-        title: "TECHNOLOGY STACK",
-        description: "Intelligent enterprise platforms built for automation, analytics, and operational excellence."
+        kpiValue: "End-to-end",
+        title: "DELIVERY",
+        description: "Hardware, platform, deployment and support in-house."
       },
       {
-        kpiValue: "Hardware Agnostic",
-        title: "PLATFORM COMPATIBILITY",
-        description: "Compatible with open industrial communication protocols and multi-vendor infrastructure."
+        kpiValue: "AMC",
+        title: "MAINTENANCE",
+        description: "Annual maintenance contracts and on-site service."
       }
     ],
     operationalIntelligence: [
       {
-        kpiValue: "24/7",
-        title: "Platform Monitoring",
-        description: "Continuous monitoring and real-time operational visibility across connected assets."
+        kpiValue: "Open protocols",
+        title: "CONTROLLER",
+        description: "Najhum IoT Controller — LoRaWAN, Modbus, BACnet/IP, MQTT and REST."
       },
       {
-        kpiValue: "4",
-        title: "Enterprise Platforms",
-        description: "Integrated solutions covering Industrial IoT, EV Charging, Energy Management, and Managed Services."
+        kpiValue: "OCPP 1.6J / 2.0.1",
+        title: "EV STANDARD",
+        description: "Any OCPP-compliant charger, any manufacturer."
       },
       {
-        kpiValue: "12+",
-        title: "Industries Served",
-        description: "Supporting manufacturing, utilities, logistics, commercial facilities, and smart infrastructure."
+        kpiValue: "5 channels",
+        title: "CONNECTIVITY",
+        description: "Cellular, fibre, LoRaWAN, satellite and BLE."
       },
       {
-        kpiValue: "100%",
-        title: "Open Integration",
-        description: "Hardware-agnostic architecture supporting industry-standard communication protocols."
+        kpiValue: "Agnostic",
+        title: "HARDWARE",
+        description: "Brand-independent across multi-vendor estates."
       },
       {
-        kpiValue: "AI",
-        title: "Operational Intelligence",
-        description: "Predictive analytics, automated alerts, anomaly detection, and intelligent decision support."
+        kpiValue: "Automated",
+        title: "ALERTING",
+        description: "Threshold, anomaly and event-based triggers."
       },
       {
-        kpiValue: "UAE",
-        title: "Regional Presence",
-        description: "Headquartered in Dubai and delivering enterprise technology solutions across the GCC."
+        kpiValue: "Retained",
+        title: "DATA",
+        description: "Historical storage, trend analysis, exportable reports."
       }
     ]
   },
@@ -131,7 +133,7 @@ export const homeContent = {
       },
       {
         id: "cropifai",
-        title: "CropifAI",
+        title: "cropifAI",
         description: "AI-driven agricultural insights for food security and yield optimization.",
         cta: "Details"
       }
@@ -142,13 +144,13 @@ export const homeContent = {
     leftContent: "We build enterprise platforms that transform industrial infrastructure into intelligent, connected ecosystems. By combining Industrial IoT, smart energy, EV mobility, and cloud technologies, we help organizations improve visibility, optimize operations, and accelerate digital transformation.",
     headline: "Engineering the Future of\nConnected Infrastructure",
     description: "Our solutions are designed to integrate seamlessly with existing infrastructure, enabling real-time monitoring, predictive insights, and scalable automation across mission-critical operations.",
-    buttonLabel: "Inside the studio",
+    buttonLabel: "Our Story",
     trustStrip: [
       "Industrial IoT", "EV Infrastructure", "Smart Energy", "Enterprise Software", "Cloud Platforms", "Hardware Agnostic", "Real-Time Intelligence", "Predictive Analytics"
     ],
     stats: [
       { id: "established", title: "ESTABLISHED", value: "2017", label: "Building enterprise platforms for Industrial IoT, smart energy, and intelligent infrastructure." },
-      { id: "core", title: "CORE PLATFORMS", value: "04", label: "IoTRICS, EVOLTICS, IEMS, and SOLAAS working together as one connected ecosystem." },
+      { id: "core", title: "CORE PLATFORMS", value: "03", label: "IoTRICS, EVOLTICS and CropifAI working together as one connected ecosystem." },
       { id: "support", title: "ENTERPRISE SUPPORT", value: "24/7", label: "Continuous monitoring, operational visibility, and technical support for mission-critical deployments." },
       { id: "deployment", title: "DEPLOYMENT OPTIONS", value: "Cloud • Edge • Hybrid", label: "Flexible deployment models designed to integrate with enterprise infrastructure at any scale." }
     ]
@@ -160,91 +162,62 @@ export const homeContent = {
     secondaryCta: { label: "Learn More", href: "/about" }
   },
   impact: {
+    heading: "Build Intelligent Operations.",
+    subCopy: "Transform industrial infrastructure with connected platforms for Industrial IoT, smart energy, EV mobility, and enterprise automation.",
+    buttonLabel: "Explore Solutions",
+
     card1: {
-      id: "1",
-      label1: "CHALLENGE 01",
-      label2: "SAFETY",
-      title: "Personnel Hazards",
-      description: "Manual monitoring of hazardous industrial environments.",
+      label1: "THE PROBLEM",
+      label2: "INDUSTRIAL OPERATIONS",
+      title1: "Your data already exists.",
+      title2: "Nobody sees it in time.",
+      description: "Sensors, meters, chargers and building systems each hold part of the picture, in platforms that do not talk to one another. What you need to act on is being recorded. It just never arrives in one place, at one time.",
       outcomeLabel: "OUTCOME:",
-      outcome: "100% Visibility"
+      outcome: "One operational view"
     },
 
     card2: {
+      label1: "WHAT YOU ACTUALLY USE",
+      label2: "EVERY DEPLOYMENT",
       items: [
-        { 
-          id: "2",
-          challengeLabel: "CHALLENGE 02",
-          category: "EV NETWORKS", 
-          title: "Fragmented Charging", 
-          description: "Complexity in managing multi-site charger availability and billing.",
-          outcome: "99.9% Uptime"
-        },
-        { 
-          id: "3", 
-          challengeLabel: "CHALLENGE 03",
-          category: "ENERGY COSTS", 
-          title: "Rising Utility Expenses", 
-          description: "High operational costs due to inefficient peak-load management.",
-          outcome: "25% Reduction"
-        },
-        { 
-          id: "4", 
-          challengeLabel: "CHALLENGE 04",
-          category: "WATER USAGE", 
-          title: "Undetected Leaks", 
-          description: "Non-revenue water loss across large-scale facility networks.",
-          outcome: "Zero-Leak Ops"
-        },
-        { 
-          id: "5", 
-          challengeLabel: "CHALLENGE 05",
-          category: "FACILITIES", 
-          title: "Manual FM Tasks", 
-          description: "Inefficient maintenance schedules based on time rather than data.",
-          outcome: "Predictive FM"
-        }
+        { id: "1", title: "Live dashboards", subtitle: "Every connected asset, one screen" },
+        { id: "2", title: "Alerts", subtitle: "Routed to whoever can act" },
+        { id: "3", title: "Audit records", subtitle: "Exportable history, kept" },
+        { id: "4", title: "Open integration", subtitle: "Into your BMS, ERP or BI tool" }
       ],
-      feature: {
-        id: "6",
-        challengeLabel: "CHALLENGE 06",
-        category: "AGRICULTURE",
-        title: "Climate Volatility",
-        description: "Inconsistent crop yields due to unpredictable moisture levels.",
-        outcome: "30% Yield Gain"
-      },
-      featureTitle: "Integrated Solutions"
+      panel: {
+        title: "Two ways to pay for it.",
+        description: "SolaaS bundles hardware, platform, deployment and support into one operating cost. PaaS licenses the platform — run it on infrastructure you already own, or buy the hardware from us outright."
+      }
     },
 
     card3: {
-      title1: "Operational",
-      title2: "Intelligence",
-      description: "Transform real-time industrial data into actionable insights through centralized dashboards, predictive analytics, and intelligent automation."
+      title1: "Retrofit,",
+      title2: "not rip-and-replace",
+      description: "Existing meters, chillers, chargers and building systems stay where they are. The Najhum IoT Controller sits alongside them and reads them over the protocols they already speak, so the first deployment adds sensing without a shutdown and without replacing anything that still works."
     },
 
     card4: {
       title1: "Energy",
-      title2: "Optimization",
-      description: "Monitor energy consumption, identify inefficiencies, and improve operational performance through intelligent energy management.",
-      outcomeLabel: "Outcome:",
-      outcome: "Lower Energy Costs"
+      title2: "Optimisation",
+      description: "Circuit-level metering shows which assets drive peak demand and when, so load shifting and tariff decisions rest on measurement rather than estimate.",
+      outcomeLabel: "OUTCOME:",
+      outcome: "Circuit-level load visibility"
     },
 
     card5: {
-      label: "PREDICTIVE INSIGHTS",
+      label: "BEFORE IT FAILS",
       title1: "Predictive",
       title2: "Maintenance",
-      description: "Detect equipment anomalies before failures occur using AI-powered monitoring, automated alerts, and predictive maintenance analytics.",
+      description: "Vibration, temperature and runtime trends flag equipment drifting out of normal before it stops — turning an unplanned shutdown into a scheduled job.",
       button: "DISCOVER MORE"
     },
 
     card6: {
       label: "GET STARTED",
-      title1: "Ready to Build",
-      title2: "Smarter Operations?",
-      description: "Partner with Najhum to modernize your infrastructure through Industrial IoT, smart energy, EV charging, and enterprise software solutions designed for long-term operational success.",
-
-      button: "BOOK A DEMO"
+      title: "Start with one site and one problem.",
+      description: "We deploy the sensors, run the platform and keep it supported. You keep the data. If it works on the first site, it scales to the rest on the same subscription.",
+      button: "Book a demo"
     }
   },
 
@@ -255,12 +228,42 @@ export const homeContent = {
     competitorLabel: "Traditional Systems",
     najhumLabel: "Najhum Platform",
     features: [
-      { name: "Infrastructure Monitoring", competitor: "Manual inspections and delayed reporting across disconnected assets.", najhum: "Real-time monitoring with live dashboards, alerts, and predictive insights." },
-      { name: "Operational Visibility", competitor: "Multiple software platforms with fragmented operational data.", najhum: "One unified dashboard for Industrial IoT, Energy, and EV infrastructure." },
-      { name: "Maintenance Strategy", competitor: "Reactive maintenance after equipment failures occur.", najhum: "Predictive maintenance powered by AI-driven analytics and automated alerts." },
-      { name: "System Integration", competitor: "Vendor-specific hardware with limited interoperability.", najhum: "Hardware-agnostic platform supporting open industrial communication protocols." },
-      { name: "Energy Management", competitor: "Manual energy tracking with limited visibility into consumption.", najhum: "Smart energy optimization through real-time monitoring and performance analytics." },
-      { name: "Decision Making", competitor: "Historical reports and manual operational analysis.", najhum: "Real-time operational intelligence with AI-powered recommendations and insights." }
+      {
+        id: "01",
+        name: "Infrastructure monitoring",
+        competitor: "Manual inspection rounds, reported days later.",
+        najhum: "Live readings from every asset, alerts in minutes."
+      },
+      {
+        id: "02",
+        name: "Operational visibility",
+        competitor: "One portal per vendor, and none of them talk.",
+        najhum: "Every asset on one dashboard, whatever the brand."
+      },
+      {
+        id: "03",
+        name: "Maintenance strategy",
+        competitor: "Repairs begin after the equipment has stopped.",
+        najhum: "Drift flagged while the equipment still runs."
+      },
+      {
+        id: "04",
+        name: "System integration",
+        competitor: "Vendor-locked hardware that will not interoperate.",
+        najhum: "One controller, open protocols, any vendor."
+      },
+      {
+        id: "05",
+        name: "Energy management",
+        competitor: "One meter reading a month, after the fact.",
+        najhum: "Circuit-level use, measured as it happens."
+      },
+      {
+        id: "06",
+        name: "EV charging",
+        competitor: "Every charger brand brings its own software.",
+        najhum: "One network across any OCPP charger brand."
+      }
     ]
   },
   faq: {

@@ -247,10 +247,12 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
                   <Link
                     href="/contact"
                     onClick={close}
-                    className="flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
+                    className="w-full bg-primary hover:bg-primary-hover active:scale-[0.99] text-white font-bold py-3.5 sm:py-4 px-6 rounded-full flex items-center justify-center gap-2.5 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all text-sm sm:text-base group cursor-pointer"
                   >
-                    <span>Request a Demo</span>
-                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    <span>Contact Us</span>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-primary flex items-center justify-center shrink-0 ml-1.5 shadow-xs group-hover:translate-x-0.5 transition-transform">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
                   </Link>
                 </motion.div>
               </div>

@@ -7,8 +7,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { iotricsContent } from "@/content/iotrics";
-
-const clients = iotricsContent.hero.clients;
+import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function IotricsHero() {
   const { hero } = iotricsContent;
@@ -21,7 +20,7 @@ export default function IotricsHero() {
   }, []);
 
   return (
-    <section className="w-full min-h-[90vh] lg:min-h-[95vh] relative overflow-hidden flex flex-col justify-center items-center pt-28 pb-16 border-b border-border text-white">
+    <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -89,32 +88,8 @@ export default function IotricsHero() {
       </div>
 
       {/* Logo Marquee at Bottom */}
-      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent overflow-hidden flex flex-col items-center justify-center h-28 z-20 pt-2">
-        <p className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-widest text-center drop-shadow-sm mb-2 w-full">
-          {hero.marqueeText}
-        </p>
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee {
-            animation: marquee 30s linear infinite;
-            width: max-content;
-          }
-        `}</style>
-        
-        <div className="flex animate-marquee items-center w-full mt-2">
-          {[...clients, ...clients, ...clients, ...clients].map((client, idx) => (
-            <div key={idx} className="flex flex-none items-center justify-center mx-4 px-8 py-2 bg-transparent opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 min-w-[160px]">
-              <img 
-                src={client.src} 
-                alt={client.name} 
-                className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-              />
-            </div>
-          ))}
-        </div>
+      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent z-20 pt-2 pb-3 sm:pb-4">
+        <ClientMarquee title={hero.marqueeText} />
       </div>
 
     </section>
