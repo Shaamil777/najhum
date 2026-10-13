@@ -1,6 +1,5 @@
 import { FooterLinks } from "./FooterLinks";
 import { siteConfig } from "@/config/site";
-import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -26,16 +25,10 @@ export default function Footer() {
               href="https://dexiko.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="group flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
+              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600 rounded-sm"
             >
-              <span className="text-[11px] uppercase tracking-wider font-medium text-slate-400">Developed by</span>
-              <Image
-                src="/images/footer/dexiko.png" 
-                alt="Dexiko" 
-                width={80}
-                height={20}
-                className="h-3.5 w-auto object-contain opacity-65 group-hover:opacity-100 transition-all relative -translate-y-[2px]" 
-              />
+              <span>Developed by</span>
+              <span className="font-semibold text-slate-700 group-hover:text-primary transition-colors">Dexiko</span>
             </a>
 
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500">
