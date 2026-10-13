@@ -29,13 +29,15 @@ interface MilestoneData {
   desc: string;
   deliverables: string[];
   impactMetric: string;
+  sourceName?: string;
+  sourceUrl?: string;
 }
 
 const timelineData: MilestoneData[] = evolticsContent.about.roadmap.milestones as MilestoneData[];
 
 export default function EvolticsAbout() {
   const { about } = evolticsContent;
-  const [selectedMilestone, setSelectedMilestone] = useState<number>(1); // Default to 2026 (Expansion)
+  const [selectedMilestone, setSelectedMilestone] = useState<number>(2); // Default to 2024 (Licensing)
 
   return (
     <section className="w-full py-16 sm:py-20 lg:py-28 bg-white text-foreground relative overflow-hidden font-sans">
@@ -273,25 +275,31 @@ export default function EvolticsAbout() {
             </p>
           </div>
 
-          {/* Stepper Tabs Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 lg:gap-4 mb-8 sm:mb-10">
+          {/* Stepper Tabs Bar (6 Milestones) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3 lg:gap-3.5 mb-8 sm:mb-10">
             {timelineData.map((item, idx) => {
               const isSelected = selectedMilestone === idx;
               return (
                 <button
                   key={item.year}
                   onClick={() => setSelectedMilestone(idx)}
-                  className={`flex flex-col p-3 sm:p-4 rounded-xl text-left border transition-all relative ${
+                  className={`flex flex-col justify-between p-3 sm:p-3.5 rounded-xl text-left border transition-all relative ${
                     isSelected 
                       ? 'bg-primary text-white border-primary shadow-md shadow-primary/20 scale-[1.02] z-10' 
                       : 'bg-surface-alt hover:bg-surface border-border text-foreground hover:border-primary/30'
                   }`}
                 >
-                  <div className="flex items-center justify-between w-full mb-1">
-                    <span className={`text-lg sm:text-2xl font-black ${isSelected ? 'text-white' : 'text-foreground'}`}>
+                  <div className="flex items-center justify-between w-full mb-2">
+                    <span className={`text-base sm:text-xl lg:text-2xl font-black leading-none ${isSelected ? 'text-white' : 'text-foreground'}`}>
                       {item.year}
                     </span>
-                    <span className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded ${
+                    <span className={`text-[10px] sm:text-xs font-semibold ${isSelected ? 'text-white/80' : 'text-muted'}`}>
+                      {item.phase}
+                    </span>
+                  </div>
+                  
+                  <div className="w-full mt-auto">
+                    <span className={`inline-block text-[8px] sm:text-[9px] font-bold uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded whitespace-nowrap ${
                       isSelected 
                         ? 'bg-white/20 text-white' 
                         : item.status === 'completed'
@@ -303,9 +311,6 @@ export default function EvolticsAbout() {
                       {item.tag}
                     </span>
                   </div>
-                  <span className={`text-[10px] sm:text-xs font-semibold ${isSelected ? 'text-white/80' : 'text-muted'}`}>
-                    {item.phase}
-                  </span>
                 </button>
               );
             })}
@@ -325,14 +330,37 @@ export default function EvolticsAbout() {
                 
                 {/* Left Overview */}
                 <div className="lg:col-span-7 space-y-4">
-                  <div className="flex items-center space-x-2 sm:space-x-3">
-                    <span className="text-2xl sm:text-3xl font-black text-foreground">
-                      {timelineData[selectedMilestone].year}
-                    </span>
-                    <div className="h-4 w-px bg-border" />
-                    <span className="text-[11px] sm:text-sm font-bold text-primary tracking-wide uppercase leading-tight">
-                      {timelineData[selectedMilestone].title}
-                    </span>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-center space-x-2 sm:space-x-3 flex-wrap gap-y-1">
+                      <span className="text-2xl sm:text-3xl font-black text-foreground">
+                        {timelineData[selectedMilestone].year}
+                      </span>
+                      <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 whitespace-nowrap">
+                        {timelineData[selectedMilestone].tag}
+                      </span>
+                      <div className="h-4 w-px bg-border hidden sm:block" />
+                      <span className="text-[11px] sm:text-sm font-bold text-primary tracking-wide uppercase leading-tight">
+                        {timelineData[selectedMilestone].title}
+                      </span>
+                    </div>
+
+                    {/* Source with 'i' Info button matching the above section */}
+                    {timelineData[selectedMilestone].sourceUrl && (
+                      <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+                        <span className="text-[11px] sm:text-xs text-muted">
+                          Source: <strong className="text-foreground font-semibold">{timelineData[selectedMilestone].sourceName}</strong>
+                        </span>
+                        <a
+                          href={timelineData[selectedMilestone].sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-surface-alt border border-border hover:bg-neutral-100 flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
+                          title={`View Source: ${timelineData[selectedMilestone].sourceName}`}
+                        >
+                          <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        </a>
+                      </div>
+                    )}
                   </div>
 
                   <p className="text-[13px] sm:text-base text-foreground/80 leading-relaxed">

@@ -90,7 +90,7 @@ export default function Cta() {
              >
                 <Link href={cta.primaryCta.href} className="focus-visible:outline-none block">
                   <AntiMetalButton 
-                    label="Contact" 
+                    label="Contact Us" 
                     accentFrom="var(--color-primary)" 
                     accentTo="var(--color-primary)" 
                     dotColor="#ffffff"

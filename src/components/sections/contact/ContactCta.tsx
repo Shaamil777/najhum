@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { AntiMetalButton } from "@/components/ui/anti-metal-button";
 import { contactContent } from "@/content/contact";
+import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function ContactCta() {
   const { cta } = contactContent;
@@ -39,7 +40,7 @@ export default function ContactCta() {
   };
 
   return (
-    <section className="relative w-full bg-white py-20 sm:py-28 lg:py-36 overflow-hidden border-t border-neutral-200">
+    <section className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden border-t border-neutral-200">
       
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -66,7 +67,7 @@ export default function ContactCta() {
       </div>
       
       {/* Interactive Main Content Container */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-20 flex flex-col items-center justify-center pointer-events-none">
+      <Container size="xl" className="relative z-20 flex flex-col items-center justify-center pointer-events-none">
         <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
           
           <h2 className="font-poppins text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.08]">
@@ -96,7 +97,7 @@ export default function ContactCta() {
           </div>
 
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

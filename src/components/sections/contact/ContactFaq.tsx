@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { contactContent } from "@/content/contact";
+import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function ContactFaq() {
   const { faq } = contactContent;
@@ -19,7 +20,8 @@ export default function ContactFaq() {
       <div className="absolute top-10 left-10 w-96 h-96 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:32px_32px] opacity-10 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[linear-gradient(to_right,#60a5fa_1px,transparent_1px),linear-gradient(to_bottom,#60a5fa_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.05] z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
 
-      <div className="max-w-[1000px] mx-auto px-6 lg:px-12 relative z-10 lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
+      <Container size="xl" className="relative z-10 flex flex-col items-center">
+        <div className="w-full max-w-4xl">
         
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 relative z-20">
@@ -79,7 +81,8 @@ export default function ContactFaq() {
             );
           })}
         </div>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }

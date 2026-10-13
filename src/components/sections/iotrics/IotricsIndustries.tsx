@@ -82,21 +82,23 @@ export default function IotricsIndustries() {
               />
               
               {/* Hover Dark Overlay Gradient */}
-              <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#111111] via-[#111111]/85 to-[#111111]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#111111] via-[#111111]/90 to-[#111111]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
               {/* Content (z-10) */}
               <div className="relative z-10 flex flex-col h-full">
-                <item.icon className="w-5 h-5 text-blue-400 mb-10 group-hover:text-blue-300 transition-colors duration-500" />
+                {/* Header with Icon and Number */}
+                <div className="flex items-center justify-between mb-8">
+                  <item.icon className="w-5 h-5 text-blue-400 mb-0 group-hover:text-blue-300 transition-colors duration-500" />
+                  <span className="text-3xl sm:text-4xl font-medium tracking-tighter text-neutral-500 group-hover:text-white transition-all duration-500 group-hover:scale-105 origin-right">
+                    {item.number}
+                  </span>
+                </div>
                 
-                <h3 className="text-sm font-semibold tracking-wide text-white mb-3 group-hover:text-blue-300 transition-colors duration-500">
+                <h3 className="text-sm sm:text-base font-semibold tracking-wide text-white mb-3 group-hover:text-blue-300 transition-colors duration-500">
                   {item.title}
                 </h3>
                 
-                <div className="text-6xl sm:text-7xl font-medium tracking-tighter text-white mb-8 transition-transform duration-500 group-hover:scale-105 origin-left">
-                  {item.number}
-                </div>
-                
-                <p className="text-[13px] text-neutral-500 leading-relaxed mt-auto group-hover:text-neutral-300 transition-colors duration-500">
+                <p className="text-[13px] text-neutral-400 leading-relaxed mt-auto group-hover:text-neutral-200 transition-colors duration-500">
                   {item.desc}
                 </p>
               </div>
@@ -105,7 +107,7 @@ export default function IotricsIndustries() {
         </div>
 
         {/* ═══ MOBILE GRID (< lg) ═══ */}
-        <div className="grid grid-cols-2 lg:hidden gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-3 sm:gap-4">
           {industries.map((item, idx) => (
             <motion.div
               key={idx}
@@ -113,17 +115,20 @@ export default function IotricsIndustries() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.04 }}
-              className="bg-neutral-900/60 border border-neutral-800/60 rounded-2xl p-5 flex flex-col"
+              className="bg-neutral-900/60 border border-neutral-800/60 rounded-2xl p-5 sm:p-6 flex flex-col"
             >
               <div className="flex items-center justify-between mb-4">
                 <item.icon className="w-4 h-4 text-blue-400" />
-                <span className="text-2xl font-bold tracking-tighter text-neutral-700">
+                <span className="text-2xl font-bold tracking-tighter text-neutral-600">
                   {item.number}
                 </span>
               </div>
-              <h3 className="text-[13px] font-semibold text-white leading-snug">
+              <h3 className="text-sm font-semibold text-white leading-snug mb-2">
                 {item.title}
               </h3>
+              <p className="text-xs text-neutral-400 leading-relaxed mt-auto">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>

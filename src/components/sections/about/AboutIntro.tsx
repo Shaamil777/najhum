@@ -77,7 +77,7 @@ export default function AboutIntro() {
 
 
         {/* ── Two-Column Layout ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 xl:gap-20 items-start">
 
           {/* Left: Editorial Content */}
           <div className="lg:col-span-7">
@@ -94,14 +94,14 @@ export default function AboutIntro() {
             </p>
 
             {/* Ecosystem Flow Diagram */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center flex-nowrap gap-1.5 sm:gap-2 xl:gap-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1 w-full">
               {intro.ecosystemFlow.map((step, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="px-4 py-2 bg-neutral-900 text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase rounded-full">
+                  <div className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 xl:px-3.5 xl:py-2 bg-neutral-900 text-white text-[10px] sm:text-[11px] xl:text-xs font-bold tracking-wider uppercase rounded-full whitespace-nowrap shrink-0 shadow-xs">
                     {step}
                   </div>
                   {idx < intro.ecosystemFlow.length - 1 && (
-                    <div className="w-6 h-px bg-neutral-300 hidden sm:block" />
+                    <div className="w-2 sm:w-3 xl:w-4 h-px bg-neutral-300 shrink-0" />
                   )}
                 </React.Fragment>
               ))}
@@ -115,7 +115,7 @@ export default function AboutIntro() {
               {/* Stat 1: Founded */}
               <div className="relative bg-neutral-950 text-white rounded-2xl p-6 overflow-hidden group">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none group-hover:bg-primary/20 transition-colors" />
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Founded</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Founded:</span>
                 <span className="text-4xl md:text-5xl font-black font-display block mb-1">
                   <AnimatedCounter target={intro.stats.founded} />
                 </span>
@@ -125,27 +125,27 @@ export default function AboutIntro() {
               {/* Stat 2: Core Platforms */}
               <div className="relative bg-neutral-50 border border-neutral-100 rounded-2xl p-6 overflow-hidden group hover:shadow-lg transition-shadow">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none group-hover:bg-primary/10 transition-colors" />
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Core Platforms</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Core Platforms:</span>
                 <span className="text-4xl md:text-5xl font-black font-display text-neutral-900 block mb-1">
-                  <AnimatedCounter target={intro.stats.corePlatforms} suffix="+" />
+                  <AnimatedCounter target={intro.stats.corePlatforms} suffix="" />
                 </span>
                 <div className="w-8 h-1 bg-primary rounded-full mt-2" />
               </div>
 
               {/* Stat 3: Server in */}
               <div className="relative bg-neutral-50 border border-neutral-100 rounded-2xl p-6 overflow-hidden group hover:shadow-lg transition-shadow">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-blue-500/10 transition-colors" />
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Server in</span>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none group-hover:bg-primary/10 transition-colors" />
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Data residency:</span>
                 <span className="text-4xl md:text-5xl font-black font-display text-neutral-900 block mb-1">{intro.stats.serverIn}</span>
-                <div className="w-8 h-1 bg-blue-500 rounded-full mt-2" />
+                <div className="w-8 h-1 bg-primary rounded-full mt-2" />
               </div>
 
               {/* Stat 4: IoT Expertise */}
               <div className="relative bg-neutral-950 text-white rounded-2xl p-6 overflow-hidden group">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/20 transition-colors" />
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">IoT Expertise</span>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none group-hover:bg-primary/20 transition-colors" />
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-neutral-400 block mb-3">Focus:</span>
                 <span className="text-3xl md:text-4xl font-black font-display block mb-1">{intro.stats.iotExpertise}</span>
-                <div className="w-8 h-1 bg-emerald-500 rounded-full mt-2" />
+                <div className="w-8 h-1 bg-primary rounded-full mt-2" />
               </div>
 
             </div>

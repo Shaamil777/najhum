@@ -73,7 +73,7 @@ export default function EvolticsCta() {
           </h2>
 
           <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
-            Partner with <span className="text-primary font-semibold">Evoltics</span> for end-to-end CPO licensing, hardware deployment, and intelligent CPMS cloud orchestration across the UAE.
+            Partner with <span className="text-primary font-semibold">Evoltics</span> for end-to-end CPO licensing, hardware deployment, and intelligent CSMP cloud orchestration across the UAE.
           </p>
           
           {/* Scaled-up Contact / Action Button */}

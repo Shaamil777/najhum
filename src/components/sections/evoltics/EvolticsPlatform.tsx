@@ -30,7 +30,7 @@ type DashboardTab = "fleet" | "load" | "revenue";
 const features = [
   { icon: Server, title: "Hardware Agnostic", desc: "Integrate and setup any OCPP-compliant charger in a few clicks and start charging." },
   { icon: BarChart3, title: "Dashboard & Analytics", desc: "Monitor your charging network with real-time data insights, charts and statistics." },
-  { icon: BadgeDollarSign, title: "Dynamic Price Plans", desc: "Create multiple pricing groups with independent rates for public and private users." },
+  { icon: BadgeDollarSign, title: "Revenue optimisation through pricing", desc: "very session logged with charger, duration, energy delivered and payment — the audit trail behind the revenue, and what a landlord actually asks for." },
   { icon: Receipt, title: "Auto-Payment Settlements", desc: "Smart settlement system auto-calculates fees and distributes net revenue monthly." },
   { icon: ShieldCheck, title: "Public-Private Mode", desc: "Set charger accessibility for employees or visitors as private, or open to the public." },
 ];
@@ -39,30 +39,30 @@ export default function EvolticsPlatform() {
 
   return (
     <section className="w-full py-28 bg-white relative overflow-hidden font-sans ">
-      
+
       {/* Background Architectural Grid & Radial Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_15%,transparent_100%)]" />
       </div>
 
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 relative z-10">
-        
+
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 sm:mb-16 gap-3 sm:gap-8">
           <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
             >
-              CPMS — Charge Point <br className="hidden sm:block" />
-              <span className="text-primary font-black">Management System</span>
+              CSMP — Charging Station <br className="hidden sm:block" />
+              <span className="text-primary font-black">Management Platform</span>
             </motion.h2>
           </div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -75,12 +75,12 @@ export default function EvolticsPlatform() {
 
         {/* Main Interactive Stage */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
-          
+
           {/* Left Column: 6 Feature Capabilities */}
           <div className="lg:col-span-4 flex flex-col space-y-4">
             <div className="mb-3 sm:mb-4 text-center lg:text-left">
               <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-foreground leading-tight">
-                Everything you need <br className="hidden lg:block"/> in one CPMS
+                Everything you need <br className="hidden lg:block" /> in one CSMP
               </h3>
             </div>
 
@@ -126,7 +126,7 @@ export default function EvolticsPlatform() {
               <div className="relative z-10 w-full overflow-hidden bg-surface-alt">
                 <Image
                   src="/images/elvotics/cpmsDahsboard.jpeg"
-                  alt="CPMS Dashboard Interface"
+                  alt="CSMP Dashboard Interface"
                   width={2560}
                   height={1400}
                   priority
@@ -143,7 +143,7 @@ export default function EvolticsPlatform() {
             </motion.div>
 
             {/* Enterprise Compatibility Footer & Prominent OCPP Badge */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -166,12 +166,12 @@ export default function EvolticsPlatform() {
               {/* Prominent Outside Certification Badge */}
               <div className="flex items-center justify-center sm:justify-start space-x-3 sm:space-x-4 bg-surface border border-border px-4 sm:px-5 py-2 sm:py-3 rounded-xl shadow-sm cursor-pointer group hover:border-primary/40 transition-colors overflow-hidden shrink-0 w-full sm:w-auto">
                 <div className="w-10 h-10 sm:w-14 sm:h-14 relative flex items-center justify-center -ml-1">
-                  <Image 
-                    src="/logo/occplogo.png" 
-                    alt="OCPP 2.0.1 Certified" 
-                    width={96} 
-                    height={96} 
-                    className="object-contain opacity-90 group-hover:opacity-100 transition-all scale-[1.3] group-hover:scale-[1.4]" 
+                  <Image
+                    src="/logo/occplogo.png"
+                    alt="OCPP 2.0.1 Certified"
+                    width={96}
+                    height={96}
+                    className="object-contain opacity-90 group-hover:opacity-100 transition-all scale-[1.3] group-hover:scale-[1.4]"
                   />
                 </div>
                 <div className="flex flex-col pr-1 sm:pr-2 text-left">

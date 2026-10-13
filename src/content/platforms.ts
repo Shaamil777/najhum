@@ -24,7 +24,7 @@ export const evolticsContent = {
       {
         num: "5",
         title: "GO-LIVE",
-        desc: "CPMS setup, testing, commissioning and operator training.",
+        desc: "CSMP setup, testing, commissioning and operator training.",
       },
       {
         num: "6",
@@ -37,7 +37,7 @@ export const evolticsContent = {
     cards: [
       {
         num: "01",
-        title: "CPMS SOFTWARE & MOBILE APP",
+        title: "CSMP SOFTWARE & MOBILE APP",
         description: "IoT-enabled EV charger management platform and driver app. Connect and control your charging infrastructure from a single system, while drivers easily find stations, start charging, and make payments via a feature-rich mobile app.",
         category: "Software & Application",
       },
@@ -88,7 +88,7 @@ export const evolticsContent = {
       {
         num: "03",
         title: "BRAND-AGNOSTIC TECHNOLOGY",
-        description: "Our CPMS works with OCPP-compliant chargers, giving businesses the flexibility to choose compatible hardware without being locked into a single brand."
+        description: "Our CSMP works with OCPP-compliant chargers, giving businesses the flexibility to choose compatible hardware without being locked into a single brand."
       },
       {
         num: "04",
@@ -97,13 +97,13 @@ export const evolticsContent = {
       },
       {
         num: "05",
-        title: "WHITE LABEL READY",
-        description: "Deploy your own branded charging network with greater control over the customer experience, platform identity and overall charging journey."
+        title: "WHITE LABELLING — DASHBOARD ONLY",
+        description: "The branding offer is the operator dashboard: your logo, your colours, your domain, for the people who manage the network. The driver app is the EVOLTICS app — one app, every EVOLTICS site — and is not rebranded per operator."
       },
       {
         num: "06",
-        title: "24/7 SUPPORT & AMC",
-        description: "Comprehensive maintenance contracts with rapid-response support, helping protect charger uptime, infrastructure performance and long-term investment."
+        title: "RAPID-RESPONSE AMC & SUPPORT",
+        description: "Comprehensive maintenance contracts with SLA-backed support and preventive servicing, helping protect charger uptime, infrastructure performance, and long-term investment."
       }
     ]
   }

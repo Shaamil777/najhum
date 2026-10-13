@@ -19,18 +19,19 @@ export const contactContent = {
         iconName: "MapPin",
         type: "address",
         location: "Dubai Office",
-        addressLine1: "Building 5, Dubai Design District (d3)",
-        addressLine2: "Dubai, UAE",
-        linkText: "View on Maps"
+        addressLine1: "in5 Design, Dubai Design District",
+        addressLine2: "Dubai, United Arab Emirates",
+        linkText: "View on Maps",
+        mapsUrl: "https://maps.google.com/?q=in5+Design+Dubai+Design+District"
       },
       {
         title: "Email Us",
         iconName: "Mail",
         type: "emails",
         emails: [
-          { label: "General", address: "info@najhum.com" },
-          { label: "Sales", address: "sales@najhum.com" },
-          { label: "Support", address: "support@najhum.com" }
+          { label: "General", address: "info@najhumgroup.com" },
+          { label: "Sales", address: "sales@najhumgroup.com" },
+          { label: "Support", address: "support@najhumgroup.com" }
         ]
       },
       {
@@ -38,9 +39,9 @@ export const contactContent = {
         iconName: "Phone",
         type: "phones",
         phones: [
-          { label: "Sales", number: "+971 (0)4 123 4567" },
-          { label: "Tech", number: "+971 (0)4 123 4568" },
-          { label: "BD", number: "+971 (0)4 123 4569" }
+          { label: "Office", number: "+971 55 767 5883" },
+          { label: "Sales", number: "+971 55 767 5883" },
+          { label: "Support", number: "+971 55 767 5883" }
         ]
       },
       {
@@ -66,7 +67,7 @@ export const contactContent = {
     title: "Explore The Najhum Ecosystem",
     ecosystems: [
       {
-        title: "IoTRICs",
+        title: "IoTRICS",
         desc: "Universal industrial IoT platform for real-time asset monitoring.",
         iconName: "Radio",
         href: "/platforms/iotrics"
@@ -120,7 +121,7 @@ export const contactContent = {
     badge: "Start Your Project",
     titlePart1: "How Can We ",
     titlePart2: "Help?",
-    description: "Complete the form to prepare an email enquiry. Send it from your email app to discuss your infrastructure and automation requirements with our technical team.",
+    description: "Complete the form below to discuss your infrastructure and automation requirements with our technical team.",
     infoCards: [
       {
         title: "Direct Access to Experts",

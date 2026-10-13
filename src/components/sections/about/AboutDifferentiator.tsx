@@ -27,10 +27,10 @@ export default function AboutDifferentiator() {
       description:
         "Our systems are built for 99.9% uptime in the harshest industrial environments, from sub-zero logistics to desert smart cities.",
       image: "/images/performancce.png",
-      accentColor: "text-blue-500",
-      accentBg: "bg-blue-500",
-      accentBorder: "border-blue-500/20",
-      glowColor: "bg-blue-500/10",
+      accentColor: "text-primary",
+      accentBg: "bg-primary",
+      accentBorder: "border-primary/20",
+      glowColor: "bg-primary/10",
     },
     {
       code: "DIFFERENTIATOR_02",
@@ -48,15 +48,15 @@ export default function AboutDifferentiator() {
     {
       code: "DIFFERENTIATOR_03",
       title: "Operational Savings",
-      stat: "22%",
+      stat: "25%",
       statLabel: "Cost Reduction",
       description:
-        "On average, our clients see a 22% reduction in operational expenditure through predictive maintenance and energy optimization.",
+        "On average, our clients see a 25% reduction in operational expenditure through predictive maintenance and energy optimization.",
       image: "/images/operational.png",
-      accentColor: "text-amber-500",
-      accentBg: "bg-amber-500",
-      accentBorder: "border-amber-500/20",
-      glowColor: "bg-amber-500/10",
+      accentColor: "text-primary",
+      accentBg: "bg-primary",
+      accentBorder: "border-primary/20",
+      glowColor: "bg-primary/10",
     },
   ];
 
@@ -84,18 +84,16 @@ export default function AboutDifferentiator() {
             return (
               <div
                 key={idx}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center transition-all duration-700 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-16"
-                }`}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 items-center transition-all duration-700 ${isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-16"
+                  }`}
                 style={{ transitionDelay: `${idx * 150}ms` }}
               >
                 {/* Image */}
                 <div
-                  className={`relative ${
-                    isReversed ? "lg:order-2" : "lg:order-1"
-                  } w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-none mx-auto`}
+                  className={`relative ${isReversed ? "lg:order-2" : "lg:order-1"
+                    } w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-none mx-auto`}
                 >
                   <div className={`relative rounded-2xl sm:rounded-3xl overflow-hidden border ${diff.accentBorder} bg-neutral-50 p-4 sm:p-6 md:p-10 group shadow-xs sm:shadow-sm`}>
                     {/* Glow behind image */}
@@ -115,9 +113,8 @@ export default function AboutDifferentiator() {
 
                   {/* Floating stat badge */}
                   <div
-                    className={`absolute -bottom-3 sm:-bottom-5 ${
-                      isReversed ? "-left-2 sm:-left-3 md:-left-5" : "-right-2 sm:-right-3 md:-right-5"
-                    } bg-neutral-950 text-white rounded-xl sm:rounded-2xl px-4 py-2.5 sm:px-6 sm:py-4 shadow-xl sm:shadow-2xl z-20`}
+                    className={`absolute -bottom-3 sm:-bottom-5 ${isReversed ? "-left-2 sm:-left-3 md:-left-5" : "-right-2 sm:-right-3 md:-right-5"
+                      } bg-neutral-950 text-white rounded-xl sm:rounded-2xl px-4 py-2.5 sm:px-6 sm:py-4 shadow-xl sm:shadow-2xl z-20`}
                   >
                     <span className={`text-2xl sm:text-3xl md:text-4xl font-black ${diff.accentColor}`}>
                       {diff.stat}
@@ -130,9 +127,8 @@ export default function AboutDifferentiator() {
 
                 {/* Text */}
                 <div
-                  className={`${
-                    isReversed ? "lg:order-1" : "lg:order-2"
-                  }`}
+                  className={`${isReversed ? "lg:order-1" : "lg:order-2"
+                    }`}
                 >
 
                   <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-tight tracking-tight mb-3 sm:mb-6">

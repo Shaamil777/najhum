@@ -35,9 +35,9 @@ export default function EvolticsPage() {
       <EvolticsPlatform />
       <PlatformProductsServer platformId="evoltics" />
       <EvolticsMobileApp />
+      <EvolticsCarbonCredit />
       <EvolticsEcosystem />
       <EvolticsJourney />
-      <EvolticsCarbonCredit />
       <EvolticsFaq />
       <EvolticsCta />
     </div>

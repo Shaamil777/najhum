@@ -4,34 +4,116 @@ import { Container } from "@/design-system/primitives/layout/Container";
 import { Input } from "@/design-system/primitives/forms/Input";
 import { Select } from "@/design-system/primitives/forms/Select";
 import { Textarea } from "@/design-system/primitives/forms/Textarea";
+import { Label } from "@/design-system/primitives/typography/Label";
 import { Button } from "@/design-system/primitives/actions/Button";
-import { ShieldCheck, Clock, Zap, ArrowRight } from "lucide-react";
+import { 
+  ShieldCheck, 
+  Clock, 
+  Zap, 
+  ArrowRight, 
+  CheckCircle2, 
+  AlertCircle, 
+  Loader2,
+  Mail,
+  RotateCcw,
+  ChevronDown
+} from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, type FormEvent } from 'react';
-import { siteConfig } from '@/config/site';
+import { useState, type FormEvent } from "react";
+import { siteConfig } from "@/config/site";
 import { contactContent } from "@/content/contact";
+import { ALL_COUNTRY_CODES } from "@/content/countryDialCodes";
+import ContactCaptcha from "./ContactCaptcha";
 
 export default function ContactForm() {
   const { form: formContent } = contactContent;
-  const [draftOpened, setDraftOpened] = useState(false);
-  function openEnquiryDraft(event: FormEvent<HTMLFormElement>) {
+
+  const [phoneCountryCode, setPhoneCountryCode] = useState("+971");
+  const [phone, setPhone] = useState("");
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+  const [captchaExpected, setCaptchaExpected] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submittedData, setSubmittedData] = useState<{
+    fullName: string;
+    email: string;
+    companyName?: string;
+  } | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitError("");
+    setCaptchaError("");
+
+    // Validate Captcha
+    if (!captchaAnswer.trim()) {
+      setCaptchaError("Please enter the verification code.");
+      return;
+    }
+
+    if (captchaAnswer.trim().toUpperCase() !== captchaExpected.trim().toUpperCase()) {
+      setCaptchaError("Incorrect verification code. Please check and try again.");
+      return;
+    }
+
     const form = event.currentTarget;
     const data = new FormData(form);
-    const value = (name: string) => {
-      const field = form.elements.namedItem(name);
-      return field instanceof HTMLSelectElement ? field.selectedOptions[0]?.textContent || '' : String(data.get(name) || '').trim();
+
+    const payload = {
+      fullName: String(data.get("fullName") || "").trim(),
+      companyName: String(data.get("companyName") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      phoneCountryCode,
+      phone: phone.trim(),
+      country: String(data.get("country") || "").trim(),
+      industry: String(data.get("industry") || "").trim(),
+      solution: String(data.get("solution") || "").trim(),
+      goals: String(data.get("goals") || "").trim(),
+      captchaAnswer: captchaAnswer.trim(),
+      captchaExpected: captchaExpected.trim(),
     };
-    const subject = `Consultation enquiry: ${value('companyName') || value('fullName')}`;
-    const body = [
-      `Name: ${value('fullName')}`, `Company: ${value('companyName')}`,
-      `Email: ${value('email')}`, `Phone: ${value('phone')}`,
-      `Country: ${value('country')}`, `Industry: ${value('industry')}`,
-      `Interested solution: ${value('solution')}`, '', value('goals'),
-    ].join('\n');
-    window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setDraftOpened(true);
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const resJson = await response.json();
+
+      if (!response.ok) {
+        throw new Error(resJson.error || "Failed to submit enquiry. Please try again.");
+      }
+
+      setSubmittedData({
+        fullName: payload.fullName,
+        email: payload.email,
+        companyName: payload.companyName,
+      });
+      setSubmitSuccess(true);
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : "An unexpected error occurred.";
+      setSubmitError(errorMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
+
+  function handleReset() {
+    setSubmitSuccess(false);
+    setSubmitError("");
+    setCaptchaError("");
+    setCaptchaAnswer("");
+    setPhone("");
+    setSubmittedData(null);
+  }
+
   return (
     <section id="contact-form" className="relative w-full py-16 sm:py-24 lg:py-32 bg-background overflow-hidden scroll-mt-20 sm:scroll-mt-28">
       
@@ -43,13 +125,14 @@ export default function ContactForm() {
 
       <Container size="xl" className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         
-        {/* Left Column - Information */}
-        <div className="lg:col-span-5 flex flex-col gap-8 lg:sticky lg:top-32">
+        {/* Left Column - Information (Aligned starting height with form box) */}
+        <div className="lg:col-span-5 flex flex-col gap-8">
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
             <span className="text-[10px] sm:text-[11px] font-bold text-primary uppercase tracking-[0.2em] block mb-4 flex items-center gap-3">
               <span className="w-8 h-px bg-primary/30" />
@@ -67,8 +150,8 @@ export default function ContactForm() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="flex flex-col gap-4 mt-4"
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="flex flex-col gap-4 mt-2"
           >
             {formContent.infoCards.map((card, idx) => {
               const Icon = card.iconName === "ShieldCheck" ? ShieldCheck : (card.iconName === "Clock" ? Clock : Zap);
@@ -88,12 +171,12 @@ export default function ContactForm() {
 
         </div>
 
-        {/* Right Column - Form */}
+        {/* Right Column - Form Box (Starts at same height as left title) */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
           className="lg:col-span-7"
         >
           <div className="bg-surface border border-border rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-xl shadow-black/[0.03] relative overflow-hidden">
@@ -101,115 +184,248 @@ export default function ContactForm() {
             {/* Subtle glow inside the form card */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-            <form className="flex flex-col gap-5 sm:gap-6 relative z-10" onSubmit={openEnquiryDraft}>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-                <Input 
-                  id="fullName" 
-                  name="fullName" required maxLength={150} autoComplete="name"
-                  label="Full Name" 
-                  placeholder="John Doe" 
-                />
-                <Input 
-                  id="companyName" 
-                  name="companyName" maxLength={150} autoComplete="organization"
-                  label="Company Name" 
-                  placeholder="Enter your organization" 
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-                <Input 
-                  id="email" 
-                  name="email" required maxLength={254} autoComplete="email"
-                  type="email" 
-                  label="Business Email" 
-                  placeholder="john@company.com" 
-                />
-                <Input 
-                  id="phone" 
-                  name="phone" maxLength={50} autoComplete="tel"
-                  type="tel" 
-                  label="Phone Number" 
-                  placeholder="+971 00 000 0000" 
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-                <Select
-                  id="country"
-                  name="country" required
-                  label="Country"
-                  placeholder="United Arab Emirates"
-                  options={[
-                    { value: "ae", label: "United Arab Emirates" },
-                    { value: "sa", label: "Saudi Arabia" },
-                    { value: "qa", label: "Qatar" },
-                    { value: "om", label: "Oman" },
-                    { value: "kw", label: "Kuwait" },
-                    { value: "bh", label: "Bahrain" },
-                  ]}
-                />
-                <Select
-                  id="industry"
-                  name="industry" required
-                  label="Industry"
-                  placeholder="Facility Management"
-                  options={[
-                    { value: "facility", label: "Facility Management" },
-                    { value: "manufacturing", label: "Manufacturing" },
-                    { value: "logistics", label: "Logistics & Supply Chain" },
-                    { value: "energy", label: "Energy & Utilities" },
-                    { value: "other", label: "Other" },
-                  ]}
-                />
-              </div>
-
-              <Select
-                id="solution"
-                name="solution" required
-                label="Interested Solution"
-                placeholder="IoTRICs (Industrial IoT)"
-                options={[
-                  { value: "iotrics", label: "IoTRICs (Industrial IoT)" },
-                  { value: "evoltics", label: "Evoltics (EV Charging)" },
-                  { value: "cropifai", label: "Cropifai (AgriTech)" },
-                  { value: "general", label: "General Inquiry" },
-                ]}
-              />
-
-              <Textarea
-                id="goals"
-                name="goals" required maxLength={1500}
-                label="What are you trying to monitor, automate, or improve?"
-                placeholder="Describe your project goals, challenges, or requirements..."
-                rows={4}
-              />
-
-              <div className="pt-4 mt-2 border-t border-border/50">
-                <Button 
-                  type="submit"
-                  variant="primary" 
-                  size="lg" 
-                  fullWidth 
-                  className="py-6 text-base sm:text-lg font-bold shadow-lg shadow-primary/20"
-                  icon={<ArrowRight className="w-5 h-5" />}
-                  iconPosition="right"
-                >
-                  Open Enquiry Email
-                </Button>
-                <p role="status" className="mt-4 text-sm text-muted text-center">
-                  {draftOpened ? 'Your email app has been requested. Review the draft and send it to complete your enquiry.' : `Opens a prefilled draft in your email app. Send it to ${siteConfig.contact.email} to request a consultation.`}
+            {submitSuccess ? (
+              /* Success State Display */
+              <div className="flex flex-col items-center text-center py-8 relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-black text-foreground uppercase tracking-tight mb-3">
+                  Enquiry Submitted
+                </h3>
+                <p className="text-muted text-base max-w-md leading-relaxed mb-6">
+                  Thank you, <span className="text-foreground font-semibold">{submittedData?.fullName}</span>. We have received your consultation enquiry and our engineering architects will reach out to you within one business day.
                 </p>
-                <div className="flex items-center justify-center gap-2 mt-5 text-muted">
-                  <ShieldCheck className="w-4 h-4 opacity-70" />
-                  <p className="text-center text-[11px] sm:text-xs font-medium uppercase tracking-wider">
-                    Your information is secure. No spam, ever.
-                  </p>
+
+                <div className="p-4 bg-background-alt border border-border rounded-xl text-left w-full max-w-md mb-8 text-xs text-muted space-y-1.5">
+                  <p><span className="text-foreground font-medium">Contact:</span> {submittedData?.email}</p>
+                  {submittedData?.companyName && (
+                    <p><span className="text-foreground font-medium">Organization:</span> {submittedData.companyName}</p>
+                  )}
+                  <p><span className="text-foreground font-medium">Status:</span> Received & Queued for Priority Review</p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-md">
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="lg"
+                    fullWidth
+                    onClick={handleReset}
+                    icon={<RotateCcw className="w-4 h-4" />}
+                  >
+                    Submit Another Enquiry
+                  </Button>
+                  <a
+                    href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(`Enquiry follow-up: ${submittedData?.fullName}`)}`}
+                    className="w-full sm:w-auto text-xs font-semibold text-muted hover:text-primary transition-colors py-2 flex items-center justify-center gap-1.5"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    Email directly
+                  </a>
                 </div>
               </div>
+            ) : (
+              /* Form */
+              <form className="flex flex-col gap-5 sm:gap-6 relative z-10" onSubmit={handleSubmit}>
+                
+                {submitError && (
+                  <div className="p-4 rounded-xl bg-danger/10 border border-danger/30 text-danger text-sm flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
 
-            </form>
+                {/* Row 1: Full Name & Company Name (With labels above boxes) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                  <Input 
+                    id="fullName" 
+                    name="fullName" 
+                    label="Full Name"
+                    required 
+                    maxLength={150} 
+                    autoComplete="name"
+                    placeholder="Enter your name" 
+                  />
+                  <Input 
+                    id="companyName" 
+                    name="companyName" 
+                    label="Company Name"
+                    maxLength={150} 
+                    autoComplete="organization"
+                    placeholder="Enter company name (optional)" 
+                  />
+                </div>
+
+                {/* Row 2: Business Email & Phone Number (With labels above boxes) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                  <Input 
+                    id="email" 
+                    name="email" 
+                    label="Business Email"
+                    required 
+                    maxLength={254} 
+                    autoComplete="email"
+                    type="email" 
+                    placeholder="Enter business email" 
+                  />
+                  
+                  {/* Phone with Country Dial Code Select (No flag/icon, just number display) */}
+                  <div className="flex flex-col gap-1.5">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <div className="flex gap-2">
+                      <div className="relative w-24 shrink-0">
+                        {/* Visible clean badge: JUST THE NUMBER, no flag, no icon, never truncated */}
+                        <div 
+                          className="w-full h-11 px-3 flex items-center justify-between text-sm rounded-sm bg-surface border border-border text-foreground font-sans pointer-events-none"
+                          aria-hidden="true"
+                        >
+                          <span className="font-medium text-foreground">{phoneCountryCode}</span>
+                          <ChevronDown className="w-3.5 h-3.5 text-muted shrink-0" />
+                        </div>
+                        {/* Invisible full native select with all countries */}
+                        <select
+                          id="phoneCountryCode"
+                          name="phoneCountryCode"
+                          value={phoneCountryCode}
+                          onChange={(e) => setPhoneCountryCode(e.target.value)}
+                          aria-label="Country Dial Code"
+                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        >
+                          {ALL_COUNTRY_CODES.map((c) => (
+                            <option key={`${c.name}-${c.code}`} value={c.code}>
+                              {c.name} ({c.code})
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          maxLength={30}
+                          autoComplete="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="Phone number"
+                          aria-label="Phone Number"
+                          className="w-full h-11 px-4 text-sm rounded-sm bg-surface border border-border text-foreground font-sans placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Row 3: Country & Industry (With labels above boxes) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                  <Select
+                    id="country"
+                    name="country" 
+                    label="Country"
+                    required
+                    placeholder="Select your country"
+                    defaultValue=""
+                    options={[
+                      { value: "United Arab Emirates", label: "United Arab Emirates" },
+                      { value: "Saudi Arabia", label: "Saudi Arabia" },
+                      { value: "Qatar", label: "Qatar" },
+                      { value: "Oman", label: "Oman" },
+                      { value: "Kuwait", label: "Kuwait" },
+                      { value: "Bahrain", label: "Bahrain" },
+                      { value: "United States", label: "United States / Canada" },
+                      { value: "United Kingdom", label: "United Kingdom" },
+                      { value: "India", label: "India" },
+                      { value: "Germany", label: "Germany" },
+                      { value: "Singapore", label: "Singapore" },
+                      { value: "Other", label: "Other Country" },
+                    ]}
+                  />
+                  <Select
+                    id="industry"
+                    name="industry" 
+                    label="Industry"
+                    required
+                    placeholder="Select your industry"
+                    defaultValue=""
+                    options={[
+                      { value: "Facility Management", label: "Facility Management" },
+                      { value: "Manufacturing & Industrial", label: "Manufacturing & Industrial" },
+                      { value: "Logistics & Supply Chain", label: "Logistics & Supply Chain" },
+                      { value: "Energy & Utilities", label: "Energy & Utilities" },
+                      { value: "Smart Agriculture", label: "Smart Agriculture" },
+                      { value: "Real Estate & Smart Buildings", label: "Real Estate & Smart Buildings" },
+                      { value: "Other", label: "Other" },
+                    ]}
+                  />
+                </div>
+
+                {/* Row 4: Interested Solution (With label above box) */}
+                <Select
+                  id="solution"
+                  name="solution" 
+                  label="Interested Solution"
+                  required
+                  placeholder="Select interested solution"
+                  defaultValue=""
+                  options={[
+                    { value: "IoTRICs (Industrial IoT)", label: "IoTRICs (Industrial IoT Platform)" },
+                    { value: "Evoltics (EV Charging)", label: "Evoltics (EV Charging Infrastructure)" },
+                    { value: "Cropifai (AgriTech)", label: "Cropifai (Precision AgriTech)" },
+                    { value: "Turnkey Automation & Sensing", label: "Turnkey Automation & Sensing" },
+                    { value: "General Consultation", label: "General Consultation & Partnership" },
+                  ]}
+                />
+
+                {/* Row 5: Goals / Message (With label above box) */}
+                <Textarea
+                  id="goals"
+                  name="goals" 
+                  label="What are you trying to monitor, automate, or improve?"
+                  required 
+                  maxLength={1500}
+                  placeholder="Describe your project goals, challenges, or requirements..."
+                  rows={4}
+                />
+
+                {/* Row 6: Captcha Verification (With label above box) */}
+                <div className="pt-1">
+                  <ContactCaptcha
+                    label="Security Verification"
+                    required
+                    value={captchaAnswer}
+                    onChange={setCaptchaAnswer}
+                    onCodeChange={setCaptchaExpected}
+                    error={captchaError}
+                  />
+                </div>
+
+                {/* Submit Action */}
+                <div className="pt-2 mt-1 border-t border-border/50">
+                  <Button 
+                    type="submit"
+                    variant="primary" 
+                    size="lg" 
+                    fullWidth 
+                    disabled={isSubmitting}
+                    className="py-6 text-base sm:text-lg font-bold shadow-lg shadow-primary/20"
+                    icon={isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowRight className="w-5 h-5" />}
+                    iconPosition="right"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Enquiry"}
+                  </Button>
+                  
+                  <div className="flex items-center justify-center gap-2 mt-5 text-muted">
+                    <ShieldCheck className="w-4 h-4 opacity-70" />
+                    <p className="text-center text-[11px] sm:text-xs font-medium uppercase tracking-wider">
+                      Your information is secure. No spam, ever.
+                    </p>
+                  </div>
+                </div>
+
+              </form>
+            )}
           </div>
         </motion.div>
 

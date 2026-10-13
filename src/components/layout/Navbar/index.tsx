@@ -46,6 +46,13 @@ export default function Navbar() {
 
   if (pathname.startsWith('/admin')) return null;
 
+  const isLightHero =
+    pathname === "/contact" ||
+    pathname === "/products" ||
+    pathname.startsWith("/products/") ||
+    pathname === "/solutions" ||
+    pathname.startsWith("/blogs");
+
   return (
     <>
       {/* ── Desktop Navigation (lg and up) ── */}
@@ -54,6 +61,8 @@ export default function Navbar() {
           "hidden lg:block fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 border-b",
           isScrolled
             ? "bg-surface/95 backdrop-blur-lg border-border shadow-sm py-2 text-foreground"
+            : isLightHero
+            ? "bg-transparent border-transparent py-4 text-foreground"
             : "bg-transparent border-transparent py-4 text-white dark"
         )}
       >

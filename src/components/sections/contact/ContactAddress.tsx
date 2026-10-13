@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, Clock } from "lucide-react";
 import { contactContent } from "@/content/contact";
+import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function ContactAddress() {
   const { address } = contactContent;
@@ -25,7 +26,12 @@ export default function ContactAddress() {
           <p className="text-neutral-400">{item.location}</p>
           <p className="text-neutral-400">{item.addressLine1}</p>
           <p className="text-neutral-400">{item.addressLine2}</p>
-          <a href="#" className="text-sm font-semibold text-white underline underline-offset-4 mt-2 hover:text-blue-400 transition-colors inline-block">
+          <a
+            href={(item as { mapsUrl?: string }).mapsUrl || "https://maps.google.com/?q=in5+Design+Dubai+Design+District"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-semibold text-white underline underline-offset-4 mt-2 hover:text-blue-400 transition-colors inline-block"
+          >
             {item.linkText}
           </a>
         </div>
@@ -34,7 +40,12 @@ export default function ContactAddress() {
       content = (
         <div className="flex flex-col gap-2">
           {item.emails?.map((email, idx) => (
-            <p key={idx} className="text-neutral-400"><span className="text-neutral-600">{email.label}:</span> {email.address}</p>
+            <p key={idx} className="text-neutral-400">
+              <span className="text-neutral-600">{email.label}:</span>{" "}
+              <a href={`mailto:${email.address}`} className="text-neutral-300 hover:text-blue-400 transition-colors">
+                {email.address}
+              </a>
+            </p>
           ))}
         </div>
       );
@@ -42,7 +53,12 @@ export default function ContactAddress() {
       content = (
         <div className="flex flex-col gap-2">
           {item.phones?.map((phone, idx) => (
-            <p key={idx} className="text-neutral-400"><span className="text-neutral-600">{phone.label}:</span> {phone.number}</p>
+            <p key={idx} className="text-neutral-400">
+              <span className="text-neutral-600">{phone.label}:</span>{" "}
+              <a href={`tel:${phone.number.replace(/\s+/g, '')}`} className="text-neutral-300 hover:text-blue-400 transition-colors">
+                {phone.number}
+              </a>
+            </p>
           ))}
         </div>
       );
@@ -64,8 +80,8 @@ export default function ContactAddress() {
   });
 
   return (
-    <section className="w-full bg-[#111111] text-white py-24 sm:py-32 font-poppins border-b border-neutral-900 overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
+    <section className="w-full bg-[#111111] text-white py-16 sm:py-24 lg:py-32 font-poppins border-b border-neutral-900 overflow-hidden">
+      <Container size="xl" className="relative z-10">
         
         {/* Header Section */}
         <div className="mb-16 lg:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
@@ -158,7 +174,7 @@ export default function ContactAddress() {
           ))}
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }

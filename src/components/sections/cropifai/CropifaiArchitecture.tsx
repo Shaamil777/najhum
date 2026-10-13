@@ -83,7 +83,7 @@ export default function CropifaiArchitecture() {
                 return (
                   <div 
                     key={i} 
-                    className="flex flex-col items-center bg-white px-2 z-10 cursor-pointer group select-none"
+                    className="flex flex-col items-center px-2 z-10 cursor-pointer group select-none"
                     onMouseEnter={() => {
                       setActiveIndex(i);
                       setIsHovered(true);

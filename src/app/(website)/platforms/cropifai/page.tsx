@@ -28,7 +28,7 @@ export default function CropifaiPage() {
       <CropifaiWaterFlow />
       {/* <CropifaiWorkflow /> */}
       <CropifaiWhyChoose />
-      <CropifaiImpact />
+      {/* <CropifaiImpact /> */}
 
       {/* <CropifaiBusinessModels /> */}
       {/* <CropifaiClients /> */}

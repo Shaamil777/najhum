@@ -10,15 +10,16 @@ export const cropifaiContent = {
     buttons: {
       explore: "Explore Solutions",
       models: "Business Models"
-    }
+    },
+    marqueeText: "TRUSTED BY COMPANIES WORLDWIDE"
   },
   about: {
     header: {
-      tag: "THE PLATFORM",
-      titlePart1: "Smart Agriculture,",
-      titlePart2: "Powered by",
-      highlight: "AI & IoT",
-      description: "CropifAI™ is an intelligent, end-to-end platform combining rugged IoT sensors, advanced AI analytics, and cloud technology to fully automate your agricultural operations. We bridge the gap between physical infrastructure and digital intelligence."
+      tag: "SOIL, WATER & IRRIGATION MONITORING",
+      titlePart1: "Know what the field",
+      titlePart2: "",
+      highlight: "needs before the crop shows it",
+      description: "cropifAI measures what is happening in the soil and in the water line — moisture and salinity at root depth, flow through the irrigation main, tank levels, valve position and local weather. Sensors report to the Najhum IoT Controller on site, which sends readings to the platform over LoRaWAN or cellular, so a field with no network of its own still reports. You see the trend, set the schedule, and override it from anywhere."
     },
     steps: [
       {
@@ -219,35 +220,35 @@ export const cropifaiContent = {
       }
     ],
     timelineProducts: [
-      { 
-        name: "Industrial Soil Sensor", 
+      {
+        name: "Industrial Soil Sensor",
         image: "/products/cropifai/soilsensor.png",
         description: "Multi-parameter soil sensing for precision agriculture.",
         features: ["Soil Moisture & Temp", "Electrical Conductivity (EC)", "pH Level", "NPK (N, P, K)"]
       },
-      { 
-        name: "LoRaWAN Weather Station", 
+      {
+        name: "LoRaWAN Weather Station",
         image: "/products/cropifai/LoRaWan_iotWeatherStation.png",
         description: "Comprehensive environmental monitoring with 15km range.",
         features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
       },
-      { 
-        name: "Solenoid Valve Controller", 
+      {
+        name: "Solar-Powered Water Flow Controller",
+        image: "/products/cropifai/SolarPoweredWaterFlowSensor.png",
+        description: "Autonomous solar-powered valve control for precision irrigation and flow management.",
+        features: ["Solar-Powered & Battery Backup", "0–100% Flow Control", "Autonomous Cycle Irrigation", "IP67 Weatherproof Rating"]
+      },
+      {
+        name: "Solenoid Valve Controller",
         image: "/products/cropifai/solenoidValveController.png",
         description: "Automated irrigation control for multiple zones.",
         features: ["0–100% Flow Control", "Open/Close Precision", "Multicast Control"]
       },
-      { 
-        name: "Smart Valve Controller", 
+      {
+        name: "Smart Valve Controller",
         image: "/products/cropifai/SmartValveController.png",
         description: "Intelligent autonomous operation for off-grid deployment.",
         features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
-      },
-      { 
-        name: "Industrial pH Sensor", 
-        image: "/products/cropifai/Phsensor.png",
-        description: "High-precision pH monitoring for optimal nutrient uptake.",
-        features: ["Real-time pH Tracking", "Anti-Fouling Design", "Automatic Calibration"]
       }
     ],
     tags: ["Ruggedized for Desert", "LoRaWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"],
@@ -334,7 +335,7 @@ export const cropifaiContent = {
     header: {
       tag: "BENEFITS",
       titlePart1: "Why Choose",
-      titlePart2: "cropifAI™?"
+      titlePart2: "cropifAI?"
     },
     features: [
       {
@@ -486,8 +487,8 @@ export const cropifaiContent = {
   },
   waterFlow: {
     header: {
-      tag: "SMART IRRIGATION & AUTOMATION",
-      title: "Automated Water Flow Control"
+      tag: "NAJHUM HARDWARE · NQT02",
+      title: "Najhum Wireless Smart Valve NQT02"
     },
     image: "/products/cropifai/SolarPoweredWaterFlowSensor.png",
     flowControls: [

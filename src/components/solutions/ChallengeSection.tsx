@@ -17,39 +17,69 @@ export default function ChallengeSection({ content }: ChallengeSectionProps) {
     offset: ["start start", "end end"],
   });
 
-  const [dimensions, setDimensions] = useState({ cardWidth: 800, stickyOffset: 160, paddingLeft: 32 });
+  const [dimensions, setDimensions] = useState({ cardWidth: 760, stickyOffset: 120, paddingLeft: 80 });
 
   useEffect(() => {
     const updateSize = () => {
       const w = window.innerWidth;
-      
-      let offset = 160;
-      if (w < 640) offset = 16;
-      else if (w < 768) offset = 32;
-      else if (w < 1024) offset = 48; 
-      else if (w < 1280) offset = 120;
-      else offset = 160;
-      
-      const desiredStackWidth = Math.min(w * 0.9, 1400);
-      const calculatedCWidth = desiredStackWidth - (challenges.length - 1) * offset;
-      
-      let cWidth = Math.max(Math.min(calculatedCWidth, 800), 280);
-      
-      const actualStackWidth = cWidth + (challenges.length - 1) * offset;
-      let centeredPadding = Math.max((w - actualStackWidth) / 2, 16);
-      
-      if (w >= 1024) {
-         centeredPadding = 80; 
-         
-         const maxAvailableDesktop = w - centeredPadding - 32; 
-         const calculatedDesktopCard = maxAvailableDesktop - (challenges.length - 1) * offset;
-         
-         cWidth = Math.max(Math.min(calculatedDesktopCard, 800), 400); 
+      const count = challenges.length;
+      const stackGaps = Math.max(count - 1, 1);
+
+      let cWidth: number;
+      let padLeft: number;
+      let rightMargin: number;
+      let maxAllowedOffset: number;
+
+      if (w >= 1536) {
+        cWidth = 800;
+        padLeft = 80;
+        rightMargin = 40;
+        maxAllowedOffset = 160;
+      } else if (w >= 1280) {
+        cWidth = 750;
+        padLeft = 80;
+        rightMargin = 32;
+        maxAllowedOffset = 140;
+      } else if (w >= 1024) {
+        cWidth = 680;
+        padLeft = 64;
+        rightMargin = 28;
+        maxAllowedOffset = 110;
+      } else if (w >= 768) {
+        cWidth = Math.min(Math.round(w * 0.72), 600);
+        padLeft = 48;
+        rightMargin = 24;
+        maxAllowedOffset = 60;
+      } else if (w >= 640) {
+        cWidth = Math.min(Math.round(w * 0.82), 520);
+        padLeft = 28;
+        rightMargin = 20;
+        maxAllowedOffset = 36;
+      } else {
+        padLeft = 16;
+        rightMargin = 16;
+        cWidth = Math.max(Math.min(w - 32, 380), 280);
+        maxAllowedOffset = 16;
       }
-      
-      setDimensions({ cardWidth: cWidth, stickyOffset: offset, paddingLeft: centeredPadding });
+
+      const availableStackSpace = w - padLeft - rightMargin;
+      const spaceForOffsets = availableStackSpace - cWidth;
+
+      let offset: number;
+      if (spaceForOffsets > 0) {
+        const computedOffset = Math.floor(spaceForOffsets / stackGaps);
+        offset = Math.min(computedOffset, maxAllowedOffset);
+      } else {
+        offset = w < 640 ? 10 : 28;
+        cWidth = Math.max(w - padLeft - rightMargin - (stackGaps * offset), 260);
+      }
+
+      const minOffset = w < 640 ? 8 : (w < 768 ? 20 : (w < 1024 ? 36 : 50));
+      offset = Math.max(offset, minOffset);
+
+      setDimensions({ cardWidth: cWidth, stickyOffset: offset, paddingLeft: padLeft });
     };
-    
+
     updateSize();
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
@@ -83,7 +113,7 @@ export default function ChallengeSection({ content }: ChallengeSectionProps) {
         </div>
 
         {/* Cards Wrapper */}
-        <div className="relative w-full h-[380px] sm:h-[450px] md:h-[500px]">
+        <div className="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[520px]">
           {challenges.map((challenge, index) => (
             <ChallengeCard 
               key={index}
@@ -131,7 +161,7 @@ function ChallengeCard({ index, challenge, scrollYProgress, N, CARD_SPACING, STI
 
   return (
     <motion.div
-      className={`absolute top-0 h-full border-l shadow-[-12px_0_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl md:rounded-3xl ${bgClass}`}
+      className={`absolute top-0 h-full border-l shadow-[-12px_0_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl md:rounded-3xl overflow-hidden ${bgClass}`}
       style={{
         x,
         width: `${cardWidth}px`,
@@ -139,31 +169,31 @@ function ChallengeCard({ index, challenge, scrollYProgress, N, CARD_SPACING, STI
         zIndex: index, 
       }}
     >
-      <div className="p-6 md:p-12 h-full flex flex-col justify-between relative">
+      <div className="p-6 sm:p-8 md:p-10 lg:p-12 h-full flex flex-col justify-between relative">
         {/* Decorative Dot */}
         <div className={`absolute top-6 right-6 md:top-10 md:right-10 w-2.5 h-2.5 md:w-3 md:h-3 rounded-full opacity-80 ${dotClass}`} />
 
         {/* Top section: Title and Description */}
-        <div className="mt-2 md:mt-4">
-          <h3 className="text-xl md:text-3xl lg:text-[32px] font-semibold mb-3 md:mb-6 leading-tight pr-6 md:pr-12 text-white">
-            <span className={`${textSubtleClass} mr-2 md:mr-3 block sm:inline mb-1 sm:mb-0`}>
+        <div className="mt-1 md:mt-2">
+          <h3 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] xl:text-[32px] font-semibold mb-3 md:mb-5 leading-tight pr-6 md:pr-10 text-white">
+            <span className={`${textSubtleClass} mr-2 md:mr-3 inline-block mb-1 sm:mb-0`}>
               {String(index + 1).padStart(2, '0')} —
             </span>
             {challenge.title}
           </h3>
-          <p className={`${textMutedClass} text-xs md:text-base leading-relaxed max-w-[95%] md:max-w-[90%] font-medium`}>
+          <p className={`${textMutedClass} text-xs sm:text-sm md:text-base leading-relaxed max-w-full md:max-w-[92%] font-medium`}>
             {challenge.description}
           </p>
         </div>
 
         {/* Bottom section: Metadata & Link */}
-        <div className={`flex justify-between items-end text-[10px] md:text-sm font-semibold uppercase tracking-wide ${textSubtleClass}`}>
+        <div className={`flex justify-between items-end text-[11px] sm:text-xs md:text-sm font-semibold uppercase tracking-wide pt-4 ${textSubtleClass}`}>
           <div className="flex gap-4 md:gap-12">
             <span className={textMutedClass}>{challenge.category || 'Challenge'}</span>
           </div>
           {(challenge.exploreLink || true) && (
             <a href={challenge.exploreLink || '#'} className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors group">
-              <span className="capitalize normal-case text-xs md:text-sm">Explore solution</span>
+              <span className="capitalize normal-case text-xs sm:text-sm">Explore solution</span>
               <span className={`text-sm md:text-lg group-hover:translate-x-1 transition-transform group-hover:text-white ${textMutedClass}`}>›</span>
             </a>
           )}

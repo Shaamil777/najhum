@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Activity, Bell, Eye, Zap, Map, BarChart3, CheckCircle2 } from "lucide-react";
+import { Activity, Bell, Eye, Zap, Map, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 
 import { iotricsContent } from "@/content/iotrics";
 
@@ -23,7 +24,7 @@ export default function IotricsCore() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="w-full py-24 sm:py-32 bg-white text-neutral-900 font-poppins">
+    <section className="w-full pt-16 sm:pt-20 lg:pt-10 pb-24 sm:pb-32 bg-white text-neutral-900 font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px] flex flex-col items-center">
         
         <div className="text-center max-w-4xl mx-auto flex flex-col items-center mb-16 lg:mb-24">
@@ -85,7 +86,7 @@ export default function IotricsCore() {
                             <ul className="grid grid-cols-1 gap-y-2 mb-5">
                               {module.keyCapabilities.map((cap, i) => (
                                 <li key={i} className="flex items-start gap-2 text-neutral-600 text-[12px] sm:text-[13px]">
-                                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500 shrink-0 mt-0.5" />
+                                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0 mt-0.5" />
                                   <span>{cap}</span>
                                 </li>
                               ))}
@@ -111,9 +112,13 @@ export default function IotricsCore() {
             })}
             
             <div className="mt-8 lg:mt-10 pt-2 flex justify-center lg:justify-start">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-8 rounded-md transition-colors text-xs sm:text-sm tracking-wider uppercase shadow-md shadow-blue-500/20 w-full sm:w-auto">
-                {core.cta}
-              </button>
+              <Link
+                href="/demo"
+                className="inline-flex items-center justify-center space-x-2 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap uppercase tracking-wider transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer w-full sm:w-auto text-center group"
+              >
+                <span>{core.cta}</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </div>
           </div>
 

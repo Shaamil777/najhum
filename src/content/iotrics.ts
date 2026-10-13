@@ -232,7 +232,7 @@ export const iotricsContent = {
         tags: ["DASHBOARDS", "ANALYTICS", "REPORTING", "COMPLIANCE"]
       }
     ],
-    cta: "EXPLORE OUR MODULES"
+    cta: "View Demo Dashboard"
   },
   capabilities: {
     header: {
@@ -243,118 +243,118 @@ export const iotricsContent = {
       {
         id: "01",
         num: "01",
-        shortTitle: "Data Acquisition",
-        title: "Monitoring & Data Acquisition",
-        description: "Continuous data capture from any sensor, any asset, any geography. Fixed and mobile deployments supported.",
-        tag: "OPTIMIZATION_ALPHA",
+        shortTitle: "Sensor Monitoring",
+        title: "Sensor Monitoring & Data Acquisition",
+        description: "Sensors on your equipment take a reading every few minutes and send it to the platform — temperature, humidity, pressure, water flow, vibration, door state. They report to the Najhum IoT Controller on site, which forwards the data to the platform over LoRaWAN, cellular or satellite — so a site with no network of its own still reports. Instead of someone walking the site with a clipboard, the current state of every asset is on screen, with the history behind it.",
+        tag: "REAL-TIME TELEMETRY",
         image: "/images/iotrics/capability_1.jpg",
-        badge: "Real-Time Ingestion"
+        badge: "Real-Time Telemetry"
       },
       {
         id: "02",
         num: "02",
         shortTitle: "Alerts & Events",
-        title: "Intelligent Alerts & Events",
-        description: "Configurable threshold-based alerts via SMS, email, and push notification. Full event logging for traceability.",
-        tag: "ALERT_LOGIC_BETA",
+        title: "Automated Alerts & Event Management",
+        description: "You set the limits that matter — a freezer above −18°C, a pump drawing more current than usual, a door left open. When a reading crosses one, the platform sends an alert by email, SMS or webhook to the person responsible for that site. Each alert carries its severity and has to be acknowledged, and anything left unanswered escalates, so a problem at 2am is not discovered at 9.",
+        tag: "THRESHOLD ALERTS",
         image: "/images/iotrics/capability_2.jpg",
-        badge: "Threshold Triggers"
+        badge: "Threshold Alerts"
       },
       {
         id: "03",
         num: "03",
-        shortTitle: "Environmental Visibility",
-        title: "Environmental & Asset Visibility",
-        description: "Temperature, humidity, energy, water, air quality, and asset status — all centralised in one dashboard view.",
-        tag: "CONDITION_GAMMA",
+        shortTitle: "Condition Monitoring",
+        title: "Environmental & Condition Monitoring",
+        description: "Continuous monitoring of the conditions inside cold rooms, warehouses, plant rooms and offices: temperature, humidity, air quality, and water leak or flood detection under raised floors and around tanks. For cold storage the record is unbroken, which is what an auditor asks for, and a leak is caught as a reading rather than as damage found the next morning.",
+        tag: "COLD CHAIN · LEAK DETECTION",
         image: "/images/iotrics/capability_3.jpg",
-        badge: "Facility Environment"
+        badge: "Cold Chain · Leak Detection"
       },
       {
         id: "04",
         num: "04",
-        shortTitle: "Energy Intelligence",
-        title: "Energy & Resource Intelligence",
-        description: "Sub-meter monitoring, load analysis, peak demand detection, and ESG reporting — all from one platform.",
-        tag: "SUBMETER_DELTA",
+        shortTitle: "Energy & Sub-Metering",
+        title: "Energy Monitoring & Sub-Metering",
+        description: "Sub-meters on individual circuits show which equipment is actually consuming the power, not just what the building total was last month. You see load profiles through the day, when peak demand occurs and what causes it — the basis for shifting loads, choosing a tariff, or proving that a change saved something.",
+        tag: "SUB-METERING",
         image: "/images/iotrics/capability_4.jpg",
-        badge: "Smart Metering"
+        badge: "Sub-Metering"
       },
       {
         id: "05",
         num: "05",
-        shortTitle: "Movement Tracking",
-        title: "Movement & Utilisation Tracking",
-        description: "Mobile asset location, logistics visibility, fleet and equipment tracking — real-time, always current.",
-        tag: "TELEMATICS_EPSILON",
+        shortTitle: "Asset Tracking",
+        title: "Asset Tracking & Utilisation",
+        description: "Tags and sensors report where movable assets are and how much they are used — location across sites, runtime hours on a machine, how often a space is occupied. It answers the two questions that usually get guessed: do we have more of this than we need, and where did it go.",
+        tag: "UTILISATION",
         image: "/images/iotrics/capability_5.jpg",
-        badge: "Fleet Logistics"
+        badge: "Utilisation"
       },
       {
         id: "06",
         num: "06",
         shortTitle: "Analytics & Compliance",
-        title: "Analytics, Reporting & Compliance",
-        description: "Historical data, trend analysis, automated report generation, and audit-ready exports on demand.",
-        tag: "AUDIT_COMPLIANCE_ZETA",
+        title: "Reporting, Analytics & Compliance",
+        description: "Every reading is kept, so any period can be reported on after the fact. Reports can be scheduled and sent automatically, exported for an inspection, or used to compare this month against last. Because the data is logged continuously and alerts carry who acknowledged them and when, the audit trail is a by-product rather than a separate exercise.",
+        tag: "AUDIT TRAIL",
         image: "/images/iotrics/capability_6.jpg",
-        badge: "Audit Reports"
+        badge: "Audit Trail"
       }
     ]
   },
   industries: {
     header: {
-      titlePart1: "One IoT Platform.",
-      titlePart2: "Built for Every Industry.",
-      description: "From facilities and manufacturing to logistics and smart infrastructure, IoTRICs adapts to the environments where real-time asset visibility, monitoring, and intelligence matter most."
+      titlePart1: "Industrial IoT monitoring, built for every industry.",
+      titlePart2: "",
+      description: "IoTRICs is deployed in buildings, cold stores, factories, warehouses, farms and retail sites across the UAE. The sensors and the readings change by sector; the Najhum IoT Controller, the platform and the dashboard do not., IoTRICs adapts to the environments where real-time asset visibility, monitoring, and intelligence matter most."
     },
     items: [
       {
         number: "01",
-        title: "Facilities Management",
-        desc: "Monitor building environments, equipment, energy consumption, and critical infrastructure from one connected platform.",
+        title: "Facilities & Building Management",
+        desc: "Smart building monitoring for offices, towers and mixed-use developments — indoor temperature and humidity, air quality, chiller and AHU performance, water tank levels, pump status and energy use per floor. Integrates with your existing BMS rather than replacing it, giving facility management teams one dashboard across a portfolio of buildings.",
         image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop"
       },
       {
         number: "02",
-        title: "Cold Storage",
-        desc: "Track temperature, humidity, and environmental conditions in real time to maintain critical storage conditions and respond to abnormal conditions.",
+        title: "Cold Storage & Cold Chain",
+        desc: "Cold room and freezer temperature monitoring with continuous humidity and door-open logging, plus compressor runtime and defrost cycles. Automated alerts fire before stock is at risk, and the unbroken temperature record is the evidence a food safety or HACCP audit asks for.",
         image: "https://images.unsplash.com/photo-1551313158-73d016a829ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29sZCUyMHN0b3JhZ2V8ZW58MHx8MHx8fDA%3D"
       },
       {
         number: "03",
-        title: "Hospitality",
-        desc: "Monitor guest environments, energy usage, equipment, and facility conditions to improve operational efficiency and service reliability.",
+        title: "Hotels & Hospitality",
+        desc: "Guest room and back-of-house monitoring across a property — room temperature and humidity, kitchen and cold store conditions, laundry and plant room equipment, water consumption and energy per zone. Maintenance teams see a fault before a guest reports it.",
         image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
       },
       {
         number: "04",
-        title: "Industrial & Manufacturing",
-        desc: "Connect industrial assets and equipment to monitor operational conditions, identify anomalies, and improve efficiency.",
+        title: "Manufacturing & Industrial Plants",
+        desc: "Machine condition monitoring on the factory floor — vibration, motor temperature, current draw, runtime hours and compressed air or steam pressure. Trends flag equipment drifting out of normal, turning an unplanned stoppage into scheduled predictive maintenance, with OEE and downtime reported from the same data.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
       },
       {
         number: "05",
-        title: "Logistics",
-        desc: "Track assets and operational conditions across distributed locations, helping teams gain greater visibility across their logistics operations.",
+        title: "Logistics & Warehousing",
+        desc: "Warehouse and distribution centre monitoring — ambient and chilled zone conditions, dock door activity, forklift and asset utilisation, and in-transit temperature for refrigerated loads. Location and condition reporting across distributed sites, on one platform.",
         image: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=800&auto=format&fit=crop"
       },
       {
         number: "06",
-        title: "Smart Cities & Infrastructure",
-        desc: "Connect distributed infrastructure and environmental systems to create real-time visibility across smart-city operations.",
+        title: "Smart Cities & Public Infrastructure",
+        desc: "Remote monitoring of distributed public assets — water networks and reservoirs, pumping stations, street lighting, flood and water leak detection in underpasses and basements, and environmental and air quality sensing. Long-range LoRaWAN and cellular coverage reaches sites with no fixed network.",
         image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop"
       },
       {
         number: "07",
-        title: "Agriculture",
-        desc: "Monitor environmental and operational conditions across agricultural environments using connected sensors and real-time data.",
+        title: "Agriculture & Farming",
+        desc: "Smart farming and irrigation monitoring — soil moisture and salinity, weather station data, water flow, tank levels and valve position, with scheduling and remote control of irrigation. Built for farms and landscaped estates where mains power and network coverage are limited.",
         image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop"
       },
       {
         number: "08",
-        title: "Retail",
-        desc: "Connect and monitor retail environments, assets, and operational conditions through a centralized IoT platform.",
+        title: "Retail & Supermarkets",
+        desc: "Store and chiller monitoring across a retail estate — display cabinet and cold room temperature, HVAC and lighting energy use, and footfall or occupancy by store. One view across every branch, with alerts routed to the area manager responsible.",
         image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop"
       }
     ]

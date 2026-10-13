@@ -43,9 +43,9 @@ export const aboutContent = {
     },
     stats: [
       { label: "FOUNDED", value: "2017", iconName: "Activity" },
-      { label: "CORE PLATFORMS", value: "3+", iconName: "Cpu" },
-      { label: "SERVER IN", value: "Dubai", iconName: "Globe2" },
-      { label: "IOT EXPERTISE", value: "Industrial", iconName: "BarChart3" },
+      { label: "CORE PLATFORMS", value: "3", iconName: "Cpu" },
+      { label: "Data residency", value: "Dubai", iconName: "Globe2" },
+      { label: "Focus", value: "Industrial", iconName: "BarChart3" },
     ]
   },
   intro: {
@@ -136,17 +136,17 @@ export const aboutContent = {
     cloudBadge: "Cloud-First Global Reach"
   },
   trust: {
-    badge: "Trusted Across Industries",
-    titlePart1: "Powering Intelligent Infrastructure ",
-    titlePart2: "for Leading Organizations",
+    badge: "WHERE OUR SYSTEMS RUN",
+    titlePart1: "Deployed across utilities, buildings, ",
+    titlePart2: "cold storage and agriculture.",
     subtitleText: "Supporting organizations across",
     industries: [
-      "Energy",
-      "Telecommunications",
-      "Smart Buildings",
-      "Commercial Real Estate",
-      "Industrial Facilities",
+      "Utilities",
+      "Commercial buildings",
+      "Cold Storage",
+      "EV charging",
+      "Agriculture",
     ],
-    quote: "From enterprise campuses to national infrastructure, Najhum delivers intelligent solutions that scale."
+    quote: "From a single site to a multi-site estate, on the same platform and the same subscription."
   }
 };

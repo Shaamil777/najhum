@@ -41,17 +41,17 @@ export default function Hero() {
         <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto max-w-sm sm:max-w-none mx-auto">
           <Link
             href={hero.primaryCta.href}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 group"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 sm:gap-2.5 bg-primary hover:bg-primary-hover text-white px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 group"
           >
-            <span>{hero.primaryCta.label}</span>
+            <span className="leading-none translate-y-px">{hero.primaryCta.label}</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
 
           <Link
             href={hero.secondaryCta.href}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center space-x-1.5 sm:space-x-2.5 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-sm hover:border-white/40 hover:-translate-y-0.5 active:translate-y-0 group"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 sm:gap-2.5 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 px-4 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-sm hover:border-white/40 hover:-translate-y-0.5 active:translate-y-0 group"
           >
-            <span>{hero.secondaryCta.label}</span>
+            <span className="leading-none translate-y-px">{hero.secondaryCta.label}</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>

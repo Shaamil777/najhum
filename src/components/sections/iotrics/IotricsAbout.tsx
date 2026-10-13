@@ -32,13 +32,13 @@ export default function IotricsAbout() {
   }, [isHovered]);
 
   return (
-    <section id="solutions" className="w-full py-24 bg-white text-neutral-900 overflow-hidden font-poppins">
+    <section id="solutions" className="w-full pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pb-8 bg-white text-neutral-900 overflow-hidden font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
-        
+
         {/* Header Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 lg:mb-20 gap-4 sm:gap-8">
           <div className="max-w-2xl">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -50,7 +50,7 @@ export default function IotricsAbout() {
             </motion.h2>
           </div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,9 +63,9 @@ export default function IotricsAbout() {
 
         {/* Three Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 relative mb-16 sm:mb-24">
-          
+
           {/* Card 1: COLLECT */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -80,7 +80,7 @@ export default function IotricsAbout() {
             <p className="text-sm sm:text-base text-neutral-600 mb-8 sm:mb-12 leading-relaxed flex-grow">
               {cardsData[0].description}
             </p>
-            
+
             {/* Arrow */}
             <div className="hidden lg:flex absolute top-1/2 -right-4 translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-[0_0_15px_rgba(0,0,0,0.08)] items-center justify-center text-blue-600 z-10">
               <ChevronRight className="w-6 h-6" />
@@ -96,7 +96,7 @@ export default function IotricsAbout() {
           </motion.div>
 
           {/* Card 2: CONNECT */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -128,7 +128,7 @@ export default function IotricsAbout() {
           </motion.div>
 
           {/* Card 3: COLLABORATE */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -157,13 +157,13 @@ export default function IotricsAbout() {
         {/* Bottom Pipeline/Timeline */}
         <div className="w-full flex flex-col items-center">
           <div className="w-full max-w-4xl relative mb-10 lg:mb-8 px-2 sm:px-4">
-            
+
             {/* Background Dashed line (desktop only) */}
             <div className="hidden lg:block absolute top-[32px] left-[5%] right-[5%] h-[2px] bg-neutral-200 -z-20 border-t-2 border-dashed border-neutral-300" />
-            
+
             {/* Moving Pulse Animation (desktop only) */}
             <div className="hidden lg:block absolute top-[32px] left-[5%] right-[5%] h-[2px] -z-10 overflow-visible pointer-events-none">
-              <motion.div 
+              <motion.div
                 className="w-20 h-[3px] rounded-full bg-blue-500 shadow-[0_0_12px_4px_rgba(59,130,246,0.8)] absolute top-0 -translate-y-1/2"
                 animate={{
                   left: ["0%", "100%"]
@@ -175,7 +175,7 @@ export default function IotricsAbout() {
                 }}
               />
             </div>
-            
+
             {/* Pipeline Nodes */}
             <div className="grid grid-cols-3 gap-y-10 gap-x-2 sm:gap-x-4 lg:flex lg:justify-between lg:gap-0 relative">
               {pipelineNodes.map((node, i) => {
@@ -183,26 +183,27 @@ export default function IotricsAbout() {
                 const isPast = i < activeIndex;
 
                 return (
-                <div 
-                  key={i} 
-                  className="flex flex-col items-center bg-white px-1 sm:px-2 z-10 cursor-pointer group"
-                  onMouseEnter={() => {
-                    setActiveIndex(i);
-                    setIsHovered(true);
-                  }}
-                  onMouseLeave={() => setIsHovered(false)}
-                >
-                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 bg-white transition-all duration-500 ${isActive ? 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-110' : isPast ? 'border-blue-200' : 'border-neutral-100 text-neutral-300'} group-hover:border-blue-400`}>
-                     <node.icon className={`w-5 h-5 md:w-6 md:h-6 transition-colors duration-500 ${isActive ? 'text-blue-500' : isPast ? 'text-blue-400' : 'text-neutral-300'} group-hover:text-blue-500`} />
+                  <div
+                    key={i}
+                    className="flex flex-col items-center bg-white px-1 sm:px-2 z-10 cursor-pointer group"
+                    onMouseEnter={() => {
+                      setActiveIndex(i);
+                      setIsHovered(true);
+                    }}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
+                    <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-2 bg-white transition-all duration-500 ${isActive ? 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-110' : isPast ? 'border-blue-200' : 'border-neutral-100 text-neutral-300'} group-hover:border-blue-400`}>
+                      <node.icon className={`w-5 h-5 md:w-6 md:h-6 transition-colors duration-500 ${isActive ? 'text-blue-500' : isPast ? 'text-blue-400' : 'text-neutral-300'} group-hover:text-blue-500`} />
+                    </div>
+                    <span className={`mt-3 md:mt-4 text-[9px] md:text-xs font-bold uppercase tracking-wider text-center transition-colors duration-500 ${isActive ? 'text-blue-600' : isPast ? 'text-blue-400' : 'text-neutral-400'} group-hover:text-blue-500`}>
+                      {node.label}
+                    </span>
                   </div>
-                  <span className={`mt-3 md:mt-4 text-[9px] md:text-xs font-bold uppercase tracking-wider text-center transition-colors duration-500 ${isActive ? 'text-blue-600' : isPast ? 'text-blue-400' : 'text-neutral-400'} group-hover:text-blue-500`}>
-                    {node.label}
-                  </span>
-                </div>
-              )})}
+                )
+              })}
             </div>
           </div>
-          
+
           {/* Dynamic tagline */}
           <div className="h-12 flex items-center justify-center overflow-hidden w-full px-4">
             <AnimatePresence mode="wait">

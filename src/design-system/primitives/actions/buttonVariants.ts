@@ -42,11 +42,11 @@ export type IconPosition = "left" | "right";
 
 export const VARIANT_STYLES: Record<ButtonVariant, string> = {
   primary: cn(
-    "bg-dark text-white",
-    "hover:bg-dark-surface",
-    "focus-visible:ring-dark",
+    "bg-primary text-white",
+    "hover:bg-primary-hover",
+    "focus-visible:ring-primary",
     "border border-transparent",
-    "shadow-md shadow-dark/20 inset-ring inset-ring-white/15"
+    "shadow-md shadow-primary/20"
   ),
   secondary: cn(
     "bg-surface text-foreground",

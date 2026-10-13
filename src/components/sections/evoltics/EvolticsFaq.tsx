@@ -10,11 +10,11 @@ const evolticsFaqData = {
   items: [
     {
       question: "What is Evoltics?",
-      answer: "Evoltics is a full-service EV charging solutions provider offering CPO licensing, regulatory approvals, charger supply, installation, CPMS software, mobile app solutions, and annual maintenance services."
+      answer: "Evoltics is a full-service EV charging solutions provider offering CPO licensing, regulatory approvals, charger supply, installation, CSMP software, mobile app solutions, and annual maintenance services."
     },
     {
-      question: "What is CPMS?",
-      answer: "CPMS (Charge Point Management System) is Evoltics’ IoT-enabled platform for managing EV charging infrastructure. It allows operators to monitor chargers, manage users and revenue, view real-time charging data, integrate hardware, and manage their charging network from a single platform."
+      question: "What is CSMP?",
+      answer: "CSMP (Charging Station Management Platform) is Evoltics’ IoT-enabled platform for managing EV charging infrastructure. It allows operators to monitor chargers, manage users and revenue, view real-time charging data, integrate hardware, and manage their charging network from a single platform."
     },
     {
       question: "What is a CPO licence and why is it required?",

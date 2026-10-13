@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cropifaiContent } from "@/content/cropifai";
+import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function CropifaiHero() {
   const { hero } = cropifaiContent;
@@ -17,7 +18,7 @@ export default function CropifaiHero() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-20 sm:pb-24 text-white">
+    <section className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -121,6 +122,11 @@ export default function CropifaiHero() {
           </a>
         </motion.div>
 
+      </div>
+
+      {/* Logo Marquee at Bottom */}
+      <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent z-20 pt-2 pb-3 sm:pb-4">
+        <ClientMarquee title={hero.marqueeText} />
       </div>
 
     </section>

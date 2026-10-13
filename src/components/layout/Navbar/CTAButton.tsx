@@ -6,7 +6,7 @@ export function CTAButton() {
     <div className="hidden md:inline-flex focus-visible:outline-none">
       <Link href="/contact" className="focus-visible:outline-none">
         <AntiMetalButton 
-          label="Contact" 
+          label="Contact Us" 
           accentFrom="var(--color-primary)" 
           accentTo="var(--color-primary-hover)" 
           dotColor="#ffffff"

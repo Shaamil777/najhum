@@ -45,7 +45,7 @@ const advantageCards: AdvantageCardData[] = [
     tag: "END-TO-END",
     badge: "SINGLE SLA ACCOUNTABILITY",
     imageSrc: "/images/elvotics/card_1.png",
-    highlights: ["Licensing & Approvals", "Hardware & Installation", "Unified Operator CPMS"]
+    highlights: ["Licensing & Approvals", "Hardware & Installation", "Unified Operator CSMP"]
   },
   {
     ...rawCards[1],
@@ -72,12 +72,20 @@ const advantageCards: AdvantageCardData[] = [
     highlights: ["Live Power Distribution", "Remote Diagnostics & Reset", "Dynamic Load Balancing"]
   },
   {
+    ...rawCards[4],
+    icon: Sparkles,
+    tag: "WHITE LABEL",
+    badge: "OPERATOR DASHBOARD",
+    imageSrc: "/images/elvotics/card_5.png",
+    highlights: ["Custom Logo & Domain", "Operator Palette", "Unified Driver App"]
+  },
+  {
     ...rawCards[5],
     icon: Headphones,
     tag: "RELIABILITY",
     badge: "99.9% UPTIME SLA",
     imageSrc: "/images/elvotics/card_6.png",
-    highlights: ["24/7 Field Engineering", "Predictive Maintenance", "Rapid-Response Dispatch"]
+    highlights: ["Certified Field Engineering", "Predictive Maintenance", "Rapid-Response SLA"]
   }
 ];
 
@@ -90,10 +98,11 @@ const WIDTH_STEP = 20;
 const SCALE_STEP = 0.015;
 
 const SCROLL_THRESHOLDS: [number, number][] = [
-  [0.1, 0.2],
-  [0.3, 0.4],
-  [0.5, 0.6],
-  [0.7, 0.8]
+  [0.08, 0.18],
+  [0.26, 0.36],
+  [0.44, 0.54],
+  [0.62, 0.72],
+  [0.80, 0.90]
 ];
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
@@ -142,7 +151,7 @@ function CardContent({ card, index }: { card: AdvantageCardData, index: number }
           <h3 className="text-base sm:text-lg md:text-[21px] font-black tracking-tight text-zinc-950 mb-1 md:mb-2 leading-tight md:leading-snug">
             {card.title}
           </h3>
-          <p className="text-[11px] md:text-[12px] text-zinc-500 leading-relaxed md:line-clamp-3">
+          <p className="text-[11px] md:text-[12px] text-zinc-500 leading-relaxed md:line-clamp-4">
             {card.description}
           </p>
         </div>
@@ -227,7 +236,7 @@ function DesktopStackCard({ card, index, totalCards, scrollYProgress, isReducedM
 
 function MobileSequenceCard({ card, index, scrollYProgress, isReducedMotion }: StackCardProps) {
   const activeIdxValue = useTransform(scrollYProgress, computeActiveIndex);
-  
+
   const x = useTransform(activeIdxValue, idx => isReducedMotion ? "0%" : `${(index - idx) * 115}%`);
   const opacity = useTransform(activeIdxValue, idx => {
     const rel = Math.abs(index - idx);
@@ -260,18 +269,19 @@ export default function EvolticsSolutions() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest < 0.2)      setActiveStep(0);
-    else if (latest < 0.4) setActiveStep(1);
-    else if (latest < 0.6) setActiveStep(2);
-    else if (latest < 0.8) setActiveStep(3);
-    else                   setActiveStep(4);
+    if (latest < 0.18) setActiveStep(0);
+    else if (latest < 0.36) setActiveStep(1);
+    else if (latest < 0.54) setActiveStep(2);
+    else if (latest < 0.72) setActiveStep(3);
+    else if (latest < 0.90) setActiveStep(4);
+    else setActiveStep(5);
   });
 
   return (
     <section
       id="solutions"
       ref={containerRef}
-      className="relative w-full h-[550vh] bg-white text-foreground font-sans scroll-mt-20"
+      className="relative w-full h-[600vh] bg-white text-foreground font-sans scroll-mt-20"
     >
 
       {/* ── Sticky viewport ── */}
@@ -284,7 +294,7 @@ export default function EvolticsSolutions() {
 
           {/* Desktop Left Side: Content */}
           <div className="w-[340px] lg:w-[360px] xl:w-[550px] shrink-0 flex flex-col justify-center gap-6 lg:gap-8 xl:gap-12">
-            
+
             <div className="flex flex-col gap-4">
 
 
@@ -294,7 +304,7 @@ export default function EvolticsSolutions() {
               </h2>
 
               <p className="text-sm lg:text-xs xl:text-base text-zinc-500 leading-relaxed max-w-md">
-                A connected approach that unifies technology, regulatory compliance, hardware flexibility, and 24/7 SLA operational support.
+                A connected approach that unifies technology, regulatory compliance, hardware flexibility, and SLA-backed operational support.
               </p>
             </div>
 

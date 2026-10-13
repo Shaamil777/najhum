@@ -46,7 +46,7 @@ export const MarketingButton = forwardRef<HTMLButtonElement, MarketingButtonProp
         {...props}
       >
         {/* Text with subtle gradient/glow effect */}
-        <span className="text-base font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/60 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <span className="text-base font-bold tracking-wide leading-none text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/60 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] inline-block translate-y-px">
           {children}
         </span>
 

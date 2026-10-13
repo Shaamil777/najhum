@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare,
@@ -19,6 +19,8 @@ import { evolticsContent } from "@/content/evoltics";
 const journeySteps = evolticsContent.journey.steps;
 
 const stepIcons = [MessageSquare, MapPinned, FileCheck2, Wrench, Rocket, ShieldCheck];
+
+const STEP_DURATION = 4500; // 4.5 seconds per step
 
 const stepDetails = [
   {
@@ -43,18 +45,27 @@ const stepDetails = [
   },
   {
     duration: "1–2 Weeks",
-    deliverables: ["CPMS cloud provisioning", "End-to-end load testing", "Operator training & handover"],
+    deliverables: ["CSMP cloud provisioning", "End-to-end load testing", "Operator training & handover"],
     output: "Fully operational charging station"
   },
   {
     duration: "Ongoing",
-    deliverables: ["24/7 remote monitoring", "Preventive maintenance cycles", "Regulatory compliance audits"],
+    deliverables: ["Continuous remote telemetry", "Preventive maintenance cycles", "Regulatory compliance audits"],
     output: "Maximized uptime & protected investment"
   }
 ];
 
 export default function EvolticsJourney() {
   const [activeStep, setActiveStep] = useState(0);
+
+  // Auto-switch steps continuously in a loop at periodic speed
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % journeySteps.length);
+    }, STEP_DURATION);
+
+    return () => clearInterval(timer);
+  }, [activeStep]);
 
   return (
     <section id="journey" className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans scroll-mt-20">
@@ -102,15 +113,46 @@ export default function EvolticsJourney() {
         <div className="hidden md:block mb-12 lg:mb-16">
           <div className="relative">
             
-            {/* Horizontal Connected Line */}
-            <div className="absolute top-[28px] left-[8%] right-[8%] h-[3px] bg-border rounded-full">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: `${((activeStep) / (journeySteps.length - 1)) * 100}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="h-full bg-primary rounded-full"
-              />
+            {/* Horizontal Connected Line with Progress Bar */}
+            <div className="absolute top-[24px] lg:top-[28px] left-[8.333%] right-[8.333%] h-[3px] bg-border/80 rounded-full flex z-0">
+              {Array.from({ length: journeySteps.length - 1 }).map((_, idx) => {
+                const isCompleted = idx < activeStep;
+                const isCurrent = idx === activeStep;
+
+                return (
+                  <div key={idx} className="flex-1 h-full relative bg-transparent">
+                    {/* Completed Segment: Solid Primary */}
+                    {isCompleted && (
+                      <div className="w-full h-full bg-primary" />
+                    )}
+
+                    {/* Active In-Progress Segment: Animated Progress Bar */}
+                    {isCurrent && (
+                      <motion.div
+                        key={`prog-seg-${activeStep}`}
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: STEP_DURATION / 1000, ease: "linear" }}
+                        className="h-full bg-primary relative"
+                      >
+                        {/* Glowing Leading Head Particle */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_2px_rgba(37,99,235,0.85)] ring-2 ring-white pointer-events-none z-20" />
+                      </motion.div>
+                    )}
+                  </div>
+                );
+              })}
+
+              {/* Shimmer sweep across all segments during the final phase */}
+              {activeStep === journeySteps.length - 1 && (
+                <motion.div
+                  key="final-shimmer"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{ duration: STEP_DURATION / 1000, ease: "linear" }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"
+                />
+              )}
             </div>
 
             {/* Step Nodes */}
@@ -145,14 +187,14 @@ export default function EvolticsJourney() {
 
                     {/* Step Number */}
                     <span className={`text-[10px] font-bold uppercase tracking-[0.2em] mb-1 transition-colors ${
-                      isActive ? 'text-primary' : 'text-muted'
+                      isActive ? 'text-primary' : isPast ? 'text-primary/75' : 'text-muted'
                     }`}>
                       Step {step.num}
                     </span>
 
                     {/* Step Title */}
                     <span className={`text-[11px] lg:text-sm font-bold transition-colors ${
-                      isActive ? 'text-foreground' : 'text-muted'
+                      isActive ? 'text-foreground' : isPast ? 'text-foreground/90' : 'text-muted'
                     }`}>
                       {step.title}
                     </span>
@@ -174,14 +216,14 @@ export default function EvolticsJourney() {
                 <button
                   key={idx}
                   onClick={() => setActiveStep(idx)}
-                  className={`flex flex-col items-center text-center p-2.5 rounded-xl transition-all border ${
+                  className={`flex flex-col items-center text-center p-2.5 rounded-xl transition-all border relative overflow-hidden ${
                     isActive 
                       ? 'bg-primary/10 border-primary/40 shadow-sm' 
                       : 'bg-surface border-border/60 hover:border-primary/30'
                   }`}
                 >
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mb-1.5 transition-all ${
-                    isActive ? 'bg-primary text-white shadow-md shadow-primary/20' : 'bg-surface-alt text-muted border border-border'
+                    isActive ? 'bg-primary text-white shadow-md shadow-primary/20 scale-105' : 'bg-surface-alt text-muted border border-border'
                   }`}>
                     <Icon className="w-4 h-4" />
                   </div>
@@ -191,6 +233,17 @@ export default function EvolticsJourney() {
                   <span className={`text-[9px] font-bold leading-tight ${isActive ? 'text-foreground' : 'text-muted'}`}>
                     {step.title}
                   </span>
+
+                  {/* Active progress indicator on mobile card */}
+                  {isActive && (
+                    <motion.div
+                      key={`mob-prog-${activeStep}`}
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: STEP_DURATION / 1000, ease: "linear" }}
+                      className="absolute bottom-0 left-0 h-[2.5px] bg-primary"
+                    />
+                  )}
                 </button>
               );
             })}
@@ -222,7 +275,7 @@ export default function EvolticsJourney() {
                     <span className="text-[9px] sm:text-[10px] font-bold text-primary uppercase tracking-[0.2em] block">
                       Step {journeySteps[activeStep].num} of 6
                     </span>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground tracking-tight leading-tight">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground tracking-tight leading-tight mt-0.5">
                       {journeySteps[activeStep].title}
                     </h3>
                   </div>
@@ -270,19 +323,18 @@ export default function EvolticsJourney() {
                   </div>
                 </div>
 
-                {/* Navigation Arrows */}
+                {/* Navigation Controls */}
                 <div className="flex items-center justify-between pt-2">
                   <button
-                    onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
-                    disabled={activeStep === 0}
-                    className="px-4 py-2 text-xs font-bold text-muted border border-border rounded-lg hover:border-primary/40 hover:text-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                    onClick={() => setActiveStep((prev) => (prev - 1 + journeySteps.length) % journeySteps.length)}
+                    className="px-4 py-2 text-xs font-bold text-muted border border-border rounded-lg hover:border-primary/40 hover:text-primary transition-colors flex items-center space-x-1.5 cursor-pointer"
                   >
-                    ← Previous
+                    <span>← Previous</span>
                   </button>
+
                   <button
-                    onClick={() => setActiveStep((prev) => Math.min(journeySteps.length - 1, prev + 1))}
-                    disabled={activeStep === journeySteps.length - 1}
-                    className="px-4 py-2 text-xs font-bold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-1.5"
+                    onClick={() => setActiveStep((prev) => (prev + 1) % journeySteps.length)}
+                    className="px-4 py-2 text-xs font-bold text-white bg-primary rounded-lg hover:bg-primary-hover transition-colors flex items-center space-x-1.5 shadow-sm shadow-primary/20 cursor-pointer"
                   >
                     <span>Next Phase</span>
                     <ArrowRight className="w-3.5 h-3.5" />

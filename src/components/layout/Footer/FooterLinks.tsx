@@ -41,7 +41,7 @@ const platforms = [
   },
   {
     title: "EVOLTICS",
-    subtitle: "EV Charging Infrastructure & CPMS",
+    subtitle: "EV Charging Infrastructure & CSMP",
     href: "/platforms/evoltics",
   },
   {

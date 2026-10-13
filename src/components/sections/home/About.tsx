@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { homeContent } from "@/content/home";
 import DottedWorldMap from "./about/DottedWorldMap";
@@ -55,12 +56,13 @@ export default function About() {
             </div>
             
             <div>
-              <a href="/about" className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-[#3B82F6] group">
-                <span className="group-hover:underline underline-offset-4">{homeContent.about.buttonLabel}</span>
-                <div className="w-8 h-8 rounded-full bg-[#3B82F6]/10 flex items-center justify-center group-hover:bg-[#3B82F6] group-hover:text-white transition-colors duration-300">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              </a>
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center gap-2 sm:gap-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 group"
+              >
+                <span className="leading-none translate-y-px">{homeContent.about.buttonLabel}</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </div>
           </div>
 

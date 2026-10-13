@@ -77,9 +77,8 @@ function ParallaxRow({ children, baseVelocity = 100 }: ParallaxProps) {
 
 // Reusable card for the analytics data
 function AnalyticsCard({ data, label }: { data: { title: string; description: string; kpiValue: string }, label?: string }) {
-  const isLong = data.kpiValue.length > 9;
   return (
-    <div className="w-[185px] sm:w-[250px] md:w-[280px] lg:w-[310px] min-h-[145px] sm:min-h-[165px] lg:min-h-[175px] flex-shrink-0 bg-white border border-zinc-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 flex flex-col justify-between group hover:border-zinc-300 transition-colors duration-300 shadow-2xs">
+    <div className="w-[190px] sm:w-[260px] md:w-[290px] lg:w-[320px] h-[160px] sm:h-[180px] lg:h-[195px] flex-shrink-0 bg-white border border-zinc-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 flex flex-col justify-between group hover:border-zinc-300 transition-colors duration-300 shadow-2xs">
        <div className="flex flex-col gap-1 sm:gap-2 whitespace-normal">
          {label && (
            <span className="text-primary text-[9px] sm:text-[10px] font-bold tracking-widest uppercase mb-0.5 sm:mb-1">
@@ -89,8 +88,10 @@ function AnalyticsCard({ data, label }: { data: { title: string; description: st
          <h3 className="text-sm sm:text-base lg:text-lg font-bold text-zinc-900 leading-tight font-poppins">{data.title}</h3>
          <p className="text-zinc-500 text-[11px] sm:text-xs leading-relaxed line-clamp-2 sm:line-clamp-none">{data.description}</p>
        </div>
-       <div className="mt-3 sm:mt-6 pt-2 sm:pt-3 border-t border-zinc-100/60">
-         <span className={`font-bold font-poppins tracking-tight text-zinc-400 line-clamp-1 ${isLong ? "text-base sm:text-lg lg:text-xl" : "text-2xl sm:text-3xl lg:text-4xl"}`}>{data.kpiValue}</span>
+       <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-3 border-t border-zinc-100/80 flex items-center min-h-[36px] sm:min-h-[40px]">
+         <span className="text-lg sm:text-xl lg:text-2xl font-bold font-poppins tracking-tight text-zinc-400 group-hover:text-zinc-600 transition-colors duration-300 line-clamp-1">
+           {data.kpiValue}
+         </span>
        </div>
     </div>
   );
@@ -103,7 +104,7 @@ export default function Analytics() {
   const operationalIntelligence = analytics.operationalIntelligence || [];
 
   return (
-    <section className="w-full bg-[#fffff] text-zinc-900 pt-6 sm:pt-8 lg:pt-10 pb-8 sm:pb-12 lg:pb-14 overflow-hidden relative font-poppins">
+    <section className="w-full bg-white text-zinc-900 pt-6 sm:pt-8 lg:pt-10 pb-8 sm:pb-12 lg:pb-14 overflow-hidden relative font-poppins">
       {/* Background subtle grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-80" />
       

@@ -63,7 +63,7 @@ export const AntiMetalButton = React.forwardRef<HTMLButtonElement, AntiMetalButt
     },
     ref
   ) => {
-    const content = label ?? children ?? "Book a demo";
+    const content = label ?? children ?? "Contact Us";
 
     return (
       <button
@@ -91,7 +91,7 @@ export const AntiMetalButton = React.forwardRef<HTMLButtonElement, AntiMetalButt
           }
         `}</style>
 
-        <span className="absolute inset-y-0 right-4 flex items-center text-[14px] font-medium tracking-tight">
+        <span className="absolute inset-y-0 left-12 flex items-center text-[14px] font-medium tracking-tight whitespace-nowrap">
           {content}
         </span>
 

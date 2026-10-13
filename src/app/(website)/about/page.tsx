@@ -16,7 +16,7 @@ export default function AboutPage() {
       {/* <AboutMethodology /> */}
       <AboutDifferentiator />
       <AboutTrust />
-      <AboutPresence />
+      {/* <AboutPresence /> */}
       <AboutCta />
     </div>
   );

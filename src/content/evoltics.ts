@@ -15,7 +15,7 @@ export const evolticsContent = {
   about: {
     header: {
       title: "UAE EV Market Outlook",
-      description: "Positioned at the nexus of the UAE's green mobility vision, aligning cutting-edge CPMS infrastructure with federal electrification goals."
+      description: "Positioned at the nexus of the UAE's green mobility vision, aligning cutting-edge CSMP infrastructure with federal electrification goals."
     },
     pillars: [
       {
@@ -49,65 +49,105 @@ export const evolticsContent = {
     roadmap: {
       badge: "Regulatory & Engineering Roadmap",
       title: "National Electrification Timeline",
-      description: "Click milestones below to explore phase deliverables, grid protocols, and strategic milestones.",
+      description: "Every date a published mandate — click milestones below to explore regulatory frameworks, key deliverables, and official sources.",
       indicatorLabel: "Strategic Target Indicator",
       indicatorDesc: "National mandate priority index",
       milestones: [
         {
-          year: "2023",
+          year: "2017",
           phase: "Phase 01",
-          tag: "FOUNDATION",
+          tag: "REGULATED",
           status: "completed",
-          title: "Green Mobility Inception",
-          desc: "Dubai Green Mobility Initiative v1 launch and foundational CPO regulatory framework establishment.",
+          title: "Dubai Supreme Council Directive No. 1",
+          desc: "Directive No. 1 of 2017, Dubai Supreme Council of Energy. DEWA approval is required before any EV charging station is installed, operated or maintained in Dubai, by any public or private party.",
           deliverables: [
-            "Initial public charging network rollout",
-            "DEWA EV Green Charger integration",
-            "Unified tariff & billing sandbox"
+            "DEWA approval required",
+            "Mandatory for every installation",
+            "Enforced for public & private operators"
           ],
-          impactMetric: "Network Genesis"
+          impactMetric: "DEWA Approval Mandate",
+          sourceName: "Dubai EV Hub, Regulations",
+          sourceUrl: "https://dubaievhub.ae/regulations/"
         },
         {
-          year: "2026",
+          year: "2023",
           phase: "Phase 02",
-          tag: "EXPANSION",
-          status: "active",
-          title: "Mandatory Infrastructure",
-          desc: "Enforcement of mandatory EV charging infrastructure requirements for all new commercial and residential developments.",
+          tag: "NATIONAL POLICY",
+          status: "completed",
+          title: "UAE National EV Policy",
+          desc: "The UAE National Electric Vehicles Policy sets a 20% reduction in transport-sector energy consumption and a central national database of charging stations. A parallel federal target puts EVs at 50% of vehicles on UAE roads by 2050.",
           deliverables: [
-            "Mandatory parking bay electrification",
-            "Interoperable OCPP 2.0.1 compliance",
-            "Standardized municipal building codes"
+            "-20% transport-sector energy",
+            "Central national charger database",
+            "Federal 50% EV target by 2050"
           ],
-          impactMetric: "+350% Deployment Rate"
+          impactMetric: "-20% Transport Energy",
+          sourceName: "u.ae, National EV Policy",
+          sourceUrl: "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
+        },
+        {
+          year: "2024",
+          phase: "Phase 03",
+          tag: "LICENSING",
+          status: "active",
+          title: "EV Charging Infrastructure Regulation",
+          desc: "The EV Charging Infrastructure Regulation for the Emirate of Dubai took effect on 30 September 2024. Independent charge point operators must now be licensed by DEWA to run public charging infrastructure.",
+          deliverables: [
+            "CPO licensing mandatory",
+            "In force since 30 Sep 2024",
+            "DEWA independent operator licensing"
+          ],
+          impactMetric: "Licensed CPO Operations",
+          sourceName: "Dubai EV Hub, Regulations",
+          sourceUrl: "https://dubaievhub.ae/regulations/"
+        },
+        {
+          year: "2027",
+          phase: "Phase 04",
+          tag: "FLEET CONVERSION",
+          status: "upcoming",
+          title: "100% Eco-Friendly Taxi Fleet",
+          desc: "Dubai RTA converts the taxi fleet to 100% eco-friendly vehicles — hybrid, electric or hydrogen — by 2027, with public transport targeting net zero by 2050.",
+          deliverables: [
+            "100% eco-friendly taxi fleet",
+            "Hybrid, electric & hydrogen mix",
+            "Public transport net zero path"
+          ],
+          impactMetric: "100% Eco-Friendly Taxis",
+          sourceName: "u.ae (RTA Mandate)",
+          sourceUrl: "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
         },
         {
           year: "2030",
-          phase: "Phase 03",
-          tag: "OPTIMISATION",
+          phase: "Phase 05",
+          tag: "DEMAND",
           status: "upcoming",
-          title: "Smart Grid & V2G Integration",
-          desc: "Nationwide smart grid orchestration enabling Vehicle-to-Grid (V2G) bidirectional power flow and dynamic load balancing.",
+          title: "42,000+ EVs & Fleet Target",
+          desc: "Dubai targets more than 42,000 electric cars on its roads by 2030, and 30% of government vehicle purchases electric or hybrid. Its Green Charger network is scaling toward 1,000 stations.",
           deliverables: [
-            "V2G bidirectional energy exchange",
-            "AI-driven peak demand shifting",
-            "Automated renewable energy absorption"
+            "42,000+ electric cars on roads",
+            "30% government fleet electrified",
+            "Green Charger network to 1,000 stations"
           ],
-          impactMetric: "40% EV Adoption"
+          impactMetric: "42,000+ EVs in Dubai",
+          sourceName: "Dubai Media Office; u.ae",
+          sourceUrl: "https://mediaoffice.ae/en/news/2023/July/09-07/Dubai-green-mobility"
         },
         {
           year: "2050",
-          phase: "Phase 04",
+          phase: "Phase 06",
           tag: "NET ZERO",
           status: "target",
-          title: "100% Electrified Mobility",
-          desc: "Complete decarbonization of public, commercial, and private transport in full lockstep with the UAE Net Zero 2050 Charter.",
+          title: "Net Zero & 50% EV Share",
+          desc: "50% of vehicles on UAE roads electric, 100% of Dubai's power from clean sources, and public transport at net zero.",
           deliverables: [
-            "100% zero-emission fleet transition",
-            "Autonomous green logistics corridors",
-            "Fully closed-loop renewable grid"
+            "50% EV share on UAE roads",
+            "100% clean power in Dubai",
+            "Public transport at net zero"
           ],
-          impactMetric: "Net Zero Emissions"
+          impactMetric: "50% EV Share & Net Zero",
+          sourceName: "The National; Dubai Media Office",
+          sourceUrl: "https://www.thenationalnews.com/uae/2023/07/13/uae-aims-for-50-electric-vehicles-on-roads-by-2050/"
         }
       ]
     }
@@ -132,7 +172,7 @@ export const evolticsContent = {
         evoltics: {
           title: "ONE PARTNER",
           description: "Single point of contact for design, build, and management.",
-          details: "Turnkey accountability across licensing, hardware supply, civil works, and CPMS."
+          details: "Turnkey accountability across licensing, hardware supply, civil works, and CSMP."
         }
       },
       {
@@ -196,7 +236,7 @@ export const evolticsContent = {
       {
         num: "5",
         title: "GO-LIVE",
-        desc: "CPMS setup, testing, commissioning and operator training.",
+        desc: "CSMP setup, testing, commissioning and operator training.",
       },
       {
         num: "6",
@@ -209,7 +249,7 @@ export const evolticsContent = {
     cards: [
       {
         num: "01",
-        title: "CPMS SOFTWARE & MOBILE APP",
+        title: "CSMP SOFTWARE & MOBILE APP",
         description: "IoT-enabled EV charger management platform and driver app. Connect and control your charging infrastructure from a single system, while drivers easily find stations, start charging, and make payments via a feature-rich mobile app.",
         category: "Software & Application",
       },
@@ -260,7 +300,7 @@ export const evolticsContent = {
       {
         num: "03",
         title: "BRAND-AGNOSTIC TECHNOLOGY",
-        description: "Our CPMS works with OCPP-compliant chargers, giving businesses the flexibility to choose compatible hardware without being locked into a single brand."
+        description: "Our CSMP works with OCPP-compliant chargers, giving businesses the flexibility to choose compatible hardware without being locked into a single brand."
       },
       {
         num: "04",
@@ -269,13 +309,13 @@ export const evolticsContent = {
       },
       {
         num: "05",
-        title: "WHITE LABEL READY",
-        description: "Deploy your own branded charging network with greater control over the customer experience, platform identity and overall charging journey."
+        title: "WHITE LABELLING — DASHBOARD ONLY",
+        description: "The branding offer is the operator dashboard: your logo, your colours, your domain, for the people who manage the network. The driver app is the EVOLTICS app — one app, every EVOLTICS site — and is not rebranded per operator."
       },
       {
         num: "06",
-        title: "24/7 SUPPORT & AMC",
-        description: "Comprehensive maintenance contracts with rapid-response support, helping protect charger uptime, infrastructure performance and long-term investment."
+        title: "RAPID-RESPONSE AMC & SUPPORT",
+        description: "Comprehensive maintenance contracts with SLA-backed support and preventive servicing, helping protect charger uptime, infrastructure performance, and long-term investment."
       }
     ]
   },

@@ -8,7 +8,7 @@ import { contactContent } from "@/content/contact";
 export default function ContactHero() {
   const { hero } = contactContent;
   return (
-    <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-32 bg-background overflow-hidden flex flex-col justify-center ">
+    <section className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-24 lg:py-32 bg-background overflow-hidden flex flex-col justify-center">
       
       {/* Background Grids & Ambient Effects */}
       <div className="absolute inset-0 pointer-events-none opacity-50 z-0">
@@ -18,39 +18,44 @@ export default function ContactHero() {
       {/* Subtle Top Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-primary/5 rounded-[100%] blur-[80px] pointer-events-none z-0" />
 
-      <Container size="md" className="relative z-10 flex flex-col items-center text-center">
+      <Container size="xl" className="relative z-10 flex flex-col items-center text-center">
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6 uppercase font-display"
-        >
-          {hero.titlePart1} <br className="hidden sm:block" />
-          <span className="text-primary">{hero.titlePart2}</span>{hero.titlePart3}
-        </motion.h1>
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-foreground leading-[1.05] mb-6 uppercase font-display"
+          >
+            {hero.titlePart1} <br className="hidden sm:block" />
+            <span className="text-primary">{hero.titlePart2}</span>{hero.titlePart3}
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg sm:text-xl text-muted leading-relaxed max-w-2xl mb-12"
-        >
-          {hero.description}
-        </motion.p>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg sm:text-xl text-muted leading-relaxed max-w-2xl mb-12"
+          >
+            {hero.description}
+          </motion.p>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted animate-bounce"
-        >
-          <ArrowDown className="w-5 h-5" />
-        </motion.div>
+          {/* Scroll Indicator */}
+          <motion.button
+            type="button"
+            onClick={() => document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })}
+            aria-label="Scroll to contact form"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted hover:text-primary hover:border-primary/50 transition-colors animate-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <ArrowDown className="w-5 h-5" />
+          </motion.button>
 
+        </div>
       </Container>
     </section>
   );

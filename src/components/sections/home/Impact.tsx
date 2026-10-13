@@ -1,6 +1,5 @@
 import { ArrowRight, Cpu, Zap, Power, Target, LayoutDashboard, AlertTriangle, FileCheck, Share2 } from "lucide-react";
 import Link from "next/link";
-import { MarketingButton } from "@/design-system/primitives/actions/MarketingButton";
 import { Card } from "@/design-system/primitives/surfaces/Card";
 import { homeContent } from "@/content/home";
 import { Poppins } from "next/font/google";
@@ -32,20 +31,22 @@ export default function Impact() {
                 Operations.
               </h2>
               
-              <p className="text-base sm:text-lg text-zinc-500 mb-8 lg:mb-10 leading-relaxed max-w-md">
+              <p className="text-base sm:text-lg text-zinc-500 mb-5 sm:mb-6 leading-relaxed max-w-md">
                 {homeContent.impact.subCopy}
               </p>
               
-              <div className="inline-block">
-                <Link href="/contact#contact-form">
-                  <MarketingButton type="button" icon={ArrowRight}>
-                    {homeContent.impact.buttonLabel}
-                  </MarketingButton>
+              <div>
+                <Link
+                  href="/contact#contact-form"
+                  className="inline-flex items-center justify-center gap-2 sm:gap-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 group"
+                >
+                  <span className="leading-none translate-y-px">{homeContent.impact.buttonLabel}</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </div>
 
               {/* Side links matching screenshot */}
-              <div className="flex gap-6 sm:gap-10 mt-8 md:mt-16 lg:mt-20">
+              <div className="flex gap-6 sm:gap-8 mt-7 sm:mt-8 lg:mt-10">
                 <div className="flex flex-col gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#3B82F6] flex items-center justify-center text-white">
                     <Cpu className="w-5 h-5" />

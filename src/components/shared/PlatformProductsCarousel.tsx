@@ -36,7 +36,7 @@ const dummyProducts = [
   },
   {
     id: 5,
-    title: "Cloud CPMS Gateway",
+    title: "Cloud CSMP Gateway",
     category: "Software",
     desc: "Edge computing gateway connecting offline chargers to the cloud securely.",
     imagePlaceholder: "bg-gradient-to-br from-blue-100 to-blue-50",

@@ -21,7 +21,7 @@ export default function ContactExplore() {
     icon: iconMap[item.iconName] || Radio
   }));
   return (
-    <section className="w-full py-24 sm:py-32 bg-stone-50 font-poppins border-b border-neutral-200">
+    <section className="w-full py-16 sm:py-24 lg:py-32 bg-stone-50 font-poppins border-b border-neutral-200">
       <Container size="xl">
         
         {/* Header Section */}
@@ -30,7 +30,7 @@ export default function ContactExplore() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-neutral-900 leading-[1.1]"
+            className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-neutral-900 leading-[1.1] normal-case"
           >
             {explore.title}
           </motion.h2>
@@ -55,7 +55,7 @@ export default function ContactExplore() {
                 </div>
                 
                 {/* Content */}
-                <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-neutral-900 mb-3">
+                <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-neutral-900 mb-3 normal-case">
                   {item.title}
                 </h3>
                 

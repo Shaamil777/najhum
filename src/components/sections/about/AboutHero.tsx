@@ -24,7 +24,7 @@ export default function AboutHero() {
   };
 
   return (
-    <section className="relative w-full min-h-[65vh] flex flex-col justify-center bg-neutral-950 text-white overflow-hidden pt-20">
+    <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-between bg-neutral-950 text-white overflow-hidden pt-20 md:pt-24">
       
       {/* Video Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -96,11 +96,11 @@ export default function AboutHero() {
               const Icon = iconMap[stat.iconName] || Activity;
               return (
                 <div key={idx} className="flex flex-col items-center justify-center py-4 md:py-6 px-4 text-center group">
-                  <div className="flex items-center gap-3 mb-1">
+                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400 mb-1.5">{stat.label}</span>
+                  <div className="flex items-center gap-2.5 sm:gap-3">
                     <Icon className="w-4 h-4 md:w-5 md:h-5 text-primary opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all" />
                     <span className="text-2xl md:text-3xl font-black text-white">{stat.value}</span>
                   </div>
-                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">{stat.label}</span>
                 </div>
               )
             })}
