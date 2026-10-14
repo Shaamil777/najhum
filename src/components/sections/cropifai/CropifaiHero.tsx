@@ -126,7 +126,7 @@ export default function CropifaiHero() {
 
       {/* Logo Marquee at Bottom */}
       <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent z-20 pt-2 pb-3 sm:pb-4">
-        <ClientMarquee title={hero.marqueeText} />
+        <ClientMarquee title={hero.marqueeText} showFadeMask={false} />
       </div>
 
     </section>

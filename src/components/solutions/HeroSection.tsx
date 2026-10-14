@@ -101,7 +101,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
 
       {/* Logo Marquee at Bottom */}
       <div className="relative z-20 w-full border-t border-white/10 bg-neutral-950/70 backdrop-blur-md py-3.5">
-        <ClientMarquee />
+        <ClientMarquee showFadeMask={false} />
       </div>
     </section>
   );

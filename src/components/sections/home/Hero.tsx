@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { homeContent } from "@/content/home";
@@ -8,23 +9,41 @@ import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function Hero() {
   const { hero } = homeContent;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isMounted && videoRef.current) {
+      videoRef.current.play().catch((e) => console.log("Video playback failed:", e));
+    }
+  }, [isMounted]);
 
   return (
     <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white bg-black">
       
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
-      >
-        <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
-      </video>
+      {/* Background Video & Vignette Overlay */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0" suppressHydrationWarning>
+        {isMounted && (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            suppressHydrationWarning
+            className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+          >
+            <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
+          </video>
+        )}
 
-      {/* Vignette Overlay for readable text */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-black/85 z-0"></div>
+        {/* Vignette Overlay for readable text */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-black/85 z-0" />
+      </div>
 
       {/* Main Hero Container */}
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-5xl flex flex-col items-center text-center mt-auto mb-auto">
@@ -60,7 +79,7 @@ export default function Hero() {
 
       {/* Logo Marquee at Bottom */}
       <div className="absolute bottom-0 left-0 w-full border-t-2 border-dotted border-white/20 bg-transparent z-20 pt-2 pb-3 sm:pb-4">
-        <ClientMarquee title="TRUSTED BY COMPANIES WORLDWIDE" />
+        <ClientMarquee title="TRUSTED BY COMPANIES WORLDWIDE" showFadeMask={false} />
       </div>
     </section>
   );

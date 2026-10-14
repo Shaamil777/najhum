@@ -6,43 +6,28 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface SubItem {
+interface NavItemData {
   title: string;
   href: string;
 }
 
-interface NavItemData {
-  title: string;
-  href?: string;
-  isPlatforms?: boolean;
-  subItems?: SubItem[];
-}
-
 const navItems: NavItemData[] = [
   { title: "Home", href: "/" },
+  { title: "EVOLTICS", href: "/platforms/evoltics" },
+  { title: "IoTRICS", href: "/platforms/iotrics" },
+  { title: "CropifAI", href: "/platforms/cropifai" },
   { title: "Solutions", href: "/solutions" },
   { title: "Products", href: "/products" },
   { title: "About", href: "/about" },
-  {
-    title: "Platforms",
-    isPlatforms: true,
-    subItems: [
-      { title: "IoTRICS", href: "/platforms/iotrics" },
-      { title: "EVOLTICS", href: "/platforms/evoltics" },
-      { title: "CropifAI", href: "/platforms/cropifai" },
-    ],
-  },
-  { title: "Contact", href: "/contact" },
 ];
 
-export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: string; slug: string }> }) {
+export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: string; slug: string }> } = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const mounted = useHydrated();
-  const [platformsExpanded, setPlatformsExpanded] = useState(true);
   const pathname = usePathname();
 
   // Prevent body scrolling when mobile menu is open
@@ -145,71 +130,6 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
                 >
                   <nav className="flex flex-col space-y-1">
                     {navItems.map((item) => {
-                      if (item.isPlatforms && item.subItems) {
-                        const isPlatformsActive = pathname?.startsWith("/platforms");
-                        return (
-                          <div key={item.title} className="flex flex-col">
-                            {/* Platforms Header Toggle */}
-                            <button
-                              type="button"
-                              onClick={() => setPlatformsExpanded((prev) => !prev)}
-                              className={cn(
-                                "w-full flex items-center justify-between px-4 py-3 rounded-2xl text-left transition-colors cursor-pointer",
-                                isPlatformsActive
-                                  ? "bg-primary/10 text-primary font-bold"
-                                  : "text-neutral-800 font-semibold hover:bg-neutral-50 hover:text-primary"
-                              )}
-                            >
-                              <span className="text-sm sm:text-base tracking-wide">
-                                {item.title}
-                              </span>
-                              <ChevronDown
-                                className={cn(
-                                  "w-4 h-4 transition-transform duration-200",
-                                  platformsExpanded ? "rotate-180" : "rotate-0",
-                                  isPlatformsActive ? "text-primary" : "text-neutral-400"
-                                )}
-                              />
-                            </button>
-
-                            {/* Sub-items */}
-                            <AnimatePresence initial={false}>
-                              {platformsExpanded && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.2 }}
-                                  className="overflow-hidden flex flex-col pl-4 sm:pl-5 pr-1 py-1 space-y-1"
-                                >
-                                  {item.subItems.map((sub) => {
-                                    const isSubActive = pathname === sub.href;
-                                    return (
-                                      <Link
-                                        key={sub.href || sub.title}
-                                        href={sub.href}
-                                        onClick={close}
-                                        className={cn(
-                                          "flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors text-xs sm:text-sm font-semibold",
-                                          isSubActive
-                                            ? "bg-primary/10 text-primary font-bold"
-                                            : "text-neutral-600 hover:text-primary hover:bg-neutral-50"
-                                        )}
-                                      >
-                                        <span>{sub.title}</span>
-                                        {isSubActive && (
-                                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                                        )}
-                                      </Link>
-                                    );
-                                  })}
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        );
-                      }
-
                       const isActive =
                         item.href === "/"
                           ? pathname === "/"
@@ -217,11 +137,11 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
 
                       return (
                         <Link
-                          key={item.title}
-                          href={item.href || "#"}
+                          key={item.href}
+                          href={item.href}
                           onClick={close}
                           className={cn(
-                            "flex items-center justify-between px-4 py-3 rounded-2xl text-left transition-colors text-sm sm:text-base font-semibold",
+                            "flex items-center justify-between px-4 py-3 sm:py-3.5 rounded-2xl text-left transition-colors text-base sm:text-lg font-semibold",
                             isActive
                               ? "bg-primary/10 text-primary font-bold"
                               : "text-neutral-800 hover:bg-neutral-50 hover:text-primary"
@@ -229,7 +149,7 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
                         >
                           <span className="tracking-wide">{item.title}</span>
                           {isActive && (
-                            <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-primary shrink-0" />
                           )}
                         </Link>
                       );
@@ -247,7 +167,7 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
                   <Link
                     href="/contact"
                     onClick={close}
-                    className="w-full bg-primary hover:bg-primary-hover active:scale-[0.99] text-white font-bold py-3.5 sm:py-4 px-6 rounded-full flex items-center justify-center gap-2.5 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all text-sm sm:text-base group cursor-pointer"
+                    className="w-full bg-primary hover:bg-primary-hover active:scale-[0.99] text-white font-bold py-3.5 sm:py-4 px-6 rounded-full flex items-center justify-center gap-2.5 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all text-base sm:text-lg group cursor-pointer"
                   >
                     <span>Contact Us</span>
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-primary flex items-center justify-center shrink-0 ml-1.5 shadow-xs group-hover:translate-x-0.5 transition-transform">
