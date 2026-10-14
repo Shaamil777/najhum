@@ -37,22 +37,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   let solution = null;
   try {
-    solution = await getSolutionBySlug(slug, true);
+    solution = await getSolutionBySlug(slug, false);
   } catch (err) {
     console.error("Failed to query solution for metadata:", err);
   }
 
-  if (!solution || solution.isDraft) {
+  if (!solution) {
     return {
       title: 'Solution Not Found',
     };
   }
 
   return {
-    title: solution.title,
+    title: `${solution.title}${solution.isDraft ? ' (Draft)' : ''} | Najhum Technologies`,
     description: solution.metaDescription || solution.title,
     openGraph: {
-      title: solution.title,
+      title: `${solution.title}${solution.isDraft ? ' (Draft)' : ''}`,
       description: solution.metaDescription || solution.title,
       type: 'website',
     },
@@ -62,21 +62,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function SolutionPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // Fetch solution with published sections only
-  const solution = await getSolutionBySlug(slug, true);
+  // Fetch solution (allows draft previewing so admins and testers don't get 404)
+  let solution = null;
+  try {
+    solution = await getSolutionBySlug(slug, false);
+  } catch (error) {
+    console.error(`Failed to load solution for slug "${slug}":`, error);
+  }
 
-  // Return 404 if solution not found or is draft
-  if (!solution || solution.isDraft) {
+  // Return 404 only if solution does not exist in database
+  if (!solution) {
     notFound();
   }
 
-  // Filter and sort sections (only published, ordered by order field)
+  // Filter and sort sections (for drafts, include all configured sections; for published, show published sections)
   const sections = (solution.sections || [])
-    .filter((section) => !section.isDraft)
+    .filter((section) => !solution.isDraft ? !section.isDraft : true)
     .sort((a, b) => a.order - b.order);
 
   return (
     <main className="min-h-screen">
+      {/* Draft Notification Banner */}
+      {solution.isDraft && (
+        <div className="bg-amber-500 text-white px-4 py-2.5 text-center text-sm font-semibold flex flex-wrap items-center justify-center gap-2 sticky top-0 z-50 shadow-md">
+          <span>⚠️ Draft Mode — This solution page is currently unpublished.</span>
+          <a
+            href={`/admin/solutions/${solution.id}/edit`}
+            className="underline font-bold hover:text-amber-100 ml-1 inline-flex items-center gap-1"
+          >
+            Open in Admin Editor to Publish →
+          </a>
+        </div>
+      )}
       {/* Render sections dynamically based on type */}
       {sections.map((section) => {
         const validated = createSectionSchema.safeParse({ type: section.type, content: section.content });

@@ -88,7 +88,20 @@ export async function getSolutionBySlug(
   publishedOnly: boolean = false
 ): Promise<SolutionWithSections | null> {
   try {
-    const whereClause: Prisma.SolutionWhereInput = { slug };
+    const raw = decodeURIComponent(slug).trim();
+    const hyphenated = raw.toLowerCase().replace(/\s+/g, '-');
+
+    const orConditions: Prisma.SolutionWhereInput[] = [
+      { slug: raw },
+      { slug: { equals: raw, mode: 'insensitive' } },
+      { slug: hyphenated },
+      { slug: { equals: hyphenated, mode: 'insensitive' } },
+      { id: raw },
+    ];
+
+    const whereClause: Prisma.SolutionWhereInput = {
+      OR: orConditions,
+    };
     
     // Filter by draft status if publishedOnly is true
     if (publishedOnly) {
@@ -108,7 +121,7 @@ export async function getSolutionBySlug(
     });
   } catch (error) {
     console.error(`Failed to fetch solution by slug ${slug}:`, error);
-    throw new Error('Failed to fetch solution from database');
+    return null;
   }
 }
 
