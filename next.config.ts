@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
-const r2PublicUrl = process.env.R2_PUBLIC_URL ? new URL(process.env.R2_PUBLIC_URL) : undefined;
+let r2PublicUrl: URL | undefined;
+if (process.env.R2_PUBLIC_URL) {
+  try {
+    const raw = process.env.R2_PUBLIC_URL.trim();
+    if (raw) {
+      const formatted = raw.startsWith('http://') || raw.startsWith('https://') ? raw : `https://${raw}`;
+      r2PublicUrl = new URL(formatted);
+    }
+  } catch {
+    r2PublicUrl = undefined;
+  }
+}
 
 const nextConfig: NextConfig = {
   turbopack: { root: process.cwd() },
