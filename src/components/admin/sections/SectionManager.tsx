@@ -106,6 +106,85 @@ export default function SectionManager({ solutionId }: SectionManagerProps) {
       setIsAddingSection(false);
     }
   };
+  const handleDuplicateSection = async (sectionId: string) => {
+    const target = sections.find((s) => s.id === sectionId);
+    if (!target) return;
+    try {
+      const response = await fetch(
+        "/api/admin/solutions/" + solutionId + "/sections",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ type: target.type, content: target.content }),
+        },
+      );
+      if (!response.ok) throw new Error("Failed to duplicate section");
+      const newSection = await response.json();
+      setSections([...sections, newSection]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to duplicate section");
+    }
+  };
+  const handleApplyPreset = async (presetKey: string) => {
+    if (!presetKey) return;
+    if (sections.length > 0 && !confirm("Loading a template will add these preset sections to your current solution. Continue?")) {
+      return;
+    }
+    const presetMap: Record<string, SectionType[]> = {
+      starter: [
+        SectionType.HERO,
+        SectionType.INTRO,
+        SectionType.CHALLENGE,
+        SectionType.FEATURES,
+        SectionType.PRODUCTS_CAROUSEL,
+        SectionType.CTA,
+      ],
+      showcase: [
+        SectionType.HERO,
+        SectionType.FEATURES,
+        SectionType.PRODUCTS_CAROUSEL,
+        SectionType.SOLAAS,
+        SectionType.CTA,
+      ],
+      deepdive: [
+        SectionType.HERO,
+        SectionType.INTRO,
+        SectionType.CHALLENGE,
+        SectionType.METHODOLOGY,
+        SectionType.USE_CASES,
+        SectionType.BENEFITS,
+        SectionType.CTA,
+      ],
+    };
+    const typesToAdd = presetMap[presetKey];
+    if (!typesToAdd) return;
+    setIsAddingSection(true);
+    try {
+      const addedSections: Section[] = [];
+      for (const type of typesToAdd) {
+        const defaultContent = getDefaultContent(type);
+        const response = await fetch(
+          "/api/admin/solutions/" + solutionId + "/sections",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ type, content: defaultContent }),
+          },
+        );
+        if (response.ok) {
+          const newSection = await response.json();
+          addedSections.push(newSection);
+        }
+      }
+      setSections((prev) => [...prev, ...addedSections]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load template");
+    } finally {
+      setIsAddingSection(false);
+    }
+  };
   const handleDeleteSection = async (sectionId: string) => {
     try {
       const response = await fetch(
@@ -183,14 +262,27 @@ export default function SectionManager({ solutionId }: SectionManagerProps) {
   return (
     <div className="space-y-4">
       {" "}
-      <div className="flex justify-between items-center">
-        {" "}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <h3 className="text-lg font-semibold text-gray-900">
-          {" "}
-          Page Sections ({sections.length}){" "}
-        </h3>{" "}
-        <div className="relative">
-          {" "}
+          Page Sections ({sections.length})
+        </h3>
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            onChange={(e) => {
+              if (e.target.value) {
+                handleApplyPreset(e.target.value);
+                e.target.value = "";
+              }
+            }}
+            disabled={isAddingSection}
+            className="px-3 py-2 text-sm border border-gray-300 rounded-md bg-white text-gray-700 hover:border-gray-400 focus:ring-2 focus:ring-blue-500 disabled:opacity-50 font-medium"
+          >
+            <option value="">⚡ Load Template</option>
+            <option value="starter">Complete Starter (6 sections)</option>
+            <option value="showcase">Product & SolaaS (5 sections)</option>
+            <option value="deepdive">Deep Dive Case Study (7 sections)</option>
+          </select>
+
           <select
             onChange={(e) => {
               if (e.target.value) {
@@ -199,48 +291,49 @@ export default function SectionManager({ solutionId }: SectionManagerProps) {
               }
             }}
             disabled={isAddingSection}
-            className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+            className="px-4 py-2 border border-blue-600 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 disabled:opacity-50 text-sm font-medium"
           >
-            {" "}
-            <option value="">+ Add Section</option>{" "}
-            <option value={SectionType.HERO}>Hero</option>{" "}
-            <option value={SectionType.INTRO}>Introduction</option>{" "}
-            <option value={SectionType.CHALLENGE}>Challenge</option>{" "}
-            <option value={SectionType.FEATURES}>Features</option>{" "}
-            <option value={SectionType.BENEFITS}>Benefits</option>{" "}
-            <option value={SectionType.TESTIMONIALS}>Testimonials</option>{" "}
-            <option value={SectionType.CTA}>Call to Action</option>{" "}
-            <option value={SectionType.CUSTOM}>Custom</option>{" "}
-            <option value={SectionType.USE_CASES}>Use Cases</option>{" "}
-            <option value={SectionType.METHODOLOGY}>Methodology</option>{" "}
-            <option value={SectionType.SOLAAS}>
+            <option value="" className="text-gray-900 bg-white">+ Add Section</option>
+            <option value={SectionType.HERO} className="text-gray-900 bg-white">Hero</option>
+            <option value={SectionType.INTRO} className="text-gray-900 bg-white">Introduction</option>
+            <option value={SectionType.CHALLENGE} className="text-gray-900 bg-white">Challenge</option>
+            <option value={SectionType.FEATURES} className="text-gray-900 bg-white">Features</option>
+            <option value={SectionType.BENEFITS} className="text-gray-900 bg-white">Benefits</option>
+            <option value={SectionType.TESTIMONIALS} className="text-gray-900 bg-white">Testimonials</option>
+            <option value={SectionType.CTA} className="text-gray-900 bg-white">Call to Action</option>
+            <option value={SectionType.CUSTOM} className="text-gray-900 bg-white">Custom</option>
+            <option value={SectionType.USE_CASES} className="text-gray-900 bg-white">Use Cases</option>
+            <option value={SectionType.METHODOLOGY} className="text-gray-900 bg-white">Methodology</option>
+            <option value={SectionType.SOLAAS} className="text-gray-900 bg-white">
               SolaaS Delivery Model
-            </option>{" "}
-            <option value={SectionType.PRODUCTS_CAROUSEL}>Products Carousel</option>{" "}
-          </select>{" "}
-        </div>{" "}
-      </div>{" "}
+            </option>
+            <option value={SectionType.PRODUCTS_CAROUSEL} className="text-gray-900 bg-white">Products Carousel</option>
+            <option value={SectionType.IMAGE} className="text-gray-900 bg-white">Image Showcase</option>
+            <option value={SectionType.VIDEO} className="text-gray-900 bg-white">Video Showcase</option>
+            <option value={SectionType.GRAPH} className="text-gray-900 bg-white">Graph & Metrics</option>
+            <option value={SectionType.COMPARISON_TABLE} className="text-gray-900 bg-white">Comparison Table (Evoltics Style)</option>
+            <option value={SectionType.PRODUCT_CARD} className="text-gray-900 bg-white">Product Cards</option>
+          </select>
+        </div>
+      </div>
       {sections.length === 0 ? (
         <div className="text-center py-12 border-2 border-dashed border-gray-300 rounded-lg">
-          {" "}
           <svg
             className="mx-auto h-12 w-12 text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            {" "}
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-            />{" "}
-          </svg>{" "}
+            />
+          </svg>
           <p className="mt-2 text-sm text-gray-500">
-            {" "}
-            No sections yet. Add your first section above.{" "}
-          </p>{" "}
+            No sections yet. Add your first section or load a template above.
+          </p>
         </div>
       ) : (
         <DndContext
@@ -248,14 +341,11 @@ export default function SectionManager({ solutionId }: SectionManagerProps) {
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
-          {" "}
           <SortableContext
             items={sections.map((s) => s.id)}
             strategy={verticalListSortingStrategy}
           >
-            {" "}
             <div className="space-y-3">
-              {" "}
               {sections.map((section) => (
                 <SectionCard
                   key={section.id}
@@ -264,10 +354,11 @@ export default function SectionManager({ solutionId }: SectionManagerProps) {
                   onDelete={handleDeleteSection}
                   onUpdate={handleUpdateSection}
                   onToggleDraft={handleToggleDraft}
+                  onDuplicate={handleDuplicateSection}
                 />
-              ))}{" "}
-            </div>{" "}
-          </SortableContext>{" "}
+              ))}
+            </div>
+          </SortableContext>
         </DndContext>
       )}{" "}
     </div>
@@ -390,6 +481,96 @@ function getDefaultContent(type: SectionType): SectionContent {
       return {
         heading: "Related Products",
         description: "Explore the products that power this solution.",
+      };
+    case SectionType.IMAGE:
+      return {
+        eyebrow: "ARCHITECTURE DIAGRAM",
+        heading: "End-to-End System Integration",
+        description: "Visual breakdown of our hardware edge nodes streaming telemetry to cloud analytics.",
+        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+        altText: "System Architecture",
+        layout: "contained",
+        aspectRatio: "16:9",
+        rounded: true,
+      };
+    case SectionType.VIDEO:
+      return {
+        eyebrow: "LIVE DEMONSTRATION",
+        heading: "See The Solution In Action",
+        subheading: "Watch our telemetry and deployment framework in real-world scenarios.",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        layout: "contained",
+      };
+    case SectionType.GRAPH:
+      return {
+        eyebrow: "PERFORMANCE METRICS",
+        heading: "Quantifiable Industrial Impact",
+        description: "Benchmarking telemetry and efficiency gains against legacy setups.",
+        chartType: "bar",
+        primaryLabel: "Our Architecture",
+        secondaryLabel: "Legacy Setup",
+        dataPoints: [
+          { label: "Data Transmission Latency", value: 12, secondaryValue: 85, unit: "ms" },
+          { label: "Energy Efficiency Factor", value: 94, secondaryValue: 62, unit: "%" },
+          { label: "Uptime Availability SLA", value: 99.98, secondaryValue: 94.2, unit: "%" },
+          { label: "Deployment Speed", value: 4, secondaryValue: 24, unit: "days" },
+        ],
+        metrics: [
+          { title: "Latency Reduction", value: "-85%", change: "12ms avg", isPositive: true },
+          { title: "Annual Opex Savings", value: "38%", change: "+$120K", isPositive: true },
+          { title: "System Reliability", value: "99.98%", change: "Field Verified", isPositive: true },
+        ],
+      };
+    case SectionType.COMPARISON_TABLE:
+      return {
+        header: {
+          leftTitle: "Traditional Setup",
+          rightTitlePart1: "The Modern",
+          rightTitlePart2: "Advantage",
+          eyebrow: "Side-by-Side Comparison",
+        },
+        items: [
+          {
+            id: "comp-1",
+            traditional: {
+              title: "Fragmented Vendors",
+              description: "High Integration Complexity",
+              details: "Multi-vendor systems cause finger-pointing during network downtime and slow deployment cycles.",
+            },
+            solution: {
+              title: "Unified Turnkey Stack",
+              description: "Zero Integration Friction",
+              details: "Pre-validated hardware, edge firmware, and cloud protocols deliver instant plug-and-play operation.",
+            },
+          },
+          {
+            id: "comp-2",
+            traditional: {
+              title: "Manual Monitoring",
+              description: "Reactive Maintenance",
+              details: "Field technicians dispatched only after hardware fails, resulting in costly downtime.",
+            },
+            solution: {
+              title: "Predictive Telemetry",
+              description: "Autonomous Remediation",
+              details: "Continuous edge diagnostics detect thermal and electrical anomalies before failures occur.",
+            },
+          },
+        ],
+        footer: {
+          leftLabel: "Legacy Ongoing Cost:",
+          leftValue: "+42% Higher TCO",
+          rightLabel: "Estimated Payback:",
+          rightValue: "< 9 Months ROI",
+        },
+      };
+    case SectionType.PRODUCT_CARD:
+      return {
+        eyebrow: "COMPATIBLE HARDWARE",
+        heading: "Field-Proven Platform Products",
+        description: "Explore connected edge appliances and devices engineered to power this architecture.",
+        displayMode: "solution-tagged",
+        columns: 3,
       };
     default:
       return {};

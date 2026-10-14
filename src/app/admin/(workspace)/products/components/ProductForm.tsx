@@ -5,11 +5,23 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Package, Tag, Boxes, Upload, FileText, Loader2 } from "lucide-react";
 
+interface ProductInitialData {
+  id?: string;
+  name?: string;
+  description?: string;
+  imageUrl?: string | null;
+  brochureUrl?: string | null;
+  platforms?: string[];
+  solutions?: string[];
+  features?: unknown;
+  details?: unknown;
+}
+
 export default function ProductForm({ 
   initialData = null,
   availableSolutions = []
 }: { 
-  initialData?: any;
+  initialData?: ProductInitialData | null;
   availableSolutions?: { slug: string, title: string }[];
 }) {
   const router = useRouter();
@@ -107,8 +119,8 @@ export default function ProductForm({
       toast.success(`Product ${initialData ? "updated" : "created"} successfully`);
       router.refresh();
       router.push("/admin/products");
-    } catch (err: any) {
-      toast.error(err.message || "Failed to save product");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to save product");
     } finally {
       setIsSaving(false);
     }

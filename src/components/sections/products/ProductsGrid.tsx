@@ -1,75 +1,85 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Container } from "@/design-system/primitives/layout/Container";
 import { 
   ArrowRight, Search, ChevronDown, 
-  LayoutGrid, Radio, Router, Monitor, Settings, Box, HeadphonesIcon 
+  LayoutGrid, Radio, Router, Monitor, Box, HeadphonesIcon, Tag, Zap
 } from "lucide-react";
 import Link from "next/link";
 
-const categories = [
-  { name: "All Products", icon: LayoutGrid, count: 24, id: "All" },
-  { name: "Sensors", icon: Radio, count: 8, id: "Sensor" },
-  { name: "Network Devices", icon: Router, count: 6, id: "Hardware" },
-  { name: "Software", icon: Monitor, count: 4, id: "Software" },
-  { name: "Services", icon: Settings, count: 3, id: "Services" },
-  { name: "Accessories", icon: Box, count: 3, id: "Accessories" },
-];
+export interface ProductItem {
+  id: string | number;
+  name: string;
+  description: string;
+  category?: string;
+  categoryId?: string;
+  imageUrl?: string | null;
+  imageType?: string;
+  platforms?: string[];
+  solutions?: string[];
+  brochureUrl?: string | null;
+}
 
-const dummyProducts = [
+const fallbackProducts: ProductItem[] = [
   { 
-    id: 1, 
+    id: "1", 
     name: "NUO3 Oil Level Sensor", 
     category: "SENSOR", 
     categoryId: "Sensor",
     description: "Ultrasonic liquid level monitoring for fuel tanks and storage containers.", 
-    imageType: "sensor" 
+    imageType: "sensor",
+    platforms: ["iotrics"]
   },
   { 
-    id: 2, 
+    id: "2", 
     name: "Edge Router X1", 
     category: "HARDWARE", 
     categoryId: "Hardware",
-    description: "High-performance enterprise networking solution.", 
-    imageType: "router" 
+    description: "High-performance enterprise networking solution for industrial telemetry.", 
+    imageType: "router",
+    platforms: ["iotrics", "evoltics"]
   },
   { 
-    id: 3, 
+    id: "3", 
     name: "Data Insights Pro", 
     category: "SOFTWARE", 
     categoryId: "Software",
-    description: "Advanced analytics platform for your business needs.", 
-    imageType: "software" 
+    description: "Advanced analytics platform for remote fleet monitoring.", 
+    imageType: "software",
+    platforms: ["evoltics"]
   },
   { 
-    id: 4, 
-    name: "Cloud Migration", 
-    category: "SERVICES", 
-    categoryId: "Services",
-    description: "Seamless transition to cloud infrastructure.", 
-    imageType: "cloud" 
-  },
-  { 
-    id: 5, 
-    name: "Mounting Kit", 
-    category: "ACCESSORIES", 
-    categoryId: "Accessories",
-    description: "Complete installation accessories.", 
-    imageType: "cable" 
-  },
-  { 
-    id: 6, 
-    name: "Temperature Sensor", 
+    id: "4", 
+    name: "CropifAI Soil Probe Node", 
     category: "SENSOR", 
     categoryId: "Sensor",
-    description: "Reliable temperature monitoring.", 
-    imageType: "square_sensor" 
+    description: "Multi-depth volumetric soil moisture and temperature sensor node.", 
+    imageType: "square_sensor",
+    platforms: ["cropifai"]
+  },
+  { 
+    id: "5", 
+    name: "AC Smart Wallbox 22kW", 
+    category: "HARDWARE", 
+    categoryId: "Hardware",
+    description: "High-power connected smart AC charging station with OCPP 2.0.1.", 
+    imageType: "router",
+    platforms: ["evoltics"]
+  },
+  { 
+    id: "6", 
+    name: "Gateway Hub IoT-500", 
+    category: "HARDWARE", 
+    categoryId: "Hardware",
+    description: "LoRaWAN & Cellular industrial edge gateway.", 
+    imageType: "router",
+    platforms: ["iotrics"]
   },
 ];
 
 // Helper to render placeholder visuals based on imageType
-const renderPlaceholder = (type: string) => {
+const renderPlaceholder = (type?: string) => {
   switch (type) {
     case "sensor":
       return <div className="w-24 h-16 bg-neutral-800 rounded-md shadow-lg transform rotate-3"></div>;
@@ -78,7 +88,7 @@ const renderPlaceholder = (type: string) => {
         <div className="w-28 h-10 bg-neutral-800 rounded-sm shadow-md flex items-end justify-between px-2 pb-1 relative">
            <div className="absolute -top-6 left-4 w-1 h-6 bg-neutral-800"></div>
            <div className="absolute -top-6 right-4 w-1 h-6 bg-neutral-800"></div>
-           <div className="w-2 h-2 rounded-full bg-green-500"></div>
+           <div className="w-2 h-2 rounded-full bg-blue-500"></div>
         </div>
       );
     case "software":
@@ -87,7 +97,7 @@ const renderPlaceholder = (type: string) => {
            <div className="h-4 bg-neutral-800 w-full flex items-center px-1 gap-1">
              <div className="w-1.5 h-1.5 rounded-full bg-red-400"></div>
              <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
-             <div className="w-1.5 h-1.5 rounded-full bg-green-400"></div>
+             <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
            </div>
            <div className="flex-1 bg-neutral-50 p-2 flex gap-2">
              <div className="w-1/3 h-full bg-neutral-200 rounded-sm"></div>
@@ -98,45 +108,107 @@ const renderPlaceholder = (type: string) => {
            </div>
         </div>
       );
-    case "cloud":
+    case "square_sensor":
+      return <div className="w-20 h-20 bg-neutral-100 border border-neutral-200 rounded-xl shadow-inner flex items-center justify-center text-neutral-400 font-bold text-xl">N</div>;
+    default:
       return (
-        <div className="text-blue-200">
-           <svg width="80" height="60" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-             <path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 12.1332 20.177 10.2104 17.8687 10.0245C17.382 6.62143 14.4752 4 11 4C7.13401 4 4 7.13401 4 11C4 11.2335 4.01142 11.4645 4.03362 11.6917C2.2821 12.2981 1 13.9877 1 16C1 18.2091 2.79086 20 5 20H17.5V19Z"/>
-           </svg>
+        <div className="w-20 h-20 bg-blue-50/80 border border-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
+          <Box className="w-8 h-8" />
         </div>
       );
-    case "cable":
-      return (
-        <div className="w-20 h-20 border-[6px] border-neutral-800 rounded-full opacity-90 transform -rotate-12 scale-y-75"></div>
-      );
-    case "square_sensor":
-      return <div className="w-20 h-20 bg-neutral-100 border border-neutral-200 rounded-xl shadow-inner flex items-center justify-center text-neutral-300 font-bold text-xl">N</div>;
-    default:
-      return <div className="w-20 h-20 bg-neutral-200 rounded-md"></div>;
   }
+};
+
+interface ProductsGridProps {
+  initialProducts?: ProductItem[];
 }
 
-export default function ProductsGrid() {
+export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState<"name-asc" | "name-desc">("name-asc");
 
-  const filteredProducts = activeCategory === "All" 
-    ? dummyProducts 
-    : dummyProducts.filter(p => p.categoryId === activeCategory);
+  const allProducts = useMemo(() => {
+    if (initialProducts && initialProducts.length > 0) {
+      return initialProducts;
+    }
+    return fallbackProducts;
+  }, [initialProducts]);
+
+  // Dynamic Categories calculation
+  const categories = useMemo(() => {
+    const list = [
+      { name: "All Products", icon: LayoutGrid, id: "All" },
+      { name: "IoTRICS (IoT)", icon: Radio, id: "iotrics" },
+      { name: "EVOLTICS (EV)", icon: Zap, id: "evoltics" },
+      { name: "CropifAI (Agri)", icon: Router, id: "cropifai" },
+      { name: "Hardware", icon: Box, id: "Hardware" },
+      { name: "Software", icon: Monitor, id: "Software" },
+    ];
+
+    return list.map(cat => {
+      let count = 0;
+      if (cat.id === "All") {
+        count = allProducts.length;
+      } else if (cat.id === "iotrics" || cat.id === "evoltics" || cat.id === "cropifai") {
+        count = allProducts.filter(p => p.platforms?.includes(cat.id)).length;
+      } else {
+        count = allProducts.filter(p => 
+          p.category?.toLowerCase() === cat.id.toLowerCase() || 
+          p.categoryId?.toLowerCase() === cat.id.toLowerCase()
+        ).length;
+      }
+      return { ...cat, count };
+    });
+  }, [allProducts]);
+
+  // Filtering & Sorting
+  const filteredProducts = useMemo(() => {
+    let result = allProducts;
+
+    // Category filter
+    if (activeCategory !== "All") {
+      if (activeCategory === "iotrics" || activeCategory === "evoltics" || activeCategory === "cropifai") {
+        result = result.filter(p => p.platforms?.includes(activeCategory));
+      } else {
+        result = result.filter(p => 
+          p.category?.toLowerCase() === activeCategory.toLowerCase() || 
+          p.categoryId?.toLowerCase() === activeCategory.toLowerCase()
+        );
+      }
+    }
+
+    // Search query
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(p => 
+        p.name.toLowerCase().includes(q) || 
+        p.description.toLowerCase().includes(q)
+      );
+    }
+
+    // Sort
+    return [...result].sort((a, b) => {
+      if (sortBy === "name-asc") return a.name.localeCompare(b.name);
+      return b.name.localeCompare(a.name);
+    });
+  }, [allProducts, activeCategory, searchQuery, sortBy]);
 
   const activeCategoryName = categories.find(c => c.id === activeCategory)?.name || "All Products";
 
   return (
-    <section className="w-full bg-white py-12 lg:py-20">
-      <Container size="full" className="px-4 lg:px-12">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+    <section className="w-full bg-white py-12 lg:py-20 font-sans">
+      <Container size="full" className="px-4 lg:px-12 max-w-[1440px]">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
           
           {/* Left Sidebar */}
           <div className="w-full lg:w-[260px] shrink-0 flex flex-col gap-10">
             {/* Categories */}
             <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted mb-4 px-3">Categories</h3>
-              <ul className="flex flex-col gap-1">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4 px-3">
+                Categories & Platforms
+              </h3>
+              <ul className="flex flex-col gap-1.5">
                 {categories.map((cat) => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.id;
@@ -144,17 +216,17 @@ export default function ProductsGrid() {
                     <li key={cat.id}>
                       <button
                         onClick={() => setActiveCategory(cat.id)}
-                        className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all ${
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                           isActive 
-                            ? "bg-[#eef2ff] text-primary" 
-                            : "text-neutral-600 hover:bg-neutral-50 hover:text-foreground"
+                            ? "bg-blue-50 text-blue-600 font-semibold" 
+                            : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <Icon className={`w-5 h-5 ${isActive ? "text-primary" : "text-neutral-500"}`} />
+                          <Icon className={`w-4 h-4 ${isActive ? "text-blue-600" : "text-neutral-400"}`} />
                           <span>{cat.name}</span>
                         </div>
-                        <span className={`text-xs ${isActive ? "text-primary/70 font-semibold" : "text-neutral-400"}`}>
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${isActive ? "bg-blue-100 text-blue-700 font-bold" : "bg-neutral-100 text-neutral-500"}`}>
                           {cat.count}
                         </span>
                       </button>
@@ -165,15 +237,15 @@ export default function ProductsGrid() {
             </div>
 
             {/* Need Help Card */}
-            <div className="bg-[#f8faff] rounded-2xl p-6 flex flex-col items-start text-left">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary mb-4">
+            <div className="bg-[#f8faff] rounded-2xl p-6 border border-blue-50 flex flex-col items-start text-left">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
                 <HeadphonesIcon className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold text-foreground mb-2">Need Help?</h4>
-              <p className="text-sm text-muted mb-4 leading-relaxed">
-                Our team is here to help you find the right solution.
+              <h4 className="text-base font-bold text-neutral-900 mb-1">Need Help?</h4>
+              <p className="text-xs text-neutral-500 mb-4 leading-relaxed">
+                Connect with our platform engineering team to find the right hardware & architecture.
               </p>
-              <Link href="/contact" className="text-sm font-semibold text-primary flex items-center gap-1 hover:underline">
+              <Link href="/contact" className="text-xs font-bold text-blue-600 flex items-center gap-1 hover:underline">
                 Contact Us <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -183,13 +255,13 @@ export default function ProductsGrid() {
           <div className="flex-1">
             
             {/* Header & Controls */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-2">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-neutral-900 tracking-tight">
                   {activeCategoryName}
                 </h2>
-                <p className="text-muted text-sm">
-                  Discover our complete product lineup.
+                <p className="text-neutral-500 text-sm mt-1">
+                  Discover production-grade industrial equipment and connected platforms.
                 </p>
               </div>
               
@@ -198,76 +270,106 @@ export default function ProductsGrid() {
                   <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input 
                     type="text" 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..." 
-                    className="w-full md:w-[220px] pl-9 pr-4 py-2.5 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                    className="w-full md:w-[220px] pl-9 pr-4 py-2 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                   />
                 </div>
                 <div className="relative">
-                  <select className="appearance-none pl-4 pr-10 py-2.5 bg-white border border-neutral-200 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer">
-                    <option>Sort by</option>
-                    <option>Name (A-Z)</option>
-                    <option>Name (Z-A)</option>
+                  <select 
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as "name-asc" | "name-desc")}
+                    className="appearance-none pl-3 pr-8 py-2 bg-white border border-neutral-200 rounded-lg text-xs font-medium text-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer"
+                  >
+                    <option value="name-asc">Sort: A-Z</option>
+                    <option value="name-desc">Sort: Z-A</option>
                   </select>
-                  <ChevronDown className="w-4 h-4 text-neutral-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-3.5 h-3.5 text-neutral-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-                <span className="text-xs text-muted font-medium ml-2">{filteredProducts.length} Results</span>
+                <span className="text-xs text-neutral-400 font-medium ml-1">{filteredProducts.length} Products</span>
               </div>
             </div>
 
             {/* Product Grid */}
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                  <div key={product.id} className="group bg-white rounded-2xl p-6 border border-neutral-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                    
-                    {/* Top Tag */}
-                    <div className="mb-4">
-                       <span className="inline-block px-2.5 py-1 bg-[#eef2ff] text-primary text-[10px] font-bold tracking-wider uppercase rounded-md">
-                         {product.category}
-                       </span>
-                    </div>
+                {filteredProducts.map((product) => {
+                  const productUrl = `/products/${product.id}`;
+                  const platformLabel = product.platforms?.[0] || product.category || "Hardware";
 
-                    {/* Image Area */}
-                    <div className="w-full h-40 flex items-center justify-center mb-6">
-                       {renderPlaceholder(product.imageType)}
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex flex-col flex-1 mt-auto">
-                      <h3 className="text-lg font-bold text-foreground mb-2 leading-tight">
-                        {product.name}
-                      </h3>
-                      <p className="text-muted text-xs leading-relaxed mb-6 flex-1">
-                        {product.description}
-                      </p>
+                  return (
+                    <div 
+                      key={product.id} 
+                      className="group bg-white rounded-2xl p-5 border border-neutral-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                    >
+                      {/* Top Tag & Platforms */}
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold tracking-wider uppercase rounded-md border border-blue-100">
+                          <Tag className="w-2.5 h-2.5" />
+                          {platformLabel}
+                        </span>
+
+                        {product.platforms && product.platforms.length > 1 && (
+                          <span className="text-[10px] font-medium text-neutral-400">
+                            +{product.platforms.length - 1} more
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Image Area */}
+                      <div className="w-full h-44 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-3 mb-4 overflow-hidden relative">
+                        {product.imageUrl ? (
+                          <img
+                            src={product.imageUrl}
+                            alt={product.name}
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          renderPlaceholder(product.imageType)
+                        )}
+                      </div>
                       
-                      <div className="flex items-center justify-between">
-                        <Link 
-                          href={`/products/${product.id}`}
-                          className="text-primary text-sm font-semibold flex items-center gap-1.5 hover:underline"
-                        >
-                          Learn More <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                      {/* Content */}
+                      <div className="flex flex-col flex-1">
+                        <h3 className="text-base font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-blue-600 transition-colors line-clamp-1">
+                          {product.name}
+                        </h3>
+                        <p className="text-neutral-500 text-xs leading-relaxed mb-5 line-clamp-2 flex-1">
+                          {product.description}
+                        </p>
                         
-                        <Link 
-                          href={`/products/${product.id}`} 
-                          className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f8faff] text-primary group-hover:bg-primary group-hover:text-white transition-colors"
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
+                        <div className="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
+                          <Link 
+                            href={productUrl}
+                            className="text-blue-600 text-xs font-bold flex items-center gap-1.5 hover:underline"
+                          >
+                            Explore Product <ArrowRight className="w-3 h-3" />
+                          </Link>
+                          
+                          <Link 
+                            href={productUrl} 
+                            className="flex items-center justify-center w-7 h-7 rounded-full bg-slate-100 text-slate-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200"
+                          >
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
-              <div className="w-full py-24 flex flex-col items-center justify-center text-center bg-neutral-50 rounded-2xl border border-dashed border-neutral-200">
-                <p className="text-muted mb-2">No products found in this category.</p>
+              <div className="w-full py-20 flex flex-col items-center justify-center text-center bg-neutral-50 rounded-2xl border border-dashed border-neutral-200">
+                <p className="text-neutral-500 text-sm mb-2">No products found matching your filter.</p>
                 <button 
-                  onClick={() => setActiveCategory("All")}
-                  className="text-primary hover:underline font-medium text-sm"
+                  onClick={() => {
+                    setActiveCategory("All");
+                    setSearchQuery("");
+                  }}
+                  className="text-blue-600 hover:underline font-semibold text-xs"
                 >
-                  Clear Filters
+                  Reset Filters
                 </button>
               </div>
             )}

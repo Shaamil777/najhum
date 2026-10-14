@@ -17,6 +17,8 @@ export const createSolutionSchema = z.object({
     .string()
     .max(300, 'Meta description must be 300 characters or less')
     .optional(),
+  coverImage: z.string().optional().nullable(),
+  platforms: z.array(z.string()),
 });
 
 export const updateSolutionSchema = createSolutionSchema.partial();

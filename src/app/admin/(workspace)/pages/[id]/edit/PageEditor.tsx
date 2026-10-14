@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { ChevronDown, ChevronRight, Plus, Trash2 } from "lucide-react";
 
 // Recursive component to render a form for any JSON structure
-function DynamicFieldEditor({ path, value, onChange, fieldName }: { path: string[], value: any, onChange: (val: any) => void, fieldName: string }) {
+function DynamicFieldEditor({ path, value, onChange, fieldName }: { path: string[], value: unknown, onChange: (val: unknown) => void, fieldName: string }) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   // Handle Strings
@@ -89,7 +89,16 @@ function DynamicFieldEditor({ path, value, onChange, fieldName }: { path: string
             onClick={(e) => {
               e.stopPropagation();
               // Add a new empty item based on the structure of the first item
-              const newItem = value.length > 0 ? (typeof value[0] === 'object' ? Object.keys(value[0]).reduce((acc: any, key) => { acc[key] = typeof value[0][key] === 'string' ? '' : (Array.isArray(value[0][key]) ? [] : {}); return acc; }, {}) : "") : "";
+              const firstItem = value[0];
+              const newItem = value.length > 0
+                ? (typeof firstItem === 'object' && firstItem !== null
+                  ? Object.keys(firstItem as Record<string, unknown>).reduce((acc: Record<string, unknown>, key) => {
+                      const itemVal = (firstItem as Record<string, unknown>)[key];
+                      acc[key] = typeof itemVal === 'string' ? '' : (Array.isArray(itemVal) ? [] : {});
+                      return acc;
+                    }, {})
+                  : '')
+                : '';
               onChange([...value, newItem]);
             }}
             className="flex items-center gap-1 text-sm text-primary hover:text-primary/80"
@@ -174,11 +183,27 @@ function DynamicFieldEditor({ path, value, onChange, fieldName }: { path: string
   return null;
 }
 
-export default function PageEditor({ page }: { page: any }) {
+interface PageRecord {
+  id: string;
+  title: string;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  content: unknown;
+  [key: string]: unknown;
+}
+
+export default function PageEditor({ page }: { page: PageRecord }) {
   const router = useRouter();
-  const [contentObj, setContentObj] = useState<any>(() => {
+  const [contentObj, setContentObj] = useState<Record<string, unknown>>(() => {
     // Ensure content is parsed if it's a string from db
-    return typeof page.content === 'string' ? JSON.parse(page.content) : page.content || {};
+    if (typeof page.content === "string") {
+      try {
+        return JSON.parse(page.content);
+      } catch {
+        return {};
+      }
+    }
+    return (page.content as Record<string, unknown>) || {};
   });
   
   const [title, setTitle] = useState(page.title || "");
@@ -211,8 +236,8 @@ export default function PageEditor({ page }: { page: any }) {
       toast.success("Page updated successfully!");
       router.refresh();
       router.push("/admin/pages");
-    } catch (err: any) {
-      toast.error(err.message || "Failed to save changes");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to save changes");
     } finally {
       setIsSaving(false);
     }
@@ -273,7 +298,7 @@ export default function PageEditor({ page }: { page: any }) {
             path={[]} 
             value={contentObj} 
             fieldName="Content Root"
-            onChange={setContentObj} 
+            onChange={(val) => setContentObj((val as Record<string, unknown>) || {})} 
           />
         </div>
       </div>

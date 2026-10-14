@@ -8,6 +8,7 @@ interface Solution {
   id: string;
   title: string;
   slug: string;
+  platforms?: string[];
   isDraft: boolean;
   createdAt: string;
   updatedAt: string;
@@ -184,6 +185,9 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                   Slug
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Platforms
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -206,6 +210,33 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-500 font-mono">
                       /{solution.slug}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex flex-wrap gap-1">
+                      {solution.platforms && solution.platforms.length > 0 ? (
+                        solution.platforms.map((p) => {
+                          const tag =
+                            p === 'iotrics'
+                              ? { label: 'IoTRICS', style: 'bg-blue-50 text-blue-700 border-blue-200' }
+                              : p === 'evoltics'
+                              ? { label: 'EVOLTICS', style: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
+                              : p === 'cropifai'
+                              ? { label: 'CropifAI', style: 'bg-amber-50 text-amber-700 border-amber-200' }
+                              : { label: p, style: 'bg-gray-50 text-gray-700 border-gray-200' };
+
+                          return (
+                            <span
+                              key={p}
+                              className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${tag.style}`}
+                            >
+                              {tag.label}
+                            </span>
+                          );
+                        })
+                      ) : (
+                        <span className="text-xs text-gray-400">—</span>
+                      )}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

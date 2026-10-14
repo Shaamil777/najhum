@@ -246,6 +246,86 @@ export const productsCarouselContentSchema = z.object({
   description: z.string().max(300).optional(),
 });
 
+export const imageSectionContentSchema = z.object({
+  eyebrow: z.string().max(80).optional().or(z.literal('')),
+  heading: z.string().max(160).optional().or(z.literal('')),
+  description: z.string().max(800).optional().or(z.literal('')),
+  imageUrl: z.string().min(1, 'Image URL is required'),
+  altText: z.string().max(200).optional().or(z.literal('')),
+  caption: z.string().max(300).optional().or(z.literal('')),
+  layout: z.enum(['full-width', 'contained', 'card', 'split-left', 'split-right']).optional(),
+  aspectRatio: z.enum(['16:9', '4:3', '21:9', 'auto']).optional(),
+  rounded: z.boolean().optional(),
+});
+
+export const videoSectionContentSchema = z.object({
+  eyebrow: z.string().max(80).optional().or(z.literal('')),
+  heading: z.string().max(160).optional().or(z.literal('')),
+  subheading: z.string().max(400).optional().or(z.literal('')),
+  videoUrl: z.string().min(1, 'Video URL is required'),
+  posterUrl: z.string().optional().or(z.literal('')),
+  layout: z.enum(['contained', 'cinema', 'split-right']).optional(),
+  caption: z.string().max(300).optional().or(z.literal('')),
+});
+
+export const graphSectionContentSchema = z.object({
+  eyebrow: z.string().max(80).optional().or(z.literal('')),
+  heading: z.string().max(160).optional().or(z.literal('')),
+  description: z.string().max(800).optional().or(z.literal('')),
+  chartType: z.enum(['bar', 'comparison-bars', 'telemetry-stream']).optional(),
+  primaryLabel: z.string().max(60).optional().or(z.literal('')),
+  secondaryLabel: z.string().max(60).optional().or(z.literal('')),
+  dataPoints: z.array(z.object({
+    label: z.string().min(1, 'Label is required'),
+    value: z.number(),
+    secondaryValue: z.number().optional(),
+    unit: z.string().max(20).optional().or(z.literal('')),
+  })).min(1, 'At least one data point is required'),
+  metrics: z.array(z.object({
+    title: z.string().min(1, 'Title is required'),
+    value: z.string().min(1, 'Value is required'),
+    change: z.string().optional().or(z.literal('')),
+    isPositive: z.boolean().optional(),
+  })).optional(),
+});
+
+export const comparisonTableContentSchema = z.object({
+  header: z.object({
+    leftTitle: z.string().min(1, 'Left title is required').max(120),
+    rightTitlePart1: z.string().min(1, 'Right title part 1 is required').max(80),
+    rightTitlePart2: z.string().min(1, 'Right title part 2 is required').max(80),
+    eyebrow: z.string().max(80).optional().or(z.literal('')),
+  }),
+  items: z.array(z.object({
+    id: z.string().min(1),
+    traditional: z.object({
+      title: z.string().min(1, 'Title is required'),
+      description: z.string().min(1, 'Description is required'),
+      details: z.string().min(1, 'Details are required'),
+    }),
+    solution: z.object({
+      title: z.string().min(1, 'Title is required'),
+      description: z.string().min(1, 'Description is required'),
+      details: z.string().min(1, 'Details are required'),
+    }),
+  })).min(1, 'At least one comparison item is required'),
+  footer: z.object({
+    leftLabel: z.string().optional().or(z.literal('')),
+    leftValue: z.string().optional().or(z.literal('')),
+    rightLabel: z.string().optional().or(z.literal('')),
+    rightValue: z.string().optional().or(z.literal('')),
+  }).optional(),
+});
+
+export const productCardSectionContentSchema = z.object({
+  eyebrow: z.string().max(80).optional().or(z.literal('')),
+  heading: z.string().max(160).optional().or(z.literal('')),
+  description: z.string().max(600).optional().or(z.literal('')),
+  displayMode: z.enum(['solution-tagged', 'all', 'manual']).optional(),
+  productIds: z.array(z.string()).optional(),
+  columns: z.number().int().min(1).max(4).optional(),
+});
+
 /**
  * Create Section Schema
  * Discriminated union based on section type
@@ -299,6 +379,26 @@ export const createSectionSchema = z.discriminatedUnion('type', [
     type: z.literal(SectionType.PRODUCTS_CAROUSEL),
     content: productsCarouselContentSchema,
   }),
+  z.object({
+    type: z.literal(SectionType.IMAGE),
+    content: imageSectionContentSchema,
+  }),
+  z.object({
+    type: z.literal(SectionType.VIDEO),
+    content: videoSectionContentSchema,
+  }),
+  z.object({
+    type: z.literal(SectionType.GRAPH),
+    content: graphSectionContentSchema,
+  }),
+  z.object({
+    type: z.literal(SectionType.COMPARISON_TABLE),
+    content: comparisonTableContentSchema,
+  }),
+  z.object({
+    type: z.literal(SectionType.PRODUCT_CARD),
+    content: productCardSectionContentSchema,
+  }),
 ]);
 
 /**
@@ -318,6 +418,11 @@ export const updateSectionContentSchema = z.union([
   methodologyContentSchema.partial(),
   solaasContentSchema.partial(),
   productsCarouselContentSchema.partial(),
+  imageSectionContentSchema.partial(),
+  videoSectionContentSchema.partial(),
+  graphSectionContentSchema.partial(),
+  comparisonTableContentSchema.partial(),
+  productCardSectionContentSchema.partial(),
 ]);
 
 /**

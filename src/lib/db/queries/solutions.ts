@@ -128,6 +128,8 @@ export async function createSolution(data: {
   title: string;
   slug: string;
   metaDescription?: string;
+  coverImage?: string | null;
+  platforms?: string[];
 }): Promise<Solution> {
   try {
     return await prisma.solution.create({
@@ -135,6 +137,8 @@ export async function createSolution(data: {
         title: data.title,
         slug: data.slug,
         metaDescription: data.metaDescription,
+        coverImage: data.coverImage,
+        platforms: data.platforms || [],
         isDraft: true, // All new solutions start as drafts
       },
     });
@@ -168,15 +172,25 @@ export async function updateSolution(
   data: Partial<Omit<Solution, 'id' | 'createdAt' | 'updatedAt'>>
 ): Promise<Solution> {
   try {
+    // Build update payload explicitly to avoid spreading unknown fields
+    // that could cause Prisma validation errors
+    const updateData: Prisma.SolutionUpdateInput = {
+      updatedAt: new Date(),
+    };
+    if (data.title !== undefined) updateData.title = data.title;
+    if (data.slug !== undefined) updateData.slug = data.slug;
+    if (data.metaDescription !== undefined) updateData.metaDescription = data.metaDescription;
+    if (data.coverImage !== undefined) updateData.coverImage = data.coverImage;
+    if (data.platforms !== undefined) updateData.platforms = data.platforms;
+    if (data.isDraft !== undefined) updateData.isDraft = data.isDraft;
+
     return await prisma.solution.update({
       where: { id },
-      data: {
-        ...data,
-        updatedAt: new Date(), // Explicitly update timestamp
-      },
+      data: updateData,
     });
   } catch (error) {
-    console.error(`Failed to update solution ${id}:`, error);
+    // Log the real Prisma error for debugging
+    console.error(`Failed to update solution ${id}. Raw error:`, error);
     
     // Check for not found error
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -311,3 +325,42 @@ export async function unpublishSolution(id: string): Promise<Solution> {
     throw new Error('Failed to unpublish solution');
   }
 }
+
+/**
+ * Get published solutions tagged with a specific platform slug (e.g. 'iotrics', 'evoltics', 'cropifai')
+ * 
+ * @param platformSlug - Platform identifier
+ * @param publishedOnly - If true, only return published solutions (default: true)
+ * @returns Array of solutions matching the platform
+ */
+export async function getSolutionsByPlatform(
+  platformSlug: string,
+  publishedOnly: boolean = true
+): Promise<SolutionWithSections[]> {
+  try {
+    return await prisma.solution.findMany({
+      where: {
+        platforms: {
+          has: platformSlug,
+        },
+        ...(publishedOnly ? { isDraft: false } : {}),
+      },
+      include: {
+        sections: {
+          where: publishedOnly ? { isDraft: false } : undefined,
+          orderBy: {
+            order: 'asc',
+          },
+        },
+        images: true,
+      },
+      orderBy: {
+        updatedAt: 'desc',
+      },
+    });
+  } catch (error) {
+    console.error(`Failed to fetch solutions for platform ${platformSlug}:`, error);
+    return [];
+  }
+}
+

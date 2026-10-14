@@ -9,13 +9,11 @@ export default function NewSolutionPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [duplicateSlugError, setDuplicateSlugError] = useState(false);
 
   const handleSubmit = async (data: CreateSolutionData) => {
     try {
       setIsLoading(true);
       setError(null);
-      setDuplicateSlugError(false);
 
       const response = await fetch('/api/admin/solutions', {
         method: 'POST',
@@ -31,7 +29,6 @@ export default function NewSolutionPage() {
         
         // Handle duplicate slug error (409)
         if (response.status === 409) {
-          setDuplicateSlugError(true);
           setError('A solution with this slug already exists. Please choose a different slug.');
           return;
         }

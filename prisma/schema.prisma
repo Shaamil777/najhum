@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,24 +6,23 @@ datasource db {
   provider = "postgresql"
 }
 
-// Solution model - represents a solution page
 model Solution {
-  id              String   @id @default(cuid())
-  slug            String   @unique
+  id              String    @id @default(cuid())
+  slug            String    @unique
   title           String
   metaDescription String?
-  isDraft         Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  sections Section[]
-  images   Image[]
+  coverImage      String?
+  isDraft         Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  platforms       String[]  @default([])
+  images          Image[]
+  sections        Section[]
 
   @@index([slug])
   @@index([isDraft])
 }
 
-// Section model - represents content sections within a solution page
 model Section {
   id         String      @id @default(cuid())
   solutionId String
@@ -36,11 +32,64 @@ model Section {
   content    Json
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-
-  solution Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  solution   Solution    @relation(fields: [solutionId], references: [id], onDelete: Cascade)
 
   @@index([solutionId, order])
   @@index([solutionId, isDraft])
+}
+
+model Image {
+  id         String   @id @default(cuid())
+  solutionId String
+  url        String
+  altText    String?
+  storageKey String
+  createdAt  DateTime @default(now())
+  solution   Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@index([solutionId])
+}
+
+model PageContent {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  content         Json
+  updatedAt       DateTime @updatedAt
+  metaDescription String?
+  metaTitle       String?
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  imageUrl    String?
+  features    Json?
+  details     Json?
+  platforms   String[]
+  isDraft     Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  solutions   String[]
+  brochureUrl String?
+}
+
+model Customer {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String
+  email       String?
+  productName String?
+  brochureUrl String?
+  source      String   @default("brochure_download")
+  verified    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([phone])
+  @@index([createdAt])
 }
 
 enum SectionType {
@@ -56,69 +105,9 @@ enum SectionType {
   METHODOLOGY
   SOLAAS
   PRODUCTS_CAROUSEL
-}
-
-// Image model - represents uploaded images for solution pages
-model Image {
-  id         String   @id @default(cuid())
-  solutionId String
-  url        String
-  altText    String?
-  storageKey String
-  createdAt  DateTime @default(now())
-
-  solution Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
-
-  @@index([solutionId])
-}
-
-// PageContent model - stores raw JSON content for static hardcoded pages
-model PageContent {
-  id              String   @id @default(cuid())
-  slug            String   @unique
-  title           String
-  metaTitle       String?
-  metaDescription String?
-  content         Json
-  updatedAt       DateTime @updatedAt
-}
-
-// Product model - for managing individual products that belong to platforms
-model Product {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  imageUrl    String?
-  brochureUrl String?
-  features    Json?    // Array of feature strings or objects
-  details     Json?    // Any additional details for the product page
-  
-  // Platform relationships
-  platforms   String[] // Array of platform slugs e.g., ["evoltics", "iotrics"]
-  
-  // Solution relationships
-  solutions   String[] // Array of solution slugs
-  
-  isDraft     Boolean  @default(false)
-  order       Int      @default(0)
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-// Customer model - records verified leads who downloaded brochures or submitted contact forms
-model Customer {
-  id          String   @id @default(cuid())
-  name        String
-  phone       String
-  email       String?
-  productName String?
-  brochureUrl String?
-  source      String   @default("brochure_download")
-  verified    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([phone])
-  @@index([createdAt])
+  IMAGE
+  VIDEO
+  GRAPH
+  COMPARISON_TABLE
+  PRODUCT_CARD
 }

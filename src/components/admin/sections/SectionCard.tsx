@@ -15,6 +15,11 @@ import UseCasesSectionForm from "./forms/UseCasesSectionForm";
 import MethodologySectionForm from "./forms/MethodologySectionForm";
 import SolaasSectionForm from "./forms/SolaasSectionForm";
 import ProductsCarouselSectionForm from "./forms/ProductsCarouselSectionForm";
+import ImageSectionForm from "./forms/ImageSectionForm";
+import VideoSectionForm from "./forms/VideoSectionForm";
+import GraphSectionForm from "./forms/GraphSectionForm";
+import ComparisonTableSectionForm from "./forms/ComparisonTableSectionForm";
+import ProductCardSectionForm from "./forms/ProductCardSectionForm";
 import { createSectionSchema } from "@/lib/validation/section-schemas";
 interface Section {
   id: string;
@@ -29,6 +34,7 @@ interface SectionCardProps {
   onDelete: (sectionId: string) => Promise<void>;
   onUpdate: (sectionId: string, content: SectionContent) => Promise<void>;
   onToggleDraft: (sectionId: string, isDraft: boolean) => Promise<void>;
+  onDuplicate?: (sectionId: string) => Promise<void>;
 }
 export default function SectionCard({
   section,
@@ -36,11 +42,13 @@ export default function SectionCard({
   onDelete,
   onUpdate,
   onToggleDraft,
+  onDuplicate,
 }: SectionCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isDuplicating, setIsDuplicating] = useState(false);
   const {
     attributes,
     listeners,
@@ -57,6 +65,15 @@ export default function SectionCard({
     } finally {
       setIsDeleting(false);
       setShowDeleteDialog(false);
+    }
+  };
+  const handleDuplicate = async () => {
+    if (!onDuplicate) return;
+    setIsDuplicating(true);
+    try {
+      await onDuplicate(section.id);
+    } finally {
+      setIsDuplicating(false);
     }
   };
   const handleFormSubmit = async (data: SectionContent) => {
@@ -96,6 +113,16 @@ export default function SectionCard({
         return "bg-blue-100 text-blue-800";
       case SectionType.PRODUCTS_CAROUSEL:
         return "bg-indigo-100 text-indigo-800";
+      case SectionType.IMAGE:
+        return "bg-sky-100 text-sky-800";
+      case SectionType.VIDEO:
+        return "bg-violet-100 text-violet-800";
+      case SectionType.GRAPH:
+        return "bg-cyan-100 text-cyan-800";
+      case SectionType.COMPARISON_TABLE:
+        return "bg-amber-100 text-amber-800";
+      case SectionType.PRODUCT_CARD:
+        return "bg-emerald-100 text-emerald-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
@@ -114,6 +141,16 @@ export default function SectionCard({
       return "SolaaS Delivery Model Component";
     if (section.type === SectionType.PRODUCTS_CAROUSEL)
       return "Products Carousel";
+    if (section.type === SectionType.IMAGE)
+      return "Image Showcase";
+    if (section.type === SectionType.VIDEO)
+      return "Video Showcase";
+    if (section.type === SectionType.GRAPH)
+      return "Graph & Performance Metrics";
+    if (section.type === SectionType.COMPARISON_TABLE)
+      return "Split Comparison Table";
+    if (section.type === SectionType.PRODUCT_CARD)
+      return "Featured Product Cards";
     return "No preview available";
   };
   const renderForm = () => {
@@ -151,6 +188,16 @@ export default function SectionCard({
         return <SolaasSectionForm defaultValues={data.content} {...formProps} />;
       case SectionType.PRODUCTS_CAROUSEL:
         return <ProductsCarouselSectionForm defaultValues={data.content} {...formProps} />;
+      case SectionType.IMAGE:
+        return <ImageSectionForm defaultValues={data.content} {...formProps} />;
+      case SectionType.VIDEO:
+        return <VideoSectionForm defaultValues={data.content} {...formProps} />;
+      case SectionType.GRAPH:
+        return <GraphSectionForm defaultValues={data.content} {...formProps} />;
+      case SectionType.COMPARISON_TABLE:
+        return <ComparisonTableSectionForm defaultValues={data.content} {...formProps} />;
+      case SectionType.PRODUCT_CARD:
+        return <ProductCardSectionForm defaultValues={data.content} {...formProps} />;
       default:
         return (
           <p className="text-sm text-gray-500">
@@ -239,9 +286,21 @@ export default function SectionCard({
                 onClick={() => setIsEditing(!isEditing)}
                 className="px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-800"
               >
-                {" "}
-                {isEditing ? "Cancel" : "Edit"}{" "}
-              </button>{" "}
+                {isEditing ? "Cancel" : "Edit"}
+              </button>
+              {onDuplicate && (
+                <button
+                  onClick={handleDuplicate}
+                  disabled={isDuplicating}
+                  className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1 disabled:opacity-50"
+                  title="Duplicate this section"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  {isDuplicating ? "Copying..." : "Duplicate"}
+                </button>
+              )}{" "}
               <button
                 onClick={() => setShowDeleteDialog(true)}
                 className="px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800"

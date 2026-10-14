@@ -24,6 +24,11 @@ export enum SectionType {
   METHODOLOGY = 'METHODOLOGY',
   SOLAAS = 'SOLAAS',
   PRODUCTS_CAROUSEL = 'PRODUCTS_CAROUSEL',
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
+  GRAPH = 'GRAPH',
+  COMPARISON_TABLE = 'COMPARISON_TABLE',
+  PRODUCT_CARD = 'PRODUCT_CARD',
 }
 
 /**
@@ -256,11 +261,102 @@ export type SectionContent =
   | UseCasesContent
   | MethodologyContent
   | SolaasContent
-  | ProductsCarouselContent;
+  | ProductsCarouselContent
+  | ImageSectionContent
+  | VideoSectionContent
+  | GraphSectionContent
+  | ComparisonTableSectionContent
+  | ProductCardSectionContent;
 
 export interface ProductsCarouselContent {
   heading?: string;
   description?: string;
+}
+
+export interface ImageSectionContent {
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
+  imageUrl: string;
+  altText?: string;
+  caption?: string;
+  layout?: 'full-width' | 'contained' | 'card' | 'split-left' | 'split-right';
+  aspectRatio?: '16:9' | '4:3' | '21:9' | 'auto';
+  rounded?: boolean;
+}
+
+export interface VideoSectionContent {
+  eyebrow?: string;
+  heading?: string;
+  subheading?: string;
+  videoUrl: string;
+  posterUrl?: string;
+  layout?: 'contained' | 'cinema' | 'split-right';
+  caption?: string;
+}
+
+export interface GraphDataPoint {
+  label: string;
+  value: number;
+  secondaryValue?: number;
+  unit?: string;
+}
+
+export interface GraphMetric {
+  title: string;
+  value: string;
+  change?: string;
+  isPositive?: boolean;
+}
+
+export interface GraphSectionContent {
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
+  chartType?: 'bar' | 'comparison-bars' | 'telemetry-stream';
+  primaryLabel?: string;
+  secondaryLabel?: string;
+  dataPoints: GraphDataPoint[];
+  metrics?: GraphMetric[];
+}
+
+export interface ComparisonItem {
+  id: string;
+  traditional: {
+    title: string;
+    description: string;
+    details: string;
+  };
+  solution: {
+    title: string;
+    description: string;
+    details: string;
+  };
+}
+
+export interface ComparisonTableSectionContent {
+  header: {
+    leftTitle: string;
+    rightTitlePart1: string;
+    rightTitlePart2: string;
+    eyebrow?: string;
+  };
+  items: ComparisonItem[];
+  footer?: {
+    leftLabel?: string;
+    leftValue?: string;
+    rightLabel?: string;
+    rightValue?: string;
+  };
+}
+
+export interface ProductCardSectionContent {
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
+  displayMode?: 'solution-tagged' | 'all' | 'manual';
+  productIds?: string[];
+  columns?: number;
 }
 
 /**

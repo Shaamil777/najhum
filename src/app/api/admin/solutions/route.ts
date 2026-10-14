@@ -70,6 +70,8 @@ export async function GET(request: NextRequest) {
       id: solution.id,
       title: solution.title,
       slug: solution.slug,
+      coverImage: solution.coverImage,
+      platforms: solution.platforms,
       isDraft: solution.isDraft,
       createdAt: solution.createdAt.toISOString(),
       updatedAt: solution.updatedAt.toISOString(),
@@ -150,6 +152,9 @@ export async function POST(request: NextRequest) {
     if (!body.slug && body.title) {
       body.slug = generateSlug(body.title);
     }
+    if (!body.platforms) {
+      body.platforms = [];
+    }
     
     // Validate request body with Zod schema
     let validatedData;
@@ -177,6 +182,8 @@ export async function POST(request: NextRequest) {
         title: validatedData.title,
         slug: validatedData.slug,
         metaDescription: validatedData.metaDescription,
+        coverImage: validatedData.coverImage,
+        platforms: validatedData.platforms,
       });
       
       // Return created solution with 201 status
@@ -186,6 +193,8 @@ export async function POST(request: NextRequest) {
           slug: solution.slug,
           title: solution.title,
           metaDescription: solution.metaDescription,
+          coverImage: solution.coverImage,
+          platforms: solution.platforms,
           isDraft: solution.isDraft,
           createdAt: solution.createdAt.toISOString(),
           updatedAt: solution.updatedAt.toISOString(),

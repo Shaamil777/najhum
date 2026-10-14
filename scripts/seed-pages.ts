@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 
@@ -41,7 +41,7 @@ async function main() {
         where: { id: existingPage.id },
         data: {
           title: page.title,
-          content: page.content as any
+          content: page.content as Prisma.InputJsonValue
         }
       });
       console.log(`Updated page: ${page.title}`);
@@ -50,7 +50,7 @@ async function main() {
         data: {
           slug: page.slug,
           title: page.title,
-          content: page.content as any
+          content: page.content as Prisma.InputJsonValue
         }
       });
       console.log(`Created page: ${page.title}`);

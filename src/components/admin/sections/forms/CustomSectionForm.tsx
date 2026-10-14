@@ -12,7 +12,7 @@ interface CustomSectionFormProps {
   isLoading?: boolean;
 }
 export default function CustomSectionForm({
-  solutionId,
+  solutionId: _solutionId,
   defaultValues,
   onSubmit,
   onCancel,
@@ -28,14 +28,13 @@ export default function CustomSectionForm({
     defaultValues: defaultValues || { heading: "", bodyHtml: "" },
   });
 
-  const [rawJsonStr, setRawJsonStr] = useState("");
-  const [jsonError, setJsonError] = useState("");
-
-  useEffect(() => {
-    if (defaultValues && 'rawData' in defaultValues && defaultValues.rawData) {
-      setRawJsonStr(JSON.stringify(defaultValues.rawData, null, 2));
+  const [rawJsonStr, setRawJsonStr] = useState<string>(() => {
+    if (defaultValues && "rawData" in defaultValues && defaultValues.rawData) {
+      return JSON.stringify(defaultValues.rawData, null, 2);
     }
-  }, [defaultValues]);
+    return "";
+  });
+  const [jsonError, setJsonError] = useState("");
 
   const handleJsonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRawJsonStr(e.target.value);

@@ -8,6 +8,7 @@ import IotricsCapabilities from "@/components/sections/iotrics/IotricsCapabiliti
 import IotricsIndustries from "@/components/sections/iotrics/IotricsIndustries";
 import IotricsCta from "@/components/sections/iotrics/IotricsCta";
 import PlatformProductsServer from "@/components/shared/PlatformProductsServer";
+import PlatformSolutionsServer from "@/components/shared/PlatformSolutionsServer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,8 +34,8 @@ export default function IotricsPage() {
       <IotricsHero />
       <IotricsAbout />
       <IotricsCore />
-      {/* <IotricsMethodology /> */}
       <PlatformProductsServer platformId="iotrics" />
+      <PlatformSolutionsServer platformId="iotrics" />
       <IotricsBusinessModel />
       <IotricsCapabilities />
       <IotricsIndustries />

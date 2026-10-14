@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin Solution Detail API Routes
  * 
  * Provides GET, PUT, and DELETE endpoints for individual solution management.
@@ -88,6 +88,8 @@ export async function GET(
       title: solution.title,
       slug: solution.slug,
       metaDescription: solution.metaDescription,
+      coverImage: solution.coverImage,
+      platforms: solution.platforms,
       isDraft: solution.isDraft,
       createdAt: solution.createdAt.toISOString(),
       updatedAt: solution.updatedAt.toISOString(),
@@ -165,6 +167,8 @@ export async function PUT(
           title: solution.title,
           slug: solution.slug,
           metaDescription: solution.metaDescription,
+          coverImage: solution.coverImage,
+          platforms: solution.platforms,
           isDraft: solution.isDraft,
           createdAt: solution.createdAt.toISOString(),
           updatedAt: solution.updatedAt.toISOString(),

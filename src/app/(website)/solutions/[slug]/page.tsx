@@ -20,6 +20,11 @@ import UseCasesSection from '@/components/solutions/UseCasesSection';
 import MethodologySection from '@/components/solutions/MethodologySection';
 import SolaasSection from '@/components/solutions/SolaasSection';
 import SolutionProductsServer from '@/components/solutions/SolutionProductsServer';
+import ImageSection from '@/components/solutions/ImageSection';
+import VideoSection from '@/components/solutions/VideoSection';
+import GraphSection from '@/components/solutions/GraphSection';
+import ComparisonTableSection from '@/components/solutions/ComparisonTableSection';
+import ProductCardServer from '@/components/solutions/ProductCardServer';
 import type { Metadata } from 'next';
 import { createSectionSchema } from '@/lib/validation/section-schemas';
 
@@ -108,6 +113,21 @@ export default async function SolutionPage({ params }: PageProps) {
           case SectionType.PRODUCTS_CAROUSEL:
             return <SolutionProductsServer key={section.id} solutionSlug={solution.slug} content={validated.data.content} />;
           
+          case SectionType.IMAGE:
+            return <ImageSection key={section.id} content={validated.data.content} />;
+
+          case SectionType.VIDEO:
+            return <VideoSection key={section.id} content={validated.data.content} />;
+
+          case SectionType.GRAPH:
+            return <GraphSection key={section.id} content={validated.data.content} />;
+
+          case SectionType.COMPARISON_TABLE:
+            return <ComparisonTableSection key={section.id} content={validated.data.content} />;
+
+          case SectionType.PRODUCT_CARD:
+            return <ProductCardServer key={section.id} solutionSlug={solution.slug} content={validated.data.content} />;
+
           default:
             return null;
         }

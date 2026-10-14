@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import {
   Users,
   Search,
@@ -36,7 +36,7 @@ export default function CustomersPage() {
   const [filterSource, setFilterSource] = useState<"all" | "brochure_download" | "contact_form">("all");
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const fetchCustomers = async () => {
+  const fetchCustomers = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch("/api/admin/customers");
@@ -49,11 +49,13 @@ export default function CustomersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    // State updates occur after network I/O, not synchronously in the effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchCustomers();
-  }, []);
+  }, [fetchCustomers]);
 
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Are you sure you want to delete lead "${name}"?`)) return;

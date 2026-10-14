@@ -50,6 +50,7 @@ export default function ContactCaptcha({
   }, [onCodeChange]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const initialCode = generateRandomCode(5);
     setCode(initialCode);
