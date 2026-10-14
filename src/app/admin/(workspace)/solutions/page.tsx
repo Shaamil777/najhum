@@ -1,4 +1,5 @@
 import SolutionsList from "@/components/admin/solutions/SolutionsList";
+export const dynamic = 'force-dynamic';
 export const metadata = { title: "Solutions | Admin Console", description: "Manage solution pages" };
 export default async function AdminSolutionsPage({ searchParams }: { searchParams: Promise<{ filter?: string }> }) {
   const { filter } = await searchParams;

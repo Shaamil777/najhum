@@ -2,10 +2,23 @@ import Link from 'next/link';
 import { prisma } from '@/lib/db/prisma';
 import { Plus, Edit2, LayoutTemplate } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PagesList() {
-  const pages = await prisma.pageContent.findMany({
-    orderBy: { title: 'asc' },
-  });
+  let pages: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    updatedAt: Date;
+  }> = [];
+
+  try {
+    pages = await prisma.pageContent.findMany({
+      orderBy: { title: 'asc' },
+    });
+  } catch (error) {
+    console.error('Failed to load pages in admin:', error);
+  }
 
   return (
     <div className="space-y-6">

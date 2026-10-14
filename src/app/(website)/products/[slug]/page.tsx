@@ -13,15 +13,20 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { slug } = await params;
   const decoded = decodeURIComponent(slug);
 
-  const product = await prisma.product.findFirst({
-    where: {
-      OR: [
-        { id: slug },
-        { name: { equals: decoded.replace(/-/g, " "), mode: "insensitive" } },
-        { name: { equals: decoded, mode: "insensitive" } },
-      ],
-    },
-  });
+  let product = null;
+  try {
+    product = await prisma.product.findFirst({
+      where: {
+        OR: [
+          { id: slug },
+          { name: { equals: decoded.replace(/-/g, " "), mode: "insensitive" } },
+          { name: { equals: decoded, mode: "insensitive" } },
+        ],
+      },
+    });
+  } catch (err) {
+    console.error("Failed to query product for metadata:", err);
+  }
 
   if (!product) {
     return {

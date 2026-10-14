@@ -2,10 +2,25 @@ import Link from 'next/link';
 import { prisma } from '@/lib/db/prisma';
 import { Plus, Edit2, Package, Tag } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductsList() {
-  const products = await prisma.product.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
+  let products: Array<{
+    id: string;
+    name: string;
+    description: string;
+    imageUrl?: string | null;
+    platforms: string[];
+    createdAt: Date;
+  }> = [];
+
+  try {
+    products = await prisma.product.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  } catch (error) {
+    console.error('Failed to load products in admin:', error);
+  }
 
   return (
     <div className="space-y-6">

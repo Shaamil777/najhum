@@ -35,7 +35,12 @@ interface PageProps {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const solution = await getSolutionBySlug(slug, true);
+  let solution = null;
+  try {
+    solution = await getSolutionBySlug(slug, true);
+  } catch (err) {
+    console.error("Failed to query solution for metadata:", err);
+  }
 
   if (!solution || solution.isDraft) {
     return {

@@ -1,11 +1,19 @@
 import { prisma } from '@/lib/db/prisma';
 import ProductForm from '../components/ProductForm';
 
+export const dynamic = 'force-dynamic';
+
 export default async function NewProductPage() {
-  const availableSolutions = await prisma.solution.findMany({
-    select: { slug: true, title: true },
-    orderBy: { title: 'asc' },
-  });
+  let availableSolutions: Array<{ slug: string; title: string }> = [];
+
+  try {
+    availableSolutions = await prisma.solution.findMany({
+      select: { slug: true, title: true },
+      orderBy: { title: 'asc' },
+    });
+  } catch (error) {
+    console.error('Failed to load solutions for new product page:', error);
+  }
 
   return (
     <div className="space-y-6">

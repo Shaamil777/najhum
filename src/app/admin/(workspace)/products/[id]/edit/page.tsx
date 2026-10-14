@@ -2,18 +2,29 @@ import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/db/prisma';
 import ProductForm from '../../components/ProductForm';
 
+export const dynamic = 'force-dynamic';
+
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const [product, availableSolutions] = await Promise.all([
-    prisma.product.findUnique({
-      where: { id },
-    }),
-    prisma.solution.findMany({
-      select: { slug: true, title: true },
-      orderBy: { title: 'asc' },
-    }),
-  ]);
+  let product = null;
+  let availableSolutions: Array<{ slug: string; title: string }> = [];
+
+  try {
+    const [prod, solutions] = await Promise.all([
+      prisma.product.findUnique({
+        where: { id },
+      }),
+      prisma.solution.findMany({
+        select: { slug: true, title: true },
+        orderBy: { title: 'asc' },
+      }),
+    ]);
+    product = prod;
+    availableSolutions = solutions;
+  } catch (error) {
+    console.error('Failed to load product in admin:', error);
+  }
 
   if (!product) {
     notFound();

@@ -2,12 +2,19 @@ import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/db/prisma';
 import PageEditor from './PageEditor';
 
+export const dynamic = 'force-dynamic';
+
 export default async function EditPageServer({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const page = await prisma.pageContent.findUnique({
-    where: { id },
-  });
+  let page = null;
+  try {
+    page = await prisma.pageContent.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error('Failed to load page in admin:', error);
+  }
 
   if (!page) {
     notFound();
