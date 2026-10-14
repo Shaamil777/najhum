@@ -6,7 +6,6 @@ import { solaasContentSchema } from "@/lib/validation/section-schemas";
 import type { SolaasContent } from "@/types/section";
 import { defaultSolaasContent } from "@/content/solaas";
 import { 
-  Sparkles, 
   Plus, 
   Trash2, 
   CheckCircle2, 
@@ -44,7 +43,6 @@ export default function SolaasSectionForm({
   const watchedValues = useWatch({ control });
   const headingVal = watchedValues?.heading || "";
   const bodyTextVal = watchedValues?.bodyText || "";
-  const eyebrowVal = watchedValues?.eyebrow || "";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -70,25 +68,6 @@ export default function SolaasSectionForm({
             <span>Section Header</span>
             <span className="text-xs font-normal text-gray-500">Strict word balance</span>
           </h4>
-
-          {/* Eyebrow */}
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-xs font-medium text-gray-700">
-                Eyebrow Badge (Optional)
-              </label>
-              <span className={`text-[11px] font-mono ${eyebrowVal.length > 50 ? "text-amber-600 font-semibold" : "text-gray-400"}`}>
-                {eyebrowVal.length} / 100 chars
-              </span>
-            </div>
-            <input
-              type="text"
-              {...register("eyebrow")}
-              maxLength={100}
-              placeholder="e.g. SOLAAS DELIVERY MODEL"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4c3bcf]/20 focus:border-[#4c3bcf] outline-none"
-            />
-          </div>
 
           {/* Heading */}
           <div>

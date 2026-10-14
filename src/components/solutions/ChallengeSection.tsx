@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import type { ChallengeContent } from '@/types/section';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface ChallengeSectionProps {
   content: ChallengeContent;
@@ -12,7 +12,7 @@ interface ChallengeSectionProps {
 export default function ChallengeSection({ content }: ChallengeSectionProps) {
   const { heading, description, challenges = [] } = content;
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -108,10 +108,7 @@ export default function ChallengeSection({ content }: ChallengeSectionProps) {
 
         {/* Section Header */}
         <div className="px-6 md:px-12 lg:px-20 mb-8 sm:mb-12 shrink-0 max-w-4xl relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold tracking-widest uppercase text-primary-300 mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>INDUSTRY LANDSCAPE</span>
-          </div>
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.08] uppercase font-display [text-wrap:balance]">
             {heading}
           </h2>
@@ -176,7 +173,7 @@ function ChallengeCard({
   const bgClass = isBrandColor 
     ? "bg-gradient-to-br from-[#4c3bcf] to-[#342896] border-[#6756f5]/40 text-white" 
     : "bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-950 border-neutral-700/60 text-white";
-  
+
   const textMutedClass = isBrandColor ? "text-violet-200" : "text-neutral-300";
   const textSubtleClass = isBrandColor ? "text-violet-300" : "text-neutral-400";
   const dotClass = isBrandColor ? "bg-violet-300 shadow-[0_0_12px_rgba(167,139,250,0.8)]" : "bg-primary shadow-[0_0_12px_rgba(76,59,207,0.8)]";

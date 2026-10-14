@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import type { MethodologyContent } from "@/types/section";
-import { Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Container } from "@/design-system/primitives/layout/Container";
 
 export default function MethodologySection({ content }: { content: MethodologyContent }) {
@@ -24,15 +24,12 @@ export default function MethodologySection({ content }: { content: MethodologyCo
       <Container className="relative z-10" size="xl">
         {/* Section Header */}
         <div className="mb-16 lg:mb-20 flex flex-col items-center text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold tracking-widest uppercase text-primary-300 mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{content.eyebrow || 'PROVEN FRAMEWORK'}</span>
-          </div>
-          
+
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase font-display leading-[1.1] [text-wrap:balance]">
             {content.heading}
           </h2>
-          
+
           {content.bodyText && (
             <p className="mt-4 text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl [text-wrap:pretty]">
               {content.bodyText}
@@ -63,7 +60,7 @@ export default function MethodologySection({ content }: { content: MethodologyCo
             >
               {/* Corner Ambient Glow */}
               <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-primary/5 group-hover:bg-primary/15 transition-all duration-300 pointer-events-none" />
-              
+
               <div>
                 {/* Step Number Badge */}
                 <div className="flex items-center justify-between mb-5">
@@ -74,12 +71,12 @@ export default function MethodologySection({ content }: { content: MethodologyCo
                     Phase {i + 1}
                   </span>
                 </div>
-                
+
                 {/* Step Title (2 lines clamp) */}
                 <h3 className="text-lg font-bold text-white uppercase tracking-tight line-clamp-2 min-h-[3rem] flex items-center group-hover:text-primary-100 transition-colors">
                   {step.title}
                 </h3>
-                
+
                 {/* Step Description (4 lines clamp) */}
                 <p className="mt-3 text-sm text-neutral-400 group-hover:text-neutral-300 leading-relaxed line-clamp-4">
                   {step.description}

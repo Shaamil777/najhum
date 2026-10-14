@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { methodologyContentSchema } from "@/lib/validation/section-schemas";
 import type { MethodologyContent } from "@/types/section";
 import { 
-  Sparkles, 
   Plus, 
   Trash2, 
   CheckCircle2, 
@@ -53,7 +52,6 @@ export default function MethodologySectionForm({
   const watchedValues = useWatch({ control });
   const headingVal = watchedValues?.heading || "";
   const bodyTextVal = watchedValues?.bodyText || "";
-  const eyebrowVal = watchedValues?.eyebrow || "";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -79,28 +77,6 @@ export default function MethodologySectionForm({
             <span>Section Header</span>
             <span className="text-xs font-normal text-gray-500">Strict word balance</span>
           </h4>
-
-          {/* Eyebrow */}
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-xs font-medium text-gray-700">
-                Eyebrow Badge <span className="text-red-500">*</span>
-              </label>
-              <span className={`text-[11px] font-mono ${eyebrowVal.length > 50 ? "text-amber-600 font-semibold" : "text-gray-400"}`}>
-                {eyebrowVal.length} / 100 chars
-              </span>
-            </div>
-            <input
-              type="text"
-              {...register("eyebrow")}
-              maxLength={100}
-              placeholder="e.g. PROVEN FRAMEWORK"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4c3bcf]/20 focus:border-[#4c3bcf] outline-none"
-            />
-            {errors.eyebrow && (
-              <p className="mt-1 text-xs text-red-600">{errors.eyebrow.message}</p>
-            )}
-          </div>
 
           {/* Heading */}
           <div>

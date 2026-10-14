@@ -47,8 +47,11 @@ export interface HeroContent {
  */
 export interface IntroContent {
   heading: string;
+  headingAccent?: string;
   bodyText: string;
   image?: string;
+  secondaryImage?: string;
+  secondaryImageAlt?: string;
   eyebrow?: string;
   summary?: string;
   bodyFormat?: 'text' | 'html';
@@ -56,8 +59,19 @@ export interface IntroContent {
   imageCaption?: string;
   imagePosition?: 'left' | 'right';
   theme?: 'light' | 'dark';
-  highlights?: { title: string; description?: string }[];
+  surfaceTone?: 'warm' | 'cool' | 'white';
+  accentTone?: 'blue' | 'teal' | 'clay';
+  imageLayout?: 'single' | 'collage';
+  headingStyle?: 'uppercase' | 'sentence';
+  decorationStyle?: 'none' | 'grid' | 'lines';
+  animationStyle?: 'none' | 'subtle';
+  metricStyle?: 'cards' | 'inline';
+  featuredMetricIndex?: number;
+  featuredMetricTone?: 'soft' | 'blue';
+  buttonStyle?: 'solid' | 'outline';
+  highlights?: { title: string; description?: string; icon?: 'network' | 'layers' | 'shield' | 'cpu' | 'chart' | 'none'; tone?: 'white' | 'soft' | 'neutral' }[];
   stats?: { value: string; label: string }[];
+  flowSteps?: { label: string }[];
   buttonText?: string;
   buttonLink?: string;
 }
@@ -146,7 +160,7 @@ export interface CTAContent {
 export interface CustomContent {
   heading: string;
   bodyHtml: string;
-  rawData?: any;
+  rawData?: unknown;
 }
 
 /**
@@ -184,7 +198,7 @@ export interface UseCaseTab {
  * Use Cases Section Content
  */
 export interface UseCasesContent {
-  eyebrow: string;
+  eyebrow?: string;
   heading: string;
   tabs: UseCaseTab[];
 }
@@ -201,7 +215,7 @@ export interface MethodologyStep {
  * Methodology Section Content
  */
 export interface MethodologyContent {
-  eyebrow: string;
+  eyebrow?: string;
   heading: string;
   bodyText: string;
   steps: MethodologyStep[];

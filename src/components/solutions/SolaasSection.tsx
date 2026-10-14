@@ -9,7 +9,6 @@ import {
   RefreshCcw, 
   Layout, 
   ShieldCheck, 
-  Sparkles, 
   CheckCircle2 
 } from "lucide-react";
 import { defaultSolaasContent } from '@/content/solaas';
@@ -27,7 +26,6 @@ const SOLAAS_ICONS = [
 
 export default function SolaasSection({ content = {} }: { content?: SolaasContent }) {
   const cards = content.cards || defaultSolaasContent.cards || [];
-  const eyebrow = content.eyebrow || defaultSolaasContent.eyebrow || "SOLAAS DELIVERY MODEL";
   const heading = content.heading || defaultSolaasContent.heading;
   const bodyText = content.bodyText || defaultSolaasContent.bodyText;
 
@@ -46,10 +44,7 @@ export default function SolaasSection({ content = {} }: { content?: SolaasConten
       <Container className="relative z-10" size="xl">
         {/* Section Header */}
         <div className="mb-16 lg:mb-20 flex flex-col items-center text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold tracking-widest uppercase text-primary-300 mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{eyebrow}</span>
-          </div>
+
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase font-display leading-[1.1] [text-wrap:balance]">
             {heading}

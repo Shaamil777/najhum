@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { ArrowRight, Zap, Shield, Cpu, Cloud, BatteryCharging } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const dummyProducts = [
@@ -43,8 +42,19 @@ const dummyProducts = [
   },
 ];
 
+interface CarouselProduct {
+  id: string | number;
+  name?: string;
+  title?: string;
+  category?: string | null;
+  description?: string | null;
+  desc?: string;
+  imageUrl?: string | null;
+  imagePlaceholder?: string;
+}
+
 interface PlatformProductsCarouselProps {
-  products?: any[];
+  products?: CarouselProduct[];
   title?: string;
   eyebrow?: string;
   description?: string;
@@ -53,23 +63,21 @@ interface PlatformProductsCarouselProps {
 export default function PlatformProductsCarousel({ 
   products = dummyProducts,
   title,
-  eyebrow = "Hardware & Solutions",
   description = "Cutting-edge hardware built for reliability and scale."
 }: PlatformProductsCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   
-  // If no products exist, don't render the section
-  if (!products || products.length === 0) return null;
+  const productCount = products?.length || 0;
   
   // We duplicate the array multiple times to create a long scrolling list if there are few items
-  const duplicatedProducts = products.length < 5 
+  const duplicatedProducts = productCount === 0 ? [] : products.length < 5
     ? [...products, ...products, ...products, ...products] 
     : [...products, ...products];
 
   // Auto-scroll logic
   useEffect(() => {
-    if (isHovered) return;
+    if (isHovered || productCount === 0) return;
     
     const interval = setInterval(() => {
       if (scrollContainerRef.current) {
@@ -85,7 +93,9 @@ export default function PlatformProductsCarousel({
     }, 3500);
     
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, productCount]);
+
+  if (productCount === 0) return null;
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -107,9 +117,6 @@ export default function PlatformProductsCarousel({
       <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-8 lg:mb-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-0">
           <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
-            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-primary uppercase mb-2 sm:mb-3 block">
-              {eyebrow}
-            </span>
             <h2 className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[2.8rem] font-black tracking-tight text-foreground leading-[1.1] uppercase">
               {title || (
                 <>

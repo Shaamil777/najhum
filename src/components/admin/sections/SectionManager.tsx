@@ -284,14 +284,24 @@ function getDefaultContent(type: SectionType): SectionContent {
       };
     case SectionType.INTRO:
       return {
-        eyebrow: "THE SOLUTION",
         heading: "Introduction",
         bodyText: "Add your introduction text here",
         bodyFormat: "text",
-        imagePosition: "right",
+        imagePosition: "left",
         theme: "light",
+        surfaceTone: "white",
+        accentTone: "blue",
+        imageLayout: "collage",
+        headingStyle: "uppercase",
+        decorationStyle: "grid",
+        animationStyle: "subtle",
+        metricStyle: "cards",
+        featuredMetricIndex: 0,
+        featuredMetricTone: "soft",
+        buttonStyle: "solid",
         highlights: [],
         stats: [],
+        flowSteps: [],
       };
     case SectionType.CHALLENGE:
       return {

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { UseCasesContent } from '@/types/section';
-import { Sparkles, CheckCircle2, TrendingUp, Layers } from 'lucide-react';
+import { CheckCircle2, TrendingUp, Layers } from 'lucide-react';
 import { Container } from '@/design-system/primitives/layout/Container';
 
 export default function UseCasesSection({ content }: { content: UseCasesContent }) {
@@ -27,10 +27,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
       <Container className="relative z-10" size="xl">
         {/* Header */}
         <div className="mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold tracking-widest uppercase text-primary-300 mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{content.eyebrow || 'ENTERPRISE DEPLOYMENTS'}</span>
-          </div>
+
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase font-display leading-[1.1] mb-8 [text-wrap:balance]">
             {content.heading}
@@ -72,7 +69,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
               {/* Solution & Implementation Details */}
               <div className="lg:col-span-7 h-full flex flex-col justify-between bg-neutral-900/60 border border-neutral-800 rounded-3xl p-7 sm:p-10 backdrop-blur-md relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-36 h-36 bg-primary/5 rounded-bl-[100px] pointer-events-none group-hover:scale-110 transition-transform duration-500" />
-                
+
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />

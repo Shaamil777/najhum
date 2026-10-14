@@ -27,10 +27,15 @@ export const heroContentSchema = z.object({
 /**
  * Intro Section Content Schema
  */
+const introImageSource = z.union([z.literal(''), z.string().url('Must be a valid URL'), z.string().regex(/^\/(?!\/)/, 'Use an image URL or a local image path')]).optional();
+
 const introContentFields = z.object({
   heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
+  headingAccent: z.string().trim().max(100).optional(),
   bodyText: z.string().min(1, 'Body text is required').max(2000, 'Body text must be 2000 characters or less'),
-  image: z.union([z.literal(''), z.string().url('Must be a valid URL')]).optional(),
+  image: introImageSource,
+  secondaryImage: introImageSource,
+  secondaryImageAlt: z.string().max(200).optional(),
   eyebrow: z.string().max(60).optional(),
   summary: z.string().max(300).optional(),
   bodyFormat: z.enum(['text', 'html']).optional(),
@@ -38,14 +43,27 @@ const introContentFields = z.object({
   imageCaption: z.string().max(160).optional(),
   imagePosition: z.enum(['left', 'right']).optional(),
   theme: z.enum(['light', 'dark']).optional(),
+  surfaceTone: z.enum(['warm', 'cool', 'white']).optional(),
+  accentTone: z.enum(['blue', 'teal', 'clay']).optional(),
+  imageLayout: z.enum(['single', 'collage']).optional(),
+  headingStyle: z.enum(['uppercase', 'sentence']).optional(),
+  decorationStyle: z.enum(['none', 'grid', 'lines']).optional(),
+  animationStyle: z.enum(['none', 'subtle']).optional(),
+  metricStyle: z.enum(['cards', 'inline']).optional(),
+  featuredMetricIndex: z.number().int().min(-1).max(3).optional(),
+  featuredMetricTone: z.enum(['soft', 'blue']).optional(),
+  buttonStyle: z.enum(['solid', 'outline']).optional(),
   highlights: z.array(z.object({
     title: z.string().trim().min(1, 'Highlight title is required').max(100),
     description: z.string().max(250).optional(),
+    icon: z.enum(['network', 'layers', 'shield', 'cpu', 'chart', 'none']).optional(),
+    tone: z.enum(['white', 'soft', 'neutral']).optional(),
   })).max(4).optional(),
   stats: z.array(z.object({
     value: z.string().trim().min(1, 'Value is required').max(30),
     label: z.string().trim().min(1, 'Label is required').max(80),
-  })).max(3).optional(),
+  })).max(4).optional(),
+  flowSteps: z.array(z.object({ label: z.string().trim().min(1, 'Step label is required').max(50) })).max(6).optional(),
   buttonText: z.string().max(50).optional(),
   buttonLink: z.string().refine(
     (value) => !value || /^\/(?!\/)/.test(value) || /^#[^\s]*$/.test(value) || /^https?:\/\//i.test(value) && URL.canParse(value),
@@ -54,6 +72,13 @@ const introContentFields = z.object({
 });
 
 export const introContentSchema = introContentFields.superRefine((content, context) => {
+  if (content.headingAccent && !content.heading.toLowerCase().includes(content.headingAccent.toLowerCase())) {
+    context.addIssue({
+      code: 'custom',
+      path: ['headingAccent'],
+      message: 'Choose a phrase that appears in your heading',
+    });
+  }
   if (Boolean(content.buttonText?.trim()) !== Boolean(content.buttonLink?.trim())) {
     context.addIssue({
       code: 'custom',
@@ -117,7 +142,7 @@ const useCaseTabSchema = z.object({
  * Use Cases Section Content Schema
  */
 export const useCasesContentSchema = z.object({
-  eyebrow: z.string().max(100, 'Eyebrow must be 100 characters or less'),
+  eyebrow: z.string().max(100, 'Eyebrow must be 100 characters or less').optional(),
   heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
   tabs: z.array(useCaseTabSchema).min(1, 'At least one tab is required').max(10, 'Maximum 10 tabs allowed'),
 });
@@ -134,7 +159,7 @@ const methodologyStepSchema = z.object({
  * Methodology Section Content Schema
  */
 export const methodologyContentSchema = z.object({
-  eyebrow: z.string().max(100, 'Eyebrow must be 100 characters or less'),
+  eyebrow: z.string().max(100, 'Eyebrow must be 100 characters or less').optional(),
   heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
   bodyText: z.string().min(1, 'Body text is required').max(2000, 'Body text must be 2000 characters or less'),
   steps: z.array(methodologyStepSchema).min(1, 'At least one step is required').max(6, 'Maximum 6 steps allowed'),

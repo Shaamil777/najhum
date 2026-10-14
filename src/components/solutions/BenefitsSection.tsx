@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import type { BenefitsContent } from '@/types/section';
-import { Sparkles, TrendingUp, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { TrendingUp, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { Container } from '@/design-system/primitives/layout/Container';
 
 interface BenefitsSectionProps {
@@ -11,7 +11,7 @@ interface BenefitsSectionProps {
 }
 
 export default function BenefitsSection({ content }: BenefitsSectionProps) {
-  const { benefits = [], heading, subheading, eyebrow } = content;
+  const { benefits = [], heading, subheading } = content;
 
   if (!benefits || benefits.length === 0) {
     return null;
@@ -29,10 +29,7 @@ export default function BenefitsSection({ content }: BenefitsSectionProps) {
       <Container className="relative z-10" size="xl">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-24 flex flex-col items-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold tracking-widest uppercase text-primary-300 mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{eyebrow || 'BUSINESS IMPACT & MEASURED VALUE'}</span>
-          </div>
+
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase font-display leading-[1.1] [text-wrap:balance]">
             {heading || 'TRANSFORMATIVE RESULTS FOR ENTERPRISE OPERATORS'}

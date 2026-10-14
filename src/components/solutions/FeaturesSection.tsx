@@ -33,7 +33,7 @@ function renderFeatureIcon(iconStr?: string, index: number = 0) {
   }
 
   const normalized = iconStr.trim().toLowerCase();
-  
+
   switch (normalized) {
     case 'cpu':
     case 'processor':
@@ -84,7 +84,7 @@ function renderFeatureIcon(iconStr?: string, index: number = 0) {
 }
 
 export default function FeaturesSection({ content }: FeaturesSectionProps) {
-  const { features = [], heading, subheading, eyebrow } = content;
+  const { features = [], heading, subheading } = content;
 
   if (!features || features.length === 0) {
     return null;
@@ -101,10 +101,7 @@ export default function FeaturesSection({ content }: FeaturesSectionProps) {
       <Container className="relative z-10" size="xl">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-14 lg:mb-18 flex flex-col items-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-xs font-bold tracking-widest uppercase text-primary-300 mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{eyebrow || 'ARCHITECTURE SPECIFICATIONS'}</span>
-          </div>
+
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white uppercase font-display leading-[1.1] [text-wrap:balance]">
             {heading || 'KEY CAPABILITIES & CORE FEATURES'}

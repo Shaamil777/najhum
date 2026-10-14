@@ -33,7 +33,6 @@ export default async function SolutionProductsServer({
     <PlatformProductsCarousel 
       products={products}
       title={content?.heading || "Compatible Ecosystem Hardware"}
-      eyebrow="HARDWARE & APPLIANCES"
       description={content?.description || "Field-proven edge appliances and devices engineered specifically to power this solution."}
     />
   );

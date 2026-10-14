@@ -10,6 +10,7 @@ interface ImageUploadFieldProps {
   solutionId: string;
   required?: boolean;
   currentImageUrl?: string | null;
+  onImageChange?: (imageUrl: string) => void;
 }
 
 export function ImageUploadField({
@@ -18,6 +19,7 @@ export function ImageUploadField({
   solutionId,
   required = false,
   currentImageUrl,
+  onImageChange,
 }: ImageUploadFieldProps) {
   const { setValue, formState: { errors } } = useFormContext();
   const [uploading, setUploading] = useState(false);
@@ -57,7 +59,8 @@ export function ImageUploadField({
       const data = await response.json();
       
       // Update form value with image URL
-      setValue(name, data.url, { shouldValidate: true });
+      setValue(name, data.url, { shouldValidate: true, shouldDirty: true });
+      onImageChange?.(data.url);
     } catch (error) {
       console.error('Image upload error:', error);
       alert(error instanceof Error ? error.message : 'Failed to upload image');
@@ -104,7 +107,8 @@ export function ImageUploadField({
 
   const handleBrowseSelect = (imageUrl: string) => {
     setPreview(imageUrl);
-    setValue(name, imageUrl, { shouldValidate: true });
+    setValue(name, imageUrl, { shouldValidate: true, shouldDirty: true });
+    onImageChange?.(imageUrl);
   };
 
   return (

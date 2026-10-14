@@ -7,7 +7,6 @@ import { heroContentSchema } from "@/lib/validation/section-schemas";
 import type { HeroContent } from "@/types/section";
 import { ImageUploadField } from "@/components/admin/ui/ImageUploadField";
 import { 
-  Sparkles, 
   ArrowRight, 
   Eye, 
   EyeOff, 
@@ -59,7 +58,6 @@ export default function HeroSectionForm({
   const watchedValues = useWatch({ control });
   const headingVal = watchedValues.heading || "";
   const subheadingVal = watchedValues.subheading || "";
-  const badgeVal = watchedValues.badge || "";
   const bgImgVal = watchedValues.backgroundImage || "";
   const ctaTextVal = watchedValues.ctaText || "Get Started";
   const ctaLinkVal = watchedValues.ctaLink || "#";
@@ -132,18 +130,6 @@ export default function HeroSectionForm({
 
               {/* Content */}
               <div className="relative z-10 max-w-xl mx-auto">
-                {badgeVal ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-primary/40 bg-primary/20 text-[10px] font-semibold tracking-wider uppercase text-primary-200 mb-3">
-                    <span className="w-1 h-1 rounded-full bg-primary animate-pulse" />
-                    {badgeVal}
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-medium tracking-wider uppercase text-neutral-400 mb-3">
-                    <Sparkles className="w-2.5 h-2.5 text-primary" />
-                    ENTERPRISE ARCHITECTURE
-                  </span>
-                )}
-
                 <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-tight leading-tight line-clamp-3 text-white">
                   {headingVal || "Headline text will appear here"}
                 </h2>
@@ -170,35 +156,6 @@ export default function HeroSectionForm({
         )}
 
         <fieldset disabled={isLoading} className="space-y-6">
-          {/* Eyebrow / Badge */}
-          <div className="p-4 rounded-xl border border-gray-200 bg-white space-y-4">
-            <h4 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#4c3bcf]" />
-              Eyebrow Badge & Accents
-            </h4>
-
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="text-xs font-medium text-gray-700">
-                  Top Capsule Badge (Optional)
-                </label>
-                <span className={`text-[11px] font-mono ${badgeVal.length > 50 ? "text-amber-600 font-bold" : "text-gray-400"}`}>
-                  {badgeVal.length} / 60 chars
-                </span>
-              </div>
-              <input
-                type="text"
-                {...register("badge")}
-                maxLength={60}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4c3bcf]/20 focus:border-[#4c3bcf] outline-none"
-                placeholder="e.g. ENTERPRISE TELEMETRY ENGINE"
-              />
-              {errors.badge && (
-                <p className="mt-1 text-xs text-red-600">{errors.badge.message}</p>
-              )}
-            </div>
-          </div>
-
           {/* Heading & Subheading */}
           <div className="p-4 rounded-xl border border-gray-200 bg-white space-y-4">
             <h4 className="text-sm font-semibold text-gray-900 flex items-center justify-between">

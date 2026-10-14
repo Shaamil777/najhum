@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { HeroContent } from '@/types/section';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ClientMarquee from '@/components/ui/ClientMarquee';
 
 interface HeroSectionProps {
@@ -12,7 +12,6 @@ export default function HeroSection({ content }: HeroSectionProps) {
   const {
     heading,
     subheading,
-    badge,
     backgroundImage,
     ctaText,
     ctaLink,
@@ -53,19 +52,6 @@ export default function HeroSection({ content }: HeroSectionProps) {
 
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto flex-grow pt-32 pb-16 sm:pt-40 sm:pb-24">
-        {/* Optional Eyebrow / Badge */}
-        {badge ? (
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wider uppercase text-primary-200 mb-6 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span>{badge}</span>
-          </div>
-        ) : (
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-semibold tracking-wider uppercase text-neutral-300 mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span>ENTERPRISE ARCHITECTURE</span>
-          </div>
-        )}
-
         {/* Heading with strict balance and fluid typography */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] uppercase font-display max-w-4xl mx-auto [text-wrap:balance]">
           {heading}

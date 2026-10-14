@@ -67,7 +67,7 @@ const product = {
   ]
 };
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
+export default function ProductDetailPage() {
   // In a real scenario, fetch product by slug here.
   const [activeImage, setActiveImage] = useState(product.images[0]);
 
