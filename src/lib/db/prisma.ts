@@ -55,9 +55,28 @@ const logConfig = process.env.NODE_ENV === 'production'
 
 const connectionString = getConnectionString(process.env.DATABASE_URL);
 
+// Pool sizing:
+// - Serverless (e.g. Vercel): 2 connections per lambda to prevent overwhelming the pooler across concurrent lambdas.
+// - Development & long-running servers: 10 connections to allow concurrent queries without queuing.
+const maxPoolSize = process.env.VERCEL ? 2 : 10;
+
 const prismaClientSingleton = () => {
-  const pool = new pg.Pool({ connectionString });
-  const adapter = new PrismaPg(pool);
+  // Reuse existing pool if available (survives hot-reloads in dev)
+  if (!globalForPrisma.pool) {
+    globalForPrisma.pool = new pg.Pool({
+      connectionString,
+      max: maxPoolSize,
+      idleTimeoutMillis: 30_000,
+      connectionTimeoutMillis: 10_000,
+    });
+
+    // Log pool errors to prevent unhandled rejections
+    globalForPrisma.pool.on('error', (err) => {
+      console.error('Unexpected pg.Pool error:', err.message);
+    });
+  }
+
+  const adapter = new PrismaPg(globalForPrisma.pool);
   return new PrismaClient({
     adapter,
     log: logConfig as Array<'query' | 'error' | 'warn' | 'info'>,
