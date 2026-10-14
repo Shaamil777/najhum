@@ -14,11 +14,14 @@ import { SectionType } from '@/types/section';
  * Hero Section Content Schema
  */
 export const heroContentSchema = z.object({
-  heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
-  subheading: z.string().min(1, 'Subheading is required').max(300, 'Subheading must be 300 characters or less'),
-  backgroundImage: z.string().url('Must be a valid URL').optional(),
-  ctaText: z.string().min(1, 'CTA text is required').max(50, 'CTA text must be 50 characters or less'),
+  heading: z.string().min(1, 'Heading is required').max(150, 'Heading must be 150 characters or less'),
+  subheading: z.string().min(1, 'Subheading is required').max(350, 'Subheading must be 350 characters or less'),
+  badge: z.string().max(60, 'Badge must be 60 characters or less').optional().or(z.literal('')),
+  backgroundImage: z.union([z.literal(''), z.string().url('Must be a valid URL')]).optional(),
+  ctaText: z.string().min(1, 'CTA text is required').max(40, 'CTA text must be 40 characters or less'),
   ctaLink: z.string().min(1, 'CTA link is required'),
+  secondaryCtaText: z.string().max(40, 'Secondary CTA text must be 40 characters or less').optional().or(z.literal('')),
+  secondaryCtaLink: z.string().optional().or(z.literal('')),
 });
 
 /**
@@ -73,6 +76,9 @@ const featureSchema = z.object({
  * Features Section Content Schema
  */
 export const featuresContentSchema = z.object({
+  eyebrow: z.string().max(60).optional().or(z.literal('')),
+  heading: z.string().max(150).optional().or(z.literal('')),
+  subheading: z.string().max(350).optional().or(z.literal('')),
   features: z.array(featureSchema).min(1, 'At least one feature is required').max(12, 'Maximum 12 features allowed'),
 });
 
@@ -153,13 +159,18 @@ export const solaasContentSchema = z.object({
 const benefitSchema = z.object({
   title: z.string().min(1, 'Benefit title is required').max(100, 'Benefit title must be 100 characters or less'),
   description: z.string().min(1, 'Benefit description is required').max(500, 'Benefit description must be 500 characters or less'),
-  image: z.string().url('Must be a valid URL').optional(),
+  image: z.union([z.literal(''), z.string().url('Must be a valid URL')]).optional(),
+  metricValue: z.string().max(30).optional().or(z.literal('')),
+  metricLabel: z.string().max(80).optional().or(z.literal('')),
 });
 
 /**
  * Benefits Section Content Schema
  */
 export const benefitsContentSchema = z.object({
+  eyebrow: z.string().max(60).optional().or(z.literal('')),
+  heading: z.string().max(150).optional().or(z.literal('')),
+  subheading: z.string().max(350).optional().or(z.literal('')),
   benefits: z.array(benefitSchema).min(1, 'At least one benefit is required').max(8, 'Maximum 8 benefits allowed'),
 });
 

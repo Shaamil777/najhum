@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/db/prisma";
 
 interface ContactRequestBody {
   fullName: string;
@@ -115,6 +116,22 @@ export async function POST(request: NextRequest) {
       solution: solution.trim(),
       goals: goals.trim(),
     });
+
+    // Save to database
+    try {
+      await prisma.customer.create({
+        data: {
+          name: fullName.trim(),
+          phone: fullPhoneNumber,
+          email: email.trim(),
+          productName: solution?.trim() || undefined,
+          source: "contact_form",
+          verified: true,
+        },
+      });
+    } catch (dbErr) {
+      console.error("Failed to save contact lead to database:", dbErr);
+    }
 
     return NextResponse.json({
       success: true,

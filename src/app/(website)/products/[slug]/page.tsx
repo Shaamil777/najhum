@@ -126,7 +126,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <Button className="gap-2">
                 Request a Quote <ArrowRight className="w-4 h-4" />
               </Button>
-              <BrochureDownloadButton brochureUrl={product.brochureUrl} />
+              <BrochureDownloadButton
+                brochureUrl={product.brochureUrl}
+                productName={product.name}
+              />
             </div>
 
             <div>
@@ -217,7 +220,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <p className="text-neutral-600 mb-8 max-w-2xl mx-auto">
             Get the complete product brochure, including full technical specifications, compliance certificates, and detailed dimension drawings.
           </p>
-          <BrochureDownloadButton brochureUrl={product.brochureUrl} size="lg" className="bg-neutral-900 text-white hover:bg-neutral-800" />
+          <BrochureDownloadButton
+            brochureUrl={product.brochureUrl}
+            productName={product.name}
+            size="lg"
+            className="bg-neutral-900 text-white hover:bg-neutral-800"
+          />
         </div>
 
       </div>

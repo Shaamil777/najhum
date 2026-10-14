@@ -186,7 +186,7 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
                                     const isSubActive = pathname === sub.href;
                                     return (
                                       <Link
-                                        key={sub.title}
+                                        key={sub.href || sub.title}
                                         href={sub.href}
                                         onClick={close}
                                         className={cn(

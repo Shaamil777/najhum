@@ -106,7 +106,7 @@ export default async function SolutionPage({ params }: PageProps) {
             return <SolaasSection key={section.id} content={validated.data.content} />;
           
           case SectionType.PRODUCTS_CAROUSEL:
-            return <SolutionProductsServer key={section.id} solutionSlug={solution.slug} />;
+            return <SolutionProductsServer key={section.id} solutionSlug={solution.slug} content={validated.data.content} />;
           
           default:
             return null;

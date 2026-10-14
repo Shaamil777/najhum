@@ -1,20 +1,23 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FileText, X } from "lucide-react";
 
 interface BrochureDownloadButtonProps {
   brochureUrl?: string | null;
+  productName?: string;
   className?: string;
   size?: "sm" | "md" | "lg";
 }
 
 export default function BrochureDownloadButton({
   brochureUrl,
+  productName,
   className = "",
-  size = "md"
+  size = "md",
 }: BrochureDownloadButtonProps) {
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<"phone" | "otp">("phone");
@@ -33,6 +36,7 @@ export default function BrochureDownloadButton({
       setShowModal(true);
       setStep("phone");
       setError("");
+      setName("");
       setPhone("");
       setOtp("");
     }
@@ -40,7 +44,11 @@ export default function BrochureDownloadButton({
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phone) {
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (!phone.trim()) {
       setError("Please enter a valid phone number.");
       return;
     }
@@ -55,8 +63,9 @@ export default function BrochureDownloadButton({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to send OTP");
       setStep("otp");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to send OTP";
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -74,17 +83,24 @@ export default function BrochureDownloadButton({
       const res = await fetch("/api/verify/check-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, code: otp }),
+        body: JSON.stringify({
+          phone,
+          code: otp,
+          name: name.trim(),
+          productName,
+          brochureUrl,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Invalid OTP");
-      
+
       // Success
       localStorage.setItem("is_phone_verified", "true");
       setShowModal(false);
       window.open(brochureUrl!, "_blank");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Invalid OTP";
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -92,9 +108,9 @@ export default function BrochureDownloadButton({
 
   return (
     <>
-      <Button 
-        onClick={handleDownloadClick} 
-        variant="outline" 
+      <Button
+        onClick={handleDownloadClick}
+        variant="outline"
         size={size}
         className={`gap-2 ${className}`}
       >
@@ -104,22 +120,21 @@ export default function BrochureDownloadButton({
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden relative">
-            <button 
+            <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
-            
+
             <div className="p-6 sm:p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {step === "phone" ? "Verify your number" : "Enter Verification Code"}
+                {step === "phone" ? "WhatsApp Verification" : "Enter Verification Code"}
               </h2>
               <p className="text-gray-500 mb-6">
-                {step === "phone" 
-                  ? "Please enter your phone number to download the brochure."
-                  : `We sent a verification code to ${phone}.`
-                }
+                {step === "phone"
+                  ? "Enter your name and mobile number with country code to receive your OTP and download the brochure."
+                  : `We sent a 6-digit verification code to ${phone}.`}
               </p>
 
               {error && (
@@ -132,7 +147,20 @@ export default function BrochureDownloadButton({
                 <form onSubmit={handleSendOtp} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number (include country code)
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. John Doe"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone Number (include country code) *
                     </label>
                     <input
                       type="tel"
@@ -143,8 +171,8 @@ export default function BrochureDownloadButton({
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Sending..." : "Send Code"}
+                  <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
+                    {loading ? "Sending..." : "Send Verification Code"}
                   </Button>
                 </form>
               ) : (
@@ -163,15 +191,15 @@ export default function BrochureDownloadButton({
                       maxLength={6}
                     />
                   </div>
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Verifying..." : "Verify & Download"}
+                  <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
+                    {loading ? "Verifying..." : "Verify & Download Brochure"}
                   </Button>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setStep("phone")}
-                    className="w-full text-center text-sm text-blue-600 hover:text-blue-800 mt-4 font-medium"
+                    className="w-full text-center text-sm text-blue-600 hover:text-blue-800 mt-4 font-medium cursor-pointer"
                   >
-                    Change phone number
+                    Change details
                   </button>
                 </form>
               )}

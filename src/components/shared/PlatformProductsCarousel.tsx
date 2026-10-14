@@ -43,7 +43,19 @@ const dummyProducts = [
   },
 ];
 
-export default function PlatformProductsCarousel({ products = dummyProducts }: { products?: any[] }) {
+interface PlatformProductsCarouselProps {
+  products?: any[];
+  title?: string;
+  eyebrow?: string;
+  description?: string;
+}
+
+export default function PlatformProductsCarousel({ 
+  products = dummyProducts,
+  title,
+  eyebrow = "Hardware & Solutions",
+  description = "Cutting-edge hardware built for reliability and scale."
+}: PlatformProductsCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   
@@ -90,23 +102,27 @@ export default function PlatformProductsCarousel({ products = dummyProducts }: {
   };
 
   return (
-    <section className="w-full py-24 lg:py-32 bg-surface relative overflow-hidden font-sans">
+    <section className="w-full py-20 lg:py-28 bg-surface relative overflow-hidden font-sans border-b border-border">
       
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-0 lg:mb-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-0 lg:mb-0">
+      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-8 lg:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-0">
           <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
             <span className="text-[10px] sm:text-xs font-bold tracking-widest text-primary uppercase mb-2 sm:mb-3 block">
-              Hardware & Solutions
+              {eyebrow}
             </span>
-            <h2 className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase">
-              Explore Our <br className="hidden sm:block" />
-              <span className="text-primary font-black">Product Range</span>
+            <h2 className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[2.8rem] font-black tracking-tight text-foreground leading-[1.1] uppercase">
+              {title || (
+                <>
+                  Explore Our <br className="hidden sm:block" />
+                  <span className="text-primary font-black">Product Range</span>
+                </>
+              )}
             </h2>
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-4 mt-2 md:mt-0">
             <p className="text-muted text-[13px] sm:text-base lg:text-lg max-w-sm italic text-center md:text-left hidden md:block mr-0 md:mr-6">
-              Cutting-edge EV charging hardware built for reliability and scale.
+              {description}
             </p>
             {/* Slider Navigation Buttons (Hidden on Mobile & Tablet) */}
             <div className="hidden lg:flex gap-3">

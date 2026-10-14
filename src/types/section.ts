@@ -33,9 +33,12 @@ export enum SectionType {
 export interface HeroContent {
   heading: string;
   subheading: string;
+  badge?: string;
   backgroundImage?: string;
   ctaText: string;
   ctaLink: string;
+  secondaryCtaText?: string;
+  secondaryCtaLink?: string;
 }
 
 /**
@@ -73,6 +76,9 @@ export interface Feature {
  * Multiple feature items in a grid/list
  */
 export interface FeaturesContent {
+  eyebrow?: string;
+  heading?: string;
+  subheading?: string;
   features: Feature[];
 }
 
@@ -83,6 +89,8 @@ export interface Benefit {
   title: string;
   description: string;
   image?: string;
+  metricValue?: string;
+  metricLabel?: string;
 }
 
 /**
@@ -90,6 +98,9 @@ export interface Benefit {
  * Multiple benefits with optional images
  */
 export interface BenefitsContent {
+  eyebrow?: string;
+  heading?: string;
+  subheading?: string;
   benefits: Benefit[];
 }
 
@@ -109,6 +120,9 @@ export interface Testimonial {
  * Customer testimonials/reviews
  */
 export interface TestimonialsContent {
+  eyebrow?: string;
+  heading?: string;
+  subheading?: string;
   testimonials: Testimonial[];
 }
 

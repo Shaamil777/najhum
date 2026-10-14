@@ -105,3 +105,20 @@ model Product {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+// Customer model - records verified leads who downloaded brochures or submitted contact forms
+model Customer {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String
+  email       String?
+  productName String?
+  brochureUrl String?
+  source      String   @default("brochure_download")
+  verified    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([phone])
+  @@index([createdAt])
+}

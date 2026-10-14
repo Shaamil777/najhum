@@ -117,7 +117,7 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
               {items.map((item) => {
                 const isChildActive = pathname === item.href;
                 return (
-                  <Stack key={item.title} gap="xs">
+                  <Stack key={item.href || item.title} gap="xs">
                     <DesignLink
                       href={item.href} onClick={() => setIsOpen(false)}
                       underline="never"

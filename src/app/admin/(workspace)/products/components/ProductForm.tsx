@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Package, Tag, Boxes } from "lucide-react";
+import { Package, Tag, Boxes, Upload, FileText, Loader2 } from "lucide-react";
 
 export default function ProductForm({ 
   initialData = null,
@@ -21,6 +21,42 @@ export default function ProductForm({
   const [brochureUrl, setBrochureUrl] = useState(initialData?.brochureUrl || "");
   const [platforms, setPlatforms] = useState<string[]>(initialData?.platforms || []);
   const [solutions, setSolutions] = useState<string[]>(initialData?.solutions || []);
+
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingBrochure, setUploadingBrochure] = useState(false);
+
+  const handleUpload = async (
+    file: File,
+    folder: string,
+    onSuccess: (url: string) => void,
+    setLoading: (b: boolean) => void
+  ) => {
+    try {
+      setLoading(true);
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("folder", folder);
+
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: fd,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Upload failed");
+      }
+
+      const data = await res.json();
+      onSuccess(data.url);
+      toast.success("Uploaded successfully to Cloudflare R2!");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to upload file";
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const PLATFORMS = [
     { id: "evoltics", label: "Evoltics Platform" },
@@ -109,28 +145,88 @@ export default function ProductForm({
 
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">
-            Image URL
+            Product Image
           </label>
-          <input
-            type="url"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="https://..."
-            className="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
-          />
+          <div className="flex gap-2">
+            <input
+              type="url"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              placeholder="https://... or upload image"
+              className="flex-1 px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+            />
+            <label className="inline-flex items-center gap-1.5 px-3 py-2 border border-slate-300 rounded-md bg-white hover:bg-slate-50 text-slate-700 text-sm font-medium cursor-pointer shadow-sm shrink-0">
+              {uploadingImage ? (
+                <Loader2 size={16} className="animate-spin text-primary" />
+              ) : (
+                <Upload size={16} />
+              )}
+              <span>{uploadingImage ? "Uploading..." : "Upload Image"}</span>
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                disabled={uploadingImage}
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) handleUpload(f, "products", setImageUrl, setUploadingImage);
+                }}
+              />
+            </label>
+          </div>
+          {imageUrl && (
+            <div className="mt-2 flex items-center gap-3 p-2 bg-slate-50 rounded-lg border border-slate-200">
+              <img src={imageUrl} alt="Product preview" className="w-12 h-12 object-cover rounded" />
+              <span className="text-xs text-slate-600 truncate flex-1">{imageUrl}</span>
+            </div>
+          )}
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">
-            Brochure PDF URL
+            Brochure PDF
           </label>
-          <input
-            type="url"
-            value={brochureUrl}
-            onChange={(e) => setBrochureUrl(e.target.value)}
-            placeholder="https://.../brochure.pdf"
-            className="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
-          />
+          <div className="flex gap-2">
+            <input
+              type="url"
+              value={brochureUrl}
+              onChange={(e) => setBrochureUrl(e.target.value)}
+              placeholder="https://.../brochure.pdf or upload PDF"
+              className="flex-1 px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+            />
+            <label className="inline-flex items-center gap-1.5 px-3 py-2 border border-slate-300 rounded-md bg-white hover:bg-slate-50 text-slate-700 text-sm font-medium cursor-pointer shadow-sm shrink-0">
+              {uploadingBrochure ? (
+                <Loader2 size={16} className="animate-spin text-primary" />
+              ) : (
+                <FileText size={16} />
+              )}
+              <span>{uploadingBrochure ? "Uploading..." : "Upload PDF"}</span>
+              <input
+                type="file"
+                accept="application/pdf"
+                className="hidden"
+                disabled={uploadingBrochure}
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) handleUpload(f, "brochures", setBrochureUrl, setUploadingBrochure);
+                }}
+              />
+            </label>
+          </div>
+          {brochureUrl && (
+            <div className="mt-2 flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600">
+              <FileText size={16} className="text-primary shrink-0" />
+              <span className="truncate flex-1">{brochureUrl}</span>
+              <a
+                href={brochureUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary font-semibold hover:underline shrink-0"
+              >
+                Preview PDF
+              </a>
+            </div>
+          )}
         </div>
 
         <div className="border-t border-slate-200 pt-6">
@@ -161,7 +257,7 @@ export default function ProductForm({
               <Boxes size={16} className="text-indigo-500" /> Link to Solutions
             </label>
             <p className="text-xs text-slate-500 mb-3">
-              If you add a "Products Carousel" section to any of these Solutions, this product will appear there.
+              If you add a &quot;Products Carousel&quot; section to any of these Solutions, this product will appear there.
             </p>
             <div className="flex gap-3 flex-wrap max-h-60 overflow-y-auto p-1">
               {availableSolutions.map((sol) => (

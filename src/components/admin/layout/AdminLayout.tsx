@@ -13,7 +13,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const dialogRef = useRef<HTMLDialogElement>(null);
   const mainRef = useRef<HTMLElement>(null);
   const isNew = pathname === "/admin/solutions/new";
-  const pageLabel = pathname === "/admin/dashboard" ? "Overview" : pathname.startsWith("/admin/pages") ? "Pages" : isNew ? "New solution" : pathname.endsWith("/edit") ? "Edit solution" : "Solutions";
+  const pageLabel =
+    pathname === "/admin/dashboard"
+      ? "Overview"
+      : pathname.startsWith("/admin/customers")
+      ? "Customers & Leads"
+      : pathname.startsWith("/admin/products")
+      ? "Products"
+      : pathname.startsWith("/admin/pages")
+      ? "Pages"
+      : isNew
+      ? "New solution"
+      : pathname.endsWith("/edit")
+      ? "Edit solution"
+      : "Solutions";
 
   useEffect(() => {
     const dialog = dialogRef.current;
