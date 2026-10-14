@@ -20,12 +20,12 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
       {/* Background Split (Desktop Only) matching Evoltics style */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">
         {/* Left Side: Traditional */}
-        <div className="w-1/2 bg-white relative overflow-hidden">
+        <div className="w-1/2 bg-white relative overflow-hidden comparison-bg-left">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-slate-100/60 rounded-full blur-[120px]" />
         </div>
         {/* Right Side: Modern Solution */}
-        <div className="w-1/2 bg-blue-50/40 relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-500/10 rounded-full blur-[120px]" />
+        <div className="w-1/2 bg-blue-50/40 relative overflow-hidden comparison-bg-right">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[120px]" />
         </div>
       </div>
 
@@ -91,13 +91,13 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
           {/* RIGHT COLUMN: Modern Platform Solution */}
           <div className="py-24 xl:py-32 flex flex-col items-start bg-transparent">
             {header.eyebrow && (
-              <span className="text-xs font-bold tracking-widest uppercase text-blue-600 mb-3 text-left w-full">
+              <span className="text-xs font-bold tracking-widest uppercase text-primary mb-3 text-left w-full">
                 Proven Advantage
               </span>
             )}
             <h2 className="text-3xl xl:text-4xl font-extrabold tracking-tight text-slate-900 mb-14 text-left w-full">
               {header.rightTitlePart1}{" "}
-              <span className="text-blue-600 italic font-serif font-normal">
+              <span className="text-primary italic font-serif font-normal">
                 {header.rightTitlePart2}
               </span>
             </h2>
@@ -116,14 +116,14 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    className={`bg-[#f6f9fc] backdrop-blur-sm border border-blue-200/60 shadow-[0_8px_30px_rgb(37,99,235,0.06)] rounded-[2rem] p-7 max-w-[420px] w-full transition-transform hover:-translate-y-1 ${staggerClass}`}
+                    className={`bg-[#f6f9fc] backdrop-blur-sm border border-primary/20 shadow-[0_8px_30px_rgb(37,99,235,0.06)] rounded-[2rem] p-7 max-w-[420px] w-full transition-transform hover:-translate-y-1 ${staggerClass}`}
                   >
                     <div className="flex items-start gap-3.5">
-                      <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                         <Check className="w-3.5 h-3.5 stroke-[3]" />
                       </div>
                       <div>
-                        <span className="text-[11px] font-bold tracking-wider text-blue-600 uppercase mb-1.5 block">
+                        <span className="text-[11px] font-bold tracking-wider text-primary uppercase mb-1.5 block">
                           {item.solution.title}
                         </span>
                         <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug">
@@ -142,9 +142,9 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
             {/* Right Col Bottom Tag */}
             {footer?.rightLabel && (
               <div className="mt-12 w-full max-w-[400px] text-left">
-                <p className="text-xs text-blue-700/80">
+                <p className="text-xs text-primary/80">
                   {footer.rightLabel}{" "}
-                  <span className="font-bold text-blue-700">{footer.rightValue}</span>
+                  <span className="font-bold text-primary">{footer.rightValue}</span>
                 </p>
               </div>
             )}
@@ -154,12 +154,12 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
         {/* ════════════════════════════════════════════════════════════════════════
             MOBILE COMBINED VIEW (< lg)
            ════════════════════════════════════════════════════════════════════════ */}
-        <div className="flex lg:hidden flex-col items-center px-4 sm:px-6 py-16 bg-blue-50/20">
+        <div className="flex lg:hidden flex-col items-center px-4 sm:px-6 py-16 bg-blue-50/20 comparison-mobile-container">
           
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 mb-8 text-center w-full">
             {header.leftTitle}{" "}
             <span className="text-slate-400 font-normal">vs</span>{" "}
-            <span className="text-blue-600 italic font-serif">
+            <span className="text-primary italic font-serif">
               {header.rightTitlePart1} {header.rightTitlePart2}
             </span>
           </h2>
@@ -189,11 +189,11 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
 
                 {/* Solution Side */}
                 <div className="w-full md:w-1/2 md:pl-6 flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3 h-3 stroke-[3]" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold tracking-wider text-blue-600 uppercase mb-1 block">
+                    <span className="text-[10px] font-bold tracking-wider text-primary uppercase mb-1 block">
                       {header.rightTitlePart1}: {item.solution.title}
                     </span>
                     <h4 className="text-sm font-bold text-slate-900 leading-snug">

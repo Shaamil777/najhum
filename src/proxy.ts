@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/lib/auth/jwt';
+import { requireAdmin, requireSameOrigin } from '@/lib/auth/require-admin';
+import { handleApiError } from '@/lib/utils/api-error';
 
 export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  if (pathname.startsWith('/api/admin/') && pathname !== '/api/admin/auth/login') {
+    try {
+      await requireAdmin(request);
+      if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method)) requireSameOrigin(request);
+      return addSecurityHeaders(NextResponse.next());
+    } catch (error) { return addSecurityHeaders(handleApiError(error)); }
+  }
 
   // Protect all /admin routes except /admin/login
   if (pathname.startsWith('/admin')) {
@@ -59,6 +69,8 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Next.js requires unsafe-inline and unsafe-eval
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // Tailwind and Google Fonts require unsafe-inline
       "img-src 'self' data: https: blob:",
+      "media-src 'self' https: blob:",
+      "frame-src 'self' https://www.youtube-nocookie.com https://player.vimeo.com",
       "font-src 'self' data: https://fonts.gstatic.com",
       "connect-src 'self'",
       "frame-ancestors 'none'",

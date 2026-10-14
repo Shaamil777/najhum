@@ -8,6 +8,7 @@
  */
 
 import { prisma } from '../prisma';
+import { draftKey } from '@/lib/builder/document';
 import { Solution, Section, Prisma } from '@prisma/client';
 
 /**
@@ -230,10 +231,9 @@ export async function updateSolution(
  */
 export async function deleteSolution(id: string): Promise<Solution> {
   try {
-    // Prisma will cascade delete sections and images automatically
-    // due to onDelete: Cascade in schema
-    return await prisma.solution.delete({
-      where: { id },
+    return await prisma.$transaction(async tx => {
+      await tx.pageContent.deleteMany({ where: { slug: draftKey(id) } });
+      return tx.solution.delete({ where: { id } });
     });
   } catch (error) {
     console.error(`Failed to delete solution ${id}:`, error);

@@ -49,7 +49,7 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           {eyebrow && (
-            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-blue-100">
+            <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
               {eyebrow}
             </span>
           )}
@@ -84,17 +84,17 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
                 >
                   {/* Top Platform Tag */}
                   <div className="flex items-center justify-between gap-2 mb-4 relative z-10">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-blue-700 text-[10px] font-bold tracking-wider uppercase rounded-full border border-blue-200/50 shadow-xs">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-primary text-[10px] font-bold tracking-wider uppercase rounded-full border border-primary/20 shadow-xs">
                       <Tag className="w-2.5 h-2.5" />
                       {product.platforms?.[0] || "Hardware"}
                     </span>
-                    <div className="w-7 h-7 rounded-full bg-white/90 text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs">
+                    <div className="w-7 h-7 rounded-full bg-white/90 text-slate-400 group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
 
                   {/* Image Display */}
-                  <div className="w-full h-44 rounded-2xl bg-white border border-blue-100/60 flex items-center justify-center p-4 mb-5 overflow-hidden relative shadow-xs">
+                  <div className="w-full h-44 rounded-2xl bg-white border border-primary/10 flex items-center justify-center p-4 mb-5 overflow-hidden relative shadow-xs">
                     {product.imageUrl ? (
                       <img
                         src={product.imageUrl}
@@ -102,7 +102,7 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
                         className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="flex flex-col items-center justify-center text-blue-300">
+                      <div className="flex flex-col items-center justify-center text-primary/40">
                         <Box className="w-12 h-12" />
                       </div>
                     )}
@@ -110,14 +110,14 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
 
                   {/* Product Details */}
                   <div className="flex flex-col flex-1 relative z-10">
-                    <h3 className="text-lg font-extrabold text-slate-900 mb-2 leading-snug group-hover:text-blue-700 transition-colors line-clamp-1">
+                    <h3 className="text-lg font-extrabold text-slate-900 mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-1">
                       {product.name}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed font-medium line-clamp-2 mb-5 flex-1">
                       {product.description}
                     </p>
 
-                    <div className="pt-3 border-t border-blue-200/50 flex items-center justify-between text-blue-600 font-bold text-xs">
+                    <div className="pt-3 border-t border-primary/20 flex items-center justify-between text-primary font-bold text-xs">
                       <span>View Product Specifications</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>

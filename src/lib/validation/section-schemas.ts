@@ -9,18 +9,21 @@
 
 import { z } from 'zod';
 import { SectionType } from '@/types/section';
+import { isSafeMediaUrl } from '@/lib/utils/content-url';
+
+const mediaUrlSchema = z.string().refine(isSafeMediaUrl, 'Use a local image path or an http(s) URL.');
 
 /**
  * Hero Section Content Schema
  */
 export const heroContentSchema = z.object({
-  heading: z.string().min(1, 'Heading is required').max(150, 'Heading must be 150 characters or less'),
+  heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
   subheading: z.string().min(1, 'Subheading is required').max(350, 'Subheading must be 350 characters or less'),
   badge: z.string().max(60, 'Badge must be 60 characters or less').optional().or(z.literal('')),
-  backgroundImage: z.union([z.literal(''), z.string().url('Must be a valid URL')]).optional(),
-  ctaText: z.string().min(1, 'CTA text is required').max(40, 'CTA text must be 40 characters or less'),
+  backgroundImage: z.union([z.literal(''), z.string().url('Must be a valid URL'), mediaUrlSchema]).optional(),
+  ctaText: z.string().min(1, 'CTA text is required').max(50, 'CTA text must be 50 characters or less'),
   ctaLink: z.string().min(1, 'CTA link is required'),
-  secondaryCtaText: z.string().max(40, 'Secondary CTA text must be 40 characters or less').optional().or(z.literal('')),
+  secondaryCtaText: z.string().max(50, 'Secondary CTA text must be 50 characters or less').optional().or(z.literal('')),
   secondaryCtaLink: z.string().optional().or(z.literal('')),
 });
 
@@ -184,7 +187,7 @@ export const solaasContentSchema = z.object({
 const benefitSchema = z.object({
   title: z.string().min(1, 'Benefit title is required').max(100, 'Benefit title must be 100 characters or less'),
   description: z.string().min(1, 'Benefit description is required').max(500, 'Benefit description must be 500 characters or less'),
-  image: z.union([z.literal(''), z.string().url('Must be a valid URL')]).optional(),
+  image: z.union([z.literal(''), z.string().url('Must be a valid URL'), mediaUrlSchema]).optional(),
   metricValue: z.string().max(30).optional().or(z.literal('')),
   metricLabel: z.string().max(80).optional().or(z.literal('')),
 });
@@ -207,7 +210,7 @@ const testimonialSchema = z.object({
   author: z.string().min(1, 'Author name is required').max(100, 'Author name must be 100 characters or less'),
   role: z.string().min(1, 'Role is required').max(100, 'Role must be 100 characters or less'),
   company: z.string().min(1, 'Company is required').max(100, 'Company must be 100 characters or less'),
-  avatar: z.string().url('Must be a valid URL').optional(),
+  avatar: z.union([z.literal(''), z.string().url('Must be a valid URL'), mediaUrlSchema]).optional(),
 });
 
 /**

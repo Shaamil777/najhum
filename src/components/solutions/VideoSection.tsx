@@ -50,7 +50,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
   return (
     <section className="relative w-full py-16 lg:py-24 bg-slate-900 text-white overflow-hidden font-sans">
       {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className={`mx-auto px-4 sm:px-6 lg:px-8 relative z-10 ${layout === "cinema" ? "max-w-full px-0" : "max-w-[1440px]"}`}>
         
@@ -58,7 +58,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
         {(heading || eyebrow || subheading) && (
           <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-14 px-4">
             {eyebrow && (
-              <span className="inline-block px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-blue-500/20">
+              <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
                 {eyebrow}
               </span>
             )}
@@ -95,7 +95,7 @@ export default function VideoSection({ content }: VideoSectionProps) {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors" />
-              <div className="relative z-10 w-20 h-20 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
+              <div className="relative z-10 w-20 h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-primary-hover transition-all duration-300">
                 <Play className="w-8 h-8 fill-current ml-1" />
               </div>
             </div>

@@ -1,3 +1,4 @@
+import RichText from './RichText';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { HeroContent } from '@/types/section';
@@ -46,21 +47,21 @@ export default function HeroSection({ content }: HeroSectionProps) {
         />
 
         {/* Multi-layered Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/30 to-neutral-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(10,10,10,0.8)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/30 to-neutral-950 hero-gradient-overlay" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(10,10,10,0.8)_100%)] hero-radial-overlay" />
       </div>
 
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto flex-grow pt-32 pb-16 sm:pt-40 sm:pb-24">
         {/* Heading with strict balance and fluid typography */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] uppercase font-display max-w-4xl mx-auto [text-wrap:balance]">
-          {heading}
+          <RichText value={heading} />
         </h1>
 
         {/* Subheading with bound width and readability */}
-        <p className="mt-6 text-base sm:text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto leading-relaxed [text-wrap:pretty]">
-          {subheading}
-        </p>
+        <div className="mt-6 text-base sm:text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto leading-relaxed [text-wrap:pretty]">
+          <RichText as="div" value={subheading} />
+        </div>
 
         {/* Call to Actions */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto mt-8 sm:mt-10">

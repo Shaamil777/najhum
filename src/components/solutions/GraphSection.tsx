@@ -36,7 +36,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
         {/* Header */}
         <div className="max-w-3xl mb-12">
           {eyebrow && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-blue-100">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
               <Activity className="w-3.5 h-3.5" />
               <span>{eyebrow}</span>
             </span>
@@ -100,13 +100,13 @@ export default function GraphSection({ content }: GraphSectionProps) {
           {/* Chart Legend */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-100">
             <div className="flex items-center gap-2 text-sm font-bold text-slate-800">
-              <BarChart2 className="w-4 h-4 text-blue-600" />
+              <BarChart2 className="w-4 h-4 text-primary" />
               <span>Comparative Metrics Breakdown</span>
             </div>
 
             <div className="flex items-center gap-6 text-xs font-semibold">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-sm bg-blue-600" />
+                <div className="w-3 h-3 rounded-sm bg-primary" />
                 <span className="text-slate-700">{primaryLabel}</span>
               </div>
               {dataPoints.some((dp) => dp.secondaryValue !== undefined) && (
@@ -131,7 +131,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-bold text-slate-800 tracking-tight">{dp.label}</span>
                     <div className="flex items-center gap-3 font-mono text-xs">
-                      <span className="font-bold text-blue-600">
+                      <span className="font-bold text-primary">
                         {dp.value} {dp.unit || ""}
                       </span>
                       {dp.secondaryValue !== undefined && (
@@ -149,7 +149,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
                       whileInView={{ width: `${primaryPercent}%` }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.8, delay: idx * 0.08, ease: "easeOut" }}
-                      className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full relative z-10"
+                      className="h-full bg-gradient-to-r from-primary to-primary-hover rounded-full relative z-10"
                     />
 
                     {/* Secondary Bar (Ghost/Target) */}

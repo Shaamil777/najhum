@@ -1,10 +1,4 @@
-﻿/**
- * CustomSection Component
- * 
- * Public-facing custom HTML section for solution pages.
- * Displays heading and custom HTML content with prose styling.
- */
-
+import RichText, { AccentHeading } from './RichText';
 import type { CustomContent } from '@/types/section';
 import { sanitizeContent } from '@/lib/utils/sanitize-content';
 
@@ -16,13 +10,15 @@ export default function CustomSection({ content }: CustomSectionProps) {
   const { heading, bodyHtml } = content;
 
   return (
-    <section className="py-16 bg-white dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
-          {heading}
-        </h2>
+    <section className="py-20 lg:py-28 bg-white border-b border-zinc-200/80 overflow-hidden font-sans">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {heading && (
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tight leading-tight mb-8 uppercase">
+            <AccentHeading value={heading} />
+          </h2>
+        )}
         <div
-          className="prose prose-lg dark:prose-invert max-w-none"
+          className="rich-text prose prose-lg max-w-none text-zinc-600 leading-relaxed font-medium"
           dangerouslySetInnerHTML={{ __html: sanitizeContent(bodyHtml) }}
         />
       </div>

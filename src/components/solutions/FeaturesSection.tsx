@@ -1,171 +1,66 @@
-"use client";
-
-import React from 'react';
+import RichText, { AccentHeading } from './RichText';
 import type { FeaturesContent } from '@/types/section';
-import { 
-  Sparkles, 
-  Cpu, 
-  Database, 
-  ShieldCheck, 
-  Zap, 
-  Activity, 
-  Lock, 
-  Cloud, 
-  BarChart3, 
-  Server, 
-  CheckCircle2, 
-  Layers, 
-  Wifi, 
-  Settings,
-  ArrowUpRight
-} from 'lucide-react';
-import { Container } from '@/design-system/primitives/layout/Container';
 
 interface FeaturesSectionProps {
   content: FeaturesContent;
 }
 
-// Icon resolver helper
-function renderFeatureIcon(iconStr?: string, index: number = 0) {
-  if (!iconStr) {
-    const fallbackIcons = [Cpu, Zap, ShieldCheck, Database, Activity, BarChart3, Cloud, Server];
-    const IconComp = fallbackIcons[index % fallbackIcons.length];
-    return <IconComp className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-  }
-
-  const normalized = iconStr.trim().toLowerCase();
-
-  switch (normalized) {
-    case 'cpu':
-    case 'processor':
-    case 'ai':
-      return <Cpu className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'database':
-    case 'data':
-    case 'storage':
-      return <Database className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'shield':
-    case 'security':
-    case 'shieldcheck':
-      return <ShieldCheck className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'zap':
-    case 'speed':
-    case 'power':
-    case 'fast':
-      return <Zap className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'activity':
-    case 'telemetry':
-    case 'analytics':
-      return <Activity className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'lock':
-    case 'privacy':
-      return <Lock className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'cloud':
-      return <Cloud className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'server':
-    case 'infrastructure':
-      return <Server className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'wifi':
-    case 'iot':
-    case 'wireless':
-      return <Wifi className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'layers':
-    case 'platform':
-      return <Layers className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    case 'settings':
-    case 'tools':
-      return <Settings className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-    default:
-      // If it's an emoji or 1-2 chars
-      if (iconStr.length <= 4) {
-        return <span className="text-xl">{iconStr}</span>;
-      }
-      return <Sparkles className="w-5 h-5 text-primary group-hover:text-white transition-colors" />;
-  }
-}
-
 export default function FeaturesSection({ content }: FeaturesSectionProps) {
-  const { features = [], heading, subheading } = content;
-
-  if (!features || features.length === 0) {
-    return null;
-  }
+  const { eyebrow, heading, subheading, features = [] } = content;
 
   return (
-    <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-white text-neutral-900 border-b border-neutral-200">
-      {/* Precision Ambient Lighting & Architectural Grid */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-primary/5 blur-[160px]" />
-        <div className="absolute inset-0 opacity-[0.035] bg-[linear-gradient(to_right,#000000_1px,transparent_1px),linear-gradient(to_bottom,#000000_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_60%,transparent_100%)]" />
-      </div>
+    <section className="py-20 lg:py-28 bg-zinc-50 border-b border-zinc-200/80 overflow-hidden font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {(eyebrow || heading || subheading) && (
+          <div className="max-w-3xl mb-14">
+            {eyebrow && (
+              <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">
+                {eyebrow}
+              </p>
+            )}
+            {heading && (
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tight leading-tight mb-4 uppercase">
+                <AccentHeading value={heading} />
+              </h2>
+            )}
+            {subheading && (
+              <div className="text-zinc-600 text-base md:text-lg leading-relaxed font-medium">
+                <RichText as="div" value={subheading} />
+              </div>
+            )}
+          </div>
+        )}
 
-      <Container className="relative z-10" size="xl">
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20 flex flex-col items-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-neutral-900 uppercase font-display leading-[1.12] [text-wrap:balance]">
-            {heading || 'KEY CAPABILITIES & CORE FEATURES'}
-          </h2>
-
-          {subheading && (
-            <p className="mt-4 text-base sm:text-lg text-neutral-500 leading-relaxed max-w-2xl [text-wrap:pretty]">
-              {subheading}
-            </p>
-          )}
-        </div>
-
-        {/* Features Symmetrical Grid */}
-        <div className={`grid gap-6 lg:gap-8 ${
-          features.length === 1 
-            ? 'grid-cols-1 max-w-lg mx-auto'
-            : features.length === 2 
-            ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto' 
-            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-        }`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="h-full flex flex-col justify-between p-8 rounded-2xl border border-neutral-200/90 bg-white hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1.5 transition-all duration-300 group relative overflow-hidden"
+              className="group bg-white rounded-2xl p-7 border border-zinc-200 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between"
             >
-              {/* Top Accent Gradient Line on Hover */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              {/* Subtle Corner Ambient Glow */}
-              <div className="absolute -top-12 -right-12 w-28 h-28 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all pointer-events-none" />
-
               <div>
-                {/* Header Icon */}
-                <div className="mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-neutral-50 border border-neutral-200/80 flex items-center justify-center text-primary group-hover:bg-primary group-hover:border-primary group-hover:text-white group-hover:shadow-md group-hover:shadow-primary/20 transition-all duration-300 shadow-xs">
-                    {renderFeatureIcon(feature.icon, index)}
+                {/* Brand Primary Icon Badge */}
+                {feature.icon && (
+                  <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-200 shadow-xs">
+                    <span className="text-xl font-bold">
+                      {feature.icon}
+                    </span>
                   </div>
-                </div>
+                )}
 
-                {/* Title (Enforcing 2 lines clamp to keep row heights aligned) */}
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 uppercase tracking-tight line-clamp-2 leading-snug group-hover:text-primary transition-colors">
-                  {feature.title}
+                {/* Title */}
+                <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-primary transition-colors">
+                  <RichText value={feature.title} />
                 </h3>
 
-                {/* Description (Enforcing 4 lines clamp) */}
-                <p className="mt-3 text-sm text-neutral-500 group-hover:text-neutral-600 leading-relaxed line-clamp-4 font-normal">
-                  {feature.description}
-                </p>
-              </div>
-
-              {/* Card Footer */}
-              <div className="mt-8 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-1.5 font-medium text-neutral-600">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
-                  Enterprise Ready
-                </span>
-                <span className="flex items-center gap-1 font-mono text-[10px] uppercase text-neutral-400 group-hover:text-primary transition-colors">
-                  Standard
-                  <ArrowUpRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </span>
+                {/* Description */}
+                <div className="text-zinc-600 text-sm md:text-base leading-relaxed font-medium">
+                  <RichText as="div" value={feature.description} />
+                </div>
               </div>
             </div>
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

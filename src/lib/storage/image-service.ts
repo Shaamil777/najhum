@@ -1,4 +1,5 @@
 import { uploadToR2, deleteFromR2 } from './r2';
+import { put, del } from '@vercel/blob';
 
 const ALLOWED_MIME_TYPES = [
   'image/jpeg',
@@ -65,6 +66,11 @@ export async function uploadImage(file: File, solutionId: string): Promise<Uploa
       throw new Error('R2 storage credentials are not configured.');
     }
     return await uploadToR2(file, storageKey);
+  } else if (storageProvider === 'vercel-blob') {
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (!token) throw new Error('Vercel Blob storage credentials are not configured.');
+    const blob = await put(storageKey, file, { access: 'public', addRandomSuffix: false, contentType: file.type, token });
+    return { url: blob.url, storageKey: blob.url };
   } else {
     throw new Error('Unsupported storage provider: ' + storageProvider);
   }
@@ -78,6 +84,10 @@ export async function deleteImage(storageKey: string): Promise<void> {
       throw new Error('R2 storage credentials are not configured.');
     }
     await deleteFromR2(storageKey);
+  } else if (storageProvider === 'vercel-blob') {
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (!token) throw new Error('Vercel Blob storage credentials are not configured.');
+    await del(storageKey, { token });
   } else {
     throw new Error('Unsupported storage provider: ' + storageProvider);
   }

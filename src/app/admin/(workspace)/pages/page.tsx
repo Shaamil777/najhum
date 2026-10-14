@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/db/prisma';
+import { DRAFT_PREFIX } from '@/lib/builder/document';
 import { Plus, Edit2, LayoutTemplate } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -14,6 +15,7 @@ export default async function PagesList() {
 
   try {
     pages = await prisma.pageContent.findMany({
+      where: { NOT: { slug: { startsWith: DRAFT_PREFIX } } },
       orderBy: { title: 'asc' },
     });
   } catch (error) {

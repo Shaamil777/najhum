@@ -8,25 +8,10 @@
 import { notFound } from 'next/navigation';
 import { getSolutionBySlug } from '@/lib/db/queries/solutions';
 import { SectionType } from '@/types/section';
-import HeroSection from '@/components/solutions/HeroSection';
-import IntroSection from '@/components/solutions/IntroSection';
-import FeaturesSection from '@/components/solutions/FeaturesSection';
-import BenefitsSection from '@/components/solutions/BenefitsSection';
-import TestimonialsSection from '@/components/solutions/TestimonialsSection';
-import CTASection from '@/components/solutions/CTASection';
-import CustomSection from '@/components/solutions/CustomSection';
-import ChallengeSection from '@/components/solutions/ChallengeSection';
-import UseCasesSection from '@/components/solutions/UseCasesSection';
-import MethodologySection from '@/components/solutions/MethodologySection';
-import SolaasSection from '@/components/solutions/SolaasSection';
-import SolutionProductsServer from '@/components/solutions/SolutionProductsServer';
-import ImageSection from '@/components/solutions/ImageSection';
-import VideoSection from '@/components/solutions/VideoSection';
-import GraphSection from '@/components/solutions/GraphSection';
-import ComparisonTableSection from '@/components/solutions/ComparisonTableSection';
-import ProductCardServer from '@/components/solutions/ProductCardServer';
+import SolutionSection from '@/components/solutions/SolutionSection';
+import { liveDocument } from '@/lib/builder/server';
+import { prisma } from '@/lib/db/prisma';
 import type { Metadata } from 'next';
-import { createSectionSchema } from '@/lib/validation/section-schemas';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -75,10 +60,29 @@ export default async function SolutionPage({ params }: PageProps) {
     notFound();
   }
 
-  // Filter and sort sections (for drafts, include all configured sections; for published, show published sections)
-  const sections = (solution.sections || [])
-    .filter((section) => !solution.isDraft ? !section.isDraft : true)
-    .sort((a, b) => a.order - b.order);
+  const document = liveDocument({ ...solution, sections: solution.sections || [] });
+  const sectionsToRender = document.sections.filter(section => !solution.isDraft ? !section.isDraft : true);
+
+  const products = await prisma.product.findMany({
+    where: { isDraft: false, solutions: { has: solution.slug } },
+    orderBy: { order: 'asc' },
+    select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true },
+  });
+
+  const selectedIds = [
+    ...new Set(
+      sectionsToRender
+        .filter(section => section.type === SectionType.PRODUCT_CARD)
+        .flatMap(section => (section.content.productIds || []) as string[])
+    ),
+  ];
+
+  const availableProducts = selectedIds.length
+    ? await prisma.product.findMany({
+        where: { isDraft: false, id: { in: selectedIds } },
+        select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true },
+      })
+    : [];
 
   return (
     <main className="min-h-screen">
@@ -94,69 +98,19 @@ export default async function SolutionPage({ params }: PageProps) {
           </a>
         </div>
       )}
-      {/* Render sections dynamically based on type */}
-      {sections.map((section) => {
-        const validated = createSectionSchema.safeParse({ type: section.type, content: section.content });
-        if (!validated.success) return null;
-        switch (validated.data.type) {
-          case SectionType.HERO:
-            return <HeroSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.INTRO:
-            return <IntroSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.CHALLENGE:
-            return <ChallengeSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.FEATURES:
-            return <FeaturesSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.BENEFITS:
-            return <BenefitsSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.TESTIMONIALS:
-            return <TestimonialsSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.CTA:
-            return <CTASection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.CUSTOM:
-            return <CustomSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.USE_CASES:
-            return <UseCasesSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.METHODOLOGY:
-            return <MethodologySection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.SOLAAS:
-            return <SolaasSection key={section.id} content={validated.data.content} />;
-          
-          case SectionType.PRODUCTS_CAROUSEL:
-            return <SolutionProductsServer key={section.id} solutionSlug={solution.slug} content={validated.data.content} />;
-          
-          case SectionType.IMAGE:
-            return <ImageSection key={section.id} content={validated.data.content} />;
 
-          case SectionType.VIDEO:
-            return <VideoSection key={section.id} content={validated.data.content} />;
-
-          case SectionType.GRAPH:
-            return <GraphSection key={section.id} content={validated.data.content} />;
-
-          case SectionType.COMPARISON_TABLE:
-            return <ComparisonTableSection key={section.id} content={validated.data.content} />;
-
-          case SectionType.PRODUCT_CARD:
-            return <ProductCardServer key={section.id} solutionSlug={solution.slug} content={validated.data.content} />;
-
-          default:
-            return null;
-        }
-      })}
+      {/* Render sections dynamically using SolutionSection */}
+      {sectionsToRender.map((section) => (
+        <SolutionSection
+          key={section.id}
+          section={section}
+          products={products}
+          availableProducts={availableProducts}
+        />
+      ))}
 
       {/* Empty state if no sections */}
-      {sections.length === 0 && (
+      {sectionsToRender.length === 0 && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {solution.title}

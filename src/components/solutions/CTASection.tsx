@@ -1,4 +1,6 @@
 "use client";
+import RichText from './RichText';
+
 
 import { useState, useEffect } from "react";
 import Link from 'next/link';
@@ -71,11 +73,9 @@ export default function CTASection({ content }: CTASectionProps) {
           {/* Content & Button */}
           <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
              <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.05]">
-                {heading}
+                <RichText value={heading} />
              </h2>
-             <p className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl">
-                {bodyText}
-             </p>
+             <div className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl"><RichText as="div" value={bodyText} /></div>
              
              <div className="flex flex-col sm:flex-row gap-8 items-center justify-center">
                {/* Primary Button */}

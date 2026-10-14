@@ -5,7 +5,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Upload, Image as ImageIcon, X, FolderOpen, Check } from 'lucide-react';
 import { createSolutionSchema, type CreateSolutionData } from '@/lib/validation/solution-schemas';
+import type { z } from 'zod';
 import ImageBrowserModal from '../images/ImageBrowserModal';
+
+type SolutionFormInput = z.input<typeof createSolutionSchema>;
 
 interface SolutionMetadataFormProps {
   defaultValues?: Partial<CreateSolutionData>;
@@ -33,7 +36,7 @@ export default function SolutionMetadataForm({
     setValue,
     watch,
     formState: { errors },
-  } = useForm<CreateSolutionData>({
+  } = useForm<SolutionFormInput, unknown, CreateSolutionData>({
     resolver: zodResolver(createSolutionSchema),
     defaultValues: {
       title: defaultValues?.title || '',

@@ -47,7 +47,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
         {!isSplit && (heading || eyebrow || description) && (
           <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-14 px-4">
             {eyebrow && (
-              <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-blue-100">
+              <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
                 {eyebrow}
               </span>
             )}
@@ -69,7 +69,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
           <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${layout === "split-right" ? "lg:flex-row-reverse" : ""}`}>
             <div className={layout === "split-right" ? "lg:order-2" : "lg:order-1"}>
               {eyebrow && (
-                <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-blue-100">
+                <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
                   {eyebrow}
                 </span>
               )}
@@ -84,7 +84,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
                 </p>
               )}
               {caption && (
-                <p className="text-xs text-slate-400 italic border-l-2 border-blue-400 pl-3">
+                <p className="text-xs text-slate-400 italic border-l-2 border-primary/40 pl-3">
                   {caption}
                 </p>
               )}

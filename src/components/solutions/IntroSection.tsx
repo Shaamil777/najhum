@@ -1,76 +1,154 @@
-import Image from 'next/image';
-import type { CSSProperties } from 'react';
-import { ArrowRight, BarChart3, Cpu, Layers, Network, ShieldCheck } from 'lucide-react';
-import type { IntroContent } from '@/types/section';
-import { sanitizeContent } from '@/lib/utils/sanitize-content';
-import styles from './IntroSection.module.css';
+"use client";
+import RichText, { AccentHeading } from './RichText';
 
-const highlightIcons = { network: Network, layers: Layers, shield: ShieldCheck, cpu: Cpu, chart: BarChart3 };
-const defaultIcons = ['network', 'layers', 'shield', 'cpu'] as const;
+
+import React from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import type { IntroContent } from '@/types/section';
+import { Container } from '@/design-system/primitives/layout/Container';
+import { sanitizeContent } from '@/lib/utils/sanitize-content';
 
 export default function IntroSection({ content }: { content: IntroContent }) {
   const highlights = content.highlights || [];
   const stats = content.stats || [];
-  const flowSteps = content.flowSteps || [];
-  const featuredIndex = content.featuredMetricIndex ?? 0;
-  const hasCollage = Boolean(content.image && content.secondaryImage && content.imageLayout !== 'single');
-  const accentPhrase = content.headingAccent?.trim();
-  const accentIndex = accentPhrase ? content.heading.toLowerCase().indexOf(accentPhrase.toLowerCase()) : -1;
-  const headingText = accentPhrase && accentIndex >= 0 ? (
-    <>{content.heading.slice(0, accentIndex)}<span className={styles.headingAccent}>{content.heading.slice(accentIndex, accentIndex + accentPhrase.length)}</span>{content.heading.slice(accentIndex + accentPhrase.length)}</>
-  ) : content.heading;
   const buttonLink = content.buttonLink && (
-    /^\/(?!\/)/.test(content.buttonLink) || /^#[^\s]*$/.test(content.buttonLink) ||
-    /^https?:\/\//i.test(content.buttonLink) && URL.canParse(content.buttonLink)
+    /^\/(?!\/)/.test(content.buttonLink) ||
+    content.buttonLink.startsWith('#') ||
+    /^https?:\/\//i.test(content.buttonLink)
   ) ? content.buttonLink : undefined;
 
-  return <section data-theme="light" data-surface={content.surfaceTone || 'white'} data-accent={content.accentTone || 'blue'} data-heading-style={content.headingStyle || 'uppercase'} data-decoration={content.decorationStyle || 'grid'} data-animation={content.animationStyle || 'subtle'} data-metrics={content.metricStyle || 'cards'} data-button={content.buttonStyle || 'solid'} className={styles.section}>
-    {content.decorationStyle !== 'none' && <div className={styles.backgroundGeometry} aria-hidden="true"><span /><span /><span /></div>}
-    <div className={styles.inner}>
-      <div className={styles.editorial} data-has-metrics={stats.length > 0}>
-        <div className={`${styles.story} ${styles.reveal}`}>
-          <h2 className={styles.heading}>{headingText}</h2>
-          <div className={styles.narrative}>
-            {content.summary && <p className={styles.summary}>{content.summary}</p>}
-            <div className={styles.body}>
-              {content.bodyFormat === 'text' ? <p className={styles.plainText}>{content.bodyText}</p> :
-                <div dangerouslySetInnerHTML={{ __html: sanitizeContent(content.bodyText) }} />}
-            </div>
-          </div>
-          {flowSteps.length > 0 && <ol className={styles.flow} aria-label="Solution flow">
-            {flowSteps.map((step, index) => <li key={index}><span>{step.label}</span>{index < flowSteps.length - 1 && <ArrowRight size={13} aria-hidden="true" />}</li>)}
-          </ol>}
-          {content.buttonText && buttonLink && <a href={buttonLink} className={styles.action}>
-            <span>{content.buttonText}</span><ArrowRight size={17} className={styles.actionArrow} aria-hidden="true" />
-          </a>}
-        </div>
-        {stats.length > 0 && <dl className={`${styles.metrics} ${styles.reveal}`} data-count={stats.length}>
-          {stats.map((stat, index) => <div key={index} className={styles.metric} data-featured={index === featuredIndex} data-tone={index === featuredIndex ? content.featuredMetricTone || 'soft' : 'neutral'}>
-            <dt className={styles.metricLabel}>{stat.label}</dt><dd className={styles.metricValue}>{stat.value}</dd><span className={styles.metricRule} aria-hidden="true" />
-          </div>)}
-        </dl>}
+  const isDark = content.theme === 'dark';
+  const themeClasses = isDark 
+    ? "bg-[#0b0c10] text-zinc-100 border-zinc-800" 
+    : "bg-zinc-50 text-zinc-900 border-zinc-200";
+
+  return (
+    <section className={`relative w-full flex items-center overflow-hidden py-12 md:py-16 border-b ${themeClasses}`}>
+      
+      {/* Dynamic Angled Shape on the left */}
+      <div aria-hidden="true" className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 opacity-15 sm:w-1/3 sm:opacity-100 lg:w-[30%] z-0">
+        <svg 
+          viewBox="0 0 100 100" 
+          preserveAspectRatio="none"
+          className={`w-full h-full text-primary overflow-visible ${isDark ? 'drop-shadow-[10px_0_30px_rgba(26,136,248,0.15)]' : 'drop-shadow-[10px_0_30px_rgba(26,136,248,0.3)]'}`}
+        >
+          <polygon 
+            points="-5,-5 100,50 -5,105 0,75 50,50 0,25" 
+            fill="currentColor"
+          />
+        </svg>
+        <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? 'from-black/50' : 'from-black/10'} to-transparent pointer-events-none`} />
       </div>
 
-      {(content.image || highlights.length > 0) && <div className={styles.details} data-has-image={Boolean(content.image)} data-has-highlights={highlights.length > 0} data-image-position={content.imagePosition || 'left'}>
-        {content.image && <figure className={`${styles.figure} ${styles.reveal}`}>
-          <div className={styles.imageComposition} data-collage={hasCollage}>
-            <div className={styles.imageFrame}><Image src={content.image} alt={content.imageAlt || content.heading} fill unoptimized className={styles.photo} sizes="(max-width: 899px) 100vw, 50vw" /></div>
-            {hasCollage && <div className={styles.detailImage}><Image src={content.secondaryImage!} alt={content.secondaryImageAlt || ''} fill unoptimized className={styles.photo} sizes="(max-width: 899px) 45vw, 25vw" /></div>}
-          </div>
-          {content.imageCaption && <figcaption className={styles.caption}>{content.imageCaption}</figcaption>}
-        </figure>}
-        {highlights.length > 0 && <div className={styles.highlights} data-count={highlights.length} style={{ '--intro-highlight-count': highlights.length } as CSSProperties}>
-          {highlights.map((highlight, index) => {
-            const iconName = highlight.icon || defaultIcons[index % defaultIcons.length];
-            const Icon = iconName === 'none' ? undefined : highlightIcons[iconName];
-            return <article key={index} data-tone={highlight.tone || 'white'} className={`${styles.highlight} ${styles.reveal}`}>
-              <div className={styles.highlightTop} aria-hidden="true">{Icon && <Icon size={23} strokeWidth={1.6} />}<span>{String(index + 1).padStart(2, '0')}</span></div>
-              <h3>{highlight.title}</h3>{highlight.description && <p>{highlight.description}</p>}
-              {content.decorationStyle !== 'none' && <span className={styles.cardDecoration} aria-hidden="true" />}
-            </article>;
-          })}
-        </div>}
-      </div>}
-    </div>
-  </section>;
+      <Container className="relative z-10 flex flex-col md:flex-row justify-end items-center" size="xl">
+        <div className={`w-full sm:w-[85%] md:w-3/4 lg:w-[75%] sm:pl-16 md:pl-24 lg:pl-32 py-4 ${content.image ? 'grid lg:grid-cols-2 gap-x-8 items-start' : ''}`}>
+          {content.image && <figure className={`min-w-0 mb-8 ${content.imagePosition === 'left' ? 'lg:col-start-1' : 'lg:col-start-2'} lg:row-start-1 lg:row-span-4`}>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-primary/20 shadow-lg">
+              <Image src={content.image} alt={content.imageAlt || content.heading} fill unoptimized className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
+            </div>
+            {content.imageCaption && <figcaption className={`mt-3 text-xs leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{content.imageCaption}</figcaption>}
+          </figure>}
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
+              {content.eyebrow || 'THE PLATFORM'}
+            </p>
+            <h2 className={`text-4xl md:text-5xl lg:text-6xl font-black font-display mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-zinc-900'}`}>
+              <AccentHeading value={content.heading} />
+            </h2>
+            
+            {content.summary && <div className={`mb-5 text-lg leading-relaxed font-semibold ${isDark ? 'text-zinc-200' : 'text-zinc-800'}`}><RichText as="div" value={content.summary} /></div>}
+            <div className={`text-base md:text-lg leading-relaxed font-medium mb-8 max-w-3xl ${isDark ? 'text-zinc-400 [&_p]:text-zinc-400' : 'text-zinc-600 [&_p]:text-zinc-600'}`}>
+              {content.bodyFormat === 'text' ? (
+                <RichText as="div" value={content.bodyText} />
+              ) : (
+                <div className="rich-text" dangerouslySetInnerHTML={{ __html: sanitizeContent(content.bodyText) }} />
+              )}
+            </div>
+          </motion.div>
+
+          {/* Highlights Grid matching CropifAI */}
+          {highlights.length > 0 && (
+            <div className={`grid grid-cols-1 ${content.image ? 'sm:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} gap-4 lg:gap-6 mb-8`}>
+              {highlights.map((highlight, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  className={`border rounded-xl p-5 shadow-lg transition-all group relative overflow-hidden ${
+                    isDark 
+                      ? 'bg-zinc-900/80 border-zinc-800 shadow-black/50 hover:border-primary/50 hover:shadow-primary/10' 
+                      : 'bg-white border-zinc-100 shadow-zinc-200/50 hover:border-primary/30 hover:shadow-primary/5'
+                  }`}
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none" />
+                  
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 relative z-10 group-hover:bg-primary group-hover:text-white transition-colors">
+                    <span className="text-xs font-bold font-mono">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  
+                  <h3 className={`text-sm font-black uppercase tracking-widest mb-3 relative z-10 ${isDark ? 'text-white' : 'text-zinc-900'}`}>
+                    <RichText value={highlight.title} />
+                  </h3>
+                  {highlight.description && (
+                    <div className={`text-sm font-medium leading-relaxed relative z-10 ${isDark ? 'text-zinc-400' : 'text-zinc-500'}`}><RichText as="div" value={highlight.description} /></div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {/* Stats if available */}
+          {stats.length > 0 && (
+            <div className={`grid gap-4 mb-8 ${stats.length === 1 ? 'grid-cols-1' : stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-3'}`}>
+              {stats.map((stat, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                  <div className="text-3xl md:text-4xl font-black text-primary">
+                    {stat.value}
+                  </div>
+                  <div className={`text-xs font-bold uppercase tracking-wider ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Call to Action */}
+          {content.buttonText && buttonLink && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-6"
+            >
+              <a 
+                href={buttonLink} 
+                className="group relative overflow-hidden inline-flex items-center justify-center space-x-3 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-bold text-sm tracking-wide uppercase transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5"
+              >
+                {/* Tiny grid effect inside button */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:0.5rem_0.5rem] opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none" />
+                
+                <span className="relative z-10">{content.buttonText}</span>
+                <ArrowUpRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </a>
+            </motion.div>
+          )}
+          
+        </div>
+      </Container>
+    </section>
+  );
 }

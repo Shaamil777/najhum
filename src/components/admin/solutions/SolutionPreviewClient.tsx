@@ -5,23 +5,8 @@ import Link from "next/link";
 import { Monitor, Tablet, Smartphone, ArrowLeft, ExternalLink, Eye } from "lucide-react";
 import { SectionType } from "@/types/section";
 import { createSectionSchema } from "@/lib/validation/section-schemas";
-import HeroSection from "@/components/solutions/HeroSection";
-import IntroSection from "@/components/solutions/IntroSection";
-import FeaturesSection from "@/components/solutions/FeaturesSection";
-import BenefitsSection from "@/components/solutions/BenefitsSection";
-import TestimonialsSection from "@/components/solutions/TestimonialsSection";
-import CTASection from "@/components/solutions/CTASection";
-import CustomSection from "@/components/solutions/CustomSection";
-import ChallengeSection from "@/components/solutions/ChallengeSection";
-import UseCasesSection from "@/components/solutions/UseCasesSection";
-import MethodologySection from "@/components/solutions/MethodologySection";
-import SolaasSection from "@/components/solutions/SolaasSection";
-import PlatformProductsCarousel from "@/components/shared/PlatformProductsCarousel";
-import ImageSection from "@/components/solutions/ImageSection";
-import VideoSection from "@/components/solutions/VideoSection";
-import GraphSection from "@/components/solutions/GraphSection";
-import ComparisonTableSection from "@/components/solutions/ComparisonTableSection";
-import ProductCardSection from "@/components/solutions/ProductCardSection";
+import SolutionSection from "@/components/solutions/SolutionSection";
+import type { BuilderProduct, SectionDesign } from "@/lib/builder/document";
 
 interface SectionItem {
   id: string;
@@ -62,6 +47,14 @@ export default function SolutionPreviewClient({ solution, products }: SolutionPr
   const [showDraftNotice, setShowDraftNotice] = useState(true);
 
   const sections = (solution.sections || []).slice().sort((a, b) => a.order - b.order);
+
+  const builderProducts: BuilderProduct[] = products.map((p) => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    imageUrl: p.imageUrl ?? null,
+    brochureUrl: p.brochureUrl ?? null,
+  }));
 
   const getContainerClass = () => {
     switch (device) {
@@ -220,67 +213,31 @@ export default function SolutionPreviewClient({ solution, products }: SolutionPr
 
               const isSectionDisabled = section.isDraft;
 
-              return (
-                <div key={section.id} className="relative group">
-                  {isSectionDisabled && (
-                    <div className="bg-slate-900/80 text-white text-[11px] font-semibold px-3 py-1 flex items-center justify-between sticky top-12 z-20">
-                      <span>⚠️ {section.type} Section (Disabled in production)</span>
-                      <span className="text-slate-300">Visible in preview only</span>
-                    </div>
-                  )}
+                  const contentRecord = (section.content && typeof section.content === 'object') ? section.content as Record<string, unknown> : {};
+                  const sectionDesign = (contentRecord._design && typeof contentRecord._design === 'object') ? contentRecord._design as SectionDesign : {};
 
-                  {(() => {
-                    switch (validated.data.type) {
-                      case SectionType.HERO:
-                        return <HeroSection content={validated.data.content} />;
-                      case SectionType.INTRO:
-                        return <IntroSection content={validated.data.content} />;
-                      case SectionType.CHALLENGE:
-                        return <ChallengeSection content={validated.data.content} />;
-                      case SectionType.FEATURES:
-                        return <FeaturesSection content={validated.data.content} />;
-                      case SectionType.BENEFITS:
-                        return <BenefitsSection content={validated.data.content} />;
-                      case SectionType.TESTIMONIALS:
-                        return <TestimonialsSection content={validated.data.content} />;
-                      case SectionType.CTA:
-                        return <CTASection content={validated.data.content} />;
-                      case SectionType.CUSTOM:
-                        return <CustomSection content={validated.data.content} />;
-                      case SectionType.USE_CASES:
-                        return <UseCasesSection content={validated.data.content} />;
-                      case SectionType.METHODOLOGY:
-                        return <MethodologySection content={validated.data.content} />;
-                      case SectionType.SOLAAS:
-                        return <SolaasSection content={validated.data.content} />;
-                      case SectionType.PRODUCTS_CAROUSEL:
-                        return products.length > 0 ? (
-                          <PlatformProductsCarousel
-                            products={products as any}
-                            title={validated.data.content?.heading || "Compatible Ecosystem Hardware"}
-                            description={validated.data.content?.description || "Field-proven edge appliances and devices engineered specifically to power this solution."}
-                          />
-                        ) : (
-                          <div className="py-12 text-center text-sm text-gray-500 border border-dashed border-gray-200">
-                            Products Carousel Section (No products currently tagged with &quot;{solution.slug}&quot;)
-                          </div>
-                        );
-                      case SectionType.IMAGE:
-                        return <ImageSection content={validated.data.content} />;
-                      case SectionType.VIDEO:
-                        return <VideoSection content={validated.data.content} />;
-                      case SectionType.GRAPH:
-                        return <GraphSection content={validated.data.content} />;
-                      case SectionType.COMPARISON_TABLE:
-                        return <ComparisonTableSection content={validated.data.content} />;
-                      case SectionType.PRODUCT_CARD:
-                        return <ProductCardSection content={validated.data.content} products={products as any} />;
-                      default:
-                        return null;
-                    }
-                  })()}
-                </div>
-              );
+                  return (
+                    <div key={section.id} className="relative group">
+                      {isSectionDisabled && (
+                        <div className="bg-slate-900/80 text-white text-[11px] font-semibold px-3 py-1 flex items-center justify-between sticky top-12 z-20">
+                          <span>⚠️ {section.type} Section (Disabled in production)</span>
+                          <span className="text-slate-300">Visible in preview only</span>
+                        </div>
+                      )}
+
+                      <SolutionSection
+                        section={{
+                          id: section.id,
+                          type: section.type as SectionType,
+                          content: contentRecord,
+                          isDraft: section.isDraft,
+                          design: sectionDesign,
+                        }}
+                        products={builderProducts}
+                        availableProducts={builderProducts}
+                      />
+                    </div>
+                  );
             })
           )}
         </div>
