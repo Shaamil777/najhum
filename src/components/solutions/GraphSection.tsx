@@ -1,5 +1,6 @@
 "use client";
 
+import RichText, { AccentHeading } from './RichText';
 import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, TrendingDown, Activity, BarChart2 } from "lucide-react";
@@ -43,19 +44,19 @@ export default function GraphSection({ content }: GraphSectionProps) {
           )}
           {heading && (
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-              {heading}
+              <AccentHeading value={heading} />
             </h2>
           )}
           {description && (
             <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium">
-              {description}
+              <RichText value={description} />
             </p>
           )}
         </div>
 
         {/* Top Metrics Cards (if any) */}
         {metrics && metrics.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
             {metrics.map((metric, idx) => (
               <motion.div
                 key={idx}
@@ -68,7 +69,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
                 <span className="text-xs font-bold tracking-wider uppercase text-slate-400 mb-2">
                   {metric.title}
                 </span>
-                <div className="flex items-baseline justify-between gap-2">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                     {metric.value}
                   </span>
@@ -104,7 +105,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
               <span>Comparative Metrics Breakdown</span>
             </div>
 
-            <div className="flex items-center gap-6 text-xs font-semibold">
+            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-sm bg-primary" />
                 <span className="text-slate-700">{primaryLabel}</span>
@@ -128,7 +129,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
 
               return (
                 <div key={idx} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
                     <span className="font-bold text-slate-800 tracking-tight">{dp.label}</span>
                     <div className="flex items-center gap-3 font-mono text-xs">
                       <span className="font-bold text-primary">

@@ -1,5 +1,6 @@
 "use client";
 
+import RichText from './RichText';
 import React from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -67,10 +68,10 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
                       {item.traditional.title}
                     </span>
                     <h4 className="text-base font-semibold text-slate-800 mb-2 leading-snug">
-                      {item.traditional.description}
+                      <RichText value={item.traditional.description} />
                     </h4>
                     <p className="text-[13px] text-slate-500 leading-relaxed">
-                      {item.traditional.details}
+                      <RichText value={item.traditional.details} />
                     </p>
                   </motion.div>
                 );
@@ -127,10 +128,10 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
                           {item.solution.title}
                         </span>
                         <h4 className="text-base font-bold text-slate-900 mb-2 leading-snug">
-                          {item.solution.description}
+                          <RichText value={item.solution.description} />
                         </h4>
                         <p className="text-[13px] text-slate-600 leading-relaxed">
-                          {item.solution.details}
+                          <RichText value={item.solution.details} />
                         </p>
                       </div>
                     </div>
@@ -180,10 +181,10 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
                     {header.leftTitle}: {item.traditional.title}
                   </span>
                   <h4 className="text-sm font-semibold text-slate-500 leading-snug line-through decoration-slate-300">
-                    {item.traditional.description}
+                    <RichText value={item.traditional.description} />
                   </h4>
                   <p className="text-xs text-slate-400 leading-relaxed mt-2">
-                    {item.traditional.details}
+                    <RichText value={item.traditional.details} />
                   </p>
                 </div>
 
@@ -197,10 +198,10 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
                       {header.rightTitlePart1}: {item.solution.title}
                     </span>
                     <h4 className="text-sm font-bold text-slate-900 leading-snug">
-                      {item.solution.description}
+                      <RichText value={item.solution.description} />
                     </h4>
                     <p className="text-xs text-slate-600 leading-relaxed mt-2">
-                      {item.solution.details}
+                      <RichText value={item.solution.details} />
                     </p>
                   </div>
                 </div>

@@ -3,6 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { HeroContent } from '@/types/section';
 import { ArrowRight } from 'lucide-react';
+import SolutionImage from './SolutionImage';
+import MediaPlaceholder from './MediaPlaceholder';
+import HeroBackgroundVideo from './HeroBackgroundVideo';
+import { isPlaceholderMedia } from '@/lib/builder/media';
+import { isSafeMediaUrl } from '@/lib/utils/content-url';
 import ClientMarquee from '@/components/ui/ClientMarquee';
 
 interface HeroSectionProps {
@@ -11,6 +16,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ content }: HeroSectionProps) {
   const {
+    layout = 'centered', eyebrow, videoUrl, imageAlt, mediaCards = [{ title: 'Connected spaces', image: '' }, { title: 'Intelligent devices', image: '' }, { title: 'Actionable insights', image: '' }],
     heading,
     subheading,
     backgroundImage,
@@ -20,10 +26,28 @@ export default function HeroSection({ content }: HeroSectionProps) {
     secondaryCtaLink,
   } = content;
 
+  if (layout === 'hero-split' || layout === 'hero-editorial') return <section className={`solution-hero solution-hero-${layout} relative overflow-hidden bg-zinc-50 font-sans`}>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={layout === 'hero-split' ? 'grid lg:grid-cols-2 gap-8 lg:gap-12 items-center' : 'max-w-4xl'}>
+        <div className="min-w-0">
+          {eyebrow && <p className="solution-eyebrow">{eyebrow}</p>}
+          <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase leading-[1.08] tracking-tight text-zinc-900"><RichText value={heading} /></h1>
+          <RichText as="div" value={subheading} className="mt-5 text-base md:text-lg leading-relaxed font-medium text-zinc-600 max-w-2xl" />
+          <div className="flex flex-wrap items-center gap-3 mt-7">
+            {ctaText && ctaLink && <Link href={ctaLink} className="solution-hero-primary">{ctaText}<ArrowRight size={16} /></Link>}
+            {secondaryCtaText && secondaryCtaLink && <Link href={secondaryCtaLink} className="solution-hero-secondary">{secondaryCtaText}</Link>}
+          </div>
+        </div>
+        {layout === 'hero-split' && <div className="overflow-hidden rounded-3xl border border-zinc-200 shadow-card"><SolutionImage src={backgroundImage} alt={imageAlt || heading} ratio="4:3" /></div>}
+      </div>
+      {layout === 'hero-editorial' && <div className="solution-hero-image-strip mt-8">{mediaCards.map((card, index) => <article key={index} className="overflow-hidden rounded-2xl border border-zinc-200 bg-white"><SolutionImage src={card.image} alt={card.imageAlt || card.title} ratio="4:3" /><h2 className="font-display text-lg md:text-xl font-bold p-5 text-zinc-900"><RichText value={card.title} /></h2></article>)}</div>}
+    </div>
+  </section>;
+
   return (
-    <section className="relative w-full min-h-[90vh] lg:min-h-screen flex flex-col justify-between overflow-hidden bg-neutral-950 text-white">
+    <section data-hero-layout={layout} className="relative w-full min-h-[90vh] lg:min-h-screen flex flex-col justify-between overflow-hidden bg-neutral-950 text-white">
       {/* Background Media */}
-      {backgroundImage && (
+      {backgroundImage && !isPlaceholderMedia(backgroundImage) && (
         <div className="absolute inset-0 z-0">
           <Image
             src={backgroundImage}
@@ -36,6 +60,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
         </div>
       )}
 
+      {layout === 'hero-video' && <div className="absolute inset-0 z-0">{videoUrl && isSafeMediaUrl(videoUrl) && /\.(mp4|webm)(?:[?#]|$)/i.test(videoUrl) ? <HeroBackgroundVideo key={videoUrl} src={videoUrl} /> : (!backgroundImage || isPlaceholderMedia(backgroundImage)) ? <MediaPlaceholder video dark fill /> : null}</div>}
       {/* Ambient Lighting & Vignette Gradients */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Central Violet Glow */}
@@ -53,6 +78,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
 
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto flex-grow pt-32 pb-16 sm:pt-40 sm:pb-24">
+        {eyebrow && <p className="solution-eyebrow mb-5">{eyebrow}</p>}
         {/* Heading with strict balance and fluid typography */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] uppercase font-display max-w-4xl mx-auto [text-wrap:balance]">
           <RichText value={heading} />
@@ -87,7 +113,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
       </div>
 
       {/* Logo Marquee at Bottom */}
-      <div className="relative z-20 w-full border-t border-white/10 bg-neutral-950/70 backdrop-blur-md py-3.5">
+      <div className="relative z-10 w-full border-t border-white/10 bg-neutral-950/70 backdrop-blur-md py-3.5">
         <ClientMarquee showFadeMask={false} />
       </div>
     </section>

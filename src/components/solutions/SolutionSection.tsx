@@ -47,9 +47,9 @@ export default function SolutionSection({ section, products = [], availableProdu
         ? availableProducts.filter(p => data.content.productIds?.includes(p.id))
         : (products.length ? products : availableProducts);
       rendered = <ProductCardSection content={data.content} products={displayProducts.length ? displayProducts : (editing ? [
-        { id: 'sample-1', name: 'Sample Smart Gateway', description: 'Industrial edge IoT gateway with integrated LoRaWAN transceiver.', imageUrl: '/builder-samples/sensor.svg' },
-        { id: 'sample-2', name: 'Sample Ambience Node', description: 'Precision multi-variable environmental sensor.', imageUrl: '/builder-samples/energy.svg' },
-        { id: 'sample-3', name: 'Sample Power Monitor', description: 'Non-invasive high-precision submetering module.', imageUrl: '/builder-samples/mobility.svg' }
+        { id: 'sample-1', name: 'Sample Smart Gateway', description: 'Industrial edge IoT gateway with integrated LoRaWAN transceiver.', imageUrl: '/builder-placeholders/image-1-1.svg' },
+        { id: 'sample-2', name: 'Sample Ambience Node', description: 'Precision multi-variable environmental sensor.', imageUrl: '/builder-placeholders/image-1-1.svg' },
+        { id: 'sample-3', name: 'Sample Power Monitor', description: 'Non-invasive high-precision submetering module.', imageUrl: '/builder-placeholders/image-1-1.svg' }
       ] : [])} />;
       break;
     }
@@ -66,5 +66,5 @@ export default function SolutionSection({ section, products = [], availableProdu
     '--block-align': design.alignment,
   } as CSSProperties;
   const classes = ['solution-block', ...Object.entries(design).filter(([, value]) => value !== undefined && value !== false).map(([key]) => `block-${key}`)].join(' ');
-  return <div className={classes} style={styles}>{rendered}</div>;
+  return <div data-section-type={section.type} className={classes} style={styles}>{rendered}</div>;
 }

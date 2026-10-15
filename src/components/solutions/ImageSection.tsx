@@ -1,5 +1,6 @@
 "use client";
 
+import RichText, { AccentHeading } from './RichText';
 import React from "react";
 import { motion } from "framer-motion";
 import type { ImageSectionContent } from "@/types/section";
@@ -19,6 +20,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
     layout = "contained",
     aspectRatio = "16:9",
     rounded = true,
+    fit = 'cover',
   } = content;
 
   if (!imageUrl) return null;
@@ -30,7 +32,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
       case "21:9":
         return "aspect-[21/9]";
       case "auto":
-        return "h-auto max-h-[700px]";
+        return "h-auto";
       case "16:9":
       default:
         return "aspect-[16/9]";
@@ -41,24 +43,24 @@ export default function ImageSection({ content }: ImageSectionProps) {
 
   return (
     <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden font-sans border-b border-slate-100">
-      <div className={`mx-auto px-4 sm:px-6 lg:px-8 ${layout === "full-width" ? "max-w-full px-0" : "max-w-[1440px]"}`}>
+      <div className={`mx-auto px-4 sm:px-6 lg:px-8 ${layout === "full-width" ? "max-w-full px-0" : "max-w-7xl"}`}>
         
         {/* Header if not split layout */}
         {!isSplit && (heading || eyebrow || description) && (
           <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-14 px-4">
             {eyebrow && (
-              <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
+              <span className="solution-eyebrow block">
                 {eyebrow}
               </span>
             )}
             {heading && (
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-                {heading}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                <AccentHeading value={heading} />
               </h2>
             )}
             {description && (
               <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium">
-                {description}
+                <RichText value={description} />
               </p>
             )}
           </div>
@@ -69,18 +71,18 @@ export default function ImageSection({ content }: ImageSectionProps) {
           <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${layout === "split-right" ? "lg:flex-row-reverse" : ""}`}>
             <div className={layout === "split-right" ? "lg:order-2" : "lg:order-1"}>
               {eyebrow && (
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-widest uppercase mb-3 border border-primary/20">
+                <span className="solution-eyebrow block">
                   {eyebrow}
                 </span>
               )}
               {heading && (
-                <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-                  {heading}
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                  <AccentHeading value={heading} />
                 </h2>
               )}
               {description && (
                 <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-6">
-                  {description}
+                  <RichText value={description} />
                 </p>
               )}
               {caption && (
@@ -100,7 +102,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
               <img
                 src={imageUrl}
                 alt={altText}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className={`w-full ${aspectRatio === "auto" ? "h-auto" : "h-full"} ${fit === "contain" ? "object-contain" : "object-cover"}`}
               />
             </motion.div>
           </div>
@@ -116,7 +118,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
             <img
               src={imageUrl}
               alt={altText}
-              className={`w-full h-full object-cover ${rounded && layout !== "full-width" ? "rounded-2xl" : ""} hover:scale-102 transition-transform duration-700`}
+              className={`w-full ${aspectRatio === "auto" ? "h-auto" : "h-full"} ${fit === "contain" ? "object-contain" : "object-cover"} ${rounded && layout !== "full-width" ? "rounded-2xl" : ""} hover:scale-102 transition-transform duration-700`}
             />
 
             {caption && (

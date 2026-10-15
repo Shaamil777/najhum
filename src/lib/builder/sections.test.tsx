@@ -1,3 +1,10 @@
+import ChallengeSection from '@/components/solutions/ChallengeSection';
+import type { ChallengeContent } from '@/types/section';
+import CustomSection from '@/components/solutions/CustomSection';
+import VideoSection from '@/components/solutions/VideoSection';
+import ImageSection from '@/components/solutions/ImageSection';
+import { makePreset } from './catalog';
+import type { CustomContent, ImageSectionContent } from '@/types/section';
 import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import {
@@ -37,9 +44,55 @@ describe('solution section validation and rendering with earlier section types',
     expect(builderDocumentSchema.safeParse(document).success).toBe(true);
     const html = renderToStaticMarkup(<GraphSection content={section.content as unknown as GraphSectionContent} />);
     expect(html).toContain('PERFORMANCE METRICS');
-    expect(html).toContain('Quantifiable Industrial Impact');
+    expect(html.replace(/<[^>]*>/g, '')).toContain('Quantifiable Industrial Impact');
   });
 
+  it('renders every challenge in normal document flow without a viewport-height spacer', () => {
+    const section = makeSection(SectionType.CHALLENGE);
+    const content = section.content as unknown as ChallengeContent;
+    content.challenges = Array.from({ length: 12 }, (_, index) => ({ title: `Problem ${index + 1}`, description: 'An editable customer challenge.' }));
+    const html = renderToStaticMarkup(<ChallengeSection content={content} />);
+    expect(html.match(/<article/g)).toHaveLength(12);
+    expect(html).not.toContain('vh');
+    expect(html).not.toContain('position:absolute');
+  });
+  it('renders FAQs as accessible disclosures and resource links as safe destinations', () => {
+    const section = makePreset('faq');
+    const html = renderToStaticMarkup(<CustomSection content={section.content as unknown as CustomContent} />);
+    expect(html.match(/<details/g)).toHaveLength(3);
+    expect(html).toContain('<summary');
+    const resource = makePreset('resources');
+    (resource.content.entries as { link: string }[])[0].link = 'javascript:alert(1)';
+    expect(renderToStaticMarkup(<CustomSection content={resource.content as unknown as CustomContent} />)).not.toContain('javascript:');
+  });
+  it('uses allowed video embeds and preserves a full width player in split layouts', () => {
+    const html = renderToStaticMarkup(<VideoSection content={{ videoUrl: 'https://youtu.be/dQw4w9WgXcQ', layout: 'split-right' }} />);
+    expect(html).toContain('aria-label="Play Solution video"');
+    expect(html).not.toContain('<iframe');
+    expect(html).toContain('w-full mx-auto');
+    expect(html).toContain('grid lg:grid-cols-2');
+  });
+  it('renders empty video slots as labelled boxes without unrelated videos', () => {
+    const section = makePreset('video-cards');
+    const html = renderToStaticMarkup(<CustomSection content={section.content as unknown as CustomContent} />);
+    expect(html.match(/aria-label="Video placeholder, 16:9"/g)).toHaveLength(3);
+    expect(html).not.toContain('<video');
+    expect(html).not.toContain('mobile_mockup');
+  });
+  it('uses the site heading scale and neutral ratio labels for visual card sections', () => {
+    const section = makePreset('overlay-cards');
+    const html = renderToStaticMarkup(<CustomSection content={section.content as unknown as CustomContent} />);
+    expect(html).toContain('lg:text-5xl');
+    expect(html).toContain('font-black');
+    expect(html).toContain('1200'); // neutral media guidance remains readable in the placeholder
+    expect(html).not.toContain('builder-samples');
+    expect(html).toContain('is-overlay');
+  });
+  it('keeps architecture images at their natural aspect ratio without cropping', () => {
+    const section = makeSection(SectionType.IMAGE);
+    const html = renderToStaticMarkup(<ImageSection content={section.content as unknown as ImageSectionContent} />);
+    expect(html).toContain('w-full h-auto object-contain');
+  });
   it('rejects arbitrary embed hosts and unsafe media while preserving local media', () => {
     expect(embedVideoUrl('youtube', 'https://youtu.be/dQw4w9WgXcQ')).toBe('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ');
     expect(embedVideoUrl('vimeo', 'https://vimeo.com/123456')).toBe('https://player.vimeo.com/video/123456');

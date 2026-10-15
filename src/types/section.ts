@@ -36,6 +36,11 @@ export enum SectionType {
  * Large header with background image and CTA
  */
 export interface HeroContent {
+  layout?: 'centered' | 'hero-split' | 'hero-video' | 'hero-editorial';
+  eyebrow?: string;
+  videoUrl?: string;
+  imageAlt?: string;
+  mediaCards?: { title: string; image?: string; imageAlt?: string }[];
   heading: string;
   subheading: string;
   badge?: string;
@@ -166,6 +171,13 @@ export interface CustomContent {
   heading: string;
   bodyHtml: string;
   rawData?: unknown;
+  layout?: 'rich-text' | 'faq' | 'case-studies' | 'resources' | 'statistics' | 'image-cards' | 'overlay-cards' | 'image-bento' | 'split-stories' | 'video-cards';
+  eyebrow?: string;
+  theme?: 'light' | 'soft' | 'dark';
+  headingAlign?: 'left' | 'center';
+  mediaRatio?: '16:9' | '4:3' | '1:1' | '3:4';
+  columns?: 2 | 3 | 4;
+  entries?: { title: string; description: string; image?: string; imageAlt?: string; videoUrl?: string; aspectRatio?: '16:9' | '4:3' | '1:1' | '3:4'; link?: string; linkText?: string; value?: string }[];
 }
 
 /**
@@ -283,6 +295,7 @@ export interface ImageSectionContent {
   layout?: 'full-width' | 'contained' | 'card' | 'split-left' | 'split-right';
   aspectRatio?: '16:9' | '4:3' | '21:9' | 'auto';
   rounded?: boolean;
+  fit?: 'cover' | 'contain';
 }
 
 export interface VideoSectionContent {

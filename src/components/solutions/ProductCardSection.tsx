@@ -1,5 +1,6 @@
 "use client";
 
+import RichText, { AccentHeading } from './RichText';
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Tag, Box, ArrowUpRight } from "lucide-react";
@@ -55,12 +56,12 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
           )}
           {heading && (
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-              {heading}
+              <AccentHeading value={heading} />
             </h2>
           )}
           {description && (
             <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium">
-              {description}
+              <RichText value={description} />
             </p>
           )}
         </div>
@@ -114,7 +115,7 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
                       {product.name}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed font-medium line-clamp-2 mb-5 flex-1">
-                      {product.description}
+                      <RichText value={product.description} />
                     </p>
 
                     <div className="pt-3 border-t border-primary/20 flex items-center justify-between text-primary font-bold text-xs">

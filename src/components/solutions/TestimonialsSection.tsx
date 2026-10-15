@@ -1,4 +1,4 @@
-import RichText from './RichText';
+import RichText, { AccentHeading } from './RichText';
 import Image from 'next/image';
 import type { TestimonialsContent } from '@/types/section';
 
@@ -7,21 +7,22 @@ interface TestimonialsSectionProps {
 }
 
 export default function TestimonialsSection({ content }: TestimonialsSectionProps) {
-  const { testimonials = [] } = content;
+  const { testimonials = [], eyebrow = 'CUSTOMER SUCCESS', heading = 'Proven Results From Field Implementations', subheading }  = content;
 
   return (
     <section className="py-20 lg:py-28 bg-zinc-50 border-b border-zinc-200/80 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-14">
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">
-            CUSTOMER SUCCESS
+            {eyebrow}
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tight leading-tight mb-4 uppercase">
-            Proven Results From Field Implementations
+            <AccentHeading value={heading} />
           </h2>
+          {subheading && <div className="text-zinc-600 leading-relaxed"><RichText as="div" value={subheading} /></div>}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="solution-card-grid">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}

@@ -32,16 +32,16 @@ export default function BenefitsSection({ content }: BenefitsSectionProps) {
           </div>
         )}
 
-        <div className="space-y-16 lg:space-y-24">
+        <div className="space-y-8 lg:space-y-12">
           {benefits.map((benefit, index) => {
             const isReversed = index % 2 === 1;
             return (
               <div
                 key={index}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${isReversed ? 'lg:grid-flow-dense' : ''}`}
+                className={`grid grid-cols-1 ${benefit.image ? 'lg:grid-cols-2' : ''} gap-6 lg:gap-10 items-center ${isReversed && benefit.image ? 'lg:grid-flow-dense' : ''}`}
               >
                 {/* Text Content */}
-                <div className={isReversed ? 'lg:col-start-2' : ''}>
+                <div className={isReversed && benefit.image ? 'lg:col-start-2' : ''}>
                   {/* Metric Pill if present */}
                   {benefit.metricValue && (
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold tracking-wider uppercase mb-4 border border-primary/20">

@@ -108,5 +108,10 @@ export const draftEnvelopeSchema = z.object({
 
 export function sectionTitle(section: BuilderSection) {
   const content = section.content;
-  return typeof content.heading === 'string' && content.heading ? content.heading.replace(/<[^>]*>/g, '') : section.type.replaceAll('_', ' ').toLowerCase();
+  if (typeof content.heading === 'string' && content.heading) return content.heading.replace(/<[^>]*>/g, '');
+  if (section.type === SectionType.COMPARISON_TABLE && content.header && typeof content.header === 'object') {
+    const header = content.header as Record<string, unknown>;
+    return [header.leftTitle, 'vs', header.rightTitlePart1, header.rightTitlePart2].filter(value => typeof value === 'string').join(' ').replace(/<[^>]*>/g, '');
+  }
+  return section.type.replaceAll('_', ' ').toLowerCase();
 }

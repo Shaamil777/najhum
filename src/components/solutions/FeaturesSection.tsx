@@ -31,7 +31,7 @@ export default function FeaturesSection({ content }: FeaturesSectionProps) {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="solution-card-grid">
           {features.map((feature, index) => (
             <div
               key={index}

@@ -17,6 +17,11 @@ const mediaUrlSchema = z.string().refine(isSafeMediaUrl, 'Use a local image path
  * Hero Section Content Schema
  */
 export const heroContentSchema = z.object({
+  layout: z.enum(['centered', 'hero-split', 'hero-video', 'hero-editorial']).optional(),
+  eyebrow: z.string().max(80).optional(),
+  videoUrl: mediaUrlSchema.optional().or(z.literal('')),
+  imageAlt: z.string().max(200).optional(),
+  mediaCards: z.array(z.object({ title: z.string().max(100), image: mediaUrlSchema.or(z.literal('')).optional(), imageAlt: z.string().max(200).optional() })).max(3).optional(),
   heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
   subheading: z.string().min(1, 'Subheading is required').max(350, 'Subheading must be 350 characters or less'),
   badge: z.string().max(60, 'Badge must be 60 characters or less').optional().or(z.literal('')),
@@ -217,6 +222,9 @@ const testimonialSchema = z.object({
  * Testimonials Section Content Schema
  */
 export const testimonialsContentSchema = z.object({
+  eyebrow: z.string().max(60).optional(),
+  heading: z.string().max(150).optional(),
+  subheading: z.string().max(350).optional(),
   testimonials: z.array(testimonialSchema).min(1, 'At least one testimonial is required').max(10, 'Maximum 10 testimonials allowed'),
 });
 
@@ -239,6 +247,23 @@ export const customContentSchema = z.object({
   heading: z.string().min(1, 'Heading is required').max(200, 'Heading must be 200 characters or less'),
   bodyHtml: z.string().min(1, 'Content is required').max(10000, 'Content must be 10000 characters or less'),
   rawData: z.any().optional(),
+  layout: z.enum(['rich-text', 'faq', 'case-studies', 'resources', 'statistics', 'image-cards', 'overlay-cards', 'image-bento', 'split-stories', 'video-cards']).optional(),
+  eyebrow: z.string().max(80).optional(),
+  theme: z.enum(['light', 'soft', 'dark']).optional(),
+  headingAlign: z.enum(['left', 'center']).optional(),
+  mediaRatio: z.enum(['16:9', '4:3', '1:1', '3:4']).optional(),
+  columns: z.union([z.literal(2), z.literal(3), z.literal(4)]).optional(),
+  entries: z.array(z.object({
+    title: z.string().min(1).max(150),
+    description: z.string().max(1500),
+    image: mediaUrlSchema.optional().or(z.literal('')),
+    imageAlt: z.string().max(200).optional(),
+    videoUrl: mediaUrlSchema.optional().or(z.literal('')),
+    aspectRatio: z.enum(['16:9', '4:3', '1:1', '3:4']).optional(),
+    link: z.string().optional(),
+    linkText: z.string().max(60).optional(),
+    value: z.string().max(40).optional(),
+  })).max(12).optional(),
 });
 
 /**
@@ -259,13 +284,14 @@ export const imageSectionContentSchema = z.object({
   layout: z.enum(['full-width', 'contained', 'card', 'split-left', 'split-right']).optional(),
   aspectRatio: z.enum(['16:9', '4:3', '21:9', 'auto']).optional(),
   rounded: z.boolean().optional(),
+  fit: z.enum(['cover', 'contain']).optional(),
 });
 
 export const videoSectionContentSchema = z.object({
   eyebrow: z.string().max(80).optional().or(z.literal('')),
   heading: z.string().max(160).optional().or(z.literal('')),
   subheading: z.string().max(400).optional().or(z.literal('')),
-  videoUrl: z.string().min(1, 'Video URL is required'),
+  videoUrl: mediaUrlSchema.or(z.literal('')),
   posterUrl: z.string().optional().or(z.literal('')),
   layout: z.enum(['contained', 'cinema', 'split-right']).optional(),
   caption: z.string().max(300).optional().or(z.literal('')),

@@ -1,205 +1,23 @@
-"use client";
-import RichText from './RichText';
-
-
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import RichText, { AccentHeading } from './RichText';
 import type { ChallengeContent } from '@/types/section';
+import { isSafeLink } from '@/lib/utils/content-url';
 
-interface ChallengeSectionProps {
-  content: ChallengeContent;
-}
-
-export default function ChallengeSection({ content }: ChallengeSectionProps) {
-  const { heading, description, challenges } = content;
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const [dimensions, setDimensions] = useState({ cardWidth: 760, stickyOffset: 120, paddingLeft: 80 });
-
-  useEffect(() => {
-    const updateSize = () => {
-      const w = window.innerWidth;
-      const count = challenges.length;
-      const stackGaps = Math.max(count - 1, 1);
-
-      let cWidth: number;
-      let padLeft: number;
-      let rightMargin: number;
-      let maxAllowedOffset: number;
-
-      if (w >= 1536) {
-        cWidth = 800;
-        padLeft = 80;
-        rightMargin = 40;
-        maxAllowedOffset = 160;
-      } else if (w >= 1280) {
-        cWidth = 750;
-        padLeft = 80;
-        rightMargin = 32;
-        maxAllowedOffset = 140;
-      } else if (w >= 1024) {
-        cWidth = 680;
-        padLeft = 64;
-        rightMargin = 28;
-        maxAllowedOffset = 110;
-      } else if (w >= 768) {
-        cWidth = Math.min(Math.round(w * 0.72), 600);
-        padLeft = 48;
-        rightMargin = 24;
-        maxAllowedOffset = 60;
-      } else if (w >= 640) {
-        cWidth = Math.min(Math.round(w * 0.82), 520);
-        padLeft = 28;
-        rightMargin = 20;
-        maxAllowedOffset = 36;
-      } else {
-        padLeft = 16;
-        rightMargin = 16;
-        cWidth = Math.max(Math.min(w - 32, 380), 280);
-        maxAllowedOffset = 16;
-      }
-
-      const availableStackSpace = w - padLeft - rightMargin;
-      const spaceForOffsets = availableStackSpace - cWidth;
-
-      let offset: number;
-      if (spaceForOffsets > 0) {
-        const computedOffset = Math.floor(spaceForOffsets / stackGaps);
-        offset = Math.min(computedOffset, maxAllowedOffset);
-      } else {
-        offset = w < 640 ? 10 : 28;
-        cWidth = Math.max(w - padLeft - rightMargin - (stackGaps * offset), 260);
-      }
-
-      const minOffset = w < 640 ? 8 : (w < 768 ? 20 : (w < 1024 ? 36 : 50));
-      offset = Math.max(offset, minOffset);
-
-      setDimensions({ cardWidth: cWidth, stickyOffset: offset, paddingLeft: padLeft });
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, [challenges.length]);
-
-  const { cardWidth, stickyOffset: STICKY_OFFSET, paddingLeft } = dimensions;
-  const GAP = 16; 
-  const CARD_SPACING = cardWidth + GAP;
-  const N = challenges.length;
-
-  return (
-    <section 
-      ref={containerRef} 
-      className="w-full bg-white text-neutral-900 relative"
-      // Total height allows the user to scroll through the animation comfortably
-      style={{ height: `${Math.max(400, (N) * 100)}vh` }}
-    >
-      {/* Sticky Container */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-20 lg:py-32">
-        
-        {/* Header matched to Najhum brand styling */}
-        <div className="px-6 md:px-12 lg:px-20 mb-8 md:mb-16 shrink-0 max-w-4xl">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">
-            INDUSTRY CHALLENGES
-          </p>
-          <h2 className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-zinc-900 leading-[1.05] uppercase mb-4">
-            <RichText value={heading} />
-          </h2>
-          {description && (
-            <div className="text-zinc-600 text-lg md:text-xl leading-relaxed"><RichText as="div" value={description} /></div>
-          )}
-        </div>
-
-        {/* Cards Wrapper */}
-        <div className="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[520px]">
-          {challenges.map((challenge, index) => (
-            <ChallengeCard 
-              key={index}
-              index={index}
-              challenge={challenge}
-              scrollYProgress={scrollYProgress}
-              N={N}
-              CARD_SPACING={CARD_SPACING}
-              STICKY_OFFSET={STICKY_OFFSET}
-              cardWidth={cardWidth}
-              paddingLeft={paddingLeft}
-            />
-          ))}
-        </div>
+export default function ChallengeSection({ content }: { content: ChallengeContent }) {
+  return <section className="py-10 lg:py-14 bg-white text-zinc-900 border-b border-zinc-200 font-sans">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="max-w-3xl mb-6 lg:mb-8">
+        <p className="text-xs font-bold tracking-widest uppercase text-primary mb-3">Industry challenges</p>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tight mb-4"><AccentHeading value={content.heading} /></h2>
+        {content.description && <div className="text-zinc-600 leading-relaxed"><RichText as="div" value={content.description} /></div>}
+      </header>
+      <div className="solution-card-grid">
+        {content.challenges.map((challenge, index) => <article key={index} className={`min-w-0 rounded-2xl p-5 sm:p-6 border flex flex-col gap-4 ${index % 2 ? 'bg-blue-50 border-blue-100' : 'bg-zinc-50 border-zinc-200'}`}>
+          <span className="text-xs font-bold text-primary">{String(index + 1).padStart(2, '0')} · {challenge.category || 'Challenge'}</span>
+          <h3 className="text-xl font-bold leading-snug"><RichText value={challenge.title} /></h3>
+          <div className="text-sm text-zinc-600 leading-relaxed"><RichText as="div" value={challenge.description} /></div>
+          {challenge.exploreLink && isSafeLink(challenge.exploreLink) && <a className="mt-auto pt-2 text-sm font-semibold text-primary underline underline-offset-4" href={challenge.exploreLink}>Explore solution →</a>}
+        </article>)}
       </div>
-    </section>
-  );
-}
-
-interface CardProps {
-  index: number;
-  challenge: ChallengeContent['challenges'][0];
-  scrollYProgress: MotionValue<number>;
-  N: number;
-  CARD_SPACING: number;
-  STICKY_OFFSET: number;
-  cardWidth: number;
-  paddingLeft: number;
-}
-
-function ChallengeCard({ index, challenge, scrollYProgress, N, CARD_SPACING, STICKY_OFFSET, cardWidth, paddingLeft }: CardProps) {
-  const x = useTransform(scrollYProgress, (p) => {
-    const maxScroll = (N - 1) * (CARD_SPACING - STICKY_OFFSET);
-    const currentScroll = p * maxScroll;
-    const targetX = index * CARD_SPACING - currentScroll;
-    const stickyX = index * STICKY_OFFSET;
-    return Math.max(stickyX + paddingLeft, targetX + paddingLeft);
-  });
-
-  const isPrimary = index % 2 === 1;
-  const bgClass = isPrimary ? "bg-primary/95 border-blue-400/40 text-white" : "bg-zinc-900/95 border-zinc-800 text-white";
-  const textMutedClass = isPrimary ? "text-blue-100" : "text-zinc-400";
-  const textSubtleClass = isPrimary ? "text-blue-200" : "text-zinc-500";
-  const dotClass = isPrimary ? "bg-white" : "bg-zinc-600";
-
-  return (
-    <motion.div
-      className={`absolute top-0 h-full border-l shadow-[-12px_0_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl md:rounded-3xl overflow-hidden ${bgClass}`}
-      style={{
-        x,
-        width: `${cardWidth}px`,
-        maxWidth: '800px',
-        zIndex: index, 
-      }}
-    >
-      <div className="p-6 sm:p-8 md:p-10 lg:p-12 h-full flex flex-col justify-between relative">
-        {/* Decorative Dot */}
-        <div className={`absolute top-6 right-6 md:top-10 md:right-10 w-2.5 h-2.5 md:w-3 md:h-3 rounded-full opacity-80 ${dotClass}`} />
-
-        {/* Top section: Title and Description */}
-        <div className="mt-1 md:mt-2">
-          <h3 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] xl:text-[32px] font-semibold mb-3 md:mb-5 leading-tight pr-6 md:pr-10 text-white">
-            <span className={`${textSubtleClass} mr-2 md:mr-3 inline-block mb-1 sm:mb-0`}>
-              {String(index + 1).padStart(2, '0')} —
-            </span>
-            <RichText value={challenge.title} />
-          </h3>
-          <div className={`${textMutedClass} text-xs sm:text-sm md:text-base leading-relaxed max-w-full md:max-w-[92%] font-medium`}><RichText as="div" value={challenge.description} /></div>
-        </div>
-
-        {/* Bottom section: Metadata & Link */}
-        <div className={`flex justify-between items-end text-[11px] sm:text-xs md:text-sm font-semibold uppercase tracking-wide pt-4 ${textSubtleClass}`}>
-          <div className="flex gap-4 md:gap-12">
-            <span className={textMutedClass}>{challenge.category || 'Challenge'}</span>
-          </div>
-          {(challenge.exploreLink || true) && (
-            <a href={challenge.exploreLink || '#'} className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors group">
-              <span className="capitalize normal-case text-xs sm:text-sm">Explore solution</span>
-              <span className={`text-sm md:text-lg group-hover:translate-x-1 transition-transform group-hover:text-white ${textMutedClass}`}>›</span>
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
+    </div>
+  </section>;
 }

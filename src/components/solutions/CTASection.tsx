@@ -5,7 +5,7 @@ import RichText from './RichText';
 import { useState, useEffect } from "react";
 import Link from 'next/link';
 import type { CTAContent } from '@/types/section';
-import { AntiMetalButton } from "@/components/ui/anti-metal-button";
+
 
 interface CTASectionProps {
   content: CTAContent;
@@ -69,40 +69,34 @@ export default function CTASection({ content }: CTASectionProps) {
          </div>
       </div>
       
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-20 flex flex-col items-center justify-center min-h-[40vh] pointer-events-none lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 lg:origin-top transition-transform duration-300 lg:-mb-32 xl:-mb-16 2xl:mb-0">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-20 flex flex-col items-center justify-center pointer-events-none">
           {/* Content & Button */}
           <div className="flex flex-col items-center text-center max-w-4xl pointer-events-auto">
-             <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.05]">
+             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.05]">
                 <RichText value={heading} />
              </h2>
              <div className="text-lg sm:text-xl text-zinc-500 mb-12 leading-relaxed max-w-2xl"><RichText as="div" value={bodyText} /></div>
              
-             <div className="flex flex-col sm:flex-row gap-8 items-center justify-center">
+             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center w-full">
                {/* Primary Button */}
                {primaryButtonText && primaryButtonLink && (
                  <div 
-                   className="scale-110 sm:scale-125 transition-transform duration-300"
+                   className="max-w-full w-full sm:w-auto"
                    onMouseEnter={() => setIsHovered(true)}
                    onMouseLeave={() => setIsHovered(false)}
                  >
-                    <Link href={primaryButtonLink} className="focus-visible:outline-none block">
-                      <AntiMetalButton 
-                        label={primaryButtonText} 
-                        accentFrom="var(--color-primary)" 
-                        accentTo="var(--color-primary)" 
-                        dotColor="#ffffff"
-                        className="dark shadow-xl hover:shadow-primary/30"
-                      />
+                    <Link href={primaryButtonLink} className="inline-flex w-full items-center justify-center rounded-lg bg-primary text-white px-6 py-3.5 text-sm font-semibold hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                      {primaryButtonText}
                     </Link>
                  </div>
                )}
 
                {/* Secondary Button */}
                {secondaryButtonText && secondaryButtonLink && (
-                 <div className="mt-4 sm:mt-0">
+                 <div className="max-w-full w-full sm:w-auto">
                    <Link
                      href={secondaryButtonLink}
-                     className="inline-flex h-[52px] items-center justify-center rounded-md px-8 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-900 border border-zinc-200 bg-white text-zinc-950 shadow-sm"
+                     className="inline-flex w-full min-h-[48px] text-center py-3 items-center justify-center rounded-md px-8 text-sm font-medium transition-colors hover:bg-zinc-100 hover:text-zinc-900 border border-zinc-200 bg-white text-zinc-950 shadow-sm"
                    >
                      {secondaryButtonText}
                    </Link>

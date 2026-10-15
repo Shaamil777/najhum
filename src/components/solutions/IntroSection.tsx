@@ -28,7 +28,7 @@ export default function IntroSection({ content }: { content: IntroContent }) {
     <section className={`relative w-full flex items-center overflow-hidden py-12 md:py-16 border-b ${themeClasses}`}>
       
       {/* Dynamic Angled Shape on the left */}
-      <div aria-hidden="true" className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 opacity-15 sm:w-1/3 sm:opacity-100 lg:w-[30%] z-0">
+      <div aria-hidden="true" className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 opacity-[0.08] sm:w-1/3 lg:w-[30%] z-0">
         <svg 
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
@@ -43,15 +43,16 @@ export default function IntroSection({ content }: { content: IntroContent }) {
       </div>
 
       <Container className="relative z-10 flex flex-col md:flex-row justify-end items-center" size="xl">
-        <div className={`w-full sm:w-[85%] md:w-3/4 lg:w-[75%] sm:pl-16 md:pl-24 lg:pl-32 py-4 ${content.image ? 'grid lg:grid-cols-2 gap-x-8 items-start' : ''}`}>
-          {content.image && <figure className={`min-w-0 mb-8 ${content.imagePosition === 'left' ? 'lg:col-start-1' : 'lg:col-start-2'} lg:row-start-1 lg:row-span-4`}>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-primary/20 shadow-lg">
+        <div className={`w-full min-w-0 py-0 ${content.image ? 'grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-5 items-start' : ''}`}>
+          {content.image && <figure className={`min-w-0 order-2 lg:order-none mb-0 ${content.imagePosition === 'left' ? 'lg:col-start-1' : 'lg:col-start-2'} lg:row-start-1 lg:row-span-4`}>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-primary/20 shadow-lg">
               <Image src={content.image} alt={content.imageAlt || content.heading} fill unoptimized className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
             </div>
             {content.imageCaption && <figcaption className={`mt-3 text-xs leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{content.imageCaption}</figcaption>}
           </figure>}
           
           <motion.div
+            className="min-w-0 order-1 lg:order-none"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -60,12 +61,12 @@ export default function IntroSection({ content }: { content: IntroContent }) {
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
               {content.eyebrow || 'THE PLATFORM'}
             </p>
-            <h2 className={`text-4xl md:text-5xl lg:text-6xl font-black font-display mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-zinc-900'}`}>
+            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black font-display mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-zinc-900'}`}>
               <AccentHeading value={content.heading} />
             </h2>
             
             {content.summary && <div className={`mb-5 text-lg leading-relaxed font-semibold ${isDark ? 'text-zinc-200' : 'text-zinc-800'}`}><RichText as="div" value={content.summary} /></div>}
-            <div className={`text-base md:text-lg leading-relaxed font-medium mb-8 max-w-3xl ${isDark ? 'text-zinc-400 [&_p]:text-zinc-400' : 'text-zinc-600 [&_p]:text-zinc-600'}`}>
+            <div className={`text-base md:text-lg leading-relaxed font-medium mb-0 max-w-3xl ${isDark ? 'text-zinc-400 [&_p]:text-zinc-400' : 'text-zinc-600 [&_p]:text-zinc-600'}`}>
               {content.bodyFormat === 'text' ? (
                 <RichText as="div" value={content.bodyText} />
               ) : (
@@ -76,7 +77,7 @@ export default function IntroSection({ content }: { content: IntroContent }) {
 
           {/* Highlights Grid matching CropifAI */}
           {highlights.length > 0 && (
-            <div className={`grid grid-cols-1 ${content.image ? 'sm:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} gap-4 lg:gap-6 mb-8`}>
+            <div className={`order-3 lg:order-none grid grid-cols-1 ${content.image ? 'sm:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} gap-4 mb-0`}>
               {highlights.map((highlight, i) => (
                 <motion.div 
                   key={i}
@@ -111,7 +112,7 @@ export default function IntroSection({ content }: { content: IntroContent }) {
 
           {/* Stats if available */}
           {stats.length > 0 && (
-            <div className={`grid gap-4 mb-8 ${stats.length === 1 ? 'grid-cols-1' : stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-3'}`}>
+            <div className={`order-4 lg:order-none grid gap-4 mb-0 ${stats.length === 1 ? 'grid-cols-1' : stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-3'}`}>
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col gap-2">
                   <div className="text-3xl md:text-4xl font-black text-primary">
@@ -132,7 +133,7 @@ export default function IntroSection({ content }: { content: IntroContent }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6"
+              className="order-5 lg:order-none mt-0"
             >
               <a 
                 href={buttonLink} 

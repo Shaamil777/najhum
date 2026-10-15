@@ -22,7 +22,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
             {content.eyebrow}
           </p>
-          <h2 className="text-4xl md:text-5xl font-black font-display tracking-tight text-zinc-900 mb-10">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display tracking-tight text-zinc-900 mb-6">
             <AccentHeading value={content.heading} />
           </h2>
           
@@ -48,7 +48,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
         </div>
 
         {/* Tab Content Area */}
-        <div className="pt-10">
+        <div className="pt-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab.id}
@@ -61,7 +61,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
                 {/* Solution Box */}
-                <div className="bg-white border border-zinc-100 shadow-xl shadow-zinc-200/50 rounded-3xl p-8 relative overflow-hidden group">
+                <div className="bg-white border border-zinc-100 shadow-xl shadow-zinc-200/50 rounded-3xl p-5 sm:p-8 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none transition-transform duration-500 group-hover:scale-110" />
                   
                   <p className="text-xs font-black tracking-widest text-primary uppercase mb-6 relative z-10">
@@ -82,7 +82,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
                 </div>
 
                 {/* Stat Box */}
-                <div className="bg-primary/5 border border-primary/10 rounded-3xl p-12 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+                <div className="bg-primary/5 border border-primary/10 rounded-3xl p-6 sm:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden group">
                   {/* Subtle animated grid background inside stat box */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(26,136,248,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(26,136,248,0.05)_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-50 pointer-events-none group-hover:opacity-100 transition-opacity duration-700" />
                   
