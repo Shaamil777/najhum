@@ -2,15 +2,15 @@
 
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   Card,
   CardBody,
   Grid,
   Text,
-  Link as DesignLink,
   Stack
 } from "@/design-system";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -117,21 +117,53 @@ export function MegaMenu({ title, items, parentHref }: MegaMenuProps) {
               {items.map((item) => {
                 const isChildActive = pathname === item.href;
                 return (
-                  <Stack key={item.href || item.title} gap="xs">
-                    <DesignLink
-                      href={item.href} onClick={() => setIsOpen(false)}
-                      underline="never"
-                      className={cn(
-                        "font-bold text-sm",
-                        isChildActive ? "text-primary" : "text-foreground"
+                  <Link
+                    key={item.href || item.title}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="group block p-2.5 -m-2.5 rounded-lg transition-all duration-200 hover:bg-surface-alt/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+                  >
+                    <Stack gap="xs">
+                      <div className="flex items-center justify-between gap-2">
+                        <span
+                          className={cn(
+                            "font-bold text-sm relative transition-all duration-200 inline-block",
+                            isChildActive
+                              ? "text-primary translate-x-1"
+                              : "text-foreground group-hover:text-primary group-hover:translate-x-1"
+                          )}
+                        >
+                          <span className="relative inline-block">
+                            {item.title}
+                            <span
+                              className={cn(
+                                "absolute left-0 -bottom-0.5 h-[2px] bg-primary transition-all duration-300 origin-left",
+                                isChildActive
+                                  ? "w-full"
+                                  : "w-0 group-hover:w-full"
+                              )}
+                            />
+                          </span>
+                        </span>
+                        <ArrowRight
+                          className={cn(
+                            "w-3.5 h-3.5 text-primary transition-all duration-200 shrink-0",
+                            isChildActive
+                              ? "opacity-100 translate-x-0"
+                              : "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
+                          )}
+                        />
+                      </div>
+                      {item.description && (
+                        <Text
+                          variant="caption"
+                          className="transition-colors duration-200 group-hover:text-foreground/80 line-clamp-2"
+                        >
+                          {item.description}
+                        </Text>
                       )}
-                    >
-                      {item.title}
-                    </DesignLink>
-                    {item.description && (
-                      <Text variant="caption">{item.description}</Text>
-                    )}
-                  </Stack>
+                    </Stack>
+                  </Link>
                 );
               })}
             </Grid>

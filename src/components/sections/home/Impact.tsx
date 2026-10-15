@@ -19,12 +19,12 @@ export default function Impact() {
         '--font-sans': 'var(--font-poppins)'
       } as React.CSSProperties}
     >
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-8 lg:px-12 md:scale-[0.9] lg:scale-[0.85] xl:scale-[0.9] 2xl:scale-100 md:origin-top transition-transform duration-300 md:-mb-[320px] lg:-mb-[480px] xl:-mb-[320px] 2xl:mb-0">
-        <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] gap-8 lg:gap-12 xl:gap-24 relative items-start">
+      <div className="max-w-[1536px] mx-auto px-8 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[45%_1fr] gap-8 lg:gap-12 xl:gap-20 relative items-start">
           
           {/* Left Sticky Column */}
-          <div className="lg:sticky lg:top-24 flex flex-col justify-start h-auto self-start pb-12 lg:pb-0">
-            <div className="max-w-xl lg:-ml-4 xl:-ml-12">
+          <div className="lg:sticky lg:top-24 xl:top-28 flex flex-col justify-start h-auto self-start pb-12 lg:pb-0 z-10">
+            <div className="max-w-xl">
               <h2 className="font-display normal-case text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5.5rem] font-bold tracking-tighter leading-[1] text-zinc-900 mb-6 lg:mb-8 whitespace-pre-line">
                 Build
                 Intelligent

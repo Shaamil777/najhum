@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EV Charging Station 3D</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #e5edf8 0%, #edf2fa 50%, #dee7f5 100%);
+      cursor: grab;
+    }
+    body:active {
+      cursor: grabbing;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      outline: none;
+    }
+  </style>
+  <!-- Three.js & OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <script>
+    window.onload = function () {
+      // ============================================================================
+      // 1. SCENE, CAMERA & RENDERER SETUP (DEPTH-PRECISION OPTIMIZED)
+      // ============================================================================
+      const scene = new THREE.Scene();
+
+      // Tightened near/far frustum (5 to 140) and logarithmicDepthBuffer to completely eliminate Z-fighting
+      const camera = new THREE.PerspectiveCamera(
+        20,
+        window.innerWidth / window.innerHeight,
+        5,
+        140
+      );
+      camera.position.set(33, 36, 35);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        logarithmicDepthBuffer: true,
+        powerPreference: "high-performance"
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputEncoding = THREE.LinearEncoding;
+      renderer.toneMapping = THREE.NoToneMapping;
+      document.body.appendChild(renderer.domElement);
+
+      // OrbitControls for smooth cursor hover/drag viewing
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.target.set(-0.3, 0.8, 0.6);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.rotateSpeed = 0.75;
+      controls.zoomSpeed = 0.9;
+      controls.panSpeed = 0.75;
+      controls.minDistance = 18;
+      controls.maxDistance = 95;
+      controls.maxPolarAngle = Math.PI / 2 - 0.04; // Prevent going below ground
+      controls.minPolarAngle = 0.15;
+      controls.update();
+
+      // ============================================================================
+      // 2. BALANCED SOFT STUDIO ISOMETRIC LIGHTING (NO SHADOW ACNE OR OVEREXPOSURE)
+      // ============================================================================
+      const hemiLight = new THREE.HemisphereLight(0xf2f6fc, 0xc3d2e8, 0.36);
+      hemiLight.position.set(0, 55, 0);
+      scene.add(hemiLight);
+
+      const ambientLight = new THREE.AmbientLight(0xdce6f5, 0.32);
+      scene.add(ambientLight);
+
+      const dirLight = new THREE.DirectionalLight(0xfffdf9, 0.46);
+      dirLight.position.set(-22, 42, 26);
+      dirLight.castShadow = true;
+      dirLight.shadow.mapSize.width = 2048;
+      dirLight.shadow.mapSize.height = 2048;
+      dirLight.shadow.camera.near = 15;
+      dirLight.shadow.camera.far = 95;
+      const d = 25;
+      dirLight.shadow.camera.left = -d;
+      dirLight.shadow.camera.right = d;
+      dirLight.shadow.camera.top = d;
+      dirLight.shadow.camera.bottom = -d;
+      dirLight.shadow.bias = -0.0008;
+      dirLight.shadow.normalBias = 0.02;
+      dirLight.shadow.radius = 3.0;
+      scene.add(dirLight);
+
+      const fillLight = new THREE.DirectionalLight(0xaec6eb, 0.18);
+      fillLight.position.set(28, 18, -12);
+      scene.add(fillLight);
+
+      // ============================================================================
+      // 3. SHARED MATERIALS & PROCEDURAL CANVAS TEXTURES
+      // ============================================================================
+      const mats = {
+        "white Glossy": new THREE.MeshLambertMaterial({
+          color: 0xeef3fb
+        }),
+        whiteMatte: new THREE.MeshLambertMaterial({
+          color: 0xe1e9f5
+        }),
+        roofTrayGrey: new THREE.MeshLambertMaterial({
+          color: 0xd0dced
+        }),
+        loungeRoofGrey: new THREE.MeshLambertMaterial({
+          color: 0xc2cfe3
+        }),
+        concrete: new THREE.MeshLambertMaterial({
+          color: 0xd2dceb
+        }),
+        apronGrey: new THREE.MeshLambertMaterial({
+          color: 0xc2cee0,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1
+        }),
+        drivewayGrey: new THREE.MeshLambertMaterial({
+          color: 0x8d9cb0
+        }),
+        roadAsphalt: new THREE.MeshLambertMaterial({
+          color: 0x64758c
+        }),
+        brandBlue: new THREE.MeshLambertMaterial({
+          color: 0x185ee0
+        }),
+        softBlueCap: new THREE.MeshLambertMaterial({
+          color: 0x4f89e6
+        }),
+        loungeBluePanel: new THREE.MeshLambertMaterial({
+          color: 0x4c8be8
+        }),
+        darkMetal: new THREE.MeshLambertMaterial({
+          color: 0x3b4554
+        }),
+        charcoal: new THREE.MeshLambertMaterial({
+          color: 0x1c2536
+        }),
+        warmGlow: new THREE.MeshBasicMaterial({
+          color: 0xffdf85
+        }),
+        glass: new THREE.MeshPhysicalMaterial({
+          color: 0xc8def7,
+          transparent: true,
+          opacity: 0.34,
+          roughness: 0.12,
+          metalness: 0.05,
+          reflectivity: 0.7,
+          depthWrite: false
+        }),
+        carGlass: new THREE.MeshStandardMaterial({
+          color: 0x1a2230,
+          roughness: 0.15,
+          metalness: 0.35
+        }),
+        foliageLight: new THREE.MeshLambertMaterial({
+          color: 0x7ca657
+        }),
+        foliageMed: new THREE.MeshLambertMaterial({
+          color: 0x648f44
+        }),
+        foliageDark: new THREE.MeshLambertMaterial({
+          color: 0x4b7031
+        }),
+        soil: new THREE.MeshLambertMaterial({
+          color: 0x574e42
+        })
+      };
+
+      function setTextureColorSpace(tex) {
+        tex.encoding = THREE.LinearEncoding;
+      }
+
+      // Helper: create rounded rectangle THREE.Shape
+      function createRoundedRectShape(width, height, radius) {
+        const shape = new THREE.Shape();
+        const x = -width / 2;
+        const y = -height / 2;
+        const r = Math.min(radius, width / 2, height / 2);
+        shape.moveTo(x + r, y);
+        shape.lineTo(x + width - r, y);
+        shape.quadraticCurveTo(x + width, y, x + width, y + r);
+        shape.lineTo(x + width, y + height - r);
+        shape.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+        shape.lineTo(x + r, y + height);
+        shape.quadraticCurveTo(x, y + height, x, y + height - r);
+        shape.lineTo(x, y + r);
+        shape.quadraticCurveTo(x, y, x + r, y);
+        return shape;
+      }
+
+      // Helper: create extruded rounded slab placed horizontally in XZ plane
+      // Bottom is at y = 0 and top surface is strictly at y = heightY
+      function createRoundedSlab(widthX, depthZ, heightY, radius, material, bevel = 0.05) {
+        const b = Math.min(bevel, heightY * 0.35);
+        const coreDepth = Math.max(0.01, heightY - b * 2);
+        const shape = createRoundedRectShape(widthX - b * 2, depthZ - b * 2, Math.max(0.02, radius - b));
+        const geo = new THREE.ExtrudeGeometry(shape, {
+          depth: coreDepth,
+          bevelEnabled: b > 0,
+          bevelThickness: b,
+          bevelSize: b,
+          bevelSegments: 4,
+          curveSegments: 16
+        });
+        geo.rotateX(-Math.PI / 2);
+        geo.translate(0, b, 0); // Shift up so bottom sits cleanly at local y = 0, top at y = heightY
+        geo.computeVertexNormals();
+        const mesh = new THREE.Mesh(geo, material);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        return mesh;
+      }
+
+      // Helper: Procedural Canvas Texture for EV Blue Parking Bay with Lightning Icon
+      function createBayTexture() {
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 768;
+        const ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#75aaf0";
+        ctx.fillRect(0, 0, 512, 768);
+
+        ctx.strokeStyle = "#f2f6fc";
+        ctx.lineWidth = 14;
+        ctx.strokeRect(18, 18, 476, 732);
+
+        ctx.lineWidth = 8;
+        ctx.setLineDash([36, 26]);
+        ctx.beginPath();
+        ctx.moveTo(46, 44);
+        ctx.lineTo(46, 722);
+        ctx.moveTo(466, 44);
+        ctx.lineTo(466, 722);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const bx = 176, by = 415, bw = 160, bh = 160, br = 28;
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.moveTo(bx + br, by);
+        ctx.lineTo(bx + bw - br, by);
+        ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + br);
+        ctx.lineTo(bx + bw, by + bh - br);
+        ctx.quadraticCurveTo(bx + bw, yEnd = by + bh, bx + bw - br, by + bh);
+        ctx.lineTo(bx + br, by + bh);
+        ctx.quadraticCurveTo(bx, by + bh, bx, by + bh - br);
+        ctx.lineTo(bx, by + br);
+        ctx.quadraticCurveTo(bx, by, bx + br, by);
+        ctx.stroke();
+
+        ctx.fillStyle = "#f2f6fc";
+        ctx.beginPath();
+        ctx.moveTo(268, 439);
+        ctx.lineTo(222, 501);
+        ctx.lineTo(254, 501);
+        ctx.lineTo(242, 551);
+        ctx.lineTo(290, 487);
+        ctx.lineTo(258, 487);
+        ctx.closePath();
+        ctx.fill();
+
+        const tex = new THREE.CanvasTexture(canvas);
+        setTextureColorSpace(tex);
+        tex.anisotropy = 8;
+        return tex;
+      }
+
+      // Helper: Procedural Canvas Texture for Charger Front Face (Lightning Icon + Screen)
+      function createChargerFrontTexture(initialSoc = 78) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 256;
+        canvas.height = 512;
+        const ctx = canvas.getContext("2d");
+
+        function draw(soc) {
+          ctx.fillStyle = "#eef3fb";
+          ctx.fillRect(0, 0, 256, 512);
+
+          ctx.fillStyle = "#185ee0";
+          ctx.beginPath();
+          ctx.moveTo(138, 48);
+          ctx.lineTo(96, 112);
+          ctx.lineTo(126, 112);
+          ctx.lineTo(114, 166);
+          ctx.lineTo(160, 100);
+          ctx.lineTo(130, 100);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = "#161f2e";
+          const px = 42, py = 200, pw = 172, ph = 185, pr = 18;
+          ctx.beginPath();
+          ctx.moveTo(px + pr, py);
+          ctx.lineTo(px + pw - pr, py);
+          ctx.quadraticCurveTo(px + pw, py, px + pw, py + pr);
+          ctx.lineTo(px + pw, py + ph - pr);
+          ctx.quadraticCurveTo(px + pw, py + ph, px + pw - pr, py + ph);
+          ctx.lineTo(px + pr, py + ph);
+          ctx.quadraticCurveTo(px, py + ph, px, py + ph - pr);
+          ctx.lineTo(px, py + pr);
+          ctx.quadraticCurveTo(px, py, px + pr, py);
+          ctx.fill();
+
+          ctx.fillStyle = "#0d1420";
+          ctx.fillRect(58, 218, 140, 74);
+
+          ctx.fillStyle = "#3b82f6";
+          const fillW = Math.max(18, Math.min(120, (soc / 100) * 120));
+          ctx.fillRect(68, 232, fillW, 18);
+
+          ctx.fillStyle = "#60a5fa";
+          ctx.fillRect(68, 258, 84, 8);
+          ctx.fillRect(68, 272, 54, 8);
+
+          ctx.fillStyle = "#0e1522";
+          ctx.fillRect(92, 308, 72, 58);
+          ctx.strokeStyle = "#2b6cb0";
+          ctx.lineWidth = 3;
+          ctx.strokeRect(98, 314, 60, 46);
+        }
+
+        draw(initialSoc);
+        const tex = new THREE.CanvasTexture(canvas);
+        setTextureColorSpace(tex);
+        return { tex, draw };
+      }
+
+      // ============================================================================
+      // 4. STATION GROUND, ROADWAY, DRIVEWAY & CURBS (ZERO COPLANAR OVERLAP)
+      // ============================================================================
+      const stationGroup = new THREE.Group();
+      scene.add(stationGroup);
+
+      // Infinite subtle studio floor plane well below slabs
+      const shadowFloor = new THREE.Mesh(
+        new THREE.PlaneGeometry(220, 220),
+        new THREE.ShadowMaterial({ color: 0x7b93b8, opacity: 0.18 })
+      );
+      shadowFloor.rotation.x = -Math.PI / 2;
+      shadowFloor.position.y = -0.35;
+      shadowFloor.receiveShadow = true;
+      scene.add(shadowFloor);
+
+      // 4.1 Main Station Concrete Island Base (#d2dceb) - Top surface at y = 0.22
+      const mainPad = createRoundedSlab(36.5, 19.5, 0.44, 1.4, mats.concrete, 0.05);
+      mainPad.position.set(-0.2, -0.22, -1.6);
+      stationGroup.add(mainPad);
+
+      // Darker cool-grey parking apron surface under the bays & 4th bay (#c2cee0)
+      const bayApron = new THREE.Mesh(
+        new THREE.PlaneGeometry(22.2, 8.2),
+        mats.apronGrey
+      );
+      bayApron.rotation.x = -Math.PI / 2;
+      bayApron.position.set(2.1, 0.232, -0.35);
+      bayApron.receiveShadow = true;
+      stationGroup.add(bayApron);
+
+      // 4.2 Entry Driveway on Right (+X side, stops cleanly at road edge so it never intersects road)
+      // Top surface at y = 0.235
+      const drivewayMesh = createRoundedSlab(9.6, 13.0, 0.455, 0.7, mats.drivewayGrey, 0.03);
+      drivewayMesh.position.set(13.2, -0.22, 1.45);
+      stationGroup.add(drivewayMesh);
+
+      // 4.3 Main Roadway along bottom-left (+Z edge, running along X) (#64758c)
+      // Top surface at y = 0.245 (strictly above driveway and concrete pad)
+      const roadLength = 42.0;
+      const roadWidth = 6.8;
+      const roadMesh = createRoundedSlab(roadLength, roadWidth, 0.465, 0.35, mats.roadAsphalt, 0.03);
+      roadMesh.position.set(-1.5, -0.22, 11.2);
+      stationGroup.add(roadMesh);
+
+      // Crisp soft-white road edge line & center dashed lane markings
+      const edgeLineMat = new THREE.MeshBasicMaterial({
+        color: 0xf4f7fc,
+        polygonOffset: true,
+        polygonOffsetFactor: -2,
+        polygonOffsetUnits: -2
+      });
+      const roadSideLine = new THREE.Mesh(new THREE.PlaneGeometry(roadLength - 1.2, 0.18), edgeLineMat);
+      roadSideLine.rotation.x = -Math.PI / 2;
+      roadSideLine.position.set(-1.5, 0.258, 8.15);
+      stationGroup.add(roadSideLine);
+
+      for (let rx = -19.5; rx <= 11.5; rx += 3.6) {
+        const dash = new THREE.Mesh(new THREE.PlaneGeometry(1.75, 0.22), edgeLineMat);
+        dash.rotation.x = -Math.PI / 2;
+        dash.position.set(rx, 0.258, 11.25);
+        stationGroup.add(dash);
+      }
+
+      // White rounded curb along right-hand edge of the driveway
+      const rightDrivewayCurb = createRoundedSlab(0.85, 11.2, 0.32, 0.35, mats.whiteMatte, 0.04);
+      rightDrivewayCurb.position.set(17.95, 0.22, 7.2);
+      stationGroup.add(rightDrivewayCurb);
+
+      // Driveway white border lines
+      const rightEdgeLine = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 13.0), edgeLineMat);
+      rightEdgeLine.rotation.x = -Math.PI / 2;
+      rightEdgeLine.position.set(17.35, 0.26, 4.3);
+      stationGroup.add(rightEdgeLine);
+
+      const leftDrivewayLine = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 6.4), edgeLineMat);
+      leftDrivewayLine.rotation.x = -Math.PI / 2;
+      leftDrivewayLine.position.set(8.55, 0.26, 7.7);
+      stationGroup.add(leftDrivewayLine);
+
+      // Helper to create crisp white directional arrow on pavement
+      function createPavementArrow(x, z, scale = 1, rotY = 0) {
+        const arrowShape = new THREE.Shape();
+        arrowShape.moveTo(0, 1.38);
+        arrowShape.lineTo(0.74, 0.36);
+        arrowShape.lineTo(0.27, 0.36);
+        arrowShape.lineTo(0.27, -1.28);
+        arrowShape.lineTo(-0.27, -1.28);
+        arrowShape.lineTo(-0.27, 0.36);
+        arrowShape.lineTo(-0.74, 0.36);
+        arrowShape.closePath();
+
+        const geo = new THREE.ShapeGeometry(arrowShape);
+        geo.rotateX(-Math.PI / 2);
+        const mesh = new THREE.Mesh(geo, edgeLineMat);
+        mesh.scale.set(scale, 1, scale);
+        mesh.rotation.y = rotY;
+        mesh.position.set(x, 0.262, z);
+        return mesh;
+      }
+
+      stationGroup.add(createPavementArrow(10.8, 8.9, 1.08, 0));
+      stationGroup.add(createPavementArrow(15.2, 2.5, 0.88, 0));
+
+      // ============================================================================
+      // 5. THREE BLUE EV CHARGING BAYS + PAVEMENT LINES
+      // ============================================================================
+      const bayTex = createBayTexture();
+      const bayMat = new THREE.MeshLambertMaterial({
+        map: bayTex,
+        polygonOffset: true,
+        polygonOffsetFactor: -1,
+        polygonOffsetUnits: -1
+      });
+
+      const bayCentersX = [-6.2, -0.6, 5.0];
+      const bayZ = -0.35;
+
+      bayCentersX.forEach((bx) => {
+        const bayMesh = new THREE.Mesh(new THREE.PlaneGeometry(5.3, 7.8), bayMat);
+        bayMesh.rotation.x = -Math.PI / 2;
+        bayMesh.position.set(bx, 0.248, bayZ);
+        bayMesh.receiveShadow = true;
+        stationGroup.add(bayMesh);
+      });
+
+      // 4th light-grey bay outline on the right
+      const greyBayGroup = new THREE.Group();
+      greyBayGroup.position.set(10.4, 0.252, bayZ);
+      const gbTop = new THREE.Mesh(new THREE.PlaneGeometry(5.0, 0.16), edgeLineMat);
+      gbTop.rotation.x = -Math.PI / 2;
+      gbTop.position.set(0, 0, -3.75);
+      greyBayGroup.add(gbTop);
+
+      const gbRight = new THREE.Mesh(new THREE.PlaneGeometry(0.16, 7.6), edgeLineMat);
+      gbRight.rotation.x = -Math.PI / 2;
+      gbRight.position.set(2.45, 0, 0);
+      greyBayGroup.add(gbRight);
+
+      for (let dz = -3.1; dz <= 3.3; dz += 0.9) {
+        const dLine = new THREE.Mesh(new THREE.PlaneGeometry(0.1, 0.48), edgeLineMat);
+        dLine.rotation.x = -Math.PI / 2;
+        dLine.position.set(-2.35, 0, dz);
+        greyBayGroup.add(dLine);
+      }
+      stationGroup.add(greyBayGroup);
+
+      // ============================================================================
+      // 6. PLANTER BEDS, CURBS, FOLIAGE & BOLLARD LIGHTS
+      // ============================================================================
+      function createBollardLight(x, y, z) {
+        const group = new THREE.Group();
+        group.position.set(x, y, z);
+
+        const post = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.2, 0.22, 1.15, 20),
+          mats.darkMetal
+        );
+        post.position.y = 0.575;
+        post.castShadow = true;
+        post.receiveShadow = true;
+        group.add(post);
+
+        const lamp = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.18, 0.18, 0.34, 20),
+          mats.warmGlow
+        );
+        lamp.position.y = 1.28;
+        group.add(lamp);
+
+        const cap = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.205, 0.205, 0.08, 20),
+          mats.darkMetal
+        );
+        cap.position.y = 1.48;
+        group.add(cap);
+
+        return group;
+      }
+
+      function createBushCluster(x, y, z, scale = 1, isTree = false, matIndex = 0) {
+        const group = new THREE.Group();
+        group.position.set(x, y, z);
+
+        if (isTree) {
+          const trunk = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.08 * scale, 0.12 * scale, 0.95 * scale, 12),
+            mats.soil
+          );
+          trunk.position.y = 0.45 * scale;
+          trunk.castShadow = true;
+          group.add(trunk);
+
+          const crown = new THREE.Mesh(
+            new THREE.SphereGeometry(0.78 * scale, 24, 20),
+            mats.foliageLight
+          );
+          crown.scale.set(0.92, 1.12, 0.92);
+          crown.position.y = 1.25 * scale;
+          crown.castShadow = true;
+          crown.receiveShadow = true;
+          group.add(crown);
+        } else {
+          const matChoice = matIndex % 2 === 0 ? mats.foliageLight : mats.foliageMed;
+          const mainSphere = new THREE.Mesh(
+            new THREE.SphereGeometry(0.55 * scale, 20, 16),
+            matChoice
+          );
+          mainSphere.scale.set(1.05, 0.88, 1.05);
+          mainSphere.position.y = 0.42 * scale;
+          mainSphere.castShadow = true;
+          mainSphere.receiveShadow = true;
+          group.add(mainSphere);
+
+          const subSphere = new THREE.Mesh(
+            new THREE.SphereGeometry(0.38 * scale, 16, 14),
+            mats.foliageDark
+          );
+          subSphere.position.set(0.35 * scale, 0.28 * scale, 0.18 * scale);
+          subSphere.castShadow = true;
+          group.add(subSphere);
+        }
+        return group;
+      }
+
+      function createPlanterBox(w, d, h, x, y, z) {
+        const group = new THREE.Group();
+        group.position.set(x, y, z);
+
+        const outerWall = createRoundedSlab(w, d, h, 0.45, mats.whiteMatte, 0.04);
+        group.add(outerWall);
+
+        // Soil bed sits strictly on top of outerWall at y = h + 0.01 (no coplanar overlap)
+        const soilBed = createRoundedSlab(w - 0.36, d - 0.36, 0.08, 0.3, mats.soil, 0.01);
+        soilBed.position.y = h - 0.04;
+        group.add(soilBed);
+
+        return group;
+      }
+
+      // 6.1 Front Roadside Divider Island & Planter (between bays and road)
+      const frontIsland = createRoundedSlab(15.6, 3.2, 0.22, 0.9, mats.whiteMatte, 0.04);
+      frontIsland.position.set(-1.8, 0.22, 5.7);
+      stationGroup.add(frontIsland);
+
+      const frontPlanter = createPlanterBox(12.2, 1.65, 0.45, -2.6, 0.44, 5.75);
+      stationGroup.add(frontPlanter);
+
+      stationGroup.add(createBushCluster(-7.8, 0.88, 5.75, 0.85, false, 0));
+      stationGroup.add(createBollardLight(-6.6, 0.88, 5.75));
+      stationGroup.add(createBushCluster(-5.3, 0.88, 5.75, 0.95, true, 1));
+      stationGroup.add(createBushCluster(-3.8, 0.88, 5.75, 0.9, false, 0));
+      stationGroup.add(createBushCluster(-2.4, 0.88, 5.75, 0.78, false, 1));
+      stationGroup.add(createBollardLight(-1.2, 0.88, 5.75));
+      stationGroup.add(createBushCluster(0.1, 0.88, 5.75, 1.05, true, 0));
+      stationGroup.add(createBushCluster(1.5, 0.88, 5.75, 0.82, false, 1));
+      stationGroup.add(createBollardLight(2.4, 0.88, 5.75));
+      stationGroup.add(createBushCluster(3.1, 0.88, 5.75, 0.65, false, 0));
+
+      const pinPost = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.05, 0.06, 0.65, 12),
+        mats.darkMetal
+      );
+      pinPost.position.set(5.1, 0.76, 6.35);
+      stationGroup.add(pinPost);
+      const pinTip = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), mats.warmGlow);
+      pinTip.position.set(5.1, 1.12, 6.35);
+      stationGroup.add(pinTip);
+
+      // 6.2 Back Charger Curb Platform & Back Planter Bed (-Z side)
+      const chargerCurb = createRoundedSlab(23.5, 3.2, 0.24, 0.6, mats.whiteMatte, 0.04);
+      chargerCurb.position.set(1.6, 0.22, -5.8);
+      stationGroup.add(chargerCurb);
+
+      const backPlanter = createPlanterBox(23.2, 2.1, 0.58, 1.6, 0.46, -7.85);
+      stationGroup.add(backPlanter);
+
+      const backFoliageSpecs = [
+        { x: -9.2, s: 1.15, tree: true },
+        { x: -7.6, s: 0.95, tree: false },
+        { x: -4.2, s: 0.9, tree: false },
+        { x: -2.8, s: 1.1, tree: true },
+        { x: -1.4, s: 0.85, tree: false },
+        { x: 0.2, s: 0.95, tree: false },
+        { x: 1.6, s: 0.88, tree: false },
+        { x: 4.8, s: 1.05, tree: true },
+        { x: 6.3, s: 0.9, tree: false },
+        { x: 8.6, s: 0.88, tree: false },
+        { x: 10.1, s: 0.95, tree: false },
+        { x: 12.1, s: 0.85, tree: false }
+      ];
+      backFoliageSpecs.forEach((f, idx) => {
+        stationGroup.add(createBushCluster(f.x, 1.02, -7.85, f.s, f.tree, idx));
+      });
+
+      // ============================================================================
+      // 7. THREE EV FAST CHARGERS & CHARGING CABLES
+      // ============================================================================
+      function createEVCharger(x, z, initialSoc = 80) {
+        const group = new THREE.Group();
+        group.position.set(x, 0.46, z);
+
+        const basePlate = createRoundedSlab(1.88, 1.16, 0.14, 0.2, mats.darkMetal, 0.02);
+        group.add(basePlate);
+
+        const bodyW = 1.68;
+        const bodyH = 3.55;
+        const bodyD = 0.96;
+
+        const profile = new THREE.Shape();
+        const r = 0.36;
+        profile.moveTo(-bodyW / 2, 0);
+        profile.lineTo(bodyW / 2, 0);
+        profile.lineTo(bodyW / 2, bodyH - r);
+        profile.quadraticCurveTo(bodyW / 2, bodyH, bodyW / 2 - r, bodyH);
+        profile.lineTo(-bodyW / 2 + r, bodyH);
+        profile.quadraticCurveTo(-bodyW / 2, bodyH, -bodyW / 2, bodyH - r);
+        profile.closePath();
+
+        const shellGeo = new THREE.ExtrudeGeometry(profile, {
+          depth: bodyD,
+          bevelEnabled: true,
+          bevelThickness: 0.05,
+          bevelSize: 0.05,
+          bevelSegments: 5
+        });
+        shellGeo.translate(0, 0.14, -bodyD / 2);
+        const shellMesh = new THREE.Mesh(shellGeo, mats["white Glossy"]);
+        shellMesh.castShadow = true;
+        shellMesh.receiveShadow = true;
+        group.add(shellMesh);
+
+        // Blue side insert panels (distinct width, no coplanar overlap with front/back faces)
+        const blueInsetGeo = new THREE.BoxGeometry(bodyW + 0.14, bodyH - 0.44, bodyD - 0.18);
+        const blueInset = new THREE.Mesh(blueInsetGeo, mats.brandBlue);
+        blueInset.position.set(0, bodyH / 2 + 0.06, 0);
+        group.add(blueInset);
+
+        // Front textured plate (Lightning Bolt + Digital Screen) placed cleanly in front of shell bevel
+        const screenData = createChargerFrontTexture(initialSoc);
+        const frontFaceMat = new THREE.MeshLambertMaterial({
+          map: screenData.tex,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1
+        });
+        const frontPlane = new THREE.Mesh(
+          new THREE.PlaneGeometry(bodyW - 0.30, bodyH - 0.28),
+          frontFaceMat
+        );
+        frontPlane.position.set(0, bodyH / 2 + 0.12, bodyD / 2 + 0.062);
+        group.add(frontPlane);
+
+        // Front central plug holster box sticking out slightly from screen
+        const frontHolster = new THREE.Mesh(
+          new THREE.BoxGeometry(0.24, 0.32, 0.18),
+          mats.charcoal
+        );
+        frontHolster.position.set(0, 1.38, bodyD / 2 + 0.12);
+        group.add(frontHolster);
+
+        // Side holster brackets & coiled hanging black cables on left and right
+        [-1, 1].forEach((side) => {
+          const holster = new THREE.Mesh(
+            new THREE.BoxGeometry(0.12, 0.55, 0.32),
+            mats.charcoal
+          );
+          holster.position.set(side * (bodyW / 2 + 0.09), 1.9, 0);
+          group.add(holster);
+
+          const loopCurve = new THREE.CatmullRomCurve3([
+            new THREE.Vector3(side * (bodyW / 2 + 0.10), 1.85, 0.08),
+            new THREE.Vector3(side * (bodyW / 2 + 0.26), 1.05, 0.22),
+            new THREE.Vector3(side * (bodyW / 2 + 0.20), 0.32, 0.05),
+            new THREE.Vector3(side * (bodyW / 2 + 0.09), 0.85, -0.18),
+            new THREE.Vector3(side * (bodyW / 2 + 0.10), 1.75, -0.05)
+          ]);
+          const cableGeo = new THREE.TubeGeometry(loopCurve, 28, 0.036, 10, false);
+          const cableMesh = new THREE.Mesh(cableGeo, mats.charcoal);
+          cableMesh.castShadow = true;
+          group.add(cableMesh);
+        });
+
+        return group;
+      }
+
+      const charger1 = createEVCharger(-6.2, -5.65, 100);
+      const charger2 = createEVCharger(-0.6, -5.65, 68);
+      const charger3 = createEVCharger(5.6, -5.65, 25);
+      stationGroup.add(charger1, charger2, charger3);
+
+      // Small white-and-blue auxiliary utility cabinet next to Charger 3
+      const auxBox = new THREE.Group();
+      auxBox.position.set(7.1, 0.46, -5.65);
+      const auxShell = createRoundedSlab(0.75, 0.72, 1.45, 0.14, mats["white Glossy"], 0.03);
+      auxBox.add(auxShell);
+      const auxBlueStrip = new THREE.Mesh(
+        new THREE.BoxGeometry(0.79, 1.1, 0.35),
+        mats.brandBlue
+      );
+      auxBlueStrip.position.set(0, 0.72, 0);
+      auxBox.add(auxBlueStrip);
+      stationGroup.add(auxBox);
+
+      const curbBollardX = [-8.2, -4.4, 1.2, 3.9, 7.9];
+      curbBollardX.forEach((bx) => {
+        stationGroup.add(createBollardLight(bx, 0.46, -4.75));
+      });
+
+      // ============================================================================
+      // 8. OVERHEAD WHITE & BLUE CANOPY + 3 SUPPORT PILLARS
+      // ============================================================================
+      const canopyGroup = new THREE.Group();
+      stationGroup.add(canopyGroup);
+
+      const canopyHeight = 7.15;
+      const pillarPositionsX = [-9.8, 2.5, 9.6];
+      const pillarZ = -5.65;
+
+      pillarPositionsX.forEach((px, idx) => {
+        const pGroup = new THREE.Group();
+        pGroup.position.set(px, 0.46, pillarZ);
+
+        const base1 = createRoundedSlab(1.65, 1.65, 0.16, 0.18, mats.darkMetal, 0.02);
+        pGroup.add(base1);
+        const base2 = createRoundedSlab(1.38, 1.38, 0.22, 0.15, mats.darkMetal, 0.02);
+        base2.position.y = 0.16;
+        pGroup.add(base2);
+
+        const col = createRoundedSlab(1.12, 1.12, canopyHeight - 0.4, 0.14, mats["white Glossy"], 0.03);
+        col.position.y = 0.38;
+        pGroup.add(col);
+
+        if (idx >= 1) {
+          const ledStrip = new THREE.Mesh(
+            new THREE.BoxGeometry(0.14, 1.85, 0.06),
+            mats.warmGlow
+          );
+          ledStrip.position.set(0, 1.45, 0.58);
+          pGroup.add(ledStrip);
+        }
+
+        canopyGroup.add(pGroup);
+      });
+
+      const roofCenterX = 0.2;
+      const roofCenterZ = -4.85;
+      const roofW = 25.4;
+      const roofD = 7.4;
+
+      // 8.1 Blue Lower Perimeter Band of Canopy (y = 7.15 to 7.63)
+      const roofBlueBand = createRoundedSlab(roofW, roofD, 0.48, 1.45, mats.brandBlue, 0.05);
+      roofBlueBand.position.set(roofCenterX, canopyHeight, roofCenterZ);
+      canopyGroup.add(roofBlueBand);
+
+      // 8.2 White Upper Rim of Canopy (y = 7.63 to 7.97)
+      const roofWhiteDeck = createRoundedSlab(roofW + 0.08, roofD + 0.08, 0.34, 1.48, mats["white Glossy"], 0.05);
+      roofWhiteDeck.position.set(roofCenterX, canopyHeight + 0.48, roofCenterZ);
+      canopyGroup.add(roofWhiteDeck);
+
+      // 8.3 Slightly Recessed Soft-Grey Top Roof Tray (y = 7.97 to 8.09)
+      const roofTopInset = createRoundedSlab(roofW - 0.85, roofD - 0.85, 0.12, 1.15, mats.roofTrayGrey, 0.02);
+      roofTopInset.position.set(roofCenterX + 1.8, canopyHeight + 0.82, roofCenterZ);
+      canopyGroup.add(roofTopInset);
+
+      // 8.4 Signature Blue Left Overhang Cap on Canopy Roof
+      const leftBlueCap = createRoundedSlab(4.6, roofD - 0.55, 0.20, 1.25, mats.softBlueCap, 0.03);
+      leftBlueCap.position.set(roofCenterX - roofW / 2 + 2.55, canopyHeight + 0.83, roofCenterZ);
+      canopyGroup.add(leftBlueCap);
+
+      // 8.5 Central Raised White Architectural Spine on Top of Canopy
+      const spineW = roofW - 4.8;
+      const spineMesh = createRoundedSlab(spineW, 0.62, 1.05, 0.2, mats.whiteMatte, 0.04);
+      spineMesh.position.set(roofCenterX + 1.65, canopyHeight + 0.94, roofCenterZ);
+      canopyGroup.add(spineMesh);
+
+      // 8.6 Glowing Warm Linear LED Light Bars on Canopy Underside
+      const lightBarPositionsX = [-6.2, -0.3, 6.0];
+      lightBarPositionsX.forEach((lx) => {
+        const housing = createRoundedSlab(3.6, 0.34, 0.14, 0.12, mats.whiteMatte, 0.02);
+        housing.position.set(lx, canopyHeight - 0.14, roofCenterZ + 2.85);
+        canopyGroup.add(housing);
+
+        const emitter = new THREE.Mesh(
+          new THREE.BoxGeometry(3.35, 0.06, 0.22),
+          mats.warmGlow
+        );
+        emitter.position.set(lx, canopyHeight - 0.16, roofCenterZ + 2.85);
+        canopyGroup.add(emitter);
+      });
+
+      // ============================================================================
+      // 9. GLASS WAITING LOUNGE / KIOSK BUILDING (LEFT SIDE)
+      // ============================================================================
+      const loungeGroup = new THREE.Group();
+      loungeGroup.position.set(-14.3, 0.22, -1.65);
+      stationGroup.add(loungeGroup);
+
+      const lW = 4.6;
+      const lD = 9.4;
+      const lH = 4.55;
+
+      const loungeFloor = createRoundedSlab(lW, lD, 0.24, 0.55, mats["white Glossy"], 0.03);
+      loungeGroup.add(loungeFloor);
+
+      const innerFloor = new THREE.Mesh(
+        new THREE.PlaneGeometry(lW - 0.5, lD - 0.5),
+        new THREE.MeshStandardMaterial({
+          color: 0xe9e4dc,
+          roughness: 0.5,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1
+        })
+      );
+      innerFloor.rotation.x = -Math.PI / 2;
+      innerFloor.position.y = 0.252;
+      innerFloor.receiveShadow = true;
+      loungeGroup.add(innerFloor);
+
+      const backWall = createRoundedSlab(0.32, lD - 0.2, lH, 0.1, mats["white Glossy"], 0.02);
+      backWall.position.set(-lW / 2 + 0.2, 0.24, 0);
+      loungeGroup.add(backWall);
+
+      const rightWall = createRoundedSlab(lW - 0.2, 0.32, lH, 0.1, mats["white Glossy"], 0.02);
+      rightWall.position.set(0, 0.24, -lD / 2 + 0.2);
+      loungeGroup.add(rightWall);
+
+      const leftWall = createRoundedSlab(lW - 0.2, 0.34, lH, 0.12, mats["white Glossy"], 0.02);
+      leftWall.position.set(0, 0.24, lD / 2 - 0.2);
+      loungeGroup.add(leftWall);
+
+      const leftBlueFeature = new THREE.Mesh(
+        new THREE.BoxGeometry(lW - 1.1, lH - 0.75, 0.08),
+        mats.loungeBluePanel
+      );
+      leftBlueFeature.position.set(-0.1, lH / 2 + 0.24, lD / 2 + 0.02);
+      loungeGroup.add(leftBlueFeature);
+
+      const loungeRoof = createRoundedSlab(lW + 0.14, lD + 0.14, 0.36, 0.58, mats["white Glossy"], 0.04);
+      loungeRoof.position.set(0, lH + 0.24, 0);
+      loungeGroup.add(loungeRoof);
+
+      const loungeRoofTray = createRoundedSlab(lW - 0.55, lD - 0.55, 0.14, 0.42, mats.loungeRoofGrey, 0.02);
+      loungeRoofTray.position.set(0, lH + 0.60, 0);
+      loungeGroup.add(loungeRoofTray);
+
+      const loungeLight = new THREE.PointLight(0xffebc2, 0.35, 9);
+      loungeLight.position.set(0.2, lH - 0.3, 0);
+      loungeGroup.add(loungeLight);
+
+      // 1) Blue & White Power Cabinet against -Z interior wall
+      const cabinetGroup = new THREE.Group();
+      cabinetGroup.position.set(-0.35, 0.26, -lD / 2 + 1.15);
+
+      // Right white half of cabinet
+      const cabWhite = createRoundedSlab(0.95, 1.1, 2.75, 0.1, mats["white Glossy"], 0.02);
+      cabWhite.position.set(0.45, 0, 0);
+      cabinetGroup.add(cabWhite);
+
+      const cabBlueCanvas = document.createElement("canvas");
+      cabBlueCanvas.width = 128;
+      cabBlueCanvas.height = 256;
+      const cbCtx = cabBlueCanvas.getContext("2d");
+      cbCtx.fillStyle = "#1863e6";
+      cbCtx.fillRect(0, 0, 128, 256);
+      cbCtx.fillStyle = "#ffffff";
+      cbCtx.beginPath();
+      cbCtx.moveTo(72, 86);
+      cbCtx.lineTo(44, 132);
+      cbCtx.lineTo(64, 132);
+      cbCtx.lineTo(54, 174);
+      cbCtx.lineTo(86, 124);
+      cbCtx.lineTo(66, 124);
+      cbCtx.closePath();
+      cbCtx.fill();
+      const cabBlueTex = new THREE.CanvasTexture(cabBlueCanvas);
+      setTextureColorSpace(cabBlueTex);
+
+      // Left blue half of cabinet (distinct X position so it never overlaps cabWhite)
+      const cabBlue = createRoundedSlab(0.92, 1.1, 2.75, 0.1, mats.brandBlue, 0.02);
+      cabBlue.position.set(-0.46, 0, 0);
+      cabinetGroup.add(cabBlue);
+
+      const cabBlueFront = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.84, 2.52),
+        new THREE.MeshLambertMaterial({
+          map: cabBlueTex,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1
+        })
+      );
+      cabBlueFront.position.set(-0.46, 1.38, 0.56);
+      cabinetGroup.add(cabBlueFront);
+
+      const cabScreen1 = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.65, 0.06), mats.charcoal);
+      cabScreen1.position.set(0.45, 1.95, 0.56);
+      cabinetGroup.add(cabScreen1);
+
+      const cabScreen2 = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.65, 0.06), mats.charcoal);
+      cabScreen2.position.set(0.45, 1.12, 0.56);
+      cabinetGroup.add(cabScreen2);
+
+      loungeGroup.add(cabinetGroup);
+
+      // 2) Indoor Potted Plant next to cabinet
+      const indoorPot = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.28, 0.22, 0.52, 16),
+        mats["white Glossy"]
+      );
+      indoorPot.position.set(-1.35, 0.52, -1.65);
+      loungeGroup.add(indoorPot);
+      loungeGroup.add(createBushCluster(-1.35, 0.74, -1.65, 0.62, false, 0));
+
+      // 3) Modern Grey Lounge Sofa & White Counter Desk (non-intersecting cushions)
+      const sofaGroup = new THREE.Group();
+      sofaGroup.position.set(0.15, 0.26, 1.55);
+      const sofaMat = new THREE.MeshStandardMaterial({ color: 0x4d5b73, roughness: 0.6 });
+      const sofaSeat = createRoundedSlab(1.05, 1.6, 0.42, 0.12, sofaMat, 0.02);
+      sofaSeat.position.set(0.18, 0, 0);
+      sofaGroup.add(sofaSeat);
+      const sofaBack = createRoundedSlab(0.36, 1.6, 0.92, 0.12, sofaMat, 0.02);
+      sofaBack.position.set(-0.54, 0, 0);
+      sofaGroup.add(sofaBack);
+      const sofaArm1 = createRoundedSlab(1.45, 0.28, 0.68, 0.1, sofaMat, 0.02);
+      sofaArm1.position.set(0, 0, -0.95);
+      sofaGroup.add(sofaArm1);
+      const sofaArm2 = sofaArm1.clone();
+      sofaArm2.position.z = 0.95;
+      sofaGroup.add(sofaArm2);
+      loungeGroup.add(sofaGroup);
+
+      const deskCounter = createRoundedSlab(1.1, 2.6, 1.05, 0.12, mats["white Glossy"], 0.02);
+      deskCounter.position.set(-1.4, 0.26, 1.9);
+      loungeGroup.add(deskCounter);
+
+      // Front Transparent Glass Facade & Door Frame (+X wall facing bays)
+      const glassX = lW / 2 - 0.14;
+      const glassPane = new THREE.Mesh(
+        new THREE.PlaneGeometry(lD - 0.6, lH - 0.35),
+        mats.glass
+      );
+      glassPane.rotation.y = Math.PI / 2;
+      glassPane.position.set(glassX, lH / 2 + 0.24, 0);
+      loungeGroup.add(glassPane);
+
+      const frameZPositions = [-lD / 2 + 0.28, -0.8, 1.45, 3.15, lD / 2 - 0.28];
+      frameZPositions.forEach((fz) => {
+        const mullion = new THREE.Mesh(
+          new THREE.BoxGeometry(0.12, lH - 0.05, 0.12),
+          mats.darkMetal
+        );
+        mullion.position.set(glassX, lH / 2 + 0.24, fz);
+        loungeGroup.add(mullion);
+      });
+
+      const doorTransom = new THREE.Mesh(
+        new THREE.BoxGeometry(0.14, 0.12, 1.7),
+        mats.darkMetal
+      );
+      doorTransom.position.set(glassX, 3.35, 2.3);
+      loungeGroup.add(doorTransom);
+
+      const doorHandle = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.025, 0.025, 0.55, 10),
+        mats.whiteMatte
+      );
+      doorHandle.position.set(glassX + 0.09, 1.65, 1.68);
+      loungeGroup.add(doorHandle);
+
+      const loungePlanter = createPlanterBox(3.6, 1.55, 0.45, -14.3, 0.22, 4.05);
+      stationGroup.add(loungePlanter);
+      stationGroup.add(createBushCluster(-15.1, 0.67, 4.05, 0.92, true, 0));
+      stationGroup.add(createBushCluster(-13.4, 0.67, 4.05, 0.85, false, 1));
+      stationGroup.add(createBollardLight(-11.8, 0.22, 3.65));
+
+      // ============================================================================
+      // 10. AUTOMATED ENTRY BARRIER GATE (RIGHT SIDE)
+      // ============================================================================
+      const gateGroup = new THREE.Group();
+      gateGroup.position.set(13.9, 0.22, -4.35);
+      stationGroup.add(gateGroup);
+
+      const gateBase = createRoundedSlab(1.35, 1.35, 0.18, 0.22, mats["white Glossy"], 0.03);
+      gateGroup.add(gateBase);
+
+      const gateHousing = createRoundedSlab(0.95, 0.95, 2.55, 0.18, mats["white Glossy"], 0.04);
+      gateHousing.position.y = 0.18;
+      gateGroup.add(gateHousing);
+
+      const gateFrontCanvas = document.createElement("canvas");
+      gateFrontCanvas.width = 128;
+      gateFrontCanvas.height = 256;
+      const gCtx = gateFrontCanvas.getContext("2d");
+      gCtx.fillStyle = "#1863e6";
+      gCtx.fillRect(0, 0, 128, 256);
+      gCtx.fillStyle = "#ffffff";
+      gCtx.beginPath();
+      gCtx.moveTo(64, 34);
+      gCtx.lineTo(96, 74);
+      gCtx.lineTo(74, 74);
+      gCtx.lineTo(74, 124);
+      gCtx.lineTo(54, 124);
+      gCtx.lineTo(54, 74);
+      gCtx.lineTo(32, 74);
+      gCtx.closePath();
+      gCtx.fill();
+
+      const gateFrontTex = new THREE.CanvasTexture(gateFrontCanvas);
+      setTextureColorSpace(gateFrontTex);
+      const gateFrontPanel = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.68, 2.15),
+        new THREE.MeshLambertMaterial({
+          map: gateFrontTex,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1
+        })
+      );
+      gateFrontPanel.position.set(0, 1.42, 0.49);
+      gateGroup.add(gateFrontPanel);
+
+      const boomPivot = new THREE.Group();
+      boomPivot.position.set(0.48, 1.75, 0);
+      gateGroup.add(boomPivot);
+
+      const pivotHub = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.22, 0.22, 0.24, 20),
+        mats.darkMetal
+      );
+      pivotHub.rotation.x = Math.PI / 2;
+      boomPivot.add(pivotHub);
+
+      const boomCanvas = document.createElement("canvas");
+      boomCanvas.width = 512;
+      boomCanvas.height = 64;
+      const bCtx = boomCanvas.getContext("2d");
+      bCtx.fillStyle = "#ffffff";
+      bCtx.fillRect(0, 0, 512, 64);
+      bCtx.fillStyle = "#1863e6";
+      for (let sx = -64; sx < 576; sx += 96) {
+        bCtx.beginPath();
+        bCtx.moveTo(sx, 0);
+        bCtx.lineTo(sx + 48, 0);
+        bCtx.lineTo(sx + 24, 64);
+        bCtx.lineTo(sx - 24, 64);
+        bCtx.closePath();
+        bCtx.fill();
+      }
+      const boomTex = new THREE.CanvasTexture(boomCanvas);
+      setTextureColorSpace(boomTex);
+
+      const boomLength = 4.15;
+      const boomArm = new THREE.Mesh(
+        new THREE.BoxGeometry(boomLength, 0.2, 0.08),
+        new THREE.MeshLambertMaterial({ map: boomTex })
+      );
+      boomArm.position.set(boomLength / 2 - 0.1, 0, 0.14);
+      boomArm.castShadow = true;
+      boomPivot.add(boomArm);
+
+      // ============================================================================
+      // 11. SCULPTED ELECTRIC SEDAN BUILDER (ZERO SIDE-SKIRT Z-FIGHTING)
+      // ============================================================================
+      function createEVSedan(bodyColorHex, isWhiteCar = false) {
+        const carGroup = new THREE.Group();
+
+        const paintMat = new THREE.MeshStandardMaterial({
+          color: bodyColorHex,
+          roughness: isWhiteCar ? 0.32 : 0.28,
+          metalness: isWhiteCar ? 0.04 : 0.12
+        });
+
+        const tailLightMat = new THREE.MeshBasicMaterial({
+          color: 0xff3b30
+        });
+
+        const headLightMat = new THREE.MeshBasicMaterial({
+          color: 0xe6f4ff
+        });
+
+        // 11.1 Lower Aerodynamic Chassis Floorpan (narrowed to 1.82 so it never Z-fights with side body panels)
+        const chassisBase = createRoundedSlab(1.82, 4.42, 0.18, 0.36, mats.charcoal, 0.02);
+        chassisBase.position.y = 0.20;
+        carGroup.add(chassisBase);
+
+        // 11.2 Main Sculpted Body Side Profile (Extruded along X, then centered)
+        const sideShape = new THREE.Shape();
+        sideShape.moveTo(-2.32, 0.34);
+        sideShape.quadraticCurveTo(-2.36, 0.68, -2.05, 0.82);
+        sideShape.quadraticCurveTo(-1.35, 0.96, -0.82, 1.02);
+        sideShape.lineTo(1.55, 1.06);
+        sideShape.quadraticCurveTo(2.22, 1.05, 2.32, 0.88);
+        sideShape.lineTo(2.30, 0.34);
+        sideShape.closePath();
+
+        const lowerBodyGeo = new THREE.ExtrudeGeometry(sideShape, {
+          depth: 1.92,
+          bevelEnabled: true,
+          bevelThickness: 0.12,
+          bevelSize: 0.09,
+          bevelSegments: 6,
+          curveSegments: 24
+        });
+        lowerBodyGeo.rotateY(-Math.PI / 2);
+        lowerBodyGeo.translate(0.96, 0, 0);
+        lowerBodyGeo.computeVertexNormals();
+
+        const lowerBodyMesh = new THREE.Mesh(lowerBodyGeo, paintMat);
+        lowerBodyMesh.castShadow = true;
+        lowerBodyMesh.receiveShadow = true;
+        carGroup.add(lowerBodyMesh);
+
+        // 11.3 Sleek Fastback Panoramic Black Glass Cabin & Roof
+        const cabinShape = new THREE.Shape();
+        cabinShape.moveTo(-1.02, 0.98);
+        cabinShape.quadraticCurveTo(-0.42, 1.48, 0.22, 1.50);
+        cabinShape.quadraticCurveTo(1.12, 1.48, 1.92, 1.04);
+        cabinShape.closePath();
+
+        const cabinGeo = new THREE.ExtrudeGeometry(cabinShape, {
+          depth: 1.54,
+          bevelEnabled: true,
+          bevelThickness: 0.11,
+          bevelSize: 0.08,
+          bevelSegments: 6,
+          curveSegments: 24
+        });
+        cabinGeo.rotateY(-Math.PI / 2);
+        cabinGeo.translate(0.77, 0, 0);
+        cabinGeo.computeVertexNormals();
+
+        const cabinMesh = new THREE.Mesh(cabinGeo, mats.carGlass);
+        cabinMesh.castShadow = true;
+        carGroup.add(cabinMesh);
+
+        // Body-colored Roof Side Rails / Pillars
+        [-1, 1].forEach((side) => {
+          const railShape = new THREE.Shape();
+          railShape.moveTo(-0.98, 1.00);
+          railShape.quadraticCurveTo(-0.38, 1.46, 0.22, 1.48);
+          railShape.quadraticCurveTo(1.08, 1.46, 1.88, 1.04);
+          railShape.lineTo(1.66, 1.04);
+          railShape.quadraticCurveTo(0.98, 1.37, 0.22, 1.39);
+          railShape.quadraticCurveTo(-0.32, 1.37, -0.78, 1.00);
+          railShape.closePath();
+
+          const railGeo = new THREE.ExtrudeGeometry(railShape, {
+            depth: 0.07,
+            bevelEnabled: true,
+            bevelThickness: 0.02,
+            bevelSize: 0.02,
+            bevelSegments: 3
+          });
+          railGeo.rotateY(-Math.PI / 2);
+          railGeo.translate(side * 0.85 + 0.035, 0, 0);
+          const railMesh = new THREE.Mesh(railGeo, paintMat);
+          carGroup.add(railMesh);
+
+          const mirror = createRoundedSlab(0.24, 0.16, 0.12, 0.05, paintMat, 0.02);
+          mirror.position.set(side * 1.06, 1.04, -0.68);
+          carGroup.add(mirror);
+        });
+
+        // 11.4 Continuous Full-Width Glowing Red LED Taillight Bar (Rear is +Z)
+        const tailBar = new THREE.Mesh(
+          new THREE.BoxGeometry(1.86, 0.075, 0.08),
+          tailLightMat
+        );
+        tailBar.position.set(0, 0.91, 2.38);
+        carGroup.add(tailBar);
+
+        [-1, 1].forEach((side) => {
+          const tailWrap = new THREE.Mesh(
+            new THREE.BoxGeometry(0.06, 0.075, 0.32),
+            tailLightMat
+          );
+          tailWrap.position.set(side * 0.95, 0.91, 2.24);
+          carGroup.add(tailWrap);
+        });
+
+        // 11.5 Sleek LED Headlights (Front is -Z)
+        [-1, 1].forEach((side) => {
+          const headLamp = new THREE.Mesh(
+            new THREE.BoxGeometry(0.46, 0.07, 0.12),
+            headLightMat
+          );
+          headLamp.position.set(side * 0.68, 0.72, -2.35);
+          headLamp.rotation.y = side * 0.18;
+          carGroup.add(headLamp);
+        });
+
+        // 11.6 Charging Port Flap on Right-Rear Quarter Panel (+X, +Z)
+        const portSocket = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.095, 0.095, 0.04, 18),
+          mats.charcoal
+        );
+        portSocket.rotation.z = Math.PI / 2;
+        portSocket.position.set(1.08, 0.92, 0.95);
+        carGroup.add(portSocket);
+
+        // Glowing blue charging status ring inside the port on the white car
+        if (isWhiteCar) {
+          const portRing = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.07, 0.07, 0.048, 18),
+            new THREE.MeshBasicMaterial({ color: 0x3b82f6 })
+          );
+          portRing.rotation.z = Math.PI / 2;
+          portRing.position.set(1.082, 0.92, 0.95);
+          carGroup.add(portRing);
+        }
+
+        // 11.7 Four Detailed Multi-Spoke Alloy Wheels (non-overlapping rim/hub geometry)
+        const wheels = [];
+        const wheelPositions = [
+          { x: -0.98, z: -1.42, isFront: true },
+          { x: 0.98, z: -1.42, isFront: true },
+          { x: -0.98, z: 1.42, isFront: false },
+          { x: 0.98, z: 1.42, isFront: false }
+        ];
+
+        const rimMat = new THREE.MeshStandardMaterial({
+          color: 0xd8e2f0,
+          roughness: 0.22,
+          metalness: 0.75
+        });
+
+        wheelPositions.forEach((wp) => {
+          const wheelPivot = new THREE.Group();
+          wheelPivot.position.set(wp.x, 0.42, wp.z);
+
+          const wheelSpin = new THREE.Group();
+          wheelPivot.add(wheelSpin);
+
+          // Rubber Tire
+          const tire = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.42, 0.42, 0.26, 28),
+            mats.charcoal
+          );
+          tire.rotation.z = Math.PI / 2;
+          tire.castShadow = true;
+          wheelSpin.add(tire);
+
+          // Dark Inner Brake Hub (slightly wider than tire)
+          const innerHub = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.29, 0.29, 0.275, 22),
+            mats.darkMetal
+          );
+          innerHub.rotation.z = Math.PI / 2;
+          wheelSpin.add(innerHub);
+
+          // Outer Silver Rim Cap & 5 Turbine Spokes (placed cleanly on outer face)
+          const sideSign = wp.x > 0 ? 1 : -1;
+          const rimRing = new THREE.Mesh(
+            new THREE.TorusGeometry(0.285, 0.025, 12, 24),
+            rimMat
+          );
+          rimRing.rotation.y = Math.PI / 2;
+          rimRing.position.set(sideSign * 0.135, 0, 0);
+          wheelSpin.add(rimRing);
+
+          const centerCap = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.065, 0.065, 0.03, 16),
+            rimMat
+          );
+          centerCap.rotation.z = Math.PI / 2;
+          centerCap.position.set(sideSign * 0.14, 0, 0);
+          wheelSpin.add(centerCap);
+
+          for (let s = 0; s < 5; s++) {
+            const angle = (s / 5) * Math.PI * 2;
+            const spoke = new THREE.Mesh(
+              new THREE.BoxGeometry(0.025, 0.26, 0.055),
+              rimMat
+            );
+            spoke.position.set(
+              sideSign * 0.14,
+              Math.cos(angle) * 0.13,
+              Math.sin(angle) * 0.13
+            );
+            spoke.rotation.x = -angle;
+            wheelSpin.add(spoke);
+          }
+
+          carGroup.add(wheelPivot);
+          wheels.push({ pivot: wheelPivot, spin: wheelSpin, isFront: wp.isFront });
+        });
+
+        return {
+          group: carGroup,
+          wheels,
+          tailLightMat
+        };
+      }
+
+      // ============================================================================
+      // 12. STATIONARY CARS & UNCLIPPED EV CHARGING GUN + CABLE
+      // ============================================================================
+      // 12.1 Soft Pearl-Alabaster White EV Sedan parked stationary in Middle Bay (Bay 2)
+      const whiteCar = createEVSedan(0xeef3fb, true);
+      whiteCar.group.position.set(-1.05, 0.248, -0.75);
+      whiteCar.group.rotation.y = -0.04;
+      stationGroup.add(whiteCar.group);
+
+      // EV Charging Gun Nozzle & Handle attached directly inside whiteCar's local coordinate system
+      // so it connects flush to the port at (1.08, 0.92, 0.95) and stays well away from the tires
+      const evGunGroup = new THREE.Group();
+      evGunGroup.position.set(1.08, 0.92, 0.95);
+      whiteCar.group.add(evGunGroup);
+
+      // Nozzle barrel inserted horizontally into the car port
+      const nozzleBarrel = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.052, 0.058, 0.18, 16),
+        mats.charcoal
+      );
+      nozzleBarrel.rotation.z = Math.PI / 2;
+      nozzleBarrel.position.set(0.08, 0, 0);
+      nozzleBarrel.castShadow = true;
+      evGunGroup.add(nozzleBarrel);
+
+      // Blue LED charging collar on EV gun
+      const nozzleCollar = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.062, 0.062, 0.035, 16),
+        mats.brandBlue
+      );
+      nozzleCollar.rotation.z = Math.PI / 2;
+      nozzleCollar.position.set(0.14, 0, 0);
+      evGunGroup.add(nozzleCollar);
+
+      // Angled ergonomic pistol-grip handle curving outward and downward (+X, -Y, -Z)
+      const gripBody = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.048, 0.042, 0.24, 16),
+        mats.charcoal
+      );
+      gripBody.position.set(0.24, -0.07, -0.04);
+      gripBody.rotation.set(0.28, 0, 0.68);
+      gripBody.castShadow = true;
+      evGunGroup.add(gripBody);
+
+      // Smooth Catenary Black Charging Cable from Middle Charger (Charger 2) to EV Gun Grip
+      // Routed safely around X = +0.58 to +0.62 so it clears the front-right tire (at X ≈ 0.06) by > 0.5 units
+      const activeCablePoints = [
+        new THREE.Vector3(-0.60, 1.84, -5.05),  // Charger 2 front central holster
+        new THREE.Vector3(-0.22, 0.96, -4.25),  // Smooth downward drop from charger
+        new THREE.Vector3(0.42, 0.29, -3.15),   // Sweeping right onto the pavement ahead of car nose
+        new THREE.Vector3(0.62, 0.29, -1.95),   // Curving cleanly outside front-right wheel well (zero tire clipping)
+        new THREE.Vector3(0.56, 0.44, -0.65),   // Rising gracefully alongside the passenger door
+        new THREE.Vector3(0.26, 1.09, 0.19)     // Entering the base of the EV gun grip at the rear quarter port
+      ];
+      const activeCableCurve = new THREE.CatmullRomCurve3(activeCablePoints);
+      const activeCableGeo = new THREE.TubeGeometry(activeCableCurve, 64, 0.040, 12, false);
+      const activeCableMesh = new THREE.Mesh(activeCableGeo, mats.charcoal);
+      activeCableMesh.castShadow = true;
+      stationGroup.add(activeCableMesh);
+
+      // 12.2 Deep Royal Blue EV Sedan stationary on Right-Hand Entrance Driveway
+      const blueCar = createEVSedan(0x1c62de, false);
+      blueCar.group.position.set(11.85, 0.235, 4.85);
+      blueCar.group.rotation.y = 0.06;
+      stationGroup.add(blueCar.group);
+
+      // ============================================================================
+      // 13. WINDOW RESIZE HANDLER & ORBIT RENDER LOOP
+      // ============================================================================
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    };
+  </script>
+</body>
+</html>

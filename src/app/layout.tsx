@@ -104,7 +104,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${outfit.variable} ${inter.variable} ${poppins.variable} antialiased font-sans scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-hidden selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-clip selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
         <Providers>
           <Navbar />
           {children}
