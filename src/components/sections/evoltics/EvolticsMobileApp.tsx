@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2, Apple, Play } from "lucide-react";
 
 import { evolticsContent } from "@/content/evoltics";
+import { HERO_VIDEOS } from "@/config/videos";
 
 const appFeatures = evolticsContent.mobileApp.features;
 
@@ -32,6 +33,16 @@ const FeatureItem = ({ feat, side }: { feat: { title: string; desc: string; badg
 
 export default function EvolticsMobileApp() {
   const { mobileApp } = evolticsContent;
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.log("Mobile mockup video autoplay failed:", err);
+      });
+    }
+  }, []);
+
   return (
     <section className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans">
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
@@ -95,7 +106,7 @@ export default function EvolticsMobileApp() {
             ))}
           </div>
 
-          {/* Center Image Mockup */}
+          {/* Center Video Mockup */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -108,14 +119,17 @@ export default function EvolticsMobileApp() {
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[#18181b] rounded-full border border-neutral-800" />
             </div>
 
-            {/* Actual Evoltics Mobile App Image */}
-            <Image 
-              src="/images/app_image.jpeg" 
-              alt="Evoltics Mobile App" 
-              fill 
-              priority 
-              className="object-cover" 
-              sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 340px" 
+            {/* Actual Evoltics Mobile App Demo Video */}
+            <video 
+              ref={videoRef}
+              src={HERO_VIDEOS.mobileMockup}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster="/images/app_image.jpeg"
+              className="w-full h-full object-cover" 
             />
           </motion.div>
 

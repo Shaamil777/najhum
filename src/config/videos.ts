@@ -23,6 +23,9 @@ export const HERO_VIDEOS = {
   
   /** Secondary hero video alternative */
   heroSecondary: `${CLOUDINARY_BASE_URL}/v1792047634/najhum/videos/hero-bg-video2.mp4`,
+  
+  /** Evoltics mobile app demo video mockup */
+  mobileMockup: `${CLOUDINARY_BASE_URL}/v1792096373/najhum/videos/mobile_mockup.mp4`,
 } as const;
 
 export type HeroVideoKey = keyof typeof HERO_VIDEOS;
