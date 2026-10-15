@@ -19,10 +19,9 @@ export const contactContent = {
         iconName: "MapPin",
         type: "address",
         location: "Dubai Office",
-        addressLine1: "in5 Design, Dubai Design District",
-        addressLine2: "Dubai, United Arab Emirates",
+        addressLine1: "in5 Innovation Centre, Dubai Design District",
         linkText: "View on Maps",
-        mapsUrl: "https://maps.google.com/?q=in5+Design+Dubai+Design+District"
+        mapsUrl: "https://maps.google.com/?q=in5+Innovation+Centre+Dubai+Design+District"
       },
       {
         title: "Email Us",
@@ -145,9 +144,9 @@ export const contactContent = {
         iconName: "ShieldCheck"
       },
       {
-        title: "24h Priority Response",
-        desc: "Our team prioritizes enterprise inquiries. Expect a comprehensive response within one business day.",
-        iconName: "Clock"
+        title: "Tailored Technical Consultation",
+        desc: "Our solution architects evaluate your requirements to provide customized technical and architectural guidance.",
+        iconName: "Cpu"
       }
     ]
   }

@@ -127,7 +127,7 @@ export const aboutContent = {
     description: "Expanding globally through cloud-first platforms and industry partnerships.",
     address: {
       title: "Dubai, United Arab Emirates",
-      description: "in5 Design — Zaa'beel Second — Dubai Design District"
+      description: "in5 Innovation Centre — Zaa'beel Second — Dubai Design District"
     },
     contact: {
       title: "Get in Touch",

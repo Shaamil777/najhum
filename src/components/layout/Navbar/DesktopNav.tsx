@@ -18,7 +18,7 @@ export function DesktopNav({ solutions = [] }: { solutions?: Array<{ title: stri
           parentHref="/platforms"
           items={siteConfig.footerNav.platforms.map((p) => ({
             ...p,
-            description: "Explore our enterprise-grade digital solutions.",
+            description: p.description || "Explore our enterprise-grade digital solutions.",
           }))}
         />
         {solutions.length ? <MegaMenu title="Solutions" parentHref="/solutions" items={solutions.slice(0, 6).map((solution) => ({ title: solution.title, href: `/solutions/${solution.slug}`, description: solution.metaDescription || 'Explore this solution.' }))} /> : <NavItem title="Solutions" href="/solutions" />}

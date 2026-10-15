@@ -9,7 +9,7 @@ export const siteConfig = {
     phone: "+971 55 767 5883",
     address: {
       company: "Najhum Technologies LLC",
-      location: "in5 Design",
+      location: "in5 Innovation Centre",
       district: "Dubai Design District",
       city: "Dubai",
       country: "United Arab Emirates"
@@ -29,9 +29,9 @@ export const siteConfig = {
   ],
   footerNav: {
     platforms: [
-      { title: "EVOLTICS", href: "/platforms/evoltics" },
-      { title: "IoTRICS", href: "/platforms/iotrics" },
-      { title: "CropifAI", href: "/platforms/cropifai" },
+      { title: "IoTRICS", href: "/platforms/iotrics", description: "Industrial IoT, Smart Building Digital Twin & Telemetry" },
+      { title: "EVOLTICS", href: "/platforms/evoltics", description: "EV Charging Infrastructure & Smart CSMP Management" },
+      { title: "CropifAI", href: "/platforms/cropifai", description: "Precision Agriculture & Automated Climate Intelligence" },
     ],
     company: [
       { title: "About Us", href: "/about" },

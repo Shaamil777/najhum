@@ -862,7 +862,7 @@ class Component extends DCLogic {
     var metrics = MET.map(function (x) { return { label: x.label, cls: 'seg' + (x.k === metric ? ' on' : ''), pick: function () { self.setState({ metric: x.k, hi: null }); } }; });
     var ranges = ['24h', '7d'].map(function (r) { return { label: r === '24h' ? '24h' : '7d', cls: 'seg' + (r === range ? ' on' : ''), pick: function () { self.setState({ range: r, hi: null }); } }; });
 
-    return {
+    var res = {
       brand: brand, sim: sim, autoRun: autoRun, autoRunCls: 'switch' + (autoRun ? ' on' : ''),
       toggleAutoRun: function () { self.setState({ autoRun: !autoRun }); },
       hero: hero, now: now, alarm: alarm, tl: tl, programs: programs, main: main, devices: devices, activity: activity,
@@ -913,6 +913,18 @@ class Component extends DCLogic {
       },
       onChartLeave: function () { self.setState({ hi: null }); }
     };
+
+    if (!self._autoTelemetryStarted) {
+      self._autoTelemetryStarted = true;
+      var metricList = ['temperature', 'soil_moisture', 'battery'];
+      var mIdx = 0;
+      setInterval(function () {
+        mIdx = (mIdx + 1) % metricList.length;
+        self.setState({ metric: metricList[mIdx] });
+      }, 3500);
+    }
+
+    return res;
   }
 }
 </script>

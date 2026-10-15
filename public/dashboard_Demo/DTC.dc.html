@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo · Building</title>
+<script src="./dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F4F7}
+a{color:#3B3794}a:hover{color:#201E44}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.tile{background:#FFFFFF;border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(16,14,40,.04),0 1px 2px rgba(16,14,40,.04),0 16px 32px -20px rgba(16,14,40,.18);min-width:0}
+.tlabel{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#646672}
+.h2{margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em}
+.muted{color:#646672}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap;background:#EEEEF2;color:#2A2B38}
+.pill.sm{height:24px;padding:0 9px;font-size:11.5px}
+.p-green{background:#E1F5EC;color:#05603F}.p-water{background:#DDF4F8;color:#0E5F73}.p-amber{background:#FCF0DC;color:#7C4204}.p-red{background:#FBE7E7;color:#9F1D1D}.p-brand{background:#E8E7F4;color:#201E44}.p-grey{background:#EEEEF2;color:#3D3F4C}.p-white{background:#FFFFFF;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:#EEEEF2;color:#0E0D1C;font:500 13.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .15s,transform .15s,filter .15s}
+.btn:hover{background:#E3E3EA;color:#0E0D1C}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.sm{min-height:32px;padding:0 12px;font-size:12.5px}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand);color:#fff;filter:brightness(1.25)}
+.btn-white{background:#fff;color:#0E0D1C;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.btn-white:hover{background:#ECECF1}
+.btn-ghostdark{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.btn-ghostdark:hover{background:rgba(255,255,255,.2);color:#fff}
+.btn-danger{background:#FBE7E7;color:#9F1D1D}
+.btn-danger:hover{background:#F7D6D6;color:#9F1D1D}
+.btn-ghost{background:transparent}
+.btn-ghost:hover{background:rgba(16,14,40,.06)}
+.nav{display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;padding:9px 0 7px;border:0;border-radius:14px;background:transparent;color:#646672;font:500 10.5px 'Geist',sans-serif;cursor:pointer;position:relative;text-decoration:none;text-align:center}
+.nav:hover{background:#F0F0F4;color:#0E0D1C}
+.nav.on{background:var(--brand);color:#fff}
+.nav.soon{opacity:.55;cursor:default}
+.nav.soon:hover{background:transparent;color:#646672}
+.navdot{position:absolute;top:7px;right:19px;width:8px;height:8px;border-radius:50%;background:#DC2626;box-shadow:0 0 0 2px #FFFFFF}
+.d-hide{display:none!important}
+.nav-more{position:relative;flex:1 1 0;min-width:0}
+.more-menu{top:auto!important;bottom:calc(100% + 10px);left:auto!important;right:0;min-width:260px!important;width:auto!important}
+.seg{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:#3D3F4C;font:500 13px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.seg:hover{background:rgba(16,14,40,.06)}
+.seg.on{background:var(--brand);color:#fff}
+.seg .n{opacity:.65;font-family:'Geist Mono',monospace;font-size:12px}
+.segs{display:inline-flex;flex-wrap:wrap;gap:2px;padding:3px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.07);max-width:100%}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:#C9CAD3;cursor:pointer;flex-shrink:0;transition:background .2s;padding:0}
+.switch::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.switch.on{background:var(--brand)}
+.switch.on::after{transform:translateX(16px)}
+.cell{border-radius:14px;background:#F2F2F6;padding:10px 12px;min-width:0}
+.cell .k{font-size:12px;color:#646672}
+.cell .v{font-family:'Geist Mono',monospace;font-size:17px;font-weight:500;letter-spacing:-0.02em}
+.big{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:34px;font-weight:500;letter-spacing:-0.03em;line-height:1.1}
+.kicker{font-size:12.5px;color:#646672;text-transform:uppercase;letter-spacing:.08em}
+.note{display:flex;gap:10px;align-items:flex-start;border-radius:16px;padding:12px 16px;font-size:13.5px}
+.lvl{flex:1 0 168px;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;border:0;border-radius:18px;padding:12px 14px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.07);font:inherit;color:inherit;cursor:pointer;text-decoration:none;transition:box-shadow .15s}
+.lvl:hover{box-shadow:0 0 0 1px rgba(16,14,40,.18);color:inherit}
+.lvl.on{box-shadow:0 0 0 2px var(--brand)}
+.lvl-tag{width:40px;height:40px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#EEEEF2;color:#2A2B38;font:600 13px 'Geist Mono',monospace}
+.lvl.on .lvl-tag{background:var(--brand);color:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-weight:500;font-size:12.5px;color:#646672;padding:0 12px 10px;white-space:nowrap}
+.tbl td{padding:12px;border-top:1px solid rgba(16,14,40,.07);white-space:nowrap}
+.tbl tr.click{cursor:pointer}
+.tbl tr.click:hover td{background:#FAFAFC}
+.r{text-align:right}
+.span2{grid-column:span 2}
+.scroll-x{overflow-x:auto;margin:0 -10px;padding:0 10px}
+.menu{position:absolute;top:calc(100% + 6px);left:0;z-index:40;min-width:300px;background:#fff;border-radius:18px;padding:6px;box-shadow:0 0 0 1px rgba(16,14,40,.06),0 20px 40px -12px rgba(16,14,40,.3)}
+.menu-item{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;border:0;background:transparent;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left;font:inherit;color:#0E0D1C}
+.menu-item:hover,.menu-item.on{background:#F2F2F6}
+a.menu-item{text-decoration:none;color:#0E0D1C}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.lang button{height:34px;padding:0 11px;border:0;border-radius:999px;background:transparent;font:500 12.5px 'Geist',sans-serif;color:#3D3F4C;cursor:pointer}
+.lang button.on{background:#0E0D1C;color:#fff}
+.iconbtn{position:relative;width:40px;height:40px;border-radius:50%;border:0;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.08);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#0E0D1C;text-decoration:none}
+.iconbtn:hover{background:#ECECF1;color:#0E0D1C}
+.badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#DC2626;color:#fff;font:600 10.5px/18px 'Geist',sans-serif;text-align:center;box-shadow:0 0 0 2px #F4F4F7}
+.bar{height:8px;border-radius:999px;background:#ECECF1;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px}
+input[type=range].rng{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:#E3E3EA;outline:none}
+input[type=range].rng::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 1px 4px rgba(16,14,40,.35);cursor:pointer}
+input[type=range].rng::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 1px 4px rgba(16,14,40,.35);cursor:pointer}
+.sev{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.sev-crit{background:#DC2626;color:#fff}.sev-major{background:#FCF0DC;color:#7C4204}.sev-minor{background:#EEEEF2;color:#3D3F4C}
+.mode{flex:1 1 130px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;border:0;border-radius:16px;padding:12px 14px;background:#F2F2F6;font:inherit;color:inherit;cursor:pointer;transition:background .15s,box-shadow .15s}
+.mode:hover{background:#EAEAF0}
+.mode.on{background:var(--brand);color:#fff}
+.mode .t{font-weight:600;font-size:14px}
+.mode .s{font-size:12px;opacity:.7}
+@media (max-width:760px){
+.rail{position:fixed!important;left:0;right:0;bottom:0;z-index:60;flex-wrap:nowrap!important;justify-content:space-around!important;align-content:center!important;padding:6px 4px calc(6px + env(safe-area-inset-bottom))!important;gap:0!important;box-shadow:0 -1px 0 rgba(16,14,40,.08),0 -10px 30px -16px rgba(16,14,40,.25)!important}
+.rail-logo{display:none!important}
+.nav{width:auto!important;flex:1 1 0;min-width:0;padding:7px 0 6px!important}
+.m-hide{display:none!important}
+.d-hide{display:flex!important}
+.wrap{padding:16px 16px 104px!important;gap:16px!important}
+.h-hero{font-size:38px!important}
+.big{font-size:26px!important}
+.tile{padding:18px!important;border-radius:20px!important}
+.segs{border-radius:18px!important}
+.lvl{flex-basis:44%!important}
+.menu{min-width:0!important;width:calc(100vw - 32px)!important;max-width:360px}
+.more-menu{width:270px!important}
+.search-box{display:none!important}
+.span2{grid-column:auto!important}
+.kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+}
+
+.fp-vp{position:relative;height:580px;overflow:hidden;perspective:2000px;perspective-origin:50% 30%;cursor:grab;user-select:none;touch-action:none;border-radius:22px;background:radial-gradient(ellipse at 50% 30%,#FFFFFF 0%,#EEF0F5 55%,#E2E4EC 100%);box-shadow:inset 0 0 0 1px rgba(16,14,40,.06)}
+.fp-vp.dragging{cursor:grabbing}
+@keyframes autoOrbit3D{0%{transform:translate(-50%, -52%) rotateX(50deg) rotateZ(-20deg)}50%{transform:translate(-50%, -52%) rotateX(50deg) rotateZ(20deg)}100%{transform:translate(-50%, -52%) rotateX(50deg) rotateZ(-20deg)}}
+.fp-world{position:absolute;left:50%;top:50%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.22,1,.36,1);animation:autoOrbit3D 24s ease-in-out infinite}
+.fp-vp.dragging .fp-world{transition:none;animation:none}
+.fp-world *{transform-style:preserve-3d}
+.fp-slab{position:absolute;left:0;top:0;border-radius:4px;background:linear-gradient(rgba(120,110,90,.10) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(120,110,90,.10) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(135deg,#F1EEE8,#E7E3DB);box-shadow:0 60px 100px -30px rgba(16,14,40,.45),0 20px 40px -20px rgba(16,14,40,.3)}
+.fp-face{position:absolute;backface-visibility:visible;pointer-events:none}
+.fp-facade{opacity:.9}
+.fp-wall{box-shadow:inset 0 2px 0 rgba(255,255,255,.9)}
+.fp-wall.side{box-shadow:none}
+.fp-wall.selw{background:linear-gradient(to top,#1A1838,#3B3794)!important;opacity:.88}
+.fp-core-top{display:flex;align-items:center;justify-content:center;text-align:center;font:600 13px 'Geist',sans-serif;color:#4A4C58;border-radius:2px;background:linear-gradient(rgba(16,14,40,.06) 1px,transparent 1px) 0 0/26px 26px,linear-gradient(90deg,rgba(16,14,40,.06) 1px,transparent 1px) 0 0/26px 26px,#DEDDE7!important;box-shadow:inset 0 0 0 3px #CBCAD8}
+.fp-floor{position:absolute;border-radius:2px;cursor:pointer;transform:translateZ(1px);box-shadow:inset 0 0 0 1px rgba(16,14,40,.07),inset 0 0 16px rgba(40,30,20,.18);transition:filter .15s}
+.fp-floor:hover{filter:brightness(.94)}
+.fp-floor.sel{box-shadow:inset 0 0 0 3px var(--brand),inset 0 0 26px rgba(32,30,68,.28)}
+.fp-num{position:absolute;left:5px;bottom:3px;font:600 10px 'Geist Mono',monospace;color:rgba(16,14,40,.62);text-shadow:0 0 3px rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;max-width:calc(100% - 8px);text-overflow:ellipsis;pointer-events:none}
+.fp-furn{position:absolute;pointer-events:none}
+.fp-floor.big .fp-num{font:600 13px 'Geist',sans-serif;color:rgba(16,14,40,.55);left:8px;bottom:6px}
+.fp-corefloor{cursor:default}
+.fp-corefloor .fp-num{left:50%!important;bottom:auto!important;top:50%;transform:translate(-50%,-50%);font:600 12px 'Geist',sans-serif!important;color:#646672!important}
+.fp-floor.open{box-shadow:inset 0 0 0 1px rgba(16,14,40,.08)}
+.fp-wall.glass{box-shadow:inset 0 2px 0 rgba(120,150,180,.85)}
+.fp-wall.glass.side{box-shadow:inset -2px 0 0 rgba(120,150,180,.85)}
+.fp-bill{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+.fp-hud{pointer-events:auto;display:block;text-align:left;border:0;border-radius:12px;padding:7px 11px;white-space:nowrap;font:500 11px/1.35 'Geist',sans-serif;color:#0E0D1C;cursor:pointer;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 20px -6px rgba(16,14,40,.3)}
+.fp-hud strong{font-size:12px;font-weight:600}
+.fp-hud.sel{background:var(--brand);color:#fff}
+.fp-hud.sel .fp-hud-sub{color:rgba(255,255,255,.75)}
+.fp-hud.alarm{box-shadow:0 0 0 1.5px #DC2626,0 8px 20px -6px rgba(220,38,38,.4)}
+.fp-hud-sub{display:block;color:#646672;font-size:10.5px}
+.fp-stem{width:1.5px;height:26px;margin:0 auto;background:linear-gradient(to bottom,rgba(16,14,40,.5),rgba(16,14,40,0))}
+.fp-tools{position:absolute;top:12px;z-index:5;display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(16,14,40,.06),0 8px 20px -10px rgba(16,14,40,.3)}
+.fp-ib{width:34px;height:34px;border:0;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0E0D1C}
+.fp-ib:hover{background:rgba(16,14,40,.06)}
+@media (max-width:760px){.fp-vp{height:400px}}
+</style>
+</helmet>
+<div style="--brand: {{brand}}; min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: #F4F4F7; color: #0E0D1C; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<nav aria-label="Main" class="rail" style="flex: 1 1 88px; background: #FFFFFF; box-shadow: 1px 0 0 rgba(16,14,40,.06); padding: 18px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 6px">
+<div class="rail-logo" style="width: 44px; height: 44px; border-radius: 14px; background: var(--brand); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 10px 14px; font: 700 13px 'Geist', sans-serif; letter-spacing: .02em">Demo</div>
+<a href="DTC.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>Overview</a>
+<a href="DTC-Building.dc.html" class="nav on" aria-current="page"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>Building</a>
+<a href="DTC-Systems.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3.5"/></svg>Systems</a>
+<a href="DTC-Alarms.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Alarms<span class="navdot" aria-label="3 active alarms"></span></a>
+<a href="DTC-Automations.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Automations</a>
+<a href="DTC-Insights.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Insights</a>
+<a href="DTC-Devices.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>Devices</a>
+<span class="nav-more d-hide"><button type="button" class="nav" onClick="{{toggleMore}}" aria-expanded="{{moreOpen}}" style="width: 100%"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</button><sc-if value="{{moreOpen}}" hint-placeholder-val="{{ false }}"><div class="menu more-menu" role="menu"><a href="DTC-Automations.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Automations</span></a><a href="DTC-Insights.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Insights</span></a><a href="DTC-Devices.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>Devices</span></a><a href="DTC-Sites.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>All sites</span></a><a href="DTC-Shift.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>My shift (technician view)</span></a></div></sc-if></span>
+</nav>
+<div style="flex: 999 1 600px; min-width: 0">
+<div class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 22px 36px 56px; display: flex; flex-direction: column; gap: 22px">
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0">
+    <span style="position: relative">
+      <button type="button" class="btn btn-white" onClick="{{toggleSites}}" aria-expanded="{{sitesOpen}}">
+        <span style="color: #646672">Demo</span><span style="color: #A3A4B0">/</span><strong style="font-weight: 600">Innovation Center</strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <sc-if value="{{sitesOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="menu" role="menu">
+          <button type="button" class="menu-item on" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Innovation Center</span><span class="muted" style="font-size: 12.5px">Abu Dhabi Campus · 6 levels · 196 spaces</span></span><span class="pill sm p-green">Live</span></button>
+          <button type="button" class="menu-item" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Demo Campus East</span><span class="muted" style="font-size: 12.5px">Floors and rooms to be confirmed</span></span><span class="pill sm">Coming soon</span></button>
+          <button type="button" class="menu-item" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Demo Logistics Hub</span><span class="muted" style="font-size: 12.5px">Floors and rooms to be confirmed</span></span><span class="pill sm">Coming soon</span></button>
+          <a href="DTC-Sites.dc.html" class="menu-item" style="border-top: 1px solid rgba(16,14,40,.07); border-radius: 0 0 12px 12px; margin-top: 4px; text-decoration: none"><span style="font-weight: 500">See all sites</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </sc-if>
+    </span>
+    <span style="color: #A3A4B0">/</span><strong style="font-weight: 600">Building</strong>
+    <span class="pill p-green m-hide"><span class="dot" style="background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2)"></span>Live · synced 30 s ago</span>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+    <label class="search-box" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(16,14,40,.08); color: #646672; min-width: 0">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+      <input type="search" placeholder="Search rooms, devices, alarms" style="border: 0; outline: 0; background: transparent; font: 400 13.5px 'Geist', sans-serif; color: #0E0D1C; width: 200px; min-width: 0">
+      <span class="mono" style="font-size: 11px; padding: 3px 7px; border-radius: 7px; background: #EEEEF2; color: #3D3F4C">⌘K</span>
+    </label>
+    <span class="lang" role="group" aria-label="Language"><button type="button" class="{{enCls}}" onClick="{{setEn}}">EN</button><button type="button" class="{{arCls}}" onClick="{{setAr}}" lang="ar">عربي</button></span>
+    <a href="DTC-Alarms.dc.html" class="iconbtn" aria-label="3 active alarms"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge">3</span></a>
+    <button type="button" aria-label="Account: Facility manager" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #0E0D1C; color: #FFFFFF; font: 600 13px 'Geist', sans-serif; cursor: pointer">FM</button>
+  </div>
+</header>
+
+<section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+  <div>
+    <div class="kicker mono">Building · Innovation Center</div>
+    <h1 class="h-hero" style="margin: 6px 0 0; font-size: 48px; line-height: 1.05; font-weight: 600; letter-spacing: -0.035em">{{lv.title}}</h1>
+    <p style="margin: 8px 0 0; font-size: 16px; color: #4A4C58">{{lv.lead}}</p>
+  </div>
+  <div class="segs" role="tablist" aria-label="Show on the plan">
+    <sc-for list="{{layers}}" as="ly" hint-placeholder-count="4">
+      <button type="button" role="tab" aria-selected="{{ly.on}}" class="{{ly.cls}}" onClick="{{ly.pick}}">{{ly.label}}</button>
+    </sc-for>
+  </div>
+</section>
+
+<nav aria-label="Levels" style="display: flex; gap: 10px; overflow-x: auto; padding: 2px; margin: -2px; scrollbar-width: none">
+  <sc-for list="{{levels}}" as="l" hint-placeholder-count="6">
+    <button type="button" class="{{l.cls}}" onClick="{{l.pick}}" aria-current="{{l.on}}">
+      <span class="lvl-tag" style="position: relative">{{l.tag}}<sc-if value="{{l.issue}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: -3px; right: -3px; width: 11px; height: 11px; border-radius: 50%; background: {{l.dot}}; box-shadow: 0 0 0 2px #fff"></span></sc-if></span>
+      <span style="flex: 1; min-width: 0">
+        <span style="display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{l.name}}</span>
+        <span style="display: block; font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><span style="color: {{l.statusColor}}; font-weight: 500">{{l.status}}</span><span class="muted"> · {{l.sub}}</span></span>
+      </span>
+    </button>
+  </sc-for>
+</nav>
+
+<section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+  <div class="tile" style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px">
+      <span class="tlabel">{{planLabel}}</span>
+      <div class="segs" style="box-shadow: none; background: #F2F2F6">
+        <button type="button" class="{{inspectCls}}" onClick="{{setInspect}}">Inspect</button>
+        <button type="button" class="{{selectCls}}" onClick="{{setSelect}}">Select rooms</button>
+      </div>
+    </div>
+
+    <sc-if value="{{roof}}" hint-placeholder-val="{{ false }}">
+      <div class="note p-grey" style="padding: 22px">The roof has no rooms. Its water tanks, solar panels and weather station are on the Systems page.</div>
+    </sc-if>
+
+    <sc-if value="{{hasPlan}}" hint-placeholder-val="{{ true }}">
+      <div ref="{{setVp}}" class="{{vpCls}}" onPointerDown="{{onDown}}" onPointerMove="{{onMove}}" onPointerUp="{{onUp}}" onPointerLeave="{{onUp}}">
+        <div class="fp-tools" style="left: 12px">
+          <button type="button" class="{{viewCls.d3}}" onClick="{{view3d}}">3D</button>
+          <button type="button" class="{{viewCls.top}}" onClick="{{viewTop}}">Top</button>
+        </div>
+        <div class="fp-tools" style="right: 12px">
+          <button type="button" class="fp-ib" onClick="{{turnLeft}}" aria-label="Turn left"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+          <button type="button" class="fp-ib" onClick="{{turnRight}}" aria-label="Turn right"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button>
+          <button type="button" class="fp-ib" onClick="{{zoomOut}}" aria-label="Zoom out"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <button type="button" class="fp-ib" onClick="{{zoomIn}}" aria-label="Zoom in"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+        <div class="m-hide" style="position: absolute; left: 16px; bottom: 14px; z-index: 5; font-size: 12px; color: #646672">Drag to turn · tap a room to select it</div>
+        <div class="fp-world" style="width: {{world.w}}px; height: {{world.h}}px; transform: {{worldTf}}">
+          <div class="fp-slab" style="width: {{world.w}}px; height: {{world.h}}px"></div>
+          <sc-for list="{{edges}}" as="e" hint-placeholder-count="4">
+            <div class="fp-face" style="left: {{e.l}}px; top: {{e.t}}px; width: {{e.w}}px; height: {{e.h}}px; transform-origin: {{e.o}}; transform: {{e.tf}}; background: {{e.bg}}"></div>
+          </sc-for>
+          <sc-for list="{{floors}}" as="f" hint-placeholder-count="96">
+            <div class="{{f.cls}}" title="{{f.tip}}" onClick="{{f.pick}}" style="left: {{f.x}}px; top: {{f.y}}px; width: {{f.w}}px; height: {{f.h}}px; background: {{f.bg}}"><span class="fp-num">{{f.label}}</span></div>
+          </sc-for>
+          <sc-for list="{{furn}}" as="u" hint-placeholder-count="400">
+            <div class="fp-furn" style="left: {{u.x}}px; top: {{u.y}}px; width: {{u.w}}px; height: {{u.h}}px; transform-origin: {{u.o}}; transform: {{u.tf}}; background: {{u.bg}}; border-radius: {{u.r}}; box-shadow: {{u.sh}}"></div>
+          </sc-for>
+          <sc-for list="{{faces}}" as="fc" hint-placeholder-count="200">
+            <div class="{{fc.cls}}" style="left: {{fc.l}}px; top: {{fc.t}}px; width: {{fc.w}}px; height: {{fc.h}}px; transform-origin: {{fc.o}}; transform: {{fc.tf}}; background: {{fc.bg}}">{{fc.label}}</div>
+          </sc-for>
+          <sc-for list="{{bills}}" as="bb" hint-placeholder-count="3">
+            <div class="fp-bill" style="transform: {{bb.tf}}">
+              <button type="button" class="{{bb.cls}}" onClick="{{bb.pick}}"><span style="display: flex; align-items: center; gap: 6px"><span class="dot" style="background: {{bb.dot}}"></span><strong>{{bb.name}}</strong></span><span class="fp-hud-sub">{{bb.sub}}</span></button>
+              <div class="fp-stem"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: #3D3F4C">
+          <sc-for list="{{legend}}" as="g" hint-placeholder-count="3">
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 4px; background: {{g.color}}; box-shadow: inset 0 0 0 1px rgba(16,14,40,.08)"></span>{{g.label}}</span>
+          </sc-for>
+          <span style="display: flex; align-items: center; gap: 6px"><span class="dot" style="background: #DC2626"></span>Active alarm</span>
+        </div>
+        <span class="muted" style="font-size: 12.5px">{{summary}}</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 16px; background: #F6F6F9">
+        <span class="mono" style="font-size: 12px; color: #646672">00:00</span>
+        <input class="rng" type="range" min="0" max="58" step="1" value="{{slot}}" onChange="{{onSlot}}" aria-label="Time of day" style="flex: 1; min-width: 0">
+        <span class="mono" style="font-size: 13px; font-weight: 600; white-space: nowrap; min-width: 92px; text-align: right">{{timeLabel}}</span>
+        <button type="button" class="btn btn-white sm" onClick="{{goLive}}" disabled="{{isLive}}">Live</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{bulk}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 18px; background: var(--brand); color: #fff">
+        <span style="font-size: 14px"><strong style="font-weight: 600">{{selCount}}</strong> selected · {{selNames}}</span>
+        <span style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" class="btn btn-ghostdark sm" onClick="{{bulkComfort}}">Comfort</button>
+          <button type="button" class="btn btn-ghostdark sm" onClick="{{bulkEco}}">Eco</button>
+          <button type="button" class="btn btn-ghostdark sm" onClick="{{bulkOff}}">Lights off</button>
+          <button type="button" class="btn sm" style="background: #fff" onClick="{{clearSel}}">Clear</button>
+        </span>
+      </div>
+    </sc-if>
+    <sc-if value="{{bulkDone}}" hint-placeholder-val="{{ false }}">
+      <div class="note" style="background: #E1F5EC; color: #05603F; align-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> {{bulkDoneText}}</div>
+    </sc-if>
+  </div>
+
+  <aside class="tile" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+    <sc-if value="{{noRoom}}" hint-placeholder-val="{{ false }}">
+      <div class="muted" style="font-size: 14px">Pick a room on the plan to see it here.</div>
+    </sc-if>
+    <sc-if value="{{hasRoom}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+        <div>
+          <div class="mono" style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em">{{rm.code}}</div>
+          <div class="muted" style="font-size: 13px">{{rm.kind}}</div>
+        </div>
+        <span class="{{rm.pillCls}}">{{rm.status}}</span>
+      </div>
+      <p style="margin: 0; font-size: 14.5px; text-wrap: pretty">{{rm.sentence}}</p>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <div class="cell"><div class="k">Temperature</div><div class="v">{{rm.temp}}</div></div>
+        <div class="cell"><div class="k">CO₂</div><div class="v" style="color: {{rm.co2Color}}">{{rm.co2}}</div></div>
+        <div class="cell"><div class="k">People</div><div class="v">{{rm.people}}</div></div>
+        <div class="cell"><div class="k">Lights</div><div class="v">{{rm.lights}}</div></div>
+      </div>
+      <div>
+        <div class="tlabel" style="margin-bottom: 8px">Set the room to</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <sc-for list="{{modes}}" as="m" hint-placeholder-count="4">
+            <button type="button" class="{{m.cls}}" onClick="{{m.pick}}"><span class="t">{{m.label}}</span><span class="s">{{m.sub}}</span></button>
+          </sc-for>
+        </div>
+      </div>
+      <a href="DTC-Room.dc.html" class="btn btn-brand" style="width: 100%">Open room story <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </sc-if>
+  </aside>
+</section>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"brand":{"editor":"color","default":"#201E44","options":["#201E44","#3B3794","#0F766E","#0A0E14"]},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    if (this._vp && typeof ResizeObserver !== 'undefined') {
+      this._ro = new ResizeObserver(function (es) {
+        var w = es[0].contentRect.width;
+        var cur = (self.state && self.state.vw) || 0;
+        if (Math.abs(w - cur) > 2) self.setState({ vw: w });
+      });
+      this._ro.observe(this._vp);
+    }
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); }
+  renderVals() {
+
+    var self = this;
+    var s = this.state || {};
+    var brand = this.props.brand ?? '#201E44';
+    var ar = !!s.ar;
+    var shell = {
+      brand: brand,
+      sitesOpen: !!s.sitesOpen,
+      toggleSites: function () { self.setState({ sitesOpen: !s.sitesOpen }); },
+      enCls: ar ? '' : 'on',
+      arCls: ar ? 'on' : '',
+      setEn: function () { self.setState({ ar: false }); },
+      setAr: function () { self.setState({ ar: true }); },
+      moreOpen: !!s.moreOpen,
+      toggleMore: function () { self.setState({ moreOpen: !s.moreOpen }); }
+    };
+
+
+    var hsh = function (str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 1000) / 1000; };
+    var LV = [
+      { id: 'RF', name: 'Roof', rooms: 0, sub: 'solar, sensors', status: 'All OK', st: 'g' },
+      { id: 'L3', name: 'Level 3', rooms: 96, sub: '22.8 °C', status: 'All OK', st: 'g' },
+      { id: 'L2', name: 'Level 2', rooms: 96, sub: '23.4 °C', status: '1 alert', st: 'a' },
+      { id: 'L1', name: 'Level 1', rooms: 96, sub: '22.9 °C', status: 'All OK', st: 'g' },
+      { id: 'G', name: 'Ground', rooms: 96, sub: '23.1 °C', status: 'All OK', st: 'g' },
+      { id: 'B1', name: 'B1 · Facility', rooms: 24, sub: 'HVAC hub', status: '1 alert', st: 'r' }
+    ];
+    var lvId = s.lv || 'L2';
+    var lvl = LV.filter(function (l) { return l.id === lvId; })[0];
+    var levels = LV.map(function (l) {
+      return { tag: l.id, name: l.name, sub: l.sub, status: l.status, on: l.id === lvId,
+        cls: 'lvl' + (l.id === lvId ? ' on' : ''), issue: l.st !== 'g', dot: l.st === 'r' ? '#DC2626' : '#F59E0B',
+        statusColor: l.st === 'r' ? '#B42318' : l.st === 'a' ? '#B45309' : '#05603F',
+        pick: function () { self.setState({ lv: l.id, room: l.id === 'L2' ? 'L2-045' : null, sel: {}, bulkDone: null }); } };
+    });
+    var layer = s.layer || 'air';
+    var LAYERS = [['people', 'People'], ['air', 'Air'], ['temp', 'Temperature'], ['lights', 'Lights']];
+    var layers = LAYERS.map(function (x) { return { label: x[1], on: layer === x[0], cls: 'seg' + (layer === x[0] ? ' on' : ''), pick: function () { self.setState({ layer: x[0] }); } }; });
+
+    var slot = s.slot === undefined ? 46 : s.slot;            // 15-minute slots from 00:00 to 14:30
+    var hour = slot / 4;
+    var hh = Math.floor(hour), mm = Math.round((hour - hh) * 60);
+    var isLive = slot === 46;
+    var timeLabel = isLive ? '11:30 · live' : (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+    var occ = hour < 7 ? 0.02 : hour < 8 ? 0.25 : hour < 9 ? 0.6 : hour < 12 ? 0.9 : hour < 13 ? 0.7 : 0.88;
+
+    var FIXED = {
+      'L2-045': { people: 8, co2: 920, temp: 23.6, lights: 'On', alarm: true },
+      'L2-061': { people: 5, co2: 860, temp: 23.1, lights: 'On' },
+      'L2-018': { people: 4, co2: 790, temp: 22.8, lights: 'On' },
+      'L3-090': { people: 0, co2: 410, temp: 24.2, lights: 'Off', alarm: false },
+      'B1-03': { people: 2, co2: 480, temp: 27.0, lights: 'On', alarm: true }
+    };
+    // Space types: label, seats or desks, walls ('solid' | 'glass' | 'none'), how busy it gets
+    var TY = {
+      office: ['Office', 2, 'solid', 'desks'], meet: ['Meeting room', 6, 'glass', 'seats'], board: ['Board room', 20, 'solid', 'seats'],
+      phone: ['Phone booth', 1, 'glass', 'seat'], open: ['Open office', 24, 'none', 'desks'], pantry: ['Pantry', 20, 'glass', 'seats'],
+      cafe: ['Cafeteria', 90, 'glass', 'seats'], training: ['Training room', 30, 'solid', 'seats'], server: ['Server room', 0, 'solid', ''],
+      itstore: ['IT store', 0, 'solid', ''], comms: ['Comms room', 0, 'solid', ''], print: ['Print and copy', 0, 'solid', ''],
+      store: ['Storage', 0, 'solid', ''], prayer: ['Prayer room', 12, 'solid', 'people'], wellness: ['Wellness room', 2, 'solid', 'seats'],
+      quiet: ['Quiet room', 4, 'glass', 'seats'], lobby: ['Reception and lobby', 40, 'none', 'people'], security: ['Security control room', 3, 'solid', 'desks'],
+      fm: ['Facility management office', 6, 'solid', 'desks'], mail: ['Mail room', 2, 'solid', 'desks'], clinic: ['First aid room', 2, 'solid', 'beds'],
+      exec: ['Executive office', 1, 'solid', 'desk'], parking: ['Parking', 0, 'none', ''], plant: ['Plant room', 0, 'solid', ''], pump: ['Pump room', 0, 'solid', ''],
+      tank: ['Tank room', 0, 'solid', ''], gen: ['Generator room', 0, 'solid', ''], elec: ['Electrical room', 0, 'solid', ''], loading: ['Loading bay', 0, 'none', ''],
+      waste: ['Waste room', 0, 'solid', ''], bike: ['Bike store', 0, 'solid', ''], liftlobby: ['Lift lobby', 0, 'glass', '']
+    };
+    var WW = 1120, WD = 660, M = 28, VH = 30, CH = 74, FH = 64;
+    var SP = [], core = null;
+    var add = function (x, y, w, h, t, o) { SP.push(Object.assign({ x: x, y: y, w: w, h: h, t: t }, o || {})); };
+    var band = function (x, y, w, h, vert, items) {
+      var tot = items.reduce(function (a, i) { return a + i[1]; }, 0), p = vert ? y : x, L = vert ? h : w;
+      items.forEach(function (it) { var len = L * it[1] / tot; if (vert) add(x, p, w, len, it[0], it[2]); else add(p, y, len, h, it[0], it[2]); p += len; });
+    };
+    var O = ['office', 1];
+    var officeFloor = function (v) {
+      // perimeter: offices and meeting rooms on the windows; inner ring: open-plan, shared rooms and the core
+      if (v === 'L3') {
+        band(M, M, WW - 2 * M, 92, false, [['exec', 1.3], ['exec', 1.3], ['exec', 1.3], ['board', 3.6, { cap: 20 }], ['exec', 1.3], ['exec', 1.3], O, O, ['meet', 2, { cap: 8 }], O, O]);
+        band(M, WD - M - 92, WW - 2 * M, 92, false, [O, O, ['meet', 2, { cap: 6 }], O, O, ['phone', .55], ['phone', .55], O, O, ['meet', 2.4, { cap: 10 }], O, O]);
+      } else {
+        band(M, M, WW - 2 * M, 92, false, [O, O, O, ['meet', 2, { cap: 6 }], O, ['office', 1.6, { cap: 6, code: v === 'L2' ? 'L2-018' : null }], ['phone', .55], ['phone', .55], O, O, ['meet', 2.2, { cap: 8 }], O, O, O]);
+        band(M, WD - M - 92, WW - 2 * M, 92, false, v === 'G'
+          ? [O, O, ['meet', 2, { cap: 8, name: 'Visitor meeting room' }], ['lobby', 3.4, { name: 'Main entrance' }], ['meet', 2, { cap: 6, name: 'Interview room' }], ['mail', 1.4], O, O]
+          : [O, O, ['meet', 2.6, { cap: 12, code: v === 'L2' ? 'L2-045' : null }], O, O, ['phone', .55], ['phone', .55], O, ['office', 1.6, { cap: 8, code: v === 'L2' ? 'L2-061' : null }], ['meet', 2, { cap: 6 }], O, O]);
+      }
+      band(M, M + 92, 92, WD - 2 * M - 184, true, v === 'G'
+        ? [['prayer', 1.3, { name: 'Prayer room · men' }], ['prayer', 1.1, { name: 'Prayer room · women' }], ['wellness', 1, { name: "Parents' room" }], ['clinic', 1]]
+        : [O, O, O, ['meet', 1.6, { cap: 6 }], O]);
+      band(WW - M - 92, M + 92, 92, WD - 2 * M - 184, true, v === 'G'
+        ? [['security', 1.6], ['fm', 1.8], ['store', 1]]
+        : [O, O, ['print', 0.8], ['store', 0.8], O]);
+      var L0 = 152, R1 = 968, T0 = 152, B1y = 508;
+      if (v === 'G') {
+        add(L0, T0, 236, B1y - T0, 'lobby');
+        add(732, T0, 236, B1y - T0, 'cafe');
+        band(398, T0, 324, 92, false, [['meet', 1.4, { cap: 6 }], ['phone', .5], ['phone', .5], ['meet', 1.4, { cap: 6 }]]);
+        band(398, 418, 324, 90, false, [['training', 1.8, { cap: 60, name: 'Town hall' }], ['comms', .6]]);
+      } else {
+        add(L0, T0, 236, 170, 'open', { cap: 24 });
+        add(L0, T0 + 180, 236, B1y - T0 - 180, 'open', { cap: 24 });
+        if (v === 'L1') { add(732, T0, 236, 160, 'training', { cap: 30 }); add(732, T0 + 170, 236, B1y - T0 - 170, 'open', { cap: 24 }); }
+        else if (v === 'L2') { add(732, T0, 236, 150, 'pantry', { code: 'L2-070' }); add(732, T0 + 160, 236, B1y - T0 - 160, 'open', { cap: 28 }); }
+        else { add(732, T0, 140, 160, 'server', { code: 'L3-090' }); add(882, T0, 86, 160, 'itstore'); add(732, T0 + 170, 236, B1y - T0 - 170, 'open', { cap: 24 }); }
+        band(398, T0, 324, 92, false, v === 'L3' ? [['pantry', 1.6], ['wellness', 1], ['prayer', 1.1]] : [['wellness', 1], ['prayer', 1.2], ['meet', 1.4, { cap: 6 }], ['phone', .5], ['phone', .5]]);
+        band(398, 418, 324, 90, false, [['meet', 1.6, { cap: 10 }], ['comms', .7], ['quiet', 1], ['meet', 1.2, { cap: 4 }]]);
+      }
+      core = { x: 404, y: 254, w: 312, h: 154 };
+    };
+    if (lvId === 'B1') {
+      band(M, M, WW - 2 * M, 120, false, [['pump', 1.2, { code: 'B1-03' }], ['tank', 1.4], ['plant', 1, { name: 'Fire pumps' }], ['gen', 1.4], ['elec', 1.2], ['plant', 1.6, { name: 'Chiller plant' }], ['store', 1, { name: 'FM workshop' }], ['store', 1]]);
+      add(M, 186, 520, 290, 'parking', { name: 'Parking A · 60 bays' });
+      add(WW - M - 520, 186, 520, 290, 'parking', { name: 'Parking B · 60 bays' });
+      band(M, WD - M - 120, WW - 2 * M, 120, false, [['loading', 2], ['waste', 1], ['bike', 1.2], ['security', 1, { name: 'Security post', cap: 1 }], ['liftlobby', 1], ['store', 1, { name: 'Archive' }]]);
+    } else if (lvl.rooms > 0) officeFloor(lvId);
+
+    var roomsList = [];
+    var selected = s.sel || {};
+    var selectMode = s.mode === 'select';
+    var activeRoom = s.room === undefined ? (lvId === 'L2' ? 'L2-045' : null) : s.room;
+    var color = function (r) {
+      if (r.noData) return '#EFEFF3';
+      if (layer === 'people') return r.people === 0 ? '#FBFBFD' : r.load < 0.3 ? '#DEDCF3' : r.load < 0.7 ? '#B5B2E6' : '#837ED0';
+      if (layer === 'air') return r.co2 > 1000 ? '#F7CFCF' : r.co2 > 800 ? '#FBE6C2' : '#DDF3E8';
+      if (layer === 'temp') return r.temp > 26 ? '#F9CDB0' : r.temp > 24.5 ? '#FCE9D3' : r.temp < 22.5 ? '#DCE9FB' : '#EAF4EF';
+      return r.lights === 'On' ? '#FDF0B8' : '#ECECF2';
+    };
+    var used = {};
+    SP.forEach(function (sp) { if (sp.code) used[sp.code] = true; });
+    var seq = 0;
+    var nextCode = function () { var c; do { seq++; c = lvId + '-' + (lvId === 'B1' ? (seq < 10 ? '0' : '') + seq : ('00' + seq).slice(-3)); } while (used[c]); used[c] = true; return c; };
+    var room = function (sp) {
+      var ty = TY[sp.t], code = sp.code || nextCode();
+      var cap = sp.cap !== undefined ? sp.cap : ty[1];
+      var name = sp.name || ty[0];
+      var kind = name + (cap && ty[3] ? ' · ' + cap + ' ' + (cap === 1 ? ty[3].replace(/s$/, '') : ty[3]) : '');
+      var r1 = hsh(code), r2 = hsh(code + 'c'), r3 = hsh(code + 't');
+      var noPeople = !cap || /plant|pump|tank|gen|elec|parking|loading|waste|bike|liftlobby|server|itstore|comms|print|store/.test(sp.t);
+      var f = sp.t === 'cafe' || sp.t === 'pantry' ? (hour >= 12 && hour < 14 ? 0.75 : hour >= 8 && hour < 17 ? 0.15 : 0) : occ;
+      var people = noPeople ? 0 : Math.round(cap * f * (r1 < 0.3 && cap < 12 ? 0 : 0.35 + r2 * 0.6));
+      var load = cap ? people / cap : 0;
+      var co2 = Math.round(440 + load * (250 + r2 * 220) + r3 * 50);
+      var temp = +(sp.t === 'server' ? 21.5 : people ? 22.6 + r3 * 1.6 : 24.4 + r3 * 1.6).toFixed(1);
+      var lights = people || sp.t === 'lobby' || sp.t === 'parking' ? 'On' : (r2 < 0.12 && hour > 8 ? 'On' : 'Off');
+      var base = { code: code, kind: kind, name: name, people: people, load: load, co2: co2, temp: temp, lights: lights, alarm: false, cap: cap, t: sp.t };
+      var fx = FIXED[code];
+      if (fx && isLive) return Object.assign(base, fx, { load: fx.people / (cap || 1) });
+      return base;
+    };
+
+    var floors = [], faces = [], furn = [], bills = [];
+    var pitch = s.pitch === undefined ? 50 : s.pitch, yaw = s.yaw === undefined ? -18 : s.yaw, zoom = s.zoom || 1, vw = s.vw || 860;
+    var rad = pitch * Math.PI / 180, fy = yaw * Math.PI / 180;
+    var S_VIS = Math.cos(fy) >= 0, E_VIS = Math.sin(fy) > 0, SOLID = pitch > 4;
+    var spanX = Math.abs(WW * Math.cos(fy)) + Math.abs(WD * Math.sin(fy));
+    var spanY = Math.abs(WW * Math.sin(fy)) + Math.abs(WD * Math.cos(fy));
+    var vpH = vw < 600 ? 400 : 580;
+    var fit = 0.95 * Math.min((vw - 24) / spanX, (vpH - 60) / (spanY * Math.cos(rad) + 110 * Math.sin(rad)), 1.2);
+    var bill = function (x, y, z) { return 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, ' + z + 'px) rotateZ(' + (-yaw) + 'deg) rotateX(' + (-pitch) + 'deg) scale(' + (1 / (fit * zoom)).toFixed(3) + ') translate(-50%, -100%)'; };
+    var hex = function (c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; };
+    var shade = function (c, f) { var h = hex(c); return 'rgb(' + h.map(function (v) { return Math.max(0, Math.min(255, Math.round(v * f))); }).join(',') + ')'; };
+    // flat piece lying at height z
+    var flat = function (x, y, w, h, z, bg, r, sh) { furn.push({ x: x, y: y, w: w, h: h, o: '50% 50%', tf: 'translateZ(' + z + 'px)', bg: bg, r: r || '2px', sh: sh || 'none' }); };
+    // solid block: top plus the two sides that face the camera
+    var cub = function (x, y, w, h, z0, hgt, col, r) {
+      furn.push({ x: x, y: y, w: w, h: h, o: '50% 50%', tf: 'translateZ(' + (z0 + hgt) + 'px)', bg: col, r: r || '2px', sh: 'inset 0 0 0 0.5px rgba(255,255,255,.35)' });
+      if (!SOLID) return;
+      furn.push({ x: x, y: S_VIS ? y + h - hgt : y - hgt, w: w, h: hgt, o: '50% 100%', tf: 'translateZ(' + z0 + 'px) rotateX(-90deg)', bg: shade(col, S_VIS ? 0.82 : 0.7), r: '1px', sh: 'none' });
+      furn.push({ x: E_VIS ? x + w : x, y: y, w: hgt, h: h, o: '0 50%', tf: 'translateZ(' + z0 + 'px) rotateY(-90deg)', bg: shade(col, E_VIS ? 0.9 : 0.66), r: '1px', sh: 'none' });
+    };
+    // thin upright panel along x (screens, chair backs, monitors)
+    var panelX = function (x, yEdge, w, z0, hgt, bg) { if (SOLID) furn.push({ x: x, y: yEdge - hgt, w: w, h: hgt, o: '50% 100%', tf: 'translateZ(' + z0 + 'px) rotateX(-90deg)', bg: bg, r: '1px', sh: 'none' }); };
+    // camera-facing figure or object
+    var stand = function (x, y, z, w, h, bg, r) { furn.push({ x: x, y: y, w: w, h: h, o: '0 0', tf: 'translateZ(' + z + 'px) rotateZ(' + (-yaw) + 'deg) rotateX(' + (-pitch) + 'deg) translate(-50%, -100%)', bg: bg, r: r || '0', sh: 'none' }); };
+    var WOOD = '#B8946A', DESK = '#EDE7DC', SCREEN = '#23242F', CHAIR = '#3B3A5C', SOFA = '#8C88B8', METAL = '#B9BCC6';
+    var SHIRTS = ['#3B3794', '#0F766E', '#B45309', '#475569', '#9F1D1D', '#1D4ED8', '#6B7280'];
+    var seats = [];
+    var chair = function (cx, cy, facing) { // 'n': sits south of a desk and faces north
+      flat(cx - 3.5, cy - 3.5, 7, 7, 4.5, CHAIR, '2px');
+      panelX(cx - 3.5, facing === 'n' ? cy + 3.5 : cy - 3.4, 7, 4.5, 7, shade(CHAIR, 0.85));
+      seats.push([cx, cy]);
+    };
+    var person = function (cx, cy, z, k) {
+      var shirt = SHIRTS[k % SHIRTS.length];
+      stand(cx, cy, z, 8, 15, 'radial-gradient(circle at 50% 3.6px, #E2B98F 0 3px, transparent 3.4px), linear-gradient(transparent 0 7px, ' + shirt + ' 7px)', '4px 4px 2px 2px');
+    };
+    var plant = function (cx, cy, sc) {
+      sc = sc || 1;
+      cub(cx - 5 * sc, cy - 5 * sc, 10 * sc, 10 * sc, 0, 8 * sc, '#D8D2C6', '2px');
+      stand(cx, cy, 6 * sc, 22 * sc, 24 * sc, 'radial-gradient(circle at 38% 34%, #9BD38A 0, #5FA35A 38%, #3E7D43 70%, transparent 71%)', '50%');
+    };
+    var monitor = function (x, yEdge, z0) { panelX(x, yEdge, 10, z0, 8, 'linear-gradient(#3A3C4E, ' + SCREEN + ')'); };
+    var deskUnit = function (dx, dy, dw, dh, two) {
+      cub(dx, dy, dw, dh, 0, 7, DESK, '2px');
+      if (two) { monitor(dx + dw / 4 - 5, dy + 3, 7); monitor(dx + dw * 3 / 4 - 5, dy + 3, 7); chair(dx + dw / 4, dy + dh + 6, 'n'); chair(dx + dw * 3 / 4, dy + dh + 6, 'n'); }
+      else { monitor(dx + dw / 2 - 5, dy + 3, 7); chair(dx + dw / 2, dy + dh + 6, 'n'); }
+    };
+    var deskRows = function (x, y, w, h) {
+      var cols = Math.max(1, Math.floor((w - 16) / 50)), rows = Math.max(1, Math.floor((h - 16) / 44));
+      for (var i = 0; i < cols; i++) for (var j = 0; j < rows; j++) {
+        var dx = x + 10 + i * (w - 20) / cols, dy = y + 8 + j * (h - 16) / rows, dw = (w - 20) / cols - 10, dh = Math.min(16, (h - 16) / rows - 18);
+        deskUnit(dx, dy, dw, dh, dw > 26);
+      }
+    };
+    var table = function (x, y, w, h, n, round) {
+      cub(x, y, w, h, 0, 7, WOOD, round ? '50%' : '5px');
+      var perSide = Math.max(1, Math.round(n / 2));
+      for (var i = 0; i < perSide; i++) { var cx = x + w * (i + 0.5) / perSide; chair(cx, y - 6, 's'); chair(cx, y + h + 6, 'n'); }
+    };
+    var furnish = function (r, x, y, w, h) {
+      var t = r.t;
+      if (t === 'office' || t === 'exec') {
+        if (r.cap > 2) deskRows(x, y, w, h);
+        else {
+          var dw = Math.min(w * 0.55, 34), dh = Math.min(h * 0.22, 14);
+          cub(x + (w - dw) / 2, y + 10, dw, dh, 0, 7, t === 'exec' ? WOOD : DESK, '2px'); monitor(x + w / 2 - 5, y + 13, 7); chair(x + w / 2, y + 10 + dh + 6, 'n');
+          cub(x + 4, y + 4, 9, Math.min(26, h - 12), 0, 14, '#D9D4C8', '1px');
+          if (t === 'exec') { flat(x + 8, y + h * 0.55, w - 16, h * 0.35, 0.6, '#C9C2B4', '3px'); cub(x + 10, y + h - 18, w - 20, 10, 0, 6, SOFA, '3px'); }
+        }
+      } else if (t === 'meet' || t === 'board' || t === 'quiet') {
+        var tw = w * 0.6, th = Math.min(h * 0.3, t === 'board' ? 26 : 20);
+        flat(x + 6, y + 6, w - 12, h - 12, 0.5, 'rgba(70,60,110,.10)', '4px');
+        table(x + (w - tw) / 2, y + (h - th) / 2, tw, th, Math.min(r.cap, 14), false);
+        if (t !== 'quiet') panelX(x + w * 0.25, y + 3, w * 0.5, 10, 14, 'linear-gradient(#2E3040, #1B1C26)');
+      } else if (t === 'phone') { cub(x + w / 2 - 7, y + 6, 14, 8, 0, 7, DESK); chair(x + w / 2, y + 20, 'n'); }
+      else if (t === 'open') { deskRows(x, y, w, h); plant(x + w - 12, y + 12, 1); plant(x + 12, y + h - 12, 1); }
+      else if (t === 'pantry' || t === 'cafe') {
+        cub(x + 6, y + 6, w - 12, 12, 0, 11, '#E7E4EE', '2px'); cub(x + 10, y + 7, 12, 9, 11, 7, '#4A4C58', '2px');
+        var n = t === 'cafe' ? 3 : 2, m = t === 'cafe' ? 5 : 2;
+        for (var i = 0; i < n; i++) for (var j = 0; j < m; j++) {
+          var cx = x + 24 + i * (w - 48) / Math.max(1, n - 1), cy = y + 42 + j * (h - 62) / Math.max(1, m - 1);
+          cub(cx - 9, cy - 9, 18, 18, 0, 7, WOOD, '50%'); chair(cx - 14, cy, 'n'); chair(cx + 14, cy, 'n');
+        }
+        if (t === 'cafe') plant(x + w - 14, y + h - 14, 1.2);
+      } else if (t === 'training') {
+        var rowsN = Math.max(2, Math.floor((h - 30) / 24));
+        for (var k = 0; k < rowsN; k++) { var ry = y + 28 + k * (h - 40) / rowsN; cub(x + 14, ry, w - 28, 8, 0, 7, DESK); for (var c2 = 0; c2 < Math.floor((w - 28) / 22); c2++) chair(x + 25 + c2 * 22, ry + 14, 'n'); }
+        panelX(x + w * 0.25, y + 3, w * 0.5, 10, 16, 'linear-gradient(#2E3040, #1B1C26)');
+      } else if (t === 'server' || t === 'comms' || t === 'itstore') {
+        var racks = t === 'server' ? 4 : t === 'comms' ? 2 : 1;
+        for (var q = 0; q < racks; q++) cub(x + 10 + q * (w - 20) / racks, y + 14, Math.min(14, (w - 20) / racks - 6), h - 28, 0, 26, t === 'itstore' ? '#C9C3B5' : '#2F3142', '1px');
+      } else if (t === 'prayer') { for (var pr = 0; pr < 4; pr++) flat(x + 8, y + 10 + pr * (h - 20) / 4, w - 16, (h - 20) / 4 - 4, 0.6, pr % 2 ? '#A8744F' : '#B9845C', '2px'); }
+      else if (t === 'wellness' || t === 'clinic') { cub(x + 8, y + h - 22, w - 16, 12, 0, 6, t === 'clinic' ? '#E6EEF5' : SOFA, '4px'); plant(x + w - 12, y + 12, 0.8); }
+      else if (t === 'lobby') {
+        cub(x + w * 0.3, y + h * 0.42, w * 0.4, 14, 0, 10, '#F1EEE8', '12px 12px 28px 28px');
+        cub(x + 10, y + 12, 38, 14, 0, 6, SOFA, '5px'); cub(x + w - 48, y + 12, 38, 14, 0, 6, SOFA, '5px');
+        flat(x + w * 0.2, y + h * 0.65, w * 0.6, h * 0.2, 0.5, 'rgba(140,120,90,.18)', '50%');
+        plant(x + w / 2, y + h - 20, 1.4); plant(x + 18, y + h - 20, 1.1); plant(x + w - 18, y + h - 20, 1.1);
+        for (var tg = 0; tg < 3; tg++) cub(x + w * 0.38 + tg * 16, y + h - 34, 4, 14, 0, 10, METAL, '1px');
+      } else if (t === 'security' || t === 'fm' || t === 'mail') {
+        panelX(x + 8, y + 4, w - 16, 10, 14, 'repeating-linear-gradient(90deg, #1E2A3A 0 22px, #2D3B4F 22px 24px)'); deskRows(x, y + 12, w, h - 12);
+      } else if (t === 'print') { cub(x + w / 2 - 9, y + h / 2 - 7, 18, 14, 0, 10, '#D5D8DE'); }
+      else if (t === 'store' || t === 'archive') { for (var z = 0; z < 2; z++) cub(x + 8, y + 10 + z * (h - 20) / 2, w - 16, 8, 0, 16, '#C9C3B5', '1px'); }
+      else if (t === 'parking') {
+        var colsP = Math.floor((w - 20) / 34);
+        for (var a = 0; a < colsP; a++) for (var b = 0; b < 2; b++) {
+          if (hsh(r.code + a + '-' + b) < 0.45) continue;
+          var col = ['#8E96A3', '#E4E6EA', '#3F4552', '#B8BEC8', '#7A1F2B', '#1F3A5F'][(a * 3 + b) % 6];
+          var cxp = x + 13 + a * 34, cyp = b === 0 ? y + 14 : y + h - 72;
+          cub(cxp, cyp, 22, 58, 1.5, 7, col, '7px'); cub(cxp + 3, cyp + 14, 16, 26, 8.5, 5, '#2B3240', '5px');
+        }
+      } else if (t === 'pump' || t === 'tank' || t === 'plant') {
+        for (var u = 0; u < 2; u++) { var tw2 = Math.min(30, (w - 20) / 2 - 8); var tx = x + 10 + u * (w - 20) / 2 + tw2 / 2 + 4, ty = y + h * 0.6;
+          stand(tx, ty, 0, tw2, t === 'tank' ? 34 : 24, 'linear-gradient(90deg, #6F98AB, #B7D4E0 40%, #7FA6B8 75%, #5C8396)', '40% 40% 6px 6px / 14% 14% 6px 6px'); }
+        if (t === 'pump') cub(x + w - 26, y + 12, 16, 12, 0, 8, '#3F6E8A', '2px');
+      } else if (t === 'gen' || t === 'elec') { cub(x + 12, y + h * 0.3, w - 24, h * 0.35, 0, 16, t === 'gen' ? '#7E8C6A' : '#9D9AC2', '2px'); }
+      else if (t === 'loading') { for (var v2 = 0; v2 < 2; v2++) cub(x + 20 + v2 * (w / 2), y + 20, w / 2 - 40, h - 40, 0, 10, '#E5E7EB', '3px'); }
+      else if (t === 'bike') { for (var bk = 0; bk < 4; bk++) cub(x + 10 + bk * (w - 20) / 4, y + 20, 3, h - 40, 0, 7, '#6B7280', '1px'); }
+    };
+    // floor finishes by space type, with the data layer as a see-through tint on top
+    var TILE = function (c, line, sz) { return 'linear-gradient(' + line + ' 1px, transparent 1px) 0 0/' + sz + 'px ' + sz + 'px, linear-gradient(90deg, ' + line + ' 1px, transparent 1px) 0 0/' + sz + 'px ' + sz + 'px, ' + c; };
+    var FIN = {
+      wood: 'repeating-linear-gradient(90deg, rgba(110,70,30,.10) 0 1px, transparent 1px 11px), linear-gradient(135deg, #E2C9A6, #D3B58E)',
+      carpet: TILE('#C8CAD6', 'rgba(16,14,40,.06)', 22), carpetW: TILE('#B9BDCF', 'rgba(16,14,40,.07)', 22),
+      stone: TILE('#ECE8E0', 'rgba(120,110,90,.12)', 30), epoxy: 'linear-gradient(135deg, #C7CBD2, #B9BEC7)',
+      raised: TILE('#D8DBE1', 'rgba(16,14,40,.12)', 14), lino: TILE('#E5EEF0', 'rgba(16,14,40,.06)', 18),
+      parking: 'repeating-linear-gradient(90deg, rgba(255,255,255,.75) 0 2px, transparent 2px 34px), linear-gradient(#9EA4AE, #A9AFB8)'
+    };
+    var finish = function (t) {
+      if (t === 'office' || t === 'exec' || t === 'board' || t === 'wellness' || t === 'prayer') return FIN.wood;
+      if (t === 'meet' || t === 'quiet' || t === 'phone' || t === 'training') return FIN.carpetW;
+      if (t === 'open' || t === 'security' || t === 'fm' || t === 'mail') return FIN.carpet;
+      if (t === 'lobby' || t === 'cafe' || t === 'pantry' || t === 'liftlobby') return FIN.stone;
+      if (t === 'server' || t === 'comms') return FIN.raised;
+      if (t === 'clinic' || t === 'print') return FIN.lino;
+      if (t === 'parking') return FIN.parking;
+      return FIN.epoxy;
+    };
+    var tint = function (r) {
+      if (layer === 'people') return r.people === 0 ? 'rgba(255,255,255,.12)' : r.load < 0.3 ? 'rgba(170,166,230,.3)' : r.load < 0.7 ? 'rgba(124,120,210,.4)' : 'rgba(85,80,190,.5)';
+      if (layer === 'air') return r.co2 > 1000 ? 'rgba(232,80,80,.5)' : r.co2 > 800 ? 'rgba(246,176,60,.45)' : 'rgba(110,205,160,.2)';
+      if (layer === 'temp') return r.temp > 26 ? 'rgba(240,110,50,.5)' : r.temp > 24.5 ? 'rgba(248,180,100,.38)' : r.temp < 22.5 ? 'rgba(110,160,240,.38)' : 'rgba(140,210,180,.2)';
+      return r.lights === 'On' ? 'rgba(255,210,100,.4)' : 'rgba(30,33,72,.32)';
+    };
+    var walls = function (x, y, w, h, hgt, kindW, sel) {
+      var glass = kindW === 'glass';
+      var solidBg = 'linear-gradient(to top, #DCD9E3, #F7F6FA 70%, #FFFFFF)';
+      var glassBg = 'repeating-linear-gradient(90deg, rgba(110,140,170,.55) 0 1.5px, transparent 1.5px 26px), linear-gradient(to top, rgba(150,185,215,.42), rgba(215,232,246,.22))';
+      var glassBgS = 'repeating-linear-gradient(0deg, rgba(110,140,170,.55) 0 1.5px, transparent 1.5px 26px), linear-gradient(to left, rgba(150,185,215,.42), rgba(215,232,246,.22))';
+      var solidBgS = 'linear-gradient(to left, #DCD9E3, #F7F6FA 70%, #FFFFFF)';
+      var k = 'fp-face fp-wall' + (glass ? ' glass' : '') + (sel ? ' selw' : '');
+      faces.push({ cls: k, l: x, t: y - hgt, w: w, h: hgt, o: '50% 100%', tf: 'rotateX(-90deg)', bg: glass ? glassBg : solidBg, label: '' });
+      faces.push({ cls: k, l: x, t: y + h - hgt, w: w, h: hgt, o: '50% 100%', tf: 'rotateX(-90deg)', bg: glass ? glassBg : solidBg, label: '' });
+      faces.push({ cls: k + ' side', l: x, t: y, w: hgt, h: h, o: '0 50%', tf: 'rotateY(-90deg)', bg: glass ? glassBgS : solidBgS, label: '' });
+      faces.push({ cls: k + ' side', l: x + w, t: y, w: hgt, h: h, o: '0 50%', tf: 'rotateY(-90deg)', bg: glass ? glassBgS : solidBgS, label: '' });
+      if (!glass && SOLID) { // wall thickness, seen from above
+        var cap = sel ? 'var(--brand)' : '#C9C6D4', tz = 'translateZ(' + hgt + 'px)';
+        faces.push({ cls: 'fp-face', l: x - 1.5, t: y - 1.5, w: w + 3, h: 3, o: '50% 50%', tf: tz, bg: cap, label: '' });
+        faces.push({ cls: 'fp-face', l: x - 1.5, t: y + h - 1.5, w: w + 3, h: 3, o: '50% 50%', tf: tz, bg: cap, label: '' });
+        faces.push({ cls: 'fp-face', l: x - 1.5, t: y, w: 3, h: h, o: '50% 50%', tf: tz, bg: cap, label: '' });
+        faces.push({ cls: 'fp-face', l: x + w - 1.5, t: y, w: 3, h: h, o: '50% 50%', tf: tz, bg: cap, label: '' });
+      }
+    };
+    SP.forEach(function (sp) {
+      var r = room(sp); var code = r.code; roomsList.push(r);
+      var isSel = selectMode ? !!selected[code] : code === activeRoom;
+      var x = sp.x + 3, y = sp.y + 3, w = sp.w - 6, h = sp.h - 6;
+      var big = w * h > 9000;
+      var wallKind = TY[sp.t][2];
+      var tn = tint(r);
+      floors.push({ x: x, y: y, w: w, h: h, bg: 'linear-gradient(' + tn + ', ' + tn + '), ' + finish(sp.t), label: big ? r.name : code.split('-')[1],
+        cls: 'fp-floor' + (isSel ? ' sel' : '') + (r.alarm ? ' alarm' : '') + (big ? ' big' : '') + (wallKind === 'none' ? ' open' : ''),
+        tip: code + ' · ' + r.kind + (r.cap ? ' · ' + r.people + ' people' : '') + ' · CO₂ ' + r.co2 + ' ppm · ' + r.temp + ' °C · lights ' + r.lights.toLowerCase(),
+        pick: function () {
+          if (self._drag && self._drag.moved) return;
+          if (selectMode) { var nx = Object.assign({}, selected); if (nx[code]) delete nx[code]; else nx[code] = true; self.setState({ sel: nx, bulkDone: null }); }
+          else self.setState({ room: code });
+        } });
+      if (wallKind !== 'none') walls(x, y, w, h, isSel ? VH + 6 : VH, wallKind, isSel);
+      seats = [];
+      if (!s.dragging) furnish(r, x, y, w, h);
+      var nP = Math.min(r.people, seats.length);
+      for (var pi = 0; pi < nP; pi++) { var st = seats[Math.floor(pi * seats.length / nP)]; person(st[0], st[1] + 1, 3, pi + code.length); }
+      if (isSel && !selectMode) bills.push({ tf: bill(x + w / 2, y + h / 2, VH + 18), name: code + ' · ' + r.name, sub: (r.cap ? r.people + ' people · ' : '') + 'CO₂ ' + r.co2.toLocaleString('en-US') + ' · ' + r.temp.toFixed(1) + ' °C', dot: r.alarm ? '#DC2626' : '#8C88E0', cls: 'fp-hud sel', pick: function () {} });
+      else if (r.alarm) bills.push({ tf: bill(x + w / 2, y + h / 2, VH + 10), name: code + ' · ' + r.name, sub: lvId === 'B1' ? 'Water leak' : code === 'L3-090' ? 'Warming 27.5 °C' : 'Stuffy · CO₂ ' + r.co2.toLocaleString('en-US'), dot: '#DC2626', cls: 'fp-hud alarm', pick: function () { self.setState({ room: code, mode: 'inspect' }); } });
+    });
+    if (core) {
+      // cutaway core: no roof, so you see the lifts, stairs and toilets inside
+      var cx0 = core.x, cy0 = core.y, cw = core.w, chh = core.h, CW = VH + 8;
+      floors.push({ x: cx0, y: cy0, w: cw, h: chh, bg: TILE('#E4E2DC', 'rgba(16,14,40,.08)', 16), label: 'Core · lifts, stairs, toilets', cls: 'fp-floor fp-corefloor big', tip: 'Building core · lifts, stairs, toilets', pick: function () {} });
+      var conc = 'linear-gradient(to top, #C9C7D1, #E6E5EC 75%, #F2F1F5)', concS = 'linear-gradient(to left, #C9C7D1, #E6E5EC 75%, #F2F1F5)';
+      faces.push({ cls: 'fp-face fp-wall', l: cx0, t: cy0 - CW, w: cw, h: CW, o: '50% 100%', tf: 'rotateX(-90deg)', bg: conc, label: '' });
+      faces.push({ cls: 'fp-face fp-wall', l: cx0, t: cy0 + chh - CW, w: cw, h: CW, o: '50% 100%', tf: 'rotateX(-90deg)', bg: conc, label: '' });
+      faces.push({ cls: 'fp-face fp-wall side', l: cx0, t: cy0, w: CW, h: chh, o: '0 50%', tf: 'rotateY(-90deg)', bg: concS, label: '' });
+      faces.push({ cls: 'fp-face fp-wall side', l: cx0 + cw, t: cy0, w: CW, h: chh, o: '0 50%', tf: 'rotateY(-90deg)', bg: concS, label: '' });
+      if (!s.dragging) {
+        // 4 lifts in the middle, doors facing south
+        for (var li = 0; li < 4; li++) { var lx = cx0 + 104 + li * 27; cub(lx, cy0 + 50, 24, 30, 0, CW, '#8E92A0', '1px'); flat(lx + 4, cy0 + 80.5, 16, 10, 0.6, 'rgba(32,30,68,.14)', '1px'); }
+        flat(cx0 + 100, cy0 + 92, 116, 24, 0.5, 'rgba(255,255,255,.55)', '2px');
+        // stairs at both ends
+        [cx0 + 12, cx0 + cw - 76].forEach(function (sx) { for (var st = 0; st < 8; st++) cub(sx, cy0 + 14 + st * 9, 64, 9, 0, 3 + st * 3.6, '#D6D3CC', '0'); });
+        // toilets along the south side
+        for (var tl = 0; tl < 6; tl++) { var tx2 = cx0 + 96 + tl * 21; cub(tx2, cy0 + chh - 30, 2, 26, 0, 20, '#C2C6D0', '0'); flat(tx2 + 6, cy0 + chh - 22, 9, 11, 3, '#FFFFFF', '40% 40% 3px 3px'); }
+        cub(cx0 + 96, cy0 + chh - 34, 128, 3, 0, 20, '#C2C6D0', '0');
+      }
+      if (!s.dragging) [[136, 136], [984, 136], [136, 524], [984, 524]].forEach(function (p) { plant(p[0], p[1], 1.2); });
+    }
+    var T = 16;
+    var edges = [
+      { l: 0, t: WD, w: WW, h: T, o: '50% 0', tf: 'rotateX(-90deg)', bg: 'linear-gradient(#BDBCCB, #A9A8BA)' },
+      { l: 0, t: -T, w: WW, h: T, o: '50% 100%', tf: 'rotateX(90deg)', bg: '#D6D5E1' },
+      { l: 0, t: 0, w: T, h: WD, o: '0 50%', tf: 'rotateY(90deg)', bg: '#C3C2D0' },
+      { l: WW, t: 0, w: T, h: WD, o: '0 50%', tf: 'rotateY(90deg)', bg: 'linear-gradient(90deg, #B5B4C4, #A3A2B5)' }
+    ];
+    if (SOLID) {
+      // curtain wall: full height on the two far sides, a low glass rail on the near sides (cutaway)
+      var curtX = 'repeating-linear-gradient(90deg, #8D97A8 0 3px, transparent 3px 56px), linear-gradient(transparent 0 46%, rgba(120,135,160,.55) 46% 49%, transparent 49%), linear-gradient(to top, rgba(120,160,200,.55), rgba(205,225,245,.35) 70%, rgba(240,246,252,.3))';
+      var curtY = 'repeating-linear-gradient(0deg, #8D97A8 0 3px, transparent 3px 56px), linear-gradient(90deg, transparent 0 46%, rgba(120,135,160,.55) 46% 49%, transparent 49%), linear-gradient(to left, rgba(120,160,200,.55), rgba(205,225,245,.35) 70%, rgba(240,246,252,.3))';
+      var rail = 'linear-gradient(to top, rgba(140,170,200,.35), rgba(220,235,248,.25))';
+      var hN = S_VIS ? FH : 10, hS = S_VIS ? 10 : FH, hW = E_VIS ? FH : 10, hE = E_VIS ? 10 : FH;
+      faces.push({ cls: 'fp-face fp-facade', l: 0, t: -hN, w: WW, h: hN, o: '50% 100%', tf: 'rotateX(-90deg)', bg: hN > 10 ? curtX : rail, label: '' });
+      faces.push({ cls: 'fp-face fp-facade', l: 0, t: WD - hS, w: WW, h: hS, o: '50% 100%', tf: 'rotateX(-90deg)', bg: hS > 10 ? curtX : rail, label: '' });
+      faces.push({ cls: 'fp-face fp-facade side', l: 0, t: 0, w: hW, h: WD, o: '0 50%', tf: 'rotateY(-90deg)', bg: hW > 10 ? curtY : rail, label: '' });
+      faces.push({ cls: 'fp-face fp-facade side', l: WW, t: 0, w: hE, h: WD, o: '0 50%', tf: 'rotateY(-90deg)', bg: hE > 10 ? curtY : rail, label: '' });
+    }
+    var worldTf = 'translate(-50%, -52%) scale(' + (fit * zoom).toFixed(3) + ') rotateX(' + pitch + 'deg) rotateZ(' + yaw + 'deg)';
+    var plan3d = { worldTf: worldTf, world: { w: WW, h: WD }, floors: floors, faces: faces, furn: furn, bills: bills, edges: edges,
+      vpCls: 'fp-vp' + (s.dragging ? ' dragging' : ''),
+      viewCls: { d3: 'seg' + (pitch > 0 ? ' on' : ''), top: 'seg' + (pitch === 0 ? ' on' : '') },
+      view3d: function () { self.setState({ pitch: 50, yaw: -18, zoom: 1 }); },
+      viewTop: function () { self.setState({ pitch: 0, yaw: 0, zoom: 1 }); },
+      turnLeft: function () { self.setState({ yaw: yaw - 45 }); }, turnRight: function () { self.setState({ yaw: yaw + 45 }); },
+      zoomIn: function () { self.setState({ zoom: Math.min(2.4, +(zoom + 0.2).toFixed(2)) }); },
+      zoomOut: function () { self.setState({ zoom: Math.max(0.6, +(zoom - 0.2).toFixed(2)) }); },
+      setVp: this._setVp || (this._setVp = function (el) { self._vp = el; }),
+      onDown: function (e) {
+        if (e.target && e.target.closest && e.target.closest('button')) { self._drag = { on: false, moved: false }; return; }
+        self._drag = { x: e.clientX, y: e.clientY, pitch: pitch, yaw: yaw, moved: false, on: true };
+      },
+      onMove: function (e) {
+        var d = self._drag; if (!d || !d.on) return;
+        var ddx = e.clientX - d.x, ddy = e.clientY - d.y;
+        if (!d.moved && Math.abs(ddx) + Math.abs(ddy) < 5) return;
+        d.moved = true;
+        self.setState({ dragging: true, yaw: Math.round(d.yaw + ddx * 0.35), pitch: Math.round(Math.min(70, Math.max(0, d.pitch - ddy * 0.3))) });
+      },
+      onUp: function () { if (self._drag) self._drag.on = false; if (self.state && self.state.dragging) self.setState({ dragging: false }); }
+    };
+    var LEG = {
+      people: [['#EEEDEA', 'Empty'], ['#C9C6E6', 'A few people'], ['#A9A6E0', 'About half full'], ['#7D78C8', 'Nearly full']],
+      air: [['#D3F1E2', 'Fresh, under 800 ppm'], ['#FBE3B8', 'Getting stuffy'], ['#F6C9C9', 'Stuffy, over 1,000']],
+      temp: [['#D6E6FA', 'Cool, under 22.5 °C'], ['#E9F3EE', 'Comfortable'], ['#FCE6CC', 'Warm'], ['#F9C9A7', 'Hot, over 26 °C']],
+      lights: [['#FCE9A2', 'Lights on'], ['#E7E7EE', 'Lights off']]
+    };
+    var legend = LEG[layer].map(function (g) { return { color: g[0], label: g[1] }; });
+    var occupied = roomsList.filter(function (r) { return r.people > 0; }).length;
+    var stuffy = roomsList.filter(function (r) { return r.co2 > 1000; }).length;
+    var lit = roomsList.filter(function (r) { return r.lights === 'On'; }).length;
+    var avgT = roomsList.length ? (roomsList.reduce(function (a, r) { return a + r.temp; }, 0) / roomsList.length).toFixed(1) : '—';
+    var SUM = { people: occupied + ' of ' + roomsList.length + ' spaces in use', air: stuffy + ' stuffy · ' + roomsList.filter(function (r) { return r.co2 > 800 && r.co2 <= 1000; }).length + ' getting stuffy', temp: 'Average ' + avgT + ' °C', lights: lit + ' rooms with lights on' };
+
+    var rm = null;
+    var picked = roomsList.filter(function (r) { return r.code === activeRoom; })[0];
+    var roomModes = s.roomModes || {};
+    if (picked && !selectMode) {
+      var p = picked;
+      var stuffyR = p.co2 > 1000;
+      var mode = roomModes[p.code] || (stuffyR ? 'meeting' : p.people ? 'comfort' : 'eco');
+      rm = {
+        code: p.code, kind: p.kind, temp: p.temp.toFixed(1) + ' °C', co2: p.co2.toLocaleString('en-US'), people: String(p.people), lights: p.lights,
+        co2Color: stuffyR ? '#B42318' : p.co2 > 800 ? '#B45309' : '#0E0D1C',
+        status: p.alarm ? 'Alarm' : stuffyR ? 'Stuffy' : p.people ? 'In use' : 'Empty',
+        pillCls: 'pill sm ' + (p.alarm ? 'p-red' : stuffyR ? 'p-amber' : p.people ? 'p-brand' : 'p-grey'),
+        sentence: p.alarm && p.code === 'L3-090' ? 'Warming: 27.5 °C and rising 0.4 °C an hour. The door has been open for 6 minutes.'
+          : p.alarm && p.code === 'B1-03' ? 'Water leak: the floor sensor is wet and transfer pump 1 is still running.'
+          : !p.cap ? 'Plant or service space. ' + p.temp.toFixed(1) + ' °C, lights ' + p.lights.toLowerCase() + '. Nothing to do.'
+          : stuffyR ? 'Busy: ' + p.people + ' people and CO₂ ' + p.co2.toLocaleString('en-US') + ' ppm. Fresh air is boosted, so it should clear in about 12 minutes.'
+          : p.people ? 'In use by ' + p.people + (p.people === 1 ? ' person' : ' people') + '. Air and temperature are comfortable.'
+          : 'Empty and in Eco. Nothing to do.',
+        mode: mode
+      };
+    }
+    var MODES = [['comfort', 'Comfort', '23 °C · lights auto'], ['meeting', 'Meeting', '22.5 °C · fresh air high'], ['eco', 'Eco', '26 °C · lights off'], ['off', 'Off', 'AC and lights off']];
+    var modes = MODES.map(function (m) {
+      return { label: m[1], sub: m[2], cls: 'mode' + (rm && rm.mode === m[0] ? ' on' : ''),
+        pick: function () { if (!rm) return; var nx = Object.assign({}, roomModes); nx[rm.code] = m[0]; self.setState({ roomModes: nx }); } };
+    });
+    var selCodes = Object.keys(selected);
+    var bulkAct = function (label) { return function () { self.setState({ sel: {}, bulkDone: label + ' set for ' + selCodes.length + ' room' + (selCodes.length === 1 ? '' : 's') + ': ' + selCodes.join(', ') + '. Logged as you.' }); }; };
+    var title = lvId === 'B1' ? 'B1 · Parking and plant' : lvl.name;
+    var lead = lvId === 'RF' ? 'Water tanks A and B, solar panels and the weather station.'
+      : roomsList.length + ' spaces · ' + occupied + ' in use · average ' + avgT + ' °C · ' + (stuffy ? stuffy + ' stuffy' : 'air fresh everywhere');
+    var res = Object.assign(shell, plan3d, {
+      lv: { title: title, lead: lead }, levels: levels, layers: layers, legend: legend,
+      roof: lvl.rooms === 0, hasPlan: lvl.rooms > 0, summary: SUM[layer],
+      planLabel: selectMode ? 'Tap rooms to select them' : lvl.name + ' plan · tap a room',
+      inspectCls: 'seg' + (selectMode ? '' : ' on'), selectCls: 'seg' + (selectMode ? ' on' : ''),
+      setInspect: function () { self.setState({ mode: 'inspect', sel: {} }); },
+      setSelect: function () { self.setState({ mode: 'select', bulkDone: null }); },
+      slot: slot, onSlot: function (e) { self.setState({ slot: +e.target.value }); }, timeLabel: timeLabel, isLive: isLive,
+      goLive: function () { self.setState({ slot: 58 }); },
+      bulk: selectMode && selCodes.length > 0, selCount: selCodes.length + (selCodes.length === 1 ? ' room' : ' rooms'),
+      selNames: selCodes.slice(0, 4).join(', ') + (selCodes.length > 4 ? ' …' : ''),
+      bulkComfort: bulkAct('Comfort'), bulkEco: bulkAct('Eco'), bulkOff: bulkAct('Lights off'),
+      clearSel: function () { self.setState({ sel: {} }); },
+      bulkDone: !!s.bulkDone, bulkDoneText: s.bulkDone || '',
+      hasRoom: !!rm, noRoom: !rm, rm: rm || {}, modes: modes
+    });
+
+    if (!self._autoSlotInterval) {
+      self._autoSlotInterval = setInterval(function () {
+        var curSlot = typeof self.state.slot === 'number' ? self.state.slot : 28;
+        self.setState({ slot: (curSlot + 1) % 58 });
+      }, 3500);
+    }
+
+    return res;
+  }
+}
+</script>
+</body>
+</html>

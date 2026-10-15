@@ -118,8 +118,9 @@ input[type=range].rng::-moz-range-thumb{width:14px;height:14px;border-radius:50%
 
 .fp-vp{position:relative;height:580px;overflow:hidden;perspective:2000px;perspective-origin:50% 30%;cursor:grab;user-select:none;touch-action:none;border-radius:22px;background:radial-gradient(ellipse at 50% 30%,#FFFFFF 0%,#EEF0F5 55%,#E2E4EC 100%);box-shadow:inset 0 0 0 1px rgba(16,14,40,.06)}
 .fp-vp.dragging{cursor:grabbing}
-.fp-world{position:absolute;left:50%;top:50%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.22,1,.36,1)}
-.fp-vp.dragging .fp-world{transition:none}
+@keyframes autoOrbit3D{0%{transform:translate(-50%, -52%) rotateX(50deg) rotateZ(-20deg)}50%{transform:translate(-50%, -52%) rotateX(50deg) rotateZ(20deg)}100%{transform:translate(-50%, -52%) rotateX(50deg) rotateZ(-20deg)}}
+.fp-world{position:absolute;left:50%;top:50%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.22,1,.36,1);animation:autoOrbit3D 24s ease-in-out infinite}
+.fp-vp.dragging .fp-world{transition:none;animation:none}
 .fp-world *{transform-style:preserve-3d}
 .fp-slab{position:absolute;left:0;top:0;border-radius:4px;background:linear-gradient(rgba(120,110,90,.10) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(120,110,90,.10) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(135deg,#F1EEE8,#E7E3DB);box-shadow:0 60px 100px -30px rgba(16,14,40,.45),0 20px 40px -20px rgba(16,14,40,.3)}
 .fp-face{position:absolute;backface-visibility:visible;pointer-events:none}
@@ -799,7 +800,7 @@ class Component extends DCLogic {
     var title = lvId === 'B1' ? 'B1 · Parking and plant' : lvl.name;
     var lead = lvId === 'RF' ? 'Water tanks A and B, solar panels and the weather station.'
       : roomsList.length + ' spaces · ' + occupied + ' in use · average ' + avgT + ' °C · ' + (stuffy ? stuffy + ' stuffy' : 'air fresh everywhere');
-    return Object.assign(shell, plan3d, {
+    var res = Object.assign(shell, plan3d, {
       lv: { title: title, lead: lead }, levels: levels, layers: layers, legend: legend,
       roof: lvl.rooms === 0, hasPlan: lvl.rooms > 0, summary: SUM[layer],
       planLabel: selectMode ? 'Tap rooms to select them' : lvl.name + ' plan · tap a room',
@@ -816,6 +817,14 @@ class Component extends DCLogic {
       hasRoom: !!rm, noRoom: !rm, rm: rm || {}, modes: modes
     });
 
+    if (!self._autoSlotInterval) {
+      self._autoSlotInterval = setInterval(function () {
+        var curSlot = typeof self.state.slot === 'number' ? self.state.slot : 28;
+        self.setState({ slot: (curSlot + 1) % 58 });
+      }, 3500);
+    }
+
+    return res;
   }
 }
 </script>

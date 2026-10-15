@@ -17,8 +17,8 @@ interface NavItemData {
 
 const navItems: NavItemData[] = [
   { title: "Home", href: "/" },
-  { title: "EVOLTICS", href: "/platforms/evoltics" },
   { title: "IoTRICS", href: "/platforms/iotrics" },
+  { title: "EVOLTICS", href: "/platforms/evoltics" },
   { title: "CropifAI", href: "/platforms/cropifai" },
   { title: "Solutions", href: "/solutions" },
   { title: "Products", href: "/products" },

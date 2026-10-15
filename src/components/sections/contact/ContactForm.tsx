@@ -9,6 +9,7 @@ import { Button } from "@/design-system/primitives/actions/Button";
 import { 
   ShieldCheck, 
   Clock, 
+  Cpu,
   Zap, 
   ArrowRight, 
   CheckCircle2, 
@@ -152,7 +153,11 @@ export default function ContactForm() {
             className="flex flex-col gap-4 mt-2"
           >
             {formContent.infoCards.map((card, idx) => {
-              const Icon = card.iconName === "ShieldCheck" ? ShieldCheck : (card.iconName === "Clock" ? Clock : Zap);
+              const Icon = card.iconName === "ShieldCheck" 
+                ? ShieldCheck 
+                : (card.iconName === "Cpu" 
+                    ? Cpu 
+                    : (card.iconName === "Clock" ? Clock : Zap));
               return (
                 <div key={idx} className="flex items-start gap-4 p-5 sm:p-6 bg-surface border border-border rounded-2xl shadow-sm hover:border-primary/30 transition-colors group">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all text-primary">
@@ -192,7 +197,7 @@ export default function ContactForm() {
                   Enquiry Submitted
                 </h3>
                 <p className="text-muted text-base max-w-md leading-relaxed mb-6">
-                  Thank you, <span className="text-foreground font-semibold">{submittedData?.fullName}</span>. We have received your consultation enquiry and our engineering architects will reach out to you within one business day.
+                  Thank you, <span className="text-foreground font-semibold">{submittedData?.fullName}</span>. We have received your consultation enquiry and our engineering architects will reach out to you shortly to discuss your project requirements.
                 </p>
 
                 <div className="p-4 bg-background-alt border border-border rounded-xl text-left w-full max-w-md mb-8 text-xs text-muted space-y-1.5">

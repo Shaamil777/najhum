@@ -152,21 +152,21 @@ a{color:#0284C7;text-decoration:none}a:hover{color:#0369A1}
           <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 14px; border-radius: 16px; background: rgba(15,23,42,.03); border: 1px solid rgba(15,23,42,.06)">
             <div>
               <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Delivered Power</div>
-              <div class="mono" style="font-size: 20px; font-weight: 700; color: #0284C7; margin-top: 2px">7.4 kW</div>
+              <div id="telemetry-power" class="mono" style="font-size: 20px; font-weight: 700; color: #0284C7; margin-top: 2px">7.4 kW</div>
               <div style="font-size: 11px; color: #10B981; margin-top: 2px">Peak cap: 120 kW</div>
             </div>
             <div>
               <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Energy Transferred</div>
-              <div class="mono" style="font-size: 20px; font-weight: 700; color: #0F172A; margin-top: 2px">48.2 kWh</div>
-              <div style="font-size: 11px; color: #64748B; margin-top: 2px">Battery: 64% (target 80%)</div>
+              <div id="telemetry-energy" class="mono" style="font-size: 20px; font-weight: 700; color: #0F172A; margin-top: 2px">48.2 kWh</div>
+              <div id="telemetry-battery" style="font-size: 11px; color: #64748B; margin-top: 2px">Battery: 64% (target 80%)</div>
             </div>
             <div>
               <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Duration</div>
-              <div class="mono" style="font-size: 16px; font-weight: 600; color: #0F172A; margin-top: 2px">24m 18s</div>
+              <div id="telemetry-duration" class="mono" style="font-size: 16px; font-weight: 600; color: #0F172A; margin-top: 2px">24m 18s</div>
             </div>
             <div>
               <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Revenue Accrued</div>
-              <div class="mono" style="font-size: 16px; font-weight: 700; color: #05603F; margin-top: 2px">AED 57.84</div>
+              <div id="telemetry-revenue" class="mono" style="font-size: 16px; font-weight: 700; color: #05603F; margin-top: 2px">AED 57.84</div>
             </div>
           </div>
 
@@ -298,5 +298,31 @@ a{color:#0284C7;text-decoration:none}a:hover{color:#0369A1}
     </div>
   </div>
 </div>
+<script>
+(function() {
+  var sec = 1458;
+  var energy = 48.2;
+  var rev = 57.84;
+  setInterval(function() {
+    sec++;
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    var durEl = document.getElementById('telemetry-duration');
+    if (durEl) durEl.textContent = m + 'm ' + (s < 10 ? '0' : '') + s + 's';
+    
+    var kw = (7.3 + Math.sin(sec * 0.35) * 0.35).toFixed(1);
+    var pwrEl = document.getElementById('telemetry-power');
+    if (pwrEl) pwrEl.textContent = kw + ' kW';
+    
+    energy += 0.002;
+    var nrgEl = document.getElementById('telemetry-energy');
+    if (nrgEl) nrgEl.textContent = energy.toFixed(1) + ' kWh';
+    
+    rev += 0.003;
+    var revEl = document.getElementById('telemetry-revenue');
+    if (revEl) revEl.textContent = 'AED ' + rev.toFixed(2);
+  }, 1000);
+})();
+</script>
 </body>
 </html>

@@ -25,9 +25,8 @@ export default function ContactAddress() {
         <div className="flex flex-col gap-2">
           <p className="text-neutral-400">{item.location}</p>
           <p className="text-neutral-400">{item.addressLine1}</p>
-          <p className="text-neutral-400">{item.addressLine2}</p>
           <a
-            href={(item as { mapsUrl?: string }).mapsUrl || "https://maps.google.com/?q=in5+Design+Dubai+Design+District"}
+            href={(item as { mapsUrl?: string }).mapsUrl || "https://maps.google.com/?q=in5+Innovation+Centre+Dubai+Design+District"}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-semibold text-white underline underline-offset-4 mt-2 hover:text-blue-400 transition-colors inline-block"
