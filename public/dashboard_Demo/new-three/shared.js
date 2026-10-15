@@ -1,0 +1,12 @@
+import * as THREE from 'three';
+export { THREE };
+export function material(color, extra={}) {return new THREE.MeshStandardMaterial({color,roughness:.78,metalness:0,...extra});}
+export function box(parent,w,h,d,x,y,z,color,extra={}) {const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material(color,extra));mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;}
+export function cylinder(parent,rt,rb,h,x,y,z,color,n=12){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,n),material(color));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}
+export function sphere(parent,r,x,y,z,color,sx=1,sy=1,sz=1){const m=new THREE.Mesh(new THREE.IcosahedronGeometry(r,1),material(color));m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.castShadow=true;parent.add(m);return m;}
+export function tube(parent,points,r,color){const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));const m=new THREE.Mesh(new THREE.TubeGeometry(curve,32,r,6,false),material(color));m.castShadow=true;parent.add(m);return m;}
+export function plant(parent,x,z,size=1,pot=true){const g=new THREE.Group();parent.add(g);g.position.set(x,0,z);if(pot)cylinder(g,.22,.16,.35,0,.175,0,'#c68a61');cylinder(g,.025,.04,size*.7,0,size*.35+.2,0,'#6b8050',6);for(let j=0;j<6;j++){const a=j*2.4;const leaf=sphere(g,size*.29,Math.cos(a)*size*.17,.35+j*size*.095,Math.sin(a)*size*.17,j%2?'#5d9151':'#7fa666',1,.48,1.3);leaf.rotation.z=Math.cos(a)*.7;}return g;}
+export function tree(parent,x,z,size=1){const g=new THREE.Group();g.position.set(x,0,z);parent.add(g);cylinder(g,.1,.16,size*1.8,0,size*.9,0,'#9a8163',8);for(let j=0;j<5;j++){const a=j*2.4;sphere(g,size*.72,Math.cos(a)*size*.28,size*(1.8+j*.12),Math.sin(a)*size*.3,['#93ac74','#7e9d63','#a4b985'][j%3],1,.9,1);}return g;}
+export function zone(root,id,label,description,metrics,state='Illustrative data'){const g=new THREE.Group();g.userData={zone:id,label,description,metrics,state};root.add(g);return g;}
+export function base(root,w=22,d=15,color='#e3d9bf'){box(root,w,.45,d,0,-.225,0,color);box(root,w+.15,.1,d+.15,0,-.5,0,'#d3c7a8');}
+export function waterParticles(root,positions){const geom=new THREE.BufferGeometry();geom.setAttribute('position',new THREE.Float32BufferAttribute(positions.flat(),3));const points=new THREE.Points(geom,new THREE.PointsMaterial({color:'#7cbed0',size:.06,transparent:true,opacity:.8}));points.userData.water=true;root.add(points);return points;}

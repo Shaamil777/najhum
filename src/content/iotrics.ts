@@ -247,7 +247,7 @@ export const iotricsContent = {
         title: "Sensor Monitoring & Data Acquisition",
         description: "Sensors on your equipment take a reading every few minutes and send it to the platform — temperature, humidity, pressure, water flow, vibration, door state. They report to the Najhum IoT Controller on site, which forwards the data to the platform over LoRaWAN, cellular or satellite — so a site with no network of its own still reports. Instead of someone walking the site with a clipboard, the current state of every asset is on screen, with the history behind it.",
         tag: "REAL-TIME TELEMETRY",
-        image: "/images/iotrics/capability_1.jpg",
+        image: "/images/iotrics/capability_1.png",
         badge: "Real-Time Telemetry"
       },
       {
@@ -257,7 +257,7 @@ export const iotricsContent = {
         title: "Automated Alerts & Event Management",
         description: "You set the limits that matter — a freezer above −18°C, a pump drawing more current than usual, a door left open. When a reading crosses one, the platform sends an alert by email, SMS or webhook to the person responsible for that site. Each alert carries its severity and has to be acknowledged, and anything left unanswered escalates, so a problem at 2am is not discovered at 9.",
         tag: "THRESHOLD ALERTS",
-        image: "/images/iotrics/capability_2.jpg",
+        image: "/images/iotrics/capability_2.png",
         badge: "Threshold Alerts"
       },
       {
@@ -267,7 +267,7 @@ export const iotricsContent = {
         title: "Environmental & Condition Monitoring",
         description: "Continuous monitoring of the conditions inside cold rooms, warehouses, plant rooms and offices: temperature, humidity, air quality, and water leak or flood detection under raised floors and around tanks. For cold storage the record is unbroken, which is what an auditor asks for, and a leak is caught as a reading rather than as damage found the next morning.",
         tag: "COLD CHAIN · LEAK DETECTION",
-        image: "/images/iotrics/capability_3.jpg",
+        image: "/images/iotrics/capability_3.png",
         badge: "Cold Chain · Leak Detection"
       },
       {
@@ -277,7 +277,7 @@ export const iotricsContent = {
         title: "Energy Monitoring & Sub-Metering",
         description: "Sub-meters on individual circuits show which equipment is actually consuming the power, not just what the building total was last month. You see load profiles through the day, when peak demand occurs and what causes it — the basis for shifting loads, choosing a tariff, or proving that a change saved something.",
         tag: "SUB-METERING",
-        image: "/images/iotrics/capability_4.jpg",
+        image: "/images/iotrics/capability_4.png",
         badge: "Sub-Metering"
       },
       {
@@ -287,7 +287,7 @@ export const iotricsContent = {
         title: "Asset Tracking & Utilisation",
         description: "Tags and sensors report where movable assets are and how much they are used — location across sites, runtime hours on a machine, how often a space is occupied. It answers the two questions that usually get guessed: do we have more of this than we need, and where did it go.",
         tag: "UTILISATION",
-        image: "/images/iotrics/capability_5.jpg",
+        image: "/images/iotrics/capability_5.png",
         badge: "Utilisation"
       },
       {

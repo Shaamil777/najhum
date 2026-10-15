@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repharm Greenhouse · modern</title>
+<script src="./dc-runtime.js"></script>
+<script type="importmap">{"imports":{"three":"./new-three/vendor/three.module.js"}}</script>
+<script type="module" src="./new-three/viewer.js"></script>
+<style>.new-three-scene{position:absolute;inset:0;overflow:hidden;border-radius:inherit}.new-three-scene canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}.three-label{position:absolute;z-index:3;transform:translate(-50%,-100%);pointer-events:none;white-space:nowrap}.three-label button{pointer-events:auto}.three-error{position:absolute;inset:80px 20px;z-index:4;color:#9b3029}</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0;background:#F4F5F3}
+a{color:#047857}a:hover{color:#065F46}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.tile{background:#FFFFFF;border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(11,15,13,.04),0 1px 2px rgba(11,15,13,.04),0 16px 32px -20px rgba(11,15,13,.18);min-width:0}
+.tlabel{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#66706B}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap;background:#EEF0ED;color:#2B3430}
+.p-green{background:#E2F4EA;color:#05603F}.p-blue{background:#E0F0FA;color:#075985}.p-amber{background:#FCF0DC;color:#7C4204}.p-red{background:#FBE7E7;color:#9F1D1D}.p-grey{background:#EEF0ED;color:#3E4843}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:#EEF0ED;color:#0B0F0D;font:500 13.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap;transition:background .15s,transform .15s}
+.btn:hover{background:#E3E6E2}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand);filter:brightness(.92)}
+.btn-ink{background:#0B0F0D;color:#fff}
+.btn-ink:hover{background:#26302B}
+.btn-white{background:#fff;color:#0B0F0D}
+.btn-white:hover{background:#E9ECE8}
+.btn-stop{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.btn-stop:hover{background:rgba(255,255,255,.2)}
+.btn-danger{background:#FBE7E7;color:#9F1D1D}
+.btn-danger:hover{background:#F7D6D6}
+.nav{display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:9px 0 7px;border:0;border-radius:14px;background:transparent;color:#66706B;font:500 10.5px 'Geist',sans-serif;cursor:pointer;position:relative}
+.nav:hover{background:#F0F2EF;color:#0B0F0D}
+.nav.on{background:#0B0F0D;color:#fff}
+@media (max-width:760px){.rail{position:fixed!important;left:0;right:0;bottom:0;z-index:60;flex-wrap:nowrap!important;justify-content:space-around!important;align-content:center!important;padding:6px 4px calc(6px + env(safe-area-inset-bottom))!important;gap:0!important;box-shadow:0 -1px 0 rgba(11,15,13,.08),0 -10px 30px -16px rgba(11,15,13,.25)!important}.rail-logo{display:none!important}.nav{width:auto!important;flex:1 1 0;min-width:0;padding:7px 0 6px!important}.wrap{padding:16px 16px 104px!important;gap:16px!important}.h-hero{font-size:40px!important}.segs{flex-wrap:wrap!important;border-radius:18px!important}.m-hide{display:none!important}.gh-vp{height:420px!important}}
+.seg{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#3E4843;font:500 12.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.seg:hover{background:rgba(11,15,13,.06)}
+.seg.on{background:#0B0F0D;color:#fff}
+.chipbtn{display:inline-flex;align-items:center;justify-content:center;min-width:52px;height:36px;padding:0 10px;border:0;border-radius:12px;background:rgba(11,15,13,.05);color:#2B3430;font:500 13px 'Geist Mono',monospace;cursor:pointer}
+.chipbtn:hover{background:rgba(11,15,13,.09)}
+.chipbtn.on{background:#0B0F0D;color:#fff}
+.chipbtn:disabled{opacity:.4;cursor:not-allowed}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:#C9CFCB;cursor:pointer;flex-shrink:0;transition:background .2s}
+.switch::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.switch.on{background:var(--brand)}
+.switch.on::after{transform:translateX(16px)}
+.switch:disabled{opacity:.4;cursor:not-allowed}
+.glass{background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,.7) inset,0 10px 30px -12px rgba(11,15,13,.25)}
+.zpill{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:#2B3430;font:500 13px 'Geist',sans-serif;cursor:pointer;white-space:nowrap}
+.zpill:hover{background:rgba(11,15,13,.06)}
+.zpill.on{background:#fff;color:#0B0F0D;box-shadow:0 1px 3px rgba(11,15,13,.12)}
+.run{position:absolute;top:8px;bottom:8px;border-radius:7px;min-width:10px}
+.run.done{background:var(--brand)}
+.run.live{background:repeating-linear-gradient(-45deg,#0284C7 0 6px,#38BDF8 6px 12px);background-size:17px 17px;animation:tl-run 1s linear infinite}
+.run.off{background:transparent;box-shadow:inset 0 0 0 1.5px #A3ACA7;border-radius:7px}
+@keyframes tl-run{to{background-position:17px 0}}
+/* 3D greenhouse twin */
+.gh-vp{position:relative;height:540px;overflow:hidden;perspective:1700px;perspective-origin:50% 38%;cursor:grab;user-select:none;touch-action:none}
+.gh-vp.dragging{cursor:grabbing}
+.gh-world{position:absolute;left:50%;top:50%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.gh-vp.dragging .gh-world{transition:none}
+.gh-world *{transform-style:preserve-3d}
+.gh-ground{position:absolute;inset:0;border-radius:28px;background:linear-gradient(rgba(90,110,100,.07) 1px,transparent 1px) 0 0/36px 36px,linear-gradient(90deg,rgba(90,110,100,.07) 1px,transparent 1px) 0 0/36px 36px,#E9ECE6;box-shadow:0 40px 80px -20px rgba(11,15,13,.25)}
+.gh-slab{position:absolute;border-radius:10px;background:#DEE2DC;box-shadow:inset 0 0 0 2px #D0D5CE}
+.gh-label{position:absolute;font:600 12px 'Geist',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(11,15,13,.42);white-space:nowrap;transform:translateX(-50%);pointer-events:none}
+.gh-floor{position:absolute;inset:0;background:#DEE2DC;border-radius:2px}
+.gh-pad{position:absolute;border-radius:6px;cursor:pointer;transition:background .3s,box-shadow .3s}
+.gh-pad.idle{background:rgba(4,120,87,.08)}
+.gh-pad.irrigating{background:rgba(2,132,199,.14)}
+.gh-pad.pending{background:repeating-linear-gradient(45deg,rgba(100,116,139,.10) 0 10px,rgba(100,116,139,.03) 10px 20px)}
+.gh-pad.sel{box-shadow:0 0 0 3px var(--brand)}
+.gh-zline{position:absolute;width:2px;background:repeating-linear-gradient(to bottom,rgba(11,15,13,.35) 0 7px,transparent 7px 13px);transform:translateZ(1.5px);pointer-events:none}
+.gh-bed{position:absolute;border-radius:3px;background:#7A5B3E}
+.gh-bed.planted{background:radial-gradient(circle,#5EE09A 0 3px,transparent 3.5px) 0 0/14px 16px,#7A5B3E}
+.gh-bed.pending{background:repeating-linear-gradient(0deg,#CFC2AC 0 6px,#C6B79E 6px 12px)}
+.gh-drip{position:absolute;width:2px;border-radius:1px;background:rgba(30,41,59,.3);transform:translateZ(1px)}
+.gh-drip.on{width:3px;background:repeating-linear-gradient(to bottom,#38BDF8 0 8px,rgba(56,189,248,.15) 8px 14px);animation:gh-y .8s linear infinite;box-shadow:0 0 8px rgba(56,189,248,.9)}
+.gh-drip.none{background:repeating-linear-gradient(to bottom,rgba(100,116,139,.4) 0 4px,transparent 4px 9px)}
+.gh-pipe{position:absolute;border-radius:4px;background:#7B8780;transform:translateZ(1px)}
+.gh-pipe.h.on{background:repeating-linear-gradient(90deg,#0369A1 0 12px,#38BDF8 12px 20px);animation:gh-x .7s linear infinite;box-shadow:0 0 10px rgba(56,189,248,.6)}
+.gh-pipe.v.on{background:repeating-linear-gradient(0deg,#0369A1 0 12px,#38BDF8 12px 20px);animation:gh-y .7s linear infinite;box-shadow:0 0 10px rgba(56,189,248,.6)}
+.gh-pipe.h.missing{background:repeating-linear-gradient(90deg,rgba(100,116,139,.5) 0 6px,transparent 6px 11px)}
+.gh-pipe.v.missing{background:repeating-linear-gradient(0deg,rgba(100,116,139,.5) 0 6px,transparent 6px 11px)}
+@keyframes gh-x{to{background-position:20px 0}}
+@keyframes gh-y{to{background-position:0 -20px}}
+.gh-house{position:absolute}
+.gh-panel{position:absolute;top:0;cursor:pointer;backface-visibility:visible;border-left:1px solid rgba(255,255,255,.85);background-image:linear-gradient(to bottom,rgba(255,255,255,.4),rgba(255,255,255,0) 40%,rgba(255,255,255,.22));transition:background-color .3s}
+.gh-gutter{position:absolute;background:#D3D9D5;box-shadow:0 0 0 1px rgba(255,255,255,.7);pointer-events:none}
+.gh-post{position:absolute;background:#A2ADA7;transform-origin:50% 100%;transform:rotateX(-90deg);pointer-events:none}
+.gh-wall{position:absolute;backface-visibility:visible;background:rgba(244,247,246,.45);border:1.5px solid rgba(255,255,255,.95);pointer-events:none}
+.gh-end{position:absolute;transform-origin:50% 100%;transform:rotateX(-90deg);pointer-events:none}
+.gh-end-base{position:absolute;left:0;right:0;bottom:0;backface-visibility:visible;background:rgba(244,247,246,.48);border:1.5px solid rgba(255,255,255,.95)}
+.gh-arch{position:absolute;backface-visibility:visible;background:rgba(244,247,246,.42);border:1.5px solid rgba(255,255,255,.95);border-bottom:none;display:flex;align-items:center;justify-content:center;font:600 10px 'Geist Mono',monospace;color:rgba(11,15,13,.45)}
+.gh-door{position:absolute;bottom:0;background:rgba(60,72,66,.5);border:1px solid rgba(255,255,255,.75);border-bottom:none;border-radius:2px 2px 0 0}
+.gh-bill{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+.gh-hud{pointer-events:auto;display:block;text-align:left;border:0;border-radius:12px;padding:7px 11px;white-space:nowrap;font:500 11px/1.35 'Geist',sans-serif;color:#0B0F0D;cursor:pointer;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 20px -6px rgba(11,15,13,.25)}
+.gh-hud strong{font-size:12px;font-weight:600}
+.gh-hud-sub{color:#66706B;font-size:10.5px}
+.gh-stem{width:1.5px;margin:0 auto;background:linear-gradient(to bottom,rgba(11,15,13,.45),rgba(11,15,13,0))}
+</style>
+</helmet>
+
+<div style="--brand: {{brand}}; min-height: 100%; display: flex; flex-wrap: wrap; align-items: stretch; background: #F4F5F3; color: #0B0F0D; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+  <!-- Rail -->
+  <nav aria-label="Main" class="rail" style="flex: 1 1 84px; background: #FFFFFF; box-shadow: 1px 0 0 rgba(11,15,13,.06); padding: 18px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 6px">
+    <div class="rail-logo" style="width: 44px; height: 44px; border-radius: 14px; background: {{brand}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 8px 14px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20h10"></path><path d="M10 20c5.5-2.5.8-6.4 3-10"></path><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"></path><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"></path></svg>
+    </div>
+    <button type="button" class="nav on" aria-current="page">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+      Overview
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7Z"></path><path d="m2 17 10 5 10-5"></path><path d="m2 12 10 5 10-5"></path></svg>
+      Zones
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+      Schedule
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+      Activity
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"></path></svg>
+      Devices
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      Alarms
+      <sc-if value="{{alarm.active}}" hint-placeholder-val="{{ true }}"><span style="position: absolute; top: 7px; right: 17px; width: 8px; height: 8px; border-radius: 50%; background: #D97706; box-shadow: 0 0 0 2px #FFFFFF"></span></sc-if>
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>
+      Settings
+    </button>
+  </nav>
+
+  <div style="flex: 999 1 600px; min-width: 0">
+    <div class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 22px 36px 56px; display: flex; flex-direction: column; gap: 22px">
+
+      <!-- Top bar -->
+      <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <button type="button" class="btn btn-white" style="box-shadow: 0 0 0 1px rgba(11,15,13,.08)">
+            <span style="color: #66706B">Repharm</span>
+            <span style="color: #A3ACA7">/</span>
+            <strong style="font-weight: 600">Greenhouse</strong>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <span class="pill p-green"><span class="dot" style="background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2)"></span>Live · synced 3 min ago</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(11,15,13,.08); color: #66706B; min-width: 0">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+            <input type="search" placeholder="Search zones, devices, runs" style="border: 0; outline: 0; background: transparent; font: 400 13.5px 'Geist', sans-serif; color: #0B0F0D; width: 210px; min-width: 0">
+            <span class="mono" style="font-size: 11px; padding: 3px 7px; border-radius: 7px; background: #EEF0ED; color: #3E4843">⌘K</span>
+          </label>
+          <button type="button" class="btn btn-white" style="box-shadow: 0 0 0 1px rgba(11,15,13,.08); padding: 0 12px" aria-label="Sync now">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
+          </button>
+          <button type="button" class="btn btn-danger" disabled="{{sim}}">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
+            Emergency stop
+          </button>
+          <button type="button" aria-label="Account: Repharm Administrator" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #0B0F0D; color: #FFFFFF; font: 600 13px 'Geist', sans-serif; cursor: pointer">RA</button>
+        </div>
+      </header>
+
+      <sc-if value="{{sim}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: #FCF0DC; color: #6B3A05; font-size: 13.5px">
+          <span class="dot" style="background: #D97706"></span>
+          <span><strong style="font-weight: 600">Simulation mode</strong> · commands would not reach IoTRICs Cloud, so irrigation controls are off. An administrator can switch the connection to live.</span>
+        </div>
+      </sc-if>
+
+      <!-- Status hero -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 18px; padding: 10px 4px 4px">
+          <div class="mono" style="font-size: 12.5px; color: #66706B; text-transform: uppercase; letter-spacing: .08em">Wed 7 Oct · 17:51 in Al Ain</div>
+          <h1 class="h-hero" style="margin: 0; font-size: 56px; line-height: 1.02; font-weight: 600; letter-spacing: -0.035em; text-wrap: balance">{{hero.title}}</h1>
+          <p style="margin: 0; font-size: 17px; color: #4A544F; max-width: 620px; text-wrap: pretty">{{hero.sub}}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <span class="pill" style="background: #FFFFFF; box-shadow: 0 0 0 1px rgba(11,15,13,.08); padding: 0 6px 0 12px; height: 36px">
+              <label for="ar" style="cursor: pointer">Auto-run</label>
+              <button id="ar" type="button" class="{{autoRunCls}}" aria-pressed="{{autoRun}}" onClick="{{toggleAutoRun}}"></button>
+            </span>
+            <span class="pill" style="height: 36px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(11,15,13,.08)"><span class="dot" style="background: #10B981"></span>3 of 3 devices online</span>
+            <sc-if value="{{alarm.active}}" hint-placeholder-val="{{ true }}">
+              <a href="#alarms" class="pill p-amber" style="height: 36px; text-decoration: none"><span class="dot" style="background: #D97706"></span>1 alarm · soil probe</a>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- Now tile -->
+        <div style="flex: 1 1 360px; min-width: 0; border-radius: 28px; background: #0E1512; color: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 48px -24px rgba(11,15,13,.5)">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span style="font-size: 13px; color: rgba(255,255,255,.62)">{{now.label}}</span>
+            <span class="pill" style="background: rgba(255,255,255,.1); color: #FFFFFF; height: 28px"><span class="dot" style="background: {{now.dot}}"></span>{{now.chip}}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 22px">
+            <div style="position: relative; width: 112px; height: 112px; flex-shrink: 0">
+              <svg width="112" height="112" viewBox="0 0 112 112" aria-hidden="true">
+                <circle cx="56" cy="56" r="46" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"></circle>
+                <circle cx="56" cy="56" r="46" fill="none" stroke="{{now.ring}}" stroke-width="8" stroke-linecap="round" stroke-dasharray="{{now.dash}}" transform="rotate(-90 56 56)"></circle>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+                <span class="mono" style="font-size: 24px; font-weight: 500">{{now.big}}</span>
+                <span style="font-size: 11px; color: rgba(255,255,255,.6)">{{now.bigSub}}</span>
+              </div>
+            </div>
+            <div style="min-width: 0">
+              <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">{{now.title}}</div>
+              <div style="font-size: 13.5px; color: rgba(255,255,255,.66); margin-top: 4px">{{now.meta1}}</div>
+              <div class="mono" style="font-size: 13px; color: rgba(255,255,255,.66); margin-top: 2px">{{now.meta2}}</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <button type="button" class="{{now.btnCls}}" style="flex: 1" disabled="{{sim}}" onClick="{{now.act}}">{{now.btn}}</button>
+            <button type="button" class="btn btn-stop" aria-label="Open schedule">Schedule</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Greenhouse -->
+      <section style="border-radius: 28px; background: linear-gradient(180deg, #E8EFEC 0%, #F6F8F7 70%); box-shadow: 0 0 0 1px rgba(11,15,13,.05); padding: 14px; display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch">
+        <div ref="{{setVp}}" class="{{vpCls}}" style="flex: 999 1 560px; min-width: 0; border-radius: 20px" onPointerDown="{{onDown}}" onPointerMove="{{onMove}}" onPointerUp="{{onUp}}" onPointerLeave="{{onUp}}">
+          <div class="glass" style="position: absolute; left: 12px; top: 12px; z-index: 5; display: flex; gap: 2px; padding: 4px; border-radius: 999px">
+            <sc-for list="{{zonePills}}" as="zp" hint-placeholder-count="3">
+              <button type="button" class="{{zp.cls}}" onClick="{{zp.pick}}"><span class="dot" style="background: {{zp.dot}}"></span>{{zp.label}}</button>
+            </sc-for>
+          </div>
+          <div class="m-hide" style="position: absolute; right: 16px; top: 20px; z-index: 5; font-size: 12px; color: #66706B">Drag to rotate</div>
+
+          <div class="new-three-scene" data-kind="repharm" data-selected="{{threeSelected}}" data-view="{{threeView}}" data-pitch="{{threePitch}}" data-yaw="{{threeYaw}}" data-zoom="{{threeZoom}}" data-active="{{threeActive}}">
+            <sc-for list="{{huds}}" as="h" hint-placeholder-count="3"><div class="three-label" data-zone-label="true"><button type="button" class="gh-hud" onClick="{{h.pick}}"><span style="display:flex;align-items:center;gap:6px"><span class="dot" style="background:{{h.dot}}"></span><strong>{{h.name}}</strong></span><span class="gh-hud-sub" style="display:block">{{h.sub}}</span></button></div></sc-for>
+            <div class="three-label" data-device="main"><div class="gh-hud"><strong>Main valve</strong><span class="gh-hud-sub" style="display:block">{{dev.mainLabel}}</span></div></div><div class="three-label" data-device="probe"><div class="gh-hud"><strong>Soil probe</strong><span class="gh-hud-sub" style="display:block">No soil contact</span></div></div>
+          </div>
+
+          <div class="glass" style="position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 5; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px">
+            <button type="button" class="{{viewCls.d3}}" onClick="{{view3d}}">3D</button>
+            <button type="button" class="{{viewCls.front}}" onClick="{{viewFront}}">Front</button>
+            <button type="button" class="{{viewCls.plan}}" onClick="{{viewPlan}}">Plan</button>
+            <span style="width: 1px; height: 18px; background: rgba(11,15,13,.14); margin: 0 4px"></span>
+            <button type="button" class="seg" style="padding: 0 10px" onClick="{{zoomOut}}" aria-label="Zoom out">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg>
+            </button>
+            <button type="button" class="seg" style="padding: 0 10px" onClick="{{zoomIn}}" aria-label="Zoom in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </button>
+            <button type="button" class="seg" style="padding: 0 10px" onClick="{{resetView}}" aria-label="Reset view">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Zone sheet -->
+        <aside class="glass" style="flex: 1 1 320px; min-width: 0; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 18px; background: rgba(255,255,255,.82)">
+          <div>
+            <span class="{{zsel.pillCls}}"><span class="dot" style="background: {{zsel.dot}}"></span>{{zsel.statusLabel}}</span>
+            <div style="margin-top: 12px; font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1">{{zsel.title}}</div>
+            <div style="margin-top: 4px; color: #66706B; font-size: 13.5px">{{zsel.meta}}</div>
+          </div>
+
+          <sc-if value="{{zsel.pending}}" hint-placeholder-val="{{ false }}">
+            <div style="border-radius: 16px; background: rgba(11,15,13,.04); padding: 16px; display: flex; flex-direction: column; gap: 10px">
+              <div style="font-weight: 600">No valve yet</div>
+              <div style="font-size: 13.5px; color: #4A544F">{{zsel.note}} Once it is installed, map it to this zone and it can be irrigated from here.</div>
+              <button type="button" class="btn btn-white" style="align-self: flex-start; box-shadow: 0 0 0 1px rgba(11,15,13,.1)">Map a valve</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{zsel.hasValve}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 14px">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+                <div>
+                  <div style="font-weight: 600">{{zsel.valve}}</div>
+                  <div style="font-size: 12.5px; color: #66706B">Reported {{zsel.reported}}</div>
+                </div>
+                <span class="{{zsel.valvePill}}">{{zsel.valveState}}</span>
+              </div>
+              <div>
+                <div style="font-size: 12.5px; color: #66706B; margin-bottom: 8px">Run for</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                  <sc-for list="{{durs}}" as="d" hint-placeholder-count="5">
+                    <button type="button" class="{{d.cls}}" onClick="{{d.pick}}" disabled="{{zsel.locked}}">{{d.label}}</button>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px">
+                <button type="button" class="btn btn-brand" style="flex: 1; min-height: 44px" disabled="{{zsel.locked}}" onClick="{{irrigate}}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg>
+                  Irrigate {{durLabel}}
+                </button>
+                <button type="button" class="btn" style="min-height: 44px" disabled="{{zsel.locked}}" onClick="{{stop}}">Stop</button>
+              </div>
+              <sc-if value="{{sentMsg}}" hint-placeholder-val="{{ false }}">
+                <div style="font-size: 13px; color: #075985; background: #E0F0FA; border-radius: 12px; padding: 10px 12px">{{sentMsg}}</div>
+              </sc-if>
+              <div style="font-size: 12.5px; color: #66706B">{{zsel.controlReason}}</div>
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-top: 14px; border-top: 1px solid rgba(11,15,13,.08)">
+                <div><div style="font-size: 12px; color: #66706B">Last run</div><div class="mono" style="font-size: 14px; font-weight: 500">{{zsel.lastRun}}</div></div>
+                <div><div style="font-size: 12px; color: #66706B">Today</div><div class="mono" style="font-size: 14px; font-weight: 500">{{zsel.today}}</div></div>
+                <div><div style="font-size: 12px; color: #66706B">7 days</div><div class="mono" style="font-size: 14px; font-weight: 500">{{zsel.week}}</div></div>
+              </div>
+            </div>
+          </sc-if>
+
+          <div style="margin-top: auto; display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: #4A544F">
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #C9EBD8"></span>Idle</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #7DD3FC"></span>Irrigating</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #D5DBD7"></span>No valve</span>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Today timeline + weather -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div class="tile" style="flex: 999 1 640px">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px">
+            <div>
+              <div class="tlabel">Today</div>
+              <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">{{tl.headline}}</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="pill p-amber">Peak heat 11:00–16:00</span>
+              <button type="button" class="btn" style="min-height: 32px; padding: 0 12px; font-size: 12.5px">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+                New program
+              </button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 12px">
+            <div style="flex: 0 0 64px; display: flex; flex-direction: column">
+              <sc-for list="{{tl.rows}}" as="r" hint-placeholder-count="3">
+                <div style="height: 46px; display: flex; align-items: center; font-size: 13px; font-weight: 500">{{r.name}}</div>
+              </sc-for>
+            </div>
+            <div style="flex: 1; min-width: 0; position: relative">
+              <div style="position: absolute; top: 0; bottom: 22px; left: 45.83%; width: 20.83%; background: repeating-linear-gradient(-45deg, rgba(217,119,6,.10) 0 6px, rgba(217,119,6,.03) 6px 12px); border-radius: 8px"></div>
+              <sc-for list="{{tl.rows}}" as="r" hint-placeholder-count="3">
+                <div style="position: relative; height: 46px; border-bottom: 1px dashed rgba(11,15,13,.08)">
+                  <sc-if value="{{r.noValve}}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 12px; color: #66706B">No valve installed</div>
+                  </sc-if>
+                  <sc-for list="{{r.runs}}" as="run" hint-placeholder-count="1">
+                    <div class="{{run.cls}}" style="left: {{run.left}}%; width: {{run.width}}%" title="{{run.title}}"></div>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <div style="position: absolute; top: -6px; bottom: 22px; left: {{tl.nowL}}%; width: 2px; background: #0B0F0D; border-radius: 1px">
+                <span class="mono" style="position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 600; background: #0B0F0D; color: #FFFFFF; padding: 2px 6px; border-radius: 6px">17:51</span>
+              </div>
+              <div class="mono" style="position: relative; height: 22px; font-size: 11px; color: #66706B">
+                <span class="m-hide" style="position: absolute; left: 0; top: 6px">00:00</span>
+                <span style="position: absolute; left: 25%; top: 6px; transform: translateX(-50%)">06:00</span>
+                <span style="position: absolute; left: 50%; top: 6px; transform: translateX(-50%)">12:00</span>
+                <span style="position: absolute; left: 75%; top: 6px; transform: translateX(-50%)">18:00</span>
+                <span class="m-hide" style="position: absolute; right: 0; top: 6px">24:00</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(11,15,13,.06)">
+            <sc-for list="{{programs}}" as="pg" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; border-radius: 16px; background: #F4F5F3">
+                <span class="mono" style="font-size: 15px; font-weight: 500">{{pg.time}}</span>
+                <span style="font-size: 12.5px; color: #66706B">{{pg.desc}}</span>
+                <sc-if value="{{pg.peak}}" hint-placeholder-val="{{ false }}"><span class="pill p-amber" style="height: 24px; font-size: 11.5px">Peak heat</span></sc-if>
+                <button type="button" class="{{pg.switchCls}}" aria-pressed="{{pg.on}}" aria-label="{{pg.aria}}" onClick="{{pg.toggle}}" disabled="{{sim}}"></button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div class="tile" style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 14px">
+          <div class="tlabel">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+            Outside · Al Ain
+          </div>
+          <div style="display: flex; align-items: flex-end; gap: 10px">
+            <span class="mono" style="font-size: 64px; font-weight: 500; line-height: .95; letter-spacing: -0.04em">36°</span>
+            <span style="font-size: 15px; color: #4A544F; padding-bottom: 6px">Clear</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <div style="border-radius: 14px; background: #F4F5F3; padding: 10px 12px"><div style="font-size: 12px; color: #66706B">Humidity</div><div class="mono" style="font-size: 16px; font-weight: 500">28%</div></div>
+            <div style="border-radius: 14px; background: #F4F5F3; padding: 10px 12px"><div style="font-size: 12px; color: #66706B">UV index</div><div class="mono" style="font-size: 16px; font-weight: 500">8</div></div>
+            <div style="border-radius: 14px; background: #F4F5F3; padding: 10px 12px"><div style="font-size: 12px; color: #66706B">Soil</div><div class="mono" style="font-size: 16px; font-weight: 500">29.4°</div></div>
+          </div>
+          <div style="margin-top: auto; font-size: 13px; color: #4A544F">Evaporation stays high until about 16:00; evening and early-morning runs lose the least water.</div>
+        </div>
+      </section>
+
+      <!-- Bento: main line, soil probe, devices, alarm -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 22px">
+        <div class="tile" style="display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <div class="tlabel">Main line</div>
+            <span class="pill p-green" style="height: 26px; font-size: 12px">Charging</span>
+          </div>
+          <div style="position: relative; width: 200px; height: 112px; margin: 6px auto 0">
+            <svg width="200" height="112" viewBox="0 0 200 112" aria-hidden="true">
+              <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#EEF0ED" stroke-width="14" stroke-linecap="round"></path>
+              <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#0284C7" stroke-width="14" stroke-linecap="round" stroke-dasharray="{{main.dash}}"></path>
+            </svg>
+            <div style="position: absolute; left: 0; right: 0; bottom: 4px; text-align: center">
+              <div class="mono" style="font-size: 30px; font-weight: 500; line-height: 1">{{main.pressure}}</div>
+              <div style="font-size: 12px; color: #66706B">bar pressure</div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 13px; padding-top: 10px; border-top: 1px solid rgba(11,15,13,.06)">
+            <span style="color: #66706B">Valve <strong class="mono" style="color: #0B0F0D; font-weight: 500">{{main.state}}</strong></span>
+            <span style="color: #66706B">Flow <strong class="mono" style="color: #0B0F0D; font-weight: 500">{{main.flow}} L</strong></span>
+          </div>
+        </div>
+
+        <div class="tile" style="display: flex; flex-direction: column; gap: 12px">
+          <div class="tlabel">Soil probe · shared</div>
+          <div style="display: flex; align-items: center; gap: 12px">
+            <span style="width: 44px; height: 44px; border-radius: 14px; background: #FCF0DC; color: #7C4204; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg>
+            </span>
+            <div>
+              <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">No soil contact</div>
+              <div style="font-size: 12.5px; color: #66706B">Reads 0% and 0 µS/cm for 24 h</div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #66706B; margin-bottom: 6px"><span>Moisture target</span><span class="mono">10–30%</span></div>
+            <div style="position: relative; height: 8px; border-radius: 4px; background: #EEF0ED">
+              <div style="position: absolute; left: 20%; width: 40%; top: 0; bottom: 0; border-radius: 4px; background: rgba(4,120,87,.25)"></div>
+            </div>
+          </div>
+          <div style="margin-top: auto; font-size: 13px; color: #4A544F">Check the probe is buried in the bed; real readings return on their own.</div>
+        </div>
+
+        <div class="tile" style="display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px">
+            <div class="tlabel">Devices</div>
+            <span class="mono" style="font-size: 13px; color: #05603F">3/3 online</span>
+          </div>
+          <sc-for list="{{devices}}" as="dv" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 1px solid rgba(11,15,13,.06)">
+              <div style="min-width: 0">
+                <div style="font-weight: 500; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dv.name}}</div>
+                <div style="font-size: 12px; color: #66706B">{{dv.seen}}</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0">
+                <div style="display: flex; align-items: flex-end; gap: 2px; height: 14px" title="{{dv.signal}}">
+                  <sc-for list="{{dv.bars}}" as="bar" hint-placeholder-count="4">
+                    <span style="width: 3px; height: {{bar.h}}px; border-radius: 1px; background: {{bar.c}}"></span>
+                  </sc-for>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px" title="Battery">
+                  <span style="position: relative; width: 26px; height: 12px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px #A3ACA7">
+                    <span style="position: absolute; left: 2px; top: 2px; bottom: 2px; width: {{dv.batW}}px; border-radius: 1.5px; background: #10B981"></span>
+                  </span>
+                  <span class="mono" style="font-size: 12px; width: 30px">{{dv.battery}}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div id="alarms" class="tile" style="display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <div class="tlabel">Alarms</div>
+            <span class="{{alarm.countCls}}" style="height: 26px; font-size: 12px">{{alarm.count}}</span>
+          </div>
+          <sc-if value="{{alarm.open}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 10px; opacity: {{alarm.opacity}}">
+              <div style="display: flex; align-items: center; gap: 8px">
+                <span class="dot" style="background: #D97706"></span>
+                <strong style="font-weight: 600">Soil probe not reading</strong>
+              </div>
+              <div style="font-size: 13px; color: #4A544F">Warning · Platform · since 2 days ago</div>
+              <sc-if value="{{alarm.acked}}" hint-placeholder-val="{{ false }}"><span class="pill p-grey" style="align-self: flex-start; height: 26px; font-size: 12px">Acknowledged</span></sc-if>
+              <div style="display: flex; gap: 8px; margin-top: 4px">
+                <sc-if value="{{alarm.canAck}}" hint-placeholder-val="{{ true }}">
+                  <button type="button" class="btn btn-ink" style="min-height: 36px" onClick="{{ackAlarm}}">Acknowledge</button>
+                </sc-if>
+                <button type="button" class="btn" style="min-height: 36px" onClick="{{clearAlarm}}">Clear</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{alarm.none}}" hint-placeholder-val="{{ false }}">
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px">
+              <div style="font-size: 20px; font-weight: 600">All clear</div>
+              <div style="font-size: 13px; color: #66706B">No open alarms at this site.</div>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+
+      <!-- Soil history + activity -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div class="tile" style="flex: 999 1 600px">
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px">
+            <div>
+              <div class="tlabel">Soil history · {{chart.title}}</div>
+              <div class="mono" style="font-size: 30px; font-weight: 500; letter-spacing: -0.02em">{{chart.now}}</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <div class="segs" style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #F4F5F3">
+                <sc-for list="{{metrics}}" as="mt" hint-placeholder-count="4">
+                  <button type="button" class="{{mt.cls}}" onClick="{{mt.pick}}">{{mt.label}}</button>
+                </sc-for>
+              </div>
+              <div class="segs" style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #F4F5F3">
+                <sc-for list="{{ranges}}" as="rg" hint-placeholder-count="2">
+                  <button type="button" class="{{rg.cls}}" onClick="{{rg.pick}}">{{rg.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="position: relative; height: 230px" onPointerMove="{{onChartMove}}" onPointerLeave="{{onChartLeave}}">
+            <sc-for list="{{chart.yTicks}}" as="yt" hint-placeholder-count="4">
+              <div style="position: absolute; left: {{chart.gridL}}%; right: 0; top: {{yt.top}}%; border-top: 1px dashed rgba(11,15,13,.08)"></div>
+              <div class="mono" style="position: absolute; left: 0; top: {{yt.top}}%; transform: translateY(-50%); font-size: 11px; color: #66706B">{{yt.label}}</div>
+            </sc-for>
+            <svg viewBox="0 0 760 214" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible" aria-hidden="true">
+              <path d="{{chart.area}}" fill="rgba(2,132,199,0.08)" stroke="none"></path>
+              <path d="{{chart.line}}" fill="none" stroke="#0284C7" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+            </svg>
+            <sc-for list="{{chart.xLabels}}" as="xl" hint-placeholder-count="5">
+              <div class="mono" style="position: absolute; top: 100%; left: {{xl.left}}%; transform: translateX({{xl.shift}}%); margin-top: 8px; font-size: 11px; color: #66706B; white-space: nowrap">{{xl.label}}</div>
+            </sc-for>
+            <div style="position: absolute; left: {{chart.lastL}}%; top: {{chart.lastT}}%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #0284C7; box-shadow: 0 0 0 3px #FFFFFF"></div>
+            <sc-if value="{{chart.nosig}}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); background: #0B0F0D; color: #FFFFFF; border-radius: 14px; padding: 10px 14px; font-size: 13px; text-align: center">The probe reads 0 until it has soil contact</div>
+            </sc-if>
+            <sc-if value="{{chart.hover}}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; top: 0; bottom: 0; left: {{chart.hL}}%; width: 1px; background: rgba(11,15,13,.3); pointer-events: none"></div>
+              <div style="position: absolute; left: {{chart.hL}}%; top: {{chart.hT}}%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #FFFFFF; border: 2px solid #0284C7; pointer-events: none"></div>
+              <div style="position: absolute; left: {{chart.hL}}%; top: -6px; transform: translateX({{chart.tipShift}}%); background: #0B0F0D; color: #FFFFFF; border-radius: 10px; padding: 6px 10px; font-size: 12px; white-space: nowrap; pointer-events: none">
+                <strong class="mono" style="font-weight: 500">{{chart.hVal}}</strong> · {{chart.hTime}}
+              </div>
+            </sc-if>
+          </div>
+          <div style="height: 26px"></div>
+        </div>
+
+        <div class="tile" style="flex: 1 1 340px">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px">
+            <div class="tlabel">Activity</div>
+            <a href="#activity" style="font-size: 13px; font-weight: 500; text-decoration: none">View all</a>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <sc-for list="{{activity}}" as="ac" hint-placeholder-count="5">
+              <div style="display: flex; gap: 12px">
+                <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 12px">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: {{ac.dot}}; margin-top: 5px; box-shadow: 0 0 0 3px {{ac.ring}}"></span>
+                  <span style="flex: 1; width: 1.5px; background: rgba(11,15,13,.08); margin-top: 6px"></span>
+                </div>
+                <div style="flex: 1; min-width: 0; padding-bottom: 16px">
+                  <div style="display: flex; justify-content: space-between; gap: 8px">
+                    <span style="font-weight: 500; font-size: 13.5px">{{ac.title}}</span>
+                    <span class="mono" style="font-size: 12px; color: #66706B; white-space: nowrap">{{ac.when}}</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: #66706B">{{ac.sub}}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"brand":{"editor":"color","default":"#047857","options":["#047857","#0F766E","#3F6212","#1D4ED8"]},"zoneBIrrigating":{"editor":"boolean","default":true},"simulation":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":2280}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    if (this._vp && typeof ResizeObserver !== 'undefined') {
+      this._ro = new ResizeObserver(function (es) {
+        var w = es[0].contentRect.width;
+        var cur = (self.state && self.state.vw) || 0;
+        if (Math.abs(w - cur) > 2) self.setState({ vw: w });
+      });
+      this._ro.observe(this._vp);
+    }
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var brand = this.props.brand ?? '#047857';
+    var sim = this.props.simulation ?? false;
+    var irrig = this.props.zoneBIrrigating ?? true;
+    var sel = s.sel ?? 1;
+    var view = s.view || '3d';
+    var VIEWS = { '3d': [56, -24], front: [70, 0], plan: [0, 0] };
+    var pitch = s.pitch ?? 56;
+    var yaw = s.yaw ?? -24;
+    var zoom = s.zoom ?? 1;
+    var vw = s.vw || 900;
+    var autoRun = s.autoRun ?? true;
+    var dur = s.dur ?? 10;
+
+    function hexRgb(h) {
+      h = String(h).replace('#', '');
+      if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+      var n = parseInt(h, 16);
+      if (!isFinite(n)) n = 0x047857;
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(',');
+    }
+
+    var STATUS = {
+      irrigating: { label: 'Irrigating', pill: 'pill p-blue', dot: '#0284C7' },
+      idle: { label: 'Idle', pill: 'pill p-green', dot: '#10B981' },
+      pending: { label: 'Bedding pending', pill: 'pill p-grey', dot: '#94A3B8' }
+    };
+
+    var Z = [
+      { name: 'Zone A', side: 'Left', tunnels: [1, 2], status: 'pending', note: 'Bedding is in progress and the valve is not installed yet.' },
+      { name: 'Zone B', side: 'Center', tunnels: [3, 4], status: irrig ? 'irrigating' : 'idle', valve: 'Valve 1', fieldAsset: true,
+        valveState: irrig ? 'Open' : 'Closed', lastRun: irrig ? 'Now' : '17:45', today: irrig ? '2 runs' : '2 runs', week: '13 runs', reported: '3 min ago' },
+      { name: 'Zone C', side: 'Right', tunnels: [5, 6], status: 'idle', valve: 'Valve 2', fieldAsset: false,
+        valveState: 'Closed', lastRun: '06:14', today: '1 run', week: '7 runs', reported: '3 min ago' }
+    ];
+
+    var pick = function (i) {
+      return function () {
+        if (self._drag && self._drag.moved) return;
+        self.setState({ sel: i, sent: null });
+      };
+    };
+
+    // ── Scene geometry (world px on the ground plane) ──
+    var W = 900, D = 500, BAY = 104, TL = 300, HW = 32, RISE = 40, PN = 8, N = 6;
+    var span = N * BAY, x0 = (W - span) / 2, Y0 = 60, YH = Y0 + TL + 56, ROOF = HW + RISE;
+    var rad = pitch * Math.PI / 180;
+    var fit = Math.min((vw - 16) / W, 470 / (D * Math.cos(rad) + 140 * Math.sin(rad)), 1.25);
+    var scale = (fit * zoom).toFixed(3);
+    var worldTf = 'translate(-50%, -48%) scale(' + scale + ') rotateX(' + pitch + 'deg) rotateZ(' + yaw + 'deg)';
+    var bill = function (x, y, z) {
+      return 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, ' + z + 'px) rotateZ(' + (-yaw) + 'deg) rotateX(' + (-pitch) + 'deg) translate(-50%, -100%)';
+    };
+    var tx = function (n) { return x0 + (n - 1) * BAY; };
+    var bounds = function (z) {
+      var f = Math.min.apply(null, z.tunnels), l = Math.max.apply(null, z.tunnels);
+      return { f: f, l: l, center: (tx(f) + tx(l) + BAY) / 2 };
+    };
+    var secOf = function (n) { for (var i = 0; i < Z.length; i++) if (Z[i].tunnels.indexOf(n) >= 0) return i; return -1; };
+    var mainOpen = irrig;
+    var mainX = x0 - 56;
+
+    var groundLabels = Z.map(function (z) { return { l: bounds(z).center, t: Y0 + TL + 26, text: z.name }; });
+    var lastCenter = bounds(Z[2]).center;
+    var pipes = [{ cls: 'gh-pipe h' + (mainOpen ? ' on' : ''), l: mainX, t: YH - 3, w: lastCenter - mainX + 3, h: 7 }];
+    Z.forEach(function (z) {
+      var b = bounds(z);
+      var st = !z.valve ? ' missing' : z.status === 'irrigating' ? ' on' : '';
+      pipes.push({ cls: 'gh-pipe v' + st, l: b.center - 2.5, t: Y0 + TL - 6, w: 5, h: YH - (Y0 + TL - 6) });
+      pipes.push({ cls: 'gh-pipe h' + st, l: tx(b.f) + 18, t: Y0 + TL - 9, w: (b.l - b.f + 1) * BAY - 36, h: 5 });
+    });
+    var pads = Z.map(function (z, i) {
+      var b = bounds(z);
+      return { cls: 'gh-pad ' + z.status + (i === sel ? ' sel' : ''), l: (b.f - 1) * BAY + 2, w: z.tunnels.length * BAY - 4, h: TL - 8, pick: pick(i) };
+    });
+    var zlines = Z.slice(1).map(function (z) { return { l: (bounds(z).f - 1) * BAY - 1, h: TL - 12 }; });
+    var bedW = (BAY - 34) / 2;
+    var beds = [];
+    for (var i = 0; i < N; i++) {
+      var st = Z[secOf(i + 1)].status;
+      [12, 12 + bedW + 10].forEach(function (off) {
+        beds.push({
+          bedCls: 'gh-bed ' + (st === 'pending' ? 'pending' : 'planted'),
+          dripCls: 'gh-drip' + (st === 'irrigating' ? ' on' : st === 'pending' ? ' none' : ''),
+          l: i * BAY + off, w: bedW, h: TL - 32, dl: i * BAY + off + bedW / 2 - 1
+        });
+      });
+    }
+    var posts = [];
+    for (var g = 1; g < N; g++) [75, 150, 225].forEach(function (py) { posts.push({ l: g * BAY - 1.5, t: py - HW, h: HW }); });
+    var arch = [];
+    for (var k = 0; k <= PN; k++) { var t = k * Math.PI / PN; arch.push({ x: BAY / 2 - BAY / 2 * Math.cos(t), z: HW + RISE * Math.sin(t) }); }
+    var rgbB = hexRgb(brand);
+    var panels = [];
+    for (var ti = 0; ti < N; ti++) {
+      var si = secOf(ti + 1);
+      for (var kk = 0; kk < PN; kk++) {
+        var p = arch[kk], q = arch[kk + 1];
+        var dx = q.x - p.x, dz = q.z - p.z, len = Math.hypot(dx, dz);
+        var light = 0.5 + 0.5 * Math.cos(Math.atan2(dz, dx) - 0.9);
+        var bg = si === sel ? 'rgba(' + rgbB + ',' + (0.14 + 0.2 * light).toFixed(2) + ')'
+          : Z[si].status === 'irrigating' ? 'rgba(56,189,248,' + (0.12 + 0.16 * light).toFixed(2) + ')'
+          : 'rgba(250,251,250,' + (0.26 + 0.3 * light).toFixed(2) + ')';
+        panels.push({
+          l: (ti * BAY + (p.x + q.x) / 2 - (len + 0.8) / 2).toFixed(2), w: (len + 0.8).toFixed(2), h: TL, bg: bg,
+          tf: 'translateZ(' + ((p.z + q.z) / 2).toFixed(2) + 'px) rotateY(' + (-Math.atan2(dz, dx) * 180 / Math.PI).toFixed(2) + 'deg)',
+          pick: pick(si)
+        });
+      }
+    }
+    var gutters = [];
+    for (var gg = 0; gg <= N; gg++) gutters.push({ l: gg * BAY - 2, h: TL, z: HW });
+    var arches = [];
+    for (var ai = 0; ai < N; ai++) arches.push({ l: ai * BAY, b: HW, w: BAY, h: RISE, r: (BAY / 2) + 'px ' + (BAY / 2) + 'px 0 0 / ' + RISE + 'px ' + RISE + 'px 0 0', label: 'T' + (ai + 1) });
+    var huds = Z.map(function (z, i) {
+      return {
+        tf: bill(bounds(z).center, Y0 + TL * 0.3, ROOF + 4), dot: STATUS[z.status].dot, name: z.name,
+        sub: STATUS[z.status].label + ' · T' + z.tunnels.join('–T'), pick: pick(i)
+      };
+    });
+    var dev = {
+      mainTf: bill(mainX, YH, 0), mainLabel: mainOpen ? 'Open 90° · 1.84 bar' : 'Closed', mainDot: mainOpen ? '#0284C7' : '#10B981',
+      probeTf: bill(tx(4) + BAY / 2, Y0 + TL * 0.74, 0), probeStem: ROOF + 10
+    };
+
+    // ── Zone selector + sheet ──
+    var zonePills = Z.map(function (z, i) { return { label: z.name, dot: STATUS[z.status].dot, cls: 'zpill' + (i === sel ? ' on' : ''), pick: pick(i) }; });
+    var zs = Z[sel] || Z[1];
+    var locked = !zs.fieldAsset || sim;
+    var reason = !zs.valve ? '' : !zs.fieldAsset ? 'Status only: no IoTRICs irrigation field is set up for this valve yet.'
+      : sim ? 'Simulation mode: commands would not reach IoTRICs Cloud.'
+      : 'IoTRICs Cloud opens the main valve first; water reaches the zone in about 3 minutes and stops on its own.';
+    var zsel = {
+      title: zs.name + ' · ' + zs.side, meta: 'Tunnels ' + zs.tunnels.join(' & ') + ' · greenhouse beds',
+      pillCls: STATUS[zs.status].pill, dot: STATUS[zs.status].dot, statusLabel: STATUS[zs.status].label,
+      pending: !zs.valve, note: zs.note || '', hasValve: !!zs.valve, valve: zs.valve || '', reported: zs.reported || '',
+      valveState: zs.valveState || '', valvePill: zs.valveState === 'Open' ? 'pill p-blue' : 'pill p-grey',
+      controlReason: reason, locked: locked, lastRun: zs.lastRun || '', today: zs.today || '', week: zs.week || ''
+    };
+    var durs = [3, 5, 10, 15, 30].map(function (mn) { return { label: mn + 'm', cls: 'chipbtn' + (mn === dur ? ' on' : ''), pick: function () { self.setState({ dur: mn }); } }; });
+    var sentMsg = s.sent === 'open' ? 'Started: ' + zs.name + ' for ' + dur + ' min. Water arrives in about 3 minutes.'
+      : s.sent === 'close' ? 'Stop sent to IoTRICs Cloud.' : '';
+
+    // ── Hero + now tile ──
+    var hero = irrig
+      ? { title: 'Zone B is irrigating.', sub: 'The 17:45 evening program is running: 131 L delivered so far, main line holding 1.84 bar. Zone C is idle and Zone A is still being bedded.' }
+      : { title: 'The greenhouse is resting.', sub: 'Last run finished at 17:55 in Zone B. Next one starts at 05:30 tomorrow, before the heat.' };
+    var C = 2 * Math.PI * 46;
+    var now = irrig
+      ? { label: 'Running now', chip: 'Zone B', dot: '#38BDF8', ring: '#38BDF8', dash: (C * 0.6).toFixed(1) + ' ' + C.toFixed(1), big: '4:12', bigSub: 'left of 10:00',
+          title: 'Evening program', meta1: 'Valve 1 · Tunnels 3 & 4', meta2: '131 L · 1.84 bar', btn: 'Stop run', btnCls: 'btn btn-white', act: function () { self.setState({ sent: 'close' }); } }
+      : { label: 'Next run', chip: 'Zone B', dot: '#10B981', ring: brand, dash: (C * 0.52).toFixed(1) + ' ' + C.toFixed(1), big: '05:30', bigSub: 'in 11 h 39 m',
+          title: 'Morning program', meta1: 'Daily · 10 min · Valve 1', meta2: 'Auto-run ' + (autoRun ? 'on' : 'off'), btn: 'Run Zone B now', btnCls: 'btn btn-white', act: function () { self.setState({ sent: 'open', sel: 1 }); } };
+
+    // ── Alarm ──
+    var alarmState = s.alarm || 'active';
+    var openCount = alarmState === 'active' ? 1 : 0;
+    var alarm = {
+      active: openCount > 0, open: alarmState !== 'cleared', none: alarmState === 'cleared', acked: alarmState === 'acked', canAck: alarmState === 'active',
+      opacity: alarmState === 'acked' ? 0.65 : 1, count: openCount + ' active', countCls: openCount ? 'pill p-amber' : 'pill p-green'
+    };
+
+    // ── Timeline ──
+    var pct = function (min) { return (min / 1440 * 100).toFixed(2); };
+    var w = function (mins) { return (mins / 1440 * 100).toFixed(2); };
+    var progOn = s.progOn || [true, true, false];
+    var tl = {
+      headline: irrig ? '3 runs · 1 running now' : '3 runs · 30 min of water',
+      nowL: pct(17 * 60 + 51),
+      rows: [
+        { name: 'Zone A', noValve: true, runs: [] },
+        { name: 'Zone B', noValve: false, runs: [
+          { cls: 'run done', left: pct(330), width: w(10), title: '05:30 · 10 min · 216 L' },
+          { cls: progOn[2] ? 'run done' : 'run off', left: pct(780), width: w(5), title: '13:00 program · ' + (progOn[2] ? 'on' : 'off') },
+          { cls: irrig ? 'run live' : 'run done', left: pct(1065), width: w(10), title: irrig ? '17:45 · running' : '17:45 · 10 min · 214 L' }
+        ] },
+        { name: 'Zone C', noValve: false, runs: [{ cls: 'run done', left: pct(374), width: w(10), title: '06:14 · 10 min · 208 L' }] }
+      ]
+    };
+    var PROGS = [
+      { time: '05:30', desc: 'Daily · 10 min · Zone B', peak: false },
+      { time: '17:45', desc: 'Daily · 10 min · Zone B', peak: false },
+      { time: '13:00', desc: 'Weekdays · 5 min · All zones', peak: true }
+    ];
+    var programs = PROGS.map(function (pg, i) {
+      return {
+        time: pg.time, desc: pg.desc, peak: pg.peak, on: progOn[i], switchCls: 'switch' + (progOn[i] ? ' on' : ''),
+        aria: (progOn[i] ? 'Disable' : 'Enable') + ' the ' + pg.time + ' program',
+        toggle: function () { var next = progOn.slice(); next[i] = !next[i]; self.setState({ progOn: next }); }
+      };
+    });
+
+    // ── Main line gauge ──
+    var ARC = Math.PI * 80;
+    var pressure = mainOpen ? 1.84 : 0.12;
+    var main = { pressure: pressure.toFixed(2), dash: (ARC * pressure / 3).toFixed(1) + ' 999', state: mainOpen ? 'Open 90°' : 'Closed', flow: mainOpen ? '131.4' : '214.0' };
+
+    // ── Devices ──
+    var mkBars = function (lvl) { return [5, 8, 11, 14].map(function (h, j) { return { h: h, c: j < lvl ? '#0B0F0D' : '#D5DBD7' }; }); };
+    var devices = [
+      { name: 'Soil Moisture Sensor', seen: '12 min ago', battery: '81%', batW: Math.round(20 * 0.81), signal: 'Good signal', bars: mkBars(3) },
+      { name: 'Field Controller', seen: '3 min ago', battery: '74%', batW: Math.round(20 * 0.74), signal: 'Fair signal', bars: mkBars(2) },
+      { name: 'Main Valve Controller', seen: '3 min ago · solar', battery: '92%', batW: Math.round(20 * 0.92), signal: 'Good signal', bars: mkBars(3) }
+    ];
+
+    // ── Activity ──
+    var activity = [
+      irrig ? { title: 'Zone B irrigating', sub: '17:45 program · confirmed by IoTRICs Cloud', when: '17:45', dot: '#0284C7', ring: '#E0F0FA' }
+            : { title: 'Zone B irrigated 10 min', sub: '17:45 program · 214 L', when: '17:45', dot: brand, ring: '#E2F4EA' },
+      { title: 'Zone C irrigated 10 min', sub: 'IoTRICs Cloud schedule · 208 L', when: '06:14', dot: brand, ring: '#E2F4EA' },
+      { title: 'Zone B irrigated 10 min', sub: '05:30 program · 216 L', when: '05:30', dot: brand, ring: '#E2F4EA' },
+      { title: 'Manual run stopped', sub: 'Zone B · stopped after 4 min · 86 L', when: 'Yesterday', dot: '#D97706', ring: '#FCF0DC' },
+      { title: 'Soil probe alarm raised', sub: 'No soil contact for 24 h', when: '5 Oct', dot: '#D97706', ring: '#FCF0DC' }
+    ];
+
+    // ── Chart ──
+    var metric = s.metric || 'temperature';
+    var range = s.range || '24h';
+    var MET = [
+      { k: 'soil_moisture', label: 'Moisture', unit: '%', nosig: true, dp: 0 },
+      { k: 'temperature', label: 'Temp', unit: '°C', dp: 1 },
+      { k: 'conductivity', label: 'EC', unit: ' µS/cm', nosig: true, dp: 0 },
+      { k: 'battery', label: 'Battery', unit: '%', dp: 0 }
+    ];
+    var m = MET.filter(function (x) { return x.k === metric; })[0] || MET[1];
+    var n = range === '24h' ? 25 : 43;
+    var stepH = range === '24h' ? 1 : 4;
+    var vals = [];
+    for (var ci = 0; ci < n; ci++) {
+      var hoursAgo = (n - 1 - ci) * stepH;
+      var hod = (((18 - hoursAgo) % 24) + 24) % 24;
+      var v = 0;
+      if (m.k === 'temperature') v = 27.4 + 3.6 * Math.sin(2 * Math.PI * (hod - 9) / 24) + 0.25 * Math.sin(ci * 1.7);
+      else if (m.k === 'battery') v = 81 + (hoursAgo / 168) * 6 + 0.4 * Math.sin(ci * 2.1);
+      vals.push(v);
+    }
+    var lo, hi;
+    if (m.nosig) { lo = 0; hi = 40; }
+    else { lo = Math.floor(Math.min.apply(null, vals) - 0.5); hi = Math.ceil(Math.max.apply(null, vals) + 0.5); }
+    var X0 = 44, X1 = 752, YT = 14, YB = 196, VW = 760, VH = 214;
+    var cx = function (j) { return X0 + (X1 - X0) * j / (n - 1); };
+    var cy = function (val) { return YB - (val - lo) / (hi - lo) * (YB - YT); };
+    var pts = vals.map(function (val, j) { return cx(j).toFixed(1) + ',' + cy(val).toFixed(1); });
+    var line = 'M' + pts.join('L');
+    var area = line + 'L' + X1 + ',' + YB + 'L' + X0 + ',' + YB + 'Z';
+    var fmt = function (val) { return val.toFixed(m.dp) + m.unit; };
+    var yTicks = [0, 1, 2, 3].map(function (j) {
+      var val = lo + (hi - lo) * j / 3;
+      return { top: (cy(val) / VH * 100).toFixed(2), label: val.toFixed(m.dp === 1 && hi - lo < 8 ? 1 : 0) };
+    });
+    var xLabels = range === '24h'
+      ? ['24 h ago', '18 h', '12 h', '6 h', 'Now'].map(function (lab, j) { return { label: lab, left: (cx(j * (n - 1) / 4) / VW * 100).toFixed(2), shift: j === 0 ? 0 : j === 4 ? -100 : -50 }; })
+      : ['30 Sep', '1 Oct', '2 Oct', '3 Oct', '4 Oct', '5 Oct', '6 Oct', 'Today'].map(function (lab, j) { return { label: lab, left: (cx(j * (n - 1) / 7) / VW * 100).toFixed(2), shift: j === 0 ? 0 : j === 7 ? -100 : -50 }; });
+    var hiIdx = (s.hi === null || s.hi === undefined) ? null : Math.max(0, Math.min(n - 1, s.hi));
+    var hAgo = hiIdx === null ? 0 : (n - 1 - hiIdx) * stepH;
+    var chart = {
+      title: m.label.toLowerCase(), now: m.nosig ? 'No signal' : fmt(vals[n - 1]), nosig: !!m.nosig,
+      line: line, area: area, yTicks: yTicks, xLabels: xLabels, gridL: (X0 / VW * 100).toFixed(2),
+      lastL: (cx(n - 1) / VW * 100).toFixed(2), lastT: (cy(vals[n - 1]) / VH * 100).toFixed(2),
+      hover: hiIdx !== null,
+      hL: hiIdx === null ? 0 : (cx(hiIdx) / VW * 100).toFixed(2),
+      hT: hiIdx === null ? 0 : (cy(vals[hiIdx]) / VH * 100).toFixed(2),
+      hVal: hiIdx === null ? '' : (m.nosig ? '0' + m.unit : fmt(vals[hiIdx])),
+      hTime: hAgo === 0 ? 'now' : hAgo < 48 ? hAgo + ' h ago' : Math.round(hAgo / 24) + ' days ago',
+      tipShift: hiIdx === null ? -50 : hiIdx < n * 0.15 ? 0 : hiIdx > n * 0.85 ? -100 : -50
+    };
+    var metrics = MET.map(function (x) { return { label: x.label, cls: 'seg' + (x.k === metric ? ' on' : ''), pick: function () { self.setState({ metric: x.k, hi: null }); } }; });
+    var ranges = ['24h', '7d'].map(function (r) { return { label: r === '24h' ? '24h' : '7d', cls: 'seg' + (r === range ? ' on' : ''), pick: function () { self.setState({ range: r, hi: null }); } }; });
+
+    return {
+      brand: brand, sim: sim, autoRun: autoRun, autoRunCls: 'switch' + (autoRun ? ' on' : ''),
+      toggleAutoRun: function () { self.setState({ autoRun: !autoRun }); },
+      hero: hero, now: now, alarm: alarm, tl: tl, programs: programs, main: main, devices: devices, activity: activity,
+      ackAlarm: function () { self.setState({ alarm: 'acked' }); },
+      clearAlarm: function () { self.setState({ alarm: 'cleared' }); },
+      viewCls: { d3: 'seg' + (view === '3d' ? ' on' : ''), front: 'seg' + (view === 'front' ? ' on' : ''), plan: 'seg' + (view === 'plan' ? ' on' : '') },
+      view3d: function () { self.setState({ view: '3d', pitch: VIEWS['3d'][0], yaw: VIEWS['3d'][1] }); },
+      viewFront: function () { self.setState({ view: 'front', pitch: VIEWS.front[0], yaw: VIEWS.front[1] }); },
+      viewPlan: function () { self.setState({ view: 'plan', pitch: VIEWS.plan[0], yaw: VIEWS.plan[1] }); },
+      zoomIn: function () { self.setState({ zoom: Math.min(1.8, +(zoom + 0.15).toFixed(2)) }); },
+      zoomOut: function () { self.setState({ zoom: Math.max(0.6, +(zoom - 0.15).toFixed(2)) }); },
+      resetView: function () { self.setState({ view: '3d', pitch: 56, yaw: -24, zoom: 1 }); },
+      setVp: this._setVp || (this._setVp = function (el) { self._vp = el; }),
+      vpCls: 'gh-vp' + (s.dragging ? ' dragging' : ''),
+      onDown: function (e) {
+        if (e.target && e.target.closest && e.target.closest('button')) { self._drag = { on: false, moved: false }; return; }
+        self._drag = { x: e.clientX, y: e.clientY, pitch: pitch, yaw: yaw, moved: false, on: true };
+        self.setState({ dragging: true });
+      },
+      onMove: function (e) {
+        var d = self._drag;
+        if (!d || !d.on) return;
+        var ddx = e.clientX - d.x, ddy = e.clientY - d.y;
+        if (Math.abs(ddx) + Math.abs(ddy) > 3) d.moved = true;
+        if (!d.moved) return;
+        self.setState({ view: 'custom', yaw: Math.round(d.yaw + ddx * 0.4), pitch: Math.round(Math.min(75, Math.max(0, d.pitch - ddy * 0.3))) });
+      },
+      onUp: function () {
+        if (self._drag) self._drag.on = false;
+        if (self.state && self.state.dragging) self.setState({ dragging: false });
+      },
+      threeSelected: sel, threeView: view, threePitch: pitch, threeYaw: yaw, threeZoom: zoom, threeActive: String(irrig),
+      worldTf: worldTf,
+      g: { slabL: x0 - 18, slabT: Y0 - 18, slabW: span + 36, slabH: TL + 36, x0: x0, y0: Y0, span: span, tl: TL, hw: HW, roof: ROOF, backT: -ROOF, frontT: TL - ROOF, doorL: span / 2 - 22, doorH: HW - 4 },
+      groundLabels: groundLabels, pipes: pipes, pads: pads, zlines: zlines, beds: beds, posts: posts, panels: panels, gutters: gutters, arches: arches,
+      huds: huds, dev: dev, zonePills: zonePills, zsel: zsel,
+      durs: durs, durLabel: dur + ' min',
+      irrigate: function () { self.setState({ sent: 'open' }); },
+      stop: function () { self.setState({ sent: 'close' }); },
+      sentMsg: sentMsg,
+      chart: chart, metrics: metrics, ranges: ranges,
+      onChartMove: function (e) {
+        var r = e.currentTarget.getBoundingClientRect();
+        var fx = (e.clientX - r.left) / r.width * VW;
+        var idx = Math.round((fx - X0) / (X1 - X0) * (n - 1));
+        idx = Math.max(0, Math.min(n - 1, idx));
+        if (idx !== s.hi) self.setState({ hi: idx });
+      },
+      onChartLeave: function () { self.setState({ hi: null }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

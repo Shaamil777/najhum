@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo · Automations</title>
+<script src="./dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F4F7}
+a{color:#3B3794}a:hover{color:#201E44}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.tile{background:#FFFFFF;border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(16,14,40,.04),0 1px 2px rgba(16,14,40,.04),0 16px 32px -20px rgba(16,14,40,.18);min-width:0}
+.tlabel{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#646672}
+.h2{margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em}
+.muted{color:#646672}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap;background:#EEEEF2;color:#2A2B38}
+.pill.sm{height:24px;padding:0 9px;font-size:11.5px}
+.p-green{background:#E1F5EC;color:#05603F}.p-water{background:#DDF4F8;color:#0E5F73}.p-amber{background:#FCF0DC;color:#7C4204}.p-red{background:#FBE7E7;color:#9F1D1D}.p-brand{background:#E8E7F4;color:#201E44}.p-grey{background:#EEEEF2;color:#3D3F4C}.p-white{background:#FFFFFF;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:#EEEEF2;color:#0E0D1C;font:500 13.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .15s,transform .15s,filter .15s}
+.btn:hover{background:#E3E3EA;color:#0E0D1C}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.sm{min-height:32px;padding:0 12px;font-size:12.5px}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand);color:#fff;filter:brightness(1.25)}
+.btn-white{background:#fff;color:#0E0D1C;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.btn-white:hover{background:#ECECF1}
+.btn-ghostdark{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.btn-ghostdark:hover{background:rgba(255,255,255,.2);color:#fff}
+.btn-danger{background:#FBE7E7;color:#9F1D1D}
+.btn-danger:hover{background:#F7D6D6;color:#9F1D1D}
+.btn-ghost{background:transparent}
+.btn-ghost:hover{background:rgba(16,14,40,.06)}
+.nav{display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;padding:9px 0 7px;border:0;border-radius:14px;background:transparent;color:#646672;font:500 10.5px 'Geist',sans-serif;cursor:pointer;position:relative;text-decoration:none;text-align:center}
+.nav:hover{background:#F0F0F4;color:#0E0D1C}
+.nav.on{background:var(--brand);color:#fff}
+.nav.soon{opacity:.55;cursor:default}
+.nav.soon:hover{background:transparent;color:#646672}
+.navdot{position:absolute;top:7px;right:19px;width:8px;height:8px;border-radius:50%;background:#DC2626;box-shadow:0 0 0 2px #FFFFFF}
+.d-hide{display:none!important}
+.nav-more{position:relative;flex:1 1 0;min-width:0}
+.more-menu{top:auto!important;bottom:calc(100% + 10px);left:auto!important;right:0;min-width:260px!important;width:auto!important}
+.seg{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:#3D3F4C;font:500 13px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.seg:hover{background:rgba(16,14,40,.06)}
+.seg.on{background:var(--brand);color:#fff}
+.seg .n{opacity:.65;font-family:'Geist Mono',monospace;font-size:12px}
+.segs{display:inline-flex;flex-wrap:wrap;gap:2px;padding:3px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.07);max-width:100%}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:#C9CAD3;cursor:pointer;flex-shrink:0;transition:background .2s;padding:0}
+.switch::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.switch.on{background:var(--brand)}
+.switch.on::after{transform:translateX(16px)}
+.cell{border-radius:14px;background:#F2F2F6;padding:10px 12px;min-width:0}
+.cell .k{font-size:12px;color:#646672}
+.cell .v{font-family:'Geist Mono',monospace;font-size:17px;font-weight:500;letter-spacing:-0.02em}
+.big{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:34px;font-weight:500;letter-spacing:-0.03em;line-height:1.1}
+.kicker{font-size:12.5px;color:#646672;text-transform:uppercase;letter-spacing:.08em}
+.note{display:flex;gap:10px;align-items:flex-start;border-radius:16px;padding:12px 16px;font-size:13.5px}
+.lvl{flex:1 0 168px;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;border:0;border-radius:18px;padding:12px 14px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.07);font:inherit;color:inherit;cursor:pointer;text-decoration:none;transition:box-shadow .15s}
+.lvl:hover{box-shadow:0 0 0 1px rgba(16,14,40,.18);color:inherit}
+.lvl.on{box-shadow:0 0 0 2px var(--brand)}
+.lvl-tag{width:40px;height:40px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#EEEEF2;color:#2A2B38;font:600 13px 'Geist Mono',monospace}
+.lvl.on .lvl-tag{background:var(--brand);color:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-weight:500;font-size:12.5px;color:#646672;padding:0 12px 10px;white-space:nowrap}
+.tbl td{padding:12px;border-top:1px solid rgba(16,14,40,.07);white-space:nowrap}
+.tbl tr.click{cursor:pointer}
+.tbl tr.click:hover td{background:#FAFAFC}
+.r{text-align:right}
+.span2{grid-column:span 2}
+.scroll-x{overflow-x:auto;margin:0 -10px;padding:0 10px}
+.menu{position:absolute;top:calc(100% + 6px);left:0;z-index:40;min-width:300px;background:#fff;border-radius:18px;padding:6px;box-shadow:0 0 0 1px rgba(16,14,40,.06),0 20px 40px -12px rgba(16,14,40,.3)}
+.menu-item{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;border:0;background:transparent;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left;font:inherit;color:#0E0D1C}
+.menu-item:hover,.menu-item.on{background:#F2F2F6}
+a.menu-item{text-decoration:none;color:#0E0D1C}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.lang button{height:34px;padding:0 11px;border:0;border-radius:999px;background:transparent;font:500 12.5px 'Geist',sans-serif;color:#3D3F4C;cursor:pointer}
+.lang button.on{background:#0E0D1C;color:#fff}
+.iconbtn{position:relative;width:40px;height:40px;border-radius:50%;border:0;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.08);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#0E0D1C;text-decoration:none}
+.iconbtn:hover{background:#ECECF1;color:#0E0D1C}
+.badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#DC2626;color:#fff;font:600 10.5px/18px 'Geist',sans-serif;text-align:center;box-shadow:0 0 0 2px #F4F4F7}
+.bar{height:8px;border-radius:999px;background:#ECECF1;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px}
+input[type=range].rng{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:#E3E3EA;outline:none}
+input[type=range].rng::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 1px 4px rgba(16,14,40,.35);cursor:pointer}
+input[type=range].rng::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 1px 4px rgba(16,14,40,.35);cursor:pointer}
+.sev{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.sev-crit{background:#DC2626;color:#fff}.sev-major{background:#FCF0DC;color:#7C4204}.sev-minor{background:#EEEEF2;color:#3D3F4C}
+.mode{flex:1 1 130px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;border:0;border-radius:16px;padding:12px 14px;background:#F2F2F6;font:inherit;color:inherit;cursor:pointer;transition:background .15s,box-shadow .15s}
+.mode:hover{background:#EAEAF0}
+.mode.on{background:var(--brand);color:#fff}
+.mode .t{font-weight:600;font-size:14px}
+.mode .s{font-size:12px;opacity:.7}
+@media (max-width:760px){
+.rail{position:fixed!important;left:0;right:0;bottom:0;z-index:60;flex-wrap:nowrap!important;justify-content:space-around!important;align-content:center!important;padding:6px 4px calc(6px + env(safe-area-inset-bottom))!important;gap:0!important;box-shadow:0 -1px 0 rgba(16,14,40,.08),0 -10px 30px -16px rgba(16,14,40,.25)!important}
+.rail-logo{display:none!important}
+.nav{width:auto!important;flex:1 1 0;min-width:0;padding:7px 0 6px!important}
+.m-hide{display:none!important}
+.d-hide{display:flex!important}
+.wrap{padding:16px 16px 104px!important;gap:16px!important}
+.h-hero{font-size:38px!important}
+.big{font-size:26px!important}
+.tile{padding:18px!important;border-radius:20px!important}
+.segs{border-radius:18px!important}
+.lvl{flex-basis:44%!important}
+.menu{min-width:0!important;width:calc(100vw - 32px)!important;max-width:360px}
+.more-menu{width:270px!important}
+.search-box{display:none!important}
+.span2{grid-column:auto!important}
+.kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+}
+
+.sentence{margin:0;font-size:22px;line-height:2.1;letter-spacing:-0.01em;color:#0E0D1C}
+.sentence select{font:600 19px 'Geist',sans-serif;color:var(--brand);background:#EFEEF8;border:0;border-radius:12px;padding:4px 30px 4px 12px;margin:0 2px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 15px) 55%,calc(100% - 10px) 55%;background-size:5px 5px;background-repeat:no-repeat;max-width:100%}
+@media (max-width:760px){.sentence{font-size:17px;line-height:2.2}.sentence select{font-size:15px}}
+</style>
+</helmet>
+<div style="--brand: {{brand}}; min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: #F4F4F7; color: #0E0D1C; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<nav aria-label="Main" class="rail" style="flex: 1 1 88px; background: #FFFFFF; box-shadow: 1px 0 0 rgba(16,14,40,.06); padding: 18px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 6px">
+<div class="rail-logo" style="width: 44px; height: 44px; border-radius: 14px; background: var(--brand); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 10px 14px; font: 700 13px 'Geist', sans-serif; letter-spacing: .02em">Demo</div>
+<a href="DTC.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>Overview</a>
+<a href="DTC-Building.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>Building</a>
+<a href="DTC-Systems.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3.5"/></svg>Systems</a>
+<a href="DTC-Alarms.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Alarms<span class="navdot" aria-label="3 active alarms"></span></a>
+<a href="DTC-Automations.dc.html" class="nav on m-hide" aria-current="page"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Automations</a>
+<a href="DTC-Insights.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Insights</a>
+<a href="DTC-Devices.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>Devices</a>
+<span class="nav-more d-hide"><button type="button" class="nav on" onClick="{{toggleMore}}" aria-expanded="{{moreOpen}}" style="width: 100%"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</button><sc-if value="{{moreOpen}}" hint-placeholder-val="{{ false }}"><div class="menu more-menu" role="menu"><a href="DTC-Automations.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Automations</span></a><a href="DTC-Insights.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Insights</span></a><a href="DTC-Devices.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>Devices</span></a><a href="DTC-Sites.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>All sites</span></a><a href="DTC-Shift.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>My shift (technician view)</span></a></div></sc-if></span>
+</nav>
+<div style="flex: 999 1 600px; min-width: 0">
+<div class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 22px 36px 56px; display: flex; flex-direction: column; gap: 22px">
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0">
+    <span style="position: relative">
+      <button type="button" class="btn btn-white" onClick="{{toggleSites}}" aria-expanded="{{sitesOpen}}">
+        <span style="color: #646672">Demo</span><span style="color: #A3A4B0">/</span><strong style="font-weight: 600">Innovation Center</strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <sc-if value="{{sitesOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="menu" role="menu">
+          <button type="button" class="menu-item on" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Innovation Center</span><span class="muted" style="font-size: 12.5px">Abu Dhabi Campus · 6 levels · 196 spaces</span></span><span class="pill sm p-green">Live</span></button>
+          <button type="button" class="menu-item" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Demo Campus East</span><span class="muted" style="font-size: 12.5px">Floors and rooms to be confirmed</span></span><span class="pill sm">Coming soon</span></button>
+          <button type="button" class="menu-item" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Demo Logistics Hub</span><span class="muted" style="font-size: 12.5px">Floors and rooms to be confirmed</span></span><span class="pill sm">Coming soon</span></button>
+          <a href="DTC-Sites.dc.html" class="menu-item" style="border-top: 1px solid rgba(16,14,40,.07); border-radius: 0 0 12px 12px; margin-top: 4px; text-decoration: none"><span style="font-weight: 500">See all sites</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </sc-if>
+    </span>
+    <span style="color: #A3A4B0">/</span><strong style="font-weight: 600">Automations</strong>
+    <span class="pill p-green m-hide"><span class="dot" style="background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2)"></span>Live · synced 30 s ago</span>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+    <label class="search-box" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(16,14,40,.08); color: #646672; min-width: 0">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+      <input type="search" placeholder="Search rooms, devices, alarms" style="border: 0; outline: 0; background: transparent; font: 400 13.5px 'Geist', sans-serif; color: #0E0D1C; width: 200px; min-width: 0">
+      <span class="mono" style="font-size: 11px; padding: 3px 7px; border-radius: 7px; background: #EEEEF2; color: #3D3F4C">⌘K</span>
+    </label>
+    <span class="lang" role="group" aria-label="Language"><button type="button" class="{{enCls}}" onClick="{{setEn}}">EN</button><button type="button" class="{{arCls}}" onClick="{{setAr}}" lang="ar">عربي</button></span>
+    <a href="DTC-Alarms.dc.html" class="iconbtn" aria-label="3 active alarms"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge">3</span></a>
+    <button type="button" aria-label="Account: Facility manager" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #0E0D1C; color: #FFFFFF; font: 600 13px 'Geist', sans-serif; cursor: pointer">FM</button>
+  </div>
+</header>
+
+<section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+  <div style="max-width: 800px">
+    <div class="kicker mono">Automations · Innovation Center</div>
+    <h1 class="h-hero" style="margin: 6px 0 0; font-size: 48px; line-height: 1.05; font-weight: 600; letter-spacing: -0.035em">{{headline}}</h1>
+    <p style="margin: 8px 0 0; font-size: 16px; color: #4A4C58">1,284 actions today, most of them switching empty rooms to Eco. Every action is logged, and a manual change always wins until the room empties.</p>
+  </div>
+  <button type="button" class="btn btn-brand" onClick="{{newRule}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> New automation</button>
+</section>
+
+<section class="tile" style="display: flex; flex-direction: column; gap: 10px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px">
+    <h2 class="h2">Running now</h2>
+    <div class="segs" role="tablist" aria-label="Filter"><sc-for list="{{rf}}" as="f" hint-placeholder-count="3"><button type="button" role="tab" class="{{f.cls}}" onClick="{{f.pick}}">{{f.label}} <span class="n">{{f.n}}</span></button></sc-for></div>
+  </div>
+  <sc-for list="{{rules}}" as="r" hint-placeholder-count="8">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(16,14,40,.07); opacity: {{r.op}}">
+      <span style="width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: {{r.ib}}; color: {{r.ic}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{r.path}}"></path></svg></span>
+      <span style="flex: 1 1 300px; min-width: 0"><span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 600">{{r.name}}<sc-if value="{{r.tagOn}}" hint-placeholder-val="{{ false }}"><span class="{{r.tagCls}}">{{r.tag}}</span></sc-if></span><span style="display: block; font-size: 13px; color: #3D3F4C">{{r.text}}</span></span>
+      <span style="flex: 0 0 120px"><span class="muted" style="display: block; font-size: 12px">Actions today</span><span class="mono" style="font-size: 15px">{{r.acts}}</span></span>
+      <span style="flex: 0 0 130px"><span class="muted" style="display: block; font-size: 12px">This week</span><span class="mono" style="font-size: 15px; color: {{r.saveColor}}">{{r.saved}}</span></span>
+      <button type="button" class="{{r.swCls}}" onClick="{{r.toggle}}" aria-label="{{r.swLabel}}"></button>
+    </div>
+  </sc-for>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px">
+  <h2 class="h2" style="padding: 0 4px">Start from a recipe</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 14px">
+    <sc-for list="{{recipes}}" as="c" hint-placeholder-count="6">
+      <button type="button" onClick="{{c.use}}" class="tile" style="border: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 10px; box-shadow: {{c.ring}}">
+        <span style="display: flex; align-items: center; gap: 10px"><span style="width: 36px; height: 36px; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: #EFEEF8; color: #201E44"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{c.path}}"></path></svg></span><span style="font-weight: 600">{{c.name}}</span></span>
+        <span style="font-size: 13px; color: #3D3F4C">{{c.text}}</span>
+        <span style="font-size: 12.5px; color: #05603F; margin-top: auto">{{c.gain}}</span>
+      </button>
+    </sc-for>
+  </div>
+</section>
+
+<section class="tile" id="builder" style="display: flex; flex-direction: column; gap: 16px; box-shadow: 0 0 0 2px var(--brand), 0 16px 32px -20px rgba(16,14,40,.25)">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px">
+    <div><div class="kicker mono">New automation · from "{{b.recipe}}"</div><h2 class="h2" style="margin-top: 4px">Write it as a sentence</h2></div>
+    <span class="pill sm p-grey">Draft · not running</span>
+  </div>
+  <p class="sentence">
+    When <select onChange="{{b.onScope}}" aria-label="Which rooms"><sc-for list="{{b.scopes}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.label}}</option></sc-for></select>
+    {{b.verb}} <select onChange="{{b.onWait}}" aria-label="For how long"><sc-for list="{{b.waits}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.label}}</option></sc-for></select>
+    during <select onChange="{{b.onWhen}}" aria-label="When"><sc-for list="{{b.whens}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.label}}</option></sc-for></select>,
+    <select onChange="{{b.onAct}}" aria-label="Then"><sc-for list="{{b.acts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.label}}</option></sc-for></select>
+    and tell <select onChange="{{b.onTell}}" aria-label="Who to tell"><sc-for list="{{b.tells}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.label}}</option></sc-for></select>.
+  </p>
+  <div style="border-radius: 20px; background: #F6F6F9; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px"><strong style="font-weight: 600">If this had run last week</strong><span class="muted" style="font-size: 12.5px">Replayed on 5–11 October sensor data</span></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 8px">
+      <div class="cell" style="background: #fff"><div class="k">Times it would run</div><div class="v">{{pv.runs}}</div></div>
+      <div class="cell" style="background: #fff"><div class="k">Rooms affected</div><div class="v">{{pv.rooms}}</div></div>
+      <div class="cell" style="background: #fff"><div class="k">Energy saved</div><div class="v" style="color: #05603F">{{pv.kwh}}</div></div>
+      <div class="cell" style="background: #fff"><div class="k">Comfort risk</div><div class="v" style="color: {{pv.riskColor}}">{{pv.risk}}</div></div>
+    </div>
+    <div style="font-size: 13px; color: #3D3F4C">{{pv.riskText}}</div>
+    <sc-if value="{{pv.overlap}}" hint-placeholder-val="{{ true }}"><div class="note p-amber" style="font-size: 13px">{{pv.overlapText}}</div></sc-if>
+  </div>
+  <sc-if value="{{b.idle}}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-wrap: wrap; gap: 8px">
+      <button type="button" class="btn btn-brand" onClick="{{b.pilot}}">Pilot on Level 2 for a week</button>
+      <button type="button" class="btn btn-white" onClick="{{b.turnOn}}">Turn on everywhere</button>
+      <button type="button" class="btn btn-ghost" onClick="{{b.draft}}">Save as draft</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{b.done}}" hint-placeholder-val="{{ false }}">
+    <div class="note p-green" style="align-items: center; justify-content: space-between; flex-wrap: wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span style="flex: 1">{{b.doneText}}</span><button type="button" class="btn btn-white sm" onClick="{{b.reset}}">Undo</button></div>
+  </sc-if>
+</section>
+
+<section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+  <div class="tile" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h2 class="h2">Weekly schedule</h2><span class="muted" style="font-size: 12.5px">Rooms follow this unless a person or a rule changes them</span></div>
+    <div class="mono" style="position: relative; height: 14px; margin-left: 46px; font-size: 11px; color: #8A8B98"><span style="position: absolute; left: 0">00</span><span style="position: absolute; left: 25%">06</span><span style="position: absolute; left: 50%">12</span><span style="position: absolute; left: 75%">18</span><span style="position: absolute; right: 0">24</span></div>
+    <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <span style="width: 36px; font-size: 13px; font-weight: 500">{{d.day}}</span>
+        <div style="flex: 1; position: relative; height: 26px; border-radius: 8px; background: #F2F2F6; overflow: hidden">
+          <sc-for list="{{d.blocks}}" as="k" hint-placeholder-count="2"><span title="{{k.tip}}" style="position: absolute; top: 0; bottom: 0; left: {{k.l}}; width: {{k.w}}; background: {{k.bg}}"></span></sc-for>
+        </div>
+      </div>
+    </sc-for>
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12.5px; color: #3D3F4C">
+      <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: var(--brand)"></span>Comfort 23 °C</span>
+      <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #A9A6E0"></span>Eco 26 °C</span>
+      <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #F2F2F6; box-shadow: inset 0 0 0 1px rgba(16,14,40,.1)"></span>Off</span>
+    </div>
+  </div>
+  <div class="tile" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px"><h2 class="h2">Holidays</h2><button type="button" class="btn btn-white sm" onClick="{{addHoliday}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add</button></div>
+    <div class="muted" style="font-size: 13px">On these days the whole building runs as a weekend.</div>
+    <sc-for list="{{hols}}" as="h" hint-placeholder-count="3">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0; border-top: 1px solid rgba(16,14,40,.07)">
+        <span class="mono" style="font-size: 13px; width: 92px">{{h.d}}</span><span style="flex: 1; font-size: 13.5px">{{h.name}}</span><span class="{{h.cls}}">{{h.state}}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"brand":{"editor":"color","default":"#201E44","options":["#201E44","#3B3794","#0F766E","#0A0E14"]},"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+
+  renderVals() {
+
+    var self = this;
+    var s = this.state || {};
+    var brand = this.props.brand ?? '#201E44';
+    var ar = !!s.ar;
+    var shell = {
+      brand: brand,
+      sitesOpen: !!s.sitesOpen,
+      toggleSites: function () { self.setState({ sitesOpen: !s.sitesOpen }); },
+      enCls: ar ? '' : 'on',
+      arCls: ar ? 'on' : '',
+      setEn: function () { self.setState({ ar: false }); },
+      setAr: function () { self.setState({ ar: true }); },
+      moreOpen: !!s.moreOpen,
+      toggleMore: function () { self.setState({ moreOpen: !s.moreOpen }); }
+    };
+
+
+    var PATHS = {"leaf": "M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16z M4 20c4-4 7-6 10-7", "clock": "M12 7v5l3 2 M3.0 12.0a9.0 9.0 0 1 0 18.0 0a9.0 9.0 0 1 0 -18.0 0", "sun": "M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41 M8.0 12.0a4.0 4.0 0 1 0 8.0 0a4.0 4.0 0 1 0 -8.0 0", "wind": "M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2 M9.6 4.6A2 2 0 1 1 11 8H2 M12.6 19.4A2 2 0 1 0 14 16H2", "drop": "M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z", "thermo": "M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"};
+    var off = s.off || {};
+    var added = s.added || null;
+    var R = [
+      ['empty', 'Empty room → save energy', 'leaf', 'When a room has had nobody in it for 15 minutes, set it to Eco and turn lights off.', 'All levels', 846, '2.6 MWh saved', '#05603F'],
+      ['after', 'After hours → shut down', 'clock', 'At 20:00 on working days, lights and AC off everywhere except the server room.', 'Whole building', 1, '0.9 MWh saved', '#05603F'],
+      ['eco18', 'Evening Eco', 'clock', 'At 18:00, set empty rooms on Levels 1–3 to Eco 26 °C.', 'Levels 1–3', 1, '0.5 MWh saved', '#05603F'],
+      ['day', 'Daylight → dim lights', 'sun', 'When daylight is above 500 lux near the window, dim perimeter lights to 30%.', 'Pilot · Level 3 west', 212, '0.2 MWh saved', '#05603F', 'Pilot · day 3 of 7', 'pill sm p-brand'],
+      ['stuffy', 'Stuffy room → fresh air', 'wind', 'When CO₂ goes over 1,000 ppm, boost fresh air for 30 minutes and tell the FM if it is still high.', 'All meeting rooms', 14, 'Uses 0.1 MWh', '#646672'],
+      ['leak', 'Leak → protect and alert', 'drop', 'When a leak sensor is wet near a pump, stop that pump and send a WhatsApp to the FM on-call.', 'Plant rooms', 1, '—', '#646672', 'Fired today 14:29', 'pill sm p-red'],
+      ['warm', 'Too warm → alert', 'thermo', 'When the server room is above 27 °C for 5 minutes, alert IT and the FM.', 'Server room', 1, '—', '#646672', 'Fired today 14:05', 'pill sm p-amber'],
+      ['comfort', 'Weekday comfort', 'clock', 'At 07:30 on working days, set all office rooms to Comfort 23 °C.', 'Levels G–3', 1, '—', '#646672']
+    ];
+    if (added) R.unshift(['new', added.name, 'leaf', added.text, added.scope, 0, 'Starts tonight', '#646672', added.tag, 'pill sm p-brand']);
+    var filt = s.rf || 'all';
+    var rules = R.filter(function (r) { return filt === 'all' || (filt === 'save' && /saved/.test(r[6])) || (filt === 'alert' && /alert/i.test(r[1])); }).map(function (r) {
+      var on = !off[r[0]];
+      return { name: r[1], path: PATHS[r[2]], text: r[3] + ' · ' + r[4], acts: r[5].toLocaleString('en-US'), saved: r[6], saveColor: r[7], tagOn: !!r[8], tag: r[8] || '', tagCls: r[9] || '',
+        ib: on ? '#EFEEF8' : '#F2F2F6', ic: on ? '#201E44' : '#9A9BA8', op: on ? 1 : 0.55, swCls: 'switch' + (on ? ' on' : ''), swLabel: (on ? 'Pause ' : 'Resume ') + r[1],
+        toggle: function () { var o = Object.assign({}, off); o[r[0]] = on; self.setState({ off: o }); } };
+    });
+    var nOn = R.filter(function (r) { return !off[r[0]]; }).length + 4;
+    var rf = [['all', 'All', R.length + 4], ['save', 'Saving energy', 4], ['alert', 'Alerts', 2]].map(function (f) { return { label: f[1], n: f[2], cls: 'seg' + (filt === f[0] ? ' on' : ''), pick: function () { self.setState({ rf: f[0] }); } }; });
+
+    var REC = [
+      ['empty', 'Empty room → save energy', 'leaf', 'Rooms nobody is using go to Eco and lights off.', 'Typically 600–900 kWh a week'],
+      ['stuffy', 'Stuffy room → fresh air', 'wind', 'Boost fresh air when CO₂ climbs, then settle back.', 'Better meetings, small energy cost'],
+      ['after', 'After hours → shut down', 'clock', 'Everything off at a set time, with exceptions.', 'Typically 300–500 kWh a week'],
+      ['leak', 'Leak → protect and alert', 'drop', 'Stop the nearest pump and alert the on-call team.', 'Limits water damage'],
+      ['day', 'Daylight → dim lights', 'sun', 'Dim lights near windows when the sun does the work.', 'Typically 150–400 kWh a week'],
+      ['warm', 'Too warm → alert', 'thermo', 'Warn the right people before a room gets too hot.', 'Protects equipment']
+    ];
+    var rec = s.rec || 'empty';
+    var recipes = REC.map(function (c) { return { name: c[1], path: PATHS[c[2]], text: c[3], gain: c[4], ring: rec === c[0] ? '0 0 0 2px var(--brand)' : '',
+      use: function () { self.setState({ rec: c[0], bstage: 'idle', bscope: null, bwait: null, bwhen: null, bact: null, btell: null }); } }; });
+
+    var CFG = {
+      empty: { verb: 'is empty for', scopes: [['any', 'any office or meeting room'], ['meet', 'a meeting room'], ['L2', 'a room on Level 2']], waits: [['5', '5 minutes'], ['15', '15 minutes'], ['30', '30 minutes']], dw: '15',
+        acts: [['eco', 'set it to Eco and turn lights off'], ['off', 'turn AC and lights off'], ['lights', 'turn only the lights off']], tells: [['nobody', 'nobody'], ['fm', 'the FM'], ['owner', 'the room owner']] },
+      stuffy: { verb: 'has CO₂ over 1,000 ppm for', scopes: [['meet', 'a meeting room'], ['any', 'any room'], ['L2', 'a room on Level 2']], waits: [['5', '5 minutes'], ['10', '10 minutes'], ['15', '15 minutes']], dw: '10',
+        acts: [['boost', 'boost fresh air for 30 minutes'], ['boost60', 'boost fresh air for 60 minutes'], ['alert', 'only send an alert']], tells: [['fm', 'the FM if it stays high'], ['nobody', 'nobody'], ['owner', 'the room owner']] },
+      after: { verb: 'is still on', scopes: [['any', 'the building'], ['L2', 'Level 2'], ['meet', 'meeting rooms']], waits: [['0', 'at 20:00'], ['21', 'at 21:00'], ['22', 'at 22:00']], dw: '0',
+        acts: [['off', 'turn lights and AC off, except the server room'], ['eco', 'set everything to Eco'], ['lights', 'turn only the lights off']], tells: [['nobody', 'nobody'], ['fm', 'the FM'], ['sec', 'security']] },
+      leak: { verb: 'has a wet leak sensor for', scopes: [['plant', 'a plant room'], ['any', 'any room'], ['L3', 'the server room']], waits: [['0', 'any time'], ['1', '1 minute'], ['5', '5 minutes']], dw: '0',
+        acts: [['pump', 'stop the nearest pump'], ['alert', 'only send an alert'], ['valve', 'close the zone valve']], tells: [['fm', 'the FM on-call on WhatsApp'], ['sec', 'security'], ['all', 'everyone on shift']] },
+      day: { verb: 'has daylight over 500 lux for', scopes: [['L3w', 'a room on Level 3 west'], ['any', 'any room with windows'], ['L2', 'a room on Level 2']], waits: [['5', '5 minutes'], ['10', '10 minutes'], ['20', '20 minutes']], dw: '10',
+        acts: [['dim30', 'dim window-side lights to 30%'], ['dim0', 'turn window-side lights off'], ['dim50', 'dim window-side lights to 50%']], tells: [['nobody', 'nobody'], ['fm', 'the FM'], ['owner', 'the room owner']] },
+      warm: { verb: 'is above 27 °C for', scopes: [['srv', 'the server room'], ['any', 'any room'], ['meet', 'a meeting room']], waits: [['5', '5 minutes'], ['10', '10 minutes'], ['15', '15 minutes']], dw: '5',
+        acts: [['alert', 'send an alert'], ['cool', 'set Cool down fast and alert'], ['log', 'just log it']], tells: [['it', 'IT and the FM'], ['fm', 'the FM'], ['all', 'everyone on shift']] }
+    };
+    var c = CFG[rec];
+    var scope = s.bscope || c.scopes[0][0], wait = s.bwait || c.dw, act = s.bact || c.acts[0][0], tell = s.btell || c.tells[0][0];
+    var when = s.bwhen || 'work';
+    var opts = function (arr, cur) { return arr.map(function (o) { return { v: o[0], label: o[1], sel: o[0] === cur }; }); };
+    var waitIdx = c.waits.map(function (w) { return w[0]; }).indexOf(wait), scopeIdx = c.scopes.map(function (w) { return w[0]; }).indexOf(scope);
+    var base = { empty: [1240, 142, 820], stuffy: [38, 21, -60], after: [5, 380, 410], leak: [0, 0, 0], day: [96, 18, 240], warm: [2, 1, 0] }[rec];
+    var mult = [1.35, 1, 0.7][waitIdx] * [1, 0.35, 0.28][scopeIdx] * (when === 'all' ? 1.4 : when === 'night' ? 0.5 : 1);
+    var risk = rec === 'empty' && wait === '5' ? 'Medium' : rec === 'after' && scope === 'any' ? 'Low' : 'Low';
+    var pv = {
+      runs: Math.round(base[0] * mult).toLocaleString('en-US'), rooms: Math.max(base[1] ? 1 : 0, Math.round(base[1] * [1, 0.35, 0.28][scopeIdx])).toLocaleString('en-US'),
+      kwh: base[2] === 0 ? '—' : (base[2] < 0 ? 'Uses ' + Math.round(-base[2] * mult) + ' kWh' : Math.round(base[2] * mult).toLocaleString('en-US') + ' kWh'),
+      risk: risk, riskColor: risk === 'Medium' ? '#B45309' : '#05603F',
+      riskText: rec === 'empty' ? (wait === '5' ? 'People came back within 5 minutes 41 times last week, mostly after short breaks. Those rooms would have warmed by about 1 °C.' : 'People came back within 5 minutes of a switch only 3 times last week. Rooms took about 4 minutes to cool back down.') :
+        rec === 'leak' ? 'No wet sensors last week, so nothing would have happened. Today it would have stopped pump 1 at 14:29, 4 minutes earlier than you did.' :
+        rec === 'stuffy' ? 'Meeting rooms would have stayed under 1,000 ppm 96% of the time, up from 88%.' : 'No complaints are expected based on last week’s occupancy.',
+      overlap: rec === 'empty' || rec === 'after', overlapText: rec === 'empty' ? 'Overlaps with "Evening Eco" between 18:00 and 20:00. Both set Eco, so they agree. The first one to act is logged.' : 'Same time as the existing "After hours → shut down". Turning this on would replace it.'
+    };
+    var bstage = s.bstage || 'idle';
+    var recName = REC.filter(function (r) { return r[0] === rec; })[0][1];
+    var sentence = function () { return 'When ' + c.scopes[scopeIdx][1] + ' ' + c.verb + ' ' + c.waits[waitIdx][1] + ', ' + c.acts.filter(function (a) { return a[0] === act; })[0][1] + '.'; };
+    var b = {
+      recipe: recName, verb: c.verb,
+      scopes: opts(c.scopes, scope), waits: opts(c.waits, wait), whens: opts([['work', 'working hours'], ['all', 'any time'], ['night', 'evenings and nights']], when), acts: opts(c.acts, act), tells: opts(c.tells, tell),
+      onScope: function (e) { self.setState({ bscope: e.target.value }); }, onWait: function (e) { self.setState({ bwait: e.target.value }); }, onWhen: function (e) { self.setState({ bwhen: e.target.value }); },
+      onAct: function (e) { self.setState({ bact: e.target.value }); }, onTell: function (e) { self.setState({ btell: e.target.value }); },
+      idle: bstage === 'idle', done: bstage !== 'idle',
+      doneText: bstage === 'pilot' ? 'Piloting on Level 2 until 20 October. You get a summary each morning, and it stops itself if anyone overrides it 5 times.' : bstage === 'on' ? 'Running on all levels from now. It shows at the top of Running now.' : 'Saved as a draft. Nothing changes in the building.',
+      pilot: function () { self.setState({ bstage: 'pilot', added: { name: recName, text: sentence(), scope: 'Pilot · Level 2', tag: 'Pilot · day 1 of 7' } }); },
+      turnOn: function () { self.setState({ bstage: 'on', added: { name: recName, text: sentence(), scope: 'All levels', tag: 'New' } }); },
+      draft: function () { self.setState({ bstage: 'draft' }); },
+      reset: function () { self.setState({ bstage: 'idle', added: null }); }
+    };
+
+    var blk = function (a, z, bg, tip) { return { l: (a / 24 * 100).toFixed(2) + '%', w: ((z - a) / 24 * 100).toFixed(2) + '%', bg: bg, tip: tip }; };
+    var WD = [blk(5, 7.5, '#A9A6E0', 'Pre-cool 05:00–07:30'), blk(7.5, 18, 'var(--brand)', 'Comfort 07:30–18:00'), blk(18, 20, '#A9A6E0', 'Eco 18:00–20:00')];
+    var week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map(function (d) { return { day: d, blocks: WD }; })
+      .concat([{ day: 'Sat', blocks: [blk(9, 14, '#A9A6E0', 'Eco on booked rooms 09:00–14:00')] }, { day: 'Sun', blocks: [] }]);
+    var H = [['30 Nov', 'Commemoration Day', 'Planned'], ['2–3 Dec', 'National Day', 'Planned'], ['1 Jan 2027', "New Year's Day", 'Planned']];
+    if (s.hol) H.push(['24 Dec', 'Office closure (added by you)', 'New']);
+    var hols = H.map(function (h) { return { d: h[0], name: h[1], state: h[2], cls: 'pill sm ' + (h[2] === 'New' ? 'p-brand' : 'p-grey') }; });
+
+    return Object.assign(shell, {
+      headline: nOn + ' automations saved 4.2 MWh this week', rules: rules, rf: rf, recipes: recipes, b: b, pv: pv, week: week, hols: hols,
+      newRule: function () { self.setState({ rec: 'empty', bstage: 'idle' }); var el = document.getElementById('builder'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
+      addHoliday: function () { self.setState({ hol: true }); }
+    });
+
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo · All sites</title>
+<script src="./dc-runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F4F7}
+a{color:#3B3794}a:hover{color:#201E44}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.tile{background:#FFFFFF;border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(16,14,40,.04),0 1px 2px rgba(16,14,40,.04),0 16px 32px -20px rgba(16,14,40,.18);min-width:0}
+.tlabel{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#646672}
+.h2{margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em}
+.muted{color:#646672}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap;background:#EEEEF2;color:#2A2B38}
+.pill.sm{height:24px;padding:0 9px;font-size:11.5px}
+.p-green{background:#E1F5EC;color:#05603F}.p-water{background:#DDF4F8;color:#0E5F73}.p-amber{background:#FCF0DC;color:#7C4204}.p-red{background:#FBE7E7;color:#9F1D1D}.p-brand{background:#E8E7F4;color:#201E44}.p-grey{background:#EEEEF2;color:#3D3F4C}.p-white{background:#FFFFFF;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:#EEEEF2;color:#0E0D1C;font:500 13.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .15s,transform .15s,filter .15s}
+.btn:hover{background:#E3E3EA;color:#0E0D1C}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.sm{min-height:32px;padding:0 12px;font-size:12.5px}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand);color:#fff;filter:brightness(1.25)}
+.btn-white{background:#fff;color:#0E0D1C;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.btn-white:hover{background:#ECECF1}
+.btn-ghostdark{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.btn-ghostdark:hover{background:rgba(255,255,255,.2);color:#fff}
+.btn-danger{background:#FBE7E7;color:#9F1D1D}
+.btn-danger:hover{background:#F7D6D6;color:#9F1D1D}
+.btn-ghost{background:transparent}
+.btn-ghost:hover{background:rgba(16,14,40,.06)}
+.nav{display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;padding:9px 0 7px;border:0;border-radius:14px;background:transparent;color:#646672;font:500 10.5px 'Geist',sans-serif;cursor:pointer;position:relative;text-decoration:none;text-align:center}
+.nav:hover{background:#F0F0F4;color:#0E0D1C}
+.nav.on{background:var(--brand);color:#fff}
+.nav.soon{opacity:.55;cursor:default}
+.nav.soon:hover{background:transparent;color:#646672}
+.navdot{position:absolute;top:7px;right:19px;width:8px;height:8px;border-radius:50%;background:#DC2626;box-shadow:0 0 0 2px #FFFFFF}
+.d-hide{display:none!important}
+.nav-more{position:relative;flex:1 1 0;min-width:0}
+.more-menu{top:auto!important;bottom:calc(100% + 10px);left:auto!important;right:0;min-width:260px!important;width:auto!important}
+.seg{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:#3D3F4C;font:500 13px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.seg:hover{background:rgba(16,14,40,.06)}
+.seg.on{background:var(--brand);color:#fff}
+.seg .n{opacity:.65;font-family:'Geist Mono',monospace;font-size:12px}
+.segs{display:inline-flex;flex-wrap:wrap;gap:2px;padding:3px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.07);max-width:100%}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:#C9CAD3;cursor:pointer;flex-shrink:0;transition:background .2s;padding:0}
+.switch::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.switch.on{background:var(--brand)}
+.switch.on::after{transform:translateX(16px)}
+.cell{border-radius:14px;background:#F2F2F6;padding:10px 12px;min-width:0}
+.cell .k{font-size:12px;color:#646672}
+.cell .v{font-family:'Geist Mono',monospace;font-size:17px;font-weight:500;letter-spacing:-0.02em}
+.big{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:34px;font-weight:500;letter-spacing:-0.03em;line-height:1.1}
+.kicker{font-size:12.5px;color:#646672;text-transform:uppercase;letter-spacing:.08em}
+.note{display:flex;gap:10px;align-items:flex-start;border-radius:16px;padding:12px 16px;font-size:13.5px}
+.lvl{flex:1 0 168px;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;border:0;border-radius:18px;padding:12px 14px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.07);font:inherit;color:inherit;cursor:pointer;text-decoration:none;transition:box-shadow .15s}
+.lvl:hover{box-shadow:0 0 0 1px rgba(16,14,40,.18);color:inherit}
+.lvl.on{box-shadow:0 0 0 2px var(--brand)}
+.lvl-tag{width:40px;height:40px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#EEEEF2;color:#2A2B38;font:600 13px 'Geist Mono',monospace}
+.lvl.on .lvl-tag{background:var(--brand);color:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-weight:500;font-size:12.5px;color:#646672;padding:0 12px 10px;white-space:nowrap}
+.tbl td{padding:12px;border-top:1px solid rgba(16,14,40,.07);white-space:nowrap}
+.tbl tr.click{cursor:pointer}
+.tbl tr.click:hover td{background:#FAFAFC}
+.r{text-align:right}
+.span2{grid-column:span 2}
+.scroll-x{overflow-x:auto;margin:0 -10px;padding:0 10px}
+.menu{position:absolute;top:calc(100% + 6px);left:0;z-index:40;min-width:300px;background:#fff;border-radius:18px;padding:6px;box-shadow:0 0 0 1px rgba(16,14,40,.06),0 20px 40px -12px rgba(16,14,40,.3)}
+.menu-item{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;border:0;background:transparent;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left;font:inherit;color:#0E0D1C}
+.menu-item:hover,.menu-item.on{background:#F2F2F6}
+a.menu-item{text-decoration:none;color:#0E0D1C}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.08)}
+.lang button{height:34px;padding:0 11px;border:0;border-radius:999px;background:transparent;font:500 12.5px 'Geist',sans-serif;color:#3D3F4C;cursor:pointer}
+.lang button.on{background:#0E0D1C;color:#fff}
+.iconbtn{position:relative;width:40px;height:40px;border-radius:50%;border:0;background:#fff;box-shadow:0 0 0 1px rgba(16,14,40,.08);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#0E0D1C;text-decoration:none}
+.iconbtn:hover{background:#ECECF1;color:#0E0D1C}
+.badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#DC2626;color:#fff;font:600 10.5px/18px 'Geist',sans-serif;text-align:center;box-shadow:0 0 0 2px #F4F4F7}
+.bar{height:8px;border-radius:999px;background:#ECECF1;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px}
+input[type=range].rng{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:#E3E3EA;outline:none}
+input[type=range].rng::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 1px 4px rgba(16,14,40,.35);cursor:pointer}
+input[type=range].rng::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 1px 4px rgba(16,14,40,.35);cursor:pointer}
+.sev{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.sev-crit{background:#DC2626;color:#fff}.sev-major{background:#FCF0DC;color:#7C4204}.sev-minor{background:#EEEEF2;color:#3D3F4C}
+.mode{flex:1 1 130px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;border:0;border-radius:16px;padding:12px 14px;background:#F2F2F6;font:inherit;color:inherit;cursor:pointer;transition:background .15s,box-shadow .15s}
+.mode:hover{background:#EAEAF0}
+.mode.on{background:var(--brand);color:#fff}
+.mode .t{font-weight:600;font-size:14px}
+.mode .s{font-size:12px;opacity:.7}
+@media (max-width:760px){
+.rail{position:fixed!important;left:0;right:0;bottom:0;z-index:60;flex-wrap:nowrap!important;justify-content:space-around!important;align-content:center!important;padding:6px 4px calc(6px + env(safe-area-inset-bottom))!important;gap:0!important;box-shadow:0 -1px 0 rgba(16,14,40,.08),0 -10px 30px -16px rgba(16,14,40,.25)!important}
+.rail-logo{display:none!important}
+.nav{width:auto!important;flex:1 1 0;min-width:0;padding:7px 0 6px!important}
+.m-hide{display:none!important}
+.d-hide{display:flex!important}
+.wrap{padding:16px 16px 104px!important;gap:16px!important}
+.h-hero{font-size:38px!important}
+.big{font-size:26px!important}
+.tile{padding:18px!important;border-radius:20px!important}
+.segs{border-radius:18px!important}
+.lvl{flex-basis:44%!important}
+.menu{min-width:0!important;width:calc(100vw - 32px)!important;max-width:360px}
+.more-menu{width:270px!important}
+.search-box{display:none!important}
+.span2{grid-column:auto!important}
+.kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+}
+</style>
+</helmet>
+<div style="--brand: {{brand}}; min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: #F4F4F7; color: #0E0D1C; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<nav aria-label="Main" class="rail" style="flex: 1 1 88px; background: #FFFFFF; box-shadow: 1px 0 0 rgba(16,14,40,.06); padding: 18px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 6px">
+<div class="rail-logo" style="width: 44px; height: 44px; border-radius: 14px; background: var(--brand); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 10px 14px; font: 700 13px 'Geist', sans-serif; letter-spacing: .02em">Demo</div>
+<a href="DTC.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>Overview</a>
+<a href="DTC-Building.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>Building</a>
+<a href="DTC-Systems.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3.5"/></svg>Systems</a>
+<a href="DTC-Alarms.dc.html" class="nav"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Alarms<span class="navdot" aria-label="3 active alarms"></span></a>
+<a href="DTC-Automations.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Automations</a>
+<a href="DTC-Insights.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Insights</a>
+<a href="DTC-Devices.dc.html" class="nav m-hide"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>Devices</a>
+<span class="nav-more d-hide"><button type="button" class="nav on" onClick="{{toggleMore}}" aria-expanded="{{moreOpen}}" style="width: 100%"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</button><sc-if value="{{moreOpen}}" hint-placeholder-val="{{ false }}"><div class="menu more-menu" role="menu"><a href="DTC-Automations.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Automations</span></a><a href="DTC-Insights.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Insights</span></a><a href="DTC-Devices.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>Devices</span></a><a href="DTC-Sites.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>All sites</span></a><a href="DTC-Shift.dc.html" class="menu-item" role="menuitem"><span style="display: flex; align-items: center; gap: 10px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>My shift (technician view)</span></a></div></sc-if></span>
+</nav>
+<div style="flex: 999 1 600px; min-width: 0">
+<div class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 22px 36px 56px; display: flex; flex-direction: column; gap: 22px">
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0">
+    <span style="position: relative">
+      <button type="button" class="btn btn-white" onClick="{{toggleSites}}" aria-expanded="{{sitesOpen}}">
+        <span style="color: #646672">Demo</span><span style="color: #A3A4B0">/</span><strong style="font-weight: 600">Innovation Center</strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <sc-if value="{{sitesOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="menu" role="menu">
+          <button type="button" class="menu-item on" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Innovation Center</span><span class="muted" style="font-size: 12.5px">Abu Dhabi Campus · 6 levels · 196 spaces</span></span><span class="pill sm p-green">Live</span></button>
+          <button type="button" class="menu-item" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Demo Campus East</span><span class="muted" style="font-size: 12.5px">Floors and rooms to be confirmed</span></span><span class="pill sm">Coming soon</span></button>
+          <button type="button" class="menu-item" onClick="{{toggleSites}}"><span><span style="display: block; font-weight: 600">Demo Logistics Hub</span><span class="muted" style="font-size: 12.5px">Floors and rooms to be confirmed</span></span><span class="pill sm">Coming soon</span></button>
+          <a href="DTC-Sites.dc.html" class="menu-item" style="border-top: 1px solid rgba(16,14,40,.07); border-radius: 0 0 12px 12px; margin-top: 4px; text-decoration: none"><span style="font-weight: 500">See all sites</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </sc-if>
+    </span>
+    <span style="color: #A3A4B0">/</span><strong style="font-weight: 600">All sites</strong>
+    <span class="pill p-green m-hide"><span class="dot" style="background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2)"></span>Live · synced 30 s ago</span>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+    <label class="search-box" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(16,14,40,.08); color: #646672; min-width: 0">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+      <input type="search" placeholder="Search rooms, devices, alarms" style="border: 0; outline: 0; background: transparent; font: 400 13.5px 'Geist', sans-serif; color: #0E0D1C; width: 200px; min-width: 0">
+      <span class="mono" style="font-size: 11px; padding: 3px 7px; border-radius: 7px; background: #EEEEF2; color: #3D3F4C">⌘K</span>
+    </label>
+    <span class="lang" role="group" aria-label="Language"><button type="button" class="{{enCls}}" onClick="{{setEn}}">EN</button><button type="button" class="{{arCls}}" onClick="{{setAr}}" lang="ar">عربي</button></span>
+    <a href="DTC-Alarms.dc.html" class="iconbtn" aria-label="3 active alarms"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge">3</span></a>
+    <button type="button" aria-label="Account: Facility manager" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #0E0D1C; color: #FFFFFF; font: 600 13px 'Geist', sans-serif; cursor: pointer">FM</button>
+  </div>
+</header>
+
+<section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+  <div style="max-width: 800px">
+    <div class="kicker mono">DTC · All sites</div>
+    <h1 class="h-hero" style="margin: 6px 0 0; font-size: 48px; line-height: 1.05; font-weight: 600; letter-spacing: -0.035em">3 sites, 1 live</h1>
+    <p style="margin: 8px 0 0; font-size: 16px; color: #4A4C58">Innovation Center is live. The other two sites show their numbers here as soon as their devices are installed.</p>
+  </div>
+</section>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 22px">
+  <a href="DTC.dc.html" class="tile" style="display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit; box-shadow: 0 0 0 2px var(--brand), 0 16px 32px -20px rgba(16,14,40,.25)">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+      <div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Head Office</div><div class="muted" style="font-size: 13px">Dubai · 6 levels · 196 spaces · 1,860 devices</div></div>
+      <span class="pill sm p-green"><span class="dot" style="background: #10B981"></span>Live</span>
+    </div>
+    <div style="display: flex; gap: 14px; align-items: flex-end">
+      <div aria-hidden="true" style="width: 96px; flex-shrink: 0; display: flex; flex-direction: column; gap: 3px">
+        <sc-for list="{{stack}}" as="l" hint-placeholder-count="6"><span style="height: 14px; border-radius: 4px; background: {{l.bg}}; position: relative"><sc-if value="{{l.dot}}" hint-placeholder-val="{{ false }}"><span class="dot" style="position: absolute; right: 4px; top: 3.5px; background: #DC2626; box-shadow: 0 0 0 2px #fff"></span></sc-if></span></sc-for>
+        <span style="height: 4px; border-radius: 2px; background: #C9CAD3; margin: 1px -6px 0"></span>
+      </div>
+      <div style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <div class="cell"><div class="k">Energy today</div><div class="v" style="font-size: 15px">9.9 MWh</div></div>
+        <div class="cell"><div class="k">People in now</div><div class="v" style="font-size: 15px">968</div></div>
+        <div class="cell"><div class="k">Average CO₂</div><div class="v" style="font-size: 15px">690 ppm</div></div>
+        <div class="cell"><div class="k">Devices online</div><div class="v" style="font-size: 15px">98.9%</div></div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap">
+      <span class="pill sm p-red">3 active alarms · 1 critical</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 13.5px; color: var(--brand)">Open site <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </div>
+  </a>
+
+  <sc-for list="{{soon}}" as="x" hint-placeholder-count="2">
+    <div class="tile" style="display: flex; flex-direction: column; gap: 16px; background: #FAFAFC; box-shadow: inset 0 0 0 1.5px rgba(16,14,40,.12); border: 0">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+        <div><div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: #3D3F4C">{{x.name}}</div><div class="muted" style="font-size: 13px">Floors and rooms to be confirmed</div></div>
+        <span class="pill sm">Coming soon</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{x.steps}}" as="t" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: #3D3F4C"><span class="mono" style="width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #EEEEF2; font-size: 11.5px">{{t.n}}</span>{{t.label}}</div>
+        </sc-for>
+      </div>
+      <div class="muted" style="font-size: 12.5px">Numbers, alarms and the building plan appear here once the site goes live.</div>
+      <button type="button" class="{{x.btnCls}}" style="align-self: flex-start; margin-top: auto" onClick="{{x.notify}}">{{x.btn}}</button>
+    </div>
+  </sc-for>
+</section>
+
+<section class="tile" style="display: flex; flex-direction: column; gap: 10px">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h2 class="h2">Compare sites</h2><span class="muted" style="font-size: 12.5px">Today, live values</span></div>
+  <div class="scroll-x">
+    <table class="tbl">
+      <thead><tr><th>Site</th><th class="r">Energy today</th><th class="r">kWh per m²</th><th class="r">People now</th><th class="r">Average CO₂</th><th class="r">Rooms comfortable</th><th class="r">Devices online</th><th class="r">Active alarms</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight: 600"><a href="DTC.dc.html" style="text-decoration: none">Head Office</a></td><td class="r mono">9.9 MWh</td><td class="r mono">0.51</td><td class="r mono">968</td><td class="r mono">690 ppm</td><td class="r mono">91%</td><td class="r mono">98.9%</td><td class="r"><span class="pill sm p-red">3</span></td></tr>
+        <tr><td style="color: #646672">Demo Campus East</td><td class="r muted" colspan="7">Coming soon</td></tr>
+        <tr><td style="color: #646672">Demo Logistics Hub</td><td class="r muted" colspan="7">Coming soon</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="muted" style="font-size: 12.5px">Energy per m² lets sites of different sizes be compared fairly. Innovation Center has 19,400 m² of floor area.</div>
+</section>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"brand":{"editor":"color","default":"#201E44","options":["#201E44","#3B3794","#0F766E","#0A0E14"]},"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+
+  renderVals() {
+
+    var self = this;
+    var s = this.state || {};
+    var brand = this.props.brand ?? '#201E44';
+    var ar = !!s.ar;
+    var shell = {
+      brand: brand,
+      sitesOpen: !!s.sitesOpen,
+      toggleSites: function () { self.setState({ sitesOpen: !s.sitesOpen }); },
+      enCls: ar ? '' : 'on',
+      arCls: ar ? 'on' : '',
+      setEn: function () { self.setState({ ar: false }); },
+      setAr: function () { self.setState({ ar: true }); },
+      moreOpen: !!s.moreOpen,
+      toggleMore: function () { self.setState({ moreOpen: !s.moreOpen }); }
+    };
+
+
+    var LV = [['#E8E7F4', false], ['var(--brand)', false], ['var(--brand)', true], ['var(--brand)', false], ['#7C78C8', false], ['#B9B6E6', true]];
+    var stack = LV.map(function (l) { return { bg: l[0], dot: l[1] }; });
+    var nt = s.nt || {};
+    var soon = ['Demo Campus East', 'Demo Logistics Hub'].map(function (n, i) { var on = !!nt[i];
+      return { name: n, steps: [['1', 'Survey and device plan'], ['2', 'Install gateways and sensors'], ['3', 'Map rooms, test and go live']].map(function (t) { return { n: t[0], label: t[1] }; }),
+        btn: on ? 'You will be told when it goes live ✓' : 'Tell me when it goes live', btnCls: on ? 'btn btn-white sm' : 'btn btn-brand sm',
+        notify: function () { var o = Object.assign({}, nt); o[i] = !on; self.setState({ nt: o }); } }; });
+    return Object.assign(shell, { stack: stack, soon: soon });
+
+  }
+}
+</script>
+</body>
+</html>

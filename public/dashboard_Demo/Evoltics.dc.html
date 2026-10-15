@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evoltics · Station Management Platform (CSMP)</title>
+<script src="./dc-runtime.js"></script>
+<link rel="stylesheet" href="fonts.css">
+<style>
+body{margin:0;background:#F4F5F6;color:#0B0F19;font-family:'Geist',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.45}
+a{color:#0284C7;text-decoration:none}a:hover{color:#0369A1}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.tile{background:#FFFFFF;border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(11,15,25,.04),0 1px 2px rgba(11,15,25,.04),0 16px 32px -20px rgba(11,15,25,.18);min-width:0}
+.tlabel{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:.05em}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap;background:#EEF2F6;color:#1E293B}
+.p-green{background:#E0F5EB;color:#05603F}.p-blue{background:#E0F2FE;color:#0369A1}.p-amber{background:#FEF3C7;color:#92400E}.p-red{background:#FEE2E2;color:#991B1B}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:#EEF2F6;color:#0B0F19;font:500 13.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap;transition:background .15s,transform .15s}
+.btn:hover{background:#E2E8F0}
+.btn:active{transform:scale(.98)}
+.btn-brand{background:#0284C7;color:#fff}
+.btn-brand:hover{background:#0369A1}
+.btn-ink{background:#0F172A;color:#fff}
+.btn-ink:hover{background:#1E293B}
+.btn-white{background:#fff;color:#0B0F19;box-shadow:0 0 0 1px rgba(11,15,25,.08)}
+.btn-white:hover{background:#F8FAFC}
+.btn-danger{background:#FEE2E2;color:#991B1B}
+.btn-danger:hover{background:#FECACA}
+.nav{display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:9px 0 7px;border:0;border-radius:14px;background:transparent;color:#64748B;font:500 10.5px 'Geist',sans-serif;cursor:pointer}
+.nav:hover{background:#F1F5F9;color:#0F172A}
+.nav.on{background:#0F172A;color:#fff}
+.glass{background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,.7) inset,0 10px 30px -12px rgba(11,15,25,.25)}
+.zpill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.9);color:#1E293B;font:500 12px 'Geist',sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.08);white-space:nowrap}
+.zpill.on{background:#0F172A;color:#fff}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:#CBD5E1;cursor:pointer;flex-shrink:0;transition:background .2s}
+.switch::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.switch.on{background:#0284C7}
+.switch.on::after{transform:translateX(16px)}
+.wrap{max-width:1360px;margin:0 auto;padding:22px 36px 48px;display:flex;flex-direction:column;gap:22px}
+@media (max-width:760px){.rail{display:none!important}.wrap{padding:16px!important;gap:16px!important}}
+</style>
+</head>
+<body>
+<div style="min-height: 100%; display: flex; flex-wrap: wrap; align-items: stretch; background: #F4F5F6; color: #0B0F19;">
+
+  <!-- Main Navigation Rail -->
+  <nav aria-label="Main" class="rail" style="flex: 1 1 84px; background: #FFFFFF; box-shadow: 1px 0 0 rgba(11,15,25,.06); padding: 18px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 6px">
+    <div style="width: 44px; height: 44px; border-radius: 14px; background: #0284C7; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 8px 14px">
+      <!-- EV Bolt Icon -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <button type="button" class="nav on">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+      Fleet
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Tariffs
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Telemetry
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
+      Chargers
+    </button>
+    <button type="button" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Payouts
+    </button>
+  </nav>
+
+  <div style="flex: 999 1 600px; min-width: 0">
+    <div class="wrap">
+
+      <!-- Top bar -->
+      <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <button type="button" class="btn btn-white">
+            <span style="color: #64748B">Evoltics CSMP</span>
+            <span style="color: #94A3B8">/</span>
+            <strong style="font-weight: 600">Hub 01 · Dubai Silicon Oasis</strong>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <span class="pill p-green"><span class="dot" style="background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2)"></span>Live · OCPP 2.0.1 Synced</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(11,15,25,.08); color: #64748B; min-width: 0">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" placeholder="Search bays, RFID, sessions" style="border: 0; outline: 0; background: transparent; font: 400 13px 'Geist', sans-serif; color: #0F172A; width: 200px">
+            <span class="mono" style="font-size: 11px; padding: 2px 6px; border-radius: 6px; background: #EEF2F6; color: #475569">⌘K</span>
+          </label>
+          <button type="button" class="btn btn-danger">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 7.86 2"/></svg>
+            Emergency Stop
+          </button>
+          <button type="button" aria-label="Evoltics Operator" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #0F172A; color: #FFFFFF; font: 600 13px 'Geist', sans-serif; cursor: pointer">EA</button>
+        </div>
+      </header>
+
+      <!-- Status Hero -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; padding: 6px 4px 4px">
+          <div class="mono" style="font-size: 12px; color: #64748B; text-transform: uppercase; letter-spacing: .08em">Active Station · CSMP Fleet Hub</div>
+          <h1 style="margin: 0; font-size: 42px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; color: #0F172A">Station Management Platform</h1>
+          <p style="margin: 0; font-size: 16px; color: #475569; max-width: 620px">Real-time IoT telemetry, automated load management, and certified OCPP 2.0.1 smart charging oversight.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <span class="pill" style="background: #FFFFFF; box-shadow: 0 0 0 1px rgba(11,15,25,.08); padding: 0 6px 0 12px; height: 36px">
+              <span style="font-size: 12.5px; font-weight: 500; margin-right: 6px">Auto-Balancing</span>
+              <button type="button" class="switch on"></button>
+            </span>
+            <span class="pill" style="height: 36px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(11,15,25,.08)"><span class="dot" style="background: #10B981"></span>8 of 8 chargers online</span>
+            <span class="pill p-blue" style="height: 36px"><span class="dot" style="background: #0284C7"></span>1 session active · Bay B1-102 (DC Fast)</span>
+            <span class="pill p-green" style="height: 36px">Solar canopy active · 96 kW</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3D EV Charging Station Twin Viewport -->
+      <section style="border-radius: 28px; background: linear-gradient(180deg, #E8EFF8 0%, #F4F7FB 70%); box-shadow: 0 0 0 1px rgba(11,15,25,.05); padding: 14px; display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch">
+        
+        <!-- 3D Scene Iframe Host -->
+        <div style="flex: 999 1 560px; min-width: 0; height: 540px; position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #e5edf8 0%, #edf2fa 50%, #dee7f5 100%);">
+          <iframe 
+            src="./ev_charging_station_3d_scene.html" 
+            title="EV Charging Station 3D Scene"
+            style="width: 100%; height: 100%; border: 0; display: block;"
+          ></iframe>
+
+          <!-- Top Overlay HUD: Interactive Bay Status -->
+          <div class="glass" style="position: absolute; left: 14px; top: 14px; z-index: 5; display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 999px;">
+            <span class="zpill"><span class="dot" style="background: #10B981"></span>Bay 1: Free (150 kW DC)</span>
+            <span class="zpill on"><span class="dot" style="background: #0284C7"></span>Bay 2: Charging (7.4 kW / 120 kW)</span>
+            <span class="zpill"><span class="dot" style="background: #10B981"></span>Bay 3: Free (22 kW AC)</span>
+          </div>
+
+          <!-- Drag instructions badge -->
+          <div class="m-hide" style="position: absolute; right: 16px; top: 16px; z-index: 5; font-size: 11.5px; color: #475569; font-weight: 500; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); padding: 5px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            3D Orbit: Drag to rotate · Scroll to zoom
+          </div>
+        </div>
+
+        <!-- Live Bay / Charger Telemetry Sheet -->
+        <aside class="glass" style="flex: 1 1 320px; min-width: 0; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 16px; background: rgba(255,255,255,.92)">
+          <div>
+            <span class="pill p-blue" style="height: 26px; font-size: 12px"><span class="dot" style="background: #0284C7"></span>Active Session #EV-8821</span>
+            <div style="margin-top: 10px; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #0F172A">Bay B1-102 · DC Fast</div>
+            <div style="margin-top: 2px; color: #64748B; font-size: 13px">Vehicle: White EV Sedan · CCS Combo 2</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 14px; border-radius: 16px; background: rgba(15,23,42,.03); border: 1px solid rgba(15,23,42,.06)">
+            <div>
+              <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Delivered Power</div>
+              <div class="mono" style="font-size: 20px; font-weight: 700; color: #0284C7; margin-top: 2px">7.4 kW</div>
+              <div style="font-size: 11px; color: #10B981; margin-top: 2px">Peak cap: 120 kW</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Energy Transferred</div>
+              <div class="mono" style="font-size: 20px; font-weight: 700; color: #0F172A; margin-top: 2px">48.2 kWh</div>
+              <div style="font-size: 11px; color: #64748B; margin-top: 2px">Battery: 64% (target 80%)</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Duration</div>
+              <div class="mono" style="font-size: 16px; font-weight: 600; color: #0F172A; margin-top: 2px">24m 18s</div>
+            </div>
+            <div>
+              <div style="font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase">Revenue Accrued</div>
+              <div class="mono" style="font-size: 16px; font-weight: 700; color: #05603F; margin-top: 2px">AED 57.84</div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #475569">
+              <span>Applied Tariff Rate:</span>
+              <strong style="color: #0F172A">AED 1.20 / kWh</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #475569">
+              <span>Driver Authentication:</span>
+              <span class="mono" style="color: #0F172A">RFID Card #88219 (Authorized)</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: auto">
+            <button type="button" class="btn btn-brand" style="flex: 1">Stop Session</button>
+            <button type="button" class="btn btn-white" style="flex: 1">Unlock Cable</button>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Sensor Fleet & Hardware Agnostic Grid (3 tiles) -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 22px">
+        <div class="tile" style="display: flex; flex-direction: column; gap: 10px">
+          <div class="tlabel">Charger 1 · DC Fast Charger</div>
+          <div style="font-size: 26px; font-weight: 700; color: #0F172A">150 kW DC</div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span class="pill p-green"><span class="dot" style="background: #10B981"></span>Available · Ready to connect</span>
+          </div>
+          <div class="muted" style="font-size: 12.5px; color: #64748B; margin-top: 4px">Dual CCS2 connectors with liquid-cooled cable handling.</div>
+        </div>
+
+        <div class="tile" style="display: flex; flex-direction: column; gap: 10px">
+          <div class="tlabel">Charger 2 · DC Fast Charger</div>
+          <div style="font-size: 26px; font-weight: 700; color: #0284C7">7.4 kW / 120 kW</div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span class="pill p-blue"><span class="dot" style="background: #0284C7"></span>Charging White Sedan · 64%</span>
+          </div>
+          <div class="muted" style="font-size: 12.5px; color: #64748B; margin-top: 4px">Smart load management throttled for optimal battery life.</div>
+        </div>
+
+        <div class="tile" style="display: flex; flex-direction: column; gap: 10px">
+          <div class="tlabel">Charger 3 · AC Dual Charger</div>
+          <div style="font-size: 26px; font-weight: 700; color: #0F172A">22 kW AC</div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span class="pill p-green"><span class="dot" style="background: #10B981"></span>Available · Type 2 Sockets</span>
+          </div>
+          <div class="muted" style="font-size: 12.5px; color: #64748B; margin-top: 4px">Destination charging for long-stay tenant parking.</div>
+        </div>
+      </section>
+
+      <!-- Soil / Fleet Analytics History + Activity -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        
+        <!-- Live Energy Consumption Chart -->
+        <div class="tile" style="flex: 999 1 600px">
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px">
+            <div>
+              <div class="tlabel">Charging Telemetry · Energy Dispensed</div>
+              <div class="mono" style="font-size: 28px; font-weight: 700; color: #0F172A; margin-top: 2px">775,402.90 kWh</div>
+              <div style="font-size: 12px; color: #10B981; margin-top: 2px">↑ 18.4% volume increase this week across 8 hubs</div>
+            </div>
+            <div style="display: flex; gap: 6px">
+              <span class="pill p-blue" style="cursor: pointer">24 Hours</span>
+              <span class="pill" style="cursor: pointer">7 Days</span>
+              <span class="pill" style="cursor: pointer">30 Days</span>
+            </div>
+          </div>
+
+          <!-- Scaled Telemetry SVG Curve -->
+          <div style="position: relative; height: 210px; width: 100%">
+            <svg viewBox="0 0 760 180" preserveAspectRatio="none" style="width: 100%; height: 100%; overflow: visible">
+              <defs>
+                <linearGradient id="evGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0284C7" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#0284C7" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="30" x2="760" y2="30" stroke="rgba(15,23,42,0.06)" stroke-dasharray="4"/>
+              <line x1="0" y1="80" x2="760" y2="80" stroke="rgba(15,23,42,0.06)" stroke-dasharray="4"/>
+              <line x1="0" y1="130" x2="760" y2="130" stroke="rgba(15,23,42,0.06)" stroke-dasharray="4"/>
+              <path d="M0,150 C80,140 140,110 220,105 C300,100 360,65 440,55 C520,45 600,75 680,40 L760,35 L760,180 L0,180 Z" fill="url(#evGradient)"/>
+              <path d="M0,150 C80,140 140,110 220,105 C300,100 360,65 440,55 C520,45 600,75 680,40 L760,35" fill="none" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="760" cy="35" r="5" fill="#0284C7" stroke="#fff" stroke-width="2"/>
+            </svg>
+            <div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #64748B; margin-top: 6px">
+              <span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>Now (146 kW Peak)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auto-Payment Settlements & Audit Trail -->
+        <div class="tile" style="flex: 1 1 340px">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px">
+            <div class="tlabel">Recent Settlements</div>
+            <span style="font-size: 12px; font-weight: 600; color: #0284C7">Auto-Calculated</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div style="display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid rgba(15,23,42,.06)">
+              <div>
+                <div style="font-weight: 600; font-size: 13.5px">Bay B1-102 · Session #8821</div>
+                <div style="font-size: 12px; color: #64748B">48.2 kWh · Fast DC · Visa ****4129</div>
+              </div>
+              <div class="mono" style="font-weight: 700; color: #05603F; font-size: 13.5px">+ AED 57.84</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid rgba(15,23,42,.06)">
+              <div>
+                <div style="font-weight: 600; font-size: 13.5px">Bay B1-101 · Session #8820</div>
+                <div style="font-size: 12px; color: #64748B">72.0 kWh · Ultra Fast · App Wallet</div>
+              </div>
+              <div class="mono" style="font-weight: 700; color: #05603F; font-size: 13.5px">+ AED 86.40</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid rgba(15,23,42,.06)">
+              <div>
+                <div style="font-weight: 600; font-size: 13.5px">Bay B1-103 · Session #8819</div>
+                <div style="font-size: 12px; color: #64748B">18.5 kWh · AC Destination · Fleet</div>
+              </div>
+              <div class="mono" style="font-weight: 700; color: #05603F; font-size: 13.5px">+ AED 22.20</div>
+            </div>
+            <div style="margin-top: 4px; padding: 10px 12px; border-radius: 12px; background: #E0F5EB; display: flex; justify-content: space-between; align-items: center">
+              <span style="font-size: 12px; font-weight: 600; color: #05603F">Net Monthly Landlord Payout:</span>
+              <span class="mono" style="font-size: 14px; font-weight: 700; color: #05603F">AED 34,820.00</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

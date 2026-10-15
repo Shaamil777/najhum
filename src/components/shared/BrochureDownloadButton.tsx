@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { FileText, X } from "lucide-react";
+import { Download, X } from "lucide-react";
 
 interface BrochureDownloadButtonProps {
   brochureUrl?: string | null;
   productName?: string;
   className?: string;
   size?: "sm" | "md" | "lg";
+  label?: string;
 }
 
 export default function BrochureDownloadButton({
@@ -15,6 +16,7 @@ export default function BrochureDownloadButton({
   productName,
   className = "",
   size = "md",
+  label = "Download Brochure",
 }: BrochureDownloadButtonProps) {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
@@ -114,7 +116,7 @@ export default function BrochureDownloadButton({
         size={size}
         className={`gap-2 ${className}`}
       >
-        <FileText className="w-4 h-4" /> Request Brochure
+        <Download className="w-4 h-4" /> {label}
       </Button>
 
       {showModal && (

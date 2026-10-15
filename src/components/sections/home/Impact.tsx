@@ -95,7 +95,6 @@ export default function Impact() {
                   </span>
                   {homeContent.impact.card1.outcome}
                 </p>
-                <ArrowRight className="w-5 h-5 text-zinc-400" />
               </div>
             </Card>
 
@@ -141,7 +140,7 @@ export default function Impact() {
                 })}
 
                 {/* Bottom Panel (Najhum Blue) */}
-                <div className="sm:col-span-2 bg-[#3B82F6] rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between min-h-[200px] sm:min-h-[230px] hover:shadow-lg transition-all duration-300 cursor-pointer group text-white">
+                <div className="sm:col-span-2 bg-[#3B82F6] rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between min-h-[200px] sm:min-h-[230px] hover:shadow-lg transition-all duration-300 cursor-default group text-white">
                   {/* Subtle circular accents on right */}
                   <div className="absolute -top-10 -right-10 w-72 h-72 bg-white/10 rounded-full pointer-events-none group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-6 right-6 w-44 h-44 bg-white/10 rounded-full pointer-events-none" />
@@ -153,10 +152,6 @@ export default function Impact() {
                     <p className="text-white/90 text-sm sm:text-base leading-relaxed max-w-xl">
                       {homeContent.impact.card2.panel.description}
                     </p>
-                  </div>
-
-                  <div className="mt-6 sm:mt-auto relative z-10 self-end w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform cursor-pointer">
-                    <ArrowRight className="w-6 h-6 text-[#3B82F6]" />
                   </div>
                 </div>
               </div>
@@ -184,9 +179,6 @@ export default function Impact() {
                 <p className="text-zinc-500 text-base sm:text-lg leading-relaxed max-w-lg">
                   {homeContent.impact.card3.description}
                 </p>
-                <div className="w-14 h-14 rounded-full bg-zinc-900 flex items-center justify-center text-white shrink-0 shadow-lg hover:scale-105 transition-transform cursor-pointer">
-                  <ArrowRight className="w-6 h-6" />
-                </div>
               </div>
             </Card>
 
@@ -219,7 +211,6 @@ export default function Impact() {
                     <span className="text-zinc-400 font-medium mr-2 uppercase tracking-wide text-xs">{homeContent.impact.card4.outcomeLabel}</span>
                     {homeContent.impact.card4.outcome}
                   </p>
-                  <ArrowRight className="w-5 h-5 text-zinc-400" />
                 </div>
               </div>
             </Card>
@@ -250,11 +241,6 @@ export default function Impact() {
                   <p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-lg">
                     {homeContent.impact.card5.description}
                   </p>
-                  <Link href="/contact#contact-form" className="shrink-0 w-fit">
-                    <div className="flex items-center gap-3 bg-white text-zinc-900 px-6 py-3 rounded-full font-bold text-sm tracking-wider hover:bg-zinc-100 transition-colors cursor-pointer w-fit">
-                      {homeContent.impact.card5.button} <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </Link>
                 </div>
               </div>
             </Card>

@@ -104,8 +104,8 @@ export default function IotricsAbout() {
             className="flex flex-col p-6 sm:p-8 md:p-10 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group"
           >
             <div className="flex items-center mb-4 sm:mb-6 gap-3">
-              <span className="text-emerald-500 font-bold text-xl sm:text-2xl">{cardsData[1].num}</span>
-              <span className="text-xs sm:text-sm font-bold tracking-widest text-emerald-500 uppercase">{cardsData[1].label}</span>
+              <span className="text-blue-600 font-bold text-xl sm:text-2xl">{cardsData[1].num}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 uppercase">{cardsData[1].label}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">{cardsData[1].title}</h3>
             <p className="text-sm sm:text-base text-neutral-600 mb-8 sm:mb-12 leading-relaxed flex-grow">
@@ -113,17 +113,17 @@ export default function IotricsAbout() {
             </p>
 
             {/* Arrow */}
-            <div className="hidden lg:flex absolute top-1/2 -right-4 translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-[0_0_15px_rgba(0,0,0,0.08)] items-center justify-center text-emerald-500 z-10">
+            <div className="hidden lg:flex absolute top-1/2 -right-4 translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-[0_0_15px_rgba(0,0,0,0.08)] items-center justify-center text-blue-600 z-10">
               <ChevronRight className="w-6 h-6" />
             </div>
 
             {/* Dummy Icons Row */}
             <div className="grid grid-cols-5 gap-2 text-neutral-400 mt-auto pt-6 sm:pt-8 border-t border-neutral-100">
-              <div className="flex flex-col items-center text-center gap-2"><Signal className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Cellular</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Activity className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Fiber</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] font-semibold tracking-wider">LoRaWAN</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Bluetooth className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">BLE</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Satellite</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Signal className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Cellular</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Activity className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Fiber</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] font-semibold tracking-wider">LoRaWAN</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Bluetooth className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">BLE</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Satellite className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Satellite</span></div>
             </div>
           </motion.div>
 
@@ -136,8 +136,8 @@ export default function IotricsAbout() {
             className="flex flex-col p-6 sm:p-8 md:p-10 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group"
           >
             <div className="flex items-center mb-4 sm:mb-6 gap-3">
-              <span className="text-indigo-600 font-bold text-xl sm:text-2xl">{cardsData[2].num}</span>
-              <span className="text-xs sm:text-sm font-bold tracking-widest text-indigo-600 uppercase">{cardsData[2].label}</span>
+              <span className="text-blue-600 font-bold text-xl sm:text-2xl">{cardsData[2].num}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-blue-600 uppercase">{cardsData[2].label}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-neutral-900">{cardsData[2].title}</h3>
             <p className="text-sm sm:text-base text-neutral-600 mb-8 sm:mb-12 leading-relaxed flex-grow">
@@ -146,10 +146,10 @@ export default function IotricsAbout() {
 
             {/* Dummy Icons Row */}
             <div className="grid grid-cols-4 gap-2 text-neutral-400 mt-auto pt-6 sm:pt-8 border-t border-neutral-100">
-              <div className="flex flex-col items-center text-center gap-2"><Cloud className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Platform</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Analytics</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Bell className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Alerts</span></div>
-              <div className="flex flex-col items-center text-center gap-2"><Target className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Predictive</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Cloud className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Platform</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Analytics</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Bell className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Alerts</span></div>
+              <div className="flex flex-col items-center text-center gap-2"><Target className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" /><span className="text-[8px] sm:text-[9px] uppercase font-semibold">Predictive</span></div>
             </div>
           </motion.div>
         </div>

@@ -112,9 +112,9 @@ export default function PlatformProductsCarousel({
   };
 
   return (
-    <section className="w-full py-20 lg:py-28 bg-surface relative overflow-hidden font-sans border-b border-border">
+    <section className="w-full pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-14 lg:pb-16 bg-surface relative overflow-hidden font-sans border-b border-border">
       
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-8 lg:mb-16">
+      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px] relative z-10 mb-6 sm:mb-8 lg:mb-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-0">
           <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
             <h2 className="text-[1.65rem] sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[2.8rem] font-black tracking-tight text-foreground leading-[1.1] uppercase">
@@ -153,7 +153,7 @@ export default function PlatformProductsCarousel({
       </div>
 
       {/* Manual & Auto Scroll Container */}
-      <div className="relative w-full overflow-hidden flex flex-col justify-center h-[420px] md:h-[480px] lg:h-[650px] mask-edges">
+      <div className="relative w-full overflow-hidden flex flex-col justify-center h-[420px] md:h-[480px] lg:h-[596px] mask-edges">
         <style dangerouslySetInnerHTML={{__html: `
           .mask-edges {
             mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { Container } from "@/design-system/primitives/layout/Container";
 import { 
   ArrowRight, Search, ChevronDown, 
-  LayoutGrid, Radio, Router, Monitor, Box, HeadphonesIcon, Tag, Zap
+  LayoutGrid, Radio, Router, Monitor, Box, HeadphonesIcon, Zap
 } from "lucide-react";
 import Link from "next/link";
 
@@ -139,9 +139,9 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
   const categories = useMemo(() => {
     const list = [
       { name: "All Products", icon: LayoutGrid, id: "All" },
-      { name: "IoTRICS (IoT)", icon: Radio, id: "iotrics" },
-      { name: "EVOLTICS (EV)", icon: Zap, id: "evoltics" },
-      { name: "CropifAI (Agri)", icon: Router, id: "cropifai" },
+      { name: "IoTRICS", icon: Radio, id: "iotrics" },
+      { name: "EVOLTICS", icon: Zap, id: "evoltics" },
+      { name: "CropifAI", icon: Router, id: "cropifai" },
       { name: "Hardware", icon: Box, id: "Hardware" },
       { name: "Software", icon: Monitor, id: "Software" },
     ];
@@ -296,27 +296,11 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => {
                   const productUrl = `/products/${product.id}`;
-                  const platformLabel = product.platforms?.[0] || product.category || "Hardware";
-
                   return (
                     <div 
                       key={product.id} 
                       className="group bg-white rounded-2xl p-5 border border-neutral-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                     >
-                      {/* Top Tag & Platforms */}
-                      <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold tracking-wider uppercase rounded-md border border-blue-100">
-                          <Tag className="w-2.5 h-2.5" />
-                          {platformLabel}
-                        </span>
-
-                        {product.platforms && product.platforms.length > 1 && (
-                          <span className="text-[10px] font-medium text-neutral-400">
-                            +{product.platforms.length - 1} more
-                          </span>
-                        )}
-                      </div>
-
                       {/* Image Area */}
                       <div className="w-full h-44 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-3 mb-4 overflow-hidden relative">
                         {product.imageUrl ? (
@@ -342,13 +326,14 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                         <div className="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
                           <Link 
                             href={productUrl}
-                            className="text-blue-600 text-xs font-bold flex items-center gap-1.5 hover:underline"
+                            className="text-blue-600 text-xs font-bold hover:underline"
                           >
-                            Explore Product <ArrowRight className="w-3 h-3" />
+                            Explore Product
                           </Link>
                           
                           <Link 
                             href={productUrl} 
+                            aria-label={`Explore ${product.name}`}
                             className="flex items-center justify-center w-7 h-7 rounded-full bg-slate-100 text-slate-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200"
                           >
                             <ArrowRight className="w-3.5 h-3.5" />

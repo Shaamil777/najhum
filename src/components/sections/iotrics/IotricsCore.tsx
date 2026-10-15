@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Activity, Bell, Eye, Zap, Map, BarChart3, CheckCircle2, ArrowRight } from "lucide-react";
 
 import { iotricsContent } from "@/content/iotrics";
+import IotricsDashboardDemo from "./IotricsDashboardDemo";
 
 const modulesData = iotricsContent.core.modules;
 
@@ -22,9 +22,29 @@ const coreModules = [
 export default function IotricsCore() {
   const { core } = iotricsContent;
   const [activeIndex, setActiveIndex] = useState(0);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const [leftHeight, setLeftHeight] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (leftColRef.current && window.innerWidth >= 1024) {
+        setLeftHeight(leftColRef.current.offsetHeight);
+      } else {
+        setLeftHeight(undefined);
+      }
+    };
+    updateHeight();
+    const ro = new ResizeObserver(updateHeight);
+    if (leftColRef.current) ro.observe(leftColRef.current);
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [activeIndex]);
 
   return (
-    <section className="w-full pt-16 sm:pt-20 lg:pt-10 pb-24 sm:pb-32 bg-white text-neutral-900 font-poppins">
+    <section className="w-full pt-16 sm:pt-20 lg:pt-10 pb-12 sm:pb-16 lg:pb-20 bg-white text-neutral-900 font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px] flex flex-col items-center">
         
         <div className="text-center max-w-4xl mx-auto flex flex-col items-center mb-16 lg:mb-24">
@@ -49,10 +69,13 @@ export default function IotricsCore() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 w-full text-left items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 xl:gap-10 w-full text-left items-start">
           
           {/* Left Column: Accordion List (shown second on mobile, first on desktop) */}
-          <div className="order-2 lg:order-1 lg:col-span-5 flex flex-col border-t border-neutral-200">
+          <div 
+            ref={leftColRef}
+            className="order-2 lg:order-1 lg:col-span-4 xl:col-span-4 flex flex-col border-t border-neutral-200"
+          >
             {coreModules.map((module, index) => {
               const isActive = activeIndex === index;
               return (
@@ -122,33 +145,13 @@ export default function IotricsCore() {
             </div>
           </div>
 
-          {/* Right Column: Live Enterprise Dashboard Showcase (shown first on mobile, second on desktop) */}
-          <div className="order-1 lg:order-2 flex flex-col lg:col-span-7 w-full justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-neutral-50 rounded-2xl border border-neutral-200/80 shadow-2xl overflow-hidden relative w-full flex flex-col group"
-            >
-              {/* Dashboard Image Content - Full Natural Dimensions, Never Cropped */}
-              <div className="relative z-10 w-full overflow-hidden bg-neutral-50">
-                <Image
-                  src="/images/iotrics/dashboardiortics.png"
-                  alt="IoTRICs Enterprise Dashboard Interface"
-                  width={2880}
-                  height={1572}
-                  priority
-                  className="w-full h-auto block object-contain select-none"
-                  sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 60vw, 900px"
-                />
-              </div>
-
-              {/* Decorative faint background grid */}
-              <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#3b82f6_1px,transparent_1px),linear-gradient(to_bottom,#3b82f6_1px,transparent_1px)] bg-[size:2rem_2rem]" />
-              </div>
-            </motion.div>
+          {/* Right Column: Live Enterprise Dashboard Interactive Showcase (shown first on mobile, second on desktop) */}
+          <div className="order-1 lg:order-2 flex flex-col lg:col-span-8 xl:col-span-8 w-full justify-start">
+            <IotricsDashboardDemo
+              activeIndex={activeIndex}
+              onSelectIndex={(index) => setActiveIndex(index)}
+              maxHeight={leftHeight}
+            />
           </div>
           
         </div>

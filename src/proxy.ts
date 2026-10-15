@@ -52,8 +52,8 @@ export default async function middleware(request: NextRequest) {
  * Adds security headers to the response
  */
 function addSecurityHeaders(response: NextResponse): NextResponse {
-  // Prevent clickjacking attacks
-  response.headers.set('X-Frame-Options', 'DENY');
+  // Prevent clickjacking attacks while allowing same-origin embedding for interactive dashboard demos
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
   
   // Prevent MIME type sniffing
   response.headers.set('X-Content-Type-Options', 'nosniff');
@@ -66,14 +66,14 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Next.js requires unsafe-inline and unsafe-eval
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net", // Allow Three.js CDNs
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // Tailwind and Google Fonts require unsafe-inline
       "img-src 'self' data: https: blob:",
       "media-src 'self' https: blob:",
       "frame-src 'self' https://www.youtube-nocookie.com https://player.vimeo.com",
       "font-src 'self' data: https://fonts.gstatic.com",
       "connect-src 'self'",
-      "frame-ancestors 'none'",
+      "frame-ancestors 'self'",
     ].join('; ')
   );
 
