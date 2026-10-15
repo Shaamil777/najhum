@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Activity, Globe2, Cpu, BarChart3 } from "lucide-react";
 import { aboutContent } from "@/content/about";
+import { HERO_VIDEOS } from "@/config/videos";
 
 export default function AboutHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -36,7 +37,7 @@ export default function AboutHero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         >
-          <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
+          <source src={HERO_VIDEOS.about} type="video/mp4" />
         </video>
         {/* Dark overlay to ensure text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/70 via-neutral-950/40 to-neutral-950/90" />

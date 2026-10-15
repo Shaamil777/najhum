@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cropifaiContent } from "@/content/cropifai";
+import { HERO_VIDEOS } from "@/config/videos";
 import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function CropifaiHero() {
@@ -30,7 +31,7 @@ export default function CropifaiHero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/cropifhero.mp4" type="video/mp4" />
+          <source src={HERO_VIDEOS.cropifai} type="video/mp4" />
         </video>
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/60" />

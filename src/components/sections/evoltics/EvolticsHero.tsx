@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { evolticsContent } from "@/content/evoltics";
+import { HERO_VIDEOS } from "@/config/videos";
 import ClientMarquee, { ClientLogo } from "@/components/ui/ClientMarquee";
 
 const evolticsLogos: ClientLogo[] = [1, 2, 3, 4, 5, 6].map((num) => ({
@@ -37,7 +38,7 @@ export default function EvolticsHero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/elvotics_bg.mp4" type="video/mp4" />
+          <source src={HERO_VIDEOS.evoltics} type="video/mp4" />
         </video>
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/60" />

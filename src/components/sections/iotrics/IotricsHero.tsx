@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { iotricsContent } from "@/content/iotrics";
+import { HERO_VIDEOS } from "@/config/videos";
 import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function IotricsHero() {
@@ -32,7 +31,7 @@ export default function IotricsHero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/iotrics-bg.mp4" type="video/mp4" />
+          <source src={HERO_VIDEOS.iotrics} type="video/mp4" />
         </video>
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/60" />

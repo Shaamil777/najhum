@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { homeContent } from "@/content/home";
+import { HERO_VIDEOS } from "@/config/videos";
 
 import ClientMarquee from "@/components/ui/ClientMarquee";
 
@@ -38,7 +39,7 @@ export default function Hero() {
             suppressHydrationWarning
             className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
           >
-            <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
+            <source src={HERO_VIDEOS.home} type="video/mp4" />
           </video>
         )}
 
