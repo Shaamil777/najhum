@@ -26,7 +26,7 @@ export default function AboutDifferentiator() {
       statLabel: "Uptime",
       description:
         "Our systems are built for 99.9% uptime in the harshest industrial environments, from sub-zero logistics to desert smart cities.",
-      image: "/images/performancce.png",
+      image: "/images/performancce.webp",
       accentColor: "text-primary",
       accentBg: "bg-primary",
       accentBorder: "border-primary/20",
@@ -39,7 +39,7 @@ export default function AboutDifferentiator() {
       statLabel: "Integrations",
       description:
         "We don't lock you into a single vendor. Our platforms integrate seamlessly with existing legacy systems and future-proof sensors.",
-      image: "/images/hardware.png",
+      image: "/images/hardware.webp",
       accentColor: "text-primary",
       accentBg: "bg-primary",
       accentBorder: "border-primary/20",
@@ -52,7 +52,7 @@ export default function AboutDifferentiator() {
       statLabel: "Cost Reduction",
       description:
         "On average, our clients see a 25% reduction in operational expenditure through predictive maintenance and energy optimization.",
-      image: "/images/operational.png",
+      image: "/images/operational.webp",
       accentColor: "text-primary",
       accentBg: "bg-primary",
       accentBorder: "border-primary/20",

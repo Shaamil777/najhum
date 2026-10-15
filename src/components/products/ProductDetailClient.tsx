@@ -45,16 +45,18 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
           {/* Image Gallery */}
           <div className="flex flex-col gap-4">
             {/* Main Image */}
-            <div className="w-full aspect-square bg-neutral-100 rounded-xl overflow-hidden relative border border-neutral-200">
+            <div className="w-full aspect-square bg-white rounded-2xl overflow-hidden relative border border-neutral-200/80 p-6 sm:p-8 flex items-center justify-center shadow-xs">
               {activeImage ? (
-                <Image 
-                  src={activeImage} 
-                  alt={product.name} 
-                  fill
-                  className="object-cover transition-opacity duration-300"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
+                <div className="relative w-full h-full">
+                  <Image 
+                    src={activeImage} 
+                    alt={product.name} 
+                    fill
+                    className="object-contain transition-opacity duration-300"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-neutral-400 font-bold text-2xl">
                   {product.name}
@@ -64,20 +66,22 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
 
             {/* Thumbnails */}
             {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-3 sm:gap-4">
                 {product.images.map((img, idx) => (
                   <button 
                     key={idx} 
                     onClick={() => setActiveImage(img)}
-                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${activeImage === img ? 'border-neutral-900 opacity-100' : 'border-transparent opacity-60 hover:opacity-100 hover:border-neutral-200'}`}
+                    className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all p-2 bg-white ${activeImage === img ? 'border-primary ring-2 ring-primary/20 opacity-100' : 'border-neutral-200 opacity-60 hover:opacity-100 hover:border-neutral-300'}`}
                   >
-                    <Image 
-                      src={img} 
-                      alt={`${product.name} thumbnail ${idx + 1}`} 
-                      fill
-                      className="object-cover"
-                      sizes="100px"
-                    />
+                    <div className="relative w-full h-full">
+                      <Image 
+                        src={img} 
+                        alt={`${product.name} thumbnail ${idx + 1}`} 
+                        fill
+                        className="object-contain"
+                        sizes="100px"
+                      />
+                    </div>
                   </button>
                 ))}
               </div>
@@ -177,24 +181,38 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
         {/* 4. Specifications Table */}
         {hasSpecs && (
           <div id="specs" className="mb-20 scroll-mt-28">
-            <h2 className="text-2xl font-bold mb-6 text-neutral-900">Technical Specifications</h2>
-            <div className="border border-neutral-200 rounded-xl overflow-hidden">
-              <table className="w-full text-left text-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+              <h2 className="text-2xl font-bold text-neutral-900">Technical Specifications</h2>
+              <span className="sm:hidden text-xs text-neutral-500 font-medium flex items-center gap-1.5 self-start bg-neutral-100 px-2.5 py-1 rounded-full">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" />
+                <span>Swipe table horizontally</span>
+              </span>
+            </div>
+            <div className="w-full overflow-x-auto border border-neutral-200 rounded-xl shadow-xs">
+              <table className="w-full text-left text-sm min-w-[560px]">
                 <thead className="bg-neutral-50 border-b border-neutral-200 text-neutral-500 font-semibold uppercase text-xs">
                   <tr>
-                    <th className="px-6 py-4">Parameter</th>
-                    <th className="px-6 py-4">Specification</th>
-                    <th className="px-6 py-4">Unit</th>
-                    <th className="px-6 py-4">Notes</th>
+                    <th className="px-4 sm:px-6 py-3.5 sm:py-4 font-semibold">Parameter</th>
+                    <th className="px-4 sm:px-6 py-3.5 sm:py-4 font-semibold">Specification</th>
+                    <th className="px-4 sm:px-6 py-3.5 sm:py-4 font-semibold">Unit</th>
+                    <th className="px-4 sm:px-6 py-3.5 sm:py-4 font-semibold">Notes</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200">
+                <tbody className="divide-y divide-neutral-200 bg-white">
                   {product.specs!.map((spec, idx) => (
-                    <tr key={idx} className="hover:bg-neutral-50/50">
-                      <td className="px-6 py-4 font-medium text-neutral-900">{spec.property}</td>
-                      <td className="px-6 py-4 text-neutral-700">{spec.value}</td>
-                      <td className="px-6 py-4 text-neutral-500">{spec.unit}</td>
-                      <td className="px-6 py-4 text-neutral-400 text-xs">{spec.remarks}</td>
+                    <tr key={idx} className="hover:bg-neutral-50/60 transition-colors">
+                      <td className="px-4 sm:px-6 py-3.5 sm:py-4 font-medium text-neutral-900 whitespace-nowrap">
+                        {spec.property}
+                      </td>
+                      <td className="px-4 sm:px-6 py-3.5 sm:py-4 text-neutral-700">
+                        {spec.value}
+                      </td>
+                      <td className="px-4 sm:px-6 py-3.5 sm:py-4 text-neutral-500 whitespace-nowrap">
+                        {spec.unit && spec.unit.trim() !== "" ? spec.unit : "—"}
+                      </td>
+                      <td className="px-4 sm:px-6 py-3.5 sm:py-4 text-neutral-400 text-xs">
+                        {spec.remarks && spec.remarks.trim() !== "" ? spec.remarks : "—"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -9,24 +9,20 @@ const evolticsFaqData = {
   headline: "Frequently Asked Questions",
   items: [
     {
-      question: "What is Evoltics?",
-      answer: "Evoltics is a full-service EV charging solutions provider offering CPO licensing, regulatory approvals, charger supply, installation, CSMP software, mobile app solutions, and annual maintenance services."
+      question: "Does it work with my existing chargers?",
+      answer: "Any OCPP-compliant charger, any manufacturer. Tested to OCPP 1.6J and 2.0.1."
     },
     {
-      question: "What is CSMP?",
-      answer: "CSMP (Charging Station Management Platform) is Evoltics’ IoT-enabled platform for managing EV charging infrastructure. It allows operators to monitor chargers, manage users and revenue, view real-time charging data, integrate hardware, and manage their charging network from a single platform."
+      question: "How is charging billed, and who handles the money?",
+      answer: "Charging is billed at the applicable UAE regulated tariff. EVOLTICS records every session, takes driver payments through the in-app wallet, and gives you the reconciliation and reporting behind them."
     },
     {
-      question: "What is a CPO licence and why is it required?",
-      answer: "A Charge Point Operator (CPO) licence gives an organization the legal right to commercially operate EV charging stations, collect revenue from drivers, and participate in the UAE’s regulated e-mobility ecosystem. Evoltics assists with application preparation, compliance, documentation, authority liaison, and post-approval support."
+      question: "Do you handle UAE regulatory approvals?",
+      answer: "Yes — DEWA, TAQA and FEWA requirements are handled as part of delivery."
     },
     {
-      question: "Which regulatory approvals does Evoltics manage?",
-      answer: "Evoltics manages EV charging-related approvals across DEWA, TAQA, and FEWA, including technical submissions, inspections, grid integration, metering, compliance documentation, and final approvals depending on the location."
-    },
-    {
-      question: "What is the Green Carbon System?",
-      answer: "The Green Carbon System is an upcoming Evoltics feature designed to reward eco-conscious EV drivers with carbon credits based on their charging activity. The document specifically states that drivers can earn carbon credits for every kWh charged through Evoltics."
+      question: "What do drivers get?",
+      answer: "The EVOLTICS driver app — live station availability, charging status and in-app wallet payment. It is the EVOLTICS app, not a branded app per operator."
     }
   ]
 };

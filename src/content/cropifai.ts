@@ -222,31 +222,31 @@ export const cropifaiContent = {
     timelineProducts: [
       {
         name: "Industrial Soil Sensor",
-        image: "/products/cropifai/soilsensor.png",
+        image: "/products/cropifai/soilsensor.webp",
         description: "Multi-parameter soil sensing for precision agriculture.",
         features: ["Soil Moisture & Temp", "Electrical Conductivity (EC)", "pH Level", "NPK (N, P, K)"]
       },
       {
         name: "LoRaWAN Weather Station",
-        image: "/products/cropifai/LoRaWan_iotWeatherStation.png",
+        image: "/products/cropifai/LoRaWan_iotWeatherStation.webp",
         description: "Comprehensive environmental monitoring with 15km range.",
         features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
       },
       {
         name: "Solar-Powered Water Flow Controller",
-        image: "/products/cropifai/SolarPoweredWaterFlowSensor.png",
+        image: "/products/cropifai/SolarPoweredWaterFlowSensor.webp",
         description: "Autonomous solar-powered valve control for precision irrigation and flow management.",
         features: ["Solar-Powered & Battery Backup", "0–100% Flow Control", "Autonomous Cycle Irrigation", "IP67 Weatherproof Rating"]
       },
       {
         name: "Solenoid Valve Controller",
-        image: "/products/cropifai/solenoidValveController.png",
+        image: "/products/cropifai/solenoidValveController.webp",
         description: "Automated irrigation control for multiple zones.",
         features: ["0–100% Flow Control", "Open/Close Precision", "Multicast Control"]
       },
       {
         name: "Smart Valve Controller",
-        image: "/products/cropifai/SmartValveController.png",
+        image: "/products/cropifai/SmartValveController.webp",
         description: "Intelligent autonomous operation for off-grid deployment.",
         features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
       }
@@ -490,7 +490,7 @@ export const cropifaiContent = {
       tag: "NAJHUM HARDWARE · NQT02",
       title: "Najhum Wireless Smart Valve NQT02"
     },
-    image: "/products/cropifai/SolarPoweredWaterFlowSensor.png",
+    image: "/products/cropifai/SolarPoweredWaterFlowSensor.webp",
     flowControls: [
       { title: "Solenoid Valve Control", desc: "Percentage control 0–100%, open/close precision" },
       { title: "Autonomous Operation", desc: "Solar-powered, battery backup, works off-grid" },

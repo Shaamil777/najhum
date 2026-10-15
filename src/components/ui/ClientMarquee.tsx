@@ -52,7 +52,7 @@ export const DEFAULT_CLIENT_LOGOS: ClientLogo[] = [
   {
     name: "SEWA",
     src: "/logo/client%20logos/SEWA.png",
-    className: "max-h-10 max-w-[85px]",
+    className: "max-h-12 sm:max-h-14 max-w-[115px] scale-125 sm:scale-135",
   },
   {
     name: "TAQA",
@@ -62,7 +62,7 @@ export const DEFAULT_CLIENT_LOGOS: ClientLogo[] = [
   {
     name: "FEWA",
     src: "/logo/client%20logos/fewa.webp",
-    className: "max-h-9 max-w-[90px]",
+    className: "max-h-12 sm:max-h-14 max-w-[125px] scale-120 sm:scale-130",
   },
   {
     name: "Dubai Taxi",
@@ -155,7 +155,7 @@ export default function ClientMarquee({
           {trackItems.map((logo, idx) => (
             <div
               key={`track1-${idx}`}
-              className="flex h-12 w-36 sm:w-44 shrink-0 items-center justify-center px-3"
+              className="flex h-14 sm:h-16 w-36 sm:w-44 shrink-0 items-center justify-center px-3"
             >
               <img
                 src={logo.src}
@@ -180,7 +180,7 @@ export default function ClientMarquee({
           {trackItems.map((logo, idx) => (
             <div
               key={`track2-${idx}`}
-              className="flex h-12 w-36 sm:w-44 shrink-0 items-center justify-center px-3"
+              className="flex h-14 sm:h-16 w-36 sm:w-44 shrink-0 items-center justify-center px-3"
             >
               <img
                 src={logo.src}

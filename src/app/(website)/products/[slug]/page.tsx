@@ -86,12 +86,24 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     ? rawDetails.overview
     : "";
 
+  const additionalImages = Array.isArray(rawDetails.images)
+    ? rawDetails.images.filter((img): img is string => typeof img === "string" && img.trim() !== "")
+    : [];
+
+  const allImages = Array.from(
+    new Set([dbProduct.imageUrl, ...additionalImages].filter((img): img is string => Boolean(img && img.trim() !== "")))
+  );
+
+  const modelCode = typeof rawDetails.model === "string" && rawDetails.model.trim() !== ""
+    ? rawDetails.model.trim()
+    : dbProduct.platforms?.[0]?.toUpperCase() || "Industrial Equipment";
+
   const productData = {
     id: dbProduct.id,
     name: dbProduct.name,
-    model: dbProduct.platforms?.[0]?.toUpperCase() || "Industrial Equipment",
+    model: modelCode,
     shortDesc: dbProduct.description,
-    images: dbProduct.imageUrl ? [dbProduct.imageUrl] : [],
+    images: allImages,
     brochureUrl: dbProduct.brochureUrl,
     overview: overviewText,
     features: featuresList,

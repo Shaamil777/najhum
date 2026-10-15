@@ -103,7 +103,7 @@ export default function EvolticsCarbonCredit() {
               >
                 <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
                 <Image 
-                  src="/images/elvotics/carbon_credit.png" 
+                  src="/images/elvotics/carbon_credit.webp" 
                   alt="Carbon Credit" 
                   fill 
                   className="object-contain drop-shadow-2xl relative z-10"

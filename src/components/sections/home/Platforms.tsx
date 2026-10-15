@@ -10,15 +10,15 @@ import { ArrowUpRight } from "lucide-react";
 
 const platformImages: Record<string, { src: string; alt: string }> = {
   evoltics: {
-    src: "/images/hero/evoltics_home.png",
+    src: "/images/hero/evoltics_home.webp",
     alt: "EVOLTICS - Ultra-fast EV charging station infrastructure and load balancing",
   },
   iotrics: {
-    src: "/images/hero/Iortics_home.png",
+    src: "/images/hero/Iortics_home.webp",
     alt: "IoTRICS - Industrial IoT edge gateway and telemetry sensors in modern manufacturing",
   },
   cropifai: {
-    src: "/images/hero/cropifai_home.png",
+    src: "/images/hero/cropifai_home.webp",
     alt: "CropifAI - Precision agriculture IoT weather station and soil sensor monitoring",
   },
 };

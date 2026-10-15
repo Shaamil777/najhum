@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/db/prisma';
 import { Plus, Edit2, Package, Tag } from 'lucide-react';
+import DeleteProductButton from './components/DeleteProductButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,6 +11,8 @@ export default async function ProductsList() {
     name: string;
     description: string;
     imageUrl?: string | null;
+    brochureUrl?: string | null;
+    isDraft?: boolean;
     platforms: string[];
     createdAt: Date;
   }> = [];
@@ -47,8 +50,20 @@ export default async function ProductsList() {
             className="flex flex-col rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md"
           >
             <div className="p-5 flex-1">
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                  product.isDraft ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                }`}>
+                  {product.isDraft ? 'Draft' : 'Published'}
+                </span>
+                {product.brochureUrl && (
+                  <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                    PDF Attached
+                  </span>
+                )}
+              </div>
               <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50 text-blue-600 overflow-hidden">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-50 text-blue-600 overflow-hidden shrink-0">
                   {product.imageUrl ? (
                     <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover" />
                   ) : (
@@ -74,7 +89,7 @@ export default async function ProductsList() {
               </div>
             </div>
             
-            <div className="flex border-t border-slate-100 bg-slate-50/50 p-3 rounded-b-xl">
+            <div className="flex items-center gap-2 border-t border-slate-100 bg-slate-50/50 p-3 rounded-b-xl">
               <Link
                 href={`/admin/products/${product.id}/edit`}
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 transition-colors"
@@ -82,6 +97,7 @@ export default async function ProductsList() {
                 <Edit2 size={16} />
                 Edit Product
               </Link>
+              <DeleteProductButton productId={product.id} productName={product.name} />
             </div>
           </div>
         ))}

@@ -66,13 +66,14 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net", // Allow Three.js CDNs
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://challenges.cloudflare.com", // Allow Three.js CDNs and Cloudflare Turnstile
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // Tailwind and Google Fonts require unsafe-inline
       "img-src 'self' data: https: blob:",
       "media-src 'self' https: blob:",
-      "frame-src 'self' https://www.youtube-nocookie.com https://player.vimeo.com",
+      "frame-src 'self' https://www.youtube-nocookie.com https://player.vimeo.com https://challenges.cloudflare.com",
       "font-src 'self' data: https://fonts.gstatic.com",
-      "connect-src 'self'",
+      "connect-src 'self' data: blob: https://challenges.cloudflare.com https://*.challenges.cloudflare.com https://*.cloudflare.com",
+      "worker-src 'self' blob: https://challenges.cloudflare.com",
       "frame-ancestors 'self'",
     ].join('; ')
   );

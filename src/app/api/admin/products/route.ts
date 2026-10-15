@@ -19,17 +19,19 @@ export async function POST(request: Request) {
       data: {
         name: data.name,
         description: data.description,
-        imageUrl: data.imageUrl,
+        imageUrl: data.imageUrl || null,
+        brochureUrl: data.brochureUrl || null,
         platforms: data.platforms || [],
         solutions: data.solutions || [],
         features: data.features || [],
         details: data.details || {},
-        isDraft: data.isDraft || false,
-        order: data.order || 0,
+        isDraft: Boolean(data.isDraft),
+        order: typeof data.order === 'number' ? data.order : (parseInt(data.order, 10) || 0),
       },
     });
     return NextResponse.json({ product }, { status: 201 });
   } catch (error) {
+    console.error('Failed to create product:', error);
     return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
   }
 }

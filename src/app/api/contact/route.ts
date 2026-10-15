@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db/prisma";
+import { verifyTurnstileToken } from "@/lib/security/turnstile";
 
 interface ContactRequestBody {
   fullName: string;
@@ -11,8 +12,9 @@ interface ContactRequestBody {
   industry: string;
   solution: string;
   goals: string;
-  captchaAnswer: string;
-  captchaExpected: string;
+  turnstileToken?: string;
+  captchaAnswer?: string;
+  captchaExpected?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -29,6 +31,7 @@ export async function POST(request: NextRequest) {
       industry,
       solution,
       goals,
+      turnstileToken,
       captchaAnswer,
       captchaExpected,
     } = body;
@@ -85,17 +88,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate Captcha (case-insensitive)
-    if (!captchaAnswer || !captchaExpected) {
-      return NextResponse.json(
-        { error: "Please complete the captcha verification." },
-        { status: 400 }
-      );
-    }
+    // Validate Cloudflare Turnstile token
+    if (turnstileToken) {
+      const clientIp =
+        request.headers.get("cf-connecting-ip") ||
+        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+        undefined;
 
-    if (captchaAnswer.trim().toUpperCase() !== captchaExpected.trim().toUpperCase()) {
+      const turnstileResult = await verifyTurnstileToken(turnstileToken, clientIp);
+      if (!turnstileResult.success) {
+        return NextResponse.json(
+          { error: turnstileResult.error || "Security verification failed. Please try again." },
+          { status: 400 }
+        );
+      }
+    } else if (captchaAnswer && captchaExpected) {
+      // Fallback for legacy captcha
+      if (captchaAnswer.trim().toUpperCase() !== captchaExpected.trim().toUpperCase()) {
+        return NextResponse.json(
+          { error: "Invalid captcha code. Please try again." },
+          { status: 400 }
+        );
+      }
+    } else {
       return NextResponse.json(
-        { error: "Invalid captcha code. Please try again." },
+        { error: "Please complete the security verification challenge." },
         { status: 400 }
       );
     }

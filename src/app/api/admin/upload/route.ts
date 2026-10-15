@@ -86,3 +86,42 @@ export async function POST(req: NextRequest) {
     return handleApiError(error);
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const token =
+      req.cookies.get('admin_token')?.value ||
+      req.headers.get('authorization')?.replace('Bearer ', '');
+
+    if (!token) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    try {
+      await verifyToken(token);
+    } catch {
+      return NextResponse.json({ error: 'Invalid or expired token' }, { status: 401 });
+    }
+
+    const body = await req.json();
+    let storageKey = body.storageKey as string | undefined;
+
+    if (!storageKey && body.url) {
+      const publicUrl = process.env.R2_PUBLIC_URL || '';
+      if (publicUrl && body.url.startsWith(publicUrl)) {
+        storageKey = body.url.replace(`${publicUrl}/`, '');
+      }
+    }
+
+    if (!storageKey) {
+      return NextResponse.json({ error: 'storageKey or url is required' }, { status: 400 });
+    }
+
+    const { deleteFromR2 } = await import('@/lib/storage/r2');
+    await deleteFromR2(storageKey);
+
+    return NextResponse.json({ success: true, message: 'File deleted from storage' });
+  } catch (error) {
+    return handleApiError(error);
+  }
+}

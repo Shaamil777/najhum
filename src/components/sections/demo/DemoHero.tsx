@@ -58,7 +58,7 @@ export default function DemoHero() {
           >
             <div className="relative w-full overflow-hidden group">
               <img 
-                src="/images/demo/IoT%20Irrigation%20Dashboard%20Field%20Cutaway.png" 
+                src="/images/demo/IoT%20Irrigation%20Dashboard%20Field%20Cutaway.webp" 
                 alt="IoT Irrigation Dashboard" 
                 className="w-full h-auto object-cover opacity-80"
               />

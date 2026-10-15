@@ -46,7 +46,7 @@ export const demoContent = {
         platform: "IoTRICs",
         title: "Unified IoT Platform",
         description: "Connect physical assets, sensors, and infrastructure. Deliver real-time visibility, intelligent alerts, and actionable insights to operate smarter and more efficiently.",
-        image: "/images/iotrics/dashboardiortics.png",
+        image: "/images/iotrics/dashboardiortics.webp",
         color: "bg-blue-500",
         textColor: "text-blue-500",
         badgeColor: "bg-blue-50 text-blue-600 border-blue-100"
@@ -64,7 +64,7 @@ export const demoContent = {
         platform: "CropifAI",
         title: "Smart Agriculture Solutions",
         description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.",
-        image: "/images/cropify/dashboardcropify.png",
+        image: "/images/cropify/dashboardcropify.webp",
         color: "bg-amber-500",
         textColor: "text-amber-500",
         badgeColor: "bg-amber-50 text-amber-600 border-amber-100"

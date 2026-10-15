@@ -1,6 +1,6 @@
 /**
  * Comprehensive international country dial codes list
- * Compliant with ITU-T E.164 standard.
+ * Compliant with ITU-T E.164 and ISO 3166-1 standards.
  * Contains all recognized countries and territories globally.
  */
 
@@ -25,13 +25,17 @@ export const POPULAR_COUNTRY_CODES: CountryDialCode[] = [
 ];
 
 export const ALL_COUNTRY_CODES: CountryDialCode[] = [
+  // GCC & Popular Quick Access at top
   { name: "United Arab Emirates", code: "+971" },
   { name: "Saudi Arabia", code: "+966" },
   { name: "Qatar", code: "+974" },
   { name: "Oman", code: "+968" },
   { name: "Kuwait", code: "+965" },
   { name: "Bahrain", code: "+973" },
+
+  // All countries and territories alphabetically
   { name: "Afghanistan", code: "+93" },
+  { name: "Åland Islands", code: "+358" },
   { name: "Albania", code: "+355" },
   { name: "Algeria", code: "+213" },
   { name: "American Samoa", code: "+1-684" },
@@ -43,10 +47,12 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Argentina", code: "+54" },
   { name: "Armenia", code: "+374" },
   { name: "Aruba", code: "+297" },
+  { name: "Ascension Island", code: "+247" },
   { name: "Australia", code: "+61" },
   { name: "Austria", code: "+43" },
   { name: "Azerbaijan", code: "+994" },
   { name: "Bahamas", code: "+1-242" },
+  { name: "Bahrain", code: "+973" },
   { name: "Bangladesh", code: "+880" },
   { name: "Barbados", code: "+1-246" },
   { name: "Belarus", code: "+375" },
@@ -56,6 +62,7 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Bermuda", code: "+1-441" },
   { name: "Bhutan", code: "+975" },
   { name: "Bolivia", code: "+591" },
+  { name: "Bonaire, Sint Eustatius and Saba", code: "+599" },
   { name: "Bosnia and Herzegovina", code: "+387" },
   { name: "Botswana", code: "+267" },
   { name: "Brazil", code: "+55" },
@@ -145,6 +152,7 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Kenya", code: "+254" },
   { name: "Kiribati", code: "+686" },
   { name: "Kosovo", code: "+383" },
+  { name: "Kuwait", code: "+965" },
   { name: "Kyrgyzstan", code: "+996" },
   { name: "Laos", code: "+856" },
   { name: "Latvia", code: "+371" },
@@ -192,6 +200,7 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "North Macedonia", code: "+389" },
   { name: "Northern Mariana Islands", code: "+1-670" },
   { name: "Norway", code: "+47" },
+  { name: "Oman", code: "+968" },
   { name: "Pakistan", code: "+92" },
   { name: "Palau", code: "+680" },
   { name: "Palestine", code: "+970" },
@@ -200,9 +209,11 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Paraguay", code: "+595" },
   { name: "Peru", code: "+51" },
   { name: "Philippines", code: "+63" },
+  { name: "Pitcairn Islands", code: "+64" },
   { name: "Poland", code: "+48" },
   { name: "Portugal", code: "+351" },
   { name: "Puerto Rico", code: "+1-787" },
+  { name: "Qatar", code: "+974" },
   { name: "Réunion", code: "+262" },
   { name: "Romania", code: "+40" },
   { name: "Russia", code: "+7" },
@@ -217,6 +228,7 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Samoa", code: "+685" },
   { name: "San Marino", code: "+378" },
   { name: "Sao Tome and Principe", code: "+239" },
+  { name: "Saudi Arabia", code: "+966" },
   { name: "Senegal", code: "+221" },
   { name: "Serbia", code: "+381" },
   { name: "Seychelles", code: "+248" },
@@ -247,6 +259,7 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Tokelau", code: "+690" },
   { name: "Tonga", code: "+676" },
   { name: "Trinidad and Tobago", code: "+1-868" },
+  { name: "Tristan da Cunha", code: "+290" },
   { name: "Tunisia", code: "+216" },
   { name: "Turkey", code: "+90" },
   { name: "Turkmenistan", code: "+993" },
@@ -254,12 +267,13 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Tuvalu", code: "+688" },
   { name: "Uganda", code: "+256" },
   { name: "Ukraine", code: "+380" },
+  { name: "United Arab Emirates", code: "+971" },
   { name: "United Kingdom", code: "+44" },
   { name: "United States", code: "+1" },
   { name: "Uruguay", code: "+598" },
   { name: "Uzbekistan", code: "+998" },
   { name: "Vanuatu", code: "+678" },
-  { name: "Vatican City", code: "+379" },
+  { name: "Vatican City", code: "+39" },
   { name: "Venezuela", code: "+58" },
   { name: "Vietnam", code: "+84" },
   { name: "US Virgin Islands", code: "+1-340" },
@@ -269,3 +283,11 @@ export const ALL_COUNTRY_CODES: CountryDialCode[] = [
   { name: "Zambia", code: "+260" },
   { name: "Zimbabwe", code: "+263" },
 ];
+
+// Unique alphabetically sorted list of all countries for dropdown select options
+export const ALL_COUNTRY_OPTIONS = Array.from(
+  new Set(ALL_COUNTRY_CODES.map((c) => c.name))
+).map((name) => ({
+  value: name,
+  label: name,
+}));

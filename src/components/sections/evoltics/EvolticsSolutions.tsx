@@ -44,7 +44,7 @@ const advantageCards: AdvantageCardData[] = [
     icon: Layers,
     tag: "END-TO-END",
     badge: "SINGLE SLA ACCOUNTABILITY",
-    imageSrc: "/images/elvotics/card_1.png",
+    imageSrc: "/images/elvotics/card_1.webp",
     highlights: ["Licensing & Approvals", "Hardware & Installation", "Unified Operator CSMP"]
   },
   {
@@ -52,7 +52,7 @@ const advantageCards: AdvantageCardData[] = [
     icon: ShieldCheck,
     tag: "REGULATORY",
     badge: "DEWA • TAQA • FEWA",
-    imageSrc: "/images/elvotics/card_2.png",
+    imageSrc: "/images/elvotics/card_2.webp",
     highlights: ["CPO License Acceleration", "Grid Authority Liaison", "Statutory Compliance Audit"]
   },
   {
@@ -60,7 +60,7 @@ const advantageCards: AdvantageCardData[] = [
     icon: Cpu,
     tag: "HARDWARE AGNOSTIC",
     badge: "OCPP 1.6J / 2.0.1",
-    imageSrc: "/images/elvotics/card_3.png",
+    imageSrc: "/images/elvotics/card_3.webp",
     highlights: ["Zero Brand Lock-in", "Multi-Vendor AC & DC", "Direct Firmware Management"]
   },
   {
@@ -68,7 +68,7 @@ const advantageCards: AdvantageCardData[] = [
     icon: Activity,
     tag: "TELEMETRY",
     badge: "SUB-SECOND MONITORING",
-    imageSrc: "/images/elvotics/card_4.png",
+    imageSrc: "/images/elvotics/card_4.webp",
     highlights: ["Live Power Distribution", "Remote Diagnostics & Reset", "Dynamic Load Balancing"]
   },
   {
@@ -76,7 +76,7 @@ const advantageCards: AdvantageCardData[] = [
     icon: Sparkles,
     tag: "WHITE LABEL",
     badge: "OPERATOR DASHBOARD",
-    imageSrc: "/images/elvotics/card_5.png",
+    imageSrc: "/images/elvotics/card_5.webp",
     highlights: ["Custom Logo & Domain", "Operator Palette", "Unified Driver App"]
   },
   {
@@ -84,7 +84,7 @@ const advantageCards: AdvantageCardData[] = [
     icon: Headphones,
     tag: "RELIABILITY",
     badge: "99.9% UPTIME SLA",
-    imageSrc: "/images/elvotics/card_6.png",
+    imageSrc: "/images/elvotics/card_6.webp",
     highlights: ["Certified Field Engineering", "Predictive Maintenance", "Rapid-Response SLA"]
   }
 ];

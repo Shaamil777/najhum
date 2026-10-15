@@ -19,20 +19,20 @@ import {
   ChevronDown
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { siteConfig } from "@/config/site";
 import { contactContent } from "@/content/contact";
-import { ALL_COUNTRY_CODES } from "@/content/countryDialCodes";
-import ContactCaptcha from "./ContactCaptcha";
+import { ALL_COUNTRY_CODES, ALL_COUNTRY_OPTIONS } from "@/content/countryDialCodes";
+import ContactTurnstile, { type ContactTurnstileRef } from "./ContactTurnstile";
 
 export default function ContactForm() {
   const { form: formContent } = contactContent;
 
   const [phoneCountryCode, setPhoneCountryCode] = useState("+971");
   const [phone, setPhone] = useState("");
-  const [captchaAnswer, setCaptchaAnswer] = useState("");
-  const [captchaExpected, setCaptchaExpected] = useState("");
-  const [captchaError, setCaptchaError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileError, setTurnstileError] = useState("");
+  const turnstileRef = useRef<ContactTurnstileRef>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -46,16 +46,11 @@ export default function ContactForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitError("");
-    setCaptchaError("");
+    setTurnstileError("");
 
-    // Validate Captcha
-    if (!captchaAnswer.trim()) {
-      setCaptchaError("Please enter the verification code.");
-      return;
-    }
-
-    if (captchaAnswer.trim().toUpperCase() !== captchaExpected.trim().toUpperCase()) {
-      setCaptchaError("Incorrect verification code. Please check and try again.");
+    // Validate Turnstile
+    if (!turnstileToken) {
+      setTurnstileError("Please complete the Cloudflare security verification.");
       return;
     }
 
@@ -72,8 +67,7 @@ export default function ContactForm() {
       industry: String(data.get("industry") || "").trim(),
       solution: String(data.get("solution") || "").trim(),
       goals: String(data.get("goals") || "").trim(),
-      captchaAnswer: captchaAnswer.trim(),
-      captchaExpected: captchaExpected.trim(),
+      turnstileToken,
     };
 
     setIsSubmitting(true);
@@ -100,6 +94,9 @@ export default function ContactForm() {
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : "An unexpected error occurred.";
       setSubmitError(errorMsg);
+      // Reset Turnstile on error so user can re-verify
+      turnstileRef.current?.reset();
+      setTurnstileToken("");
     } finally {
       setIsSubmitting(false);
     }
@@ -108,8 +105,9 @@ export default function ContactForm() {
   function handleReset() {
     setSubmitSuccess(false);
     setSubmitError("");
-    setCaptchaError("");
-    setCaptchaAnswer("");
+    setTurnstileError("");
+    setTurnstileToken("");
+    turnstileRef.current?.reset();
     setPhone("");
     setSubmittedData(null);
   }
@@ -292,8 +290,8 @@ export default function ContactForm() {
                           aria-label="Country Dial Code"
                           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                         >
-                          {ALL_COUNTRY_CODES.map((c) => (
-                            <option key={`${c.name}-${c.code}`} value={c.code}>
+                          {ALL_COUNTRY_CODES.map((c, idx) => (
+                            <option key={`${c.name}-${c.code}-${idx}`} value={c.code}>
                               {c.name} ({c.code})
                             </option>
                           ))}
@@ -327,20 +325,7 @@ export default function ContactForm() {
                     required
                     placeholder="Select your country"
                     defaultValue=""
-                    options={[
-                      { value: "United Arab Emirates", label: "United Arab Emirates" },
-                      { value: "Saudi Arabia", label: "Saudi Arabia" },
-                      { value: "Qatar", label: "Qatar" },
-                      { value: "Oman", label: "Oman" },
-                      { value: "Kuwait", label: "Kuwait" },
-                      { value: "Bahrain", label: "Bahrain" },
-                      { value: "United States", label: "United States / Canada" },
-                      { value: "United Kingdom", label: "United Kingdom" },
-                      { value: "India", label: "India" },
-                      { value: "Germany", label: "Germany" },
-                      { value: "Singapore", label: "Singapore" },
-                      { value: "Other", label: "Other Country" },
-                    ]}
+                    options={ALL_COUNTRY_OPTIONS}
                   />
                   <Select
                     id="industry"
@@ -389,15 +374,25 @@ export default function ContactForm() {
                   rows={4}
                 />
 
-                {/* Row 6: Captcha Verification (With label above box) */}
+                {/* Row 6: Security Verification (Cloudflare Turnstile) */}
                 <div className="pt-1">
-                  <ContactCaptcha
+                  <ContactTurnstile
+                    ref={turnstileRef}
                     label="Security Verification"
                     required
-                    value={captchaAnswer}
-                    onChange={setCaptchaAnswer}
-                    onCodeChange={setCaptchaExpected}
-                    error={captchaError}
+                    onVerify={(token) => {
+                      setTurnstileToken(token);
+                      setTurnstileError("");
+                    }}
+                    onExpire={() => {
+                      setTurnstileToken("");
+                      setTurnstileError("Security verification expired. Please verify again.");
+                    }}
+                    onError={(msg) => {
+                      setTurnstileToken("");
+                      setTurnstileError(msg);
+                    }}
+                    error={turnstileError}
                   />
                 </div>
 

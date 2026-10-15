@@ -24,7 +24,7 @@ export default function DemoCta() {
           <div className="flex justify-center md:justify-end w-full">
             <div className="relative w-full md:w-[110%] md:-mr-10 lg:-mr-16 rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src="/images/demo/Industrial%20Digital%20Twin%20Network.png" 
+                src="/images/demo/Industrial%20Digital%20Twin%20Network.webp" 
                 alt="Industrial Digital Twin Network" 
                 className="w-full h-auto object-cover opacity-30"
               />

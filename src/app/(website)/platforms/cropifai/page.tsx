@@ -13,6 +13,7 @@ import PlatformSolutionsServer from "@/components/shared/PlatformSolutionsServer
 
 import CropifaiBusinessModels from "@/components/sections/cropifai/CropifaiBusinessModels";
 import CropifaiClients from "@/components/sections/cropifai/CropifaiClients";
+import CropifaiFaq from "@/components/sections/cropifai/CropifaiFaq";
 import CropifaiCta from "@/components/sections/cropifai/CropifaiCta";
 
 
@@ -25,7 +26,7 @@ export default function CropifaiPage() {
       <CropifaiSolutions />
       <CropifaiInterface />
       <PlatformProductsServer platformId="cropifai" />
-      <PlatformSolutionsServer platformId="cropifai" />
+      {/* <PlatformSolutionsServer platformId="cropifai" /> */}
       <CropifaiHardware />
       <CropifaiWaterFlow />
       {/* <CropifaiWorkflow /> */}
@@ -34,6 +35,7 @@ export default function CropifaiPage() {
 
       {/* <CropifaiBusinessModels /> */}
       {/* <CropifaiClients /> */}
+      <CropifaiFaq />
       <CropifaiCta />
     </div>
   );

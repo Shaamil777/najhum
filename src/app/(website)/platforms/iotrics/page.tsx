@@ -6,6 +6,7 @@ import IotricsMethodology from "@/components/sections/iotrics/IotricsMethodology
 import IotricsBusinessModel from "@/components/sections/iotrics/IotricsBusinessModel";
 import IotricsCapabilities from "@/components/sections/iotrics/IotricsCapabilities";
 import IotricsIndustries from "@/components/sections/iotrics/IotricsIndustries";
+import IotricsFaq from "@/components/sections/iotrics/IotricsFaq";
 import IotricsCta from "@/components/sections/iotrics/IotricsCta";
 import PlatformProductsServer from "@/components/shared/PlatformProductsServer";
 import PlatformSolutionsServer from "@/components/shared/PlatformSolutionsServer";
@@ -35,10 +36,11 @@ export default function IotricsPage() {
       <IotricsAbout />
       <IotricsCore />
       <PlatformProductsServer platformId="iotrics" />
-      <PlatformSolutionsServer platformId="iotrics" />
+      {/* <PlatformSolutionsServer platformId="iotrics" /> */}
       <IotricsBusinessModel />
       <IotricsCapabilities />
       <IotricsIndustries />
+      <IotricsFaq />
       <IotricsCta />
     </div>
   );

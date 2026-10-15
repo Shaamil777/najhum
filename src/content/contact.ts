@@ -92,28 +92,44 @@ export const contactContent = {
     title: "Frequently Asked Questions",
     items: [
       {
-        question: "What does Najhum Group specialize in?",
-        answer: "Najhum Group specializes in intelligent IoT, sustainable EV mobility, smart energy management, and data-driven technology solutions that help organizations operate more efficiently and sustainably."
+        question: "What does Najhum do?",
+        answer: "We build and run connected monitoring systems for industrial sites, EV charging networks and farms. Sensors and the Najhum IoT Controller collect the data on site; our cloud platform turns it into dashboards, alerts and reports. Three platforms: IoTRICs for industrial IoT, EVOLTICS for EV charging management, cropifAI for agriculture. Sensors, connectivity, platform and support come from one supplier."
       },
       {
-        question: "What is IoTRICs?",
-        answer: "IoTRICs is Najhum's comprehensive IoT platform for asset visibility and operational intelligence. It enables real-time data collection, monitoring, visualization, alerts, and analytics across different types of infrastructure."
+        question: "Do I have to replace the equipment I already have?",
+        answer: "No. We install the Najhum IoT Controller on site, and it connects to your existing meters, chillers, chargers and building systems over the protocols they already speak — LoRaWAN, Modbus, BACnet/IP, MQTT and REST — then sends the readings to the platform. The equipment itself is untouched and deployment needs no shutdown."
       },
       {
-        question: "What is EVOLTICS?",
-        answer: "EVOLTICS is Najhum's electric vehicle charging management platform. It allows operators to connect and manage OCPP-compliant chargers through a unified dashboard while providing real-time network monitoring, revenue management, smart load management, and maintenance alerts."
+        question: "How is Najhum bought — capital purchase or subscription?",
+        answer: "Two models. SolaaS bundles hardware, platform, deployment and support into one recurring operating cost, with no capital outlay. PaaS licenses the platform. Run it on infrastructure you already own, or buy the hardware from us outright and own the assets."
       },
       {
-        question: "Can Najhum's solutions work with existing hardware?",
-        answer: "Yes. Najhum's platforms are designed to be hardware agnostic, allowing diverse infrastructure and, in the case of EVOLTICS, OCPP-compliant chargers from different manufacturers to be connected and managed through a unified platform."
+        question: "What does a deployment involve, and how long does it take?",
+        answer: "Site survey, sensor installation, connectivity setup, platform configuration, handover and training."
       },
       {
-        question: "What industries can Najhum support?",
-        answer: "IoTRICs is designed as an industry-agnostic platform and can support applications across areas such as logistics, facilities management, industrial operations, and smart city infrastructure."
+        question: "Where is my data stored, and who can see it?",
+        answer: "Data is held on our secure cloud platform with role-based access, so each user sees only their own sites. The data is yours and is exportable at any time."
       },
       {
-        question: "Does Najhum offer managed technology solutions?",
-        answer: "Yes. Through its Solution as a Service (Solaas) model, Najhum provides an end-to-end managed ecosystem covering deployment, network configuration, updates, scalability, and platform access."
+        question: "What support do I get after handover?",
+        answer: "Annual maintenance contracts cover platform support, firmware updates and on-site service."
+      },
+      {
+        question: "Can it connect to our existing BMS, ERP or reporting tools?",
+        answer: "Yes. The platform exposes a REST API and MQTT, so data can feed an existing BMS, ERP or BI tool rather than living only in our dashboard."
+      },
+      {
+        question: "Can we start small?",
+        answer: "Yes, and it is what we recommend. One site, one problem. If it works, it extends to the rest of the estate on the same subscription."
+      },
+      {
+        question: "Which industries do you work in?",
+        answer: "Manufacturing, utilities, facilities and commercial buildings, cold storage, mobility and agriculture, across the UAE and wider GCC."
+      },
+      {
+        question: "How do I get started?",
+        answer: "Request a demo, or call +971 55 617 7234 / +971 52 569 9979, or email info@najhumgroup.com. We are at in5 Innovation Centre, Dubai Design District."
       }
     ]
   },
