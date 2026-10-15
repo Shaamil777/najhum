@@ -63,11 +63,16 @@ export default async function SolutionPage({ params }: PageProps) {
   const document = liveDocument({ ...solution, sections: solution.sections || [] });
   const sectionsToRender = document.sections.filter(section => !solution.isDraft ? !section.isDraft : true);
 
-  const products = await prisma.product.findMany({
-    where: { isDraft: false, solutions: { has: solution.slug } },
-    orderBy: { order: 'asc' },
-    select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true },
-  });
+  let products: Array<{ id: string; name: string; description: string; imageUrl: string | null; brochureUrl: string | null }> = [];
+  try {
+    products = await prisma.product.findMany({
+      where: { isDraft: false, solutions: { has: solution.slug } },
+      orderBy: { order: 'asc' },
+      select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true },
+    });
+  } catch (err) {
+    console.error("Failed to query products for solution:", err);
+  }
 
   const selectedIds = [
     ...new Set(
@@ -77,12 +82,17 @@ export default async function SolutionPage({ params }: PageProps) {
     ),
   ];
 
-  const availableProducts = selectedIds.length
-    ? await prisma.product.findMany({
+  let availableProducts: Array<{ id: string; name: string; description: string; imageUrl: string | null; brochureUrl: string | null }> = [];
+  if (selectedIds.length) {
+    try {
+      availableProducts = await prisma.product.findMany({
         where: { isDraft: false, id: { in: selectedIds } },
         select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true },
-      })
-    : [];
+      });
+    } catch (err) {
+      console.error("Failed to query available products by id:", err);
+    }
+  }
 
   return (
     <main className="min-h-screen">
