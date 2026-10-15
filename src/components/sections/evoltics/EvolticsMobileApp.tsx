@@ -114,11 +114,6 @@ export default function EvolticsMobileApp() {
             transition={{ duration: 0.6 }}
             className="order-2 relative w-[220px] sm:w-[280px] md:w-[240px] lg:w-[300px] xl:w-[340px] h-[440px] sm:h-[580px] md:h-[480px] lg:h-[620px] xl:h-[680px] rounded-[2.5rem] sm:rounded-[3.2rem] bg-black border-[7px] sm:border-[9px] border-[#18181b] shadow-2xl flex flex-col items-center justify-center overflow-hidden mx-auto"
           >
-            {/* Phone Notch / Dynamic Island */}
-            <div className="absolute top-3 inset-x-0 h-4 sm:h-5 bg-black rounded-full w-20 sm:w-24 mx-auto z-20 flex items-center justify-end pr-2 pointer-events-none">
-              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[#18181b] rounded-full border border-neutral-800" />
-            </div>
-
             {/* Actual Evoltics Mobile App Demo Video */}
             <video 
               ref={videoRef}
