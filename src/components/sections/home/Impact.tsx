@@ -74,7 +74,8 @@ export default function Impact() {
             
             {/* Card 1 */}
             <Card variant="outlined" className="bg-white rounded-[1.75rem] sm:rounded-[2.5rem] p-5 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
-              <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#cbd5e1_2px,transparent_2px)] [background-size:24px_24px] opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
+              <ImpactDotWave id="problem" />
+              <div className="relative z-10">
 
               <div className="relative z-10 flex flex-wrap justify-between items-center gap-2 sm:gap-4 mb-5 sm:mb-8">
                 <span className="text-[10px] sm:text-sm font-semibold tracking-[0.12em] sm:tracking-widest text-zinc-400 uppercase">
@@ -98,10 +99,13 @@ export default function Impact() {
                   {homeContent.impact.card1.outcome}
                 </p>
               </div>
+              </div>
             </Card>
 
             {/* Card 2 */}
-            <Card variant="outlined" className="bg-slate-50 rounded-[1.75rem] sm:rounded-[2.5rem] p-3 sm:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]">
+            <Card variant="outlined" className="relative isolate overflow-hidden bg-slate-50 rounded-[1.75rem] sm:rounded-[2.5rem] p-3 sm:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]">
+              <ImpactDotWave id="features" />
+              <div className="relative z-10">
               <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4 px-1 sm:px-0 mb-4 sm:mb-6">
                 <span className="text-[10px] sm:text-sm font-semibold tracking-[0.12em] sm:tracking-widest text-zinc-400 uppercase">
                   · {homeContent.impact.card2.label1} ·
@@ -163,6 +167,7 @@ export default function Impact() {
                   </div>
                 </div>
               </div>
+              </div>
             </Card>
 
             {/* Card 3 */}
@@ -180,7 +185,7 @@ export default function Impact() {
                 <ImpactActivity kind="retrofit" />
               </div>
               
-              <div className="flex flex-col sm:flex-row justify-between items-end gap-8 mt-auto border-t border-zinc-100 pt-8">
+              <div className="relative z-10 flex flex-col sm:flex-row justify-between items-end gap-8 mt-auto border-t border-zinc-100 pt-8">
                 <p className="text-zinc-500 text-base sm:text-lg leading-relaxed max-w-lg">
                   {homeContent.impact.card3.description}
                 </p>

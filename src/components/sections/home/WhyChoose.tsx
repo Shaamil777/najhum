@@ -1,206 +1,65 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { Check, ArrowRight, BarChart3 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useState, type CSSProperties } from "react";
+import { Activity, LayoutDashboard, Wrench, Share2, Zap, Plug, Check, X, ArrowRight, Repeat2 } from "lucide-react";
 import { homeContent } from "@/content/home";
-import Link from "next/link";
+import styles from "./WhyChoose.module.css";
+
+const icons = [Activity, LayoutDashboard, Wrench, Share2, Zap, Plug];
+const tilts = [-1.8, 1.4, -1.1, 1.7, -1.5, 1.2];
 
 export default function WhyChoose() {
-  const { whyChoose } = homeContent;
+  const { features } = homeContent.whyChoose;
+  const [connected, setConnected] = useState<boolean[]>(() => features.map(() => false));
+  const count = connected.filter(Boolean).length;
+  const allOn = count === features.length;
+  const setAll = (value: boolean) => setConnected(features.map(() => value));
 
   return (
-    <section className="relative w-full pt-10 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 overflow-hidden font-sans bg-white">
-      
-      {/* Background Split (Desktop Only) */}
-      <div className="absolute inset-0 pointer-events-none hidden lg:flex">
-        {/* Left Side Bg */}
-        <div className="w-1/2 bg-white relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-200/40 rounded-full blur-[120px]" />
-        </div>
-        {/* Right Side Bg */}
-        <div className="w-1/2 bg-blue-50/40 relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px]" />
-        </div>
-      </div>
-
-      <div className="container mx-auto relative z-10 max-w-[1400px] px-4 sm:px-6">
-        
-        {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16 lg:mb-0 lg:hidden relative z-20">
-          <span className="text-sm font-semibold tracking-widest text-primary uppercase mb-4 flex items-center gap-4 before:h-px before:w-8 before:bg-blue-200 after:h-px after:w-8 after:bg-blue-200">
-            {whyChoose.label}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 mb-6">
-            Smarter. Unified. <span className="text-primary">Future-Ready.</span>
-          </h2>
-          <p className="text-base sm:text-lg text-zinc-500 max-w-2xl">
-            {whyChoose.subtitle}
-          </p>
-        </div>
-
-        {/* ════════════════════════════════════════════════════════════════════════
-            DESKTOP SPLIT VIEW (lg and up)
-           ════════════════════════════════════════════════════════════════════════ */}
-        <div className="hidden lg:grid grid-cols-2 gap-8 xl:gap-32">
-          
-          {/* LEFT COLUMN: Traditional */}
-          <div className="pt-4 lg:pt-6 pb-8 lg:pb-10 flex flex-col items-end bg-transparent">
-            
-            <h2 className="text-4xl font-medium tracking-tight text-zinc-600 mb-16 text-right w-full">
-              Instead of
-            </h2>
-
-            <div className="space-y-6 w-full flex flex-col items-end">
-              {whyChoose.features.map((f, idx) => {
-                // simple stagger
-                let staggerClass = "mr-6";
-                if (idx % 3 === 0) staggerClass = "mr-12";
-                if (idx % 3 === 1) staggerClass = "mr-0";
-                
-                return (
-                  <motion.div
-                    key={`desktop-trad-${idx}`}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={cn(
-                      "bg-white border border-zinc-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
-                      staggerClass
-                    )}
-                  >
-                    <span className="text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-1.5 block">
-                      {f.id ? `${f.id} · ` : ""}{f.name}
-                    </span>
-                    <h4 className="text-base font-semibold text-zinc-800 leading-snug">
-                      {f.competitor}
-                    </h4>
-                  </motion.div>
-                );
-              })}
-            </div>
+    <section className={styles.section} aria-labelledby="compare-heading">
+      <span className={styles.glow} style={{ opacity: count / features.length }} aria-hidden="true" />
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.copy}>
+            <span className={styles.eyebrow}>Same assets. Different operation.</span>
+            <h2 id="compare-heading">Flip the switch on <span className={allOn ? styles.blue : undefined}>how you operate.</span></h2>
+            <p><span className={styles.desktopCopy}>Toggle to see what changes when every asset reports to one platform, or tap any card to flip it.</span><span className={styles.mobileCopy}>Toggle all six, or tap a card to flip it.</span></p>
           </div>
-
-          {/* RIGHT COLUMN: Najhum */}
-          <div className="pt-4 lg:pt-6 pb-8 lg:pb-10 flex flex-col items-start bg-transparent">
-            
-            <h2 className="text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-left w-full">
-              Najhum <span className="font-serif italic font-normal text-primary">gives</span>
-            </h2>
-
-            <div className="space-y-6 w-full flex flex-col items-start">
-              {whyChoose.features.map((f, idx) => {
-                let staggerClass = "ml-6";
-                if (idx % 3 === 0) staggerClass = "ml-0";
-                if (idx % 3 === 1) staggerClass = "ml-12";
-
-                return (
-                  <motion.div
-                    key={`desktop-najhum-${idx}`}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={cn(
-                      "bg-[#f6f9fc] backdrop-blur-sm border border-primary/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] shadow-primary/5 rounded-[2.5rem] p-8 max-w-[420px] w-full transition-transform hover:-translate-y-1",
-                      staggerClass
-                    )}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="mt-0.5 shrink-0">
-                        <Check className="w-5 h-5 text-primary" strokeWidth={3} />
-                      </div>
-                      <div>
-                        <span className="text-[11px] font-bold tracking-wider text-primary/70 uppercase mb-1.5 block">
-                          {f.id ? `${f.id} · ` : ""}{f.name}
-                        </span>
-                        <h4 className="text-base font-bold text-zinc-900 leading-snug">
-                          {f.najhum}
-                        </h4>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+          <div className={styles.controls}>
+            <div className={styles.toggle} role="group" aria-label="Compare traditional systems with Najhum">
+              <span aria-hidden="true" className={`${styles.pill} ${allOn ? styles.pillOn : ""} ${count > 0 && !allOn ? styles.pillMixed : ""}`} />
+              <button type="button" aria-pressed={count === 0} onClick={() => setAll(false)}><X size={16} aria-hidden="true" />Instead of</button>
+              <button type="button" aria-pressed={allOn} onClick={() => setAll(true)}><Check size={16} aria-hidden="true" />Najhum gives</button>
+            </div>
+            <div className={styles.progress}>
+              <span>Connected</span>
+              <div className={styles.track} role="progressbar" aria-label="Connected capabilities" aria-valuemin={0} aria-valuemax={features.length} aria-valuenow={count}><span style={{ width: `${count / features.length * 100}%` }} /></div>
+              <strong aria-live="polite" aria-atomic="true">{count}<small>/{features.length}</small></strong>
             </div>
           </div>
         </div>
 
-        {/* ════════════════════════════════════════════════════════════════════════
-            MOBILE COMBINED VIEW (< lg)
-           ════════════════════════════════════════════════════════════════════════ */}
-        <div className="flex lg:hidden flex-col items-center py-8">
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-900 mb-10 text-center w-full max-w-sm md:max-w-2xl">
-            {whyChoose.competitorLabel} <span className="text-zinc-400 font-normal">vs</span> <span className="font-serif italic font-normal text-primary">{whyChoose.najhumLabel}</span>
-          </h2>
-
-          <div className="space-y-5 w-full max-w-md md:max-w-3xl">
-            {whyChoose.features.map((f, idx) => (
-              <motion.div
-                key={`mobile-combined-${idx}`}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-white border border-border shadow-sm rounded-3xl p-5 sm:p-6 md:p-8 w-full relative overflow-hidden flex flex-col md:flex-row md:items-stretch gap-5 md:gap-0"
-              >
-                {/* Traditional Side */}
-                <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-border/50 pb-5 md:pb-0 md:pr-8 mb-5 md:mb-0">
-                  <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-zinc-400 uppercase mb-1.5 md:mb-2 block">
-                    {f.id ? `${f.id} · ` : ""}Instead of: {f.name}
-                  </span>
-                  <h4 className="text-[14px] md:text-[15px] font-semibold text-zinc-500 leading-snug line-through decoration-zinc-300">
-                    {f.competitor}
-                  </h4>
-                </div>
-
-                {/* Najhum Side */}
-                <div className="w-full md:w-1/2 relative md:pl-8">
-                  <div className="absolute -left-5 sm:-left-6 md:-left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 hidden md:block" />
-                  <div className="absolute -left-6 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 md:hidden" />
-                  
-                  <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-primary uppercase mb-2 block">
-                    {f.id ? `${f.id} · ` : ""}{whyChoose.najhumLabel} Gives: {f.name}
-                  </span>
-                  <div className="flex items-start gap-2.5 md:gap-3">
-                    <Check className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0 mt-0.5" strokeWidth={3} />
-                    <div>
-                      <h4 className="text-[14px] md:text-[15px] font-bold text-zinc-900 leading-snug">
-                        {f.najhum}
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className={styles.tiles} aria-label="Tap a capability to compare">
+          {features.map((feature, index) => {
+            const on = connected[index];
+            const Icon = icons[index];
+            return (
+              <button key={feature.id} type="button" className={`${styles.tile} ${on ? styles.connected : ""}`} style={{ "--tilt": `${tilts[index]}deg`, "--delay": `${index * 60}ms` } as CSSProperties} aria-pressed={on} aria-label={`${feature.name}: ${on ? "Najhum gives" : "Instead of"}. Tap to ${on ? "disconnect" : "connect"}.`} onClick={() => setConnected(previous => previous.map((value, i) => i === index ? !value : value))}>
+                <span className={styles.tileHeader}>
+                  <span className={styles.icon}><Icon size={22} aria-hidden="true" strokeWidth={1.8} /></span>
+                  <span className={styles.title}><span>{feature.id}<span className={styles.mobileNumber}> / 06</span></span><strong>{feature.name}</strong></span>
+                </span>
+                <span className={styles.label}>{on ? "With Najhum" : "Instead of"}</span>
+                <span className={styles.statement}>{on ? feature.najhum : feature.competitor}</span>
+                <span className={styles.badge}>{on ? "Connected" : "Disconnected"}</span>
+              </button>
+            );
+          })}
         </div>
-
-        {/* Bottom CTA Banner */}
-        <div className="mt-4 sm:mt-6 lg:mt-8 bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative z-20 max-w-5xl mx-auto">
-           <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
-                 <BarChart3 className="w-8 h-8 text-primary" />
-              </div>
-              <div className="flex flex-col gap-1">
-                 <h4 className="text-lg md:text-xl font-bold text-zinc-900">Move from legacy limitations to limitless possibilities.</h4>
-                 <p className="text-zinc-500 text-sm md:text-base max-w-xl">Najhum Platform empowers industries with real-time intelligence, automation, and efficiency at every level.</p>
-              </div>
-           </div>
-           
-           <div className="flex flex-col items-center md:items-end gap-3 flex-shrink-0 w-full md:w-auto mt-4 md:mt-0 md:pl-8 md:border-l border-zinc-100">
-              <span className="text-sm font-medium text-zinc-500">Ready to transform your operations?</span>
-              <Link href="/contact" className="w-full md:w-auto">
-                <button className="w-full bg-primary hover:bg-blue-700 transition-colors text-white font-semibold py-3 px-8 rounded-full flex items-center justify-center gap-2">
-                   Request a Demo <ArrowRight className="w-4 h-4" />
-                </button>
-              </Link>
-           </div>
+        <div className={styles.footer}>
+          <span><Repeat2 size={17} aria-hidden="true" />{count === 0 ? "Tap a card to flip it." : allOn ? "One platform, any vendor, every asset." : "Getting there — keep flipping."}</span>
+          <span className={styles.swipe}>Swipe <ArrowRight size={16} aria-hidden="true" /></span>
         </div>
-
       </div>
     </section>
   );
