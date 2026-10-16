@@ -21,7 +21,7 @@ export default function CropifaiHardware() {
   ];
 
   return (
-    <section className="w-full py-16 md:py-20 bg-zinc-50 relative overflow-hidden font-sans border-b border-zinc-200">
+    <section id="cropifai-hardware" aria-label="Our Smart Ecosystem" className="w-full py-16 md:py-20 bg-zinc-50 relative overflow-hidden font-sans border-b border-zinc-200">
       
       {/* Decorative background blobs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-[100%] blur-[120px] pointer-events-none" />

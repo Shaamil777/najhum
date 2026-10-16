@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowDownToLine, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import type { LegalDocument } from "@/content/legal";
 
 export default function LegalPage({ document }: { document: LegalDocument }) {
@@ -9,8 +9,7 @@ export default function LegalPage({ document }: { document: LegalDocument }) {
         <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-primary"><ShieldCheck size={16} />Najhum Technologies LLC</span>
         <h1 className="mt-5 text-4xl sm:text-6xl font-bold tracking-tight leading-tight">{document.title}</h1>
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-sm text-slate-500">
-          <p>Last updated: <time dateTime="2026-10-17">{document.updated}</time></p>
-          <a href={document.pdf} download className="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-200 px-5 text-slate-700 hover:border-primary hover:text-primary"><ArrowDownToLine size={16} />Download original PDF</a>
+          <p>Publication Date: <time dateTime="2025-11-29">{document.updated}</time></p>
         </div>
       </header>
       <div className="grid gap-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 pt-10 sm:pt-14">

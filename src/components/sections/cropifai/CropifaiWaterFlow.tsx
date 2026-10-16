@@ -12,7 +12,7 @@ export default function CropifaiWaterFlow() {
   const flowControls = waterFlow.flowControls;
 
   return (
-    <section id="nqt02" className="scroll-mt-24 w-full py-16 lg:py-20 bg-white relative overflow-hidden font-sans border-b border-zinc-200">
+    <section aria-label="Najhum Wireless Smart Valve NQT02" id="nqt02" className="scroll-mt-24 w-full py-16 lg:py-20 bg-white relative overflow-hidden font-sans border-b border-zinc-200">
 
       {/* Decorative background blob */}
       <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-primary/5 rounded-[100%] blur-[120px] -translate-y-1/2 pointer-events-none" />

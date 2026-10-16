@@ -45,7 +45,7 @@ export default function IotricsCore() {
   }, [activeIndex]);
 
   return (
-    <section className="w-full pt-16 sm:pt-20 lg:pt-10 pb-12 sm:pb-16 lg:pb-20 bg-white text-neutral-900 font-poppins">
+    <section id="iotrics-core" aria-label="Io TRICs Core" className="w-full pt-16 sm:pt-20 lg:pt-10 pb-12 sm:pb-16 lg:pb-20 bg-white text-neutral-900 font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px] flex flex-col items-center">
         
         <div className="text-center max-w-4xl mx-auto flex flex-col items-center mb-16 lg:mb-24">

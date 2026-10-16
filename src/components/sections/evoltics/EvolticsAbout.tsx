@@ -41,7 +41,7 @@ export default function EvolticsAbout() {
   const [selectedMilestone, setSelectedMilestone] = useState<number>(2); // Default to 2024 (Licensing)
 
   return (
-    <section className="w-full py-16 sm:py-20 lg:py-28 bg-white text-foreground relative overflow-hidden font-sans">
+    <section id="evoltics-about" aria-label="UAE EV Market Outlook" className="w-full py-16 sm:py-20 lg:py-28 bg-white text-foreground relative overflow-hidden font-sans">
       {/* Background Architectural Grid & Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_10%,#000_15%,transparent_100%)]" />

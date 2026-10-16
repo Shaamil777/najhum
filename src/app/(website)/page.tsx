@@ -1,3 +1,7 @@
+import { buildMetadata, pageSchema } from "@/lib/seo";
+import { pageSeo } from "@/content/page-seo";
+import { pageSections } from "@/content/page-sections";
+import StructuredData from "@/components/seo/StructuredData";
 import Hero from "@/components/sections/home/Hero";
 
 import About from "@/components/sections/home/About";
@@ -8,9 +12,11 @@ import Analytics from "@/components/sections/home/Analytics";
 import Faq from "@/components/sections/home/Faq";
 import Cta from "@/components/sections/home/Cta";
 
+export const metadata = buildMetadata(pageSeo.home);
+
 export default function Home() {
   return (
-    <div className="flex flex-col w-full">
+    <><StructuredData data={pageSchema(pageSeo.home, pageSections.home)} /><div className="flex flex-col w-full">
       <Hero />
       {/* Scroll Container */}
       <div className="relative z-10 bg-white">
@@ -26,6 +32,6 @@ export default function Home() {
         <Faq />
         <Cta />
       </div>
-    </div>
+    </div></>
   );
 }

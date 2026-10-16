@@ -27,7 +27,7 @@ export default function IotricsCapabilities() {
   };
 
   return (
-    <section className="w-full bg-white py-20 sm:py-28 lg:py-32 relative overflow-hidden font-sans border-b border-zinc-200">
+    <section id="iotrics-capabilities" aria-label="Io TRICs Capabilities" className="w-full bg-white py-20 sm:py-28 lg:py-32 relative overflow-hidden font-sans border-b border-zinc-200">
       {/* Background Soft Glows */}
       <div className="absolute top-1/3 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-[#3B82F6]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />

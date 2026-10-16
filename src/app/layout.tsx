@@ -1,3 +1,6 @@
+import StructuredData from "@/components/seo/StructuredData";
+import { organisationSchema } from "@/lib/seo";
+import { pageSeo } from "@/content/page-seo";
 import type { Metadata, Viewport } from "next";
 import { Outfit, Inter, Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
     default: siteConfig.name,
     template: `%s | ${siteConfig.shortName}`,
   },
-  description: siteConfig.description,
+  description: pageSeo.home.description,
   metadataBase: new URL(siteConfig.url),
   icons: {
     icon: [
@@ -52,15 +55,12 @@ export const metadata: Metadata = {
     "Dubai Technology Company",
   ],
   category: "Technology",
-  authors: [{ name: "Najhum Group" }],
-  creator: "Najhum Group",
-  publisher: "Najhum Group",
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   referrer: "origin-when-cross-origin",
   alternates: {
     canonical: siteConfig.url,
-  },
-  verification: {
-    google: "",
   },
   appleWebApp: {
     capable: true,
@@ -74,10 +74,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_GB",
     url: siteConfig.url,
     title: siteConfig.name,
-    description: siteConfig.description,
+    description: pageSeo.home.description,
     siteName: siteConfig.name,
     images: [
       {
@@ -91,9 +91,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
-    description: siteConfig.description,
+    description: pageSeo.home.description,
     images: [siteConfig.ogImage],
-    creator: "@najhum",
   },
 };
 
@@ -105,6 +104,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${outfit.variable} ${inter.variable} ${poppins.variable} antialiased font-sans scroll-smooth`}>
       <body className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-clip selection:bg-neutral-900 selection:text-white" suppressHydrationWarning>
+        <StructuredData data={organisationSchema} />
         <Providers>
           <Navbar />
           {children}

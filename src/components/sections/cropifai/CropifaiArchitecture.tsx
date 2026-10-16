@@ -31,7 +31,7 @@ export default function CropifaiArchitecture() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full py-24 lg:py-32 bg-white overflow-hidden font-sans border-b border-slate-200/60">
+    <section id="cropifai-architecture" aria-label="cropif AI Architecture" className="relative w-full py-24 lg:py-32 bg-white overflow-hidden font-sans border-b border-slate-200/60">
       
       {/* Background Architectural Grid & Radial Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">

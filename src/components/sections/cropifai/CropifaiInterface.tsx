@@ -47,7 +47,7 @@ export default function CropifaiInterface() {
   }, [activeIndex]);
 
   return (
-    <section className="w-full pt-16 sm:pt-20 lg:pt-28 pb-12 sm:pb-16 lg:pb-20 bg-white relative overflow-hidden font-sans">
+    <section id="cropifai-interface" aria-label="cropif AI Interface" className="w-full pt-16 sm:pt-20 lg:pt-28 pb-12 sm:pb-16 lg:pb-20 bg-white relative overflow-hidden font-sans">
       
       {/* Background Architectural Grid & Radial Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">

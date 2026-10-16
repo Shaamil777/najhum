@@ -32,7 +32,7 @@ export default function IotricsCta() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full bg-white py-20 sm:py-28 lg:py-36 overflow-hidden border-t border-border">
+    <section id="iotrics-cta" aria-label="Io TRICs Cta" className="relative w-full bg-white py-20 sm:py-28 lg:py-36 overflow-hidden border-t border-border">
       
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">

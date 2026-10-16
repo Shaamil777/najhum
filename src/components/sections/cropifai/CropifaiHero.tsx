@@ -11,7 +11,7 @@ import ClientMarquee from "@/components/ui/ClientMarquee";
 export default function CropifaiHero() {
   const { hero } = cropifaiContent;
   return (
-    <section className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
+    <section id="cropifai-hero" aria-label="cropif AI Hero" className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function ProductsHero() {
   return (
-    <section className="w-full relative overflow-hidden bg-[#f8faff] pt-16 pb-8 lg:pt-24 lg:pb-12">
+    <section id="products-hero" aria-label="Products Hero" className="w-full relative overflow-hidden bg-[#f8faff] pt-16 pb-8 lg:pt-24 lg:pb-12">
       {/* Abstract Background Shape */}
       <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-bl from-[#e5eeff] to-transparent rounded-bl-full z-0 opacity-70"></div>
 

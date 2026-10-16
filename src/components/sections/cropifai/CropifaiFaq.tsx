@@ -32,7 +32,7 @@ export default function CropifaiFaq() {
   };
 
   return (
-    <section className="w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden relative font-sans border-t border-zinc-200">
+    <section id="cropifai-faq" aria-label="cropif AI Faq" className="w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden relative font-sans border-t border-zinc-200">
       {/* Background ambient grids matching light mode design */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:32px_32px] opacity-10 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[linear-gradient(to_right,#10b981_1px,transparent_1px),linear-gradient(to_bottom,#10b981_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.04] z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />

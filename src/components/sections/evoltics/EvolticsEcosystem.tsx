@@ -97,7 +97,7 @@ export default function EvolticsEcosystem() {
   const N = cards.length;
 
   return (
-    <section 
+    <section id="evoltics-ecosystem" aria-label="EVOLTICS Ecosystem"
       ref={containerRef} 
       className={`w-full bg-white text-neutral-900 ${poppins.className} relative h-[400vh]`}
     >

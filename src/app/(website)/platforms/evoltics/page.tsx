@@ -1,3 +1,7 @@
+import { buildMetadata, pageSchema } from "@/lib/seo";
+import { pageSeo } from "@/content/page-seo";
+import { pageSections } from "@/content/page-sections";
+import StructuredData from "@/components/seo/StructuredData";
 import EvolticsHero from "@/components/sections/evoltics/EvolticsHero";
 import EvolticsAbout from "@/components/sections/evoltics/EvolticsAbout";
 import EvolticsEcosystem from "@/components/sections/evoltics/EvolticsEcosystem";
@@ -20,9 +24,11 @@ const poppins = Poppins({
   variable: "--font-poppins"
 });
 
+export const metadata = buildMetadata(pageSeo.evoltics);
+
 export default function EvolticsPage() {
   return (
-    <div 
+    <><StructuredData data={pageSchema(pageSeo.evoltics, pageSections.evoltics, { "@type": "SoftwareApplication", name: "EVOLTICS", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: pageSeo.evoltics.path, provider: { "@type": "Organization", name: "Najhum Technologies LLC" } })} /><div
       className={`flex flex-col w-full ${poppins.variable} ${poppins.className}`}
       style={{
         '--font-display': 'var(--font-poppins)',
@@ -42,6 +48,6 @@ export default function EvolticsPage() {
       <EvolticsJourney />
       <EvolticsFaq />
       <EvolticsCta />
-    </div>
+    </div></>
   );
 }

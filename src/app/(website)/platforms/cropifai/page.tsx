@@ -1,3 +1,7 @@
+import { buildMetadata, pageSchema } from "@/lib/seo";
+import { pageSeo } from "@/content/page-seo";
+import { pageSections } from "@/content/page-sections";
+import StructuredData from "@/components/seo/StructuredData";
 import CropifaiHero from "@/components/sections/cropifai/CropifaiHero";
 import CropifaiAbout from "@/components/sections/cropifai/CropifaiAbout";
 import CropifaiArchitecture from "@/components/sections/cropifai/CropifaiArchitecture";
@@ -17,9 +21,11 @@ import CropifaiFaq from "@/components/sections/cropifai/CropifaiFaq";
 import CropifaiCta from "@/components/sections/cropifai/CropifaiCta";
 
 
+export const metadata = buildMetadata(pageSeo.cropifai);
+
 export default function CropifaiPage() {
   return (
-    <div className="flex flex-col w-full">
+    <><StructuredData data={pageSchema(pageSeo.cropifai, pageSections.cropifai, { "@type": "SoftwareApplication", name: "cropifAI", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: pageSeo.cropifai.path, provider: { "@type": "Organization", name: "Najhum Technologies LLC" } })} /><div className="flex flex-col w-full">
       <CropifaiHero />
       <CropifaiAbout />
       <CropifaiArchitecture />
@@ -37,6 +43,6 @@ export default function CropifaiPage() {
       {/* <CropifaiClients /> */}
       <CropifaiFaq />
       <CropifaiCta />
-    </div>
+    </div></>
   );
 }

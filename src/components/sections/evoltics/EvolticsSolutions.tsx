@@ -278,7 +278,7 @@ export default function EvolticsSolutions() {
   });
 
   return (
-    <section
+    <section aria-label="EVOLTICS Solutions"
       id="solutions"
       ref={containerRef}
       className="relative w-full h-[600vh] bg-white text-foreground font-sans scroll-mt-20"

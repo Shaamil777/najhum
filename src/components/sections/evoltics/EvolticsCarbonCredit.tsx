@@ -7,7 +7,7 @@ import { Leaf, Zap, Globe2, Car, Gauge, Gift, Award } from "lucide-react";
 
 export default function EvolticsCarbonCredit() {
   return (
-    <section className="w-full py-20 lg:py-32 bg-white relative overflow-hidden font-sans">
+    <section id="evoltics-carbon-credit" aria-label="EVOLTICS Carbon Credit" className="w-full py-20 lg:py-32 bg-white relative overflow-hidden font-sans">
       {/* Background accents */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-emerald-100 to-transparent rounded-full blur-[100px] opacity-60 pointer-events-none translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-teal-50 to-transparent rounded-full blur-[100px] opacity-60 pointer-events-none -translate-x-1/3 translate-y-1/3" />

@@ -4,7 +4,7 @@ export interface LegalDocument { title: string; slug: string; updated: string; p
 export const privacyPolicy: LegalDocument = {
   "title": "Privacy Policy",
   "slug": "privacy-policy",
-  "updated": "17 October 2026",
+  "updated": "29-Nov-2025",
   "pdf": "/documents/Najhum_Privacy_Policy.pdf",
   "sections": [
     {
@@ -156,7 +156,7 @@ export const privacyPolicy: LegalDocument = {
 export const termsAndConditions: LegalDocument = {
   "title": "Terms & Conditions",
   "slug": "terms-and-conditions",
-  "updated": "17 October 2026",
+  "updated": "29-Nov-2025",
   "pdf": "/documents/Najhum_Terms_and_Conditions.pdf",
   "sections": [
     {

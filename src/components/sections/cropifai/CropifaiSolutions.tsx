@@ -17,7 +17,7 @@ export default function CropifaiSolutions() {
   ];
 
   return (
-    <section id="solutions" className="relative w-full py-20 lg:py-28 bg-slate-50 text-slate-900 overflow-hidden font-sans border-y border-slate-200/60">
+    <section aria-label="cropif AI Solutions" id="solutions" className="relative w-full py-20 lg:py-28 bg-slate-50 text-slate-900 overflow-hidden font-sans border-y border-slate-200/60">
       
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />

@@ -32,7 +32,7 @@ export default function IotricsAbout() {
   }, [isHovered]);
 
   return (
-    <section id="solutions" className="w-full pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pb-8 bg-white text-neutral-900 overflow-hidden font-poppins">
+    <section aria-label="Io TRICs About" id="solutions" className="w-full pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pb-8 bg-white text-neutral-900 overflow-hidden font-poppins">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
 
         {/* Header Title */}

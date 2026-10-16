@@ -179,7 +179,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
   const activeCategoryName = categories.find(c => c.id === activeCategory)?.name || "All Products";
 
   return (
-    <section className="w-full bg-white py-12 lg:py-20 font-sans">
+    <section id="products-grid" aria-label="Products Grid" className="w-full bg-white py-12 lg:py-20 font-sans">
       <Container size="full" className="px-4 lg:px-12 max-w-[1440px]">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
 

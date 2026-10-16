@@ -13,7 +13,7 @@ export default function AboutTrust() {
   const { trust } = aboutContent;
 
   return (
-    <section className="relative w-full py-28 md:py-36 bg-neutral-950 text-white overflow-hidden">
+    <section id="about-trust" aria-label="About Trust" className="relative w-full py-28 md:py-36 bg-neutral-950 text-white overflow-hidden">
 
       {/* ── Background ── */}
       <div className="absolute inset-0 pointer-events-none">

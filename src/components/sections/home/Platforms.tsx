@@ -18,7 +18,7 @@ export default function Platforms() {
 
 
   return (
-    <section
+    <section id="platforms" aria-label="Enterprise platforms and the 3C methodology"
       className={`relative w-full pt-16 sm:pt-24 lg:pt-32 pb-0 text-zinc-900 ${poppins.variable} ${poppins.className} z-10`}
       style={{
         '--font-display': 'var(--font-poppins)',

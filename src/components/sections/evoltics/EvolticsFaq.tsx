@@ -36,7 +36,7 @@ export default function EvolticsFaq() {
   };
 
   return (
-    <section className="w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden relative font-sans">
+    <section id="evoltics-faq" aria-label="EVOLTICS Faq" className="w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden relative font-sans">
       
       {/* Background ambient grids matching the rest of the site's light mode */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:32px_32px] opacity-10 z-0 pointer-events-none [mask-image:radial-gradient(circle,white,transparent_70%)]" />

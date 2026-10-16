@@ -30,7 +30,7 @@ export default function AboutCta() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden">
+    <section id="about-cta" aria-label="About Cta" className="relative w-full bg-white py-16 sm:py-24 lg:py-32 overflow-hidden">
 
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">

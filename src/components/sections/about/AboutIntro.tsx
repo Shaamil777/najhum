@@ -11,7 +11,7 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 export default function AboutIntro() {
   const { intro } = aboutContent;
   return (
-    <section className="relative w-full py-24 md:py-32 bg-white overflow-hidden">
+    <section id="about-intro" aria-label="About Intro" className="relative w-full py-24 md:py-32 bg-white overflow-hidden">
 
       {/* ── Grid Background ── */}
       <div className="absolute inset-0 pointer-events-none">

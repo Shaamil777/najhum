@@ -13,7 +13,7 @@ const scopeData = iotricsContent.businessModel.scope;
 export default function IotricsBusinessModel() {
   const { businessModel } = iotricsContent;
   return (
-    <section id="business-models" className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200">
+    <section aria-label="Io TRICs Business Model" id="business-models" className="w-full relative overflow-hidden font-sans bg-zinc-50 border-y border-zinc-200">
       
       {/* Background Split (Desktop Only) */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">

@@ -1,3 +1,5 @@
+import { buildMetadata, pageSchema } from "@/lib/seo";
+import StructuredData from "@/components/seo/StructuredData";
 import { formatPublicCopy, formatPublicText } from '@/lib/public-copy';
 /**
  * Dynamic Solution Page
@@ -28,21 +30,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     console.error("Failed to query solution for metadata:", err);
   }
 
-  if (!solution) {
-    return {
-      title: 'Solution Not Found',
-    };
-  }
-
-  return {
-    title: `${formatPublicText(solution.title)}${solution.isDraft ? ' (Draft)' : ''} | Najhum Technologies`,
-    description: solution.metaDescription ? formatPublicText(solution.metaDescription) : solution.metaDescription || solution.title,
-    openGraph: {
-      title: `${formatPublicText(solution.title)}${solution.isDraft ? ' (Draft)' : ''}`,
-      description: solution.metaDescription ? formatPublicText(solution.metaDescription) : solution.metaDescription || solution.title,
-      type: 'website',
-    },
-  };
+  if (!solution) return buildMetadata({title:"Solution not found",description:"This solution is not available.",path:`/solutions/${encodeURIComponent(slug)}`,noIndex:true});
+  return buildMetadata({title:formatPublicText(solution.title),description:formatPublicText(solution.metaDescription || `${solution.title}. Connected monitoring and operational intelligence from Najhum Technologies in the UAE.`),path:`/solutions/${solution.slug}`,image:solution.coverImage,keywords:[formatPublicText(solution.title),...solution.platforms,"IoT solutions UAE","connected monitoring"]});
 }
 
 export default async function SolutionPage({ params }: PageProps) {
@@ -95,7 +84,9 @@ export default async function SolutionPage({ params }: PageProps) {
     }
   }
 
+  const seo = {title:formatPublicText(solution.title),description:formatPublicText(solution.metaDescription || `${solution.title}. Connected monitoring and operational intelligence from Najhum Technologies in the UAE.`),path:`/solutions/${solution.slug}`};
   return (
+    <><StructuredData data={pageSchema(seo,sectionsToRender.map(section=>({id:`solution-section-${section.id}`,name:String(section.content.heading || section.type.replaceAll('_',' '))})),{"@type":"Service",name:seo.title,serviceType:seo.title,provider:{"@type":"Organization",name:"Najhum Technologies LLC"},areaServed:{"@type":"Country",name:"United Arab Emirates"}})} />
     <main className="solution-page min-h-screen">
       {/* Draft Notification Banner */}
       {solution.isDraft && (
@@ -131,7 +122,7 @@ export default async function SolutionPage({ params }: PageProps) {
           </p>
         </div>
       )}
-    </main>
+    </main></>
   );
 }
 

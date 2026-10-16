@@ -15,7 +15,7 @@ const poppins = Poppins({
 
 export default function About() {
   return (
-    <section 
+    <section id="about" aria-label="About Najhum"
       className={`relative w-full bg-[#f8f9fa] py-8 sm:py-16 lg:py-32 ${poppins.variable} ${poppins.className} overflow-hidden sticky top-0 z-0`}
       style={{
         '--font-display': 'var(--font-poppins)',

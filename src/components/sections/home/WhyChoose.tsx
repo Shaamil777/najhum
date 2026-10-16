@@ -16,7 +16,7 @@ export default function WhyChoose() {
   const setAll = (value: boolean) => setConnected(features.map(() => value));
 
   return (
-    <section className={styles.section} aria-labelledby="compare-heading">
+    <section id="why-choose" className={styles.section} aria-labelledby="compare-heading">
       <span className={styles.glow} style={{ opacity: count / features.length }} aria-hidden="true" />
       <div className={styles.container}>
         <div className={styles.header}>

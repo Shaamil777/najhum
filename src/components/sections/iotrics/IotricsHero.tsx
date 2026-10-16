@@ -20,7 +20,7 @@ export default function IotricsHero() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
+    <section id="iotrics-hero" aria-label="Io TRICs Hero" className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">

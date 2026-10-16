@@ -21,7 +21,7 @@ export default function ContactExplore() {
     icon: iconMap[item.iconName] || Radio
   }));
   return (
-    <section className="w-full py-16 sm:py-24 lg:py-32 bg-stone-50 font-poppins border-b border-neutral-200">
+    <section id="contact-explore" aria-label="Contact Explore" className="w-full py-16 sm:py-24 lg:py-32 bg-stone-50 font-poppins border-b border-neutral-200">
       <Container size="xl">
         
         {/* Header Section */}

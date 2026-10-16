@@ -25,7 +25,7 @@ export default function Hero() {
   }, [isMounted]);
 
   return (
-    <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white bg-black">
+    <section id="hero" aria-label="Connected infrastructure" className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white bg-black">
       
       {/* Background Video & Vignette Overlay */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0" suppressHydrationWarning>

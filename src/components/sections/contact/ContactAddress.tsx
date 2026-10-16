@@ -79,7 +79,7 @@ export default function ContactAddress() {
   });
 
   return (
-    <section className="w-full bg-[#111111] text-white py-16 sm:py-24 lg:py-32 font-poppins border-b border-neutral-900 overflow-hidden">
+    <section id="contact-address" aria-label="Contact Address" className="w-full bg-[#111111] text-white py-16 sm:py-24 lg:py-32 font-poppins border-b border-neutral-900 overflow-hidden">
       <Container size="xl" className="relative z-10">
         
         {/* Header Section */}

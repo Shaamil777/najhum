@@ -17,7 +17,7 @@ const poppins = Poppins({
 
 export default function Impact() {
   return (
-    <section 
+    <section id="impact" aria-label="Build intelligent operations"
       className={`relative w-full bg-white pt-10 sm:pt-16 lg:pt-20 pb-0 ${poppins.variable} ${poppins.className}`}
       style={{
         '--font-display': 'var(--font-poppins)',

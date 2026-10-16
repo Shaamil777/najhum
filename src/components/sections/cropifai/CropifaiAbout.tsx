@@ -15,7 +15,7 @@ export default function CropifaiAbout() {
   ];
 
   return (
-    <section className="relative w-full min-h-[70vh] flex items-center bg-zinc-50 overflow-hidden py-24 md:py-32 border-b border-zinc-200">
+    <section id="cropifai-about" aria-label="cropif AI About" className="relative w-full min-h-[70vh] flex items-center bg-zinc-50 overflow-hidden py-24 md:py-32 border-b border-zinc-200">
       
       {/* Dynamic Angled Shape on the left */}
       <div className="absolute left-0 top-0 bottom-0 w-1/2 sm:w-1/3 lg:w-[30%] z-0">

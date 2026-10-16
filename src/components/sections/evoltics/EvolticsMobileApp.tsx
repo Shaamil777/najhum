@@ -44,7 +44,7 @@ export default function EvolticsMobileApp() {
   }, []);
 
   return (
-    <section className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans">
+    <section id="evoltics-mobile-app" aria-label="EVOLTICS Mobile App" className="w-full py-16 lg:py-28 bg-background relative overflow-hidden font-sans">
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-primary)_0%,transparent_50%)]" />
       </div>

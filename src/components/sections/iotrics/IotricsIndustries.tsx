@@ -1,9 +1,9 @@
 "use client";
 
 import AccentText from "@/components/ui/AccentText";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Building2, Snowflake, Hotel, Factory, Truck, Building, Tractor, ShoppingCart, Zap } from "lucide-react";
+import { Building2, Snowflake, Hotel, Factory, Truck, Building, Tractor, ShoppingCart } from "lucide-react";
 
 import { iotricsContent } from "@/content/iotrics";
 
@@ -22,8 +22,10 @@ const industries = [
 
 export default function IotricsIndustries() {
   const { industries: industriesContent } = iotricsContent;
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  const toggleIndustry = (index: number) => setExpanded(current => ({ ...current, [index]: !current[index] }));
   return (
-    <section className="w-full bg-[#111111] text-white py-24 sm:py-32 font-poppins border-b border-neutral-900">
+    <section id="iotrics-industries" aria-label="Industrial IoT monitoring for every industry" className="w-full bg-[#111111] text-white py-24 sm:py-32 font-poppins border-b border-neutral-900">
       <div className="container mx-auto px-6 lg:px-8 max-w-[1440px]">
         
         {/* Header Section */}
@@ -99,9 +101,13 @@ export default function IotricsIndustries() {
                   {item.title}
                 </h3>
                 
-                <p className="text-[13px] text-neutral-400 leading-relaxed mt-auto group-hover:text-neutral-200 transition-colors duration-500">
+                <p id={`industry-description-desktop-${idx}`} className={`text-[13px] text-neutral-400 leading-relaxed mt-auto group-hover:text-neutral-200 transition-colors duration-500 ${expanded[idx] ? "" : "line-clamp-3"}`}>
                   {item.desc}
                 </p>
+
+                <button type="button" onClick={() => toggleIndustry(idx)} aria-expanded={Boolean(expanded[idx])} aria-controls={`industry-description-desktop-${idx}`} aria-label={`${expanded[idx] ? 'Read less' : 'Read more'} about ${item.title}`} className="mt-3 inline-flex min-h-8 items-center gap-2 self-start text-xs font-medium text-blue-400 hover:text-blue-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400">
+                  {expanded[idx] ? 'Read less' : 'Read more'}<span aria-hidden="true">{expanded[idx] ? '−' : '+'}</span>
+                </button>
               </div>
             </motion.div>
           ))}
@@ -142,9 +148,12 @@ export default function IotricsIndustries() {
                 <h3 className="text-sm font-semibold text-white leading-snug mb-2">
                   {item.title}
                 </h3>
-                <p className="text-xs text-neutral-300 leading-relaxed mt-auto">
+                <p id={`industry-description-mobile-${idx}`} className={`text-xs text-neutral-300 leading-relaxed mt-auto ${expanded[idx] ? "" : "line-clamp-3"}`}>
                   {item.desc}
                 </p>
+                <button type="button" onClick={() => toggleIndustry(idx)} aria-expanded={Boolean(expanded[idx])} aria-controls={`industry-description-mobile-${idx}`} aria-label={`${expanded[idx] ? 'Read less' : 'Read more'} about ${item.title}`} className="mt-3 inline-flex min-h-8 items-center gap-2 self-start text-xs font-medium text-blue-400 hover:text-blue-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400">
+                  {expanded[idx] ? 'Read less' : 'Read more'}<span aria-hidden="true">{expanded[idx] ? '−' : '+'}</span>
+                </button>
               </div>
             </motion.div>
           ))}

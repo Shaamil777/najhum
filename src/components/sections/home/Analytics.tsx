@@ -104,7 +104,7 @@ export default function Analytics() {
   const operationalIntelligence = analytics.operationalIntelligence || [];
 
   return (
-    <section className="w-full bg-white text-zinc-900 pt-6 sm:pt-8 lg:pt-10 pb-8 sm:pb-12 lg:pb-14 overflow-hidden relative font-poppins">
+    <section id="analytics" aria-label="Intelligent operations grid" className="w-full bg-white text-zinc-900 pt-6 sm:pt-8 lg:pt-10 pb-8 sm:pb-12 lg:pb-14 overflow-hidden relative font-poppins">
       {/* Background subtle grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-80" />
       

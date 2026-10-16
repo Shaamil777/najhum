@@ -1,6 +1,9 @@
 import { formatPublicCopy, formatPublicText } from "@/lib/public-copy";
 import { notFound } from "next/navigation";
-import { prisma } from "@/lib/db/prisma";
+import { getPublishedProductBySlug } from "@/lib/published-product";
+import { buildMetadata, pageSchema, plainSeoText, absoluteSiteUrl } from "@/lib/seo";
+import { generateSlug } from "@/lib/utils/slug";
+import StructuredData from "@/components/seo/StructuredData";
 import ProductDetailClient from "@/components/products/ProductDetailClient";
 import type { Metadata } from "next";
 
@@ -12,56 +15,14 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const decoded = decodeURIComponent(slug);
-
-  let product = null;
-  try {
-    product = await prisma.product.findFirst({
-      where: {
-        isDraft: false,
-        OR: [
-          { id: slug },
-          { name: { equals: decoded.replace(/-/g, " "), mode: "insensitive" } },
-          { name: { equals: decoded, mode: "insensitive" } },
-        ],
-      },
-    });
-  } catch (err) {
-    console.error("Failed to query product for metadata:", err);
-  }
-
-  if (!product) {
-    return {
-      title: "Product Overview | Najhum",
-    };
-  }
-
-  return {
-    title: `${formatPublicText(product.name)} | Najhum Products`,
-    description: formatPublicText(product.description),
-  };
+  const product = await getPublishedProductBySlug(slug);
+  if (!product) return buildMetadata({title:"Product not found",description:"This product is not available.",path:`/products/${encodeURIComponent(slug)}`,noIndex:true});
+  return buildMetadata({title:formatPublicText(product.name),description:formatPublicText(product.description),path:`/products/${generateSlug(product.name)||product.id}`,image:product.imageUrl,keywords:[formatPublicText(product.name),...product.platforms,"IoT hardware UAE","industrial sensors","Najhum products"]});
 }
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const decoded = decodeURIComponent(slug);
-
-  // Attempt to find product in database
-  let dbProduct = null;
-  try {
-    dbProduct = await prisma.product.findFirst({
-      where: {
-        isDraft: false,
-        OR: [
-          { id: slug },
-          { name: { equals: decoded.replace(/-/g, " "), mode: "insensitive" } },
-          { name: { equals: decoded, mode: "insensitive" } },
-        ],
-      },
-    });
-  } catch (err) {
-    console.error("Failed to query product:", err);
-  }
+  const dbProduct = await getPublishedProductBySlug(slug);
 
   if (!dbProduct) {
     notFound();
@@ -117,5 +78,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     downloads: [],
   };
 
-  return <ProductDetailClient product={formatPublicCopy(productData)} />;
+  const seo = {title:formatPublicText(dbProduct.name),description:formatPublicText(dbProduct.description),path:`/products/${generateSlug(dbProduct.name)||dbProduct.id}`};
+  return <><StructuredData data={pageSchema(seo,[],{"@type":"Product",name:seo.title,description:plainSeoText(seo.description),...(allImages.length?{image:allImages.map(image=>absoluteSiteUrl(image))}:{}),model:modelCode,brand:{"@type":"Brand",name:"Najhum"}})} /><ProductDetailClient product={formatPublicCopy(productData)} /></>;
 }

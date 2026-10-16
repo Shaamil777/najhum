@@ -25,7 +25,7 @@ export default function AboutHero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-between bg-neutral-950 text-white overflow-hidden pt-20 md:pt-24">
+    <section id="about-hero" aria-label="About Hero" className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-between bg-neutral-950 text-white overflow-hidden pt-20 md:pt-24">
       
       {/* Video Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">

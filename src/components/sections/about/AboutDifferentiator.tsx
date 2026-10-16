@@ -62,7 +62,7 @@ export default function AboutDifferentiator() {
   ];
 
   return (
-    <section
+    <section id="about-differentiator" aria-label="About Differentiator"
       ref={sectionRef}
       className="relative w-full py-24 md:py-32 bg-white overflow-hidden"
     >

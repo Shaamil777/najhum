@@ -39,7 +39,7 @@ export default function Cta() {
   }, [isHovered]);
 
   return (
-    <section className="relative w-full bg-white pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+    <section id="cta" aria-label="Contact Najhum" className="relative w-full bg-white pt-10 sm:pt-14 lg:pt-16 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
       
       {/* Background Interactive Pixel Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden">

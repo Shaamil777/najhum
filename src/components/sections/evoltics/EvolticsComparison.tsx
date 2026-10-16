@@ -25,7 +25,7 @@ const comparisonData: ComparisonItem[] = evolticsContent.comparison.items as Com
 export default function EvolticsComparison() {
   const { comparison } = evolticsContent;
   return (
-    <section className="w-full relative overflow-hidden font-sans">
+    <section id="evoltics-comparison" aria-label="EVOLTICS Comparison" className="w-full relative overflow-hidden font-sans">
       
       {/* Background Split (Desktop Only) */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">

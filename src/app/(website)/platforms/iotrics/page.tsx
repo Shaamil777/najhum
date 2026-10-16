@@ -1,3 +1,7 @@
+import { buildMetadata, pageSchema } from "@/lib/seo";
+import { pageSeo } from "@/content/page-seo";
+import { pageSections } from "@/content/page-sections";
+import StructuredData from "@/components/seo/StructuredData";
 import { Poppins } from "next/font/google";
 import IotricsHero from "@/components/sections/iotrics/IotricsHero";
 import IotricsAbout from "@/components/sections/iotrics/IotricsAbout";
@@ -16,9 +20,11 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
+export const metadata = buildMetadata(pageSeo.iotrics);
+
 export default function IotricsPage() {
   return (
-    <div className={`flex flex-col w-full ${poppins.className}`}>
+    <><StructuredData data={pageSchema(pageSeo.iotrics, pageSections.iotrics, { "@type": "SoftwareApplication", name: "IoTRICs", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: pageSeo.iotrics.path, provider: { "@type": "Organization", name: "Najhum Technologies LLC" } })} /><div className={`flex flex-col w-full ${poppins.className}`}>
       <style>{`
         .${poppins.className} h1,
         .${poppins.className} h2,
@@ -42,6 +48,6 @@ export default function IotricsPage() {
       <IotricsIndustries />
       <IotricsFaq />
       <IotricsCta />
-    </div>
+    </div></>
   );
 }

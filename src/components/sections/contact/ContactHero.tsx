@@ -8,7 +8,7 @@ import { contactContent } from "@/content/contact";
 export default function ContactHero() {
   const { hero } = contactContent;
   return (
-    <section className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-24 lg:py-32 bg-background overflow-hidden flex flex-col justify-center">
+    <section id="contact-hero" aria-label="Contact Hero" className="relative w-full pt-28 pb-16 sm:pt-32 sm:pb-24 lg:py-32 bg-background overflow-hidden flex flex-col justify-center">
       
       {/* Background Grids & Ambient Effects */}
       <div className="absolute inset-0 pointer-events-none opacity-50 z-0">

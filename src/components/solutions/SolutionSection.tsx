@@ -66,5 +66,5 @@ export default function SolutionSection({ section, products = [], availableProdu
     '--block-align': design.alignment,
   } as CSSProperties;
   const classes = ['solution-block', ...Object.entries(design).filter(([, value]) => value !== undefined && value !== false).map(([key]) => `block-${key}`)].join(' ');
-  return <div data-section-type={section.type} className={classes} style={styles}>{rendered}</div>;
+  return <div id={`solution-section-${section.id}`} role="region" aria-label={String((data.content as { heading?: string }).heading || section.type.replaceAll("_", " "))} data-section-type={section.type} className={classes} style={styles}>{rendered}</div>;
 }

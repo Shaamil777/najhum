@@ -1,3 +1,4 @@
+export const metadata = { title: "Design system preview", robots: { index: false, follow: false } };
 export default function ThemeTest() {
   return (
     <section className="min-h-screen bg-background flex items-center justify-center p-20">

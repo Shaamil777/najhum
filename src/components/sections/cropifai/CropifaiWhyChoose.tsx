@@ -19,7 +19,7 @@ export default function CropifaiWhyChoose() {
   const roadmap = whyChoose.roadmap;
 
   return (
-    <section className="relative w-full py-24 md:py-32 bg-zinc-50 text-zinc-900 overflow-hidden font-sans border-b border-zinc-200">
+    <section id="cropifai-why-choose" aria-label="cropif AI Why Choose" className="relative w-full py-24 md:py-32 bg-zinc-50 text-zinc-900 overflow-hidden font-sans border-b border-zinc-200">
       
       {/* Background Decor */}
       <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
