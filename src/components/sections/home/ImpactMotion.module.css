@@ -68,3 +68,15 @@
 .dotWave { position: absolute; inset: 0; z-index: 0; pointer-events: none; color: #cbd5e1; }
 .darkDots { color: #71717a; }
 .waveDot { fill: currentColor; r: 2px; opacity: .4; }
+
+@media (max-width: 639px) {
+  .paymentPanel { min-width: 0; gap: 14px; padding: 16px; border-radius: 20px; }
+  .paymentHeader { align-items: flex-start; gap: 4px 12px; }
+  .compareLink { font-size: 12px; }
+  .paymentModels { gap: 10px; grid-template-columns: minmax(0, 1fr); }
+  .paymentModel { padding: 14px; gap: 7px; border-radius: 14px; }
+  .paymentModel > p { font-size: 13px; line-height: 1.65; }
+  .modelHeading > h5 { font-size: 18px; }
+  .modelHeading > span { font-size: 9px; padding: 3px 8px; }
+  .paymentHalo { right: -90px; top: -120px; width: 250px; height: 250px; border-width: 32px; }
+}

@@ -73,3 +73,14 @@
   .preview *, .preview *::before, .preview *::after { animation: none !important; }
   .packets { stroke-dashoffset: 45; }
 }
+
+/* Keep illustrations in proportion to single-column phone tiles. */
+@media (max-width: 639px) {
+  .preview { height: clamp(112px, 31vw, 136px); padding: 12px; border-radius: 14px; }
+  .toolbar { margin-bottom: 6px; }
+  .chart { height: 74px; }
+  .notification { padding: 9px 10px; }
+  .route { margin-top: 10px; }
+  .routeTrack { margin-top: 7px; }
+  .auditDemo { gap: 8px; }
+}
