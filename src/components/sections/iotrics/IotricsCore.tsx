@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -55,7 +56,7 @@ export default function IotricsCore() {
             transition={{ delay: 0.1 }}
             className="text-[1.75rem] sm:text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-neutral-900 leading-[1.1] sm:leading-[1.05] uppercase mb-6"
           >
-            {core.header.title}
+            <AccentText text={core.header.title} accent="Intelligence Layer" />
           </motion.h2>
 
           <motion.p 

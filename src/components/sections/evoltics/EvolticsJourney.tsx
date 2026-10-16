@@ -95,7 +95,7 @@ export default function EvolticsJourney() {
             transition={{ delay: 0.1 }}
             className="text-[1.65rem] sm:text-3xl md:text-4xl xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
           >
-            Your Deployment Journey
+            Your <span className="text-primary">Deployment Journey</span>
           </motion.h2>
 
           <motion.p 

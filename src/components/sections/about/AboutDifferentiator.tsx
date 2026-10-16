@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
@@ -132,7 +133,7 @@ export default function AboutDifferentiator() {
                 >
 
                   <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-display text-neutral-900 leading-tight tracking-tight mb-3 sm:mb-6">
-                    {diff.title}
+                    <AccentText text={diff.title} accent={diff.title.split(" ").at(-1)!} />
                   </h3>
 
                   <p className="text-sm sm:text-base md:text-lg text-neutral-500 leading-relaxed max-w-lg">

@@ -46,7 +46,7 @@ export default function IotricsAbout() {
               className="text-[1.75rem] sm:text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-neutral-900 leading-[1.1] sm:leading-[1.05] uppercase"
             >
               {about.header.titlePart1} <br className="hidden md:block" />
-              {about.header.titlePart2}
+              <span className="text-primary">{about.header.titlePart2}</span>
             </motion.h2>
           </div>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import { useState } from "react";
 
 interface FaqItem {
@@ -23,7 +24,7 @@ export default function FaqSection({ title = "Frequently Asked Questions", items
     <div className="w-full py-16 px-8 lg:px-16 border-y border-neutral-200">
       <div className="max-w-3xl mx-auto">
         <p className="text-sm font-medium tracking-widest uppercase text-neutral-500 mb-8 text-center">
-          {title}
+          <AccentText text={title} accent="Questions" />
         </p>
 
         <div className="flex flex-col divide-y divide-neutral-200 border-y border-neutral-200">

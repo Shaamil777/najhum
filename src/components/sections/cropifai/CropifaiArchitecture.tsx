@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, RadioTower, Cloud, Database, LayoutDashboard } from "lucide-react";
@@ -45,7 +46,7 @@ export default function CropifaiArchitecture() {
             {architecture.header.tag}
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-slate-900 leading-tight tracking-tight mb-6">
-            {architecture.header.title}
+            <AccentText text={architecture.header.title} accent="Interoperability" />
           </h2>
           <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
             {architecture.header.description}

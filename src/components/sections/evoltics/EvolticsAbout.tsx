@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -58,7 +59,7 @@ export default function EvolticsAbout() {
               transition={{ delay: 0.1 }}
               className="text-[1.75rem] sm:text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] sm:leading-[1.05] uppercase"
             >
-              {about.header.title}
+              <AccentText text={about.header.title} accent="EV Market" />
             </motion.h2>
           </div>
 

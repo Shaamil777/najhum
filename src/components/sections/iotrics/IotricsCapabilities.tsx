@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,7 +44,7 @@ export default function IotricsCapabilities() {
               className="normal-case text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-900 tracking-tight leading-tight"
               style={{ textTransform: "none" }}
             >
-              {iotricsContent.capabilities.header.title}
+              <AccentText text={iotricsContent.capabilities.header.title} accent="data-driven operations" />
             </h2>
           </div>
 

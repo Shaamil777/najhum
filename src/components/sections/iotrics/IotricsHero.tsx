@@ -47,7 +47,7 @@ export default function IotricsHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-wide leading-[1.1] mb-6 text-white uppercase"
         >
-          {hero.title.line1} <br /> {hero.title.line2}
+          {hero.title.line1} <br /> <span className="text-blue-400">{hero.title.line2}</span>
         </motion.h1>
 
         {/* Description */}

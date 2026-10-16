@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -95,7 +96,7 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
             </div>
             
             <h1 className="text-3xl md:text-4xl font-extrabold text-neutral-900 mb-4 tracking-tight">
-              {product.name}
+              <AccentText text={product.name} accent="Smart Valve NQT02" />
             </h1>
             
             <p className="text-base text-neutral-600 mb-8 leading-relaxed">

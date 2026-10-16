@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,7 +60,7 @@ export default function Platforms() {
               </p>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tighter text-white leading-[1.05] text-left md:text-right max-w-[20ch]">
-              {homeContent.platforms.title}
+              <AccentText text={homeContent.platforms.title} accent="high performance" dark />
             </h2>
           </div>
 
@@ -135,7 +136,7 @@ export default function Platforms() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
               <div className="flex flex-col max-w-2xl">
                 <h3 className="text-white text-3xl sm:text-4xl lg:text-6xl font-display font-bold tracking-tighter leading-tight uppercase">
-                  The 3C Methodology
+                  The <span className="text-blue-400">3C</span> Methodology
                 </h3>
               </div>
               <p className="text-zinc-400 text-lg max-w-md leading-relaxed">

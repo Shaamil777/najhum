@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React from "react";
 import { motion } from "framer-motion";
 import { Building2, Snowflake, Hotel, Factory, Truck, Building, Tractor, ShoppingCart, Zap } from "lucide-react";
@@ -34,7 +35,7 @@ export default function IotricsIndustries() {
               viewport={{ once: true }}
               className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1] mb-2"
             >
-              {industriesContent.header.titlePart1}
+              <AccentText text={industriesContent.header.titlePart1} accent="every industry." dark />
             </motion.h2>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}

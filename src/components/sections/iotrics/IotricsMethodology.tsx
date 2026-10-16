@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React from "react";
 import { motion } from "framer-motion";
 import { Wifi, Cpu, Settings } from "lucide-react";
@@ -28,7 +29,7 @@ export default function IotricsMethodology() {
             viewport={{ once: true }}
             className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 leading-[1.1] mb-4"
           >
-            {methodology.header.title}
+            <AccentText text={methodology.header.title} accent="3C" />
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

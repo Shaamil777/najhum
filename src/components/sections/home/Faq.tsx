@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { homeContent } from "@/content/home";
@@ -77,7 +78,7 @@ export default function Faq() {
             {faq.label}
           </span>
           <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
-            {faq.headline}
+            <AccentText text={faq.headline} accent="Questions" />
           </h2>
         </div>
 

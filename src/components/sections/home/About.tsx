@@ -1,3 +1,4 @@
+import AccentText from "@/components/ui/AccentText";
 import React from "react";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
@@ -33,7 +34,7 @@ export default function About() {
             </div>
             
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-zinc-900 mb-4 sm:mb-6 whitespace-pre-line">
-              {homeContent.about.headline}
+              <AccentText text={homeContent.about.headline} accent="Connected Infrastructure" />
             </h2>
             
             <p className="text-sm sm:text-base text-zinc-500 mb-4 leading-relaxed">

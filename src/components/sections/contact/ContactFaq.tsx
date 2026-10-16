@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
@@ -29,7 +30,7 @@ export default function ContactFaq() {
             {faq.badge}
           </span>
           <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6">
-            {faq.title}
+            <AccentText text={faq.title} accent="Questions" />
           </h2>
         </div>
 

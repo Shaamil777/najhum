@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -60,7 +61,7 @@ export default function CropifaiWaterFlow() {
                 {waterFlow.header.tag}
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-4xl font-black text-[#1a2b4b] leading-tight tracking-tight mb-2">
-                {waterFlow.header.title}
+                <AccentText text={waterFlow.header.title} accent="Smart Valve NQT02" />
               </h2>
             </div>
 

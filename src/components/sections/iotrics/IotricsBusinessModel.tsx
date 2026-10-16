@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, XCircle, Zap, Box } from "lucide-react";
@@ -32,7 +33,7 @@ export default function IotricsBusinessModel() {
         <div className="text-center w-full pt-20 pb-8 lg:pt-32 lg:pb-12 px-4 relative z-20">
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{businessModel.header.tag}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 tracking-tight leading-tight mb-6">
-            {businessModel.header.title}
+            <AccentText text={businessModel.header.title} accent="Work With Us" />
           </h2>
           <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
             {businessModel.header.description}

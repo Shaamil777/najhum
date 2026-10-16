@@ -107,7 +107,7 @@ export default function EvolticsEcosystem() {
         {/* Header */}
         <div className="px-6 md:px-12 lg:px-20 mb-8 md:mb-16 shrink-0 max-w-4xl">
           <h2 className="text-3xl lg:text-[2rem] xl:text-[3.2rem] font-black tracking-tight text-neutral-900 leading-[1.05] uppercase mb-4">
-            EXPLORE THE EVOLTICS ECOSYSTEM
+            EXPLORE THE <span className="text-primary">EVOLTICS ECOSYSTEM</span>
           </h2>
           <p className="text-neutral-600 text-lg md:text-xl leading-relaxed">
             Integrated solutions for smarter, scalable EV charging infrastructure.

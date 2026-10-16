@@ -26,9 +26,9 @@ export default function Impact() {
           <div className="lg:sticky lg:top-24 xl:top-28 flex flex-col justify-start h-auto self-start pb-12 lg:pb-0 z-10">
             <div className="max-w-xl">
               <h2 className="font-display normal-case text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5.5rem] font-bold tracking-tighter leading-[1] text-zinc-900 mb-6 lg:mb-8 whitespace-pre-line">
-                Build
-                Intelligent
-                Operations.
+                {"Build\n"}
+                <span className="text-primary">Intelligent</span>
+                {"\nOperations."}
               </h2>
               
               <p className="text-base sm:text-lg text-zinc-500 mb-5 sm:mb-6 leading-relaxed max-w-md">

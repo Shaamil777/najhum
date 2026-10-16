@@ -29,7 +29,7 @@ export default function AboutTrust() {
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-white leading-tight tracking-tight mb-6">
             {trust.titlePart1} <br className="hidden md:block" />
-            {trust.titlePart2}
+            <span className="text-blue-400">{trust.titlePart2}</span>
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-neutral-400">
             <span>{trust.subtitleText}</span>

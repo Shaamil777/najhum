@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
@@ -44,7 +45,7 @@ export default function IotricsFaq() {
             {iotricsFaqData.label}
           </span>
           <h2 className="font-poppins normal-case text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 mb-6">
-            {iotricsFaqData.headline}
+            <AccentText text={iotricsFaqData.headline} accent="Questions" />
           </h2>
         </div>
 

@@ -109,7 +109,7 @@ export default function CropifaiHardware() {
         <div className="relative w-full max-w-5xl mx-auto mb-10">
           
           <div className="text-center mb-14 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tight">Our Smart Ecosystem</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 tracking-tight">Our <span className="text-primary">Smart Ecosystem</span></h2>
           </div>
 
           {/* Central Line (Desktop) / Side Line (Mobile) */}

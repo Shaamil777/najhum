@@ -1,5 +1,6 @@
 "use client";
 
+import AccentText from "@/components/ui/AccentText";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
@@ -49,7 +50,7 @@ export default function EvolticsFaq() {
             {evolticsFaqData.label}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-[3.2rem] font-black tracking-tight text-foreground leading-[1.1] mb-6 uppercase">
-            {evolticsFaqData.headline}
+            <AccentText text={evolticsFaqData.headline} accent="Questions" />
           </h2>
         </div>
 

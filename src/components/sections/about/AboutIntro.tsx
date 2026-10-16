@@ -84,7 +84,7 @@ export default function AboutIntro() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-[3.5rem] font-black font-display text-neutral-900 leading-[1.1] tracking-tight mb-8">
               {intro.titlePart1}{" "}
               <span className="relative inline-block">
-                <span className="relative z-10">{intro.titlePart2}</span>
+                <span className="relative z-10 text-primary">{intro.titlePart2}</span>
                 <span className="absolute bottom-1 left-0 w-full h-3 bg-primary/15 -z-0 rounded-sm" />
               </span>
             </h2>
