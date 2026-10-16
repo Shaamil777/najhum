@@ -34,7 +34,7 @@ const DEFAULT_SOLUTIONS: PublishedSolutionItem[] = [
   {
     title: "Facilities Management",
     slug: "facilities-management",
-    metaDescription: "Connect comfort, utilities and critical assets with IoTRICS. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
+    metaDescription: "Connect comfort, utilities and critical assets with IoTRICs. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
   },
   {
     title: "Hospitality & Hotels",
@@ -54,7 +54,7 @@ const DEFAULT_SOLUTIONS: PublishedSolutionItem[] = [
   {
     title: "Energy Monitoring",
     slug: "energy-monitoring",
-    metaDescription: "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICS.",
+    metaDescription: "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICs.",
   },
 ];
 

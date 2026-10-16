@@ -41,7 +41,7 @@ export default function MethodologySectionForm({
       bodyText: "A systematic engineering lifecycle designed for enterprise precision and measurable ROI.",
       steps: [
         { title: "CAPTURE & INGEST", description: "Edge sensors collect physical telemetry with sub-second frequency." },
-        { title: "ANALYZE & PREDICT", description: "Embedded machine learning detects anomalies and optimizes operational limits." },
+        { title: "ANALYSE & PREDICT", description: "Embedded machine learning detects anomalies and optimizes operational limits." },
         { title: "ACTUATE & AUTOMATE", description: "Automated controls adjust physical systems in real-time without latency." },
       ],
     },

@@ -100,7 +100,7 @@ export default function AboutPlatform() {
                   </div>
 
                   {/* Platform Name */}
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2 tracking-tight">
+                  <h3 className="normal-case text-xl sm:text-2xl font-extrabold text-slate-900 mb-2 tracking-tight">
                     {platform.name}
                   </h3>
 

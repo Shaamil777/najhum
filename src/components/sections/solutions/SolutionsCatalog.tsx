@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, SlidersHorizontal, ArrowUpRight, X } from 'lucide-react';
 export interface CatalogSolution { id: string; slug: string; title: string; metaDescription: string | null; coverImage: string | null; platforms: string[] }
-const platformLabels: Record<string, string> = { iotrics: 'IoTRICS', evoltics: 'EVOLTICS', cropifai: 'CropifAI' };
+const platformLabels: Record<string, string> = { iotrics: 'IoTRICs', evoltics: 'EVOLTICS', cropifai: 'cropifAI' };
 function industry(solution: CatalogSolution) {
   const text = `${solution.slug} ${solution.title}`.toLowerCase();
   if (/smart-cit/.test(text)) return 'Smart cities';

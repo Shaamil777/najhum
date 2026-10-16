@@ -56,7 +56,7 @@ export const iotricsContent = {
       { label: "ASSETS", text: "One connected intelligence layer for your entire infrastructure." },
       { label: "SENSORS", text: "Industrial-grade sensors capture critical data across your assets." },
       { label: "CONNECTIVITY", text: "Resilient connectivity ensures your data reaches the platform securely." },
-      { label: "IOTRICS CLOUD", text: "A unified cloud platform to ingest, process, and store operational data." },
+      { label: "IoTRICs CLOUD", text: "A unified cloud platform to ingest, process, and store operational data." },
       { label: "INSIGHTS", text: "Real-time visualization and analytics to help you make smarter decisions." },
       { label: "ACTION", text: "Configurable alerts and automated triggers for immediate response." }
     ]
@@ -182,13 +182,13 @@ export const iotricsContent = {
         id: "visibility",
         title: "03 — ENVIRONMENTAL & ASSET VISIBILITY",
         subtitle: "See Your Infrastructure in Real Time",
-        description: "Monitor critical environmental and asset conditions from a centralized platform. IoTRICs brings information such as temperature, humidity, water levels, air quality, energy, pressure, and vibration into a unified operational view.",
+        description: "Monitor critical environmental and asset conditions from a centralised platform. IoTRICs brings information such as temperature, humidity, water levels, air quality, energy, pressure, and vibration into a unified operational view.",
         keyCapabilities: [
           "Temperature & Humidity monitoring",
           "Water-level & Air-quality monitoring",
           "Energy, pressure & vibration monitoring",
           "Asset condition visibility",
-          "Centralized dashboard view"
+          "Centralised dashboard view"
         ],
         tags: ["TEMPERATURE", "HUMIDITY", "WATER", "AIR QUALITY"]
       },
@@ -312,7 +312,7 @@ export const iotricsContent = {
     header: {
       titlePart1: "Industrial IoT monitoring, built for every industry.",
       titlePart2: "",
-      description: "IoTRICs is deployed in buildings, cold stores, factories, warehouses, farms and retail sites across the UAE. The sensors and the readings change by sector; the Najhum IoT Controller, the platform and the dashboard do not., IoTRICs adapts to the environments where real-time asset visibility, monitoring, and intelligence matter most."
+      description: "IoTRICs is deployed in buildings, cold stores, factories, warehouses, farms and retail sites across the UAE. The sensors and the readings change by sector; the Najhum IoT Controller, the platform and the dashboard do not."
     },
     items: [
       {

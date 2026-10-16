@@ -1,3 +1,4 @@
+import { formatPublicCopy } from '@/lib/public-copy';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db/prisma';
 
@@ -18,7 +19,7 @@ export async function GET() {
       orderBy: { title: 'asc' },
     });
 
-    return NextResponse.json({ solutions }, { status: 200 });
+    return NextResponse.json({ solutions: formatPublicCopy(solutions) }, { status: 200 });
   } catch (error) {
     console.error('[API] Error fetching published solutions:', error);
     return NextResponse.json(

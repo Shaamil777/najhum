@@ -2,7 +2,7 @@
   {
     "title": "Smart Cities",
     "slug": "smart-cities",
-    "metaDescription": "Connect public spaces, utilities and everyday services with IoTRICS. Help city teams see changing conditions, prioritise work and coordinate across the district.",
+    "metaDescription": "Connect public spaces, utilities and everyday services with IoTRICs. Help city teams see changing conditions, prioritise work and coordinate across the district.",
     "coverImage": "/solutions/expanded/smart-cities.jpg",
     "platforms": [
       "iotrics"
@@ -15,13 +15,13 @@
         "content": {
           "layout": "hero-faded",
           "heading": "A city has many moving parts.\nGive them a shared view.",
-          "subheading": "Connect public spaces, utilities and everyday services with IoTRICS. Help city teams see changing conditions, prioritise work and coordinate across the district.",
+          "subheading": "Connect public spaces, utilities and everyday services with IoTRICs. Help city teams see changing conditions, prioritise work and coordinate across the district.",
           "backgroundImage": "/solutions/expanded/smart-cities.jpg",
           "imageAlt": "Smart Cities monitoring application",
           "eyebrow": "SMART CITIES",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -120,7 +120,7 @@
           "backgroundImage": "/solutions/expanded/smart-cities.jpg",
           "imageAlt": "A clearer district starts at street level.",
           "overlayStyle": "side",
-          "buttonText": "Explore IoTRICS",
+          "buttonText": "Explore IoTRICs",
           "buttonLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -259,7 +259,7 @@
           "eyebrow": "AIR QUALITY MONITORING",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -373,7 +373,7 @@
           "backgroundImage": "/solutions/expanded/air-quality.jpg",
           "imageAlt": "Better context for the places people spend time.",
           "overlayStyle": "full",
-          "buttonText": "Explore IoTRICS",
+          "buttonText": "Explore IoTRICs",
           "buttonLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -489,7 +489,7 @@
           "eyebrow": "CONSTRUCTION SITE SAFETY",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics",
           "mediaCards": [
             {
@@ -649,7 +649,7 @@
           "backgroundImage": "/solutions/expanded/construction-safety.jpg",
           "imageAlt": "Connected support for a changing site.",
           "overlayStyle": "side",
-          "buttonText": "Explore IoTRICS",
+          "buttonText": "Explore IoTRICs",
           "buttonLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -741,7 +741,7 @@
           "eyebrow": "SMART PARKING",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -975,7 +975,7 @@
           "eyebrow": "SMART WASTE MANAGEMENT",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -1147,7 +1147,7 @@
           "backgroundImage": "/solutions/expanded/waste-management.jpg",
           "imageAlt": "Make the collection round part of the city picture.",
           "overlayStyle": "full",
-          "buttonText": "Explore IoTRICS",
+          "buttonText": "Explore IoTRICs",
           "buttonLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -1205,7 +1205,7 @@
           "eyebrow": "SILO & STORAGE MONITORING",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -1311,7 +1311,7 @@
           "backgroundImage": "/solutions/expanded/silo-monitoring.jpg",
           "imageAlt": "Bring every vessel into the operating picture.",
           "overlayStyle": "side",
-          "buttonText": "Explore IoTRICS",
+          "buttonText": "Explore IoTRICs",
           "buttonLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -1432,7 +1432,7 @@
           "eyebrow": "ESG & SUSTAINABILITY",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics",
           "mediaCards": [
             {
@@ -1592,7 +1592,7 @@
           "backgroundImage": "/solutions/expanded/esg-sustainability.jpg",
           "imageAlt": "Progress is easier to explain when the data has context.",
           "overlayStyle": "side",
-          "buttonText": "Explore IoTRICS",
+          "buttonText": "Explore IoTRICs",
           "buttonLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -1620,7 +1620,7 @@
             },
             {
               "title": "Can irrigation data be included?",
-              "description": "Yes. CropifAI irrigation activity and compatible water-meter information can contribute to a resource view with clear measurement boundaries."
+              "description": "Yes. cropifAI irrigation activity and compatible water-meter information can contribute to a resource view with clear measurement boundaries."
             }
           ],
           "theme": "light",
@@ -1868,7 +1868,7 @@
   {
     "title": "Smart Irrigation",
     "slug": "smart-irrigation",
-    "metaDescription": "Connect irrigation schedules, valve control and field conditions with CropifAI. Give growers and landscape teams a clearer way to manage watering across zones.",
+    "metaDescription": "Connect irrigation schedules, valve control and field conditions with cropifAI. Give growers and landscape teams a clearer way to manage watering across zones.",
     "coverImage": "/solutions/expanded/smart-irrigation.jpg",
     "platforms": [
       "cropifai"
@@ -1881,13 +1881,13 @@
         "content": {
           "layout": "hero-split",
           "heading": "Water the zone.\nUnderstand the result.",
-          "subheading": "Connect irrigation schedules, valve control and field conditions with CropifAI. Give growers and landscape teams a clearer way to manage watering across zones.",
+          "subheading": "Connect irrigation schedules, valve control and field conditions with cropifAI. Give growers and landscape teams a clearer way to manage watering across zones.",
           "backgroundImage": "/solutions/expanded/smart-irrigation.jpg",
           "imageAlt": "Smart Irrigation monitoring application",
           "eyebrow": "SMART IRRIGATION",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore CropifAI",
+          "secondaryCtaText": "Explore cropifAI",
           "secondaryCtaLink": "/platforms/cropifai"
         },
         "isDraft": false,
@@ -2063,7 +2063,7 @@
           "backgroundImage": "/solutions/expanded/smart-irrigation.jpg",
           "imageAlt": "Every zone has its own story.",
           "overlayStyle": "side",
-          "buttonText": "Explore CropifAI",
+          "buttonText": "Explore cropifAI",
           "buttonLink": "/platforms/cropifai"
         },
         "isDraft": false,
@@ -2154,7 +2154,7 @@
           "eyebrow": "PRECISION FARMING",
           "ctaText": "Discuss your project",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore CropifAI",
+          "secondaryCtaText": "Explore cropifAI",
           "secondaryCtaLink": "/platforms/cropifai",
           "mediaCards": [
             {
@@ -2204,7 +2204,7 @@
             {
               "title": "Seasonal context",
               "description": "Compare growing conditions and recorded interventions over time.",
-              "image": "/images/cropify/precision_farming.jpg",
+              "image": "/images/cropifai/precision_farming.jpg",
               "imageAlt": "Seasonal context",
               "link": "/contact",
               "linkText": "Explore this application"
@@ -2276,7 +2276,7 @@
         "content": {
           "layout": "image-banner",
           "heading": "Better field decisions start with the right context.",
-          "bodyHtml": "<p>Keep the measurements, observations and growing plan together in CropifAI.</p>",
+          "bodyHtml": "<p>Keep the measurements, observations and growing plan together in cropifAI.</p>",
           "entries": [],
           "theme": "dark",
           "headingAlign": "left",
@@ -2285,7 +2285,7 @@
           "backgroundImage": "/solutions/expanded/precision-farming.jpg",
           "imageAlt": "Better field decisions start with the right context.",
           "overlayStyle": "full",
-          "buttonText": "Explore CropifAI",
+          "buttonText": "Explore cropifAI",
           "buttonLink": "/platforms/cropifai"
         },
         "isDraft": false,

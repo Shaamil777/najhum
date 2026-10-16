@@ -70,7 +70,7 @@ export const aboutContent = {
         code: "PHASE_01",
         title: "COLLECT",
         tag: "Real-time Insight",
-        description: "We deploy ruggedized sensors across your physical infrastructure to capture high-fidelity operational data at the source.",
+        description: "We deploy ruggedised sensors across your physical infrastructure to capture high-fidelity operational data at the source.",
         iconName: "Radar"
       },
       {
@@ -98,7 +98,7 @@ export const aboutContent = {
     platforms: [
       {
         code: "CORE 01",
-        name: "IoTRICS",
+        name: "IoTRICs",
         description: "Industrial monitoring for facilities, utilities and cold chain — sensors, alerts and live dashboards on one platform.",
         href: "/platforms/iotrics",
         badgeType: "iotrics"
@@ -112,7 +112,7 @@ export const aboutContent = {
       },
       {
         code: "CORE 03",
-        name: "CropifAI",
+        name: "cropifAI",
         description: "Agricultural monitoring and irrigation control — soil moisture, flow and valve scheduling from one dashboard.",
         href: "/platforms/cropifai",
         badgeType: "cropifai"

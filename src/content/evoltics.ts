@@ -19,31 +19,34 @@ export const evolticsContent = {
     },
     pillars: [
       {
-        tag: "PROJECTION_2030",
-        value: "40%",
-        badge: "Target",
-        description: "Projected EV adoption in UAE by 2030, accelerated by the federal Green Mobility Strategy and smart city initiatives.",
-        footerLabel: "National Fleet Shift",
-        footerValue: "1 in 2.5 Vehicles",
+        tag: "UAE POLICY TARGET",
+        value: "50%",
+        badge: "By 2050",
+        description: "The federal National Electric Vehicles Policy targets electric vehicles making up 50% of vehicles on UAE roads by 2050.",
+        footerLabel: "National fleet target",
+        footerValue: "1 in 2 vehicles",
+        sourceName: "UAE Government · National Electric Vehicles Policy",
         sourceUrl: "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
       },
       {
-        tag: "CAPACITY REQUIRED",
-        value: "42k+",
-        badge: "By 2035",
-        description: "New charging points required across the UAE by 2035 to sustain the surging electric vehicle fleet and inter-emirate transit.",
-        footerLabel: "Grid Density Demand",
-        footerValue: "High Growth (AC & DC)",
-        sourceUrl: "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/policies/transport-and-infrastructure/national-electric-vehicles-policy"
+        tag: "DUBAI PUBLISHED TARGET",
+        value: "42,000+",
+        badge: "By 2030",
+        description: "A July 2023 Dubai Media Office publication set out Dubai’s aim to have over 42,000 electric cars on its roads by 2030.",
+        footerLabel: "Vehicle target",
+        footerValue: "Electric cars · Dubai",
+        sourceName: "Dubai Media Office · 9 July 2023",
+        sourceUrl: "https://mediaoffice.ae/en/news/2023/july/09-07/dubai-green-mobility"
       },
       {
-        tag: "TARGET GOAL",
-        value: "NET ZERO",
-        badge: "UAE Net Zero 2050 Charter",
-        description: "Full alignment with the UAE Net Zero 2050 Charter through resilient, sustainable, and smart IoT infrastructure.",
-        footerLabel: "Emissions Reductions",
-        footerValue: "100% Decarbonized",
-        sourceUrl: "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/environment-and-energy/the-uae-net-zero-2050-strategy"
+        tag: "DUBAI REGULATORY FRAMEWORK",
+        value: "2024",
+        badge: "CPO licensing",
+        description: "DEWA introduced its EV charging regulatory and licensing framework in October 2024. Independent operators of public charging equipment in Dubai must hold a DEWA CPO licence.",
+        footerLabel: "Public charging operations",
+        footerValue: "DEWA licence required",
+        sourceName: "DEWA · Regulatory and Licensing Framework",
+        sourceUrl: "https://dewa.gov.ae/en/builder/useful-tools/regulatory-framework-for-ev-charging-infrastructure"
       }
     ],
     roadmap: {
@@ -155,11 +158,11 @@ export const evolticsContent = {
   comparison: {
     header: {
       leftTitle: "Instead of",
-      rightTitlePart1: "Evoltics",
+      rightTitlePart1: "EVOLTICS",
       rightTitlePart2: "gives",
       mobileCombinedPart1: "Traditional",
       mobileCombinedPart2: "vs",
-      mobileCombinedPart3: "Evoltics"
+      mobileCombinedPart3: "EVOLTICS"
     },
     items: [
       {
@@ -256,13 +259,13 @@ export const evolticsContent = {
       {
         num: "02",
         title: "CPO LICENSING",
-        description: "Complete support for obtaining the Charge Point Operator licence required to commercially operate and monetize EV charging infrastructure. Evoltics assists with application preparation, regulatory compliance, documentation, authority liaison and post-approval support.",
+        description: "Complete support for obtaining the Charge Point Operator licence required to commercially operate and monetise EV charging infrastructure. EVOLTICS assists with application preparation, regulatory compliance, documentation, authority liaison and post-approval support.",
         category: "Compliance",
       },
       {
         num: "03",
         title: "AC & DC CHARGER SUPPLY",
-        description: "Reliable AC and DC charging hardware supplied through a brand-agnostic approach. Evoltics provides OCPP-compliant chargers, allowing businesses to deploy compatible charging infrastructure without being locked into a single hardware brand.",
+        description: "Reliable AC and DC charging hardware supplied through a brand-agnostic approach. EVOLTICS provides OCPP-compliant chargers, allowing businesses to deploy compatible charging infrastructure without being locked into a single hardware brand.",
         category: "Hardware",
       },
       {
@@ -324,8 +327,8 @@ export const evolticsContent = {
       titlePart1: "Mobile App —",
       titlePart2: "for EV Drivers",
       subtitle: "Empowering eco-conscious drivers with seamless control and sustainability.",
-      cardTitle: "The Evoltics App",
-      cardDesc: "Our Evoltics app helps users locate nearby charging stations, monitor their charging progress, and make payments. It provides real-time charging station availability and status updates, ensuring drivers always have access to the charging infrastructure they need."
+      cardTitle: "The EVOLTICS App",
+      cardDesc: "Our EVOLTICS app helps users locate nearby charging stations, monitor their charging progress, and make payments. It provides real-time charging station availability and status updates, ensuring drivers always have access to the charging infrastructure they need."
     },
     features: [
       { title: "In-App Wallet", desc: "Pay for charging with a pre-loaded wallet. Add or withdraw funds at any time via the app." },

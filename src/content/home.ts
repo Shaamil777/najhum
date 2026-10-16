@@ -32,7 +32,7 @@ export const homeContent = {
     ]
   },
   analytics: {
-    badge: "Enterprise Platform",
+    badge: "AT A GLANCE",
     headline: "Intelligent",
     headlineItalic: "Operations Grid",
     description: "An integrated ecosystem connecting Industrial IoT, EV infrastructure, smart energy, and operational intelligence through a unified enterprise platform.",
@@ -52,7 +52,7 @@ export const homeContent = {
       {
         kpiValue: "3",
         title: "PLATFORMS",
-        description: "IoTRICS, EVOLTICS and CropifAI."
+        description: "IoTRICs, EVOLTICS and cropifAI."
       },
       {
         kpiValue: "2",
@@ -121,27 +121,27 @@ export const homeContent = {
       },
       {
         id: "iotrics",
-        title: "IoTRICS",
+        title: "IoTRICs",
         description: "The complete operating system for industrial IoT. Connect millions of data points securely across any network protocol with enterprise-grade encryption.",
         features: [
           "Multi-protocol ingestion (MQTT, LoRa)",
           "Advanced Rules Engine",
           "Customizable Executive Dashboards"
         ],
-        cta: "EXPLORE IoTRICS",
+        cta: "EXPLORE IoTRICs",
         label: "CORE PLATFORM"
       },
       {
         id: "cropifai",
         title: "cropifAI",
-        description: "AI-driven agricultural insights for food security and yield optimization.",
+        description: "AI-driven agricultural insights for food security and yield optimisation.",
         cta: "Details"
       }
     ]
   },
   about: {
     badge: "+ Who we are",
-    leftContent: "We build enterprise platforms that transform industrial infrastructure into intelligent, connected ecosystems. By combining Industrial IoT, smart energy, EV mobility, and cloud technologies, we help organizations improve visibility, optimize operations, and accelerate digital transformation.",
+    leftContent: "We build enterprise platforms that transform industrial infrastructure into intelligent, connected ecosystems. By combining Industrial IoT, smart energy, EV mobility, and cloud technologies, we help organizations improve visibility, optimise operations, and accelerate digital transformation.",
     headline: "Engineering the Future of\nConnected Infrastructure",
     description: "Our solutions are designed to integrate seamlessly with existing infrastructure, enabling real-time monitoring, predictive insights, and scalable automation across mission-critical operations.",
     buttonLabel: "Our Story",
@@ -150,14 +150,14 @@ export const homeContent = {
     ],
     stats: [
       { id: "established", title: "ESTABLISHED", value: "2017", label: "Building enterprise platforms for Industrial IoT, smart energy, and intelligent infrastructure." },
-      { id: "core", title: "CORE PLATFORMS", value: "03", label: "IoTRICS, EVOLTICS and CropifAI working together as one connected ecosystem." },
+      { id: "core", title: "CORE PLATFORMS", value: "03", label: "IoTRICs, EVOLTICS and cropifAI working together as one connected ecosystem." },
       { id: "support", title: "ENTERPRISE SUPPORT", value: "SLA-Backed", label: "Dedicated technical support, guaranteed response times, and operational visibility for enterprise deployments." },
       { id: "deployment", title: "DEPLOYMENT OPTIONS", value: "Cloud • Edge • Hybrid", label: "Flexible deployment models designed to integrate with enterprise infrastructure at any scale." }
     ]
   },
   cta: {
     headline: "Ready to Transform Your Operations?",
-    subheadline: "Connect industrial assets, optimize energy, and unlock real-time operational intelligence with Najhum's enterprise platforms.",
+    subheadline: "Connect industrial assets, optimise energy, and unlock real-time operational intelligence with Najhum's enterprise platforms.",
     primaryCta: { label: "Get Started", href: "/contact" },
     secondaryCta: { label: "Learn More", href: "/about" }
   },

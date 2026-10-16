@@ -18,7 +18,7 @@ import EvolticsDashboardDemo from "./EvolticsDashboardDemo";
 const features = [
   { icon: Server, title: "Hardware Agnostic", desc: "Integrate and setup any OCPP-compliant charger in a few clicks and start charging." },
   { icon: BarChart3, title: "Dashboard & Analytics", desc: "Monitor your charging network with real-time data insights, charts and statistics." },
-  { icon: BadgeDollarSign, title: "Revenue optimisation through pricing", desc: "Every session logged with charger, duration, energy delivered and payment — the audit trail behind the revenue, and what a landlord actually asks for." },
+  { icon: BadgeDollarSign, title: "Session records and reconciliation", desc: "Every session logged with charger, duration, energy delivered and payment — the audit trail behind the revenue, and what a landlord actually asks for." },
   { icon: Receipt, title: "Auto-Payment Settlements", desc: "Smart settlement system auto-calculates fees and distributes net revenue monthly." },
   { icon: ShieldCheck, title: "Public-Private Mode", desc: "Set charger accessibility for employees or visitors as private, or open to the public." },
 ];

@@ -16,11 +16,11 @@ const platformImages: Record<string, { src: string; alt: string }> = {
   },
   iotrics: {
     src: "/images/hero/Iortics_home.webp",
-    alt: "IoTRICS - Industrial IoT edge gateway and telemetry sensors in modern manufacturing",
+    alt: "IoTRICs - Industrial IoT edge gateway and telemetry sensors in modern manufacturing",
   },
   cropifai: {
     src: "/images/hero/cropifai_home.webp",
-    alt: "CropifAI - Precision agriculture IoT weather station and soil sensor monitoring",
+    alt: "cropifAI - Precision agriculture IoT weather station and soil sensor monitoring",
   },
 };
 

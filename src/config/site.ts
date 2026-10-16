@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Najhum",
   description: "Next Generation Digital Excellence and Sustainable Progress",
   url: "https://najhumgroup.com",
-  ogImage: "https://najhumgroup.com/og.jpg",
+  ogImage: "https://najhumgroup.com/opengraph-image",
   contact: {
     email: "info@najhumgroup.com",
     phone: "+971 55 617 7234",
@@ -23,7 +23,6 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/najhumtechnologies",
   },
   mainNav: [
-    { title: "Platforms", href: "/platforms" },
     { title: "Solutions", href: "/solutions" },
     { title: "Products", href: "/products" },
     { title: "About", href: "/about" },
@@ -31,9 +30,9 @@ export const siteConfig = {
   ],
   footerNav: {
     platforms: [
-      { title: "IoTRICS", href: "/platforms/iotrics", description: "Industrial IoT, Smart Building Digital Twin & Telemetry" },
+      { title: "IoTRICs", href: "/platforms/iotrics", description: "Industrial IoT, Smart Building Digital Twin & Telemetry" },
       { title: "EVOLTICS", href: "/platforms/evoltics", description: "EV Charging Infrastructure & Smart CSMP Management" },
-      { title: "CropifAI", href: "/platforms/cropifai", description: "Precision Agriculture & Automated Climate Intelligence" },
+      { title: "cropifAI", href: "/platforms/cropifai", description: "Precision Agriculture & Automated Climate Intelligence" },
     ],
     solutions: [
       { title: "Facilities Management", href: "/solutions/facilities-management" },

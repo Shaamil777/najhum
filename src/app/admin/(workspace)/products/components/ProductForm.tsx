@@ -182,9 +182,9 @@ export default function ProductForm({
   };
 
   const PLATFORMS = [
-    { id: "evoltics", label: "Evoltics Platform" },
-    { id: "iotrics", label: "IoTRICS Platform" },
-    { id: "cropifai", label: "CropifAI Platform" },
+    { id: "evoltics", label: "EVOLTICS Platform" },
+    { id: "iotrics", label: "IoTRICs Platform" },
+    { id: "cropifai", label: "cropifAI Platform" },
   ];
 
   const handleTogglePlatform = (platformId: string) => {

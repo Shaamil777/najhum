@@ -242,7 +242,7 @@ export default function ChallengeSectionForm({
                         type="text"
                         {...register(`challenges.${index}.category` as const)}
                         maxLength={100}
-                        placeholder="e.g. Cost Optimization"
+                        placeholder="e.g. Cost Optimisation"
                         className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4c3bcf]/20 focus:border-[#4c3bcf] outline-none"
                       />
                       {errors.challenges?.[index]?.category && (

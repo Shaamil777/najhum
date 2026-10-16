@@ -159,6 +159,7 @@ export default function CropifaiHardware() {
                          </li>
                        ))}
                      </ul>
+                     {"href" in prod && <a href={prod.href} className="mt-5 inline-flex text-sm font-semibold text-primary underline underline-offset-4">Explore NQT02 specifications</a>}
                    </motion.div>
                 </div>
 

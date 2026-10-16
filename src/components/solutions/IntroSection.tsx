@@ -75,7 +75,7 @@ export default function IntroSection({ content }: { content: IntroContent }) {
             </div>
           </motion.div>
 
-          {/* Highlights Grid matching CropifAI */}
+          {/* Highlights Grid matching cropifAI */}
           {highlights.length > 0 && (
             <div className={`order-3 lg:order-none grid grid-cols-1 ${content.image ? 'sm:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} gap-4 mb-0`}>
               {highlights.map((highlight, i) => (

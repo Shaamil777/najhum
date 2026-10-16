@@ -71,7 +71,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 6,
-    title: "Optimizing Web Vitals: A Practical Guide to 100/100",
+    title: "Optimising Web Vitals: A Practical Guide to 100/100",
     excerpt: "Step-by-step techniques to improve your Largest Contentful Paint, Cumulative Layout Shift, and First Input Delay for maximum SEO performance.",
     category: "Performance",
     date: "Sep 08, 2026",

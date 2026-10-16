@@ -18,7 +18,7 @@ export default function ComparisonTableSection({ content }: ComparisonTableSecti
   return (
     <section className="w-full relative overflow-hidden font-sans border-b border-slate-200/60">
       
-      {/* Background Split (Desktop Only) matching Evoltics style */}
+      {/* Background Split (Desktop Only) matching EVOLTICS style */}
       <div className="absolute inset-0 pointer-events-none hidden lg:flex">
         {/* Left Side: Traditional */}
         <div className="w-1/2 bg-white relative overflow-hidden comparison-bg-left">

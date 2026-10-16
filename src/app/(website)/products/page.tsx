@@ -1,3 +1,4 @@
+import { getProductClassification } from "@/lib/product-classification";
 import ProductsHero from "@/components/sections/products/ProductsHero";
 import ProductsGrid from "@/components/sections/products/ProductsGrid";
 import Cta from "@/components/sections/home/Cta";
@@ -14,6 +15,7 @@ export default async function ProductsPage() {
     platforms: string[];
     solutions: string[];
     brochureUrl?: string | null;
+    details?: unknown;
   }> = [];
 
   try {
@@ -32,7 +34,7 @@ export default async function ProductsPage() {
   return (
     <div className="flex flex-col w-full">
       <ProductsHero />
-      <ProductsGrid initialProducts={dbProducts} />
+      <ProductsGrid initialProducts={dbProducts.map(product => ({ ...product, ...getProductClassification(product) }))} />
       <Cta />
     </div>
   );

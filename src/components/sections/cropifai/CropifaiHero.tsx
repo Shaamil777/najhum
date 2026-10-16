@@ -1,38 +1,21 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cropifaiContent } from "@/content/cropifai";
-import { HERO_VIDEOS } from "@/config/videos";
+import CropifaiHeroMedia from "./CropifaiHeroMedia";
 import ClientMarquee from "@/components/ui/ClientMarquee";
 
 export default function CropifaiHero() {
   const { hero } = cropifaiContent;
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((e) => console.log("Video playback failed:", e));
-    }
-  }, []);
-
   return (
     <section className="w-full min-h-screen relative overflow-hidden font-sans flex flex-col justify-center items-center pt-24 sm:pt-28 pb-32 sm:pb-36 text-white">
       
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src={HERO_VIDEOS.cropifai} type="video/mp4" />
-        </video>
+        <CropifaiHeroMedia />
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-black/60" />
       </div>
@@ -47,7 +30,7 @@ export default function CropifaiHero() {
           transition={{ duration: 0.6 }}
           className="mb-6 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
         >
-          <span className="text-sm font-bold tracking-widest uppercase text-white">{hero.badge}</span>
+          <span className="text-sm font-bold tracking-widest normal-case text-white">{hero.badge}</span>
         </motion.div>
 
         {/* Main Headline */}

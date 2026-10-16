@@ -35,7 +35,7 @@ const getSocialIcon = (name: string) => {
 
 const platforms = [
   {
-    title: "IoTRICS",
+    title: "IoTRICs",
     subtitle: "Industrial IoT & Telemetry",
     href: "/platforms/iotrics",
   },
@@ -45,7 +45,7 @@ const platforms = [
     href: "/platforms/evoltics",
   },
   {
-    title: "CropifAI",
+    title: "cropifAI",
     subtitle: "Precision AgriTech & Climate AI",
     href: "/platforms/cropifai",
   },

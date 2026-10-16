@@ -311,7 +311,7 @@ export default function SectionManager({ solutionId }: SectionManagerProps) {
             <option value={SectionType.IMAGE} className="text-gray-900 bg-white">Image Showcase</option>
             <option value={SectionType.VIDEO} className="text-gray-900 bg-white">Video Showcase</option>
             <option value={SectionType.GRAPH} className="text-gray-900 bg-white">Graph & Metrics</option>
-            <option value={SectionType.COMPARISON_TABLE} className="text-gray-900 bg-white">Comparison Table (Evoltics Style)</option>
+            <option value={SectionType.COMPARISON_TABLE} className="text-gray-900 bg-white">Comparison Table (EVOLTICS Style)</option>
             <option value={SectionType.PRODUCT_CARD} className="text-gray-900 bg-white">Product Cards</option>
           </select>
         </div>

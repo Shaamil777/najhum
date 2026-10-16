@@ -14,7 +14,7 @@ export default function EvolticsCarbonCredit() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center lg:items-start">
-          
+
           {/* Left Column: Title, Desc, 3 Features */}
           <div className="flex flex-col">
             <motion.div
@@ -49,7 +49,7 @@ export default function EvolticsCarbonCredit() {
               transition={{ delay: 0.1 }}
               className="text-muted text-sm sm:text-base lg:text-lg leading-relaxed mb-12 max-w-xl"
             >
-              Evoltics’ upcoming <strong className="text-foreground font-semibold">Green Carbon System</strong> rewards eco-conscious drivers with carbon credits for every kWh charged through the Evoltics network.
+              EVOLTICS’ upcoming <strong className="text-foreground font-semibold">Green Carbon System</strong> rewards eco-conscious drivers with carbon credits for every kWh charged through the EVOLTICS network.
             </motion.p>
 
             {/* 3 Features Stacked */}
@@ -89,12 +89,12 @@ export default function EvolticsCarbonCredit() {
           {/* Right Column: Spider Layout from Reference Image */}
           <div className="w-full flex items-center justify-center mt-12 lg:mt-0">
             <div className="relative w-full max-w-[500px] lg:max-w-[600px] aspect-square flex items-center justify-center">
-              
+
               {/* Background Thin Dashed Ring */}
               <div className="absolute inset-8 sm:inset-12 border border-dashed border-emerald-500/30 rounded-full pointer-events-none" />
-              
+
               {/* Center Image */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -102,24 +102,24 @@ export default function EvolticsCarbonCredit() {
                 className="relative w-[55%] sm:w-[50%] aspect-square z-10"
               >
                 <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-                <Image 
-                  src="/images/elvotics/carbon_credit.webp" 
-                  alt="Carbon Credit" 
-                  fill 
+                <Image
+                  src="/images/evoltics/carbon_credit.webp"
+                  alt="Carbon Credit"
+                  fill
                   className="object-contain drop-shadow-2xl relative z-10"
                 />
               </motion.div>
 
               {/* 4 Corner Cards */}
               {[
-                { num: "01", title: "CHARGE YOUR EV", desc: "Charge your electric vehicle through the Evoltics charging network.", pos: "top-0 left-0", align: "left", icon: Car },
+                { num: "01", title: "CHARGE YOUR EV", desc: "Charge your electric vehicle through the EVOLTICS charging network.", pos: "top-0 left-0", align: "left", icon: Car },
                 { num: "02", title: "TRACK ENERGY USED", desc: "Your charging activity is measured based on the energy consumed.", pos: "top-0 right-0", align: "right", icon: Gauge },
-                { num: "04", title: "CARBON CREDITS", desc: "Receive carbon credits through the Evoltics Green Carbon System.", pos: "bottom-0 left-0", align: "left", icon: Award },
+                { num: "04", title: "CARBON CREDITS", desc: "Receive carbon credits through the EVOLTICS Green Carbon System.", pos: "bottom-0 left-0", align: "left", icon: Award },
                 { num: "03", title: "EARN REWARDS", desc: "Your charging activity contributes toward sustainability rewards.", pos: "bottom-0 right-0", align: "right", icon: Gift }
               ].map((step, idx) => {
                 const Icon = step.icon;
                 const isRight = step.align === "right";
-                
+
                 return (
                   <motion.div
                     key={`step-img-${idx}`}
@@ -133,7 +133,7 @@ export default function EvolticsCarbonCredit() {
                     <div className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#156e30] text-white flex items-center justify-center shadow-lg border-4 border-white">
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                    
+
                     <div className="mt-3 sm:mt-4 w-full">
                       <div className="text-3xl sm:text-4xl font-black text-emerald-100/80 mb-1 sm:mb-2 font-display">
                         {step.num}
@@ -150,7 +150,7 @@ export default function EvolticsCarbonCredit() {
                   </motion.div>
                 );
               })}
-              
+
             </div>
           </div>
 

@@ -1,12 +1,12 @@
 export const cropifaiContent = {
   hero: {
-    badge: "CROPifAI Platform",
+    badge: "cropifAI Platform",
     title: {
       line1: "BEYOND PRECISION.",
       line2: "CULTIVATING THE FUTURE."
     },
     subtitle: "AI & IoT-Powered Smart Agriculture Solutions",
-    description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.",
+    description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimise farming operations.",
     buttons: {
       explore: "Explore Solutions",
       models: "Business Models"
@@ -55,8 +55,8 @@ export const cropifaiContent = {
         text: "Long-range, low-power LPWAN gateways collect telemetry across up to 15km radius without cellular dependencies."
       },
       {
-        label: "CROPIFAI CLOUD",
-        text: "A unified IoT cloud platform to ingest, process, and analyze high-frequency field telemetry in real-time."
+        label: "cropifAI CLOUD",
+        text: "A unified IoT cloud platform to ingest, process, and analyse high-frequency field telemetry in real-time."
       },
       {
         label: "CLOUD INTEGRATION",
@@ -151,11 +151,11 @@ export const cropifaiContent = {
   },
   cta: {
     title: {
-      line1: "Ready to Optimize",
+      line1: "Ready to Optimise",
       line2: "Your",
       highlight: "Agriculture?"
     },
-    description: "Join leading agri-enterprises saving millions of gallons of water and boosting crop yields with <span class=\"text-primary font-medium\">CropifAI's intelligent, data-driven ecosystem.</span>",
+    description: "Join leading agri-enterprises saving millions of gallons of water and boosting crop yields with <span class=\"text-primary font-medium\">cropifAI's intelligent, data-driven ecosystem.</span>",
     button: "Contact Sales"
   },
   ecosystem: {
@@ -233,32 +233,22 @@ export const cropifaiContent = {
         features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
       },
       {
-        name: "Solar-Powered Water Flow Controller",
+        name: "Najhum Wireless Smart Valve NQT02",
         image: "/products/cropifai/SolarPoweredWaterFlowSensor.webp",
-        description: "Autonomous solar-powered valve control for precision irrigation and flow management.",
-        features: ["Solar-Powered & Battery Backup", "0–100% Flow Control", "Autonomous Cycle Irrigation", "IP67 Weatherproof Rating"]
-      },
-      {
-        name: "Solenoid Valve Controller",
-        image: "/products/cropifai/solenoidValveController.webp",
-        description: "Automated irrigation control for multiple zones.",
-        features: ["0–100% Flow Control", "Open/Close Precision", "Multicast Control"]
-      },
-      {
-        name: "Smart Valve Controller",
-        image: "/products/cropifai/SmartValveController.webp",
-        description: "Intelligent autonomous operation for off-grid deployment.",
-        features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
+        description: "A motorised valve with an integrated ultrasonic flow meter for wireless irrigation control.",
+        features: ["0–100% Valve Position Control", "Solar & Battery Power", "Group & Sequential Zone Control"],
+        href: "#nqt02"
       }
     ],
-    tags: ["Ruggedized for Desert", "LPWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"],
+    tags: ["Ruggedised for Desert", "LPWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"],
     flowControls: [
-      { title: "Solenoid Valve Control", desc: "Percentage control 0–100%, open/close precision" },
-      { title: "Autonomous Operation", desc: "Solar-powered, battery backup, works off-grid" },
-      { title: "Cycle Irrigation", desc: "Set start time, duration, capacity, cycle number" },
-      { title: "Fertigation Dosing", desc: "Automated nutrient dosing, variable-rate application" },
-      { title: "Safety Alarms", desc: "Web notifications for flow, pressure, sensor breakdown" },
-      { title: "Multicast Control", desc: "Bulk valve control across multiple zones simultaneously" }
+      { title: "Motorised Valve Control", desc: "Open, close or hold an intermediate valve position from 0–100%." },
+      { title: "Integrated Ultrasonic Flow Meter", desc: "An ultrasonic flow meter is included as standard to monitor water flow." },
+      { title: "Solar & Battery Power", desc: "Off-grid operation without control cabinets or cable installation." },
+      { title: "Cycle Irrigation", desc: "Schedule irrigation cycles with a start time and duration." },
+      { title: "Group Control", desc: "Manage groups of valves across irrigation zones." },
+      { title: "Subsequential Task Mode", desc: "Queue zones to irrigate one after another when the water supply is limited." },
+      { title: "Safety Alarms", desc: "Receive notifications about abnormal flow, pressure and sensor faults." }
     ]
   },
   impact: {
@@ -268,7 +258,7 @@ export const cropifaiContent = {
       description: "Field-proven technology deployed across residential, commercial, and agricultural projects."
     },
     items: [
-      { value: "38%", title: "Water Savings", desc: "Smart irrigation optimization", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+      { value: "38%", title: "Water Savings", desc: "Smart irrigation optimisation", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
       { value: "30%", title: "Crop Quality Improvement", desc: "Precision farming", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
       { value: "35%", title: "Revenue & Profit Increase", desc: "Smart agriculture", color: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
       { value: "30%", title: "Food Safety Enhancement", desc: "Supply chain traceability", color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" },
@@ -278,9 +268,9 @@ export const cropifaiContent = {
   },
   interface: {
     header: {
-      titlePart1: "CENTRALIZED MANAGEMENT —",
+      titlePart1: "CENTRALISED MANAGEMENT —",
       titlePart2: "CLOUD PLATFORM",
-      description: "Powered by IoTRICs, providing an intuitive, multi-tenant interface for remote agricultural management and device oversight."
+      description: "Built on the same platform core as IoTRICs, cropifAI provides a dedicated multi-tenant interface for agricultural monitoring, irrigation and device management."
     },
     sidebar: {
       titleLine1: "Everything you need",
@@ -296,9 +286,9 @@ export const cropifaiContent = {
   solutions: {
     header: {
       tag: "Core Solutions",
-      titlePart1: "The Future of",
-      titlePart2: "Smart Agriculture",
-      description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations."
+      titlePart1: "From Field Data to",
+      titlePart2: "Daily Decisions",
+      description: "Bring soil conditions, irrigation control and farm-wide telemetry into one working view, so teams can plan and respond from the same information."
     },
     items: [
       {
@@ -306,28 +296,28 @@ export const cropifaiContent = {
         title: "Precision Farming",
         description: "Multi-depth soil sensors, weather monitoring, and crop health tracking.",
         tag: "Soil & Crop Telemetry",
-        bgImage: "/images/cropify/precision_farming.jpg"
+        bgImage: "/images/cropifai/precision_farming.jpg"
       },
       {
         code: "CORE 02",
         title: "Smart Irrigation",
-        description: "Automated valve control, fertigation, and water flow optimization.",
+        description: "Scheduled valve control and water-flow monitoring for irrigation zones.",
         tag: "Automated Valve Flow",
-        bgImage: "/images/cropify/smart_irrigation.jpg"
+        bgImage: "/images/cropifai/smart_irrigation.jpg"
       },
       {
         code: "CORE 03",
         title: "AI/ML Analytics",
         description: "Satellite imagery, NDVI analysis, yield prediction, and recommendations.",
         tag: "Predictive Yield Models",
-        bgImage: "/images/cropify/aiml_analytics.jpg"
+        bgImage: "/images/cropifai/aiml_analytics.jpg"
       },
       {
         code: "CORE 04",
         title: "Cloud Platform",
         description: "Real-time dashboards, remote monitoring, and multi-site management.",
-        tag: "IoTRICs Central Hub",
-        bgImage: "/images/cropify/cloud_platform.jpg"
+        tag: "cropifAI Cloud Platform",
+        bgImage: "/images/cropifai/cloud_platform.jpg"
       }
     ]
   },
@@ -365,7 +355,7 @@ export const cropifaiContent = {
       {
         num: "2",
         title: "Field Survey",
-        description: "Sensor placement optimization and network coverage testing."
+        description: "Sensor placement optimisation and network coverage testing."
       },
       {
         num: "3",
@@ -379,7 +369,7 @@ export const cropifaiContent = {
       },
       {
         num: "5",
-        title: "AI Optimization",
+        title: "AI Optimisation",
         description: "Model training and autonomous irrigation active."
       }
     ]
@@ -397,13 +387,13 @@ export const cropifaiContent = {
       },
       {
         num: "02",
-        title: "Analyze",
+        title: "Analyse",
         description: "Cloud engines process billions of data points through crop-specific AI models."
       },
       {
         num: "03",
         title: "Decide",
-        description: "Actionable recommendations are generated for resource optimization and risk mitigation."
+        description: "Actionable recommendations are generated for resource optimisation and risk mitigation."
       },
       {
         num: "04",
@@ -427,8 +417,8 @@ export const cropifaiContent = {
         location: "The Greens, Dubai",
         launched: "March 2020",
         challenge: "Traditional irrigation causing excessive water waste, inefficient practices, and high maintenance costs in residential community.",
-        solution: "Retrofitted existing irrigation with wireless IoT sensors, smart valve controllers, integrated with IoTRICs cloud dashboard.",
-        result: "38% reduction in water consumption with optimized irrigation, remote monitoring, and enhanced plant health.",
+        solution: "Retrofitted existing irrigation with wireless IoT sensors, smart valve controllers, integrated with the cropifAI dashboard on the shared Najhum platform core.",
+        result: "38% reduction in water consumption with optimised irrigation, remote monitoring, and enhanced plant health.",
         metric: "38%",
         metricLabel: "Water Savings Achieved",
         image: "/images/cropifai/the-greens.jpg"
@@ -440,15 +430,15 @@ export const cropifaiContent = {
         mode: "Commercial Deployment",
         location: "Dubai",
         launched: "2021",
-        challenge: "Need for sustainable environments and optimized watering to reduce carbon footprint and operational costs.",
-        solution: "Deployed a full cycle system: Sense (Real-time monitoring) → Decide (Smart engine) → Irrigate (Automated cut-off) → Analyze (Central reports).",
+        challenge: "Need for sustainable environments and optimised watering to reduce carbon footprint and operational costs.",
+        solution: "Deployed a full cycle system: Sense (Real-time monitoring) → Decide (Smart engine) → Irrigate (Automated cut-off) → Analyse (Central reports).",
         result: "Reduced water consumption, healthier crop growth, zero electrical cabling (solar-powered), and lower operational costs.",
         metric: "100%",
         metricLabel: "Wireless & Solar-Powered",
         image: "/images/cropifai/garden-villa.jpg",
         outcomes: [
           "Reduced water consumption through smart scheduling",
-          "Healthier crop growth with optimized soil moisture",
+          "Healthier crop growth with optimised soil moisture",
           "No electrical cabling — wireless & solar-powered",
           "Reduced carbon emissions & lower operational cost"
         ],
@@ -491,16 +481,17 @@ export const cropifaiContent = {
     },
     image: "/products/cropifai/SolarPoweredWaterFlowSensor.webp",
     flowControls: [
-      { title: "Solenoid Valve Control", desc: "Percentage control 0–100%, open/close precision" },
-      { title: "Autonomous Operation", desc: "Solar-powered, battery backup, works off-grid" },
-      { title: "Cycle Irrigation", desc: "Set start time, duration, capacity, cycle number" },
-      { title: "Fertigation Dosing", desc: "Automated nutrient dosing, variable-rate application" },
-      { title: "Safety Alarms", desc: "Web notifications for flow, pressure, sensor breakdown" },
-      { title: "Multicast Control", desc: "Bulk valve control across multiple zones simultaneously" }
+      { title: "Motorised Valve Control", desc: "Open, close or hold an intermediate valve position from 0–100%." },
+      { title: "Integrated Ultrasonic Flow Meter", desc: "An ultrasonic flow meter is included as standard to monitor water flow." },
+      { title: "Solar & Battery Power", desc: "Off-grid operation without control cabinets or cable installation." },
+      { title: "Cycle Irrigation", desc: "Schedule irrigation cycles with a start time and duration." },
+      { title: "Group Control", desc: "Manage groups of valves across irrigation zones." },
+      { title: "Subsequential Task Mode", desc: "Queue zones to irrigate one after another when the water supply is limited." },
+      { title: "Safety Alarms", desc: "Receive notifications about abnormal flow, pressure and sensor faults." }
     ],
     specs: [
       "IP67 Rated Enclosure",
-      "Flexible Power: Solar / Battery / Mains",
+      "Power: Solar / Battery",
       "Internal & External Antenna Options"
     ]
   }

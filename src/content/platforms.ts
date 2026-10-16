@@ -44,13 +44,13 @@ export const evolticsContent = {
       {
         num: "02",
         title: "CPO LICENSING",
-        description: "Complete support for obtaining the Charge Point Operator licence required to commercially operate and monetize EV charging infrastructure. Evoltics assists with application preparation, regulatory compliance, documentation, authority liaison and post-approval support.",
+        description: "Complete support for obtaining the Charge Point Operator licence required to commercially operate and monetise EV charging infrastructure. EVOLTICS assists with application preparation, regulatory compliance, documentation, authority liaison and post-approval support.",
         category: "Compliance",
       },
       {
         num: "03",
         title: "AC & DC CHARGER SUPPLY",
-        description: "Reliable AC and DC charging hardware supplied through a brand-agnostic approach. Evoltics provides OCPP-compliant chargers, allowing businesses to deploy compatible charging infrastructure without being locked into a single hardware brand.",
+        description: "Reliable AC and DC charging hardware supplied through a brand-agnostic approach. EVOLTICS provides OCPP-compliant chargers, allowing businesses to deploy compatible charging infrastructure without being locked into a single hardware brand.",
         category: "Hardware",
       },
       {

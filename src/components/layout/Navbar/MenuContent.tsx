@@ -1,15 +1,16 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useState, type CSSProperties } from "react";
 import Link from "next/link";
+import PlatformBrand from "@/components/ui/PlatformBrand";
 import { ArrowRight, ArrowUpRight, Check, ChevronRight, Cpu, Plug, Sprout, HelpCircle } from "lucide-react";
 import { buildSolutionGroups, type PublishedSolutionItem } from "./menu-data";
 import styles from "./Navigation.module.css";
 
 const platforms = [
-  { name: "IoTRICs", tag: "Industrial IoT", href: "/platforms/iotrics", desc: "Industrial IoT, smart building, digital twin and telemetry.", points: ["Live sensor telemetry", "Digital twin of your site", "Alerts and predictive insight"], Icon: Cpu },
-  { name: "EVOLTICS", tag: "EV charging", href: "/platforms/evoltics", desc: "EV charging infrastructure and smart CSMS management.", points: ["Charger monitoring and control", "Load balancing across sites", "Payment gateway integration"], Icon: Plug },
-  { name: "cropifAI", tag: "Smart agriculture", href: "/platforms/cropifai", desc: "Precision agriculture and automated climate intelligence.", points: ["Field and soil sensing", "Automated climate control", "AI crop insights"], Icon: Sprout },
+  { name: "IoTRICs", tag: "Industrial IoT", href: "/platforms/iotrics", desc: "Industrial IoT, smart building, digital twin and telemetry.", accent: "#167DE4", soft: "#EAF3FD", dark: "#1565C8", tint: "#F3F8FE", points: ["Live sensor telemetry", "Digital twin of your site", "Alerts and predictive insight"], Icon: Cpu },
+  { name: "EVOLTICS", tag: "EV charging", href: "/platforms/evoltics", desc: "EV charging infrastructure and smart CSMS management.", accent: "#2F9DB8", soft: "#E3F4F8", dark: "#0C2733", tint: "#F2FAFC", points: ["Charger monitoring and control", "Load balancing across sites", "Payment gateway integration"], Icon: Plug },
+  { name: "cropifAI", tag: "Smart agriculture", href: "/platforms/cropifai", desc: "Precision agriculture and automated climate intelligence.", accent: "#16A34A", soft: "#E7F7EC", dark: "#13783D", tint: "#F3FBF5", points: ["Field and soil sensing", "Automated climate control", "AI crop insights"], Icon: Sprout },
 ];
 
 export function PlatformMenuContent({ mobile = false, onNavigate }: { mobile?: boolean; onNavigate: () => void }) {
@@ -20,16 +21,17 @@ export function PlatformMenuContent({ mobile = false, onNavigate }: { mobile?: b
       <div className={styles.platformBody}>
         <div className={styles.platformList}>
           {!mobile && <div className={styles.listHeading}><strong>Our platforms</strong><span>Three platforms, one operating model</span></div>}
-          {platforms.map(({ name, tag, href, desc, Icon }, index) => (
-            <Link key={href} href={href} onClick={onNavigate} onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} className={`${styles.platformRow} ${index === active ? styles.activeRow : ""}`}>
+          {platforms.map(({ name, tag, href, desc, Icon, accent, soft, tint }, index) => (
+            <Link key={href} href={href} onClick={onNavigate} onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} style={{ "--platform-accent": accent, "--platform-soft": soft, "--platform-tint": tint } as CSSProperties} className={`${styles.platformRow} ${index === active ? styles.activeRow : ""}`}>
               <span className={styles.platformIcon}><Icon size={26} strokeWidth={1.8} aria-hidden="true" /></span>
               <span className={styles.platformText}><span className={styles.platformName}>{name}<span className={styles.tag}>{tag}</span></span><span className={styles.description}>{desc}</span></span>
               {mobile ? <ChevronRight size={16} aria-hidden="true" /> : <ArrowRight className={styles.rowArrow} size={16} aria-hidden="true" />}
             </Link>
           ))}
         </div>
-        {!mobile && <aside className={styles.platformPreview}>
+        {!mobile && <aside className={styles.platformPreview} style={{ background: current.dark }}>
           <div key={current.name} className={styles.previewCopy}>
+            {active < 2 && <PlatformBrand platform={active === 0 ? "iotrics" : "evoltics"} />}
             <span className={styles.previewTag}>{current.tag}</span><strong className={styles.previewName}>{current.name}</strong><p>{current.desc}</p>
             <ul>{current.points.map(point => <li key={point}><Check size={16} aria-hidden="true" />{point}</li>)}</ul>
             <Link href={current.href} onClick={onNavigate} className={styles.explore}>Explore {current.name}<ArrowUpRight size={16} aria-hidden="true" /></Link>

@@ -46,7 +46,7 @@ export const demoContent = {
         platform: "IoTRICs",
         title: "Unified IoT Platform",
         description: "Connect physical assets, sensors, and infrastructure. Deliver real-time visibility, intelligent alerts, and actionable insights to operate smarter and more efficiently.",
-        image: "/images/iotrics/dashboardiortics.webp",
+        image: "/images/iotrics/dashboard-iotrics.webp",
         color: "bg-blue-500",
         textColor: "text-blue-500",
         badgeColor: "bg-blue-50 text-blue-600 border-blue-100"
@@ -55,16 +55,16 @@ export const demoContent = {
         platform: "EVOLTICS",
         title: "Intelligent EV Charging",
         description: "Deploy and scale intelligent EV charging networks with real-time IoT telemetry, automated load management, and complete operational control.",
-        image: "/images/elvotics/cpmsDahsboard.jpeg",
+        image: "/images/evoltics/cpms-dashboard.jpeg",
         color: "bg-emerald-500",
         textColor: "text-emerald-500",
         badgeColor: "bg-emerald-50 text-emerald-600 border-emerald-100"
       },
       {
-        platform: "CropifAI",
+        platform: "cropifAI",
         title: "Smart Agriculture Solutions",
-        description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimize farming operations.",
-        image: "/images/cropify/dashboardcropify.webp",
+        description: "A revolutionary IoT-based agriculture and irrigation system using sensors, devices, and data analytics to monitor and optimise farming operations.",
+        image: "/images/cropifai/dashboard-cropifai.webp",
         color: "bg-amber-500",
         textColor: "text-amber-500",
         badgeColor: "bg-amber-50 text-amber-600 border-amber-100"
@@ -133,8 +133,8 @@ export const demoContent = {
       },
       {
         iconName: "Tractor",
-        title: "CropifAI",
-        description: "Agritech platform focused on yield optimization and precision soil analysis via satellite and on-site sensors.",
+        title: "cropifAI",
+        description: "Agritech platform focused on yield optimisation and precision soil analysis via satellite and on-site sensors.",
         category: "PRECISION AGRI",
         image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop",
         color: "group-hover:text-amber-400",

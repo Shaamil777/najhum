@@ -97,7 +97,7 @@ export default function Navbar() {
 
           {/* Right: Actions */}
           <div className="flex items-center justify-end gap-2 xl:gap-4 shrink-0">
-            <button type="button" aria-label="Search the website" aria-haspopup="dialog" onClick={() => setSearchOpen(true)} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-current/20 px-3 py-2 text-sm font-semibold hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary"><Search size={18}/><span className="hidden xl:inline">Search</span></button>
+            <button type="button" aria-label="Search the website" aria-haspopup="dialog" onClick={() => setSearchOpen(true)} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-current/20 px-3 py-2 text-sm font-semibold hover:bg-[#EAF3FD] focus-visible:outline-2 focus-visible:outline-[#167DE4]"><Search size={18}/><span className="hidden xl:inline">Search</span></button>
             <CTAButton />
           </div>
           

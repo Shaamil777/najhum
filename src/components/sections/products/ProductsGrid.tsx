@@ -1,9 +1,10 @@
 "use client";
 
+import { matchesProductCategory } from "@/lib/product-filters";
 import { useState, useMemo } from "react";
 import { Container } from "@/design-system/primitives/layout/Container";
-import { 
-  ArrowRight, Search, ChevronDown, 
+import {
+  ArrowRight, Search, ChevronDown,
   LayoutGrid, Radio, Router, Monitor, Box, HeadphonesIcon, Zap
 } from "lucide-react";
 import Link from "next/link";
@@ -22,57 +23,57 @@ export interface ProductItem {
 }
 
 const fallbackProducts: ProductItem[] = [
-  { 
-    id: "1", 
-    name: "NUO3 Oil Level Sensor", 
-    category: "SENSOR", 
+  {
+    id: "1",
+    name: "NUO3 Oil Level Sensor",
+    category: "SENSOR",
     categoryId: "Sensor",
-    description: "Ultrasonic liquid level monitoring for fuel tanks and storage containers.", 
+    description: "Ultrasonic liquid level monitoring for fuel tanks and storage containers.",
     imageType: "sensor",
     platforms: ["iotrics"]
   },
-  { 
-    id: "2", 
-    name: "Edge Router X1", 
-    category: "HARDWARE", 
+  {
+    id: "2",
+    name: "Edge Router X1",
+    category: "HARDWARE",
     categoryId: "Hardware",
-    description: "High-performance enterprise networking solution for industrial telemetry.", 
+    description: "High-performance enterprise networking solution for industrial telemetry.",
     imageType: "router",
     platforms: ["iotrics", "evoltics"]
   },
-  { 
-    id: "3", 
-    name: "Data Insights Pro", 
-    category: "SOFTWARE", 
+  {
+    id: "3",
+    name: "Data Insights Pro",
+    category: "SOFTWARE",
     categoryId: "Software",
-    description: "Advanced analytics platform for remote fleet monitoring.", 
+    description: "Advanced analytics platform for remote fleet monitoring.",
     imageType: "software",
     platforms: ["evoltics"]
   },
-  { 
-    id: "4", 
-    name: "CropifAI Soil Probe Node", 
-    category: "SENSOR", 
+  {
+    id: "4",
+    name: "cropifAI Soil Probe Node",
+    category: "SENSOR",
     categoryId: "Sensor",
-    description: "Multi-depth volumetric soil moisture and temperature sensor node.", 
+    description: "Multi-depth volumetric soil moisture and temperature sensor node.",
     imageType: "square_sensor",
     platforms: ["cropifai"]
   },
-  { 
-    id: "5", 
-    name: "AC Smart Wallbox 22kW", 
-    category: "HARDWARE", 
+  {
+    id: "5",
+    name: "AC Smart Wallbox 22kW",
+    category: "HARDWARE",
     categoryId: "Hardware",
-    description: "High-power connected smart AC charging station with OCPP 2.0.1.", 
+    description: "High-power connected smart AC charging station with OCPP 2.0.1.",
     imageType: "router",
     platforms: ["evoltics"]
   },
-  { 
-    id: "6", 
-    name: "Gateway Hub IoT-500", 
-    category: "HARDWARE", 
+  {
+    id: "6",
+    name: "Gateway Hub IoT-500",
+    category: "HARDWARE",
     categoryId: "Hardware",
-    description: "LPWAN & Cellular industrial edge gateway.", 
+    description: "LPWAN & Cellular industrial edge gateway.",
     imageType: "router",
     platforms: ["iotrics"]
   },
@@ -139,25 +140,15 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
   const categories = useMemo(() => {
     const list = [
       { name: "All Products", icon: LayoutGrid, id: "All" },
-      { name: "IoTRICS", icon: Radio, id: "iotrics" },
+      { name: "IoTRICs", icon: Radio, id: "iotrics" },
       { name: "EVOLTICS", icon: Zap, id: "evoltics" },
-      { name: "CropifAI", icon: Router, id: "cropifai" },
+      { name: "cropifAI", icon: Router, id: "cropifai" },
       { name: "Hardware", icon: Box, id: "Hardware" },
       { name: "Software", icon: Monitor, id: "Software" },
     ];
 
     return list.map(cat => {
-      let count = 0;
-      if (cat.id === "All") {
-        count = allProducts.length;
-      } else if (cat.id === "iotrics" || cat.id === "evoltics" || cat.id === "cropifai") {
-        count = allProducts.filter(p => p.platforms?.includes(cat.id)).length;
-      } else {
-        count = allProducts.filter(p => 
-          p.category?.toLowerCase() === cat.id.toLowerCase() || 
-          p.categoryId?.toLowerCase() === cat.id.toLowerCase()
-        ).length;
-      }
+      const count = allProducts.filter(product => matchesProductCategory(product, cat.id)).length;
       return { ...cat, count };
     });
   }, [allProducts]);
@@ -167,22 +158,13 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
     let result = allProducts;
 
     // Category filter
-    if (activeCategory !== "All") {
-      if (activeCategory === "iotrics" || activeCategory === "evoltics" || activeCategory === "cropifai") {
-        result = result.filter(p => p.platforms?.includes(activeCategory));
-      } else {
-        result = result.filter(p => 
-          p.category?.toLowerCase() === activeCategory.toLowerCase() || 
-          p.categoryId?.toLowerCase() === activeCategory.toLowerCase()
-        );
-      }
-    }
+    if (activeCategory !== "All") result = result.filter(product => matchesProductCategory(product, activeCategory));
 
     // Search query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.name.toLowerCase().includes(q) || 
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(q) ||
         p.description.toLowerCase().includes(q)
       );
     }
@@ -200,7 +182,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
     <section className="w-full bg-white py-12 lg:py-20 font-sans">
       <Container size="full" className="px-4 lg:px-12 max-w-[1440px]">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
-          
+
           {/* Left Sidebar */}
           <div className="w-full lg:w-[260px] shrink-0 flex flex-col gap-10">
             {/* Categories */}
@@ -217,8 +199,8 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                       <button
                         onClick={() => setActiveCategory(cat.id)}
                         className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                          isActive 
-                            ? "bg-blue-50 text-blue-600 font-semibold" 
+                          isActive
+                            ? "bg-blue-50 text-blue-600 font-semibold"
                             : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
                         }`}
                       >
@@ -253,7 +235,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
 
           {/* Right Main Content */}
           <div className="flex-1">
-            
+
             {/* Header & Controls */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
@@ -264,20 +246,20 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                   Discover production-grade industrial equipment and connected platforms.
                 </p>
               </div>
-              
+
               <div className="flex flex-wrap items-center gap-3">
                 <div className="relative">
                   <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search products..." 
+                    placeholder="Search products..."
                     className="w-full md:w-[220px] pl-9 pr-4 py-2 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                   />
                 </div>
                 <div className="relative">
-                  <select 
+                  <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as "name-asc" | "name-desc")}
                     className="appearance-none pl-3 pr-8 py-2 bg-white border border-neutral-200 rounded-lg text-xs font-medium text-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer"
@@ -297,8 +279,8 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                 {filteredProducts.map((product) => {
                   const productUrl = `/products/${product.id}`;
                   return (
-                    <div 
-                      key={product.id} 
+                    <div
+                      key={product.id}
                       className="group bg-white rounded-2xl p-5 border border-neutral-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                     >
                       {/* Image Area */}
@@ -313,7 +295,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                           renderPlaceholder(product.imageType)
                         )}
                       </div>
-                      
+
                       {/* Content */}
                       <div className="flex flex-col flex-1">
                         <h3 className="text-base font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-blue-600 transition-colors line-clamp-1">
@@ -322,17 +304,17 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                         <p className="text-neutral-500 text-xs leading-relaxed mb-5 line-clamp-2 flex-1">
                           {product.description}
                         </p>
-                        
+
                         <div className="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
-                          <Link 
+                          <Link
                             href={productUrl}
                             className="text-blue-600 text-xs font-bold hover:underline"
                           >
                             Explore Product
                           </Link>
-                          
-                          <Link 
-                            href={productUrl} 
+
+                          <Link
+                            href={productUrl}
                             aria-label={`Explore ${product.name}`}
                             className="flex items-center justify-center w-7 h-7 rounded-full bg-slate-100 text-slate-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200"
                           >
@@ -347,7 +329,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
             ) : (
               <div className="w-full py-20 flex flex-col items-center justify-center text-center bg-neutral-50 rounded-2xl border border-dashed border-neutral-200">
                 <p className="text-neutral-500 text-sm mb-2">No products found matching your filter.</p>
-                <button 
+                <button
                   onClick={() => {
                     setActiveCategory("All");
                     setSearchQuery("");

@@ -57,7 +57,7 @@ const UNDERLINE_MAP: Record<LinkUnderline, string> = {
  * @example
  * // External link (adds target="_blank" + rel="noopener noreferrer" automatically)
  * <Link href="https://iotrics.io" variant="external" underline="always">
- *   Visit IoTRICS
+ *   Visit IoTRICs
  * </Link>
  */
 export function Link({

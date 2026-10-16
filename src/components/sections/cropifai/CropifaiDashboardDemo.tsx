@@ -259,7 +259,7 @@ export default function CropifaiDashboardDemo({
             <iframe
               ref={iframeRef}
               src={targetUrl}
-              title="Cropifai Dashboard - Modern Greenhouse Digital Twin"
+              title="cropifAI Dashboard - Modern Greenhouse Digital Twin"
               onLoad={() => handleIframeLoaded(iframeRef.current)}
               sandbox="allow-scripts allow-same-origin allow-forms"
               loading="lazy"
@@ -314,7 +314,7 @@ export default function CropifaiDashboardDemo({
                 <iframe
                   ref={fullscreenIframeRef}
                   src={targetUrl}
-                  title="Cropifai Dashboard Fullscreen"
+                  title="cropifAI Dashboard Fullscreen"
                   onLoad={() => handleIframeLoaded(fullscreenIframeRef.current)}
                   sandbox="allow-scripts allow-same-origin allow-forms"
                   className="border-0 bg-[#F4F5F3] block"

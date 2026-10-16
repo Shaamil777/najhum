@@ -11,10 +11,10 @@ interface EvolticsDashboardDemoProps {
   maxHeight?: number;
 }
 
-const DASHBOARD_FILE = "Evoltics.dc.html";
+const DASHBOARD_FILE = "EVOLTICS.dc.html";
 const DEFAULT_HEIGHT = 1750;
 
-// Fallback section scroll targets inside Evoltics.dc.html (unscaled px)
+// Fallback section scroll targets inside EVOLTICS.dc.html (unscaled px)
 const FALLBACK_OFFSETS: Record<number, number> = {
   0: 0,     // 3D EV Charging Station Twin & Fleet Overview
   1: 1250,  // Charging Telemetry & Energy Dispensed Chart
@@ -262,7 +262,7 @@ export default function EvolticsDashboardDemo({
             <iframe
               ref={iframeRef}
               src={targetUrl}
-              title="Evoltics CSMP Dashboard - Interactive Station Management Platform"
+              title="EVOLTICS CSMP Dashboard - Interactive Station Management Platform"
               onLoad={() => handleIframeLoaded(iframeRef.current)}
               sandbox="allow-scripts allow-same-origin allow-forms"
               loading="lazy"
@@ -317,7 +317,7 @@ export default function EvolticsDashboardDemo({
                 <iframe
                   ref={fullscreenIframeRef}
                   src={targetUrl}
-                  title="Evoltics CSMP Dashboard Fullscreen"
+                  title="EVOLTICS CSMP Dashboard Fullscreen"
                   onLoad={() => handleIframeLoaded(fullscreenIframeRef.current)}
                   sandbox="allow-scripts allow-same-origin allow-forms"
                   className="border-0 bg-[#F4F5F3] block"

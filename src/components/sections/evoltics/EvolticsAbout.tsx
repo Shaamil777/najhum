@@ -122,7 +122,7 @@ export default function EvolticsAbout() {
               <div className="w-full bg-surface-alt h-1.5 sm:h-2.5 rounded-full mt-2 sm:mt-4 mb-3 sm:mb-5 overflow-hidden p-[1px] sm:p-0.5 border border-border">
                 <motion.div 
                   initial={{ width: 0 }}
-                  whileInView={{ width: "40%" }}
+                  whileInView={{ width: "50%" }}
                   viewport={{ once: true }}
                   transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
                   className="h-full bg-gradient-to-r from-primary to-blue-400 rounded-full"
@@ -136,6 +136,7 @@ export default function EvolticsAbout() {
               <span>{about.pillars[0].footerLabel}</span>
               <span className="font-bold text-foreground">{about.pillars[0].footerValue}</span>
             </div>
+            <a href={about.pillars[0].sourceUrl} target="_blank" rel="noopener noreferrer" className="relative mt-3 text-[10px] sm:text-xs text-primary underline underline-offset-2 leading-relaxed">Source: {about.pillars[0].sourceName}</a>
           </motion.div>
 
           {/* Pillar 2: Capacity Required */}
@@ -197,6 +198,7 @@ export default function EvolticsAbout() {
               <span>{about.pillars[1].footerLabel}</span>
               <span className="font-bold text-foreground">{about.pillars[1].footerValue}</span>
             </div>
+            <a href={about.pillars[1].sourceUrl} target="_blank" rel="noopener noreferrer" className="relative mt-3 text-[10px] sm:text-xs text-primary underline underline-offset-2 leading-relaxed">Source: {about.pillars[1].sourceName}</a>
           </motion.div>
 
           {/* Pillar 3: Target Goal */}
@@ -225,7 +227,7 @@ export default function EvolticsAbout() {
                     <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </a>
                   <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-success/10 flex items-center justify-center text-success group-hover:scale-110 transition-transform">
-                    <Leaf className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                    <ShieldCheck className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                   </div>
                 </div>
               </div>
@@ -251,6 +253,7 @@ export default function EvolticsAbout() {
               <span>{about.pillars[2].footerLabel}</span>
               <span className="font-bold text-success">{about.pillars[2].footerValue}</span>
             </div>
+            <a href={about.pillars[2].sourceUrl} target="_blank" rel="noopener noreferrer" className="relative mt-3 text-[10px] sm:text-xs text-primary underline underline-offset-2 leading-relaxed">Source: {about.pillars[2].sourceName}</a>
           </motion.div>
 
         </div>

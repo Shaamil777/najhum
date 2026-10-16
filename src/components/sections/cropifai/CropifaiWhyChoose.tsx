@@ -37,7 +37,7 @@ export default function CropifaiWhyChoose() {
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{whyChoose.header.tag}</p>
             <h2 className="text-4xl md:text-5xl font-black font-display text-zinc-900 leading-tight tracking-tight mb-12">
               {whyChoose.header.titlePart1} <br />
-              <span className="text-primary">{whyChoose.header.titlePart2}</span>
+              <span className="normal-case text-primary">{whyChoose.header.titlePart2}</span>
             </h2>
             
             <div className="flex flex-col gap-10">

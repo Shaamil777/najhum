@@ -252,11 +252,11 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                         solution.platforms.map((p) => {
                           const tag =
                             p === 'iotrics'
-                              ? { label: 'IoTRICS', style: 'bg-blue-50 text-blue-700 border-blue-200' }
+                              ? { label: 'IoTRICs', style: 'bg-blue-50 text-blue-700 border-blue-200' }
                               : p === 'evoltics'
                               ? { label: 'EVOLTICS', style: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
                               : p === 'cropifai'
-                              ? { label: 'CropifAI', style: 'bg-amber-50 text-amber-700 border-amber-200' }
+                              ? { label: 'cropifAI', style: 'bg-amber-50 text-amber-700 border-amber-200' }
                               : { label: p, style: 'bg-gray-50 text-gray-700 border-gray-200' };
 
                           return (

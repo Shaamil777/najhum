@@ -1,3 +1,4 @@
+import { formatPublicCopy, formatPublicText } from "@/lib/public-copy";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db/prisma";
 import ProductDetailClient from "@/components/products/ProductDetailClient";
@@ -36,8 +37,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 
   return {
-    title: `${product.name} | Najhum Products`,
-    description: product.description,
+    title: `${formatPublicText(product.name)} | Najhum Products`,
+    description: formatPublicText(product.description),
   };
 }
 
@@ -116,5 +117,5 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     downloads: [],
   };
 
-  return <ProductDetailClient product={productData} />;
+  return <ProductDetailClient product={formatPublicCopy(productData)} />;
 }

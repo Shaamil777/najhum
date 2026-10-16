@@ -114,7 +114,7 @@ export default function EvolticsMobileApp() {
             transition={{ duration: 0.6 }}
             className="order-2 relative w-[220px] sm:w-[280px] md:w-[240px] lg:w-[300px] xl:w-[340px] h-[440px] sm:h-[580px] md:h-[480px] lg:h-[620px] xl:h-[680px] rounded-[2.5rem] sm:rounded-[3.2rem] bg-black border-[7px] sm:border-[9px] border-[#18181b] shadow-2xl flex flex-col items-center justify-center overflow-hidden mx-auto"
           >
-            {/* Actual Evoltics Mobile App Demo Video */}
+            {/* Actual EVOLTICS Mobile App Demo Video */}
             <video 
               ref={videoRef}
               src={HERO_VIDEOS.mobileMockup}
@@ -160,7 +160,7 @@ export default function EvolticsMobileApp() {
             className="flex items-center justify-center space-x-1.5 sm:space-x-2 bg-foreground text-background hover:bg-foreground/90 transition-colors px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-0.5 duration-200 flex-1 sm:flex-none max-w-[160px] sm:max-w-none cursor-pointer"
           >
             <div className="w-5 h-5 sm:w-7 sm:h-7 shrink-0 relative pb-1">
-              <Image src="/images/elvotics/apple-icon.png" alt="Apple" fill className="object-contain brightness-0 invert" />
+              <Image src="/images/evoltics/apple-icon.png" alt="Apple" fill className="object-contain brightness-0 invert" />
             </div>
             <div className="flex flex-col items-start leading-none">
               <span className="text-[7px] sm:text-[10px] uppercase tracking-widest mb-0.5 sm:mb-1 opacity-80 whitespace-nowrap">Download on the</span>

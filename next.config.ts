@@ -16,6 +16,22 @@ if (process.env.R2_PUBLIC_URL) {
 const nextConfig: NextConfig = {
   turbopack: { root: process.cwd() },
   outputFileTracingRoot: process.cwd(),
+  async redirects() {
+    return [
+      { source: "/blog/:path*", destination: "/", permanent: false },
+      { source: "/blogs/:path*", destination: "/", permanent: false },
+      { source: "/portfolio/:path*", destination: "/", permanent: false },
+      { source: "/platforms", destination: "/", permanent: false },
+      { source: "/platfoms", destination: "/", permanent: false },
+      { source: "/images/elvotics/:path*", destination: "/images/evoltics/:path*", permanent: true },
+      { source: "/images/evoltics/cpmsDahsboard.jpeg", destination: "/images/evoltics/cpms-dashboard.jpeg", permanent: true },
+      { source: "/images/iotrics/dashboardiortics.webp", destination: "/images/iotrics/dashboard-iotrics.webp", permanent: true },
+      { source: "/images/cropify/:path*", destination: "/images/cropifai/:path*", permanent: true },
+      { source: "/images/cropifai/dashboardcropify.webp", destination: "/images/cropifai/dashboard-cropifai.webp", permanent: true },
+      { source: "/images/performancce.webp", destination: "/images/performance.webp", permanent: true },
+      { source: "/logo/elvotics_logo/:path*", destination: "/logo/evoltics/:path*", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       ...(r2PublicUrl ? [{

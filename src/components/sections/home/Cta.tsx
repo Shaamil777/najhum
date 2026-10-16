@@ -79,7 +79,7 @@ export default function Cta() {
                 Your <span className="text-primary">Operations?</span>
              </h2>
              <p className="text-lg sm:text-xl text-zinc-500 mb-8 sm:mb-10 leading-relaxed max-w-2xl">
-                Connect <span className="text-primary">industrial assets</span>, optimize <span className="text-primary">energy</span>, and unlock <span className="text-primary font-medium">real-time operational intelligence</span> with Najhum&apos;s enterprise platforms.
+                Connect <span className="text-primary">industrial assets</span>, optimise <span className="text-primary">energy</span>, and unlock <span className="text-primary font-medium">real-time operational intelligence</span> with Najhum&apos;s enterprise platforms.
              </p>
              
              {/* Scaled-up Contact Button */}

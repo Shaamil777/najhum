@@ -11,14 +11,14 @@ export default function CropifaiWorkflow() {
     },
     {
       num: "02",
-      title: "Analyze",
+      title: "Analyse",
       description: "Cloud engines process billions of data points through crop-specific AI models.",
       icon: BrainCircuit
     },
     {
       num: "03",
       title: "Decide",
-      description: "Actionable recommendations are generated for resource optimization and risk mitigation.",
+      description: "Actionable recommendations are generated for resource optimisation and risk mitigation.",
       icon: Lightbulb
     },
     {

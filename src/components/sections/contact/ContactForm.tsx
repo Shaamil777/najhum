@@ -361,8 +361,8 @@ export default function ContactForm() {
                   defaultValue=""
                   options={[
                     { value: "IoTRICs (Industrial IoT)", label: "IoTRICs (Industrial IoT Platform)" },
-                    { value: "Evoltics (EV Charging)", label: "Evoltics (EV Charging Infrastructure)" },
-                    { value: "Cropifai (AgriTech)", label: "Cropifai (Precision AgriTech)" },
+                    { value: "EVOLTICS (EV Charging)", label: "EVOLTICS (EV Charging Infrastructure)" },
+                    { value: "cropifAI (AgriTech)", label: "cropifAI (Precision AgriTech)" },
                     { value: "Turnkey Automation & Sensing", label: "Turnkey Automation & Sensing" },
                     { value: "General Consultation", label: "General Consultation & Partnership" },
                   ]}

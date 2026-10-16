@@ -27,7 +27,7 @@ export default function AboutDifferentiator() {
       statLabel: "Uptime",
       description:
         "Our systems are built for 99.9% uptime in the harshest industrial environments, from sub-zero logistics to desert smart cities.",
-      image: "/images/performancce.webp",
+      image: "/images/performance.webp",
       accentColor: "text-primary",
       accentBg: "bg-primary",
       accentBorder: "border-primary/20",
@@ -52,7 +52,7 @@ export default function AboutDifferentiator() {
       stat: "25%",
       statLabel: "Cost Reduction",
       description:
-        "On average, our clients see a 25% reduction in operational expenditure through predictive maintenance and energy optimization.",
+        "On average, our clients see a 25% reduction in operational expenditure through predictive maintenance and energy optimisation.",
       image: "/images/operational.webp",
       accentColor: "text-primary",
       accentBg: "bg-primary",

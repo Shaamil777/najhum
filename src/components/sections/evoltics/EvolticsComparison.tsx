@@ -92,7 +92,7 @@ export default function EvolticsComparison() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Evoltics */}
+          {/* RIGHT COLUMN: EVOLTICS */}
           <div className="py-32 flex flex-col items-start bg-transparent">
             
             <h2 className="text-4xl font-semibold tracking-tight text-zinc-900 mb-16 text-left w-full">
@@ -178,7 +178,7 @@ export default function EvolticsComparison() {
                   </p>
                 </div>
 
-                {/* Evoltics Side */}
+                {/* EVOLTICS Side */}
                 <div className="w-full md:w-1/2 relative md:pl-8">
                   <div className="absolute -left-5 sm:-left-6 md:-left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 hidden md:block" />
                   <div className="absolute -left-6 top-0 bottom-0 w-1 bg-primary rounded-r-md opacity-70 md:hidden" />

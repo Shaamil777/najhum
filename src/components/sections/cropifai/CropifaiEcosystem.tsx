@@ -68,7 +68,7 @@ export default function CropifaiEcosystem() {
                 </div>
                 
                 {/* Content */}
-                <h3 className="text-xl font-bold tracking-tight text-neutral-900 mb-3 relative z-10 group-hover:text-primary transition-colors duration-300">
+                <h3 className="normal-case text-xl font-bold tracking-tight text-neutral-900 mb-3 relative z-10 group-hover:text-primary transition-colors duration-300">
                   {item.title}
                 </h3>
                 

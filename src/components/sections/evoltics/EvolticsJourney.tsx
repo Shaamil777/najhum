@@ -77,10 +77,10 @@ export default function EvolticsJourney() {
 
       {/* Background Illustrations */}
       <div className="absolute top-[70%] -translate-y-1/2 left-[2%] w-[30%] opacity-[0.04] pointer-events-none z-0">
-        <img src="/images/elvotics/journey_img_2.svg" alt="" className="w-full h-auto object-contain" />
+        <img src="/images/evoltics/journey_img_2.svg" alt="" className="w-full h-auto object-contain" />
       </div>
       <div className="absolute top-[40%] -translate-y-1/2 right-[2%] w-[30%] opacity-[0.04] pointer-events-none z-0">
-        <img src="/images/elvotics/journey_img_1.svg" alt="" className="w-full h-auto object-contain" />
+        <img src="/images/evoltics/journey_img_1.svg" alt="" className="w-full h-auto object-contain" />
       </div>
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-7xl">

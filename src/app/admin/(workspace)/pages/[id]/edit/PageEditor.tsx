@@ -270,7 +270,7 @@ export default function PageEditor({ page }: { page: PageRecord }) {
               type="text"
               value={metaTitle}
               onChange={(e) => setMetaTitle(e.target.value)}
-              placeholder="e.g. Evoltics - Smart EV Charging"
+              placeholder="e.g. EVOLTICS - Smart EV Charging"
               className="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
             />
           </div>

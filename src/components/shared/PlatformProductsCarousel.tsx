@@ -27,7 +27,7 @@ const dummyProducts = [
     id: 4,
     title: "Fleet Management Node",
     category: "Enterprise",
-    desc: "Centralized hardware node for managing multi-charger load balancing.",
+    desc: "Centralised hardware node for managing multi-charger load balancing.",
     imagePlaceholder: "bg-slate-50",
   },
   {

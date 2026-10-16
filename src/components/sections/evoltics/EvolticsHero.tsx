@@ -1,5 +1,6 @@
 "use client";
 
+import PlatformBrand from "@/components/ui/PlatformBrand";
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +12,7 @@ import ClientMarquee, { ClientLogo } from "@/components/ui/ClientMarquee";
 
 const evolticsLogos: ClientLogo[] = [1, 2, 3, 4, 5, 6].map((num) => ({
   name: `Trusted Partner ${num}`,
-  src: `/logo/elvotics_logo/${num}.png`,
+  src: `/logo/evoltics/${num}.png`,
   className: "max-h-8 max-w-[130px]",
 }));
 
@@ -47,6 +48,8 @@ export default function EvolticsHero() {
       {/* Main Hero Container */}
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-5xl flex flex-col items-center text-center mt-auto mb-auto">
         
+        <div className="mb-6"><PlatformBrand platform="evoltics" priority /></div>
+
         {/* Main Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

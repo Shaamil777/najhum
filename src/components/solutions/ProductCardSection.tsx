@@ -25,7 +25,7 @@ export default function ProductCardSection({ content, products = [] }: ProductCa
   const {
     eyebrow = "Compatible Hardware & Software",
     heading = "Featured Platform Products",
-    description = "Integrated industrial equipment and edge hardware optimized for this deployment architecture.",
+    description = "Integrated industrial equipment and edge hardware optimised for this deployment architecture.",
     columns = 3,
   } = content;
 

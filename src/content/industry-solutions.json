@@ -2,10 +2,10 @@
   {
     "title": "Facilities Management",
     "slug": "facilities-management",
-    "metaDescription": "Connect comfort, utilities and critical assets with IoTRICS. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
+    "metaDescription": "Connect comfort, utilities and critical assets with IoTRICs. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
     "coverImage": "/solutions/facilities-management.jpg",
     "platforms": [
-      "IoTRICS",
+      "IoTRICs",
       "EVOLTICS"
     ],
     "sourceUrl": "https://temppro-nine.vercel.app/solutions/facilities-management.html",
@@ -18,11 +18,11 @@
           "heading": "Buildings that work better.\nTeams that see more.",
           "subheading": "Give your facilities team a connected view of comfort, utilities and critical equipment—so the next decision starts with a clearer picture.",
           "backgroundImage": "/solutions/facilities-management.jpg",
-          "imageAlt": "FACILITIES MANAGEMENT · IOTRICS connected operations",
-          "eyebrow": "FACILITIES MANAGEMENT · IOTRICS",
+          "imageAlt": "FACILITIES MANAGEMENT · IoTRICs connected operations",
+          "eyebrow": "FACILITIES MANAGEMENT · IoTRICs",
           "ctaText": "Plan your solution",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -110,7 +110,7 @@
         "content": {
           "layout": "image-banner",
           "heading": "The plant room is only part of the story.",
-          "bodyHtml": "<p>Connect the spaces people use with the equipment that keeps them running. IoTRICS brings those perspectives together.</p>",
+          "bodyHtml": "<p>Connect the spaces people use with the equipment that keeps them running. IoTRICs brings those perspectives together.</p>",
           "entries": [],
           "theme": "dark",
           "eyebrow": "A CONNECTED PERSPECTIVE",
@@ -235,7 +235,7 @@
     "metaDescription": "Connected hotel operations for guest comfort, refrigeration, utilities and maintenance. Help service teams work from a shared view of the property.",
     "coverImage": "/solutions/hospitality.jpg",
     "platforms": [
-      "IoTRICS",
+      "IoTRICs",
       "EVOLTICS"
     ],
     "sourceUrl": "https://temppro-nine.vercel.app/solutions/hospitality.html",
@@ -252,7 +252,7 @@
           "eyebrow": "HOSPITALITY · CONNECTED HOTEL OPERATIONS",
           "ctaText": "Plan your solution",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -481,7 +481,7 @@
     "metaDescription": "Connect cold-room conditions, door activity and refrigeration demand. Understand exceptions with the context needed for a focused response.",
     "coverImage": "/solutions/cold-storage.jpg",
     "platforms": [
-      "IoTRICS"
+      "IoTRICs"
     ],
     "sourceUrl": "https://temppro-nine.vercel.app/solutions/cold-storage.html",
     "sections": [
@@ -497,7 +497,7 @@
           "eyebrow": "COLD STORAGE · CONNECTED REFRIGERATION",
           "ctaText": "Plan your solution",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics",
           "mediaCards": [
             {
@@ -707,7 +707,7 @@
     "metaDescription": "Connected industrial monitoring for materials, equipment and utilities. Give production and maintenance teams a shared view across shifts.",
     "coverImage": "/solutions/industrial.jpg",
     "platforms": [
-      "IoTRICS"
+      "IoTRICs"
     ],
     "sourceUrl": "https://temppro-nine.vercel.app/solutions/industrial.html",
     "sections": [
@@ -719,11 +719,11 @@
           "heading": "Keep production moving.\nKeep the whole plant in view.",
           "subheading": "Connect materials, utilities and equipment condition in one operating picture. Help every shift see what needs attention and why.",
           "backgroundImage": "/solutions/industrial.jpg",
-          "imageAlt": "INDUSTRIAL & MANUFACTURING · IOTRICS connected operations",
-          "eyebrow": "INDUSTRIAL & MANUFACTURING · IOTRICS",
+          "imageAlt": "INDUSTRIAL & MANUFACTURING · IoTRICs connected operations",
+          "eyebrow": "INDUSTRIAL & MANUFACTURING · IoTRICs",
           "ctaText": "Plan your solution",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,
@@ -983,10 +983,10 @@
   {
     "title": "Energy Monitoring",
     "slug": "energy-monitoring",
-    "metaDescription": "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICS.",
+    "metaDescription": "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICs.",
     "coverImage": "/solutions/energy-monitoring.jpg",
     "platforms": [
-      "IoTRICS"
+      "IoTRICs"
     ],
     "sourceUrl": "https://temppro-nine.vercel.app/solutions/energy-monitoring.html",
     "sections": [
@@ -1002,7 +1002,7 @@
           "eyebrow": "ENERGY MONITORING · FROM MEASUREMENT TO ACTION",
           "ctaText": "Plan your solution",
           "ctaLink": "/contact",
-          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaText": "Explore IoTRICs",
           "secondaryCtaLink": "/platforms/iotrics"
         },
         "isDraft": false,

@@ -1,3 +1,4 @@
+import { formatPublicCopy, formatPublicText } from '@/lib/public-copy';
 /**
  * Dynamic Solution Page
  * 
@@ -34,11 +35,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${solution.title}${solution.isDraft ? ' (Draft)' : ''} | Najhum Technologies`,
-    description: solution.metaDescription || solution.title,
+    title: `${formatPublicText(solution.title)}${solution.isDraft ? ' (Draft)' : ''} | Najhum Technologies`,
+    description: solution.metaDescription ? formatPublicText(solution.metaDescription) : solution.metaDescription || solution.title,
     openGraph: {
-      title: `${solution.title}${solution.isDraft ? ' (Draft)' : ''}`,
-      description: solution.metaDescription || solution.title,
+      title: `${formatPublicText(solution.title)}${solution.isDraft ? ' (Draft)' : ''}`,
+      description: solution.metaDescription ? formatPublicText(solution.metaDescription) : solution.metaDescription || solution.title,
       type: 'website',
     },
   };
@@ -60,7 +61,7 @@ export default async function SolutionPage({ params }: PageProps) {
     notFound();
   }
 
-  const document = liveDocument({ ...solution, sections: solution.sections || [] });
+  const document = formatPublicCopy(liveDocument({ ...solution, sections: solution.sections || [] }));
   const sectionsToRender = document.sections.filter(section => !solution.isDraft ? !section.isDraft : true);
 
   let products: Array<{ id: string; name: string; description: string; imageUrl: string | null; brochureUrl: string | null }> = [];

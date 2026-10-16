@@ -8,7 +8,7 @@
       "Flexible printed detection membrane",
       "Local event history and retransmission",
       "NFC configuration",
-      "IoTRICS D2D support",
+      "IoTRICs D2D support",
       "IP67 enclosure"
     ],
     "details": {
@@ -17,7 +17,7 @@
       "specs": [
         {
           "property": "Connectivity",
-          "value": "LPWAN; IoTRICS D2D",
+          "value": "LPWAN; IoTRICs D2D",
           "unit": "",
           "remarks": ""
         },
@@ -2158,7 +2158,7 @@
       "Replaceable battery",
       "IP67 UV-resistant enclosure",
       "NFC setup",
-      "Remote IoTRICS monitoring"
+      "Remote IoTRICs monitoring"
     ],
     "details": {
       "model": "T&H300",

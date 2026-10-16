@@ -12,17 +12,17 @@ export default function CropifaiWaterFlow() {
   const flowControls = waterFlow.flowControls;
 
   return (
-    <section className="w-full py-16 lg:py-20 bg-white relative overflow-hidden font-sans border-b border-zinc-200">
-      
+    <section id="nqt02" className="scroll-mt-24 w-full py-16 lg:py-20 bg-white relative overflow-hidden font-sans border-b border-zinc-200">
+
       {/* Decorative background blob */}
       <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-primary/5 rounded-[100%] blur-[120px] -translate-y-1/2 pointer-events-none" />
 
       <Container size="xl" className="relative z-10">
-        
+
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-          
+
           {/* Left Side: Product Image Display */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -31,25 +31,25 @@ export default function CropifaiWaterFlow() {
           >
             {/* The distinct stylized background box with reduced desktop size */}
             <div className="relative w-[300px] sm:w-[340px] lg:w-[380px] h-[340px] sm:h-[400px] lg:h-[440px] bg-primary/10 rounded-[2.25rem] overflow-hidden shadow-xl shadow-primary/15 border border-primary/20 flex items-center justify-center p-6 lg:p-7">
-              
+
               {/* Background gradient using brand color */}
               <div className="absolute inset-0 bg-gradient-to-b from-[#e8f1ff] via-primary/30 to-primary" />
-              
+
               {/* Actual Image */}
               <div className="relative w-full h-full flex items-center justify-center">
-                <Image 
-                  src={waterFlow.image} 
-                  alt="Automated Water Flow Controller" 
-                  fill 
+                <Image
+                  src={waterFlow.image}
+                  alt="Najhum Wireless Smart Valve NQT02"
+                  fill
                   sizes="(max-width: 768px) 100vw, 380px"
-                  className="object-contain drop-shadow-2xl" 
+                  className="object-contain drop-shadow-2xl"
                 />
               </div>
             </div>
           </motion.div>
 
           {/* Right Side: Features */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

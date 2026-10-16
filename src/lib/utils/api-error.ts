@@ -1,7 +1,7 @@
 ﻿/**
  * API Error Handling Utilities
  * 
- * Provides centralized error handling for API routes with consistent error responses.
+ * Provides centralised error handling for API routes with consistent error responses.
  * Handles Zod validation errors, Prisma errors, and custom API errors.
  * 
  * Requirements: 10.16, 10.17, 12.5

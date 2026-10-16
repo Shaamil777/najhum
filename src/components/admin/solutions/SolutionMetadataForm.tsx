@@ -288,7 +288,7 @@ export default function SolutionMetadataForm({
           {[
             {
               id: 'iotrics',
-              name: 'IoTRICS',
+              name: 'IoTRICs',
               desc: 'Industrial IoT & Connectivity',
               accent: 'border-blue-500 bg-blue-50/50',
             },
@@ -300,7 +300,7 @@ export default function SolutionMetadataForm({
             },
             {
               id: 'cropifai',
-              name: 'CropifAI',
+              name: 'cropifAI',
               desc: 'Precision AgriTech',
               accent: 'border-indigo-500 bg-indigo-50/50',
             },

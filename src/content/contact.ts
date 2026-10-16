@@ -58,14 +58,14 @@ export const contactContent = {
     titlePart3: "Operations?",
     descriptionPart1: "Connect ",
     descriptionHighlight: "industrial assets",
-    descriptionPart2: ", optimize energy, and unlock real-time operational intelligence with Najhum's enterprise platforms.",
+    descriptionPart2: ", optimise energy, and unlock real-time operational intelligence with Najhum's enterprise platforms.",
     buttonLabel: "Get in Touch"
   },
   explore: {
     title: "Explore The Najhum Ecosystem",
     ecosystems: [
       {
-        title: "IoTRICS",
+        title: "IoTRICs",
         desc: "Universal industrial IoT platform for real-time asset monitoring.",
         iconName: "Radio",
         href: "/platforms/iotrics"
@@ -77,8 +77,8 @@ export const contactContent = {
         href: "/platforms/evoltics"
       },
       {
-        title: "CropifAI",
-        desc: "AI-driven precision agriculture for optimized resource use.",
+        title: "cropifAI",
+        desc: "AI-driven precision agriculture for optimised resource use.",
         iconName: "Sprout",
         href: "/platforms/cropifai"
       }
