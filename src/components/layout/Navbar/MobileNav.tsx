@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ const navItems: NavItemData[] = [
   { title: "About", href: "/about" },
 ];
 
-export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: string; slug: string }> } = {}) {
+export function MobileNav({ onSearch }: { onSearch: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const mounted = useHydrated();
   const pathname = usePathname();
@@ -64,7 +64,7 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
           />
         </Link>
 
-        <button
+        <div className="flex items-center gap-2"><button type="button" aria-label="Search the website" aria-haspopup="dialog" onClick={onSearch} className="w-11 h-11 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-900"><Search size={19}/></button>        <button
           onClick={toggle}
           type="button"
           aria-label="Open menu"
@@ -72,7 +72,7 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
           className="w-11 h-11 rounded-full bg-neutral-50 hover:bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 transition-all shadow-xs active:scale-95 cursor-pointer shrink-0"
         >
           <Menu className="w-5 h-5 text-neutral-900" strokeWidth={2} />
-        </button>
+        </button></div>
       </header>
 
       {/* ═══ Open State Overlay & Dropdown Menu ═══ */}
@@ -154,10 +154,7 @@ export function MobileNav({ solutions = [] }: { solutions?: Array<{ title: strin
                         </Link>
                       );
                     })}
-                    {solutions.length > 0 && <div className="border-t border-neutral-100 pt-3 mt-3">
-                      <p className="px-4 mb-2 text-xs font-bold uppercase tracking-wider text-neutral-500">Published solutions</p>
-                      {solutions.map((solution) => <Link key={solution.slug} href={`/solutions/${solution.slug}`} onClick={close} className="block rounded-xl px-4 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-primary/10 hover:text-primary">{solution.title}</Link>)}
-                    </div>}
+
                   </nav>
 
                   {/* Divider */}

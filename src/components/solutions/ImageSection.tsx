@@ -23,7 +23,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
     fit = 'cover',
   } = content;
 
-  if (!imageUrl) return null;
+
 
   const getAspectClass = () => {
     switch (aspectRatio) {
@@ -39,7 +39,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
     }
   };
 
-  const isSplit = layout === "split-left" || layout === "split-right";
+  const isSplit = !!imageUrl && (layout === "split-left" || layout === "split-right");
 
   return (
     <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden font-sans border-b border-slate-100">
@@ -106,7 +106,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
               />
             </motion.div>
           </div>
-        ) : (
+        ) : imageUrl ? (
           /* Standard / Full Width Image Showcase */
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -127,7 +127,7 @@ export default function ImageSection({ content }: ImageSectionProps) {
               </div>
             )}
           </motion.div>
-        )}
+        ) : null}
 
       </div>
     </section>

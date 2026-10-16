@@ -1,3 +1,4 @@
+import industrySolutions from '@/content/industry-solutions.json';
 import { SectionType } from '@/types/section';
 import type { BuilderDocument, BuilderSection, BuilderProduct } from './document';
 import { defaultSolaasContent } from '@/content/solaas';
@@ -144,6 +145,15 @@ export function makeSection(type: SectionType, products: BuilderProduct[] = []):
 }
 
 export const sectionPresets = [
+  { id: 'hero-faded', type: SectionType.HERO, label: 'Hero · side-fade image', description: 'A light editorial hero with photography fading behind the copy · 16:9', mark: 'H◧', content: { layout: 'hero-faded', eyebrow: 'CONNECTED OPERATIONS', heading: 'A clearer view of every possibility.', subheading: 'Introduce your solution with a large image, a focused message, and a clear next step.', backgroundImage: '', imageAlt: '', ctaText: 'Discuss your project', ctaLink: '/contact', secondaryCtaText: 'Explore the platform', secondaryCtaLink: '/platforms/iotrics' } },
+  { id: 'faded-image-cards', label: 'Faded image cards · About style', description: 'Pale blue cards with photography fading behind text · 4:3', mark: '▧', content: { eyebrow: 'CONNECTED POSSIBILITIES', heading: 'Designed for your everyday operations', bodyHtml: '<p>Introduce your key applications with the same image-led cards used on our About page.</p>', layout: 'faded-image-cards', theme: 'light', headingAlign: 'center', mediaRatio: '4:3', columns: 3, entries: [
+    { title: 'Connected spaces', description: 'Understand your environment and help every space work better.', image: '', imageAlt: 'Connected workplace', link: '/contact', linkText: 'Explore the possibilities' },
+    { title: 'Smarter assets', description: 'Know what your equipment needs before small changes become bigger problems.', image: '', imageAlt: 'Connected equipment', link: '/contact', linkText: 'Discuss your assets' },
+    { title: 'Clearer decisions', description: 'Give your team a shared view of the information that matters.', image: '', imageAlt: 'Operations team', link: '/demo', linkText: 'Explore the platform' },
+  ] } },
+  { id: 'image-banner', label: 'Background image · full overlay', description: 'Full-width photography, readable overlay, and optional action · 16:9', mark: '▣', content: { layout: 'image-banner', eyebrow: 'SEE THE BIGGER PICTURE', heading: 'Your entire operation. One connected view.', bodyHtml: '<p>Bring a key benefit into focus with a large photograph and a short, clear message.</p>', backgroundImage: '', imageAlt: '', overlayStyle: 'full', theme: 'dark', headingAlign: 'left', buttonText: 'Discuss your project', buttonLink: '/contact', entries: [] } },
+  { id: 'image-banner-side', label: 'Background image · side fade', description: 'A soft image fade beside your content · 16:9', mark: '◧', content: { layout: 'image-banner', eyebrow: 'BUILT AROUND YOUR TEAM', heading: 'Better visibility starts here.', bodyHtml: '<p>Let a photograph set the scene while your message stays easy to read.</p>', backgroundImage: '', imageAlt: '', overlayStyle: 'side', theme: 'soft', headingAlign: 'left', buttonText: 'Talk to our team', buttonLink: '/contact', entries: [] } },
+
   { id: 'faq', label: 'Frequently asked questions', description: 'Expandable answers to common customer questions', mark: '?', content: { eyebrow: 'COMMON QUESTIONS', theme: 'light', headingAlign: 'center', heading: 'Your questions, answered', bodyHtml: '<p>Find out how this solution fits your project.</p>', layout: 'faq', entries: [
     { title: 'Can this work with our existing systems?', description: 'We review your infrastructure and recommend a suitable integration approach.' },
     { title: 'How do we get started?', description: 'Contact our team to discuss your site, goals, and deployment requirements.' },
@@ -189,6 +199,7 @@ export const sectionPresets = [
   { id: 'hero-split', type: SectionType.HERO, label: 'Hero · split image', description: 'Introduction beside a large image · 4:3', mark: 'H▧', content: { layout: 'hero-split', eyebrow: 'CONNECTED SOLUTIONS', heading: 'Intelligent infrastructure. Clearer decisions.', subheading: 'Introduce your solution alongside a photograph of the environment it connects.', backgroundImage: '', imageAlt: 'Solution overview', ctaText: 'Discuss your project', ctaLink: '/contact', secondaryCtaText: 'Explore solutions', secondaryCtaLink: '/solutions' } },
   { id: 'hero-video', type: SectionType.HERO, label: 'Hero · background video', description: 'Dark cinematic banner with a hosted background video · 16:9', mark: 'H▷', content: { layout: 'hero-video', eyebrow: 'SEE WHAT IS POSSIBLE', heading: 'Bring your connected world to life.', subheading: 'Set the scene with a short video of your solution in action.', videoUrl: '', backgroundImage: '', imageAlt: 'Video cover', ctaText: 'Talk to our team', ctaLink: '/contact' } },
   { id: 'hero-editorial', type: SectionType.HERO, label: 'Hero · image card strip', description: 'Editorial heading with three supporting image cards · 4:3', mark: 'H▦', content: { layout: 'hero-editorial', eyebrow: 'INTELLIGENT OPERATIONS', heading: 'One connected vision. Every part of your business.', subheading: 'Introduce your solution with a visual story across the environments, devices, and teams it connects.', backgroundImage: '', ctaText: 'Start a conversation', ctaLink: '/contact', mediaCards: [ { title: 'Connected spaces', image: '', imageAlt: 'Connected spaces' }, { title: 'Intelligent devices', image: '', imageAlt: 'Intelligent devices' }, { title: 'Actionable insights', image: '', imageAlt: 'Dashboard insights' } ] } },
+  { id: 'table', label: 'Data table', description: 'Editable columns and rows for specifications, challenges, or comparisons', mark: '≡', content: { eyebrow: 'AT A GLANCE', heading: 'Compare the details', bodyHtml: '', layout: 'table', theme: 'light', headingAlign: 'left', tableCaption: 'Solution details', tableColumns: ['Challenge', 'Operational impact'], tableRows: [{ cells: ['Manual monitoring', 'Limited visibility and delayed response'] }, { cells: ['Disconnected systems', 'More effort to bring information together'] }] } },
 ] as const;
 export type SectionPresetId = typeof sectionPresets[number]['id'];
 export function makePreset(id: SectionPresetId): BuilderSection {
@@ -211,10 +222,17 @@ export const pageTemplates = [
   { id: 'video-showcase', label: 'Video showcase', description: 'Background-video hero, a cinema player, and a video card library.' },
   { id: 'dark-showcase', label: 'Dark showcase', description: 'Dark image overlays, a featured mosaic, and video cards with blue accents.' },
   { id: 'application-gallery', label: 'Application gallery', description: 'A visual application directory with image grids, overlays, and demonstrations.' },
+  { id: 'facilities-management', label: 'Facilities management', description: 'Side-fade hero, About-style image cards, visual stories and application accordions.' },
+  { id: 'hospitality', label: 'Hospitality & hotels', description: 'Split photography, hospitality image cards, a full-image banner and a featured mosaic.' },
+  { id: 'cold-storage', label: 'Cold chain intelligence', description: 'Editorial image strip, cold-room photo cards, side-fade storytelling and practical FAQs.' },
+  { id: 'industrial', label: 'Industrial & manufacturing', description: 'Immersive hero, production image cards, a three-column table and plant-wide imagery.' },
+  { id: 'energy-monitoring', label: 'Energy monitoring', description: 'Light photo hero, an energy image mosaic, faded application cards and an evidence-led story.' },
 ] as const;
 export type PageTemplateId = typeof pageTemplates[number]['id'];
 
 export function makeTemplate(kind: PageTemplateId, products: BuilderProduct[] = []): BuilderSection[] {
+  const imported = industrySolutions.find(solution => solution.slug === kind);
+  if (imported) return structuredClone(imported.sections).map(section => ({ ...section, id: crypto.randomUUID(), type: section.type as SectionType }));
   const visualTemplates: Partial<Record<PageTemplateId, (SectionType | SectionPresetId)[]>> = {
     'visual-overview': ['hero-split', 'overlay-cards', 'split-stories', 'video-cards', 'image-cards', 'statistics', 'faq', SectionType.CTA],
     'image-editorial': ['hero-editorial', 'image-bento', 'split-stories', SectionType.IMAGE, 'image-cards', 'case-studies', 'resources', SectionType.CTA],
@@ -265,6 +283,9 @@ export function makeTemplate(kind: PageTemplateId, products: BuilderProduct[] = 
 // Templates for adding items to an empty collection; do not infer types from old values.
 export const arrayTemplates: Record<string, Record<string, unknown> | string> = {
   mediaCards: { title: 'New image card', image: '', imageAlt: 'Describe this image' },
+  tableColumns: 'New column',
+  tableRows: { cells: ['Value', 'Value'] },
+  cells: 'Value',
   entries: { title: 'New item', description: 'Describe this item.', image: '', imageAlt: 'Describe this image', videoUrl: '', link: '', linkText: 'Learn more', value: '' },
   features: { title: 'New feature', description: 'Describe this feature.', icon: '' },
   benefits: { title: 'New benefit', description: 'Describe this benefit.', image: '/builder-placeholders/image-4-3.svg' },
@@ -286,12 +307,15 @@ export const arrayTemplates: Record<string, Record<string, unknown> | string> = 
 };
 export const arrayLimits: Record<string, number> = {
   mediaCards: 3,
+  tableColumns: 12,
+  tableRows: 100,
+  cells: 12,
   entries: 12,
   features: 12,
   benefits: 8,
   testimonials: 10,
   challenges: 12,
-  tabs: 10,
+  tabs: 20,
   steps: 6,
   cards: 6,
   highlights: 4,
@@ -305,10 +329,10 @@ export const arrayLimits: Record<string, number> = {
 
 export function editableContent(section: BuilderSection): Record<string, unknown> {
   const base = sectionLibrary.find(item => item.type === section.type)?.content || {};
-  const preset = sectionPresets.find(item => item.id === section.content.layout)?.content || {};
+  const preset = sectionPresets.find(item => item.id === (section.content.layout === 'image-banner' && section.content.overlayStyle === 'side' ? 'image-banner-side' : section.content.layout))?.content || {};
   const defaults = { ...base, ...preset };
   const content = { ...JSON.parse(JSON.stringify(defaults)), ...section.content };
-  if (['image-cards', 'overlay-cards', 'image-bento', 'split-stories', 'case-studies', 'video-cards'].includes(content.layout) && Array.isArray(content.entries)) {
+  if (['image-cards', 'overlay-cards', 'image-bento', 'split-stories', 'case-studies', 'video-cards', 'faded-image-cards'].includes(content.layout) && Array.isArray(content.entries)) {
     content.entries = content.entries.map((entry: Record<string, unknown>) => ({ image: '', imageAlt: '', ...(content.layout === 'video-cards' ? { videoUrl: '' } : {}), ...entry }));
   }
   if (section.type === SectionType.HERO && Array.isArray(content.mediaCards)) {

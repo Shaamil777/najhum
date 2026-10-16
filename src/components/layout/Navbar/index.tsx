@@ -6,6 +6,9 @@ import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { DesktopNav } from "./DesktopNav";
 import { MobileNav } from "./MobileNav";
+import { Search } from 'lucide-react';
+import UniversalSearch from './UniversalSearch';
+import './search.css';
 import { CTAButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -20,6 +23,8 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const [searchOpen,setSearchOpen] = useState(false);
+  useEffect(() => { function shortcut(event: KeyboardEvent) { if (pathname.startsWith('/admin')) return; if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); setSearchOpen(true); } } window.addEventListener('keydown',shortcut); return () => window.removeEventListener('keydown',shortcut); }, [pathname]);
   const [solutions, setSolutions] = useState<Array<{ title: string; slug: string; metaDescription: string | null }>>([]);
 
   useEffect(() => {
@@ -46,6 +51,7 @@ export default function Navbar() {
 
   if (pathname.startsWith('/admin')) return null;
 
+  const solutionDetail = pathname.startsWith('/solutions/');
   const isLightHero =
     pathname === "/contact" ||
     pathname === "/products" ||
@@ -59,14 +65,14 @@ export default function Navbar() {
       <header
         className={cn(
           "hidden lg:block fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 border-b",
-          isScrolled
+          isScrolled || solutionDetail
             ? "bg-surface/95 backdrop-blur-lg border-border shadow-sm py-2 text-foreground"
             : isLightHero
             ? "bg-transparent border-transparent py-4 text-foreground"
             : "bg-transparent border-transparent py-4 text-white dark"
         )}
       >
-        <div className="max-w-[var(--spacing-container)] mx-auto px-8 lg:px-16 flex items-center justify-between">
+        <div className="max-w-[var(--spacing-container)] mx-auto px-8 xl:px-16 gap-4 flex items-center justify-between">
           
           {/* Logo */}
           <Link 
@@ -90,7 +96,8 @@ export default function Navbar() {
           </div>
 
           {/* Right: Actions */}
-          <div className="flex items-center justify-end gap-4 shrink-0">
+          <div className="flex items-center justify-end gap-2 xl:gap-4 shrink-0">
+            <button type="button" aria-label="Search the website" aria-haspopup="dialog" onClick={() => setSearchOpen(true)} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-current/20 px-3 py-2 text-sm font-semibold hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary"><Search size={18}/><span className="hidden xl:inline">Search</span></button>
             <CTAButton />
           </div>
           
@@ -99,8 +106,9 @@ export default function Navbar() {
 
       {/* ── Mobile Navigation (< lg) ── */}
       <div className="lg:hidden">
-        <MobileNav solutions={solutions} />
+        <MobileNav onSearch={() => setSearchOpen(true)} />
       </div>
+      <UniversalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

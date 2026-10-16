@@ -59,7 +59,7 @@ export default function IntroSection({ content }: { content: IntroContent }) {
             transition={{ duration: 0.5 }}
           >
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
-              {content.eyebrow || 'THE PLATFORM'}
+              {content.eyebrow ?? 'THE PLATFORM'}
             </p>
             <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black font-display mb-6 leading-tight tracking-tight ${isDark ? 'text-white' : 'text-zinc-900'}`}>
               <AccentHeading value={content.heading} />

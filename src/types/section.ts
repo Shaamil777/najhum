@@ -36,7 +36,7 @@ export enum SectionType {
  * Large header with background image and CTA
  */
 export interface HeroContent {
-  layout?: 'centered' | 'hero-split' | 'hero-video' | 'hero-editorial';
+  layout?: 'centered' | 'hero-split' | 'hero-video' | 'hero-editorial' | 'hero-faded';
   eyebrow?: string;
   videoUrl?: string;
   imageAlt?: string;
@@ -171,12 +171,20 @@ export interface CustomContent {
   heading: string;
   bodyHtml: string;
   rawData?: unknown;
-  layout?: 'rich-text' | 'faq' | 'case-studies' | 'resources' | 'statistics' | 'image-cards' | 'overlay-cards' | 'image-bento' | 'split-stories' | 'video-cards';
+  layout?: 'rich-text' | 'faq' | 'case-studies' | 'resources' | 'statistics' | 'image-cards' | 'overlay-cards' | 'image-bento' | 'split-stories' | 'video-cards' | 'table' | 'faded-image-cards' | 'image-banner';
   eyebrow?: string;
   theme?: 'light' | 'soft' | 'dark';
   headingAlign?: 'left' | 'center';
   mediaRatio?: '16:9' | '4:3' | '1:1' | '3:4';
   columns?: 2 | 3 | 4;
+  backgroundImage?: string;
+  imageAlt?: string;
+  overlayStyle?: 'full' | 'side';
+  buttonText?: string;
+  buttonLink?: string;
+  tableColumns?: string[];
+  tableRows?: { cells: string[] }[];
+  tableCaption?: string;
   entries?: { title: string; description: string; image?: string; imageAlt?: string; videoUrl?: string; aspectRatio?: '16:9' | '4:3' | '1:1' | '3:4'; link?: string; linkText?: string; value?: string }[];
 }
 
@@ -310,8 +318,8 @@ export interface VideoSectionContent {
 
 export interface GraphDataPoint {
   label: string;
-  value: number;
-  secondaryValue?: number;
+  value: number | null;
+  secondaryValue?: number | null;
   unit?: string;
 }
 

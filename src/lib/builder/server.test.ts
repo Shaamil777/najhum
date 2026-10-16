@@ -61,13 +61,19 @@ describe('draft and publish boundaries', () => {
   });
 });
 
-it('refuses publication of unselected or unavailable products before modifying live sections', async () => {
+it('refuses publication of unavailable selected products before modifying live sections', async () => {
  const section = makeSection(SectionType.PRODUCT_CARD);
  section.content.displayMode = 'manual';
  const doc = { ...previewDocument(), sections: [section] };
  const request = { document: doc, version: 0, baseRevision: liveRevision(fixture()), action: 'publish' };
- await expect(saveBuilderDocument('solution-1', request)).rejects.toMatchObject({ statusCode: 400 });
  doc.sections[0].content.productIds = ['unpublished-product'];
  await expect(saveBuilderDocument('solution-1', request)).rejects.toMatchObject({ statusCode: 400 });
  expect(db.section.deleteMany).not.toHaveBeenCalled(); expect(db.section.createMany).not.toHaveBeenCalled();
+});
+
+it('allows an intentionally empty product section without forcing product selection', async () => {
+ const section = makeSection(SectionType.PRODUCT_CARD);
+ section.content.displayMode = 'manual'; section.content.productIds = [];
+ await saveBuilderDocument('solution-1', { document: { ...previewDocument(), sections: [section] }, version: 0, baseRevision: liveRevision(fixture()), action: 'publish' });
+ expect(db.solution.update).toHaveBeenCalled();
 });

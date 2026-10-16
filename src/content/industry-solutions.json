@@ -1,0 +1,1233 @@
+[
+  {
+    "title": "Facilities Management",
+    "slug": "facilities-management",
+    "metaDescription": "Connect comfort, utilities and critical assets with IoTRICS. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
+    "coverImage": "/solutions/facilities-management.jpg",
+    "platforms": [
+      "IoTRICS",
+      "EVOLTICS"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/facilities-management.html",
+    "sections": [
+      {
+        "id": "13128909-85ca-4718-86bd-08a2f6458aa7",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-faded",
+          "heading": "Buildings that work better.\nTeams that see more.",
+          "subheading": "Give your facilities team a connected view of comfort, utilities and critical equipment—so the next decision starts with a clearer picture.",
+          "backgroundImage": "/solutions/facilities-management.jpg",
+          "imageAlt": "FACILITIES MANAGEMENT · IOTRICS connected operations",
+          "eyebrow": "FACILITIES MANAGEMENT · IOTRICS",
+          "ctaText": "Plan your solution",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "4d7979e7-fa22-4980-b0fc-c30c2d48412a",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Every building has a lot going on.\nBring it into view.",
+          "bodyHtml": "<p>Connect the everyday systems that shape comfort, service and operating cost.</p>",
+          "entries": [
+            {
+              "title": "Comfort, room by room",
+              "description": "See indoor conditions and cooling demand together. Help teams find the places that need attention.",
+              "image": "/solutions/facilities-management.jpg",
+              "imageAlt": "Comfort, room by room",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Utilities, made visible",
+              "description": "Understand energy and water use across your property. Investigate changes with context.",
+              "image": "/images/iotrics/capability_4.webp",
+              "imageAlt": "Utilities, made visible",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Assets, kept in focus",
+              "description": "Follow equipment condition and service history. Prioritise the checks that matter today.",
+              "image": "/images/iotrics/capability_5.webp",
+              "imageAlt": "Assets, kept in focus",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "ONE PROPERTY. A CONNECTED PICTURE.",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "235e96a2-1c2b-45e4-90bb-915d245a8f7e",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "split-stories",
+          "heading": "Less time piecing things together.",
+          "bodyHtml": "<p>Your team needs useful context, from the plant room to the portfolio.</p>",
+          "entries": [
+            {
+              "title": "Start with the building, not another spreadsheet.",
+              "description": "Connect the meters, sensors and equipment that matter to your property. Organise the information by location so teams can find it quickly.",
+              "image": "/solutions/facilities-management.jpg",
+              "imageAlt": "Start with the building, not another spreadsheet.",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Make the handover a little clearer.",
+              "description": "Review alerts, operating patterns and asset history in a shared view. Give the next shift the context behind a reading, rather than another isolated notification.",
+              "image": "/images/iotrics/capability_6.jpg",
+              "imageAlt": "Make the handover a little clearer.",
+              "link": "/demo",
+              "linkText": "Explore the platform"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "FROM FIELD TO FACILITIES TEAM",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "ff3d76a9-dbf9-4a4c-b57a-39b2502c488e",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "The plant room is only part of the story.",
+          "bodyHtml": "<p>Connect the spaces people use with the equipment that keeps them running. IoTRICS brings those perspectives together.</p>",
+          "entries": [],
+          "theme": "dark",
+          "eyebrow": "A CONNECTED PERSPECTIVE",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/images/iotrics/capability_4.webp",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Explore the platform",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "11e58ace-1c5a-4358-b759-ac05ecc3cd4f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A connected layer across your facility.",
+          "bodyHtml": "<p>Choose an application to see what your team can monitor and how the information supports daily decisions.</p>",
+          "entries": [
+            {
+              "title": "Pool water, without the guesswork",
+              "description": "Bring pH, disinfectant levels and water temperature into one view. Give the pool team a clearer basis for checks, treatment decisions and maintenance records."
+            },
+            {
+              "title": "Solar assets that stay visible",
+              "description": "Compare generation with operating conditions and spot panels or strings that need investigation. Keep production trends alongside the rest of your facility data."
+            },
+            {
+              "title": "Cooling and energy, connected",
+              "description": "Review HVAC demand, indoor conditions and equipment run time together. Identify schedules and loads that deserve attention before changing operating settings."
+            },
+            {
+              "title": "Waste collections with context",
+              "description": "Use bin fill information to plan collections around demand. Give service teams a view of where attention is needed across the property."
+            },
+            {
+              "title": "Leaks and drainage, seen earlier",
+              "description": "Monitor vulnerable water points, tanks and sewage levels. Route threshold alerts to the people responsible for the affected area."
+            },
+            {
+              "title": "Washrooms ready for the next visitor",
+              "description": "Combine usage, consumables and environmental information to support cleaning rounds and replenishment. Help supervisors prioritise the busiest spaces."
+            },
+            {
+              "title": "Parking and charging that work together",
+              "description": "Bring parking availability into the building experience and connect EV charging through EVOLTICS. Review each platform’s role before planning a combined deployment."
+            },
+            {
+              "title": "Environmental and safety awareness",
+              "description": "Use environmental and equipment signals to support site awareness and escalation. Connected monitoring complements the building’s certified life-safety systems."
+            },
+            {
+              "title": "Critical equipment with a history",
+              "description": "Track operating condition and run hours for pumps, motors and other assets. Give maintenance teams trends to review alongside inspections and work orders."
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "EXPLORE THE APPLICATIONS",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "8fe8acff-d4d3-48b0-a742-f27a9db85f76",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL WAY FORWARD",
+          "heading": "Start where the need is clearest.",
+          "bodyText": "Start with a focused deployment. Build confidence in the data. Expand where it adds value.",
+          "steps": [
+            {
+              "title": "Walk the property",
+              "description": "Map the assets, areas and service issues your team wants to understand."
+            },
+            {
+              "title": "Connect a focused pilot",
+              "description": "Agree the sensors, connectivity and alert responsibilities for the first deployment."
+            },
+            {
+              "title": "Review, then expand",
+              "description": "Use the operating data to refine thresholds and plan the next areas to connect."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "7d9a05fe-8e27-4a85-8b8c-57756b4c203e",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Make your next building a connected one.",
+          "bodyHtml": "<p>Tell us about your property, existing systems and operational priorities. We’ll help shape a practical starting point.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "LET’S BUILD YOUR SOLUTION",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/facilities-management.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Talk to our team",
+          "buttonLink": "/contact"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Hospitality & Hotels",
+    "slug": "hospitality",
+    "metaDescription": "Connected hotel operations for guest comfort, refrigeration, utilities and maintenance. Help service teams work from a shared view of the property.",
+    "coverImage": "/solutions/hospitality.jpg",
+    "platforms": [
+      "IoTRICS",
+      "EVOLTICS"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/hospitality.html",
+    "sections": [
+      {
+        "id": "d8dd97f4-7423-4ade-9b00-adea5199f517",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-split",
+          "heading": "A better stay starts\nbehind the scenes.",
+          "subheading": "Connect the details guests rarely see—room conditions, refrigeration, water and equipment—so your team can focus on the experience they do.",
+          "backgroundImage": "/solutions/hospitality.jpg",
+          "imageAlt": "HOSPITALITY · CONNECTED HOTEL OPERATIONS connected operations",
+          "eyebrow": "HOSPITALITY · CONNECTED HOTEL OPERATIONS",
+          "ctaText": "Plan your solution",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "e99cc2f1-ca8e-4d43-bfd2-ead4713efa7f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Guest experience. Operational clarity.",
+          "bodyHtml": "<p>Bring front-of-house comfort and behind-the-scenes operations into the same conversation.</p>",
+          "entries": [
+            {
+              "title": "Spaces that feel right",
+              "description": "Understand room and shared-space conditions so service teams can follow up with confidence.",
+              "image": "/solutions/hospitality.jpg",
+              "imageAlt": "Spaces that feel right",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Service that stays ready",
+              "description": "Keep cold rooms, water systems and essential equipment visible between routine checks.",
+              "image": "/images/iotrics/capability_3.webp",
+              "imageAlt": "Service that stays ready",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Resources used thoughtfully",
+              "description": "Review cooling and utility patterns alongside occupancy and the property’s operating needs.",
+              "image": "/images/iotrics/capability_4.webp",
+              "imageAlt": "Resources used thoughtfully",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "DESIGNED AROUND THE PROPERTY",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "6d72ba2d-f5c5-4495-9fe5-38ed1bd583b9",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Quietly connected.\nNoticeably better informed.",
+          "bodyHtml": "<p>A hotel runs on hundreds of daily decisions. Give engineering, housekeeping and management a common view of the conditions behind them.</p>",
+          "entries": [],
+          "theme": "dark",
+          "eyebrow": "A CONNECTED PERSPECTIVE",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/hospitality.jpg",
+          "imageAlt": "",
+          "overlayStyle": "full",
+          "buttonText": "Explore the platform",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "d8f02ec5-a23f-49b4-953b-79ca53629660",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-bento",
+          "heading": "From the lobby to the service corridor.",
+          "bodyHtml": "<p>Build the connected property around the areas your teams use every day.</p>",
+          "entries": [
+            {
+              "title": "The guest environment",
+              "description": "Comfort and space-use information helps teams review what guests experience across the property.",
+              "image": "/solutions/hospitality.jpg",
+              "imageAlt": "The guest environment",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Food and refrigeration",
+              "description": "Monitor cold-room conditions and review exceptions with the kitchen team.",
+              "image": "/solutions/cold-storage.jpg",
+              "imageAlt": "Food and refrigeration",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Guest mobility",
+              "description": "Connect charging services through EVOLTICS as part of your property’s mobility offering.",
+              "image": "/images/about/evoltics_bg.jpg",
+              "imageAlt": "Guest mobility",
+              "link": "/platforms/evoltics",
+              "linkText": "Explore EVOLTICS"
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "ONE PROPERTY. MANY TOUCHPOINTS.",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "7b8400ff-6bbe-4445-a28f-cc8de5db53b9",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "Explore your connected hotel.",
+          "bodyHtml": "<p>Choose an application to see what your team can monitor and how the information supports daily decisions.</p>",
+          "entries": [
+            {
+              "title": "Guest-room comfort",
+              "description": "Review room temperature, humidity and air quality to understand comfort conditions. Use the patterns to guide service checks and operating schedules."
+            },
+            {
+              "title": "Energy across the property",
+              "description": "Compare rooms, kitchens, common areas and plant loads. Highlight consumption outside expected hours and investigate the causes with facilities teams."
+            },
+            {
+              "title": "Kitchen and cold-room conditions",
+              "description": "Keep a continuous record of refrigeration conditions and door activity. Escalate exceptions so kitchen and engineering teams can investigate promptly."
+            },
+            {
+              "title": "Water use and leak awareness",
+              "description": "Monitor consumption and vulnerable leak points across guestrooms, service areas and plant rooms. Locate exceptions with the context needed for a targeted inspection."
+            },
+            {
+              "title": "Pest-monitoring support",
+              "description": "Bring compatible bed-bug detection notifications into the operational workflow. Help housekeeping organise inspection and response without relying on scattered reports."
+            },
+            {
+              "title": "Washroom service planning",
+              "description": "Use activity and replenishment signals to prioritise housekeeping rounds in public washrooms. Match service attention to how spaces are actually used."
+            },
+            {
+              "title": "Outdoor spaces and sustainability",
+              "description": "Review outdoor conditions and resource use around landscaping and shared areas. Build a clearer operating picture for sustainability discussions."
+            },
+            {
+              "title": "EV charging for guests and staff",
+              "description": "Use EVOLTICS to support charging access, sessions and network management. Plan charger locations and operating requirements around the property."
+            },
+            {
+              "title": "Facilities operations",
+              "description": "Give engineering and housekeeping teams a shared location-based view of alerts. Keep operational information accessible across shifts."
+            },
+            {
+              "title": "Equipment maintenance",
+              "description": "Follow equipment condition and operating history to inform inspections. Investigate changes in asset behaviour before deciding on corrective work."
+            },
+            {
+              "title": "Wellness and shared spaces",
+              "description": "Understand environmental conditions and occupancy patterns in gyms, meeting rooms and lounges. Support comfort and scheduling decisions with measured information."
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "EXPLORE THE APPLICATIONS",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "edf5ca7b-77f4-4425-9c6a-ea2f5c39233f",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL WAY FORWARD",
+          "heading": "Built around your service standards.",
+          "bodyText": "Start with a focused deployment. Build confidence in the data. Expand where it adds value.",
+          "steps": [
+            {
+              "title": "Map guest and service areas",
+              "description": "Choose the rooms, plant and back-of-house operations that need better visibility."
+            },
+            {
+              "title": "Agree a response workflow",
+              "description": "Set useful thresholds and make clear which team reviews each type of alert."
+            },
+            {
+              "title": "Learn from the operating pattern",
+              "description": "Use shared reports to discuss comfort, resource use and maintenance priorities."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "9e0e6921-38ff-4db7-855b-24a73e620e6f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Let’s connect the details that matter.",
+          "bodyHtml": "<p>From a single hotel to a group of properties, start with the operational priorities behind your guest experience.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "LET’S BUILD YOUR SOLUTION",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/hospitality.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Talk to our team",
+          "buttonLink": "/contact"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Cold Storage",
+    "slug": "cold-storage",
+    "metaDescription": "Connect cold-room conditions, door activity and refrigeration demand. Understand exceptions with the context needed for a focused response.",
+    "coverImage": "/solutions/cold-storage.jpg",
+    "platforms": [
+      "IoTRICS"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/cold-storage.html",
+    "sections": [
+      {
+        "id": "de4f69f1-1e0c-4eb0-b4e6-e8d228dbbae8",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-editorial",
+          "heading": "Protect the cold.\nUnderstand the cost.",
+          "subheading": "See room conditions, door activity and refrigeration demand together. Move from isolated readings to a clearer explanation of what is happening in your cold store.",
+          "backgroundImage": "/solutions/cold-storage.jpg",
+          "imageAlt": "COLD STORAGE · CONNECTED REFRIGERATION connected operations",
+          "eyebrow": "COLD STORAGE · CONNECTED REFRIGERATION",
+          "ctaText": "Plan your solution",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics",
+          "mediaCards": [
+            {
+              "title": "Conditions inside the room",
+              "image": "/images/iotrics/capability_3.webp",
+              "imageAlt": "Cold-room sensors and refrigeration"
+            },
+            {
+              "title": "Activity at the door",
+              "image": "/solutions/cold-storage.jpg",
+              "imageAlt": "Cold-storage doors and stored goods"
+            },
+            {
+              "title": "Exceptions reaching your team",
+              "image": "/images/iotrics/capability_2.webp",
+              "imageAlt": "Operator reviewing a cold-room notification"
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "f7197f75-efe5-404f-a308-621e126abe3a",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Three signals. A more complete story.",
+          "bodyHtml": "<p>Temperature alone cannot explain every change. Connect the signals around it.</p>",
+          "entries": [
+            {
+              "title": "Room conditions",
+              "description": "Follow temperature and humidity trends and review exceptions against your storage requirements.",
+              "image": "/images/iotrics/capability_3.webp",
+              "imageAlt": "Room conditions",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Door activity",
+              "description": "See when access events coincide with changing conditions and longer recovery periods.",
+              "image": "/solutions/cold-storage.jpg",
+              "imageAlt": "Door activity",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Refrigeration demand",
+              "description": "Review electrical load alongside conditions to investigate changes in cooling effort.",
+              "image": "/images/iotrics/capability_4.webp",
+              "imageAlt": "Refrigeration demand",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "LOOK BEYOND A SINGLE READING",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "af9e2da1-5fa2-4a9c-bfa2-7410dd04e3a9",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "An open door leaves more than a temperature trace.",
+          "bodyHtml": "<p>Bring access events and refrigeration trends onto the same timeline. Help your team understand the sequence before choosing the next action.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "A CONNECTED PERSPECTIVE",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/cold-storage.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Explore the platform",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "ab6bb12d-f9bc-4abe-91c4-6659834aa0d8",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "split-stories",
+          "heading": "A clearer response, from alert to review.",
+          "bodyHtml": "<p>Support the people responsible for stock, equipment and operating records.</p>",
+          "entries": [
+            {
+              "title": "Know which room needs a closer look.",
+              "description": "Use location-based alerts to direct checks. Review the event history to distinguish a brief access event from a condition that continues to drift.",
+              "image": "/images/iotrics/capability_2.webp",
+              "imageAlt": "Know which room needs a closer look.",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Keep a record you can return to.",
+              "description": "Review temperature history, door activity and energy patterns when investigating an incident or planning maintenance. Monitoring supports your site’s food-safety procedures.",
+              "image": "/images/iotrics/capability_3.webp",
+              "imageAlt": "Keep a record you can return to.",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "KEEP THE CONTEXT WITH THE EVENT",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "cad65562-cf57-4d82-a00a-49666ed34f46",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "Questions a connected cold store can answer.",
+          "bodyHtml": "<p>Choose an application to see what your team can monitor and how the information supports daily decisions.</p>",
+          "entries": [
+            {
+              "title": "Why did this room warm up?",
+              "description": "Compare the condition trend with door openings and equipment demand. Use the sequence to decide whether the next check belongs at the door, the refrigeration system or elsewhere."
+            },
+            {
+              "title": "Is refrigeration working harder than usual?",
+              "description": "Review demand across comparable operating periods and room conditions. Investigate sustained changes before adjusting setpoints or equipment schedules."
+            },
+            {
+              "title": "Can we start with one room?",
+              "description": "Yes. A site review can define a focused pilot with agreed sensor locations, connectivity, thresholds and responsibilities before expanding coverage."
+            },
+            {
+              "title": "How does this support existing checks?",
+              "description": "Connected records add continuity between manual checks. Your team still sets the storage requirements, reviews exceptions and follows the applicable site procedures."
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "PRACTICAL OPERATING QUESTIONS",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "9cefac05-31b1-4b0f-9f4e-b8b6340f793a",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL WAY FORWARD",
+          "heading": "Start with the rooms that matter most.",
+          "bodyText": "Start with a focused deployment. Build confidence in the data. Expand where it adds value.",
+          "steps": [
+            {
+              "title": "Map storage requirements",
+              "description": "Review the rooms, goods, working ranges and equipment involved."
+            },
+            {
+              "title": "Connect the right signals",
+              "description": "Plan condition sensors, door monitoring and energy measurement around the site."
+            },
+            {
+              "title": "Tune the response",
+              "description": "Agree escalation rules and review the first operating patterns with your team."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "9061aa2f-b775-4472-ab85-f7a221151403",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Give your cold store a clearer operating picture.",
+          "bodyHtml": "<p>Discuss your rooms, refrigeration plant and monitoring requirements with our team.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "LET’S BUILD YOUR SOLUTION",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/cold-storage.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Talk to our team",
+          "buttonLink": "/contact"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Industrial & Manufacturing",
+    "slug": "industrial",
+    "metaDescription": "Connected industrial monitoring for materials, equipment and utilities. Give production and maintenance teams a shared view across shifts.",
+    "coverImage": "/solutions/industrial.jpg",
+    "platforms": [
+      "IoTRICS"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/industrial.html",
+    "sections": [
+      {
+        "id": "411599f3-d863-4cfe-a769-73f53db82819",
+        "type": "HERO",
+        "content": {
+          "layout": "centered",
+          "heading": "Keep production moving.\nKeep the whole plant in view.",
+          "subheading": "Connect materials, utilities and equipment condition in one operating picture. Help every shift see what needs attention and why.",
+          "backgroundImage": "/solutions/industrial.jpg",
+          "imageAlt": "INDUSTRIAL & MANUFACTURING · IOTRICS connected operations",
+          "eyebrow": "INDUSTRIAL & MANUFACTURING · IOTRICS",
+          "ctaText": "Plan your solution",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "f41e3d1e-32cc-40d4-a8bc-57c3de012d6c",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "The signals behind a stronger shift.",
+          "bodyHtml": "<p>Build visibility around the resources and equipment your operation depends on.</p>",
+          "entries": [
+            {
+              "title": "Materials in motion",
+              "description": "Follow fuel, silo levels and material weight through the production process.",
+              "image": "/solutions/industrial.jpg",
+              "imageAlt": "Materials in motion",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Equipment at work",
+              "description": "Review equipment condition and run-time patterns to guide maintenance checks.",
+              "image": "/images/iotrics/capability_5.webp",
+              "imageAlt": "Equipment at work",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "People with context",
+              "description": "Give shift teams a shared view of exceptions, trends and resource use.",
+              "image": "/images/iotrics/capability_6.jpg",
+              "imageAlt": "People with context",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "CONNECTED FROM INPUT TO OUTPUT",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "e1c2f37b-198c-4dc9-916e-96b7213403a3",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Turn operational questions into useful signals.",
+          "bodyHtml": "<p>Use the question your team is trying to answer to choose the first measurement.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "PLAN THE MEASUREMENT",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableCaption": "From operating question to connected measurement",
+          "tableColumns": [
+            "Operational question",
+            "Signal to connect",
+            "What your team can review"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Are fuel records consistent?",
+                "Tank level and fuel flow",
+                "Consumption patterns, refill timing and unexpected changes"
+              ]
+            },
+            {
+              "cells": [
+                "Is material feed consistent?",
+                "Conveyor and bag weight",
+                "Feed variation and packing exceptions"
+              ]
+            },
+            {
+              "cells": [
+                "Will materials be available?",
+                "Silo level",
+                "Stock position and replenishment thresholds"
+              ]
+            },
+            {
+              "cells": [
+                "Which asset needs a check?",
+                "Condition and run time",
+                "Changes that merit a maintenance inspection"
+              ]
+            },
+            {
+              "cells": [
+                "What is driving demand?",
+                "Electrical and water metering",
+                "Resource use by machine, area or shift"
+              ]
+            },
+            {
+              "cells": [
+                "Is backup plant ready?",
+                "Generator status and fuel",
+                "Readiness checks and operating history"
+              ]
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "c7ddf70e-8d24-4ac8-832d-dc33f26a5fde",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "A plant-wide view.\nA practical next action.",
+          "bodyHtml": "<p>When an exception appears, bring its location, timing and recent trend into view. Give the team a useful starting point for investigation.</p>",
+          "entries": [],
+          "theme": "dark",
+          "eyebrow": "A CONNECTED PERSPECTIVE",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/industrial.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Explore the platform",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "f620a52a-a25c-4ddb-a8e9-9e69585a4a00",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "Connect the applications your plant needs.",
+          "bodyHtml": "<p>Choose an application to see what your team can monitor and how the information supports daily decisions.</p>",
+          "entries": [
+            {
+              "title": "Fuel inventory",
+              "description": "Monitor tank levels remotely and review unusual level changes. Plan refilling and investigate discrepancies with a timestamped operating history."
+            },
+            {
+              "title": "Fuel consumption",
+              "description": "Connect fuel flow to the equipment and time period using it. Compare consumption patterns across runs to support operational and cost reviews."
+            },
+            {
+              "title": "Conveyor material weight",
+              "description": "Track material moving through conveyors to support consistent feed rates. Review changes alongside production conditions and material records."
+            },
+            {
+              "title": "Bag weight checks",
+              "description": "Surface underweight or overweight exceptions during packing. Give quality teams records to review against the applicable product requirements."
+            },
+            {
+              "title": "Silo availability",
+              "description": "Follow material levels across silos and set site-specific high and low thresholds. Use the information to coordinate replenishment and production planning."
+            },
+            {
+              "title": "Equipment condition",
+              "description": "Review vibration, temperature and run-time trends from connected equipment. Prioritise inspections around changes that merit investigation."
+            },
+            {
+              "title": "Electrical demand",
+              "description": "Understand loads at a circuit, machine or production-area level. Compare demand with shift activity and identify persistent idle loads."
+            },
+            {
+              "title": "Dust and filtration",
+              "description": "Monitor relevant dust and bag-filter operating signals. Help maintenance teams review changes alongside local environmental and safety procedures."
+            },
+            {
+              "title": "Backup power readiness",
+              "description": "Track generator status, fuel availability and operating hours. Keep backup-power checks visible to the people responsible for continuity."
+            },
+            {
+              "title": "Workplace conditions",
+              "description": "Bring environmental readings into the site view. Use location-based alerts to support the team’s established operating procedures."
+            },
+            {
+              "title": "Water in the process",
+              "description": "Measure water consumption across relevant process areas. Review trends and unexpected flow to guide inspections and resource planning."
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "EXPLORE THE APPLICATIONS",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "aafd6718-4d2d-46ac-a665-301930d64e0f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "split-stories",
+          "heading": "Designed around the way your plant runs.",
+          "bodyHtml": "<p>A useful deployment fits the site, the assets and the responsibilities already in place.</p>",
+          "entries": [
+            {
+              "title": "Connect a focused production area.",
+              "description": "Start with a defined set of assets and operational questions. Review installation conditions and the protocols your site already uses.",
+              "image": "/images/iotrics/capability_5.webp",
+              "imageAlt": "Connect a focused production area.",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Carry the context across shifts.",
+              "description": "Use shared operating history to support handovers, planned checks and resource discussions. Extend the view as more areas are connected.",
+              "image": "/images/iotrics/capability_6.jpg",
+              "imageAlt": "Carry the context across shifts.",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "FROM FIRST ASSET TO PLANT-WIDE VISIBILITY",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "824945e7-37b5-4013-93fb-3657d68f323f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Make the next shift better informed.",
+          "bodyHtml": "<p>Tell us about your production environment and the gaps your team wants to close first.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "LET’S BUILD YOUR SOLUTION",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/industrial.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Talk to our team",
+          "buttonLink": "/contact"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Energy Monitoring",
+    "slug": "energy-monitoring",
+    "metaDescription": "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICS.",
+    "coverImage": "/solutions/energy-monitoring.jpg",
+    "platforms": [
+      "IoTRICS"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/energy-monitoring.html",
+    "sections": [
+      {
+        "id": "1e3ed405-055d-45a0-b793-39008f73edfb",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-faded",
+          "heading": "Know where the energy goes.\nSee where to act.",
+          "subheading": "Connect meters, equipment and operating schedules. Give energy and facilities teams the detail behind the total on the bill.",
+          "backgroundImage": "/solutions/energy-monitoring.jpg",
+          "imageAlt": "ENERGY MONITORING · FROM MEASUREMENT TO ACTION connected operations",
+          "eyebrow": "ENERGY MONITORING · FROM MEASUREMENT TO ACTION",
+          "ctaText": "Plan your solution",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "78eb9c67-3391-4e03-b1b4-78f478e0d6c1",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "statistics",
+          "heading": "A simpler way to stay in control.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "value": "Measure",
+              "title": "At the right level",
+              "description": "Review whole-site demand or follow selected circuits and assets."
+            },
+            {
+              "value": "Compare",
+              "title": "With operating context",
+              "description": "Look at usage alongside schedules, shifts and working conditions."
+            },
+            {
+              "value": "Act",
+              "title": "With a clearer baseline",
+              "description": "Agree a change, then review what happened in the measured data."
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "AT A GLANCE",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "4fead36d-7588-40c9-a842-e7095c238d82",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-bento",
+          "heading": "Follow the energy through your operation.",
+          "bodyHtml": "<p>Connect the places where electricity becomes cooling, production and everyday service.</p>",
+          "entries": [
+            {
+              "title": "See the load, not just the total.",
+              "description": "Meter selected circuits to build a more detailed view of demand. Compare equipment and time periods to identify questions worth investigating.",
+              "image": "/images/iotrics/capability_4.webp",
+              "imageAlt": "See the load, not just the total.",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Cooling and building services",
+              "description": "Review demand alongside the systems that keep your property comfortable.",
+              "image": "/solutions/facilities-management.jpg",
+              "imageAlt": "Cooling and building services",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Production and process loads",
+              "description": "Bring electrical use into discussions about shifts, run time and idle equipment.",
+              "image": "/solutions/industrial.jpg",
+              "imageAlt": "Production and process loads",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "FROM INCOMING SUPPLY TO INDIVIDUAL LOADS",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "862b7cc4-95b5-4297-a664-e16653334dc4",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Three places to start looking.",
+          "bodyHtml": "<p>Turn a broad energy target into specific operating questions.</p>",
+          "entries": [
+            {
+              "title": "Outside operating hours",
+              "description": "Which loads keep running when the space or process is not in use?",
+              "image": "/solutions/energy-monitoring.jpg",
+              "imageAlt": "Outside operating hours",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "At the busiest moments",
+              "description": "Which systems contribute to demand when several loads overlap?",
+              "image": "/images/iotrics/capability_4.webp",
+              "imageAlt": "At the busiest moments",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            },
+            {
+              "title": "Across similar assets",
+              "description": "Why does one area or piece of equipment use more than another?",
+              "image": "/images/iotrics/capability_5.webp",
+              "imageAlt": "Across similar assets",
+              "link": "/contact",
+              "linkText": "Discuss this application"
+            }
+          ],
+          "theme": "light",
+          "eyebrow": "FIND THE NEXT USEFUL QUESTION",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "7f93a135-972c-427c-90cb-47e8850b6493",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "A lower number is useful.\nKnowing why is better.",
+          "bodyHtml": "<p>Keep a measured baseline, review changes in context and use the results to inform the next decision. Build an energy programme your team can explain.</p>",
+          "entries": [],
+          "theme": "dark",
+          "eyebrow": "A CONNECTED PERSPECTIVE",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/energy-monitoring.jpg",
+          "imageAlt": "",
+          "overlayStyle": "full",
+          "buttonText": "Explore the platform",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "1e456ae3-a1d8-4f97-a5a3-40e29d0115d7",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL WAY FORWARD",
+          "heading": "Build a programme around measured evidence.",
+          "bodyText": "Start with a focused deployment. Build confidence in the data. Expand where it adds value.",
+          "steps": [
+            {
+              "title": "Define the boundary",
+              "description": "Choose the sites, circuits or assets you want to understand and confirm the metering plan."
+            },
+            {
+              "title": "Establish the baseline",
+              "description": "Review typical operating periods, schedules and demand patterns before choosing changes."
+            },
+            {
+              "title": "Review the difference",
+              "description": "Compare measured results with the baseline and record the operating context."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "bd67d2d9-5f78-4e78-9396-6549ce2b599f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "Make the data useful to your team.",
+          "bodyHtml": "<p>Choose an application to see what your team can monitor and how the information supports daily decisions.</p>",
+          "entries": [
+            {
+              "title": "Can existing meters be included?",
+              "description": "Review the available interfaces, protocols and access conditions with our team. The integration plan depends on the meters and systems installed at your site."
+            },
+            {
+              "title": "Can we compare different sites?",
+              "description": "A common measurement structure helps teams compare sites or areas. Keep differences in opening hours, loads and operating conditions in view when interpreting results."
+            },
+            {
+              "title": "Will monitoring guarantee a saving?",
+              "description": "Monitoring provides the detail needed to investigate and verify changes. Savings depend on the site, the opportunities identified and the actions implemented."
+            },
+            {
+              "title": "Where should we start?",
+              "description": "Choose a meaningful boundary with a clear owner—such as a plant room, production area or building—and agree the first questions the data needs to answer."
+            }
+          ],
+          "theme": "soft",
+          "eyebrow": "BEFORE YOUR FIRST METER IS CONNECTED",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "47c83a5c-9c55-4fe0-ae17-2355351ce123",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Start with the energy question you can’t answer yet.",
+          "bodyHtml": "<p>We’ll help you plan the measurements and platform view needed to investigate it.</p>",
+          "entries": [],
+          "theme": "soft",
+          "eyebrow": "LET’S BUILD YOUR SOLUTION",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/energy-monitoring.jpg",
+          "imageAlt": "",
+          "overlayStyle": "side",
+          "buttonText": "Talk to our team",
+          "buttonLink": "/contact"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  }
+]

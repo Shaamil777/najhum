@@ -10,6 +10,6 @@ export function isPlaceholderMedia(value?: string | null) {
   return !value || value.startsWith('/builder-samples/') || value.startsWith('/builder-placeholders/');
 }
 export function imageRecommendation(field: string, sectionType?: string, layout?: string, ratio?: string) {
-  const recommended = field === 'avatar' ? '1:1' : sectionType === 'HERO' ? (layout === 'hero-split' ? '4:3' : layout === 'hero-editorial' ? '4:3' : '16:9') : field === 'posterUrl' || field === 'poster' || layout === 'video-cards' ? '16:9' : ratio && ratio in mediaRatios ? ratio as MediaRatio : sectionType === 'INTRO' || sectionType === 'BENEFITS' || layout === 'image-cards' || layout === 'split-stories' ? '4:3' : layout === 'overlay-cards' ? '3:4' : '16:9';
+  const recommended = field === 'avatar' ? '1:1' : sectionType === 'HERO' ? (layout === 'hero-split' ? '4:3' : layout === 'hero-editorial' ? '4:3' : '16:9') : field === 'posterUrl' || field === 'poster' || layout === 'video-cards' ? '16:9' : ratio && ratio in mediaRatios ? ratio as MediaRatio : sectionType === 'INTRO' || sectionType === 'BENEFITS' || layout === 'image-cards' || layout === 'faded-image-cards' || layout === 'split-stories' ? '4:3' : layout === 'overlay-cards' ? '3:4' : '16:9';
   return `${recommended} · ${mediaRatios[recommended].size} recommended. ${sectionType === 'IMAGE' && ratio === 'auto' ? 'Use the original ratio for diagrams; choose Contain to keep labels visible.' : 'Keep the main subject near the center; Cover crops edges to fit.'}`;
 }

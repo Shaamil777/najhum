@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   let solution = null;
   try {
-    solution = await getSolutionBySlug(slug, false);
+    solution = await getSolutionBySlug(slug, true);
   } catch (err) {
     console.error("Failed to query solution for metadata:", err);
   }
@@ -50,7 +50,7 @@ export default async function SolutionPage({ params }: PageProps) {
   // Fetch solution (allows draft previewing so admins and testers don't get 404)
   let solution = null;
   try {
-    solution = await getSolutionBySlug(slug, false);
+    solution = await getSolutionBySlug(slug, true);
   } catch (error) {
     console.error(`Failed to load solution for slug "${slug}":`, error);
   }

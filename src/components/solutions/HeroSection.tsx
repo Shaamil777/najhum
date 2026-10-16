@@ -26,6 +26,20 @@ export default function HeroSection({ content }: HeroSectionProps) {
     secondaryCtaLink,
   } = content;
 
+  if (layout === 'hero-faded') return <section className="solution-hero-faded">
+    {backgroundImage && !isPlaceholderMedia(backgroundImage) && isSafeMediaUrl(backgroundImage) && <div className="solution-hero-faded-photo"><Image src={backgroundImage} alt={imageAlt || ''} fill unoptimized priority sizes="100vw" className="object-cover object-right"/></div>}
+    <div className="solution-hero-faded-wash"/>
+    <div className="solution-hero-faded-content">
+      {eyebrow && <p className="solution-eyebrow">{eyebrow}</p>}
+      <h1><RichText value={heading}/></h1>
+      <RichText as="div" value={subheading} className="solution-hero-faded-summary"/>
+      <div className="flex flex-wrap gap-3 mt-7">
+        {ctaText && ctaLink && <Link href={ctaLink} className="solution-hero-primary">{ctaText}<ArrowRight size={16}/></Link>}
+        {secondaryCtaText && secondaryCtaLink && <Link href={secondaryCtaLink} className="solution-hero-secondary">{secondaryCtaText}</Link>}
+      </div>
+    </div>
+  </section>;
+
   if (layout === 'hero-split' || layout === 'hero-editorial') return <section className={`solution-hero solution-hero-${layout} relative overflow-hidden bg-zinc-50 font-sans`}>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className={layout === 'hero-split' ? 'grid lg:grid-cols-2 gap-8 lg:gap-12 items-center' : 'max-w-4xl'}>

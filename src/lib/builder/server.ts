@@ -61,7 +61,6 @@ export async function saveBuilderDocument(id: string, input: unknown) {
       if (request.action === 'publish') {
         const productSections = request.document.sections.filter(section => !section.isDraft && section.type === SectionType.PRODUCT_CARD);
         const chosenIds = [...new Set(productSections.flatMap(section => (section.content.productIds as string[]) || []))];
-        if (productSections.some(section => section.content.displayMode === 'manual' && !(section.content.productIds as string[])?.length)) throw apiErrors.badRequest('Choose at least one product for each visible Product cards section in manual mode.');
         if (chosenIds.length) {
           const available = await tx.product.findMany({ where: { id: { in: chosenIds }, isDraft: false }, select: { id: true } });
           if (available.length !== chosenIds.length) throw apiErrors.badRequest('A selected product is unavailable or unpublished. Choose published products before publishing.');

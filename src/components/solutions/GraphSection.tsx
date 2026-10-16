@@ -22,11 +22,12 @@ export default function GraphSection({ content }: GraphSectionProps) {
     metrics = [],
   } = content;
 
-  if (!dataPoints || dataPoints.length === 0) return null;
+  const visiblePoints = dataPoints.filter(point => point.value !== null);
+  if (!visiblePoints.length) return null;
 
   // Calculate highest value for relative percentage bar widths
   const maxValue = Math.max(
-    ...dataPoints.map((dp) => Math.max(dp.value, dp.secondaryValue || 0)),
+    ...visiblePoints.map((dp) => Math.max(dp.value ?? 0, dp.secondaryValue || 0)),
     10
   );
 
@@ -110,7 +111,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
                 <div className="w-3 h-3 rounded-sm bg-primary" />
                 <span className="text-slate-700">{primaryLabel}</span>
               </div>
-              {dataPoints.some((dp) => dp.secondaryValue !== undefined) && (
+              {dataPoints.some((dp) => dp.secondaryValue != null) && (
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-sm bg-slate-300" />
                   <span className="text-slate-500">{secondaryLabel}</span>
@@ -121,8 +122,8 @@ export default function GraphSection({ content }: GraphSectionProps) {
 
           {/* Bar Chart Visualization */}
           <div className="space-y-6">
-            {dataPoints.map((dp, idx) => {
-              const primaryPercent = Math.min(100, Math.round((dp.value / maxValue) * 100));
+            {visiblePoints.map((dp, idx) => {
+              const primaryPercent = Math.min(100, Math.round(((dp.value ?? 0) / maxValue) * 100));
               const secondaryPercent = dp.secondaryValue
                 ? Math.min(100, Math.round((dp.secondaryValue / maxValue) * 100))
                 : null;
@@ -135,7 +136,7 @@ export default function GraphSection({ content }: GraphSectionProps) {
                       <span className="font-bold text-primary">
                         {dp.value} {dp.unit || ""}
                       </span>
-                      {dp.secondaryValue !== undefined && (
+                      {dp.secondaryValue != null && (
                         <span className="text-slate-400">
                           / {dp.secondaryValue} {dp.unit || ""}
                         </span>

@@ -11,6 +11,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
 
   const activeTab = content.tabs.find(t => t.id === activeTabId) || content.tabs[0];
 
+  if (!activeTab) return null;
   return (
     <section className="relative w-full py-24 bg-zinc-50 text-zinc-900 overflow-hidden font-sans border-b border-zinc-200">
       {/* Background Decor */}
@@ -58,7 +59,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
               transition={{ duration: 0.3 }}
               className="flex flex-col gap-8"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className={`grid grid-cols-1 ${activeTab.statValue || activeTab.statDescription ? 'lg:grid-cols-2' : ''} gap-6`}>
                 
                 {/* Solution Box */}
                 <div className="bg-white border border-zinc-100 shadow-xl shadow-zinc-200/50 rounded-3xl p-5 sm:p-8 relative overflow-hidden group">
@@ -82,7 +83,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
                 </div>
 
                 {/* Stat Box */}
-                <div className="bg-primary/5 border border-primary/10 rounded-3xl p-6 sm:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+                {(activeTab.statValue || activeTab.statDescription) && <div className="bg-primary/5 border border-primary/10 rounded-3xl p-6 sm:p-10 flex flex-col items-center justify-center text-center relative overflow-hidden group">
                   {/* Subtle animated grid background inside stat box */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(26,136,248,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(26,136,248,0.05)_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-50 pointer-events-none group-hover:opacity-100 transition-opacity duration-700" />
                   
@@ -90,7 +91,7 @@ export default function UseCasesSection({ content }: { content: UseCasesContent 
                     {activeTab.statValue}
                   </div>
                   <div className="text-base md:text-lg font-bold text-zinc-700 max-w-sm mx-auto relative z-10"><RichText as="div" value={activeTab.statDescription} /></div>
-                </div>
+                </div>}
               </div>
 
               {/* Bottom Highlights */}

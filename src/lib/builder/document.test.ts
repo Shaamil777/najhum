@@ -62,10 +62,10 @@ describe('solution builder documents', () => {
     doc.sections.pop(); doc.sections[0].design.background = 'url(https://example.test)';
     expect(builderDocumentSchema.safeParse(doc).success).toBe(false);
   });
-  it('rejects empty required content with an actionable section field path', () => {
-    const doc = previewDocument(); doc.sections[0].content.heading = '';
-    const result = builderDocumentSchema.safeParse(doc);
-    expect(result.success).toBe(false);
-    if (!result.success) expect(result.error.issues[0].path).toEqual(['sections', 0, 'content', 'heading']);
+  it('accepts empty optional section fields while retaining required page identity', () => {
+    const doc = previewDocument();
+    doc.sections[0].content.heading = ''; doc.sections[0].content.subheading = ''; doc.sections[0].content.ctaText = ''; doc.sections[0].content.ctaLink = '';
+    expect(builderDocumentSchema.safeParse(doc).success).toBe(true);
+    doc.title = ''; expect(builderDocumentSchema.safeParse(doc).success).toBe(false);
   });
 });

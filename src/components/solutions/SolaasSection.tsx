@@ -53,9 +53,9 @@ export default function SolaasSection({ content = {} }: { content?: SolaasConten
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 mb-6 uppercase">
-            <RichText value={content.heading || defaultSolaasContent.heading} />
+            <RichText value={content.heading ?? defaultSolaasContent.heading} />
           </h2>
-          <RichText as="div" className="max-w-2xl text-zinc-600 text-lg" value={content.bodyText || defaultSolaasContent.bodyText} />
+          <RichText as="div" className="max-w-2xl text-zinc-600 text-lg" value={content.bodyText ?? defaultSolaasContent.bodyText} />
         </div>
 
         <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${({ 1: 'lg:grid-cols-1', 2: 'lg:grid-cols-2', 3: 'lg:grid-cols-3', 4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5', 6: 'lg:grid-cols-3' } as Record<number, string>)[(content.cards || defaultSolaasContent.cards).length] || 'lg:grid-cols-3'}`}>
