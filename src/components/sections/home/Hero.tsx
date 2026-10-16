@@ -50,11 +50,11 @@ export default function Hero() {
       {/* Main Hero Container */}
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-5xl flex flex-col items-center text-center mt-auto mb-auto">
         
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-[1.08] uppercase font-display">
+        <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-[4.25rem] font-bold text-white mb-6 tracking-tight leading-[1.1] uppercase font-display">
           {hero.titlePart1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-primary-hover">{hero.titlePart2}</span> <br className="hidden sm:block" /> {hero.titlePart3}
         </h1>
         
-        <p className="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl leading-relaxed mb-8 sm:mb-10">
+        <p className="text-base sm:text-lg text-neutral-300 max-w-2xl sm:max-w-3xl leading-relaxed mb-8 sm:mb-10">
           {hero.subheadline}
         </p>
 

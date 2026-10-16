@@ -6,17 +6,40 @@ export interface ClientLogo {
   name: string;
   src: string;
   className?: string;
+  filterClass?: string;
+  lightFilterClass?: string;
 }
 
 export const DEFAULT_CLIENT_LOGOS: ClientLogo[] = [
   {
-    name: "DEWA",
-    src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png",
-    className: "max-h-8 max-w-[130px]",
+    name: "Nokia",
+    src: "/logo/client%20logos/nokia-com-wordmark.png",
+    className: "max-h-6 max-w-[115px]",
+  },
+  {
+    name: "e&",
+    src: "/logo/client%20logos/eand.webp",
+    className: "max-h-8 max-w-[110px]",
+  },
+  {
+    name: "Space42",
+    src: "/logo/client%20logos/space42.png",
+    className: "max-h-7 max-w-[130px]",
+  },
+  {
+    name: "Thuraya",
+    src: "/logo/client%20logos/Thuraya_logo.png",
+    className: "max-h-8 max-w-[125px]",
   },
   {
     name: "ADAA",
     src: "/logo/client%20logos/adaa_gov.png",
+    className: "max-h-8 max-w-[130px]",
+    filterClass: "transition-opacity invert hue-rotate-180 opacity-80 group-hover/logo:opacity-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.2)]",
+  },
+  {
+    name: "Al Rostamani Group",
+    src: "/logo/client%20logos/alrostamaniagroup.svg",
     className: "max-h-8 max-w-[130px]",
   },
   {
@@ -25,19 +48,9 @@ export const DEFAULT_CLIENT_LOGOS: ClientLogo[] = [
     className: "max-h-8 max-w-[120px]",
   },
   {
-    name: "Thuraya",
-    src: "/logo/client%20logos/Thuraya_logo.png",
-    className: "max-h-8 max-w-[125px]",
-  },
-  {
-    name: "Nokia",
-    src: "/logo/client%20logos/nokia-com-wordmark.png",
-    className: "max-h-6 max-w-[115px]",
-  },
-  {
-    name: "Space42",
-    src: "/logo/client%20logos/space42.png",
-    className: "max-h-7 max-w-[130px]",
+    name: "du",
+    src: "/logo/client%20logos/du.png",
+    className: "max-h-9 max-w-[100px]",
   },
   {
     name: "Yahsat",
@@ -45,29 +58,29 @@ export const DEFAULT_CLIENT_LOGOS: ClientLogo[] = [
     className: "max-h-5 max-w-[125px]",
   },
   {
-    name: "Aramtec",
-    src: "/logo/client%20logos/aramtec.png",
-    className: "max-h-10 max-w-[95px]",
+    name: "Al Mulla Group",
+    src: "/logo/client%20logos/almulagroup.svg",
+    className: "max-h-8 max-w-[130px]",
   },
   {
-    name: "SEWA",
-    src: "/logo/client%20logos/SEWA.png",
-    className: "max-h-12 sm:max-h-14 max-w-[115px] scale-125 sm:scale-135",
-  },
-  {
-    name: "TAQA",
-    src: "/logo/client%20logos/taqa-seeklogo.png",
-    className: "max-h-8 max-w-[125px]",
-  },
-  {
-    name: "FEWA",
-    src: "/logo/client%20logos/fewa.webp",
-    className: "max-h-12 sm:max-h-14 max-w-[125px] scale-120 sm:scale-130",
+    name: "Radiant Square",
+    src: "/logo/client%20logos/radiantsquaregroup.webp",
+    className: "max-h-8 max-w-[130px]",
   },
   {
     name: "Dubai Taxi",
     src: "/logo/client%20logos/dubaitaxi.png",
     className: "max-h-8 max-w-[120px]",
+  },
+  {
+    name: "Aramtec",
+    src: "/logo/client%20logos/aramtec.png",
+    className: "max-h-10 max-w-[95px]",
+  },
+  {
+    name: "The Deep Seafood Company",
+    src: "/logo/client%20logos/thedeepseofood.png",
+    className: "max-h-9 max-w-[110px]",
   },
 ];
 
@@ -96,7 +109,7 @@ export default function ClientMarquee({
   const isDark = theme === "dark";
 
   return (
-    <div className={`relative w-full overflow-hidden select-none ${className}`}>
+    <div className={`relative w-full overflow-hidden select-none group/marquee ${className}`}>
       {/* Title */}
       {title && (
         <p
@@ -138,12 +151,17 @@ export default function ClientMarquee({
             transform: translate3d(-50%, 0, 0);
           }
         }
+        .client-marquee-track {
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
       `}</style>
 
       {/* Marquee Motion Wrapper */}
       <div
-        className={`flex shrink-0 will-change-transform ${
-          pauseOnHover ? "hover:[animation-play-state:paused]" : ""
+        className={`flex shrink-0 will-change-transform client-marquee-track ${
+          pauseOnHover ? "group-hover/marquee:[animation-play-state:paused]" : ""
         }`}
         style={{
           width: "max-content",
@@ -155,17 +173,18 @@ export default function ClientMarquee({
           {trackItems.map((logo, idx) => (
             <div
               key={`track1-${idx}`}
-              className="flex h-14 sm:h-16 w-36 sm:w-44 shrink-0 items-center justify-center px-3"
+              className="group/logo flex h-14 sm:h-16 w-36 sm:w-44 shrink-0 items-center justify-center px-3 cursor-pointer"
             >
               <img
                 src={logo.src}
                 alt={logo.name}
                 loading="eager"
                 decoding="async"
-                className={`w-auto object-contain transition-all duration-300 ${
+                draggable={false}
+                className={`w-auto object-contain pointer-events-none select-none duration-300 ${
                   isDark
-                    ? "brightness-0 invert opacity-75 hover:opacity-100 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]"
-                    : "grayscale opacity-60 hover:grayscale-0 hover:opacity-100"
+                    ? (logo.filterClass ?? "transition-opacity brightness-0 invert opacity-70 group-hover/logo:opacity-100 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]")
+                    : (logo.lightFilterClass ?? "transition-[opacity,filter] grayscale opacity-60 group-hover/logo:grayscale-0 group-hover/logo:opacity-100")
                 } ${logo.className || "max-h-8 max-w-[125px]"}`}
               />
             </div>
@@ -180,17 +199,18 @@ export default function ClientMarquee({
           {trackItems.map((logo, idx) => (
             <div
               key={`track2-${idx}`}
-              className="flex h-14 sm:h-16 w-36 sm:w-44 shrink-0 items-center justify-center px-3"
+              className="group/logo flex h-14 sm:h-16 w-36 sm:w-44 shrink-0 items-center justify-center px-3 cursor-pointer"
             >
               <img
                 src={logo.src}
                 alt={logo.name}
                 loading="eager"
                 decoding="async"
-                className={`w-auto object-contain transition-all duration-300 ${
+                draggable={false}
+                className={`w-auto object-contain pointer-events-none select-none duration-300 ${
                   isDark
-                    ? "brightness-0 invert opacity-75 hover:opacity-100 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]"
-                    : "grayscale opacity-60 hover:grayscale-0 hover:opacity-100"
+                    ? (logo.filterClass ?? "transition-opacity brightness-0 invert opacity-70 group-hover/logo:opacity-100 drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]")
+                    : (logo.lightFilterClass ?? "transition-[opacity,filter] grayscale opacity-60 group-hover/logo:grayscale-0 group-hover/logo:opacity-100")
                 } ${logo.className || "max-h-8 max-w-[125px]"}`}
               />
             </div>

@@ -3,7 +3,7 @@
     "key": "stld",
     "id": "45ca0e06-3a99-5063-9fb0-0c7db11ffb01",
     "name": "Najhum Spread-Type Leakage Sensor",
-    "description": "A LoRaWAN leak sensor with a reusable flexible membrane for monitoring conductive liquids across a wider surface.",
+    "description": "An LPWAN leak sensor with a reusable flexible membrane for monitoring conductive liquids across a wider surface.",
     "features": [
       "Flexible printed detection membrane",
       "Local event history and retransmission",
@@ -13,11 +13,11 @@
     ],
     "details": {
       "model": "STLD",
-      "overview": "A LoRaWAN leak sensor with a reusable flexible membrane for monitoring conductive liquids across a wider surface. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "An LPWAN leak sensor with a reusable flexible membrane for monitoring conductive liquids across a wider surface. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Connectivity",
-          "value": "LoRaWAN; IoTRICS D2D",
+          "value": "LPWAN; IoTRICS D2D",
           "unit": "",
           "remarks": ""
         },
@@ -92,7 +92,7 @@
     "key": "nu03-controller",
     "id": "f5314d30-624c-59f2-94d7-d9382fb48f1d",
     "name": "Najhum Ultrasonic Fuel Level Sensor with Controller",
-    "description": "Externally mounted ultrasonic liquid-level measurement for fuel tanks and storage containers, with LoRaWAN or NB-IoT communication options.",
+    "description": "Externally mounted ultrasonic liquid-level measurement for fuel tanks and storage containers, with LPWAN or NB-IoT communication options.",
     "features": [
       "Non-contact measurement through the container wall",
       "External adhesive installation",
@@ -102,7 +102,7 @@
     ],
     "details": {
       "model": "NU03",
-      "overview": "Externally mounted ultrasonic liquid-level measurement for fuel tanks and storage containers, with LoRaWAN or NB-IoT communication options. The brochure measurements depend on container material, wall thickness and liquid. Confirm the tank and liquid before selecting this externally mounted system.",
+      "overview": "Externally mounted ultrasonic liquid-level measurement for fuel tanks and storage containers, with LPWAN or NB-IoT communication options. The brochure measurements depend on container material, wall thickness and liquid. Confirm the tank and liquid before selecting this externally mounted system.",
       "specs": [
         {
           "property": "Measurement range",
@@ -136,7 +136,7 @@
         },
         {
           "property": "Communication",
-          "value": "LoRaWAN / NB-IoT",
+          "value": "LPWAN / NB-IoT",
           "unit": "",
           "remarks": ""
         },
@@ -177,7 +177,7 @@
     "key": "ntgs301",
     "id": "8820094b-cc8c-587d-ab85-32923cb82196",
     "name": "Najhum Bathroom Odor Detector",
-    "description": "A four-in-one LoRaWAN detector for ammonia, hydrogen sulfide, temperature and humidity in washrooms and service areas.",
+    "description": "A four-in-one LPWAN detector for ammonia, hydrogen sulfide, temperature and humidity in washrooms and service areas.",
     "features": [
       "Electrochemical NH3 and H2S sensing",
       "LED and buzzer threshold alerts",
@@ -187,7 +187,7 @@
     ],
     "details": {
       "model": "NTGS301",
-      "overview": "A four-in-one LoRaWAN detector for ammonia, hydrogen sulfide, temperature and humidity in washrooms and service areas. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A four-in-one LPWAN detector for ammonia, hydrogen sulfide, temperature and humidity in washrooms and service areas. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Ammonia range",
@@ -267,7 +267,7 @@
     "key": "nt410-rdr",
     "id": "4e1fa7e5-6171-5fd0-82d3-e87e6a510ea3",
     "name": "Najhum Radar Distance & Level Sensor",
-    "description": "A non-contact 60 GHz radar sensor for liquid and smooth-surface level measurement, with LoRaWAN and cellular variants.",
+    "description": "A non-contact 60 GHz radar sensor for liquid and smooth-surface level measurement, with LPWAN and cellular variants.",
     "features": [
       "Narrow 8° radar beam",
       "Tilt monitoring",
@@ -278,7 +278,7 @@
     ],
     "details": {
       "model": "NT410-RDR",
-      "overview": "A non-contact 60 GHz radar sensor for liquid and smooth-surface level measurement, with LoRaWAN and cellular variants. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A non-contact 60 GHz radar sensor for liquid and smooth-surface level measurement, with LPWAN and cellular variants. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Measurement range",
@@ -306,7 +306,7 @@
         },
         {
           "property": "Communication",
-          "value": "LoRaWAN or LTE Cat-1, depending on variant",
+          "value": "LPWAN or LTE Cat-1, depending on variant",
           "unit": "",
           "remarks": ""
         },
@@ -715,7 +715,7 @@
     "key": "nt321",
     "id": "3ea87b2f-9a7f-52cd-a6ea-e7b2035758e7",
     "name": "Najhum AI Occupancy Sensor",
-    "description": "A battery-powered LoRaWAN occupancy sensor with people-counting and desk-occupancy modes, plus temperature, humidity and light sensing.",
+    "description": "A battery-powered LPWAN occupancy sensor with people-counting and desk-occupancy modes, plus temperature, humidity and light sensing.",
     "features": [
       "AI-assisted occupancy detection",
       "People-counting or desk-occupancy modes",
@@ -726,11 +726,11 @@
     ],
     "details": {
       "model": "NT321",
-      "overview": "A battery-powered LoRaWAN occupancy sensor with people-counting and desk-occupancy modes, plus temperature, humidity and light sensing. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A battery-powered LPWAN occupancy sensor with people-counting and desk-occupancy modes, plus temperature, humidity and light sensing. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Connectivity",
-          "value": "LoRaWAN; Najhum D2D",
+          "value": "LPWAN; Najhum D2D",
           "unit": "",
           "remarks": ""
         },
@@ -812,17 +812,17 @@
     "key": "airflow-pro-dual",
     "id": "71c9581f-6dda-5d7a-8b08-c0a5be1671e0",
     "name": "Najhum Airflow Pro Dual",
-    "description": "A dual differential-pressure LoRaWAN device for remote airflow and pressure monitoring in fan-coil units and ventilation systems.",
+    "description": "A dual differential-pressure LPWAN device for remote airflow and pressure monitoring in fan-coil units and ventilation systems.",
     "features": [
       "Two differential-pressure sensors",
       "BLE configuration",
-      "LoRaWAN OTAA or ABP",
+      "LPWAN OTAA or ABP",
       "Configurable measuring interval",
       "Compact sealed ABS enclosure"
     ],
     "details": {
       "model": "Airflow Pro Dual",
-      "overview": "A dual differential-pressure LoRaWAN device for remote airflow and pressure monitoring in fan-coil units and ventilation systems. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A dual differential-pressure LPWAN device for remote airflow and pressure monitoring in fan-coil units and ventilation systems. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Differential-pressure range",
@@ -844,7 +844,7 @@
         },
         {
           "property": "Connectivity",
-          "value": "LoRaWAN; BLE 5.0 configuration",
+          "value": "LPWAN; BLE 5.0 configuration",
           "unit": "",
           "remarks": ""
         },
@@ -1088,7 +1088,7 @@
     "key": "nt3xx",
     "id": "065929cc-523b-5682-bdba-fbe2fff18cae",
     "name": "Najhum High-Current Transformer",
-    "description": "A self-powered LoRaWAN current-monitoring system for 500 A and 1000 A applications, with threshold alarms and optional cable-temperature sensing.",
+    "description": "A self-powered LPWAN current-monitoring system for 500 A and 1000 A applications, with threshold alarms and optional cable-temperature sensing.",
     "features": [
       "Non-invasive clamp format",
       "Induced-current power",
@@ -1098,7 +1098,7 @@
     ],
     "details": {
       "model": "NT305 / NT310",
-      "overview": "A self-powered LoRaWAN current-monitoring system for 500 A and 1000 A applications, with threshold alarms and optional cable-temperature sensing. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A self-powered LPWAN current-monitoring system for 500 A and 1000 A applications, with threshold alarms and optional cable-temperature sensing. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Current variants",
@@ -1132,7 +1132,7 @@
         },
         {
           "property": "Connectivity",
-          "value": "LoRaWAN Class A",
+          "value": "LPWAN Class A",
           "unit": "",
           "remarks": ""
         },
@@ -1177,7 +1177,7 @@
     "key": "ld301",
     "id": "e8a8b3c4-7155-5f34-91a8-b0865c4289a4",
     "name": "Najhum Magnetic Contact Switch",
-    "description": "A compact LoRaWAN door and window contact sensor with open/close and mounting-tamper alerts.",
+    "description": "A compact LPWAN door and window contact sensor with open/close and mounting-tamper alerts.",
     "features": [
       "Magnetic open/close detection",
       "Tamper detection",
@@ -1187,7 +1187,7 @@
     ],
     "details": {
       "model": "LD301",
-      "overview": "A compact LoRaWAN door and window contact sensor with open/close and mounting-tamper alerts. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A compact LPWAN door and window contact sensor with open/close and mounting-tamper alerts. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Detection distance",
@@ -1197,7 +1197,7 @@
         },
         {
           "property": "Connectivity",
-          "value": "LoRaWAN; LoRa D2D",
+          "value": "LPWAN; LoRa D2D",
           "unit": "",
           "remarks": ""
         },
@@ -1260,7 +1260,7 @@
     "key": "nt308",
     "id": "5f3a8f14-536c-5d69-94f0-5c18cd4b20b4",
     "name": "Najhum Indoor Ambience Sensor",
-    "description": "A nine-in-one LoRaWAN indoor environment sensor with E-ink display, local threshold alerts and environmental data logging.",
+    "description": "A nine-in-one LPWAN indoor environment sensor with E-ink display, local threshold alerts and environmental data logging.",
     "features": [
       "CO2, TVOC, PM2.5 and PM10 sensing",
       "Temperature and humidity sensing",
@@ -1271,7 +1271,7 @@
     ],
     "details": {
       "model": "NT308",
-      "overview": "A nine-in-one LoRaWAN indoor environment sensor with E-ink display, local threshold alerts and environmental data logging. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A nine-in-one LPWAN indoor environment sensor with E-ink display, local threshold alerts and environmental data logging. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "CO2 range",
@@ -1351,10 +1351,10 @@
     "key": "nt100",
     "id": "9acacfc0-aef7-57ef-9c8f-699d22d7b0ea",
     "name": "Najhum IoT Controller",
-    "description": "A LoRaWAN controller for connecting Modbus RS485 equipment to remote monitoring and control workflows.",
+    "description": "An LPWAN controller for connecting Modbus RS485 equipment to remote monitoring and control workflows.",
     "features": [
       "Up to 32 Modbus RTU registers",
-      "Modbus-to-LoRaWAN passthrough",
+      "Modbus-to-LPWAN passthrough",
       "Local trigger rules",
       "800-entry local history",
       "D2D integration",
@@ -1362,11 +1362,11 @@
     ],
     "details": {
       "model": "NT100",
-      "overview": "A LoRaWAN controller for connecting Modbus RS485 equipment to remote monitoring and control workflows. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "An LPWAN controller for connecting Modbus RS485 equipment to remote monitoring and control workflows. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Connectivity",
-          "value": "LoRaWAN Class C; Najhum D2D",
+          "value": "LPWAN Class C; Najhum D2D",
           "unit": "",
           "remarks": ""
         },
@@ -1441,10 +1441,10 @@
   {
     "key": "ntj3lw",
     "id": "04749c99-fe9d-56f8-8e96-c085c2171885",
-    "name": "Najhum LoRaWAN Smartwatch",
-    "description": "A BLE and LoRaWAN wearable with GPS, SOS and activity and wellness sensing for site-based connected monitoring.",
+    "name": "Najhum LPWAN Smartwatch",
+    "description": "A BLE and LPWAN wearable with GPS, SOS and activity and wellness sensing for site-based connected monitoring.",
     "features": [
-      "LoRaWAN uplink",
+      "LPWAN uplink",
       "BLE 5.2 connectivity",
       "SOS button",
       "Heart-rate and SpO2 sensing",
@@ -1453,16 +1453,16 @@
     ],
     "details": {
       "model": "NTJ3LW",
-      "overview": "A BLE and LoRaWAN wearable with GPS, SOS and activity and wellness sensing for site-based connected monitoring. The brochure’s seven-day battery figure excludes GPS and LoRa use. Blood-pressure values are indicative and not intended for clinical diagnosis.",
+      "overview": "A BLE and LPWAN wearable with GPS, SOS and activity and wellness sensing for site-based connected monitoring. The brochure’s seven-day battery figure excludes GPS and LoRa use. Blood-pressure values are indicative and not intended for clinical diagnosis.",
       "specs": [
         {
           "property": "Chipset",
-          "value": "Nordic NRF52840; Semtech LoRaWAN module",
+          "value": "Nordic NRF52840; Semtech LPWAN module",
           "unit": "",
           "remarks": ""
         },
         {
-          "property": "LoRaWAN bands",
+          "property": "LPWAN bands",
           "value": "868 / 915 / 923 MHz",
           "unit": "",
           "remarks": ""
@@ -1530,8 +1530,8 @@
   {
     "key": "nt50x",
     "id": "a1479d8d-a4a1-53b5-8a16-b2936c7525eb",
-    "name": "Najhum LoRaWAN Wall Switch",
-    "description": "A LoRaWAN wall switch for local and remote appliance control, with electrical measurements and overload protection.",
+    "name": "Najhum LPWAN Wall Switch",
+    "description": "An LPWAN wall switch for local and remote appliance control, with electrical measurements and overload protection.",
     "features": [
       "Local and remote switching",
       "Energy measurement",
@@ -1542,7 +1542,7 @@
     ],
     "details": {
       "model": "NT501 / NT502 / NT501-US",
-      "overview": "A LoRaWAN wall switch for local and remote appliance control, with electrical measurements and overload protection. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "An LPWAN wall switch for local and remote appliance control, with electrical measurements and overload protection. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Supply",
@@ -1576,7 +1576,7 @@
         },
         {
           "property": "Connectivity",
-          "value": "LoRaWAN Class C",
+          "value": "LPWAN Class C",
           "unit": "",
           "remarks": ""
         },
@@ -1711,7 +1711,7 @@
     "key": "nt370",
     "id": "a2e5f015-bea2-5474-a77d-7f720cc645a7",
     "name": "Najhum Radar Presence Sensor",
-    "description": "A LoRaWAN presence sensor combining millimetre-wave radar and PIR for camera-free occupancy sensing and room automation.",
+    "description": "An LPWAN presence sensor combining millimetre-wave radar and PIR for camera-free occupancy sensing and room automation.",
     "features": [
       "24 GHz radar and PIR detection",
       "Slight-movement detection",
@@ -1721,7 +1721,7 @@
     ],
     "details": {
       "model": "NT-370",
-      "overview": "A LoRaWAN presence sensor combining millimetre-wave radar and PIR for camera-free occupancy sensing and room automation. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "An LPWAN presence sensor combining millimetre-wave radar and PIR for camera-free occupancy sensing and room automation. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Radar frequency",
@@ -1800,7 +1800,7 @@
     "key": "nt201",
     "id": "5ab657f5-e526-512a-9f41-1a55b2572767",
     "name": "Najhum Smart Thermostat",
-    "description": "A LoRaWAN HVAC controller for compatible 24 VAC systems, with scheduling, temperature and humidity sensing and remote management.",
+    "description": "An LPWAN HVAC controller for compatible 24 VAC systems, with scheduling, temperature and humidity sensing and remote management.",
     "features": [
       "Heat, emergency heat, cool and auto modes",
       "Auto, on and circulate fan modes",
@@ -1811,7 +1811,7 @@
     ],
     "details": {
       "model": "NT201",
-      "overview": "A LoRaWAN HVAC controller for compatible 24 VAC systems, with scheduling, temperature and humidity sensing and remote management. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "An LPWAN HVAC controller for compatible 24 VAC systems, with scheduling, temperature and humidity sensing and remote management. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Compatibility",
@@ -1890,7 +1890,7 @@
     "key": "nctx",
     "id": "b49b8aee-e592-592f-8e32-2d2efafa8608",
     "name": "Najhum Smart Current Transformer",
-    "description": "A self-powered LoRaWAN current-transformer family for non-invasive circuit monitoring, with 100 A, 250 A and 500 A variants.",
+    "description": "A self-powered LPWAN current-transformer family for non-invasive circuit monitoring, with 100 A, 250 A and 500 A variants.",
     "features": [
       "Split-core clamp installation",
       "Induced-current power",
@@ -1901,7 +1901,7 @@
     ],
     "details": {
       "model": "NCT101 / NCT103 / NCT105",
-      "overview": "A self-powered LoRaWAN current-transformer family for non-invasive circuit monitoring, with 100 A, 250 A and 500 A variants. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "A self-powered LPWAN current-transformer family for non-invasive circuit monitoring, with 100 A, 250 A and 500 A variants. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Rated current",
@@ -2152,7 +2152,7 @@
     "key": "th300",
     "id": "28f39647-9c81-5254-9ec3-002d05beb74f",
     "name": "Najhum Temperature & Humidity Sensor",
-    "description": "A compact LoRaWAN temperature and humidity sensor for indoor and outdoor environmental monitoring.",
+    "description": "A compact LPWAN temperature and humidity sensor for indoor and outdoor environmental monitoring.",
     "features": [
       "Sensirion sensing technology",
       "Replaceable battery",
@@ -2162,7 +2162,7 @@
     ],
     "details": {
       "model": "T&H300",
-      "overview": "A compact LoRaWAN temperature and humidity sensor for indoor and outdoor environmental monitoring. Confirm the selected variant, installation environment and reporting requirements before ordering.",
+      "overview": "A compact LPWAN temperature and humidity sensor for indoor and outdoor environmental monitoring. Confirm the selected variant, installation environment and reporting requirements before ordering.",
       "specs": [
         {
           "property": "Temperature range",
@@ -2598,7 +2598,7 @@
     "key": "nt400-udl",
     "id": "a0522971-0141-53f9-995d-2ae94bc3d273",
     "name": "Najhum Non-Contact Ultrasonic Distance Sensor",
-    "description": "A LoRaWAN ultrasonic distance and level sensor with selectable probes for water tanks and static or slow-flowing water bodies.",
+    "description": "An LPWAN ultrasonic distance and level sensor with selectable probes for water tanks and static or slow-flowing water bodies.",
     "features": [
       "Selectable range probes",
       "Tilt-status monitoring",
@@ -2609,7 +2609,7 @@
     ],
     "details": {
       "model": "NT400-UDL",
-      "overview": "A LoRaWAN ultrasonic distance and level sensor with selectable probes for water tanks and static or slow-flowing water bodies. Review the installation environment, network region and selected variant with our team before ordering.",
+      "overview": "An LPWAN ultrasonic distance and level sensor with selectable probes for water tanks and static or slow-flowing water bodies. Review the installation environment, network region and selected variant with our team before ordering.",
       "specs": [
         {
           "property": "Standard probes",
@@ -2631,7 +2631,7 @@
         },
         {
           "property": "Connectivity",
-          "value": "LoRaWAN Class A",
+          "value": "LPWAN Class A",
           "unit": "",
           "remarks": ""
         },

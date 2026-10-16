@@ -115,20 +115,36 @@ export default function IotricsIndustries() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.04 }}
-              className="bg-neutral-900/60 border border-neutral-800/60 rounded-2xl p-5 sm:p-6 flex flex-col"
+              className="relative overflow-hidden bg-neutral-950 border border-neutral-800/80 rounded-2xl p-5 sm:p-6 flex flex-col group cursor-pointer"
             >
-              <div className="flex items-center justify-between mb-4">
-                <item.icon className="w-4 h-4 text-blue-400" />
-                <span className="text-2xl font-bold tracking-tighter text-neutral-600">
-                  {item.number}
-                </span>
+              {/* Background Image - slightly visible on mobile like desktop */}
+              <div 
+                className="absolute inset-0 z-0 opacity-40 group-active:opacity-60 transition-opacity duration-500"
+                style={{
+                  backgroundImage: `url(${item.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              
+              {/* Dark Overlay Gradient to ensure contrast & text legibility */}
+              <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#111111] via-[#111111]/85 to-[#111111]/50" />
+
+              {/* Content (z-10) */}
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex items-center justify-between mb-4">
+                  <item.icon className="w-4 h-4 text-blue-400" />
+                  <span className="text-2xl font-bold tracking-tighter text-neutral-400 group-hover:text-white transition-colors">
+                    {item.number}
+                  </span>
+                </div>
+                <h3 className="text-sm font-semibold text-white leading-snug mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-neutral-300 leading-relaxed mt-auto">
+                  {item.desc}
+                </p>
               </div>
-              <h3 className="text-sm font-semibold text-white leading-snug mb-2">
-                {item.title}
-              </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed mt-auto">
-                {item.desc}
-              </p>
             </motion.div>
           ))}
         </div>

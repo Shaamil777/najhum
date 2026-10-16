@@ -179,10 +179,10 @@ export default function EvolticsPlatform() {
                   Infrastructure Partners:
                 </span>
                 <div className="flex items-center justify-center space-x-4 sm:space-x-5 opacity-90 mt-2 sm:mt-0">
-                  <Image src="/logo/client logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" alt="DEWA" width={60} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                  <Image src="/logo/client logos/taqa-seeklogo.png" alt="TAQA" width={60} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                  <Image src="/logo/client logos/fewa.webp" alt="FEWA" width={60} height={30} className="object-contain h-6 sm:h-8 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                  <Image src="/logo/client logos/SEWA.png" alt="SEWA" width={60} height={30} className="object-contain h-6 sm:h-8 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/dubaitaxi.png" alt="Dubai Taxi" width={70} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/du.png" alt="du" width={50} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/alrostamaniagroup.svg" alt="Al Rostamani Group" width={80} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
+                  <Image src="/logo/client logos/eand.webp" alt="e&" width={50} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
                 </div>
               </div>
 

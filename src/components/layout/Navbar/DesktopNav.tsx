@@ -2,6 +2,7 @@ import { siteConfig } from "@/config/site";
 import { Cluster } from "@/design-system";
 import { NavItem } from "./NavItem";
 import { MegaMenu } from "./MegaMenu";
+import { SolutionsMegaMenu } from "./SolutionsMegaMenu";
 
 /**
  * DesktopNav
@@ -21,7 +22,7 @@ export function DesktopNav({ solutions = [] }: { solutions?: Array<{ title: stri
             description: p.description || "Explore our enterprise-grade digital solutions.",
           }))}
         />
-        {solutions.length ? <MegaMenu title="Solutions" parentHref="/solutions" items={solutions.slice(0, 6).map((solution) => ({ title: solution.title, href: `/solutions/${solution.slug}`, description: solution.metaDescription || 'Explore this solution.' }))} /> : <NavItem title="Solutions" href="/solutions" />}
+        <SolutionsMegaMenu solutions={solutions} />
         <NavItem title="Products" href="/products" />
         <NavItem title="About" href="/about" />
       </Cluster>

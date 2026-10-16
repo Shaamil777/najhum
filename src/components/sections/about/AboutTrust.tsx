@@ -81,7 +81,9 @@ export default function AboutTrust() {
                   <img
                     src={client.src}
                     alt={client.name}
-                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto opacity-50 group-hover:opacity-95 transition-opacity duration-300 invert`}
+                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto duration-300 ${
+                      client.filterClass ? client.filterClass : "opacity-50 group-hover:opacity-95 transition-opacity invert"
+                    }`}
                   />
                 </div>
               ))}
@@ -96,7 +98,9 @@ export default function AboutTrust() {
                   <img
                     src={client.src}
                     alt={client.name}
-                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto opacity-50 group-hover:opacity-95 transition-opacity duration-300 invert`}
+                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto duration-300 ${
+                      client.filterClass ? client.filterClass : "opacity-50 group-hover:opacity-95 transition-opacity invert"
+                    }`}
                   />
                 </div>
               ))}
@@ -123,7 +127,9 @@ export default function AboutTrust() {
                   <img
                     src={client.src}
                     alt={client.name}
-                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto opacity-50 group-hover:opacity-95 transition-opacity duration-300 invert`}
+                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto duration-300 ${
+                      client.filterClass ? client.filterClass : "opacity-50 group-hover:opacity-95 transition-opacity invert"
+                    }`}
                   />
                 </div>
               ))}
@@ -138,7 +144,9 @@ export default function AboutTrust() {
                   <img
                     src={client.src}
                     alt={client.name}
-                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto opacity-50 group-hover:opacity-95 transition-opacity duration-300 invert`}
+                    className={`object-contain ${client.className || "max-h-8 max-w-[125px]"} w-auto duration-300 ${
+                      client.filterClass ? client.filterClass : "opacity-50 group-hover:opacity-95 transition-opacity invert"
+                    }`}
                   />
                 </div>
               ))}

@@ -194,7 +194,7 @@ export default function IotricsAbout() {
                     <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
                   </svg>
                 </div>
-                <span className="text-[10px] sm:text-[11px] xl:text-xs font-medium text-[#4B5563] group-hover:text-[#C3CEDD] truncate w-full transition-colors duration-300">LoRaWAN</span>
+                <span className="text-[10px] sm:text-[11px] xl:text-xs font-medium text-[#4B5563] group-hover:text-[#C3CEDD] truncate w-full transition-colors duration-300">LPWAN</span>
               </div>
 
               <div className="flex-1 min-w-0 flex flex-col items-center gap-2 text-center">

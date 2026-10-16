@@ -77,7 +77,7 @@ export const aboutContent = {
         code: "PHASE_02",
         title: "CONNECT",
         tag: "Secure Connectivity",
-        description: "Data is securely transmitted via NB-IoT, LoRaWAN, or 5G private networks to our central processing ecosystem.",
+        description: "Data is securely transmitted via NB-IoT, LPWAN, or 5G private networks to our central processing ecosystem.",
         iconName: "Wifi"
       },
       {
@@ -131,7 +131,8 @@ export const aboutContent = {
     },
     contact: {
       title: "Get in Touch",
-      phone: "+971 52 569 9979"
+      phone: "+971 55 617 7234",
+      secondaryPhone: "+971 52 569 9979"
     },
     cloudBadge: "Cloud-First Global Reach"
   },

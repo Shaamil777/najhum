@@ -51,18 +51,27 @@ const platforms = [
   },
 ];
 
+const solutions = [
+  { title: "Facilities Management", href: "/solutions/facilities-management" },
+  { title: "Hospitality & Hotels", href: "/solutions/hospitality" },
+  { title: "Cold Storage", href: "/solutions/cold-storage" },
+  { title: "Industrial & Manufacturing", href: "/solutions/industrial" },
+  { title: "Energy Monitoring", href: "/solutions/energy-monitoring" },
+];
+
 const companyLinks = [
   { title: "About Us", href: "/about" },
+  { title: "Products", href: "/products" },
   { title: "Contact Us", href: "/contact" },
 ];
 
 export function FooterLinks() {
   return (
     <div className="w-full py-16 lg:py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto relative z-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10 xl:gap-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 xl:gap-12">
         
-        {/* Column 1: Brand & Contact (5 cols on desktop, full width on tablet) */}
-        <div className="md:col-span-2 lg:col-span-5 flex flex-col">
+        {/* Column 1: Brand & Contact (4 cols on lg, full width on sm) */}
+        <div className="sm:col-span-2 lg:col-span-4 flex flex-col">
           {/* Logo properly displayed with its authentic colors */}
           <Link
             href="/"
@@ -94,15 +103,28 @@ export function FooterLinks() {
               <span className="truncate">{siteConfig.contact.email}</span>
             </a>
 
-            <a
-              href={`tel:${siteConfig.contact.phone.replace(/\s+/g, '')}`}
-              className="group flex items-center gap-3 text-xs sm:text-sm text-slate-600 hover:text-primary transition-colors w-fit"
-            >
-              <span className="w-8 h-8 rounded-lg bg-blue-50/80 border border-blue-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-200 shrink-0">
-                <Phone className="w-4 h-4" />
-              </span>
-              <span>{siteConfig.contact.phone}</span>
-            </a>
+            {/* Phone Numbers */}
+            <div className="flex flex-col space-y-2">
+              <a
+                href="tel:+971556177234"
+                className="group flex items-center gap-3 text-xs sm:text-sm text-slate-600 hover:text-primary transition-colors w-fit"
+              >
+                <span className="w-8 h-8 rounded-lg bg-blue-50/80 border border-blue-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-200 shrink-0">
+                  <Phone className="w-4 h-4" />
+                </span>
+                <span>+971 55 617 7234</span>
+              </a>
+
+              <a
+                href="tel:+971525699979"
+                className="group flex items-center gap-3 text-xs sm:text-sm text-slate-600 hover:text-primary transition-colors w-fit"
+              >
+                <span className="w-8 h-8 rounded-lg bg-blue-50/80 border border-blue-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-200 shrink-0">
+                  <Phone className="w-4 h-4" />
+                </span>
+                <span>+971 52 569 9979</span>
+              </a>
+            </div>
 
             <div className="flex items-start gap-3 text-xs sm:text-sm text-slate-500 max-w-sm">
               <span className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 shrink-0 mt-0.5">
@@ -131,8 +153,8 @@ export function FooterLinks() {
           </div>
         </div>
 
-        {/* Column 2: Platform Solutions (4 cols) */}
-        <div className="md:col-span-1 lg:col-span-4 flex flex-col">
+        {/* Column 2: Platform Solutions (3 cols on lg) */}
+        <div className="sm:col-span-1 lg:col-span-3 flex flex-col">
           <div className="flex items-center gap-2 mb-5">
             <span className="w-1.5 h-3 rounded-full bg-primary" />
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
@@ -161,8 +183,43 @@ export function FooterLinks() {
           </div>
         </div>
 
-        {/* Column 3: Company Navigation (3 cols) */}
-        <div className="md:col-span-1 lg:col-span-3 flex flex-col">
+        {/* Column 3: Connected Solutions (3 cols on lg) */}
+        <div className="sm:col-span-1 lg:col-span-3 flex flex-col">
+          <div className="flex items-center gap-2 mb-5">
+            <span className="w-1.5 h-3 rounded-full bg-primary" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+              Solutions
+            </h3>
+          </div>
+
+          <div className="flex flex-col space-y-2.5">
+            {solutions.map((sol) => (
+              <Link
+                key={sol.title}
+                href={sol.href}
+                className="group flex items-center justify-between text-sm text-slate-600 hover:text-primary transition-colors font-medium py-1"
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-primary transition-colors shrink-0" />
+                  <span className="truncate group-hover:translate-x-0.5 transition-transform duration-200">
+                    {sol.title}
+                  </span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-primary opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shrink-0 ml-1" />
+              </Link>
+            ))}
+            <Link
+              href="/solutions"
+              className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-hover transition-colors pt-2 w-fit"
+            >
+              <span>View all solutions</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Column 4: Company Navigation (2 cols on lg) */}
+        <div className="sm:col-span-2 lg:col-span-2 flex flex-col">
           <div className="flex items-center gap-2 mb-5">
             <span className="w-1.5 h-3 rounded-full bg-slate-300" />
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">

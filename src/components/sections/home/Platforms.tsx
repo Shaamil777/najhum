@@ -161,8 +161,8 @@ export default function Platforms() {
                   {
                     step: "02",
                     title: "Connect",
-                    desc: "A connectivity layer built so data reaches the platform from remote and off-grid sites. Cellular and fibre where bandwidth allows, LoRaWAN for long-range low-power coverage across large sites, satellite and BLE where neither reaches.",
-                    metric: "CELLULAR · LORAWAN · SATELLITE"
+                    desc: "A connectivity layer built so data reaches the platform from remote and off-grid sites. Cellular and fibre where bandwidth allows, LPWAN for long-range low-power coverage across large sites, satellite and BLE where neither reaches.",
+                    metric: "CELLULAR · LPWAN · SATELLITE"
                   },
                   {
                     step: "03",

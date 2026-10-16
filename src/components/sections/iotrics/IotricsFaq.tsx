@@ -14,7 +14,7 @@ const iotricsFaqData = {
     },
     {
       question: "Does it work on remote or off-grid sites?",
-      answer: "Yes. Cellular and fibre where available, LoRaWAN for long-range low-power coverage across large sites, satellite and BLE where neither reaches."
+      answer: "Yes. Cellular and fibre where available, LPWAN for long-range low-power coverage across large sites, satellite and BLE where neither reaches."
     },
     {
       question: "How are alerts delivered?",

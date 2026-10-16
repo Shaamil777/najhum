@@ -147,7 +147,7 @@ export const demoContent = {
     description: "Built on industry-leading protocols and robust infrastructure to ensure seamless interoperability and military-grade security.",
     connectivity: {
       badge: "Connectivity & Protocols",
-      tags: ["LoRaWAN", "NB-IoT", "MQTT", "Modbus", "OPC-UA", "5G/eSIM"]
+      tags: ["LPWAN", "NB-IoT", "MQTT", "Modbus", "OPC-UA", "5G/eSIM"]
     },
     infrastructure: {
       badge: "Infrastructure & Compute",

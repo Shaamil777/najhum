@@ -18,7 +18,7 @@ export const cropifaiFaqData = {
     },
     {
       question: "Does it work without site connectivity?",
-      answer: "Yes. LoRaWAN covers large sites on low power; satellite is available where there is no cellular service."
+      answer: "Yes. LPWAN covers large sites on low power; satellite is available where there is no cellular service."
     }
   ]
 };

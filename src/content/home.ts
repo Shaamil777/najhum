@@ -79,7 +79,7 @@ export const homeContent = {
       {
         kpiValue: "Open protocols",
         title: "CONTROLLER",
-        description: "Najhum IoT Controller — LoRaWAN, Modbus, BACnet/IP, MQTT and REST."
+        description: "Najhum IoT Controller — LPWAN, Modbus, BACnet/IP, MQTT and REST."
       },
       {
         kpiValue: "OCPP 1.6J / 2.0.1",
@@ -89,7 +89,7 @@ export const homeContent = {
       {
         kpiValue: "5 channels",
         title: "CONNECTIVITY",
-        description: "Cellular, fibre, LoRaWAN, satellite and BLE."
+        description: "Cellular, fibre, LPWAN, satellite and BLE."
       },
       {
         kpiValue: "Agnostic",
@@ -276,7 +276,7 @@ export const homeContent = {
       },
       {
         question: "Do I have to replace the equipment I already have?",
-        answer: "No. We install the Najhum IoT Controller on site, and it connects to your existing meters, chillers, chargers and building systems over the protocols they already speak — LoRaWAN, Modbus, BACnet/IP, MQTT and REST — then sends the readings to the platform. The equipment itself is untouched and deployment needs no shutdown."
+        answer: "No. We install the Najhum IoT Controller on site, and it connects to your existing meters, chillers, chargers and building systems over the protocols they already speak — LPWAN, Modbus, BACnet/IP, MQTT and REST — then sends the readings to the platform. The equipment itself is untouched and deployment needs no shutdown."
       },
       {
         question: "How is Najhum bought — capital purchase or subscription?",

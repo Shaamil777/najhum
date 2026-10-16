@@ -38,9 +38,8 @@ export const contactContent = {
         iconName: "Phone",
         type: "phones",
         phones: [
-          { label: "Office", number: "+971 55 767 5883" },
-          { label: "Sales", number: "+971 55 767 5883" },
-          { label: "Support", number: "+971 55 767 5883" }
+          { label: "Office", number: "+971 55 617 7234" },
+          { label: "Sales & Support", number: "+971 52 569 9979" }
         ]
       },
       {
@@ -96,7 +95,7 @@ export const contactContent = {
       },
       {
         question: "Do I have to replace the equipment I already have?",
-        answer: "No. We install the Najhum IoT Controller on site, and it connects to your existing meters, chillers, chargers and building systems over the protocols they already speak — LoRaWAN, Modbus, BACnet/IP, MQTT and REST — then sends the readings to the platform. The equipment itself is untouched and deployment needs no shutdown."
+        answer: "No. We install the Najhum IoT Controller on site, and it connects to your existing meters, chillers, chargers and building systems over the protocols they already speak — LPWAN, Modbus, BACnet/IP, MQTT and REST — then sends the readings to the platform. The equipment itself is untouched and deployment needs no shutdown."
       },
       {
         question: "How is Najhum bought — capital purchase or subscription?",

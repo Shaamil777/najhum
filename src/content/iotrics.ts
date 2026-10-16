@@ -10,14 +10,20 @@ export const iotricsContent = {
     },
     marqueeText: "TRUSTED BY COMPANIES WORLDWIDE",
     clients: [
-      { name: "DEWA", src: "/logo/client%20logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
-      { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
-      { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
       { name: "Nokia", src: "/logo/client%20logos/nokia-com-wordmark.png" },
-      { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
+      { name: "e&", src: "/logo/client%20logos/eand.webp" },
       { name: "Space42", src: "/logo/client%20logos/space42.png" },
+      { name: "Thuraya", src: "/logo/client%20logos/Thuraya_logo.png" },
+      { name: "ADAA", src: "/logo/client%20logos/adaa_gov.png" },
+      { name: "Al Rostamani Group", src: "/logo/client%20logos/alrostamaniagroup.svg" },
+      { name: "UAEAA", src: "/logo/client%20logos/uaeaa_gov.png" },
+      { name: "du", src: "/logo/client%20logos/du.png" },
+      { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" },
+      { name: "Al Mulla Group", src: "/logo/client%20logos/almulagroup.svg" },
+      { name: "Radiant Square", src: "/logo/client%20logos/radiantsquaregroup.webp" },
+      { name: "Dubai Taxi", src: "/logo/client%20logos/dubaitaxi.png" },
       { name: "Aramtec", src: "/logo/client%20logos/aramtec.png" },
-      { name: "Yahsat", src: "/logo/client%20logos/idsuguLgbe.png" }
+      { name: "The Deep Seafood Company", src: "/logo/client%20logos/thedeepseofood.png" }
     ]
   },
   about: {
@@ -245,7 +251,7 @@ export const iotricsContent = {
         num: "01",
         shortTitle: "Sensor Monitoring",
         title: "Sensor Monitoring & Data Acquisition",
-        description: "Sensors on your equipment take a reading every few minutes and send it to the platform — temperature, humidity, pressure, water flow, vibration, door state. They report to the Najhum IoT Controller on site, which forwards the data to the platform over LoRaWAN, cellular or satellite — so a site with no network of its own still reports. Instead of someone walking the site with a clipboard, the current state of every asset is on screen, with the history behind it.",
+        description: "Sensors on your equipment take a reading every few minutes and send it to the platform — temperature, humidity, pressure, water flow, vibration, door state. They report to the Najhum IoT Controller on site, which forwards the data to the platform over LPWAN, cellular or satellite — so a site with no network of its own still reports. Instead of someone walking the site with a clipboard, the current state of every asset is on screen, with the history behind it.",
         tag: "REAL-TIME TELEMETRY",
         image: "/images/iotrics/capability_1.webp",
         badge: "Real-Time Telemetry"
@@ -342,7 +348,7 @@ export const iotricsContent = {
       {
         number: "06",
         title: "Smart Cities & Public Infrastructure",
-        desc: "Remote monitoring of distributed public assets — water networks and reservoirs, pumping stations, street lighting, flood and water leak detection in underpasses and basements, and environmental and air quality sensing. Long-range LoRaWAN and cellular coverage reaches sites with no fixed network.",
+        desc: "Remote monitoring of distributed public assets — water networks and reservoirs, pumping stations, street lighting, flood and water leak detection in underpasses and basements, and environmental and air quality sensing. Long-range LPWAN and cellular coverage reaches sites with no fixed network.",
         image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop"
       },
       {

@@ -6,7 +6,9 @@ export const siteConfig = {
   ogImage: "https://najhumgroup.com/og.jpg",
   contact: {
     email: "info@najhumgroup.com",
-    phone: "+971 55 767 5883",
+    phone: "+971 55 617 7234",
+    secondaryPhone: "+971 52 569 9979",
+    phones: ["+971 55 617 7234", "+971 52 569 9979"],
     address: {
       company: "Najhum Technologies LLC",
       location: "in5 Innovation Centre",
@@ -33,8 +35,16 @@ export const siteConfig = {
       { title: "EVOLTICS", href: "/platforms/evoltics", description: "EV Charging Infrastructure & Smart CSMP Management" },
       { title: "CropifAI", href: "/platforms/cropifai", description: "Precision Agriculture & Automated Climate Intelligence" },
     ],
+    solutions: [
+      { title: "Facilities Management", href: "/solutions/facilities-management" },
+      { title: "Hospitality & Hotels", href: "/solutions/hospitality" },
+      { title: "Cold Storage", href: "/solutions/cold-storage" },
+      { title: "Industrial & Manufacturing", href: "/solutions/industrial" },
+      { title: "Energy Monitoring", href: "/solutions/energy-monitoring" },
+    ],
     company: [
       { title: "About Us", href: "/about" },
+      { title: "Products", href: "/products" },
       { title: "Contact", href: "/contact" },
     ]
   }

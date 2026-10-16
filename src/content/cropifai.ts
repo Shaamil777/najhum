@@ -19,7 +19,7 @@ export const cropifaiContent = {
       titlePart1: "Know what the field",
       titlePart2: "",
       highlight: "needs before the crop shows it",
-      description: "cropifAI measures what is happening in the soil and in the water line — moisture and salinity at root depth, flow through the irrigation main, tank levels, valve position and local weather. Sensors report to the Najhum IoT Controller on site, which sends readings to the platform over LoRaWAN or cellular, so a field with no network of its own still reports. You see the trend, set the schedule, and override it from anywhere."
+      description: "cropifAI measures what is happening in the soil and in the water line — moisture and salinity at root depth, flow through the irrigation main, tank levels, valve position and local weather. Sensors report to the Najhum IoT Controller on site, which sends readings to the platform over LPWAN or cellular, so a field with no network of its own still reports. You see the trend, set the schedule, and override it from anywhere."
     },
     steps: [
       {
@@ -30,7 +30,7 @@ export const cropifaiContent = {
       {
         num: "2",
         title: "CONNECT",
-        desc: "LoRaWAN & cloud connectivity from remote field locations"
+        desc: "LPWAN & cloud connectivity from remote field locations"
       },
       {
         num: "3",
@@ -51,8 +51,8 @@ export const cropifaiContent = {
         text: "Industrial soil moisture, weather, and environmental sensors capture real-time agricultural telemetry."
       },
       {
-        label: "LoRaWAN GATEWAY",
-        text: "Long-range, low-power LoRaWAN gateways collect telemetry across up to 15km radius without cellular dependencies."
+        label: "LPWAN GATEWAY",
+        text: "Long-range, low-power LPWAN gateways collect telemetry across up to 15km radius without cellular dependencies."
       },
       {
         label: "CROPIFAI CLOUD",
@@ -216,7 +216,7 @@ export const cropifaiContent = {
         borderColor: "border-teal-200",
         bgColor: "bg-teal-50",
         glow: "group-hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.3)]",
-        features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall", "Solar-Powered", "LoRaWAN (15km range)"]
+        features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall", "Solar-Powered", "LPWAN (15km range)"]
       }
     ],
     timelineProducts: [
@@ -227,7 +227,7 @@ export const cropifaiContent = {
         features: ["Soil Moisture & Temp", "Electrical Conductivity (EC)", "pH Level", "NPK (N, P, K)"]
       },
       {
-        name: "LoRaWAN Weather Station",
+        name: "LPWAN Weather Station",
         image: "/products/cropifai/LoRaWan_iotWeatherStation.webp",
         description: "Comprehensive environmental monitoring with 15km range.",
         features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
@@ -251,7 +251,7 @@ export const cropifaiContent = {
         features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
       }
     ],
-    tags: ["Ruggedized for Desert", "LoRaWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"],
+    tags: ["Ruggedized for Desert", "LPWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"],
     flowControls: [
       { title: "Solenoid Valve Control", desc: "Percentage control 0–100%, open/close precision" },
       { title: "Autonomous Operation", desc: "Solar-powered, battery backup, works off-grid" },
@@ -464,22 +464,21 @@ export const cropifaiContent = {
     },
     carouselLogos: [
       { name: "SPACE42", src: "/logo/client logos/space42-logo.webp" },
-      { name: "Nokia", src: "/logo/client logos/nokia-seeklogo.svg" },
-      { name: "Thuraya", src: "/logo/client logos/Thuraya-logo.webp" },
       { name: "e&", src: "/logo/client logos/etisalat-seeklogo.svg" },
+      { name: "Nokia", src: "/logo/client logos/nokia-seeklogo.svg" },
+      { name: "Emaar", src: "/logo/client logos/emaar-seeklogo.svg" },
       { name: "du", src: "/logo/client logos/du-seeklogo.svg" },
-      { name: "Emaar", src: "/logo/client logos/emaar-seeklogo.svg" }
+      { name: "Thuraya", src: "/logo/client logos/Thuraya-logo.webp" }
     ],
     gridLogos: [
       { name: "Al Rostamani Communications", src: "/logo/client logos/ARC_Logo.png" },
-      { name: "DEWA", src: "/logo/client logos/Dubai_Electricity_and_Water_Authority_id40SLA8sS_1.png" },
+      { name: "du", src: "/logo/client logos/du.png" },
       { name: "ADAA", src: "/logo/client logos/adaa_gov.png" },
       { name: "UAEAA", src: "/logo/client logos/uaeaa_gov.png" },
       { name: "Aramtec", src: "/logo/client logos/Aramteclogo_400x.avif" },
       { name: "ATGC", src: "/logo/client logos/atgc-logo.svg" },
       { name: "Al Mulla Group", src: "/logo/client logos/Al_Mulla_Group_Logo.svg" },
       { name: "Al Rostamani Properties", src: "/logo/client logos/Al-Rostamani.png" },
-      { name: "Gargash", src: "/logo/client logos/gargash.svg" },
       { name: "DTC", src: "/logo/client logos/dtclogo.jpg" },
       { name: "The Dubai Mall", src: "/logo/client logos/dubaimall.png" },
       { name: "Ski Dubai", src: "/logo/client logos/ski_dubai_logo.png" }

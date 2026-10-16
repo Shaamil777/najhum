@@ -72,7 +72,7 @@ const fallbackProducts: ProductItem[] = [
     name: "Gateway Hub IoT-500", 
     category: "HARDWARE", 
     categoryId: "Hardware",
-    description: "LoRaWAN & Cellular industrial edge gateway.", 
+    description: "LPWAN & Cellular industrial edge gateway.", 
     imageType: "router",
     platforms: ["iotrics"]
   },

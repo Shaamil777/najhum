@@ -471,7 +471,7 @@ function getDefaultContent(type: SectionType): SectionContent {
             title: "COLLECT",
             description: "Intelligent sensors capture data.",
           },
-          { title: "CONNECT", description: "LoRaWAN connectivity." },
+          { title: "CONNECT", description: "LPWAN connectivity." },
           { title: "COLLABORATE", description: "AI-driven dashboards." },
         ],
       };
