@@ -48,25 +48,43 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!solutionId) {
-      return NextResponse.json(
-        { error: 'solutionId is required' },
-        { status: 400 }
-      );
-    }
+    const folder = solutionId || 'solutions';
 
     // Upload to cloud storage
-    const uploadResult = await uploadImage(file, solutionId);
+    const uploadResult = await uploadImage(file, folder);
 
-    // Create database record
-    const image = await createImage({
-      solutionId,
-      url: uploadResult.url,
-      storageKey: uploadResult.storageKey,
-      altText: altText || undefined,
-    });
+    if (solutionId) {
+      try {
+        // Create database record if solution exists in database
+        const image = await createImage({
+          solutionId,
+          url: uploadResult.url,
+          storageKey: uploadResult.storageKey,
+          altText: altText || undefined,
+        });
 
-    return NextResponse.json(image, { status: 201 });
+        return NextResponse.json(image, { status: 201 });
+      } catch (dbErr) {
+        // If solution record does not exist in DB yet, still return uploaded image URL
+        return NextResponse.json(
+          {
+            url: uploadResult.url,
+            storageKey: uploadResult.storageKey,
+            altText: altText || undefined,
+          },
+          { status: 201 }
+        );
+      }
+    }
+
+    return NextResponse.json(
+      {
+        url: uploadResult.url,
+        storageKey: uploadResult.storageKey,
+        altText: altText || undefined,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     return handleApiError(error);
   }

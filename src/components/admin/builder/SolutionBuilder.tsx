@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState, type DragEvent, type PointerEvent } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { ArrowDown, ArrowLeft, ArrowUp, Check, ChevronRight, Copy, Eye, EyeOff, Globe, GripVertical, Layers, LayoutTemplate, Loader2, Monitor, Plus, Redo2, Save, Settings2, Smartphone, Tablet, Trash2, Undo2, X } from 'lucide-react';
 import { builderDocumentSchema, sectionTitle, type BuilderDocument, type BuilderSection, type BuilderSession } from '@/lib/builder/document';
 import { editableContent, makeSection, makeTemplate, makePreset, sectionLabel, sectionPresets, sectionLibrary, type SectionPresetId, type PageTemplateId } from '@/lib/builder/catalog';
@@ -26,6 +28,7 @@ function historyReducer(state: History, action: Action): History {
 const dragType = 'application/x-najhum-section';
 
 export default function SolutionBuilder({ solutionId, initialSession, localPreview = false }: { solutionId: string; initialSession: BuilderSession; localPreview?: boolean }) {
+  const router = useRouter();
   const [session, setSession] = useState(initialSession);
   const [history, dispatch] = useReducer(historyReducer, { document: initialSession.document, past: [], future: [] });
   const doc = history.document;
@@ -49,7 +52,7 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
   const [dropAt, setDropAt] = useState<number | null>(null);
   const pointerDrag = useRef<{ data: { kind: 'new' | 'move'; type?: SectionType | SectionPresetId; id?: string }; start: { x: number; y: number }; moved: boolean; index: number | null } | null>(null);
   const [dragLabel, setDragLabel] = useState<{ x: number; y: number } | null>(null);
-  const [confirm, setConfirm] = useState<'discard' | 'publish' | 'unpublish' | null>(null);
+  const [confirm, setConfirm] = useState<'discard' | 'publish' | 'unpublish' | 'delete' | null>(null);
   const confirmRef = useRef<HTMLDialogElement>(null);
   useEffect(() => { if (confirm && confirmRef.current && !confirmRef.current.open) confirmRef.current.showModal(); }, [confirm]);
   const selected = doc.sections.find(section => section.id === selectedId);
@@ -203,6 +206,35 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
     finally { inFlight.current = false; setBusy(false); }
   }
 
+  async function deleteCurrentSolution() {
+    if (inFlight.current) return;
+    inFlight.current = true; setBusy(true); setError('');
+    try {
+      if (localPreview) {
+        localStorage.removeItem('najhum-builder-local-preview');
+        toast.success('Preview solution deleted');
+        router.push('/admin/solutions');
+        return;
+      }
+      const response = await fetch(`/api/admin/solutions/${solutionId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        throw new Error(result?.error || 'Failed to delete solution');
+      }
+      toast.success('Solution deleted successfully');
+      router.push('/admin/solutions');
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Could not delete the solution.';
+      setError(msg);
+      toast.error(msg);
+    } finally {
+      inFlight.current = false; setBusy(false);
+    }
+  }
+
   function addHere(index: number) { setInsertAt(index); setLeftTab('library'); }
   function renderDropZone(index: number) {
     // The ref-backed drop function is invoked only by this event handler, never during rendering.
@@ -217,7 +249,7 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
         const DeviceIcon = Icon as typeof Monitor;
         return <button key={size as number} className={`builder-icon-button ${width === size ? 'active' : ''}`} aria-label={`${label} preview`} aria-pressed={width === size} title={`${label} preview`} onClick={() => setWidth(size as number)}><DeviceIcon size={17} /></button>;
       })}</div>
-      <div className="flex gap-2 items-center"><button className={`builder-small-button ${preview ? 'active' : ''}`} onClick={() => setPreview(!preview)}><Eye size={15} />{preview ? 'Back to editing' : 'Preview'}</button><button className="builder-small-button" disabled={busy || !dirty || !validation.success} onClick={() => void persist()}><Save size={15} />Save draft</button><button className="builder-primary-button" disabled={busy || !validation.success || !doc.sections.some(section => !section.isDraft)} onClick={() => setConfirm('publish')}>{busy ? <Loader2 size={15} className="animate-spin" /> : <Globe size={15} />}Publish</button></div>
+      <div className="flex gap-2 items-center"><button className={`builder-small-button ${preview ? 'active' : ''}`} onClick={() => setPreview(!preview)}><Eye size={15} />{preview ? 'Back to editing' : 'Preview'}</button><button className="builder-small-button" disabled={busy || !dirty || !validation.success} onClick={() => void persist()}><Save size={15} />Save draft</button><button className="builder-primary-button" disabled={busy || !validation.success || !doc.sections.some(section => !section.isDraft)} onClick={() => setConfirm('publish')}>{busy ? <Loader2 size={15} className="animate-spin" /> : <Globe size={15} />}Publish</button><span className="builder-toolbar-divider" /><button className="builder-icon-button text-red-500 hover:text-red-700 hover:bg-red-50" disabled={busy} title="Delete solution" aria-label="Delete solution" onClick={() => setConfirm('delete')}><Trash2 size={16} /></button></div>
     </header>
     {localPreview && <div className="builder-preview-notice">Local builder preview · saves stay in this browser · the live website is untouched</div>}
     {(error || message) && <div className={`builder-alert ${error ? 'is-error' : ''}`} role={error ? 'alert' : 'status'}><span>{error || message}</span><button aria-label="Dismiss notification" onClick={() => { setError(''); setMessage(''); }}><X size={14} /></button></div>}
@@ -266,7 +298,7 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
           {rightTab === 'page' ? <>
             <ContentInspector solutionId={solutionId} value={{ title: doc.title, slug: doc.slug, metaDescription: doc.metaDescription }} onChange={value => change({ ...doc, ...(value as Pick<BuilderDocument, 'title' | 'slug' | 'metaDescription'>) })} />
             <p className="text-[11px] text-slate-400 mb-6">Page URL: /solutions/{doc.slug}</p>
-            <div className="border-t pt-5 space-y-3"><button className="builder-small-button w-full" disabled={busy} onClick={() => setConfirm('discard')}>Discard draft changes</button>{session.isPublished && <button className="builder-small-button w-full text-red-600" disabled={busy} onClick={() => setConfirm('unpublish')}>Unpublish solution</button>}</div>
+            <div className="border-t pt-5 space-y-3"><button className="builder-small-button w-full" disabled={busy} onClick={() => setConfirm('discard')}>Discard draft changes</button>{session.isPublished && <button className="builder-small-button w-full text-red-600" disabled={busy} onClick={() => setConfirm('unpublish')}>Unpublish solution</button>}<button className="builder-small-button w-full text-red-600 hover:bg-red-50 border-red-200" disabled={busy} onClick={() => setConfirm('delete')}>Delete solution</button></div>
           </> : selected ? <>
             {selected.isDraft && <p className="p-3 bg-amber-50 rounded-lg text-xs text-amber-800 mb-4">This section is hidden from the published page.</p>}
             {rightTab === 'content' ? <ContentInspector key={selected.id} solutionId={solutionId} sectionType={selected.type} products={session.availableProducts || []} value={editableContent(selected)} onChange={value => patchSection(selected.id, { content: value as Record<string, unknown> })} /> : <DesignInspector design={selected.design} onChange={design => patchSection(selected.id, { design })} />}
@@ -279,6 +311,6 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
     {templateGallery && <TemplateGallery products={session.availableProducts || []} linkedProducts={session.products} hasSections={!!doc.sections.length} currentCount={doc.sections.length} onApply={applyTemplate} onClose={() => setTemplateGallery(false)} />}
     {libraryPreview && <SectionPreviewModal key={libraryPreview} type={libraryPreview} products={session.availableProducts || []} linkedProducts={session.products} onClose={() => setLibraryPreview(null)} onAdd={() => { insert(libraryPreview); setLibraryPreview(null); }} />}
     {dragLabel && <div className="builder-drag-label" style={{ left: dragLabel.x + 12, top: dragLabel.y + 12 }}><GripVertical size={14} />{dropAt === null ? 'Move onto the canvas or outline' : `Drop at position ${dropAt + 1}`}</div>}
-    {confirm && <dialog ref={confirmRef} onCancel={() => setConfirm(null)} aria-labelledby="builder-confirm-title" className="builder-modal"><h2 id="builder-confirm-title">{confirm === 'publish' ? 'Publish this solution?' : confirm === 'unpublish' ? 'Unpublish this solution?' : 'Discard your draft?'}</h2><p>{confirm === 'publish' ? 'Your current content and design will become visible on the website.' : confirm === 'unpublish' ? 'Visitors will no longer be able to open this solution page. Your draft will be kept.' : 'Your unpublished changes will be removed. The current saved solution content will be loaded.'}</p><div className="flex justify-end gap-3"><button autoFocus className="builder-small-button" onClick={() => setConfirm(null)}>Cancel</button><button className="builder-primary-button" disabled={busy} onClick={() => { const action = confirm; setConfirm(null); if (action === 'discard') void discard(); else void persist(action); }}>{confirm === 'publish' ? 'Publish now' : confirm === 'unpublish' ? 'Unpublish' : 'Discard draft'}</button></div></dialog>}
+    {confirm && <dialog ref={confirmRef} onCancel={() => setConfirm(null)} aria-labelledby="builder-confirm-title" className="builder-modal"><h2 id="builder-confirm-title">{confirm === 'publish' ? 'Publish this solution?' : confirm === 'unpublish' ? 'Unpublish this solution?' : confirm === 'delete' ? 'Delete this solution?' : 'Discard your draft?'}</h2><p>{confirm === 'publish' ? 'Your current content and design will become visible on the website.' : confirm === 'unpublish' ? 'Visitors will no longer be able to open this solution page. Your draft will be kept.' : confirm === 'delete' ? 'Are you sure you want to delete this solution? This will permanently remove the solution and all associated sections and images. This action cannot be undone.' : 'Your unpublished changes will be removed. The current saved solution content will be loaded.'}</p><div className="flex justify-end gap-3"><button autoFocus className="builder-small-button" onClick={() => setConfirm(null)}>Cancel</button><button className={confirm === 'delete' ? "builder-primary-button !bg-red-600 hover:!bg-red-700 !border-red-600" : "builder-primary-button"} disabled={busy} onClick={() => { const action = confirm; setConfirm(null); if (action === 'delete') void deleteCurrentSolution(); else if (action === 'discard') void discard(); else void persist(action); }}>{confirm === 'publish' ? 'Publish now' : confirm === 'unpublish' ? 'Unpublish' : confirm === 'delete' ? 'Delete permanently' : 'Discard draft'}</button></div></dialog>}
   </div>;
 }

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Upload, Image as ImageIcon, X, FolderOpen, Check } from 'lucide-react';
 import { createSolutionSchema, type CreateSolutionData } from '@/lib/validation/solution-schemas';
 import type { z } from 'zod';
+import { toast } from 'sonner';
 import ImageBrowserModal from '../images/ImageBrowserModal';
 
 type SolutionFormInput = z.input<typeof createSolutionSchema>;
@@ -86,27 +87,26 @@ export default function SolutionMetadataForm({
 
       const formData = new FormData();
       formData.append('file', file);
-      if (solutionId) {
-        formData.append('solutionId', solutionId);
-      }
+      formData.append('folder', 'solutions');
 
-      const response = await fetch('/api/admin/images', {
+      const response = await fetch('/api/admin/upload', {
         method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to upload cover image');
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to upload cover image');
       }
 
       const data = await response.json();
       if (data.url) {
         setValue('coverImage', data.url, { shouldValidate: true, shouldDirty: true });
+        toast.success('Cover image uploaded successfully');
       }
     } catch (err) {
       console.error('Error uploading cover image:', err);
-      alert(err instanceof Error ? err.message : 'Cover image upload failed');
+      toast.error(err instanceof Error ? err.message : 'Cover image upload failed');
     } finally {
       setIsUploadingCover(false);
       if (fileInputRef.current) {

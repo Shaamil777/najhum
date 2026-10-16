@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState , useCallback} from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Trash2, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface Solution {
   id: string;
@@ -21,7 +23,36 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<FilterType>(initialFilter);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const router = useRouter();
+
+  const handleDelete = async (e: React.MouseEvent, solution: Solution) => {
+    e.stopPropagation();
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${solution.title}"? This action cannot be undone.`
+    );
+    if (!confirmed) return;
+
+    try {
+      setDeletingId(solution.id);
+      const res = await fetch(`/api/admin/solutions/${solution.id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || "Failed to delete solution");
+      }
+
+      toast.success(`"${solution.title}" has been deleted`);
+      setSolutions((prev) => prev.filter((s) => s.id !== solution.id));
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Error deleting solution");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const fetchSolutions = useCallback(async () => {
     try {
@@ -193,6 +224,9 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Last Updated
                 </th>
+                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -256,6 +290,22 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                       day: 'numeric',
                       year: 'numeric',
                     })}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      onClick={(e) => handleDelete(e, solution)}
+                      disabled={deletingId === solution.id}
+                      className="inline-flex items-center justify-center p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 border border-slate-200 hover:border-red-200 transition-colors shadow-xs disabled:opacity-50 cursor-pointer"
+                      title={`Delete ${solution.title}`}
+                      aria-label={`Delete ${solution.title}`}
+                    >
+                      {deletingId === solution.id ? (
+                        <Loader2 size={16} className="animate-spin text-red-600" />
+                      ) : (
+                        <Trash2 size={16} />
+                      )}
+                    </button>
                   </td>
                 </tr>
               ))}
