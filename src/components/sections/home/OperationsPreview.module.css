@@ -1,0 +1,75 @@
+.preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 142px;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid #eff2f7;
+  border-radius: 18px;
+  background: #f7f9fc;
+  color: var(--color-primary);
+}
+
+.toolbar, .skeletons, .live, .notification, .route, .record, .export {
+  display: flex;
+  align-items: center;
+}
+.toolbar { justify-content: space-between; margin-bottom: 10px; }
+.skeletons { gap: 6px; }
+.skeletons i { width: 30px; height: 6px; border-radius: 4px; background: #dce3ed; }
+.skeletons i + i { width: 18px; background: #e7ecf3; }
+.live { gap: 5px; font-size: 9px; font-weight: 700; letter-spacing: .04em; }
+.live i, .notificationDot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: statusPulse 3s ease-in-out infinite; }
+.chart { width: 100%; height: 90px; overflow: hidden; }
+.grid { stroke: #e8edf5; stroke-width: 1; }
+.area { fill: currentColor; opacity: .1; animation: graphArea 6s ease-in-out infinite; }
+.line { stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; animation: graphLine 6s ease-in-out infinite; }
+.scan { stroke: currentColor; stroke-width: 1; opacity: .17; animation: scan 6s linear infinite; }
+.alertDemo { width: 100%; }
+.notification { gap: 9px; padding: 12px 10px; background: white; border: 1px solid #dbe7fb; border-radius: 12px; box-shadow: 0 4px 14px #3b82f608; animation: notificationFloat 4s ease-in-out infinite; }
+.bell { display: flex; padding: 7px; background: #eff6ff; border-radius: 10px; }
+.notificationText { flex: 1; min-width: 0; }
+.notificationText span { display: block; color: #3f3f46; font-size: 9px; font-weight: 600; white-space: nowrap; }
+.notificationText i { display: block; width: 72%; height: 5px; margin-top: 6px; border-radius: 4px; background: #e8edf5; }
+.notificationDot { flex-shrink: 0; }
+.route { gap: 7px; margin: 13px 2px 0; font-size: 9px; font-weight: 600; }
+.routeTrack { height: 2px; margin: 9px 2px 0; overflow: hidden; border-radius: 2px; background: #e3ecfa; }
+.routeTrack i { display: block; width: 30%; height: 100%; background: currentColor; animation: route 4s ease-in-out infinite; }
+.auditDemo { display: flex; flex-direction: column; gap: 10px; }
+.record { gap: 9px; animation: record 4.5s ease-in-out infinite; }
+.record:nth-child(2) { animation-delay: .35s; }
+.record:nth-child(3) { animation-delay: .7s; }
+.record i { flex: 1; height: 6px; border-radius: 4px; background: #dce3ed; }
+.record span { width: 25px; height: 6px; border-radius: 4px; background: #e8edf5; }
+.export { align-self: flex-end; gap: 5px; padding: 5px 9px; border-radius: 20px; background: #eaf2ff; font-size: 9px; font-weight: 600; }
+.integration { height: 100%; width: 100%; overflow: visible; }
+.connections { stroke: currentColor; stroke-opacity: .22; stroke-width: 1.5; stroke-dasharray: 3 5; }
+.packets { stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 5 125; stroke-dashoffset: 130; }
+.packets path { animation: dataFlow 3.5s linear infinite; }
+.packets path:nth-child(2) { animation-delay: -1.2s; }
+.packets path:nth-child(3) { animation-delay: -2.4s; }
+.hubHalo { fill: currentColor; fill-opacity: .12; transform-box: fill-box; transform-origin: center; animation: hubPulse 3.5s ease-in-out infinite; }
+
+@keyframes graphLine {
+  0%, 100% { d: path('M0 80 L28 72 L56 76 L84 53 L112 59 L140 37 L168 45 L196 27 L224 35 L252 19 L280 12'); }
+  50% { d: path('M0 73 L28 79 L56 62 L84 67 L112 43 L140 51 L168 31 L196 40 L224 23 L252 29 L280 16'); }
+}
+@keyframes graphArea {
+  0%, 100% { d: path('M0 80 L28 72 L56 76 L84 53 L112 59 L140 37 L168 45 L196 27 L224 35 L252 19 L280 12 L280 100 L0 100 Z'); }
+  50% { d: path('M0 73 L28 79 L56 62 L84 67 L112 43 L140 51 L168 31 L196 40 L224 23 L252 29 L280 16 L280 100 L0 100 Z'); }
+}
+@keyframes scan { from { transform: translateX(0); } to { transform: translateX(280px); } }
+@keyframes statusPulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+@keyframes notificationFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes route { 0% { transform: translateX(-110%); } 80%, 100% { transform: translateX(440%); } }
+@keyframes record { 0%, 70%, 100% { opacity: 1; transform: translateX(0); } 35% { opacity: .45; transform: translateX(3px); } }
+@keyframes dataFlow { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 0; } }
+@keyframes hubPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .preview *, .preview *::before, .preview *::after { animation: none !important; }
+  .packets { stroke-dashoffset: 45; }
+}

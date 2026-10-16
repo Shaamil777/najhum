@@ -187,6 +187,10 @@ export const homeContent = {
       ],
       panel: {
         title: "Two ways to pay for it.",
+        models: [
+          { name: "SolaaS", badge: "OPEX", description: "Hardware, platform, deployment and support bundled into one operating cost." },
+          { name: "PaaS", badge: "LICENCE", description: "License the platform. Run it on infrastructure you already own, or buy the hardware from us outright." }
+        ],
         description: "SolaaS bundles hardware, platform, deployment and support into one operating cost. PaaS licenses the platform — run it on infrastructure you already own, or buy the hardware from us outright."
       }
     },
