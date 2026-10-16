@@ -162,8 +162,6 @@
   .solution-visual-grid:not(.solution-layout-split-stories) { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .solution-visual-grid[data-columns="2"]:not(.solution-layout-split-stories) { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .solution-visual-grid[data-columns="4"]:not(.solution-layout-split-stories) { grid-template-columns: repeat(4,minmax(0,1fr)); }
-  .solution-layout-image-bento .solution-content-card:first-child { grid-column: span 2; grid-row: span 2; }
-  .solution-layout-image-bento .solution-content-card:first-child .solution-card-media { flex: 1; min-height: 280px; aspect-ratio: auto !important; }
   .solution-layout-split-stories .solution-content-card { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: stretch; }
   .solution-layout-split-stories .solution-content-card:nth-child(even) .solution-card-media { order: 2; }
   .solution-layout-split-stories .solution-card-media { min-height: 100%; aspect-ratio: auto !important; }
@@ -241,3 +239,30 @@
 .solution-custom-section .solution-section-header h2 { text-transform: none; font-weight: 800; }
 .solution-faq-list { align-items: start; }
 @media(min-width:1024px) { .solution-faq-list { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 24px; } }
+
+/* The featured mosaic uses photography instead of stretching an empty text panel. */
+.solution-visual-grid { align-items: start; }
+.solution-layout-image-bento .solution-content-card.is-featured { min-height: 350px; aspect-ratio: auto; align-self: stretch; }
+.solution-layout-image-bento .is-featured .solution-content-card-body { min-height: 350px; justify-content: flex-end; padding: 28px; }
+.solution-layout-image-bento .is-featured .solution-card-description { max-width: 38rem; color: #f1f5f9; }
+.solution-layout-image-bento .is-featured .solution-card-link { margin-top: 8px; }
+.solution-layout-image-bento .solution-content-card-body { padding: 20px; }
+@media(min-width:640px) {
+ .solution-layout-image-bento:has(.is-featured) { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .solution-layout-image-bento .is-featured { grid-column: 1 / -1; min-height: 370px; }
+ .solution-layout-image-bento .is-featured .solution-content-card-body { min-height: 370px; }
+}
+@media(min-width:1024px) {
+ .solution-layout-image-bento:has(.is-featured) { grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); align-items: stretch; gap: 20px; }
+ .solution-layout-image-bento .solution-content-card.is-featured { grid-column: 1; grid-row: span 2; min-height: 440px; }
+ .solution-layout-image-bento .is-featured .solution-content-card-body { min-height: 440px; }
+ .solution-layout-image-bento:has(.is-featured) .solution-content-card:not(.is-featured) { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1fr); min-height: 210px; align-self: start; }
+ .solution-layout-image-bento:has(.is-featured) .solution-content-card:not(.is-featured) .solution-card-media { aspect-ratio: auto !important; height: 100%; min-height: 210px; }
+ .solution-layout-image-bento:has(.is-featured) .solution-content-card:not(.is-featured) h3 { font-size: 1.125rem; line-height: 1.35; }
+ .solution-layout-image-bento:has(.is-featured) .solution-content-card:not(.is-featured) .solution-card-description { font-size: .875rem; }
+ .solution-layout-image-bento:has(.is-featured) .solution-content-card:not(.is-featured) .solution-card-link { font-size: .75rem; margin-top: 8px; }
+}
+
+/* Removed cards do not leave unoccupied desktop columns behind. */
+.solution-visual-grid[data-count="1"],.solution-faded-grid[data-count="1"] { grid-template-columns: minmax(0,1fr); }
+@media(min-width:640px) { .solution-visual-grid[data-count="2"]:not(.solution-layout-split-stories),.solution-faded-grid[data-count="2"] { grid-template-columns: repeat(2,minmax(0,1fr)); } }

@@ -20,11 +20,12 @@ export default function CustomSection({ content }: { content: CustomContent }) {
       <SectionHeader heading={heading} eyebrow={eyebrow} description={bodyHtml} centered={headingAlign === 'center'} dark={dark} />
       {layout === 'faded-image-cards' ? <FadedImageCards content={content}/> : layout === 'table' ? !!content.tableColumns?.length && <div className="solution-data-table" role="region" aria-label={content.tableCaption || heading || 'Solution data table'} tabIndex={0}><table><caption>{content.tableCaption || heading}</caption><thead><tr>{(content.tableColumns || []).map((column,index) => <th key={index} scope="col"><RichText value={column}/></th>)}</tr></thead><tbody>{(content.tableRows || []).map((row,index) => <tr key={index}>{(content.tableColumns || []).map((_,column) => <td key={column}><RichText as="div" value={row.cells[column] || ''}/></td>)}</tr>)}</tbody></table></div> : layout === 'faq' ? <div className="solution-faq-list">
         {entries.map((entry, index) => <details key={index} className="solution-faq-item group"><summary className="flex items-center justify-between gap-5 cursor-pointer list-none"><span className="text-base md:text-lg font-medium"><RichText value={entry.title} /></span><span className="solution-faq-toggle"><Plus size={18} /></span></summary><RichText as="div" className="solution-card-description pt-4" value={entry.description} /></details>)}
-      </div> : layout !== 'rich-text' && <div className={`solution-visual-grid solution-layout-${layout}`} data-columns={columns}>
+      </div> : layout !== 'rich-text' && <div className={`solution-visual-grid solution-layout-${layout}`} data-columns={columns} data-count={entries.length}>
         {entries.map((entry, index) => {
           const entryRatio = entry.aspectRatio || ratio;
-          const overlay = layout === 'overlay-cards';
-          return <article key={index} className={`solution-content-card ${overlay ? 'is-overlay' : ''}`} style={overlay ? { aspectRatio: mediaRatios[entryRatio].css } : undefined}>
+          const featured = layout === 'image-bento' && index === 0 && entries.length >= 3;
+          const overlay = layout === 'overlay-cards' || featured;
+          return <article key={index} className={`solution-content-card ${overlay ? 'is-overlay' : ''} ${featured ? 'is-featured' : ''}`} style={layout === 'overlay-cards' ? { aspectRatio: mediaRatios[entryRatio].css } : undefined}>
             {visual && (layout === 'video-cards' ? <SolutionVideoPlayer key={entry.videoUrl} url={entry.videoUrl} poster={entry.image} title={entry.title} dark={dark} /> : <SolutionImage src={entry.image} alt={entry.imageAlt || entry.title} ratio={entryRatio} dark={dark || overlay} fill={overlay} />)}
             <div className="solution-content-card-body">
               {layout === 'statistics' && entry.value && <div className="solution-stat-value">{entry.value}</div>}

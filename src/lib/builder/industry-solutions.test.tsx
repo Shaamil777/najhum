@@ -52,7 +52,7 @@ describe('industry solution designs', () => {
     const section = makeTemplate('hospitality').find(section => section.content.layout === 'faded-image-cards')!;
     const html = renderToStaticMarkup(<CustomSection content={section.content as unknown as CustomContent}/>);
     expect(html).toContain('solution-faded-photo');
-    expect(html).toContain('/solutions/hospitality.jpg');
+    expect(html).toContain('/solutions/details/hotel-guest-room.jpg');
     expect(html).toContain('Spaces that feel right');
     expect(html).toContain('href="/contact"');
     const blank = makePreset('image-banner');
@@ -63,4 +63,15 @@ describe('industry solution designs', () => {
     const document = { title: 'Optional page', slug: 'optional-page', sections: [{ id: 'optional', type: SectionType.USE_CASES, isDraft: false, design: {}, content: { heading: '', tabs: [{ id: 'app', label: '', solutionDetails: '', statValue: '', statDescription: '', bullets: [] }] } }] };
     expect(builderDocumentSchema.safeParse(document).success).toBe(true);
   });
+});
+
+it('uses an image-backed feature only when the mosaic has supporting cards', () => {
+ const section = makeTemplate('hospitality').find(s => s.content.layout === 'image-bento')!;
+ const content = section.content as unknown as CustomContent;
+ const featured = renderToStaticMarkup(<CustomSection content={content}/>);
+ expect(featured.match(/is-featured/g)).toHaveLength(1);
+ expect(featured).toContain('solution-card-media is-fill');
+ const compact = renderToStaticMarkup(<CustomSection content={{...content,entries:content.entries!.slice(0,2)}}/>);
+ expect(compact).not.toContain('is-featured');
+ expect(compact).toContain('data-count="2"');
 });

@@ -47,7 +47,7 @@
             {
               "title": "Utilities, made visible",
               "description": "Understand energy and water use across your property. Investigate changes with context.",
-              "image": "/images/iotrics/capability_4.webp",
+              "image": "/solutions/details/energy-metering.jpg",
               "imageAlt": "Utilities, made visible",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -55,7 +55,7 @@
             {
               "title": "Assets, kept in focus",
               "description": "Follow equipment condition and service history. Prioritise the checks that matter today.",
-              "image": "/images/iotrics/capability_5.webp",
+              "image": "/solutions/details/facility-water-systems.jpg",
               "imageAlt": "Assets, kept in focus",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -117,7 +117,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/images/iotrics/capability_4.webp",
+          "backgroundImage": "/solutions/details/facility-water-systems.jpg",
           "imageAlt": "",
           "overlayStyle": "side",
           "buttonText": "Explore the platform",
@@ -218,7 +218,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/facilities-management.jpg",
+          "backgroundImage": "/solutions/details/hotel-pool-operations.jpg",
           "imageAlt": "",
           "overlayStyle": "side",
           "buttonText": "Talk to our team",
@@ -269,7 +269,7 @@
             {
               "title": "Spaces that feel right",
               "description": "Understand room and shared-space conditions so service teams can follow up with confidence.",
-              "image": "/solutions/hospitality.jpg",
+              "image": "/solutions/details/hotel-guest-room.jpg",
               "imageAlt": "Spaces that feel right",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -277,7 +277,7 @@
             {
               "title": "Service that stays ready",
               "description": "Keep cold rooms, water systems and essential equipment visible between routine checks.",
-              "image": "/images/iotrics/capability_3.webp",
+              "image": "/solutions/details/hotel-kitchen.jpg",
               "imageAlt": "Service that stays ready",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -285,7 +285,7 @@
             {
               "title": "Resources used thoughtfully",
               "description": "Review cooling and utility patterns alongside occupancy and the property’s operating needs.",
-              "image": "/images/iotrics/capability_4.webp",
+              "image": "/solutions/details/energy-metering.jpg",
               "imageAlt": "Resources used thoughtfully",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -313,7 +313,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/hospitality.jpg",
+          "backgroundImage": "/solutions/details/hotel-pool-operations.jpg",
           "imageAlt": "",
           "overlayStyle": "full",
           "buttonText": "Explore the platform",
@@ -333,7 +333,7 @@
             {
               "title": "The guest environment",
               "description": "Comfort and space-use information helps teams review what guests experience across the property.",
-              "image": "/solutions/hospitality.jpg",
+              "image": "/solutions/details/hotel-guest-room.jpg",
               "imageAlt": "The guest environment",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -341,7 +341,7 @@
             {
               "title": "Food and refrigeration",
               "description": "Monitor cold-room conditions and review exceptions with the kitchen team.",
-              "image": "/solutions/cold-storage.jpg",
+              "image": "/solutions/details/hotel-kitchen.jpg",
               "imageAlt": "Food and refrigeration",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -349,7 +349,7 @@
             {
               "title": "Guest mobility",
               "description": "Connect charging services through EVOLTICS as part of your property’s mobility offering.",
-              "image": "/images/about/evoltics_bg.jpg",
+              "image": "/solutions/details/hotel-ev-charging.jpg",
               "imageAlt": "Guest mobility",
               "link": "/platforms/evoltics",
               "linkText": "Explore EVOLTICS"
@@ -464,7 +464,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/hospitality.jpg",
+          "backgroundImage": "/solutions/details/hotel-ev-charging.jpg",
           "imageAlt": "",
           "overlayStyle": "side",
           "buttonText": "Talk to our team",
@@ -531,7 +531,7 @@
             {
               "title": "Room conditions",
               "description": "Follow temperature and humidity trends and review exceptions against your storage requirements.",
-              "image": "/images/iotrics/capability_3.webp",
+              "image": "/solutions/details/cold-chain-inspection.jpg",
               "imageAlt": "Room conditions",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -547,7 +547,7 @@
             {
               "title": "Refrigeration demand",
               "description": "Review electrical load alongside conditions to investigate changes in cooling effort.",
-              "image": "/images/iotrics/capability_4.webp",
+              "image": "/solutions/details/energy-metering.jpg",
               "imageAlt": "Refrigeration demand",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -595,7 +595,7 @@
             {
               "title": "Know which room needs a closer look.",
               "description": "Use location-based alerts to direct checks. Review the event history to distinguish a brief access event from a condition that continues to drift.",
-              "image": "/images/iotrics/capability_2.webp",
+              "image": "/solutions/details/cold-chain-inspection.jpg",
               "imageAlt": "Know which room needs a closer look.",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -603,7 +603,7 @@
             {
               "title": "Keep a record you can return to.",
               "description": "Review temperature history, door activity and energy patterns when investigating an incident or planning maintenance. Monitoring supports your site’s food-safety procedures.",
-              "image": "/images/iotrics/capability_3.webp",
+              "image": "/solutions/details/hotel-kitchen.jpg",
               "imageAlt": "Keep a record you can return to.",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -740,7 +740,7 @@
             {
               "title": "Materials in motion",
               "description": "Follow fuel, silo levels and material weight through the production process.",
-              "image": "/solutions/industrial.jpg",
+              "image": "/solutions/details/industrial-materials.jpg",
               "imageAlt": "Materials in motion",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -851,7 +851,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/industrial.jpg",
+          "backgroundImage": "/solutions/details/industrial-materials.jpg",
           "imageAlt": "",
           "overlayStyle": "side",
           "buttonText": "Explore the platform",
@@ -933,7 +933,7 @@
             {
               "title": "Connect a focused production area.",
               "description": "Start with a defined set of assets and operational questions. Review installation conditions and the protocols your site already uses.",
-              "image": "/images/iotrics/capability_5.webp",
+              "image": "/solutions/details/facility-water-systems.jpg",
               "imageAlt": "Connect a focused production area.",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -969,7 +969,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/industrial.jpg",
+          "backgroundImage": "/solutions/details/energy-metering.jpg",
           "imageAlt": "",
           "overlayStyle": "side",
           "buttonText": "Talk to our team",
@@ -1052,7 +1052,7 @@
             {
               "title": "See the load, not just the total.",
               "description": "Meter selected circuits to build a more detailed view of demand. Compare equipment and time periods to identify questions worth investigating.",
-              "image": "/images/iotrics/capability_4.webp",
+              "image": "/solutions/details/energy-metering.jpg",
               "imageAlt": "See the load, not just the total.",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -1068,7 +1068,7 @@
             {
               "title": "Production and process loads",
               "description": "Bring electrical use into discussions about shifts, run time and idle equipment.",
-              "image": "/solutions/industrial.jpg",
+              "image": "/solutions/details/industrial-materials.jpg",
               "imageAlt": "Production and process loads",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -1094,7 +1094,7 @@
             {
               "title": "Outside operating hours",
               "description": "Which loads keep running when the space or process is not in use?",
-              "image": "/solutions/energy-monitoring.jpg",
+              "image": "/solutions/details/energy-metering.jpg",
               "imageAlt": "Outside operating hours",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -1110,7 +1110,7 @@
             {
               "title": "Across similar assets",
               "description": "Why does one area or piece of equipment use more than another?",
-              "image": "/images/iotrics/capability_5.webp",
+              "image": "/solutions/details/facility-water-systems.jpg",
               "imageAlt": "Across similar assets",
               "link": "/contact",
               "linkText": "Discuss this application"
@@ -1138,7 +1138,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/energy-monitoring.jpg",
+          "backgroundImage": "/solutions/details/facility-water-systems.jpg",
           "imageAlt": "",
           "overlayStyle": "full",
           "buttonText": "Explore the platform",
@@ -1219,7 +1219,7 @@
           "headingAlign": "left",
           "columns": 3,
           "mediaRatio": "4:3",
-          "backgroundImage": "/solutions/energy-monitoring.jpg",
+          "backgroundImage": "/solutions/details/industrial-materials.jpg",
           "imageAlt": "",
           "overlayStyle": "side",
           "buttonText": "Talk to our team",

@@ -1,0 +1,236 @@
+[
+  {
+    "slug": "hospitality",
+    "sectionHeading": "Guest experience. Operational clarity.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Spaces that feel right",
+    "field": "image",
+    "old": "/solutions/hospitality.jpg",
+    "new": "/solutions/details/hotel-guest-room.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "Guest experience. Operational clarity.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Service that stays ready",
+    "field": "image",
+    "old": "/images/iotrics/capability_3.webp",
+    "new": "/solutions/details/hotel-kitchen.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "Guest experience. Operational clarity.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Resources used thoughtfully",
+    "field": "image",
+    "old": "/images/iotrics/capability_4.webp",
+    "new": "/solutions/details/energy-metering.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "Quietly connected.\nNoticeably better informed.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/hospitality.jpg",
+    "new": "/solutions/details/hotel-pool-operations.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "From the lobby to the service corridor.",
+    "layout": "image-bento",
+    "entryTitle": "The guest environment",
+    "field": "image",
+    "old": "/solutions/hospitality.jpg",
+    "new": "/solutions/details/hotel-guest-room.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "From the lobby to the service corridor.",
+    "layout": "image-bento",
+    "entryTitle": "Food and refrigeration",
+    "field": "image",
+    "old": "/solutions/cold-storage.jpg",
+    "new": "/solutions/details/hotel-kitchen.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "From the lobby to the service corridor.",
+    "layout": "image-bento",
+    "entryTitle": "Guest mobility",
+    "field": "image",
+    "old": "/images/about/evoltics_bg.jpg",
+    "new": "/solutions/details/hotel-ev-charging.jpg"
+  },
+  {
+    "slug": "hospitality",
+    "sectionHeading": "Let’s connect the details that matter.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/hospitality.jpg",
+    "new": "/solutions/details/hotel-ev-charging.jpg"
+  },
+  {
+    "slug": "facilities-management",
+    "sectionHeading": "Every building has a lot going on.\nBring it into view.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Utilities, made visible",
+    "field": "image",
+    "old": "/images/iotrics/capability_4.webp",
+    "new": "/solutions/details/energy-metering.jpg"
+  },
+  {
+    "slug": "facilities-management",
+    "sectionHeading": "Every building has a lot going on.\nBring it into view.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Assets, kept in focus",
+    "field": "image",
+    "old": "/images/iotrics/capability_5.webp",
+    "new": "/solutions/details/facility-water-systems.jpg"
+  },
+  {
+    "slug": "facilities-management",
+    "sectionHeading": "The plant room is only part of the story.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/images/iotrics/capability_4.webp",
+    "new": "/solutions/details/facility-water-systems.jpg"
+  },
+  {
+    "slug": "facilities-management",
+    "sectionHeading": "Make your next building a connected one.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/facilities-management.jpg",
+    "new": "/solutions/details/hotel-pool-operations.jpg"
+  },
+  {
+    "slug": "industrial",
+    "sectionHeading": "The signals behind a stronger shift.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Materials in motion",
+    "field": "image",
+    "old": "/solutions/industrial.jpg",
+    "new": "/solutions/details/industrial-materials.jpg"
+  },
+  {
+    "slug": "industrial",
+    "sectionHeading": "A plant-wide view.\nA practical next action.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/industrial.jpg",
+    "new": "/solutions/details/industrial-materials.jpg"
+  },
+  {
+    "slug": "industrial",
+    "sectionHeading": "Designed around the way your plant runs.",
+    "layout": "split-stories",
+    "entryTitle": "Connect a focused production area.",
+    "field": "image",
+    "old": "/images/iotrics/capability_5.webp",
+    "new": "/solutions/details/facility-water-systems.jpg"
+  },
+  {
+    "slug": "industrial",
+    "sectionHeading": "Make the next shift better informed.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/industrial.jpg",
+    "new": "/solutions/details/energy-metering.jpg"
+  },
+  {
+    "slug": "cold-storage",
+    "sectionHeading": "Three signals. A more complete story.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Room conditions",
+    "field": "image",
+    "old": "/images/iotrics/capability_3.webp",
+    "new": "/solutions/details/cold-chain-inspection.jpg"
+  },
+  {
+    "slug": "cold-storage",
+    "sectionHeading": "Three signals. A more complete story.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Refrigeration demand",
+    "field": "image",
+    "old": "/images/iotrics/capability_4.webp",
+    "new": "/solutions/details/energy-metering.jpg"
+  },
+  {
+    "slug": "cold-storage",
+    "sectionHeading": "A clearer response, from alert to review.",
+    "layout": "split-stories",
+    "entryTitle": "Know which room needs a closer look.",
+    "field": "image",
+    "old": "/images/iotrics/capability_2.webp",
+    "new": "/solutions/details/cold-chain-inspection.jpg"
+  },
+  {
+    "slug": "cold-storage",
+    "sectionHeading": "A clearer response, from alert to review.",
+    "layout": "split-stories",
+    "entryTitle": "Keep a record you can return to.",
+    "field": "image",
+    "old": "/images/iotrics/capability_3.webp",
+    "new": "/solutions/details/hotel-kitchen.jpg"
+  },
+  {
+    "slug": "energy-monitoring",
+    "sectionHeading": "Follow the energy through your operation.",
+    "layout": "image-bento",
+    "entryTitle": "See the load, not just the total.",
+    "field": "image",
+    "old": "/images/iotrics/capability_4.webp",
+    "new": "/solutions/details/energy-metering.jpg"
+  },
+  {
+    "slug": "energy-monitoring",
+    "sectionHeading": "Follow the energy through your operation.",
+    "layout": "image-bento",
+    "entryTitle": "Production and process loads",
+    "field": "image",
+    "old": "/solutions/industrial.jpg",
+    "new": "/solutions/details/industrial-materials.jpg"
+  },
+  {
+    "slug": "energy-monitoring",
+    "sectionHeading": "Three places to start looking.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Outside operating hours",
+    "field": "image",
+    "old": "/solutions/energy-monitoring.jpg",
+    "new": "/solutions/details/energy-metering.jpg"
+  },
+  {
+    "slug": "energy-monitoring",
+    "sectionHeading": "Three places to start looking.",
+    "layout": "faded-image-cards",
+    "entryTitle": "Across similar assets",
+    "field": "image",
+    "old": "/images/iotrics/capability_5.webp",
+    "new": "/solutions/details/facility-water-systems.jpg"
+  },
+  {
+    "slug": "energy-monitoring",
+    "sectionHeading": "A lower number is useful.\nKnowing why is better.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/energy-monitoring.jpg",
+    "new": "/solutions/details/facility-water-systems.jpg"
+  },
+  {
+    "slug": "energy-monitoring",
+    "sectionHeading": "Start with the energy question you can’t answer yet.",
+    "layout": "image-banner",
+    "entryTitle": null,
+    "field": "backgroundImage",
+    "old": "/solutions/energy-monitoring.jpg",
+    "new": "/solutions/details/industrial-materials.jpg"
+  }
+]

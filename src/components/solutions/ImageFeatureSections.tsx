@@ -23,7 +23,7 @@ export function BackgroundImageSection({ content }: { content: CustomContent }) 
 }
 
 export function FadedImageCards({ content }: { content: CustomContent }) {
-  return <div className="solution-faded-grid" data-columns={content.columns || 3}>
+  return <div className="solution-faded-grid" data-columns={content.columns || 3} data-count={content.entries?.length || 0}>
     {(content.entries || []).map((entry, index) => {
       const hasImage = entry.image && !isPlaceholderMedia(entry.image) && isSafeMediaUrl(entry.image);
       return <article key={index} className="solution-faded-card">
