@@ -106,7 +106,7 @@ export default function Navbar() {
 
       {/* ── Mobile Navigation (< lg) ── */}
       <div className="lg:hidden">
-        <MobileNav onSearch={() => setSearchOpen(true)} />
+        <MobileNav onSearch={() => setSearchOpen(true)} solutions={solutions} />
       </div>
       <UniversalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>

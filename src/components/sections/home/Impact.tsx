@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpRight, Cpu, Zap, LayoutDashboard, AlertTriangle, FileCheck, Share2 } from "lucide-react";
 import Link from "next/link";
 import OperationsPreview from "./OperationsPreview";
-import ImpactActivity from "./ImpactActivity";
+import RetrofitDeployment from "./RetrofitDeployment";
 import ImpactAnimatedVisual from "./ImpactAnimatedVisual";
 import ImpactDotWave from "./ImpactDotWave";
 import motion from "./ImpactMotion.module.css";
@@ -170,25 +170,18 @@ export default function Impact() {
               </div>
             </Card>
 
-            {/* Card 3 */}
-            <Card variant="outlined" className="bg-white rounded-[2.5rem] p-6 sm:p-10 lg:p-12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden group">
+            {/* Card 3: approved Plug-in deployment option. */}
+            <Card variant="outlined" className="bg-white rounded-[2rem] p-4 sm:p-5 shadow-[0_18px_40px_-24px_rgba(21,40,68,0.15)] relative overflow-hidden">
               <ImpactDotWave id="retrofit" />
-              <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start gap-8 mb-12">
-                <div className="flex flex-col gap-1">
-                  <h3 className="normal-case text-4xl sm:text-5xl lg:text-6xl font-bold text-[#3B82F6] tracking-tighter leading-none">
-                    {homeContent.impact.card3.title1}
-                  </h3>
-                  <h3 className="normal-case text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 tracking-tighter leading-none">
-                    {homeContent.impact.card3.title2}
-                  </h3>
+              <RetrofitDeployment />
+              <div className="relative z-10 px-2.5 sm:px-4 pt-6 sm:pt-7 pb-2">
+                <h3 className="normal-case text-[2rem] sm:text-[2.5rem] font-bold tracking-tighter leading-[1.1] mb-6">
+                  <span className="text-primary">{homeContent.impact.card3.title1}</span><br />
+                  <span className="text-zinc-900">{homeContent.impact.card3.title2}</span>
+                </h3>
+                <div className="border-t border-zinc-100 pt-5 sm:pt-6">
+                  <p className="text-zinc-500 text-sm sm:text-[15px] leading-[1.85]">{homeContent.impact.card3.description}</p>
                 </div>
-                <ImpactActivity kind="retrofit" />
-              </div>
-              
-              <div className="relative z-10 flex flex-col sm:flex-row justify-between items-end gap-8 mt-auto border-t border-zinc-100 pt-8">
-                <p className="text-zinc-500 text-base sm:text-lg leading-relaxed max-w-lg">
-                  {homeContent.impact.card3.description}
-                </p>
               </div>
             </Card>
 
