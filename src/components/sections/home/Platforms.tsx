@@ -1,7 +1,7 @@
 "use client";
 
 import AccentText from "@/components/ui/AccentText";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
@@ -32,6 +32,7 @@ const poppins = Poppins({
 
 export default function Platforms() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [expandedSteps, setExpandedSteps] = useState<string[]>([]);
 
   const platforms = homeContent.platforms.items;
 
@@ -151,7 +152,7 @@ export default function Platforms() {
                 <div className="w-full h-full bg-gradient-to-r from-transparent via-[#60a5fa] to-transparent opacity-100 animate-pulse" />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-6 lg:gap-8 relative z-10">
                 {[
                   {
                     step: "01",
@@ -171,10 +172,12 @@ export default function Platforms() {
                     desc: "Data is processed and visualised on the secure cloud platform: live dashboards for situational awareness, automated triggers that flag anomalies and threshold breaches before they become failures, and historical modelling for maintenance and resource planning.",
                     metric: "DASHBOARDS · TRIGGERS · PREDICTIVE"
                   }
-                ].map((c, i) => (
+                ].map((c, i) => {
+                  const expanded = expandedSteps.includes(c.step);
+                  return (
                   <div
                     key={c.step}
-                    className={`relative p-[5px] rounded-[1.75rem] overflow-hidden flex shadow-2xl ${i === 2 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+                    className={`relative p-[5px] rounded-[1.75rem] overflow-clip flex shadow-2xl ${i === 2 ? 'md:col-span-2 lg:col-span-1' : ''}`}
                   >
                     {/* Rotating Aurora Border */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250%] aspect-square animate-spin [animation-duration:4s] bg-[conic-gradient(from_0deg,transparent_0%,transparent_35%,#3B82F6_45%,#93c5fd_50%,transparent_55%,transparent_100%)] opacity-100" />
@@ -183,28 +186,40 @@ export default function Platforms() {
                     <div className="absolute inset-0 bg-[#2a2a2a] rounded-[1.75rem]" />
 
                     {/* Inner Card */}
-                    <div className="relative z-10 flex flex-col flex-grow bg-[#000000] rounded-[1.5rem] p-6 sm:p-8 lg:p-10 overflow-hidden">
+                    <div className="relative z-10 flex flex-col flex-grow bg-[#000000] rounded-[1.5rem] p-6 sm:p-7 overflow-clip">
                       {/* Step Number */}
-                      <span className="text-5xl sm:text-6xl lg:text-7xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-zinc-700 to-zinc-900 mb-6 lg:mb-8 block">
+                      <span className="text-5xl sm:text-6xl font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-zinc-700 to-zinc-900 mb-4 block">
                         {c.step}
                       </span>
 
                       {/* Content */}
                       <h4 className="text-2xl sm:text-3xl font-bold text-white mb-3 lg:mb-4 uppercase">{c.title}</h4>
-                      <p className="text-zinc-400 text-sm sm:text-base leading-relaxed flex-grow mb-6 lg:mb-8">
+                      <p id={`methodology-description-${c.step}`} className={`text-zinc-400 text-sm sm:text-base leading-relaxed ${expanded ? "" : "line-clamp-3"}`}>
                         {c.desc}
                       </p>
+                      <button
+                        type="button"
+                        aria-expanded={expanded}
+                        aria-controls={`methodology-description-${c.step}`}
+                        aria-label={`${expanded ? "Read less" : "Read more"} about ${c.title}`}
+                        onClick={() => setExpandedSteps((steps) => expanded ? steps.filter((step) => step !== c.step) : [...steps, c.step])}
+                        className="self-start inline-flex items-center gap-1.5 mt-3 mb-5 py-1 text-xs font-semibold text-blue-400 hover:text-blue-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 rounded-sm cursor-pointer transition-colors"
+                      >
+                        {expanded ? "Read less" : "Read more"}
+                        <span aria-hidden="true">{expanded ? "−" : "+"}</span>
+                      </button>
 
                       {/* Metric Footer */}
-                      <div className="mt-auto pt-6 border-t border-zinc-800/80 flex items-center gap-2.5 min-w-0">
+                      <div className="mt-auto pt-4 border-t border-zinc-800/80 flex items-center gap-2.5 min-w-0">
                         <div className="w-2 h-2 rounded-full bg-[#3B82F6] shadow-[0_0_15px_rgba(59,130,246,1)] animate-pulse shrink-0" />
-                        <span className="text-[10px] sm:text-[11px] md:text-xs lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-zinc-300 uppercase tracking-wide whitespace-nowrap">
+                        <span className="text-[10px] sm:text-[11px] md:text-xs lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-zinc-300 uppercase tracking-wide leading-relaxed">
                           {c.metric}
                         </span>
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
