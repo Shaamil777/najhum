@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function SolutionPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // Fetch solution (allows draft previewing so admins and testers don't get 404)
+  // Public routes expose published pages; draft previews remain in the admin builder.
   let solution = null;
   try {
     solution = await getSolutionBySlug(slug, true);
@@ -95,7 +95,7 @@ export default async function SolutionPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="solution-page min-h-screen">
       {/* Draft Notification Banner */}
       {solution.isDraft && (
         <div className="bg-amber-500 text-white px-4 py-2.5 text-center text-sm font-semibold flex flex-wrap items-center justify-center gap-2 sticky top-0 z-50 shadow-md">

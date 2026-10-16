@@ -103,12 +103,12 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <BrochureDownloadButton
+              {product.brochureUrl && <BrochureDownloadButton
                 brochureUrl={product.brochureUrl}
                 productName={product.name}
                 size="lg"
                 className="bg-primary text-white hover:bg-primary/90"
-              />
+              />}
               <Link
                 href="/contact#contact-form"
                 className="inline-flex items-center justify-center px-6 py-3 border border-neutral-300 rounded-md text-sm font-semibold text-neutral-700 bg-white hover:bg-neutral-50 transition-colors"

@@ -1,0 +1,2415 @@
+[
+  {
+    "title": "Smart Cities",
+    "slug": "smart-cities",
+    "metaDescription": "Connect public spaces, utilities and everyday services with IoTRICS. Help city teams see changing conditions, prioritise work and coordinate across the district.",
+    "coverImage": "/solutions/expanded/smart-cities.jpg",
+    "platforms": [
+      "iotrics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/smart-cities.html",
+    "sections": [
+      {
+        "id": "df6d84b9-021a-4be3-8ec0-7a7172cb8b77",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-faded",
+          "heading": "A city has many moving parts.\nGive them a shared view.",
+          "subheading": "Connect public spaces, utilities and everyday services with IoTRICS. Help city teams see changing conditions, prioritise work and coordinate across the district.",
+          "backgroundImage": "/solutions/expanded/smart-cities.jpg",
+          "imageAlt": "Smart Cities monitoring application",
+          "eyebrow": "SMART CITIES",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "8740ace0-48ae-4906-a6a4-f77df44bdb79",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-bento",
+          "heading": "From the street to the service team.",
+          "bodyHtml": "<p>Build a connected picture around the places people use every day.</p>",
+          "entries": [
+            {
+              "title": "Public spaces, in focus",
+              "description": "Bring environmental readings, lighting status and visitor patterns into one district view.",
+              "image": "/solutions/expanded/smart-cities.jpg",
+              "imageAlt": "Public spaces, in focus",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Find a place to park",
+              "description": "Use bay occupancy and guidance to help drivers navigate busy destinations.",
+              "image": "/solutions/expanded/smart-parking.jpg",
+              "imageAlt": "Find a place to park",
+              "link": "/solutions/smart-parking",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Collections that follow demand",
+              "description": "See which collection points need attention before sending a team.",
+              "image": "/solutions/expanded/waste-management.jpg",
+              "imageAlt": "Collections that follow demand",
+              "link": "/solutions/waste-management",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "0d7004a9-3950-41d6-bd6f-873bed656c2e",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "One district. Many applications.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Outdoor air quality",
+              "description": "Track selected particulate and gas measurements with location and time context. Sensor selection depends on the monitoring objective."
+            },
+            {
+              "title": "Street lighting",
+              "description": "Review lighting schedules, consumption and fault events. Where compatible controls are present, use occupancy information to refine dimming strategies."
+            },
+            {
+              "title": "Connected public furniture",
+              "description": "Bring supported bench, weather and footfall information into the district picture. Confirm solar and communications requirements for each installation."
+            },
+            {
+              "title": "Water below the street",
+              "description": "Follow drainage levels and cover-status events at vulnerable locations. Route alerts to the responsible service team."
+            },
+            {
+              "title": "Service coordination",
+              "description": "Keep asset locations, threshold events and service records together so different teams can work from shared information."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "af4b3e22-41ba-4a5a-8ebc-27f0a3c18e94",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "A clearer district starts at street level.",
+          "bodyHtml": "<p>Connect the signals that help your team make the next service decision.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/smart-cities.jpg",
+          "imageAlt": "A clearer district starts at street level.",
+          "overlayStyle": "side",
+          "buttonText": "Explore IoTRICS",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "33ce18f3-bb67-4bab-842e-794243889ab3",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Turn field readings into useful action.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Air and environment",
+                "Selected outdoor air-quality stations",
+                "Compare locations and investigate changing conditions"
+              ]
+            },
+            {
+              "cells": [
+                "Lighting",
+                "Compatible controllers and energy meters",
+                "Review faults and operating schedules"
+              ]
+            },
+            {
+              "cells": [
+                "Drainage",
+                "Level and cover-status sensors",
+                "Prioritise inspections and follow-up"
+              ]
+            },
+            {
+              "cells": [
+                "Public services",
+                "Parking and waste-system integrations",
+                "Coordinate work by location"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "65de107b-8508-447a-bb0e-d3379b505420",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Start with one district priority.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Map the need",
+              "description": "Choose the assets and service decisions that matter first."
+            },
+            {
+              "title": "Survey coverage",
+              "description": "Check power, mounting, network coverage and data ownership."
+            },
+            {
+              "title": "Connect teams",
+              "description": "Define thresholds, responsibilities and service workflows."
+            },
+            {
+              "title": "Expand with context",
+              "description": "Use the first deployment to guide the next application."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "8b6d5089-4844-4405-b06c-26f842e127b8",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "9ac84806-903c-4bf7-8871-696ed92a415f",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Air Quality Monitoring",
+    "slug": "air-quality",
+    "metaDescription": "Bring indoor comfort and outdoor environmental measurements into view. Give facilities teams the context to investigate conditions and review ventilation performance.",
+    "coverImage": "/solutions/expanded/air-quality.jpg",
+    "platforms": [
+      "iotrics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/air-quality.html",
+    "sections": [
+      {
+        "id": "672b6e91-6774-46df-a038-77e59269e0be",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-split",
+          "heading": "Make the invisible\neasier to understand.",
+          "subheading": "Bring indoor comfort and outdoor environmental measurements into view. Give facilities teams the context to investigate conditions and review ventilation performance.",
+          "backgroundImage": "/solutions/expanded/air-quality.jpg",
+          "imageAlt": "Air Quality Monitoring monitoring application",
+          "eyebrow": "AIR QUALITY MONITORING",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "45fd176f-68dd-41b7-b559-2cf32bd499a1",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Different spaces. The right measurements.",
+          "bodyHtml": "<p>Select monitoring points around occupancy, exposure and the decisions each team needs to make.</p>",
+          "entries": [
+            {
+              "title": "Inside the building",
+              "description": "Review temperature, humidity, CO₂ and selected particulate or VOC indicators alongside room use.",
+              "image": "/solutions/expanded/air-quality.jpg",
+              "imageAlt": "Inside the building",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Across the district",
+              "description": "Follow outdoor particulate and selected gas measurements at representative locations.",
+              "image": "/solutions/expanded/smart-cities.jpg",
+              "imageAlt": "Across the district",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Behind the comfort",
+              "description": "Compare indoor trends with ventilation pressure and equipment operating information.",
+              "image": "/solutions/details/energy-metering.jpg",
+              "imageAlt": "Behind the comfort",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "a61b8d05-6d78-4759-8a48-4ca7e7ddf32e",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Match the question to the measurement.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Room comfort",
+                "Temperature and relative humidity",
+                "Review hot, cold or humid spaces"
+              ]
+            },
+            {
+              "cells": [
+                "Ventilation context",
+                "CO₂ and occupancy trends",
+                "Investigate busy rooms and operating schedules"
+              ]
+            },
+            {
+              "cells": [
+                "Particle exposure",
+                "PM2.5 and PM10 on supported devices",
+                "Compare indoor and outdoor trends"
+              ]
+            },
+            {
+              "cells": [
+                "Odour or VOC events",
+                "Supported TVOC, NH₃ or H₂S sensors",
+                "Choose a sensor suited to the target environment"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "c46462f0-7fb5-4338-b98a-bdfc48c724f7",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Better context for the places people spend time.",
+          "bodyHtml": "<p>From meeting rooms to shared campuses, keep conditions and operating decisions connected.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/air-quality.jpg",
+          "imageAlt": "Better context for the places people spend time.",
+          "overlayStyle": "full",
+          "buttonText": "Explore IoTRICS",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "06f39b0c-fe9d-445f-be38-c8537723e500",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Can indoor and outdoor readings be compared?",
+              "description": "Yes, when the sensors, measurement intervals and locations are appropriate. Outdoor and indoor devices may measure different parameters; comparisons should retain that context."
+            },
+            {
+              "title": "Does monitoring replace a ventilation assessment?",
+              "description": "Readings support investigation and operating decisions. Building ventilation design and specialist assessments remain part of the facilities process."
+            },
+            {
+              "title": "What does the NT308 measure?",
+              "description": "The indoor sensor brochure lists temperature, humidity, CO₂, TVOC, pressure, light, motion, PM2.5 and PM10. Confirm the selected device configuration before ordering."
+            },
+            {
+              "title": "Can alerts follow room schedules?",
+              "description": "Thresholds, time windows and escalation rules can be scoped around how the building is occupied."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "dc35119c-034c-4b4d-9efd-e43564e2bb71",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Put readings where decisions happen.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Choose spaces",
+              "description": "Map room use and representative measurement points."
+            },
+            {
+              "title": "Establish a baseline",
+              "description": "Review normal occupied and unoccupied patterns."
+            },
+            {
+              "title": "Investigate changes",
+              "description": "Combine alerts with occupancy and ventilation context."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "8a1dea79-e414-48d4-8dbd-799029aa2701",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "a61844b3-64c5-4015-acde-dc2881911f65",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Construction Site Safety",
+    "slug": "construction-safety",
+    "metaDescription": "Bring worker support, site conditions and incident information into one operational picture. Help supervisors coordinate checks, communications and follow-up across active projects.",
+    "coverImage": "/solutions/expanded/construction-safety.jpg",
+    "platforms": [
+      "iotrics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/construction-safety.html",
+    "sections": [
+      {
+        "id": "ffb06fa0-f66d-42a9-9ed1-2f51f32a5423",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-editorial",
+          "heading": "Keep the team connected.\nKeep the site in view.",
+          "subheading": "Bring worker support, site conditions and incident information into one operational picture. Help supervisors coordinate checks, communications and follow-up across active projects.",
+          "backgroundImage": "/solutions/expanded/construction-safety.jpg",
+          "imageAlt": "Construction Site Safety monitoring application",
+          "eyebrow": "CONSTRUCTION SITE SAFETY",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics",
+          "mediaCards": [
+            {
+              "title": "On-site support",
+              "image": "/solutions/expanded/construction-safety.jpg",
+              "imageAlt": "On-site support"
+            },
+            {
+              "title": "Environmental context",
+              "image": "/solutions/expanded/air-quality.jpg",
+              "imageAlt": "Environmental context"
+            },
+            {
+              "title": "Connected operations",
+              "image": "/solutions/expanded/smart-cities.jpg",
+              "imageAlt": "Connected operations"
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "986578ff-b535-44c6-96eb-4485517ef0ac",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "overlay-cards",
+          "heading": "Support the people behind the project.",
+          "bodyHtml": "<p>Choose connected tools around your working environment and response procedures.</p>",
+          "entries": [
+            {
+              "title": "A way to ask for help",
+              "description": "SOS-capable wearables and two-way communications can support lone-worker procedures.",
+              "image": "/solutions/expanded/construction-safety.jpg",
+              "imageAlt": "A way to ask for help",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Know the working environment",
+              "description": "Review selected gas, heat and environmental monitoring points around the site.",
+              "image": "/solutions/industrial.jpg",
+              "imageAlt": "Know the working environment",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Context for the next shift",
+              "description": "Keep event history, responsible contacts and follow-up records together.",
+              "image": "/images/iotrics/capability_6.jpg",
+              "imageAlt": "Context for the next shift",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "802c0e89-dc40-4cbb-b3fc-8c6e46dc0b6b",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Define the response before the alert.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Worker assistance",
+                "Suitable SOS wearable and communications",
+                "Agree who receives and acknowledges the event"
+              ]
+            },
+            {
+              "cells": [
+                "Location context",
+                "Supported GPS, BLE or site positioning",
+                "Review coverage, location accuracy and privacy requirements"
+              ]
+            },
+            {
+              "cells": [
+                "Environmental exposure",
+                "Devices selected for the actual hazards",
+                "Set site-specific thresholds and inspection procedures"
+              ]
+            },
+            {
+              "cells": [
+                "Incident review",
+                "Timestamped events and service records",
+                "Support handovers and documented follow-up"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "e7073605-c926-485a-9b6d-038fb1cfae2f",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Build around your site procedures.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Assess the site",
+              "description": "Identify people, hazards and communications gaps."
+            },
+            {
+              "title": "Select devices",
+              "description": "Confirm wearables, network coverage and environmental suitability."
+            },
+            {
+              "title": "Rehearse response",
+              "description": "Test alert delivery, acknowledgements and escalation with the team."
+            },
+            {
+              "title": "Review the evidence",
+              "description": "Use event history to refine procedures and device placement."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "b025b87d-6013-4a63-87a6-9253b7f55e7a",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Connected support for a changing site.",
+          "bodyHtml": "<p>Give supervisors a shared view as teams, work zones and project stages change.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/construction-safety.jpg",
+          "imageAlt": "Connected support for a changing site.",
+          "overlayStyle": "side",
+          "buttonText": "Explore IoTRICS",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "f3835102-9a83-4bb7-84db-a8e809bf0609",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Do connected devices replace PPE or supervision?",
+              "description": "No. Monitoring and communications support the site’s existing safety programme, PPE, supervision and emergency procedures."
+            },
+            {
+              "title": "Can helmet-based devices be included?",
+              "description": "Compatible helmet or wearable systems can be assessed for the project. Device availability, certifications, positioning coverage and integration must be confirmed during selection."
+            },
+            {
+              "title": "Which wearables can be considered?",
+              "description": "The brochure range includes cellular SOS bracelets and connected watches. The choice depends on cellular coverage, battery needs, voice features and the intended working environment."
+            },
+            {
+              "title": "How is worker data handled?",
+              "description": "Define the purpose, access permissions, retention and workforce communication before collecting location or wellness data."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "5c17ae6a-d3f3-4167-b315-2dbc935e7e47",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "35d84675-d002-4ab4-9083-10a4d1340cf1",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Smart Parking",
+    "slug": "smart-parking",
+    "metaDescription": "Connect parking occupancy, guidance and charging-bay information. Help operators understand demand and give drivers a clearer path through busy destinations.",
+    "coverImage": "/solutions/expanded/smart-parking.jpg",
+    "platforms": [
+      "iotrics",
+      "evoltics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/smart-parking.html",
+    "sections": [
+      {
+        "id": "7ddf52c9-5ea2-4797-8183-8e02233b3acb",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-split",
+          "heading": "Less searching.\nA better arrival.",
+          "subheading": "Connect parking occupancy, guidance and charging-bay information. Help operators understand demand and give drivers a clearer path through busy destinations.",
+          "backgroundImage": "/solutions/expanded/smart-parking.jpg",
+          "imageAlt": "Smart Parking monitoring application",
+          "eyebrow": "SMART PARKING",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "c49d49bf-a343-45d8-868b-037ca9064ad9",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Make every arrival easier.",
+          "bodyHtml": "<p>Bring the parking journey into focus, from the entrance to the charging bay.</p>",
+          "entries": [
+            {
+              "title": "See available space",
+              "description": "Follow occupancy by zone and integrate guidance where supported.",
+              "image": "/solutions/expanded/smart-parking.jpg",
+              "imageAlt": "See available space",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Keep charging bays visible",
+              "description": "Combine bay use with charger session status to investigate unavailable spaces.",
+              "image": "/solutions/expanded/ev-charging.jpg",
+              "imageAlt": "Keep charging bays visible",
+              "link": "/solutions/ev-charging",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Plan for busy destinations",
+              "description": "Understand changing demand around hotels, offices and mixed-use districts.",
+              "image": "/solutions/expanded/smart-cities.jpg",
+              "imageAlt": "Plan for busy destinations",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "a924698a-f0c0-4c47-b12d-2390eb19e03b",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Connect the parking journey.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Survey the bays",
+              "description": "Map levels, zones, entrances and the intended sensor approach."
+            },
+            {
+              "title": "Connect information",
+              "description": "Scope occupancy sensing, signage and charger-data integrations."
+            },
+            {
+              "title": "Guide the driver",
+              "description": "Agree how availability reaches signs, apps or attendants."
+            },
+            {
+              "title": "Review operations",
+              "description": "Use event history and demand patterns to refine the service."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "22701205-0e50-4b71-a9bd-2e2188887e93",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "The right context for each parking zone.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "General bays",
+                "Per-bay or zone occupancy systems",
+                "Review availability and guidance"
+              ]
+            },
+            {
+              "cells": [
+                "EV bays",
+                "Occupancy plus charging-session status",
+                "Investigate blocked or idle charging spaces"
+              ]
+            },
+            {
+              "cells": [
+                "Permit access",
+                "Optional compatible LPR or access integration",
+                "Support entry policies and authorised use"
+              ]
+            },
+            {
+              "cells": [
+                "Vulnerable areas",
+                "Suitable water-level or environmental sensors",
+                "Route inspection alerts to the facilities team"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "94520dbe-628a-4572-8778-2ab8319760f2",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Parking and charging belong in the same conversation.",
+          "bodyHtml": "<p>Plan availability, driver access and charging operations together with EVOLTICS.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/ev-charging.jpg",
+          "imageAlt": "Parking and charging belong in the same conversation.",
+          "overlayStyle": "side",
+          "buttonText": "Explore EVOLTICS",
+          "buttonLink": "/platforms/evoltics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "0ccc9c3b-ac4d-4381-be09-56159947aec1",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Can this work in an existing car park?",
+              "description": "A site survey determines sensor placement, power, network coverage and integration with existing guidance or access systems."
+            },
+            {
+              "title": "Can charging bays have separate rules?",
+              "description": "Yes. Occupancy and charger status can inform agreed policies, alerts and staff follow-up. Enforcement and billing workflows depend on the selected integrations."
+            },
+            {
+              "title": "Does the solution include licence-plate recognition?",
+              "description": "LPR can be scoped as a compatible integration where required. It is not assumed for every deployment."
+            },
+            {
+              "title": "Can several parking sites share a view?",
+              "description": "A multi-site scope can organise data by property, level and zone with appropriate operator access."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "2f89abf0-8082-41b6-af63-878574eb18e6",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "63e28efb-bf0c-4f71-a80a-eb0dc490e0b7",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Smart Waste Management",
+    "slug": "waste-management",
+    "metaDescription": "Bring collection-point conditions and service records into view. Help operations teams prioritise visits around demand across buildings, campuses and public spaces.",
+    "coverImage": "/solutions/expanded/waste-management.jpg",
+    "platforms": [
+      "iotrics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/waste-management.html",
+    "sections": [
+      {
+        "id": "63fd1f23-fbbe-45a9-b3d0-962e5bfa4236",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-faded",
+          "heading": "Collect with context.\nRespond where it matters.",
+          "subheading": "Bring collection-point conditions and service records into view. Help operations teams prioritise visits around demand across buildings, campuses and public spaces.",
+          "backgroundImage": "/solutions/expanded/waste-management.jpg",
+          "imageAlt": "Smart Waste Management monitoring application",
+          "eyebrow": "SMART WASTE MANAGEMENT",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "382231a6-91eb-4af0-ae9c-5b253f5b6b0f",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "From collection point to completed visit.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Sense the need",
+              "description": "Select fill-level and condition monitoring suited to the bin and environment."
+            },
+            {
+              "title": "Prioritise the round",
+              "description": "Review thresholds, location and service demand before dispatch."
+            },
+            {
+              "title": "Record the visit",
+              "description": "Keep collection events and follow-up notes in the operating history."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "9b2e406a-4359-4e65-9198-42b3fa9f1723",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-bento",
+          "heading": "A service view that reaches the street.",
+          "bodyHtml": "<p>Coordinate teams around the places that need attention.</p>",
+          "entries": [
+            {
+              "title": "Collection points in context",
+              "description": "Review bin or container status by site, zone and service responsibility.",
+              "image": "/solutions/expanded/waste-management.jpg",
+              "imageAlt": "Collection points in context",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "A connected district",
+              "description": "Combine service information with other public-space operations.",
+              "image": "/solutions/expanded/smart-cities.jpg",
+              "imageAlt": "A connected district",
+              "link": "/solutions/smart-cities",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Clearer team handovers",
+              "description": "Keep exceptions, assignments and completed visits together.",
+              "image": "/images/iotrics/capability_6.jpg",
+              "imageAlt": "Clearer team handovers",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "1faded21-d000-4d0b-84e6-a7e6b0a790f5",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Plan the next visit with better information.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Fill threshold",
+                "Container-appropriate fill monitoring",
+                "Prioritise inspection or collection"
+              ]
+            },
+            {
+              "cells": [
+                "Temperature change",
+                "Suitable temperature sensor",
+                "Investigate unusual conditions through site procedures"
+              ]
+            },
+            {
+              "cells": [
+                "Repeated demand",
+                "Collection timestamps and location history",
+                "Review service frequency and container capacity"
+              ]
+            },
+            {
+              "cells": [
+                "Missed service",
+                "Agreed workflow and acknowledgement",
+                "Identify unresolved work for the responsible team"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "4ba5f968-061a-47aa-a529-59b1675cd10b",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Can every bin use the same sensor?",
+              "description": "No. Container geometry, material, mounting, contents and environmental exposure affect sensor selection. Confirm suitability in a representative pilot."
+            },
+            {
+              "title": "Will this automatically optimise every route?",
+              "description": "Collection priorities can inform dispatch planning. Automated route optimisation requires a separately scoped routing integration and reliable service constraints."
+            },
+            {
+              "title": "Can temperature monitoring detect a fire?",
+              "description": "Temperature thresholds can flag unusual conditions for investigation. They do not replace approved fire detection or emergency procedures."
+            },
+            {
+              "title": "Can contractors share the service view?",
+              "description": "Access, responsibilities and the information shared with each contractor can be defined as part of the workflow."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "54a43527-9ea5-40f2-9982-99c000b36c02",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Make the collection round part of the city picture.",
+          "bodyHtml": "<p>Bring service demand, field events and team follow-up together.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/waste-management.jpg",
+          "imageAlt": "Make the collection round part of the city picture.",
+          "overlayStyle": "full",
+          "buttonText": "Explore IoTRICS",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "a810a967-7515-4741-810d-27a612e19aff",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "7617958b-5ff0-4b2e-abd1-afd88f279a86",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Silo & Storage Monitoring",
+    "slug": "silo-monitoring",
+    "metaDescription": "Connect level readings and storage events across your operation. Give procurement and site teams a clearer basis for replenishment, inspections and capacity planning.",
+    "coverImage": "/solutions/expanded/silo-monitoring.jpg",
+    "platforms": [
+      "iotrics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/silo-monitoring.html",
+    "sections": [
+      {
+        "id": "ffac2f11-da1a-4687-8c27-e89372cfca5c",
+        "type": "HERO",
+        "content": {
+          "layout": "centered",
+          "heading": "Know what’s in store.\nPlan what comes next.",
+          "subheading": "Connect level readings and storage events across your operation. Give procurement and site teams a clearer basis for replenishment, inspections and capacity planning.",
+          "backgroundImage": "/solutions/expanded/silo-monitoring.jpg",
+          "imageAlt": "Silo & Storage Monitoring monitoring application",
+          "eyebrow": "SILO & STORAGE MONITORING",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "88a6a909-91af-4024-8a0a-7626482b0b55",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "split-stories",
+          "heading": "Storage is more than a single level reading.",
+          "bodyHtml": "<p>Connect the operating context around each vessel.</p>",
+          "entries": [
+            {
+              "title": "A view across the site",
+              "description": "Organise levels by vessel, material and location. Review consumption patterns alongside replenishment plans.",
+              "image": "/solutions/expanded/silo-monitoring.jpg",
+              "imageAlt": "A view across the site",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "The right instrument for the material",
+              "description": "Assess tank geometry, dust, surface conditions and mounting before choosing radar, ultrasonic or other measurement technology.",
+              "image": "/solutions/details/industrial-materials.jpg",
+              "imageAlt": "The right instrument for the material",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "1e12805e-0499-4acf-92aa-aa334838cf69",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Start with the measurement conditions.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Liquid storage",
+                "Compatible radar or ultrasonic level instrument",
+                "Confirm liquid, tank material and mounting requirements"
+              ]
+            },
+            {
+              "cells": [
+                "Bulk solids",
+                "Technology assessed for the material and surface",
+                "Check dust, uneven surfaces, filling patterns and suitability"
+              ]
+            },
+            {
+              "cells": [
+                "Replenishment",
+                "Level thresholds and consumption history",
+                "Coordinate purchase and delivery planning"
+              ]
+            },
+            {
+              "cells": [
+                "Site exceptions",
+                "High/low events and sensor status",
+                "Prioritise checks with responsible staff"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "5f8ed81e-6d0a-47f0-a561-032f3933ec15",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Bring every vessel into the operating picture.",
+          "bodyHtml": "<p>Use location, material and level history to support the next site decision.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/silo-monitoring.jpg",
+          "imageAlt": "Bring every vessel into the operating picture.",
+          "overlayStyle": "side",
+          "buttonText": "Explore IoTRICS",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "4142076f-c57e-4872-9691-341f7893a5c6",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Choose the instrument before the dashboard.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Understand the vessel",
+              "description": "Record dimensions, contents and the operating environment."
+            },
+            {
+              "title": "Validate measurement",
+              "description": "Test mounting and readings against site conditions."
+            },
+            {
+              "title": "Set useful thresholds",
+              "description": "Agree high, low and exception workflows."
+            },
+            {
+              "title": "Connect planning",
+              "description": "Review replenishment and consumption with the relevant team."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "0b8a9570-3d66-464f-8d87-cafca61fc475",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Can one sensor measure every silo material?",
+              "description": "No. The appropriate instrument depends on material properties, dust, surface shape and vessel geometry. A liquid-level sensor should not be assumed suitable for all bulk solids."
+            },
+            {
+              "title": "Can readings be converted to volume?",
+              "description": "Volume estimates require vessel dimensions and an appropriate conversion model. Calibration and usable measurement range should be verified on site."
+            },
+            {
+              "title": "Which brochure devices cover liquid storage?",
+              "description": "The range includes NT410-RDR radar, NT400-UDL ultrasonic and NU03 external liquid-level systems. Each has distinct mounting and compatibility requirements."
+            },
+            {
+              "title": "Can multiple sites share replenishment data?",
+              "description": "A multi-site view can organise readings and history by location, vessel and material for the authorised teams."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "ead8fa63-cbaf-441f-90e4-c480d8520e36",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "0152bafd-209b-4a39-966f-4902dd1514ed",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "ESG & Sustainability",
+    "slug": "esg-sustainability",
+    "metaDescription": "Connect energy, water and environmental data around your sustainability programme. Build a consistent operating baseline and keep the context behind each improvement.",
+    "coverImage": "/solutions/expanded/esg-sustainability.jpg",
+    "platforms": [
+      "iotrics",
+      "cropifai"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/esg-sustainability.html",
+    "sections": [
+      {
+        "id": "7f6d318f-5ec8-400e-86a8-51fda570f8b3",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-editorial",
+          "heading": "Make resource use visible.\nGive progress a record.",
+          "subheading": "Connect energy, water and environmental data around your sustainability programme. Build a consistent operating baseline and keep the context behind each improvement.",
+          "backgroundImage": "/solutions/expanded/esg-sustainability.jpg",
+          "imageAlt": "ESG & Sustainability monitoring application",
+          "eyebrow": "ESG & SUSTAINABILITY",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore IoTRICS",
+          "secondaryCtaLink": "/platforms/iotrics",
+          "mediaCards": [
+            {
+              "title": "Resource visibility",
+              "image": "/solutions/expanded/esg-sustainability.jpg",
+              "imageAlt": "Resource visibility"
+            },
+            {
+              "title": "Water use",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "Water use"
+            },
+            {
+              "title": "Healthy environments",
+              "image": "/solutions/expanded/air-quality.jpg",
+              "imageAlt": "Healthy environments"
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "711b2fab-a23c-496b-9a76-2db4e3a81093",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "Start with what your operation can measure.",
+          "bodyHtml": "<p>Bring resource and environmental information together without losing its source.</p>",
+          "entries": [
+            {
+              "title": "Energy in context",
+              "description": "Follow electricity demand alongside occupancy, equipment and operating schedules.",
+              "image": "/solutions/details/energy-metering.jpg",
+              "imageAlt": "Energy in context",
+              "link": "/solutions/energy-monitoring",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Water with a purpose",
+              "description": "Review irrigation activity, flow and resource use around the site.",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "Water with a purpose",
+              "link": "/solutions/smart-irrigation",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Places people use",
+              "description": "Bring selected environmental readings into the building and district picture.",
+              "image": "/solutions/expanded/air-quality.jpg",
+              "imageAlt": "Places people use",
+              "link": "/solutions/air-quality",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "101a1d72-5231-4982-bd77-385057fbbf1f",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Keep the evidence behind the number.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Energy",
+                "Meters and suitable current-monitoring devices",
+                "Retain units, location, time period and measurement limits"
+              ]
+            },
+            {
+              "cells": [
+                "Water",
+                "Compatible flow meters and irrigation records",
+                "Separate measured volumes from estimates"
+              ]
+            },
+            {
+              "cells": [
+                "Environment",
+                "Selected air, temperature and humidity sensors",
+                "Keep measurement location and device context"
+              ]
+            },
+            {
+              "cells": [
+                "Service activity",
+                "Waste collection and operating records",
+                "Track data source and completeness for reporting"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "8c05ce25-809f-4632-b4b6-862e8cd1e0eb",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Build a repeatable evidence trail.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Define the scope",
+              "description": "Agree boundaries, reporting periods and the decisions the data should support."
+            },
+            {
+              "title": "Connect the sources",
+              "description": "Record device identity, location and data ownership."
+            },
+            {
+              "title": "Review the baseline",
+              "description": "Check completeness and understand normal operating patterns."
+            },
+            {
+              "title": "Track the change",
+              "description": "Compare like-for-like periods and document interventions."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "e0c19156-d30f-4cd6-a907-0f9ed30d3502",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Progress is easier to explain when the data has context.",
+          "bodyHtml": "<p>Connect the operational evidence behind your sustainability story.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/esg-sustainability.jpg",
+          "imageAlt": "Progress is easier to explain when the data has context.",
+          "overlayStyle": "side",
+          "buttonText": "Explore IoTRICS",
+          "buttonLink": "/platforms/iotrics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "e2f434c2-9ea9-4d72-ae15-98634d5c3b21",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Does monitoring provide an ESG certification?",
+              "description": "Monitoring supplies operational evidence. Certification, assurance and reporting-framework requirements need their own assessment and review."
+            },
+            {
+              "title": "Can energy data be converted to carbon estimates?",
+              "description": "A project can use agreed emission factors and calculation boundaries. Estimates should retain their methodology, source factors and reporting period."
+            },
+            {
+              "title": "Can data support LEED, WELL or GRI work?",
+              "description": "Selected data may support parts of a reporting or assessment process. The required parameters and evidence should be checked with the project’s specialist advisers."
+            },
+            {
+              "title": "Can irrigation data be included?",
+              "description": "Yes. CropifAI irrigation activity and compatible water-meter information can contribute to a resource view with clear measurement boundaries."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "17edccff-b670-4c3e-b844-d684223803f0",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "16dbaca2-1fb5-467e-aec0-60bda1a77422",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "EV Charging Solutions",
+    "slug": "ev-charging",
+    "metaDescription": "Plan charging around your property, drivers and operating model. Connect compatible chargers, session management and service workflows through EVOLTICS.",
+    "coverImage": "/solutions/expanded/ev-charging.jpg",
+    "platforms": [
+      "evoltics"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/ev-charging.html",
+    "sections": [
+      {
+        "id": "c5a6c7b6-6a2a-412e-ac1a-eba88fb01fe9",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-faded",
+          "heading": "From the first bay\nto everyday charging.",
+          "subheading": "Plan charging around your property, drivers and operating model. Connect compatible chargers, session management and service workflows through EVOLTICS.",
+          "backgroundImage": "/solutions/expanded/ev-charging.jpg",
+          "imageAlt": "EV Charging Solutions monitoring application",
+          "eyebrow": "EV CHARGING SOLUTIONS",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore EVOLTICS",
+          "secondaryCtaLink": "/platforms/evoltics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "f403211a-3295-4dcb-86e6-a2ea616174c8",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-bento",
+          "heading": "Charging that fits the destination.",
+          "bodyHtml": "<p>The right deployment starts with how the space is used.</p>",
+          "entries": [
+            {
+              "title": "Commercial charging hubs",
+              "description": "Plan AC and DC charging around arrival patterns, dwell times and site capacity.",
+              "image": "/solutions/expanded/ev-charging.jpg",
+              "imageAlt": "Commercial charging hubs",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Hotels and workplaces",
+              "description": "Bring charging into the guest, employee or visitor experience.",
+              "image": "/solutions/details/hotel-ev-charging.jpg",
+              "imageAlt": "Hotels and workplaces",
+              "link": "/solutions/hospitality",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Parking and mixed-use sites",
+              "description": "Coordinate bay availability, driver access and charging operations.",
+              "image": "/solutions/expanded/smart-parking.jpg",
+              "imageAlt": "Parking and mixed-use sites",
+              "link": "/solutions/smart-parking",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "6d75a970-9df4-4e64-a638-80c18a3061fe",
+        "type": "FEATURES",
+        "content": {
+          "heading": "The operating layer around the charger.",
+          "subheading": "Scope the capabilities your charging service needs.",
+          "features": [
+            {
+              "title": "Charger connectivity",
+              "description": "Connect compatible OCPP chargers and confirm supported commands and data."
+            },
+            {
+              "title": "Session visibility",
+              "description": "Review charger availability, session events and operating history."
+            },
+            {
+              "title": "Driver access",
+              "description": "Scope app, RFID or other supported access methods for the audience."
+            },
+            {
+              "title": "Pricing and billing",
+              "description": "Configure agreed tariffs and supported payment or billing integrations."
+            },
+            {
+              "title": "Load management",
+              "description": "Plan compatible load-control integrations around the site’s electrical capacity."
+            },
+            {
+              "title": "Service follow-up",
+              "description": "Organise fault information, maintenance responsibilities and support workflows."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "a0389114-2ce2-47b3-81af-0fcb1e66191e",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Design the service before installation.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Understand the destination",
+              "description": "Map driver needs, dwell times and the intended operating model."
+            },
+            {
+              "title": "Assess the site",
+              "description": "Review electrical capacity, bay layout and installation requirements with the relevant specialists."
+            },
+            {
+              "title": "Connect and commission",
+              "description": "Validate charger compatibility, access, sessions and the chosen integrations."
+            },
+            {
+              "title": "Operate and improve",
+              "description": "Review usage, faults and the driver experience after launch."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "c09c5471-0a4a-4c61-a394-217b32434f62",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "A charging service people can find and use.",
+          "bodyHtml": "<p>Bring the physical bays and the day-to-day operating experience together.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/ev-charging.jpg",
+          "imageAlt": "A charging service people can find and use.",
+          "overlayStyle": "full",
+          "buttonText": "Explore EVOLTICS",
+          "buttonLink": "/platforms/evoltics"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "4bd0ef7e-6f2c-4616-91f9-a0a3bbcad1d2",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Can existing chargers connect?",
+              "description": "Compatible OCPP chargers can be assessed. Protocol version, firmware, supported commands and the required integrations must be checked before migration."
+            },
+            {
+              "title": "How do we choose AC or DC?",
+              "description": "Dwell time, vehicle demand, available electrical capacity and the business model guide selection. The site assessment defines the final mix."
+            },
+            {
+              "title": "Can a private fleet and visitors use different rules?",
+              "description": "Separate access groups, tariffs and reporting can be scoped to the selected platform and integrations."
+            },
+            {
+              "title": "Who handles installation and local requirements?",
+              "description": "Agree installation, electrical design, approvals and operating responsibilities with the project partners before deployment."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "22017ad1-dd16-4799-807d-c1b8f84c00b3",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Smart Irrigation",
+    "slug": "smart-irrigation",
+    "metaDescription": "Connect irrigation schedules, valve control and field conditions with CropifAI. Give growers and landscape teams a clearer way to manage watering across zones.",
+    "coverImage": "/solutions/expanded/smart-irrigation.jpg",
+    "platforms": [
+      "cropifai"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/smart-irrigation.html",
+    "sections": [
+      {
+        "id": "28f9ab54-4e76-4308-932e-49a2d82ee3b9",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-split",
+          "heading": "Water the zone.\nUnderstand the result.",
+          "subheading": "Connect irrigation schedules, valve control and field conditions with CropifAI. Give growers and landscape teams a clearer way to manage watering across zones.",
+          "backgroundImage": "/solutions/expanded/smart-irrigation.jpg",
+          "imageAlt": "Smart Irrigation monitoring application",
+          "eyebrow": "SMART IRRIGATION",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore CropifAI",
+          "secondaryCtaLink": "/platforms/cropifai"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "2908b3a1-603c-49bb-9b83-b6eba4d73533",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "split-stories",
+          "heading": "Control where the water goes.",
+          "bodyHtml": "<p>Build watering decisions around the needs of each area.</p>",
+          "entries": [
+            {
+              "title": "From a schedule to a zone decision",
+              "description": "Combine field observations with compatible soil, weather and flow data. Adjust watering plans around crop stage and local conditions.",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "From a schedule to a zone decision",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "A field team that stays in control",
+              "description": "Use supported remote valve operation alongside agreed manual override and offline procedures. Keep the irrigation plan practical for the people maintaining it.",
+              "image": "/solutions/expanded/precision-farming.jpg",
+              "imageAlt": "A field team that stays in control",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "83e99b9f-c91e-43d4-ac42-844f362bc573",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faded-image-cards",
+          "heading": "One approach. Different growing spaces.",
+          "bodyHtml": "<p>Plan the equipment around the landscape and its operating needs.</p>",
+          "entries": [
+            {
+              "title": "Open-field irrigation",
+              "description": "Organise valves and watering activity by crop block and zone.",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "Open-field irrigation",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Precision growing",
+              "description": "Bring irrigation history into the wider crop-management picture.",
+              "image": "/solutions/expanded/precision-farming.jpg",
+              "imageAlt": "Precision growing",
+              "link": "/solutions/precision-farming",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Commercial landscapes",
+              "description": "Review watering schedules and resource use across managed grounds.",
+              "image": "/solutions/expanded/esg-sustainability.jpg",
+              "imageAlt": "Commercial landscapes",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "f8f8dde7-a035-4fe3-b428-130eb3edc3b9",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Give exceptions a planned response.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Unusual flow",
+                "Compatible flow meter and valve status",
+                "Investigate leakage, blocked lines or an unexpected operating state"
+              ]
+            },
+            {
+              "cells": [
+                "Low pressure",
+                "Supported pressure monitoring",
+                "Check supply conditions before changing schedules"
+              ]
+            },
+            {
+              "cells": [
+                "Dry conditions",
+                "Suitable soil and weather inputs",
+                "Review zone needs with the grower"
+              ]
+            },
+            {
+              "cells": [
+                "Lost connectivity",
+                "Device status and agreed fallback settings",
+                "Follow the tested offline and manual operating plan"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "5eef6588-5f32-4288-9b9f-b9a521865c68",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Start with a manageable zone.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Map the system",
+              "description": "Record valves, pipework, pressure and power availability."
+            },
+            {
+              "title": "Choose inputs",
+              "description": "Select appropriate field measurements and compatible controllers."
+            },
+            {
+              "title": "Test control",
+              "description": "Check valve operation, feedback and fallback procedures."
+            },
+            {
+              "title": "Refine the schedule",
+              "description": "Review field outcomes and irrigation records with the team."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "e1bc215f-7600-4b17-ae85-fad784e31875",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Every zone has its own story.",
+          "bodyHtml": "<p>Connect the water plan with the conditions in the field.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/smart-irrigation.jpg",
+          "imageAlt": "Every zone has its own story.",
+          "overlayStyle": "side",
+          "buttonText": "Explore CropifAI",
+          "buttonLink": "/platforms/cropifai"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "4938c1dd-bbe0-46a2-bbaa-7d915cb4f5e8",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Can existing valves be retained?",
+              "description": "Valve type, size, torque, pressure and control interface determine compatibility. The QT-02F08 controller has specific valve-size and installation requirements."
+            },
+            {
+              "title": "Can it run on solar power?",
+              "description": "Solar-powered controller options are available. Actual operation depends on the selected device, solar exposure, connectivity and watering duty cycle."
+            },
+            {
+              "title": "Is soil sensing included automatically?",
+              "description": "Soil and weather inputs are selected for the project. Choose probes suited to the crop, soil and installation depth; they are not assumed to be included with every valve."
+            },
+            {
+              "title": "Can fertigation be added?",
+              "description": "Compatible dosing and fertigation integration can be assessed separately with the required agronomic and equipment controls."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "23fe7692-bc91-40d4-9660-cf8955bc2fe1",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "ca8930d1-caa0-438f-9dd5-c5435da7545b",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  },
+  {
+    "title": "Precision Farming",
+    "slug": "precision-farming",
+    "metaDescription": "Bring field observations, environmental data and irrigation activity into one crop-management picture. Help growers compare zones and make decisions with better context.",
+    "coverImage": "/solutions/expanded/precision-farming.jpg",
+    "platforms": [
+      "cropifai"
+    ],
+    "sourceUrl": "https://temppro-nine.vercel.app/solutions/precision-farming.html",
+    "sections": [
+      {
+        "id": "38d1014d-eb48-4a15-9b31-aabc0afed066",
+        "type": "HERO",
+        "content": {
+          "layout": "hero-editorial",
+          "heading": "See the field in detail.\nAct with local knowledge.",
+          "subheading": "Bring field observations, environmental data and irrigation activity into one crop-management picture. Help growers compare zones and make decisions with better context.",
+          "backgroundImage": "/solutions/expanded/precision-farming.jpg",
+          "imageAlt": "Precision Farming monitoring application",
+          "eyebrow": "PRECISION FARMING",
+          "ctaText": "Discuss your project",
+          "ctaLink": "/contact",
+          "secondaryCtaText": "Explore CropifAI",
+          "secondaryCtaLink": "/platforms/cropifai",
+          "mediaCards": [
+            {
+              "title": "Field insight",
+              "image": "/solutions/expanded/precision-farming.jpg",
+              "imageAlt": "Field insight"
+            },
+            {
+              "title": "Irrigation control",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "Irrigation control"
+            },
+            {
+              "title": "Resource context",
+              "image": "/solutions/expanded/esg-sustainability.jpg",
+              "imageAlt": "Resource context"
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "fcfd5eb9-9870-47d5-a6d9-cb455d2c5065",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "overlay-cards",
+          "heading": "A connected view, from soil to season.",
+          "bodyHtml": "<p>Choose the information that helps the grower decide what to do next.</p>",
+          "entries": [
+            {
+              "title": "Field conditions",
+              "description": "Review suitable soil and weather inputs by crop block and measurement location.",
+              "image": "/solutions/expanded/precision-farming.jpg",
+              "imageAlt": "Field conditions",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Watering activity",
+              "description": "Keep irrigation events and compatible flow measurements alongside field observations.",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "Watering activity",
+              "link": "/solutions/smart-irrigation",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Seasonal context",
+              "description": "Compare growing conditions and recorded interventions over time.",
+              "image": "/images/cropify/precision_farming.jpg",
+              "imageAlt": "Seasonal context",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "8790c8be-256f-4c1d-89ee-c5523a335f37",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "table",
+          "heading": "Keep the zone behind the average.",
+          "bodyHtml": "",
+          "entries": [],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "tableColumns": [
+            "Focus",
+            "What to connect",
+            "How the team uses it"
+          ],
+          "tableRows": [
+            {
+              "cells": [
+                "Soil and environment",
+                "Project-selected probes and weather stations",
+                "Understand differences between representative field zones"
+              ]
+            },
+            {
+              "cells": [
+                "Crop observations",
+                "Field notes and supported imagery sources",
+                "Investigate changes with local agronomic knowledge"
+              ]
+            },
+            {
+              "cells": [
+                "Inputs and interventions",
+                "Irrigation, treatment and activity records",
+                "Review what changed and when"
+              ]
+            },
+            {
+              "cells": [
+                "Harvest and traceability",
+                "Agreed crop-lot and event records",
+                "Maintain a consistent field-to-handover history"
+              ]
+            }
+          ],
+          "tableCaption": "Final devices, thresholds and integrations are agreed during the site survey."
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "b59b9e7c-6045-4714-be21-d7ef3601ae7d",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "image-banner",
+          "heading": "Better field decisions start with the right context.",
+          "bodyHtml": "<p>Keep the measurements, observations and growing plan together in CropifAI.</p>",
+          "entries": [],
+          "theme": "dark",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3",
+          "backgroundImage": "/solutions/expanded/precision-farming.jpg",
+          "imageAlt": "Better field decisions start with the right context.",
+          "overlayStyle": "full",
+          "buttonText": "Explore CropifAI",
+          "buttonLink": "/platforms/cropifai"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "08e2a801-cd9f-49a0-a622-591005e8031d",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "split-stories",
+          "heading": "Technology that works with the grower.",
+          "bodyHtml": "<p>Keep practical decisions close to the field.</p>",
+          "entries": [
+            {
+              "title": "A focused first deployment",
+              "description": "Start with one crop and a few representative zones. Validate placement and data quality before expanding the sensor network.",
+              "image": "/solutions/expanded/precision-farming.jpg",
+              "imageAlt": "A focused first deployment",
+              "link": "/contact",
+              "linkText": "Explore this application"
+            },
+            {
+              "title": "Connect the water plan",
+              "description": "Bring irrigation activity into the seasonal view, so watering decisions can be reviewed against field conditions.",
+              "image": "/solutions/expanded/smart-irrigation.jpg",
+              "imageAlt": "Connect the water plan",
+              "link": "/solutions/smart-irrigation",
+              "linkText": "Explore this application"
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "9e22652f-a16f-4ef0-afbd-17e1a3b0136a",
+        "type": "CUSTOM",
+        "content": {
+          "layout": "faq",
+          "heading": "A few things to plan for.",
+          "bodyHtml": "",
+          "entries": [
+            {
+              "title": "Does the platform decide every treatment?",
+              "description": "Data supports agronomic decisions. Crop stage, soil conditions, local practice and specialist advice remain important when selecting treatments or changing inputs."
+            },
+            {
+              "title": "Can satellite or NDVI information be used?",
+              "description": "Supported imagery and analytics can be scoped around the available data source, resolution, revisit frequency and crop. They are not assumed in every deployment."
+            },
+            {
+              "title": "Can livestock tracking be included?",
+              "description": "Compatible location tags and animal-management integrations can be assessed as a separate application with appropriate coverage and welfare considerations."
+            },
+            {
+              "title": "Which sensors should we start with?",
+              "description": "Begin with the decisions you need to improve, then choose representative soil, weather or environmental measurements and a suitable connectivity plan."
+            }
+          ],
+          "theme": "light",
+          "headingAlign": "left",
+          "columns": 3,
+          "mediaRatio": "4:3"
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "775b4897-4386-43ea-908c-a6d70a4a07d4",
+        "type": "METHODOLOGY",
+        "content": {
+          "eyebrow": "A PRACTICAL ROLLOUT",
+          "heading": "Grow the deployment from field evidence.",
+          "bodyText": "Start with a focused deployment, then expand from what the team learns.",
+          "steps": [
+            {
+              "title": "Choose the question",
+              "description": "Identify the crop decisions and zones that need better context."
+            },
+            {
+              "title": "Validate the inputs",
+              "description": "Check placement, connectivity and measurement quality."
+            },
+            {
+              "title": "Review with the grower",
+              "description": "Connect trends to field observations and recorded activity."
+            }
+          ]
+        },
+        "isDraft": false,
+        "design": {}
+      },
+      {
+        "id": "189d75f0-e0e6-438e-8d7e-bba9930b7e0f",
+        "type": "PRODUCT_CARD",
+        "isDraft": false,
+        "design": {},
+        "content": {
+          "eyebrow": "EXPLORE THE DEVICE RANGE",
+          "heading": "Devices for your monitoring plan.",
+          "description": "Explore relevant devices, then confirm the model and installation requirements with our team.",
+          "displayMode": "solution-tagged",
+          "columns": 3,
+          "productIds": []
+        }
+      },
+      {
+        "id": "e64a17a9-08b4-41b4-ab59-17f525b2e77f",
+        "type": "CTA",
+        "content": {
+          "heading": "Let’s connect your next step.",
+          "bodyText": "Tell us about your site, your team and the decisions you want to improve. We’ll help define the right monitoring scope.",
+          "primaryButtonText": "Talk to Najhum",
+          "primaryButtonLink": "/contact",
+          "secondaryButtonText": "Explore all solutions",
+          "secondaryButtonLink": "/solutions"
+        },
+        "isDraft": false,
+        "design": {}
+      }
+    ]
+  }
+]

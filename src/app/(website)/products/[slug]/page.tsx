@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   try {
     product = await prisma.product.findFirst({
       where: {
+        isDraft: false,
         OR: [
           { id: slug },
           { name: { equals: decoded.replace(/-/g, " "), mode: "insensitive" } },
@@ -49,6 +50,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   try {
     dbProduct = await prisma.product.findFirst({
       where: {
+        isDraft: false,
         OR: [
           { id: slug },
           { name: { equals: decoded.replace(/-/g, " "), mode: "insensitive" } },

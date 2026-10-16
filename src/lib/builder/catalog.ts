@@ -1,4 +1,5 @@
 import industrySolutions from '@/content/industry-solutions.json';
+import expandedSolutions from '@/content/expanded-solutions.json';
 import { SectionType } from '@/types/section';
 import type { BuilderDocument, BuilderSection, BuilderProduct } from './document';
 import { defaultSolaasContent } from '@/content/solaas';
@@ -149,7 +150,7 @@ export const sectionPresets = [
   { id: 'faded-image-cards', label: 'Faded image cards · About style', description: 'Pale blue cards with photography fading behind text · 4:3', mark: '▧', content: { eyebrow: 'CONNECTED POSSIBILITIES', heading: 'Designed for your everyday operations', bodyHtml: '<p>Introduce your key applications with the same image-led cards used on our About page.</p>', layout: 'faded-image-cards', theme: 'light', headingAlign: 'center', mediaRatio: '4:3', columns: 3, entries: [
     { title: 'Connected spaces', description: 'Understand your environment and help every space work better.', image: '', imageAlt: 'Connected workplace', link: '/contact', linkText: 'Explore the possibilities' },
     { title: 'Smarter assets', description: 'Know what your equipment needs before small changes become bigger problems.', image: '', imageAlt: 'Connected equipment', link: '/contact', linkText: 'Discuss your assets' },
-    { title: 'Clearer decisions', description: 'Give your team a shared view of the information that matters.', image: '', imageAlt: 'Operations team', link: '/demo', linkText: 'Explore the platform' },
+    { title: 'Clearer decisions', description: 'Give your team a shared view of the information that matters.', image: '', imageAlt: 'Operations team', link: '/contact', linkText: 'Explore the platform' },
   ] } },
   { id: 'image-banner', label: 'Background image · full overlay', description: 'Full-width photography, readable overlay, and optional action · 16:9', mark: '▣', content: { layout: 'image-banner', eyebrow: 'SEE THE BIGGER PICTURE', heading: 'Your entire operation. One connected view.', bodyHtml: '<p>Bring a key benefit into focus with a large photograph and a short, clear message.</p>', backgroundImage: '', imageAlt: '', overlayStyle: 'full', theme: 'dark', headingAlign: 'left', buttonText: 'Discuss your project', buttonLink: '/contact', entries: [] } },
   { id: 'image-banner-side', label: 'Background image · side fade', description: 'A soft image fade beside your content · 16:9', mark: '◧', content: { layout: 'image-banner', eyebrow: 'BUILT AROUND YOUR TEAM', heading: 'Better visibility starts here.', bodyHtml: '<p>Let a photograph set the scene while your message stays easy to read.</p>', backgroundImage: '', imageAlt: '', overlayStyle: 'side', theme: 'soft', headingAlign: 'left', buttonText: 'Talk to our team', buttonLink: '/contact', entries: [] } },
@@ -227,11 +228,21 @@ export const pageTemplates = [
   { id: 'cold-storage', label: 'Cold chain intelligence', description: 'Editorial image strip, cold-room photo cards, side-fade storytelling and practical FAQs.' },
   { id: 'industrial', label: 'Industrial & manufacturing', description: 'Immersive hero, production image cards, a three-column table and plant-wide imagery.' },
   { id: 'energy-monitoring', label: 'Energy monitoring', description: 'Light photo hero, an energy image mosaic, faded application cards and an evidence-led story.' },
+  { id: "smart-cities", label: "Smart Cities", description: "Connect public spaces, utilities and everyday services with IoTRICS. Help city teams see changing conditions, prioritise work and coordinate across the district." },
+  { id: "air-quality", label: "Air Quality Monitoring", description: "Bring indoor comfort and outdoor environmental measurements into view. Give facilities teams the context to investigate conditions and review ventilation performance." },
+  { id: "construction-safety", label: "Construction Site Safety", description: "Bring worker support, site conditions and incident information into one operational picture. Help supervisors coordinate checks, communications and follow-up across active projects." },
+  { id: "smart-parking", label: "Smart Parking", description: "Connect parking occupancy, guidance and charging-bay information. Help operators understand demand and give drivers a clearer path through busy destinations." },
+  { id: "waste-management", label: "Smart Waste Management", description: "Bring collection-point conditions and service records into view. Help operations teams prioritise visits around demand across buildings, campuses and public spaces." },
+  { id: "silo-monitoring", label: "Silo & Storage Monitoring", description: "Connect level readings and storage events across your operation. Give procurement and site teams a clearer basis for replenishment, inspections and capacity planning." },
+  { id: "esg-sustainability", label: "ESG & Sustainability", description: "Connect energy, water and environmental data around your sustainability programme. Build a consistent operating baseline and keep the context behind each improvement." },
+  { id: "ev-charging", label: "EV Charging Solutions", description: "Plan charging around your property, drivers and operating model. Connect compatible chargers, session management and service workflows through EVOLTICS." },
+  { id: "smart-irrigation", label: "Smart Irrigation", description: "Connect irrigation schedules, valve control and field conditions with CropifAI. Give growers and landscape teams a clearer way to manage watering across zones." },
+  { id: "precision-farming", label: "Precision Farming", description: "Bring field observations, environmental data and irrigation activity into one crop-management picture. Help growers compare zones and make decisions with better context." },
 ] as const;
 export type PageTemplateId = typeof pageTemplates[number]['id'];
 
 export function makeTemplate(kind: PageTemplateId, products: BuilderProduct[] = []): BuilderSection[] {
-  const imported = industrySolutions.find(solution => solution.slug === kind);
+  const imported = [...industrySolutions, ...expandedSolutions].find(solution => solution.slug === kind);
   if (imported) return structuredClone(imported.sections).map(section => ({ ...section, id: crypto.randomUUID(), type: section.type as SectionType }));
   const visualTemplates: Partial<Record<PageTemplateId, (SectionType | SectionPresetId)[]>> = {
     'visual-overview': ['hero-split', 'overlay-cards', 'split-stories', 'video-cards', 'image-cards', 'statistics', 'faq', SectionType.CTA],

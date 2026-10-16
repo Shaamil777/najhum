@@ -1,0 +1,2687 @@
+[
+  {
+    "key": "stld",
+    "id": "45ca0e06-3a99-5063-9fb0-0c7db11ffb01",
+    "name": "Najhum Spread-Type Leakage Sensor",
+    "description": "A LoRaWAN leak sensor with a reusable flexible membrane for monitoring conductive liquids across a wider surface.",
+    "features": [
+      "Flexible printed detection membrane",
+      "Local event history and retransmission",
+      "NFC configuration",
+      "IoTRICS D2D support",
+      "IP67 enclosure"
+    ],
+    "details": {
+      "model": "STLD",
+      "overview": "A LoRaWAN leak sensor with a reusable flexible membrane for monitoring conductive liquids across a wider surface. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN; IoTRICS D2D",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Detection film",
+          "value": "400 × 400 × 0.25 mm; custom sizes available",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Trigger condition",
+          "value": "Liquid contact length greater than 1.5 cm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "1 × 4000 mAh ER18505 battery; expandable to two",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Event storage",
+          "value": "1000 records",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-30°C to +70°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "105.6 × 85.3 × 27 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Building leak detection",
+        "Plant rooms",
+        "Water-sensitive equipment areas"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "hospitality",
+      "smart-cities"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Leak Sensor_STLD-datasheet-en.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Leak Sensor_STLD-datasheet-en.pdf": "e1a5407c175b1a5d06c9328f4d78d96f38fffaf3dd6395211c404e58ccb6e60d"
+    }
+  },
+  {
+    "key": "nu03-controller",
+    "id": "f5314d30-624c-59f2-94d7-d9382fb48f1d",
+    "name": "Najhum Ultrasonic Fuel Level Sensor with Controller",
+    "description": "Externally mounted ultrasonic liquid-level measurement for fuel tanks and storage containers, with LoRaWAN or NB-IoT communication options.",
+    "features": [
+      "Non-contact measurement through the container wall",
+      "External adhesive installation",
+      "Metal housing with potted electronics",
+      "Interference filtering and compensation",
+      "Millimetre measurement resolution"
+    ],
+    "details": {
+      "model": "NU03",
+      "overview": "Externally mounted ultrasonic liquid-level measurement for fuel tanks and storage containers, with LoRaWAN or NB-IoT communication options. The brochure measurements depend on container material, wall thickness and liquid. Confirm the tank and liquid before selecting this externally mounted system.",
+      "specs": [
+        {
+          "property": "Measurement range",
+          "value": "70–2000 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Accuracy",
+          "value": "≤5 mm under the brochure test conditions",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Resolution",
+          "value": "≤1 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Reference angle",
+          "value": "3–6°",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Container thickness",
+          "value": "4–7 mm; material-dependent",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Communication",
+          "value": "LoRaWAN / NB-IoT",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-15°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Vehicle fuel monitoring",
+        "Liquid storage tanks",
+        "Container water level"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "industrial",
+      "silo-monitoring",
+      "energy-monitoring"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum Fuel Sensor with Controller.pdf",
+      "Najhum Wireless Level Sensor.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum Fuel Sensor with Controller.pdf": "ff43434efb47ee2199a96fc817b9cf7b31dfdf87b19f8370e40aaf3cef0a35b0",
+      "Najhum Wireless Level Sensor.pdf": "15d52d46cd9a889b19ed5332d90c6786546432906accadb9c5f8e70f5d0bcdee"
+    }
+  },
+  {
+    "key": "ntgs301",
+    "id": "8820094b-cc8c-587d-ab85-32923cb82196",
+    "name": "Najhum Bathroom Odor Detector",
+    "description": "A four-in-one LoRaWAN detector for ammonia, hydrogen sulfide, temperature and humidity in washrooms and service areas.",
+    "features": [
+      "Electrochemical NH3 and H2S sensing",
+      "LED and buzzer threshold alerts",
+      "Wireless battery operation",
+      "NFC setup",
+      "D2D ventilation-control integration"
+    ],
+    "details": {
+      "model": "NTGS301",
+      "overview": "A four-in-one LoRaWAN detector for ammonia, hydrogen sulfide, temperature and humidity in washrooms and service areas. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Ammonia range",
+          "value": "0–10 ppm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Hydrogen sulfide range",
+          "value": "0–5 ppm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature sensing",
+          "value": "-40°C to +85°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Humidity sensing",
+          "value": "0–100% RH",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "4 × 4000 mAh ER18505 replaceable batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-40°C to +55°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "120 × 85 × 32.5 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Smart washrooms",
+        "Hospitality facilities",
+        "Public-building service areas"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "hospitality",
+      "facilities-management",
+      "smart-cities",
+      "air-quality"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum Odor Sensor.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum Odor Sensor.pdf": "4235ebff1def189a8cdcfc79c31ee053b6ec410ba33dd23e4599dad95d3ff59c"
+    }
+  },
+  {
+    "key": "nt410-rdr",
+    "id": "4e1fa7e5-6171-5fd0-82d3-e87e6a510ea3",
+    "name": "Najhum Radar Distance & Level Sensor",
+    "description": "A non-contact 60 GHz radar sensor for liquid and smooth-surface level measurement, with LoRaWAN and cellular variants.",
+    "features": [
+      "Narrow 8° radar beam",
+      "Tilt monitoring",
+      "Radar echo diagnostics",
+      "Local history and retransmission",
+      "NFC or Bluetooth setup",
+      "PVDF enclosure"
+    ],
+    "details": {
+      "model": "NT410-RDR",
+      "overview": "A non-contact 60 GHz radar sensor for liquid and smooth-surface level measurement, with LoRaWAN and cellular variants. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Measurement range",
+          "value": "0.3–12 m",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Radar frequency",
+          "value": "60 GHz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Accuracy",
+          "value": "Up to ±2 mm on still liquids or smooth flat targets",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Resolution",
+          "value": "1 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Communication",
+          "value": "LoRaWAN or LTE Cat-1, depending on variant",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "19000 mAh ER34615 battery",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP68; 1 m underwater for 48 hours",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "Ø100 × 92.2 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Water tanks",
+        "Sewers and reservoirs",
+        "Liquid storage"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "silo-monitoring",
+      "smart-cities",
+      "industrial"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum Radar level.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum Radar level.pdf": "ace4a3bf23547b51aaaa8259402a07f02b6d24a8619f6227ba7a5c077fb2223c"
+    }
+  },
+  {
+    "key": "qt-02f08",
+    "id": "9fb469f6-02f9-5d39-9389-f88984c0763c",
+    "name": "Najhum Solar Smart Valve Controller",
+    "description": "A solar-powered 4G valve controller for remote irrigation control, with operating-status feedback and optional pressure and flow monitoring.",
+    "features": [
+      "Remote app or computer control",
+      "Solar and battery power",
+      "Water-shortage, low-battery and fault alarms",
+      "Optional flow meter",
+      "Valve opening and water-output control"
+    ],
+    "details": {
+      "model": "QT-02F08",
+      "overview": "A solar-powered 4G valve controller for remote irrigation control, with operating-status feedback and optional pressure and flow monitoring. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Connectivity",
+          "value": "4G LTE Cat-1",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Solar panel",
+          "value": "9 V / 2.2 W monocrystalline silicon",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "External supply",
+          "value": "DC 9–30 V / 4.5 W",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Torque",
+          "value": ">80 N·m",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Ball valve sizes",
+          "value": "DN25 / DN32 / DN40 / DN50",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Butterfly valve sizes",
+          "value": "DN50 / DN65",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +70°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Agricultural irrigation",
+        "Landscape irrigation",
+        "Remote valve control"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "cropifai"
+    ],
+    "solutions": [
+      "smart-irrigation",
+      "precision-farming",
+      "esg-sustainability"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum Smart Valve.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum Smart Valve.pdf": "1183b2372bec0971aeee2d10af872f67d7271ca28fcbf4f200c2740410a52421"
+    }
+  },
+  {
+    "key": "nv48",
+    "id": "e57b4b74-56c8-51ca-99dd-27dce55614c5",
+    "name": "Najhum 4G SOS GPS Bracelet",
+    "description": "A cellular personal-safety bracelet with SOS calling, fall detection, geo-fence alerts and multiple positioning methods.",
+    "features": [
+      "4G LTE Cat-1 connectivity",
+      "GPS, AGPS, LBS and Wi-Fi positioning",
+      "SOS and two-way voice calling",
+      "Fall alerts",
+      "90-day route history",
+      "Magnetic charging"
+    ],
+    "details": {
+      "model": "NV48A / NV48B",
+      "overview": "A cellular personal-safety bracelet with SOS calling, fall detection, geo-fence alerts and multiple positioning methods. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Chipset",
+          "value": "ASR3603S",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Connectivity",
+          "value": "LTE Cat-1; regional NV48A and NV48B variants",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "GPS accuracy",
+          "value": "5–15 m under stated conditions",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Battery",
+          "value": "1000 mAh",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "65 × 42 × 20 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Weight",
+          "value": "73 g",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +70°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Lone-worker support",
+        "Assisted living",
+        "Campus safety"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "construction-safety",
+      "industrial",
+      "facilities-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_4G_SOS_GPS_Bracelet_NV48.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_4G_SOS_GPS_Bracelet_NV48.pdf": "1da7dff3ef0d27d4650afd63c1dd092b2ba22421c85e6db1d776e2478ffa93f4"
+    }
+  },
+  {
+    "key": "na80-pro",
+    "id": "203faf0a-2678-5adc-be48-47e54b9591d7",
+    "name": "Najhum 4G Smart Watch NA80 Pro",
+    "description": "An LTE wristwatch with voice and video calling, GPS and activity and wellness sensing for connected workforce and personal-support applications.",
+    "features": [
+      "4G HD video calling",
+      "GPS and Wi-Fi connectivity",
+      "Heart-rate and SpO2 sensing",
+      "Step and activity tracking",
+      "Magnetic charging",
+      "IP67 enclosure"
+    ],
+    "details": {
+      "model": "NA80 Pro",
+      "overview": "An LTE wristwatch with voice and video calling, GPS and activity and wellness sensing for connected workforce and personal-support applications. Blood-pressure values are indicative and not intended for clinical diagnostic use. Actual runtime depends on connectivity and usage.",
+      "specs": [
+        {
+          "property": "Chipset",
+          "value": "ASR8601C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Display",
+          "value": "1.83-inch IPS; 240 × 284",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Camera",
+          "value": "0.3 MP front camera",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Battery",
+          "value": "800 mAh Li-polymer",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Standby",
+          "value": "2–3 days, as stated in brochure",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Calling time",
+          "value": "5–6 hours",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Weight",
+          "value": "54 g",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Field workforce communications",
+        "Personal-safety support",
+        "Activity and wellness monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "construction-safety",
+      "industrial"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_4G_Smart_Watch_NA80_Pro.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_4G_Smart_Watch_NA80_Pro.pdf": "4106de5fdf1ac19b5a624b201ccef12f9b9ad5367e48da2e8a28314ee6747a4f"
+    }
+  },
+  {
+    "key": "ntj3g",
+    "id": "647da1e0-4f51-505b-b614-28c4f7ce8cc6",
+    "name": "Najhum 4G Smartwatch",
+    "description": "A BLE 5.2 and LTE Cat-1 wearable with GPS/BeiDou positioning, NFC and activity and wellness data access through SDK/API integration.",
+    "features": [
+      "BLE beacon broadcasting",
+      "GPS and BeiDou positioning",
+      "NFC card emulation",
+      "Heart-rate, SpO2 and skin-temperature sensing",
+      "SOS button",
+      "Raw PPG and accelerometer access"
+    ],
+    "details": {
+      "model": "NTJ3G",
+      "overview": "A BLE 5.2 and LTE Cat-1 wearable with GPS/BeiDou positioning, NFC and activity and wellness data access through SDK/API integration. Skin temperature is a surface measurement. Blood-pressure estimates are indicative and not for clinical diagnosis. Confirm regional cellular bands and the intended integration.",
+      "specs": [
+        {
+          "property": "Chipset",
+          "value": "Nordic NRF52840 with LTE Cat-1 module",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Bluetooth",
+          "value": "BLE 5.2",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Display",
+          "value": "1.54-inch TFT IPS; 240 × 240",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "NFC",
+          "value": "13.56 MHz; M1 card emulation",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Battery",
+          "value": "600–650 mAh",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "HRV/RRI sampling",
+          "value": "25 Hz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Skin-temperature range",
+          "value": "35–42°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP68",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Lone-worker support",
+        "Campus access integration",
+        "Workforce wellness data"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "construction-safety",
+      "industrial",
+      "facilities-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_4G_Smartwatch_NTJ3G.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_4G_Smartwatch_NTJ3G.pdf": "a15aa4e2ca68da68d489c2db221518d43ebef806cc19ef6a7f03145b6029ea33"
+    }
+  },
+  {
+    "key": "nt321",
+    "id": "3ea87b2f-9a7f-52cd-a6ea-e7b2035758e7",
+    "name": "Najhum AI Occupancy Sensor",
+    "description": "A battery-powered LoRaWAN occupancy sensor with people-counting and desk-occupancy modes, plus temperature, humidity and light sensing.",
+    "features": [
+      "AI-assisted occupancy detection",
+      "People-counting or desk-occupancy modes",
+      "No image collection",
+      "Environmental sensing",
+      "Local history and retransmission",
+      "D2D control integration"
+    ],
+    "details": {
+      "model": "NT321",
+      "overview": "A battery-powered LoRaWAN occupancy sensor with people-counting and desk-occupancy modes, plus temperature, humidity and light sensing. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN; Najhum D2D",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Field of view",
+          "value": "129° horizontal; 93° vertical",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Installation height",
+          "value": "2.4–4 m",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Required illumination",
+          "value": "50 lux",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Local storage",
+          "value": "2045 entries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "4 × 2700 mAh ER14505 batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "0–30°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "100 × 100 × 26 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Meeting rooms",
+        "Office occupancy",
+        "Campus space management"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "hospitality",
+      "smart-cities",
+      "air-quality"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_AI_Occupancy_Sensor_NT321.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_AI_Occupancy_Sensor_NT321.pdf": "d3c016d6d0a07dd7969e37bf3b74f7798f86014ea5559caf3a5a34f4e9ad836f"
+    }
+  },
+  {
+    "key": "airflow-pro-dual",
+    "id": "71c9581f-6dda-5d7a-8b08-c0a5be1671e0",
+    "name": "Najhum Airflow Pro Dual",
+    "description": "A dual differential-pressure LoRaWAN device for remote airflow and pressure monitoring in fan-coil units and ventilation systems.",
+    "features": [
+      "Two differential-pressure sensors",
+      "BLE configuration",
+      "LoRaWAN OTAA or ABP",
+      "Configurable measuring interval",
+      "Compact sealed ABS enclosure"
+    ],
+    "details": {
+      "model": "Airflow Pro Dual",
+      "overview": "A dual differential-pressure LoRaWAN device for remote airflow and pressure monitoring in fan-coil units and ventilation systems. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Differential-pressure range",
+          "value": "-500 to +500 Pa",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Pressure accuracy",
+          "value": "0.1 Pa + 3% of reading; temperature-dependent",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Compatible media",
+          "value": "Air, nitrogen, oxygen",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN; BLE 5.0 configuration",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "3 × AA 1.5 V batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "86 × 86 × 25.5 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Weight",
+          "value": "104 g",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "HVAC monitoring",
+        "Fan-coil units",
+        "Ventilation pressure monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "hospitality",
+      "energy-monitoring",
+      "air-quality"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Airflow_Pro_Dual_datasheet.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Airflow_Pro_Dual_datasheet.pdf": "07eaaa48d79f866b5f259c57d09a0f0680369fe3e66477d094bd0149f0892f95"
+    }
+  },
+  {
+    "key": "ntl01s",
+    "id": "62bf2723-82eb-58dd-bbe8-1034fefbdf40",
+    "name": "Najhum BLE Temperature & Humidity Sensor",
+    "description": "A BLE 5.1 environmental logger for cold-chain and storage monitoring, with local historical data and flexible mounting.",
+    "features": [
+      "Temperature and humidity sensing",
+      "60000 historical data groups",
+      "Replaceable battery",
+      "Built-in accelerometer",
+      "Sticker, screw, cable-tie or magnetic mounting"
+    ],
+    "details": {
+      "model": "NTL01S",
+      "overview": "A BLE 5.1 environmental logger for cold-chain and storage monitoring, with local historical data and flexible mounting. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Bluetooth",
+          "value": "BLE 5.1",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature range",
+          "value": "-20°C to +60°C; extended version -40°C to +80°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature accuracy",
+          "value": "±0.5°C from 0°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Humidity accuracy",
+          "value": "±2% RH from 20% to 80% RH",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Flash memory",
+          "value": "2 MB; 60000 data groups",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Battery",
+          "value": "2400 mAh replaceable",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "76.2 × 53.6 × 24 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Cold-chain logistics",
+        "Refrigerated storage",
+        "Greenhouse monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics",
+      "cropifai"
+    ],
+    "solutions": [
+      "cold-storage",
+      "hospitality",
+      "precision-farming"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_BLE_Temperature_Sensor_NTL01S.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_BLE_Temperature_Sensor_NTL01S.pdf": "f2a483eb9ad817cd6e82996892da46eed4ee2a3f0cce7b4c4875f1dd7d3a0252"
+    }
+  },
+  {
+    "key": "ntgw4",
+    "id": "eeb8e6d1-690d-55ab-a8a3-7bd5f1628bfb",
+    "name": "Najhum Cellular Gateway with GPS",
+    "description": "A rugged BLE-to-cellular gateway with GPS/BeiDou positioning, offline buffering and a backup battery for mobile monitoring deployments.",
+    "features": [
+      "BLE scanning and advertising",
+      "LTE Cat-1 and GSM uplink",
+      "GPS/BeiDou with LBS fallback",
+      "Offline data buffer",
+      "MQTT over SSL/TLS",
+      "OTA updates"
+    ],
+    "details": {
+      "model": "NTGW4",
+      "overview": "A rugged BLE-to-cellular gateway with GPS/BeiDou positioning, offline buffering and a backup battery for mobile monitoring deployments. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "BLE chipset",
+          "value": "Nordic nRF52840",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Bluetooth",
+          "value": "BLE 5.0",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "GNSS",
+          "value": "GPS + BeiDou",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Main input",
+          "value": "4.8–60 V DC",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Backup battery",
+          "value": "3200 mAh",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Memory",
+          "value": "32 MB",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67; IK09",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "122.4 × 72.9 × 33.8 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Logistics and fleet tracking",
+        "Cold-chain sensor aggregation",
+        "Remote asset monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "cold-storage",
+      "industrial",
+      "construction-safety"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Cellular_Gateway_with_GPS_NTGW4.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Cellular_Gateway_with_GPS_NTGW4.pdf": "1942ae9b2e4de48a0d3b027eeaf5e54b62f09df6e49db0be855c2e1d10f23cdd"
+    }
+  },
+  {
+    "key": "nt3xx",
+    "id": "065929cc-523b-5682-bdba-fbe2fff18cae",
+    "name": "Najhum High-Current Transformer",
+    "description": "A self-powered LoRaWAN current-monitoring system for 500 A and 1000 A applications, with threshold alarms and optional cable-temperature sensing.",
+    "features": [
+      "Non-invasive clamp format",
+      "Induced-current power",
+      "RMS current reporting",
+      "Optional NTC cable-temperature sensor",
+      "Three-phase monitoring support"
+    ],
+    "details": {
+      "model": "NT305 / NT310",
+      "overview": "A self-powered LoRaWAN current-monitoring system for 500 A and 1000 A applications, with threshold alarms and optional cable-temperature sensing. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Current variants",
+          "value": "NT305: 500 Arms; NT310: 1000 Arms",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Accuracy",
+          "value": "±1%",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Sampling",
+          "value": "3.3 kHz; 50–60 Hz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Resolution",
+          "value": "1 mA",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Start current",
+          "value": "NT305: 30 Arms; NT310: 60 Arms",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN Class A",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "Induced current",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Industrial circuits",
+        "Building energy monitoring",
+        "Motor-current trends"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "energy-monitoring",
+      "industrial",
+      "esg-sustainability"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Current TRX_Nt3xx-datasheet-en.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Current TRX_Nt3xx-datasheet-en.pdf": "f7b94eadbacf2922cae75b0197ac0490c9a2c6d3076c536e3fa533b1059a83ff"
+    }
+  },
+  {
+    "key": "ld301",
+    "id": "e8a8b3c4-7155-5f34-91a8-b0865c4289a4",
+    "name": "Najhum Magnetic Contact Switch",
+    "description": "A compact LoRaWAN door and window contact sensor with open/close and mounting-tamper alerts.",
+    "features": [
+      "Magnetic open/close detection",
+      "Tamper detection",
+      "NFC configuration",
+      "Replaceable battery",
+      "D2D control support"
+    ],
+    "details": {
+      "model": "LD301",
+      "overview": "A compact LoRaWAN door and window contact sensor with open/close and mounting-tamper alerts. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Detection distance",
+          "value": "10–15 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN; LoRa D2D",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "1200 mAh ER14250 battery",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP20",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Sensor dimensions",
+          "value": "50.5 × 31 × 18.5 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Magnet dimensions",
+          "value": "30 × 13.5 × 10 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Doors and windows",
+        "Cold-room access events",
+        "Cabinet monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "cold-storage",
+      "hospitality"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_DoorSensor_LD301-datasheet-en.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_DoorSensor_LD301-datasheet-en.pdf": "db9fc27c44fad9b28833e0c070a4aba7cdc26fca1dfe6257156f27c320ff34fc"
+    }
+  },
+  {
+    "key": "nt308",
+    "id": "5f3a8f14-536c-5d69-94f0-5c18cd4b20b4",
+    "name": "Najhum Indoor Ambience Sensor",
+    "description": "A nine-in-one LoRaWAN indoor environment sensor with E-ink display, local threshold alerts and environmental data logging.",
+    "features": [
+      "CO2, TVOC, PM2.5 and PM10 sensing",
+      "Temperature and humidity sensing",
+      "Pressure, light and motion readings",
+      "E-ink comfort display",
+      "LED and buzzer alerts",
+      "Local history and retransmission"
+    ],
+    "details": {
+      "model": "NT308",
+      "overview": "A nine-in-one LoRaWAN indoor environment sensor with E-ink display, local threshold alerts and environmental data logging. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "CO2 range",
+          "value": "400–5000 ppm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Particulate range",
+          "value": "0–1000 μg/m³",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature range",
+          "value": "-20°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Humidity range",
+          "value": "0–100% RH",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Pressure range",
+          "value": "260–1260 hPa",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Display",
+          "value": "4.2-inch black-and-white E-ink",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Data storage",
+          "value": "18000 entries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "4 × ER14505 batteries or USB Type-C 5 V / 1 A",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Offices and classrooms",
+        "Hospitality environments",
+        "Indoor air-quality monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "air-quality",
+      "facilities-management",
+      "hospitality",
+      "esg-sustainability"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Indoor_Ambience_Sensor  .pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Indoor_Ambience_Sensor  .pdf": "f718b720ea51e8c3184d278ec53586a8e04f33fbb7c010ef5343dc5d791d6984"
+    }
+  },
+  {
+    "key": "nt100",
+    "id": "9acacfc0-aef7-57ef-9c8f-699d22d7b0ea",
+    "name": "Najhum IoT Controller",
+    "description": "A LoRaWAN controller for connecting Modbus RS485 equipment to remote monitoring and control workflows.",
+    "features": [
+      "Up to 32 Modbus RTU registers",
+      "Modbus-to-LoRaWAN passthrough",
+      "Local trigger rules",
+      "800-entry local history",
+      "D2D integration",
+      "FUOTA support"
+    ],
+    "details": {
+      "model": "NT100",
+      "overview": "A LoRaWAN controller for connecting Modbus RS485 equipment to remote monitoring and control workflows. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN Class C; Najhum D2D",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Data interface",
+          "value": "1 × RS485",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protocol",
+          "value": "Modbus RTU; passthrough",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Baud rate",
+          "value": "1200–115200 bps",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "5–24 V DC or USB Type-C 5 V / 1 A",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Consumption",
+          "value": "<0.5 W",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "70 × 45 × 13 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Smart metering",
+        "Building automation",
+        "Connected urban infrastructure"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "smart-cities",
+      "facilities-management",
+      "industrial",
+      "energy-monitoring"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_IoT_Controller.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_IoT_Controller.pdf": "dc6be256b6609b931f32ccf50a227dbb6d26e6c083c7d6d900ff5dfbe65fd028"
+    }
+  },
+  {
+    "key": "ntj3lw",
+    "id": "04749c99-fe9d-56f8-8e96-c085c2171885",
+    "name": "Najhum LoRaWAN Smartwatch",
+    "description": "A BLE and LoRaWAN wearable with GPS, SOS and activity and wellness sensing for site-based connected monitoring.",
+    "features": [
+      "LoRaWAN uplink",
+      "BLE 5.2 connectivity",
+      "SOS button",
+      "Heart-rate and SpO2 sensing",
+      "Skin-temperature sensing",
+      "SDK/API access"
+    ],
+    "details": {
+      "model": "NTJ3LW",
+      "overview": "A BLE and LoRaWAN wearable with GPS, SOS and activity and wellness sensing for site-based connected monitoring. The brochure’s seven-day battery figure excludes GPS and LoRa use. Blood-pressure values are indicative and not intended for clinical diagnosis.",
+      "specs": [
+        {
+          "property": "Chipset",
+          "value": "Nordic NRF52840; Semtech LoRaWAN module",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "LoRaWAN bands",
+          "value": "868 / 915 / 923 MHz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Display",
+          "value": "1.54-inch TFT; 240 × 240; no touchscreen",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Battery",
+          "value": "600 mAh",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "HRV/RRI sampling",
+          "value": "25 Hz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Skin-temperature range",
+          "value": "36–42°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP68",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "42.5 × 53 × 16.5 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Site workforce support",
+        "Institutional wellness monitoring",
+        "Lone-worker support"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "construction-safety",
+      "industrial"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_LoRaWAN_Smartwatch_NTJ3LW.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_LoRaWAN_Smartwatch_NTJ3LW.pdf": "fb56101ecec0fb7ce0b732343d2716f12472cd2d887a3119dd6fffcbdfd50208"
+    }
+  },
+  {
+    "key": "nt50x",
+    "id": "a1479d8d-a4a1-53b5-8a16-b2936c7525eb",
+    "name": "Najhum LoRaWAN Wall Switch",
+    "description": "A LoRaWAN wall switch for local and remote appliance control, with electrical measurements and overload protection.",
+    "features": [
+      "Local and remote switching",
+      "Energy measurement",
+      "Overload protection",
+      "D2D sensor-triggered control",
+      "Multicast group control",
+      "One- and two-gang variants"
+    ],
+    "details": {
+      "model": "NT501 / NT502 / NT501-US",
+      "overview": "A LoRaWAN wall switch for local and remote appliance control, with electrical measurements and overload protection. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Supply",
+          "value": "100–250 VAC; 50–60 Hz; neutral required",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Load",
+          "value": "Up to 1000 W per gang; 2000 W total",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Current",
+          "value": "Resistive: 10 A per gang; 10 A total",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Measured values",
+          "value": "Voltage, current, power factor, active power, energy",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Typical measurement accuracy",
+          "value": "±3%; maximum ±5%",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN Class C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP20",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Hotel lighting",
+        "Office automation",
+        "Building energy management"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "hospitality",
+      "energy-monitoring"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_LoRaWAN_Wall_Switch_NT50x.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_LoRaWAN_Wall_Switch_NT50x.pdf": "0f5d813bbac52726ab672b0ddf2fb4c1cc52b80c67b4096b0e2c78f73b832242"
+    }
+  },
+  {
+    "key": "nt650",
+    "id": "c0ded1dc-3363-5e0c-95e2-2a0cb53d9495",
+    "name": "Najhum RF Zone Protector",
+    "description": "A programmable radio-frequency detection device for monitoring restricted wireless activity across defined areas.",
+    "features": [
+      "127 programmable detection channels",
+      "Adjustable detection radius",
+      "Audio, visual and relay alerts",
+      "Standalone or networked operation",
+      "Browser-based configuration",
+      "PoE or AC supply"
+    ],
+    "details": {
+      "model": "NT650",
+      "overview": "A programmable radio-frequency detection device for monitoring restricted wireless activity across defined areas. Confirm the selected variant, installation environment and reporting requirements before ordering.",
+      "specs": [
+        {
+          "property": "Frequency range",
+          "value": "20 MHz–6 GHz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Detection channels",
+          "value": "127",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Detection radius",
+          "value": "Adjustable 1.5–45 m; environment-dependent",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protocols",
+          "value": "Cellular, Wi-Fi and Bluetooth detection",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power options",
+          "value": "PoE, AC adapter; optional rechargeable battery",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "235 × 165 × 30 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Weight",
+          "value": "0.36 kg",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "0°C to +54°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Restricted wireless zones",
+        "Corporate facilities",
+        "Industrial security areas"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "industrial"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_RF_Zone_Protector_NT650.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_RF_Zone_Protector_NT650.pdf": "4fbf7fd3b8cf2c9896b9d485bcb8121874131b61e9156e206f6c629f0c2660e7"
+    },
+    "sourceNotes": "Coverage depends on configuration and the RF environment. The unrelated people-counting table on page 3 of the supplied brochure is excluded from these specifications."
+  },
+  {
+    "key": "nt370",
+    "id": "a2e5f015-bea2-5474-a77d-7f720cc645a7",
+    "name": "Najhum Radar Presence Sensor",
+    "description": "A LoRaWAN presence sensor combining millimetre-wave radar and PIR for camera-free occupancy sensing and room automation.",
+    "features": [
+      "24 GHz radar and PIR detection",
+      "Slight-movement detection",
+      "No image or video capture",
+      "D2D lighting and HVAC integration",
+      "Adjustable magnetic bracket"
+    ],
+    "details": {
+      "model": "NT-370",
+      "overview": "A LoRaWAN presence sensor combining millimetre-wave radar and PIR for camera-free occupancy sensing and room automation. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Radar frequency",
+          "value": "24 GHz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Radar field",
+          "value": "150°",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Radar detection",
+          "value": "Movement: 7.5 m; slight movement: 4.8 m",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "PIR field",
+          "value": "110°; within 7 m",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "2 × 2700 mAh ER14505 batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "0–30°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Body dimensions",
+          "value": "Ø70 × 48.5 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Meeting rooms",
+        "Guest rooms",
+        "Smart-building occupancy"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "hospitality",
+      "air-quality"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Radar_Presence_Sensor_NT-370.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Radar_Presence_Sensor_NT-370.pdf": "0a86b74a281a6a69427973135613a3de0765b27557d275dbd9cd4aa9e8f0ebf5"
+    }
+  },
+  {
+    "key": "nt201",
+    "id": "5ab657f5-e526-512a-9f41-1a55b2572767",
+    "name": "Najhum Smart Thermostat",
+    "description": "A LoRaWAN HVAC controller for compatible 24 VAC systems, with scheduling, temperature and humidity sensing and remote management.",
+    "features": [
+      "Heat, emergency heat, cool and auto modes",
+      "Auto, on and circulate fan modes",
+      "Local scheduling",
+      "Hotel-keycard dry-contact input",
+      "NFC setup",
+      "D2D control integration"
+    ],
+    "details": {
+      "model": "NT201",
+      "overview": "A LoRaWAN HVAC controller for compatible 24 VAC systems, with scheduling, temperature and humidity sensing and remote management. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Compatibility",
+          "value": "24 VAC HVAC; furnaces, ACs, heat pumps, boilers and PTAC",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Display",
+          "value": "4.2-inch backlit LCD",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature range",
+          "value": "-20°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Humidity range",
+          "value": "0–100% RH",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "24 VAC ±15%",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Consumption",
+          "value": "<1.2 W",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "113 × 110 × 21 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Hotel climate control",
+        "Office HVAC",
+        "Commercial building automation"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "hospitality",
+      "facilities-management",
+      "energy-monitoring"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Smart Thermostat.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Smart Thermostat.pdf": "7dfd59839756f7707dde0de82ac894ab0eddee3928c4a1813702ca3b491d4aaa"
+    }
+  },
+  {
+    "key": "nctx",
+    "id": "b49b8aee-e592-592f-8e32-2d2efafa8608",
+    "name": "Najhum Smart Current Transformer",
+    "description": "A self-powered LoRaWAN current-transformer family for non-invasive circuit monitoring, with 100 A, 250 A and 500 A variants.",
+    "features": [
+      "Split-core clamp installation",
+      "Induced-current power",
+      "RMS current reporting",
+      "Threshold and overrange alarms",
+      "Optional NTC temperature sensing",
+      "FUOTA support"
+    ],
+    "details": {
+      "model": "NCT101 / NCT103 / NCT105",
+      "overview": "A self-powered LoRaWAN current-transformer family for non-invasive circuit monitoring, with 100 A, 250 A and 500 A variants. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Rated current",
+          "value": "NCT101: 100 Arms; NCT103: 250 Arms; NCT105: 500 Arms",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Accuracy",
+          "value": "±1% above 5 Arms; ±3% at or below 5 Arms",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Sampling",
+          "value": "3.3 kHz; 50/60 Hz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Resolution",
+          "value": "1 mA",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "Induced current; backup 5 V USB Type-C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature option",
+          "value": "NTC: -20°C to +100°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +70°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Circuit monitoring",
+        "HVAC and cold-chain loads",
+        "Industrial energy management"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "energy-monitoring",
+      "industrial",
+      "esg-sustainability"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Smart_Current_Transformer_NCTx.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Smart_Current_Transformer_NCTx.pdf": "ea265c8e02a3ded34647d3ed3b432a5095791b3c644e06d897a6983cef9535c5"
+    }
+  },
+  {
+    "key": "nt400-rodent",
+    "id": "ec347f46-2a1f-54b2-b2f7-2d8e3918a297",
+    "name": "Najhum Smart Rodent Monitor",
+    "description": "A LoRa rodent-activity monitoring system combining motion, vibration and temperature sensing with gateway-based remote reporting.",
+    "features": [
+      "Rodent movement and catch alerts",
+      "Motion, vibration and temperature sensing",
+      "Floorplan and heatmap views",
+      "Multi-site monitoring",
+      "Gateway buffering during outages"
+    ],
+    "details": {
+      "model": "NT400 / NT-Connect",
+      "overview": "A LoRa rodent-activity monitoring system combining motion, vibration and temperature sensing with gateway-based remote reporting. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Radio",
+          "value": "LoRa 433 MHz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Sensor",
+          "value": "NT400 motion, shock/vibration and temperature",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Gateway",
+          "value": "NT-Connect",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "Replaceable 3.6 V Li-SOCl2 AA battery",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "60 × 64 × 22 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Weight",
+          "value": "57 g",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +85°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Pest-management monitoring",
+        "Food-storage facilities",
+        "Commercial buildings"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "hospitality",
+      "cold-storage",
+      "facilities-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Smart_Rodent_Monitor_NT400.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Smart_Rodent_Monitor_NT400.pdf": "90846fbfae2a6cd609efad167c7d63ea00480dd08828981117c7e6c64e0a5a9d"
+    }
+  },
+  {
+    "key": "nt-l28",
+    "id": "e7dac021-0e40-555a-89d5-17e775e51473",
+    "name": "Najhum Smart Watch NT-L28",
+    "description": "A 4G GPS smartwatch with two-way calling, SOS and activity and wellness sensing for personal and workforce support.",
+    "features": [
+      "4G LTE connectivity",
+      "GPS, BDS and GLONASS positioning",
+      "SOS and geo-fence alerts",
+      "Heart-rate and SpO2 sensing",
+      "ECG and temperature functions listed in brochure",
+      "Web dashboard support"
+    ],
+    "details": {
+      "model": "NT-L28",
+      "overview": "A 4G GPS smartwatch with two-way calling, SOS and activity and wellness sensing for personal and workforce support. Wellness measurements should not be presented as clinical diagnostic results. Runtime varies with cellular, location and sensing use.",
+      "specs": [
+        {
+          "property": "Display",
+          "value": "1.32-inch AMOLED; 466 × 466",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Processors",
+          "value": "Unisoc W307; GR5515 sensor hub",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Battery",
+          "value": "700 mAh",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Bluetooth",
+          "value": "BLE 5.0",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Wi-Fi",
+          "value": "802.11 b/g/n",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "Ø42.5 × 12.5 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Weight",
+          "value": "52.5 g",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Lone-worker support",
+        "Activity and wellness monitoring",
+        "Personal-safety communications"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "construction-safety",
+      "industrial"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Smart_Watch_NT-L28.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Smart_Watch_NT-L28.pdf": "770a8932c0645e83f4748fc12c96b9c89f696af8496fef8f785ccd5aebe45e2e"
+    }
+  },
+  {
+    "key": "th300",
+    "id": "28f39647-9c81-5254-9ec3-002d05beb74f",
+    "name": "Najhum Temperature & Humidity Sensor",
+    "description": "A compact LoRaWAN temperature and humidity sensor for indoor and outdoor environmental monitoring.",
+    "features": [
+      "Sensirion sensing technology",
+      "Replaceable battery",
+      "IP67 UV-resistant enclosure",
+      "NFC setup",
+      "Remote IoTRICS monitoring"
+    ],
+    "details": {
+      "model": "T&H300",
+      "overview": "A compact LoRaWAN temperature and humidity sensor for indoor and outdoor environmental monitoring. Confirm the selected variant, installation environment and reporting requirements before ordering.",
+      "specs": [
+        {
+          "property": "Temperature range",
+          "value": "-30°C to +70°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Temperature accuracy",
+          "value": "±0.3°C from 0°C to +70°C; ±0.6°C below 0°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Humidity range",
+          "value": "0–100% RH",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Humidity accuracy",
+          "value": "±3% from 10–90% RH; ±5% outside that range",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "4000 mAh ER18505; expandable to two batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "88.5 × 85.3 × 27 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Environmental monitoring",
+        "Greenhouses",
+        "Building and storage conditions"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics",
+      "cropifai"
+    ],
+    "solutions": [
+      "precision-farming",
+      "smart-irrigation",
+      "cold-storage",
+      "facilities-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_T^0H_datasheet-en.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_T^0H_datasheet-en.pdf": "8aa06c6235f2fa44bd161c64282d2454fe2a0be43cc40bfdf0a64ecc86bcdd5e"
+    },
+    "sourceNotes": "The supplied brochure lists different battery-life figures in its overview and table, so battery life is not stated here. Confirm the operating profile and selected battery configuration."
+  },
+  {
+    "key": "nt351",
+    "id": "40ba675d-65a6-504b-b7b5-c0109d497a27",
+    "name": "Najhum Thermopile People Counter",
+    "description": "A camera-free bidirectional people counter using thermopile sensing, with radar assistance on the battery version.",
+    "features": [
+      "Bidirectional people counting",
+      "Battery or Type-C variants",
+      "No image capture",
+      "D2D automation support",
+      "Local history and retransmission",
+      "Ceiling or lintel mounting"
+    ],
+    "details": {
+      "model": "NT351",
+      "overview": "A camera-free bidirectional people counter using thermopile sensing, with radar assistance on the battery version. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Technology",
+          "value": "Thermopile; radar on battery version",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Installation height",
+          "value": "2–3 m",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Detection width",
+          "value": "3.6 m at 3 m installation height",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Adjustable angle",
+          "value": "0–90°",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "5 V / 1 A USB Type-C; battery variant also uses 4 × 9000 mAh cells",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-20°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP30",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Entrances and exits",
+        "Retail visitor counting",
+        "Office occupancy"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "facilities-management",
+      "hospitality",
+      "smart-cities"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Thermopile_People_Counter_NT351.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Thermopile_People_Counter_NT351.pdf": "f230faac3739575e2f88f22b13f5238b49592aa08b96a5e42f58001e3d020881"
+    }
+  },
+  {
+    "key": "nts600",
+    "id": "1de95aa7-8b6c-5c53-9391-07a972ee385e",
+    "name": "Najhum UV/IR Flame Detector",
+    "description": "A point-type flame detector combining three infrared channels and ultraviolet sensing, with relay, analogue and RS485 outputs.",
+    "features": [
+      "Triple-IR and UV sensing",
+      "Automatic sensitivity adjustment",
+      "Flicker-frequency analysis",
+      "Relay, 4–20 mA and RS485 outputs",
+      "Die-cast aluminium housing"
+    ],
+    "details": {
+      "model": "NTS600",
+      "overview": "A point-type flame detector combining three infrared channels and ultraviolet sensing, with relay, analogue and RS485 outputs. Confirm the selected variant, installation environment and reporting requirements before ordering.",
+      "specs": [
+        {
+          "property": "IR spectrum",
+          "value": "4.4 μm primary; 5.3 μm and 3.8 μm suppression channels",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "UV spectrum",
+          "value": "185–260 nm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Response time",
+          "value": "<5 seconds under brochure conditions",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Working supply",
+          "value": "24 V DC",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Outputs",
+          "value": "Relay; 4–20 mA; RS485",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "190 × 160 × 110 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-10°C to +55°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Fuel storage",
+        "Industrial process areas",
+        "Plant and equipment monitoring"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "industrial",
+      "construction-safety",
+      "facilities-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_UV_IR_Flame_Detector_NT600.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_UV_IR_Flame_Detector_NT600.pdf": "7db6822d01845b43793c9cf22b262d941d23e9d8b41a85055fa40b691944b9c4"
+    },
+    "sourceNotes": "The brochure heading identifies NTS600 despite NT600 appearing in the filename and table label. Confirm the required hazardous-area approvals and installation specification for the project."
+  },
+  {
+    "key": "nt-u03",
+    "id": "6773c8cc-9cd5-5622-bd9f-cb5ca1bc184b",
+    "name": "Najhum Ultrasonic Level Sensor",
+    "description": "An externally mounted ultrasonic liquid-level sensor with wired output variants for tanks, generators and vehicle fuel systems.",
+    "features": [
+      "No tank penetration",
+      "Narrow ultrasonic beam",
+      "Metal-alloy housing",
+      "Serial and analogue variants",
+      "Adhesive and bracket mounting"
+    ],
+    "details": {
+      "model": "NT-U03",
+      "overview": "An externally mounted ultrasonic liquid-level sensor with wired output variants for tanks, generators and vehicle fuel systems. Confirm the selected variant, installation environment and reporting requirements before ordering.",
+      "specs": [
+        {
+          "property": "Measurement range",
+          "value": "50–1000 mm in detailed specification table",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Accuracy",
+          "value": "≤5 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Resolution",
+          "value": "≤1 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Beam angle",
+          "value": "2–4°",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Container wall",
+          "value": "0.6–5 mm; material-dependent",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Input",
+          "value": "12–48 V DC",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Outputs",
+          "value": "RS232, RS485, or 0–5 V with TTL-UART",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-15°C to +60°C",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Vehicle fuel tanks",
+        "Generator reserves",
+        "Liquid storage"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "industrial",
+      "silo-monitoring",
+      "energy-monitoring"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Ultrasonic_Level_Sensor_NT-U03.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Ultrasonic_Level_Sensor_NT-U03.pdf": "a4ffd14b71f20b243ca1bf02030f8bcc871d9d60dd1c8553f3aeb2a8decf2267"
+    },
+    "sourceNotes": "The cover header states 50–2000 mm, while the detailed specifications state 50–1000 mm. The detailed-table range is shown here; confirm the chosen variant and tank before ordering."
+  },
+  {
+    "key": "nt800-system",
+    "id": "b14009c0-ee76-5c58-9a40-1c0abcf2ed5e",
+    "name": "Najhum Wireless Gas Detection System",
+    "description": "A combustible-gas monitoring system combining wireless NT800 detectors with the NT6000 II multi-point alarm controller.",
+    "features": [
+      "Infrared combustible-gas detection",
+      "LoRa communication",
+      "Magnetic detector mounting",
+      "Two-level concentration alarms",
+      "Controller LCD and alarm-event history",
+      "Relay and RS485 integration"
+    ],
+    "details": {
+      "model": "NT800 + NT6000 II",
+      "overview": "A combustible-gas monitoring system combining wireless NT800 detectors with the NT6000 II multi-point alarm controller. Detector and controller have different interfaces and power requirements. Confirm the selected wiring or wireless topology and approvals for the installation.",
+      "specs": [
+        {
+          "property": "Detected gases",
+          "value": "Methane, propane and isobutane",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Range",
+          "value": "3–100% LEL",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Accuracy",
+          "value": "±3% FS",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Detector response",
+          "value": "<30 seconds",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Alarm thresholds",
+          "value": "20% LEL low; 50% LEL high",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Detector power",
+          "value": "3.6 V; 2 × 19000 mAh lithium batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Controller power",
+          "value": "220 V AC ±15%; 50 Hz",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Controller history",
+          "value": "Up to 65000 events",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Controller upstream",
+          "value": "RS485",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Combustible-gas monitoring",
+        "Fuel and LPG facilities",
+        "Industrial plant areas"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "industrial",
+      "construction-safety",
+      "facilities-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Najhum_Wireless_Gas_Detection_System_NT800_NT6000II.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Najhum_Wireless_Gas_Detection_System_NT800_NT6000II.pdf": "61c8e18fc58edcbb231e3e0b3ee5a2b0eec98ce346ce8f55d94dc6d684c44354"
+    }
+  },
+  {
+    "key": "nt400-udl",
+    "id": "a0522971-0141-53f9-995d-2ae94bc3d273",
+    "name": "Najhum Non-Contact Ultrasonic Distance Sensor",
+    "description": "A LoRaWAN ultrasonic distance and level sensor with selectable probes for water tanks and static or slow-flowing water bodies.",
+    "features": [
+      "Selectable range probes",
+      "Tilt-status monitoring",
+      "NTC temperature sensing",
+      "NFC setup",
+      "Threshold alarms",
+      "Replaceable batteries"
+    ],
+    "details": {
+      "model": "NT400-UDL",
+      "overview": "A LoRaWAN ultrasonic distance and level sensor with selectable probes for water tanks and static or slow-flowing water bodies. Review the installation environment, network region and selected variant with our team before ordering.",
+      "specs": [
+        {
+          "property": "Standard probes",
+          "value": "C050: 25–500 cm; C100: 25–1000 cm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Pro probes",
+          "value": "W050: 30–500 cm; W100: 50–1000 cm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Resolution",
+          "value": "1 mm",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Connectivity",
+          "value": "LoRaWAN Class A",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Power",
+          "value": "2 × 9000 mAh ER26500 batteries",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Operating temperature",
+          "value": "-30°C to +70°C",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Protection",
+          "value": "IP67",
+          "unit": "",
+          "remarks": ""
+        },
+        {
+          "property": "Dimensions",
+          "value": "118 × 65 × 80 mm",
+          "unit": "",
+          "remarks": ""
+        }
+      ],
+      "applications": [
+        "Water-level monitoring",
+        "Tank fill levels",
+        "Urban drainage infrastructure"
+      ],
+      "images": []
+    },
+    "platforms": [
+      "iotrics"
+    ],
+    "solutions": [
+      "silo-monitoring",
+      "smart-cities",
+      "waste-management"
+    ],
+    "imageUrl": "/products/product-image-placeholder.svg",
+    "sourceFiles": [
+      "Non-Contact Ultrasonic Distance Sensor.pdf"
+    ],
+    "brochureUrl": null,
+    "sourceHashes": {
+      "Non-Contact Ultrasonic Distance Sensor.pdf": "d23e11ad0598a9e7506df9e4bb3e478aec63d0c3c2b8ba2f3d1096d15fa64110"
+    }
+  }
+]

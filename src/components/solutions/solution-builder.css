@@ -266,3 +266,8 @@
 /* Removed cards do not leave unoccupied desktop columns behind. */
 .solution-visual-grid[data-count="1"],.solution-faded-grid[data-count="1"] { grid-template-columns: minmax(0,1fr); }
 @media(min-width:640px) { .solution-visual-grid[data-count="2"]:not(.solution-layout-split-stories),.solution-faded-grid[data-count="2"] { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+
+/* Keep the first public hero clear of the floating mobile navigation. */
+@media (max-width: 767px) {
+  .solution-page > .solution-block:first-child > :is(.solution-hero, .solution-hero-faded) { padding-top: 112px; }
+}

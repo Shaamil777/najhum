@@ -25,7 +25,7 @@ export default function CropifaiPage() {
       <CropifaiArchitecture />
       <CropifaiSolutions />
       <CropifaiInterface />
-      <PlatformProductsServer platformId="cropifai" />
+      {/* <PlatformProductsServer platformId="cropifai" /> */}
       {/* <PlatformSolutionsServer platformId="cropifai" /> */}
       <CropifaiHardware />
       <CropifaiWaterFlow />

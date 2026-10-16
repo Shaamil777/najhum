@@ -136,7 +136,7 @@ export default function IotricsCore() {
             
             <div className="mt-8 lg:mt-10 pt-2 flex justify-center lg:justify-start">
               <Link
-                href="/demo"
+                href="/contact"
                 className="inline-flex items-center justify-center space-x-2 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap uppercase tracking-wider transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer w-full sm:w-auto text-center group"
               >
                 <span>{core.cta}</span>
