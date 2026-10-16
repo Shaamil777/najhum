@@ -1,344 +1,120 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, Minimize2 } from "lucide-react";
+import { Activity, ArrowDownToLine, ArrowLeftRight, ArrowUpRight, Bell, Boxes, Check, ChevronLeft, ChevronRight, CircleHelp, CreditCard, LayoutDashboard, Leaf, MapPin, Maximize2, Minimize2, PlugZap, Plus, Puzzle, Radio, Search, Settings2, ShieldCheck, Users, Wallet, X, Zap } from "lucide-react";
+import { demoChargers, demoLocations, demoCsv, filterDemoRows, getDemoTotals, getDemoChart, tableDefinitions, type DemoRow, type DemoView } from "@/content/evoltics-demo-data";
+import styles from "./EvolticsDashboardDemo.module.css";
 
-interface EvolticsDashboardDemoProps {
-  activeIndex: number;
-  onSelectIndex?: (index: number) => void;
-  maxHeight?: number;
-}
+interface Props { activeIndex: number; onSelectIndex?: (index: number) => void; maxHeight?: number }
+const navigation = [
+  {name:"Dashboard",Icon:LayoutDashboard},{name:"Locations",Icon:MapPin},{name:"Chargers",Icon:PlugZap},{name:"Sessions",Icon:ArrowLeftRight},{name:"Carbon credits",Icon:Leaf},{name:"Payments",Icon:Wallet},{name:"Users",Icon:Users},{name:"Groups",Icon:Users},{name:"Assets",Icon:Boxes},{name:"Plans",Icon:CreditCard},{name:"RFID",Icon:Radio},{name:"Plugin",Icon:Puzzle},
+] as const;
+const statuses = ["Available","Charging","Plugged-In","Offline"];
+const amounts = new Intl.NumberFormat("en-AE",{maximumFractionDigits:2});
+const statusClass = (status:string) => status === "Charging" || status === "Running" ? styles.blue : ["Offline","Inactive"].includes(status) ? styles.grey : ["Pending","Plugged-In","Estimated"].includes(status) ? styles.amber : styles.green;
 
-const DASHBOARD_FILE = "EVOLTICS.dc.html";
-const DEFAULT_HEIGHT = 1750;
-
-// Fallback section scroll targets inside EVOLTICS.dc.html (unscaled px)
-const FALLBACK_OFFSETS: Record<number, number> = {
-  0: 0,     // 3D EV Charging Station Twin & Fleet Overview
-  1: 1250,  // Charging Telemetry & Energy Dispensed Chart
-  2: 780,   // Fast Chargers & Solar Canopy Hardware
-  3: 1250,  // Recent Settlements & Landlord Payouts
-  4: 120    // Auto-Balancing & Station Mode Settings
-};
-
-export default function EvolticsDashboardDemo({
-  activeIndex,
-  onSelectIndex,
-  maxHeight
-}: EvolticsDashboardDemoProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const fullscreenContainerRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const fullscreenIframeRef = useRef<HTMLIFrameElement>(null);
-
-  const [scale, setScale] = useState(0.5);
-  const [fullscreenScale, setFullscreenScale] = useState(1);
-  const [contentHeight, setContentHeight] = useState(DEFAULT_HEIGHT);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  const targetUrl = `/dashboard_Demo/${DASHBOARD_FILE}`;
-
-  useEffect(() => {
-    setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+export default function EvolticsDashboardDemo({activeIndex,maxHeight}:Props){
+  const [selection,setSelection] = useState<{feature:number;view:DemoView}>({feature:activeIndex,view:"Dashboard"});
+  // Keep the existing capability cards connected to the relevant demo screen.
+  if(selection.feature!==activeIndex) setSelection({feature:activeIndex,view:(["Chargers","Dashboard","Sessions","Payments","Chargers"] as DemoView[])[activeIndex]??"Dashboard"});
+  const view=selection.view;
+  const [tab,setTab]=useState("Analytics");
+  const [location,setLocation]=useState("All");
+  const [period,setPeriod]=useState("Today");
+  const [metric,setMetric]=useState("Revenue");
+  const [chartMode,setChartMode]=useState("Stacked");
+  const [sort,setSort]=useState("Total connectors");
+  const [search,setSearch]=useState("");
+  const [status,setStatus]=useState("All");
+  const [page,setPage]=useState(0);
+  const [fullscreen,setFullscreen]=useState(false);
+  const [detail,setDetail]=useState<{title:string;row:DemoRow}|null>(null);
+  const [creating,setCreating]=useState(false);
+  const [extras,setExtras]=useState<Partial<Record<DemoView,DemoRow[]>>>({});
+  const [overrides,setOverrides]=useState<Record<string,Record<string,string>>>({});
+  const [notice,setNotice]=useState("");
+  const [selectedLocation,setSelectedLocation]=useState("LOC-01");
+  const rootRef=useRef<HTMLDivElement>(null);
+  const dialogRef=useRef<HTMLDivElement>(null);
+  const overlayOpen=Boolean(detail||creating);
+  const navigate=(next:DemoView)=>{setSelection({feature:activeIndex,view:next});setSearch("");setStatus("All");setPage(0);setDetail(null);setCreating(false);};
+  useEffect(()=>{if(!notice)return; const timer=window.setTimeout(()=>setNotice(""),4500);return()=>clearTimeout(timer);},[notice]);
+  useEffect(()=>{
+    if(!fullscreen && !overlayOpen)return;
+    const previous=document.activeElement as HTMLElement|null;
+    const previousOverflow=document.body.style.overflow;
+    if(fullscreen)document.body.style.overflow="hidden";
+    const scope=overlayOpen?dialogRef.current:rootRef.current;
+    scope?.querySelector<HTMLElement>('button,input,select,[href]')?.focus();
+    const onKey=(event:KeyboardEvent)=>{
+      if(event.key==="Escape"){if(overlayOpen){setDetail(null);setCreating(false);}else setFullscreen(false);}
+      if(event.key!=="Tab" || !scope)return;
+      const focusable=[...scope.querySelectorAll<HTMLElement>('button:not([disabled]),input,select,[href],[tabindex="0"]')].filter(el=>el.getClientRects().length);
+      const first=focusable[0],last=focusable[focusable.length-1];
+      if(event.shiftKey && document.activeElement===first){event.preventDefault();last?.focus();}
+      else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first?.focus();}
     };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    window.addEventListener("keydown",onKey);
+    return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",onKey);if(previous?.isConnected) previous.focus(); else document.querySelector<HTMLButtonElement>('[aria-label="Expand Fullscreen"]')?.focus();};
+  },[fullscreen,overlayOpen]);
+  const definition=view!=="Dashboard"?tableDefinitions[view]:null;
+  const allRows=definition?[...definition.rows,...(extras[view]??[])].map(row=>({...row,...overrides[row.id]})):[];
+  const rows=filterDemoRows(allRows,search,status);
+  const totalPages=Math.max(1,Math.ceil(rows.length/8));
+  const currentPage=Math.min(page,totalPages-1);
+  const totals=getDemoTotals(location,period);
+  const visibleChargers=demoChargers.filter(c=>location==="All"||c.location===location);
+  const connectorCounts=statuses.map(s=>visibleChargers.filter(c=>(overrides[c.id]?.status??c.status)===s).reduce((sum,c)=>sum+c.connectors,0));
+  const totalConnectors=connectorCounts.reduce((sum,n)=>sum+n,0);
+  const chartValues=getDemoChart(location,period,metric);
+  const chartMaximum=Math.max(...chartValues,1);
+  const exportRows=()=>{
+    const columns=definition?.columns??[{key:"metric",label:"Metric"},{key:"value",label:"Value"}];
+    const values=definition?rows:Object.entries(totals).map(([key,value])=>({id:key,metric:key,value:value.toFixed(2)}));
+    const blob=new Blob([demoCsv(columns,values)],{type:"text/csv;charset=utf-8;"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`evoltics-demo-${view.toLowerCase().replaceAll(" ","-")}.csv`;a.click();URL.revokeObjectURL(url);setNotice("Demo report exported.");
+  };
+  const saveRecord=(event:FormEvent<HTMLFormElement>)=>{event.preventDefault();const form=new FormData(event.currentTarget);const name=String(form.get("name")??"").trim();if(!name||!definition)return;const row:DemoRow={id:`DEMO-${Date.now().toString().slice(-6)}`,status:"Active"};definition.columns.forEach(c=>{if(c.key!=="id"&&c.key!=="status")row[c.key]=c.key==="name"?name:c.key==="location"?String(form.get("location")):c.key==="accessibility"?"Public":c.key==="visibility"?"Visible":c.key==="connectors"?"1":c.key==="power"?"22":"—";});if(!definition.columns.some(c=>c.key==="name"))row.id=name;setExtras(previous=>({...previous,[view]:[...(previous[view]??[]),row]}));setCreating(false);setSearch("");setStatus("All");setPage(Math.floor(allRows.length/8));setNotice(`${name} added to this demo.`);};
 
-  // Measure container and compute scaling factor to fit 1440px desktop design
-  const updateScale = useCallback(() => {
-    if (containerRef.current) {
-      const width = containerRef.current.clientWidth;
-      if (width > 0) {
-        setScale(Math.min(1, width / 1440));
-      }
-    }
-  }, []);
-
-  const updateFullscreenScale = useCallback(() => {
-    if (fullscreenContainerRef.current) {
-      const width = fullscreenContainerRef.current.clientWidth;
-      if (width > 0) {
-        setFullscreenScale(Math.min(1.2, width / 1440));
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    updateScale();
-    const ro = new ResizeObserver(updateScale);
-    if (containerRef.current) ro.observe(containerRef.current);
-    window.addEventListener("resize", updateScale);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", updateScale);
-    };
-  }, [updateScale]);
-
-  useEffect(() => {
-    if (isFullscreen) {
-      updateFullscreenScale();
-      const ro = new ResizeObserver(updateFullscreenScale);
-      if (fullscreenContainerRef.current) ro.observe(fullscreenContainerRef.current);
-      window.addEventListener("resize", updateFullscreenScale);
-      return () => {
-        ro.disconnect();
-        window.removeEventListener("resize", updateFullscreenScale);
-      };
-    }
-  }, [isFullscreen, updateFullscreenScale]);
-
-  // Handle ESC key to exit fullscreen
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isFullscreen) {
-        setIsFullscreen(false);
-      }
-    };
-    if (isFullscreen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isFullscreen]);
-
-  // Measure dynamic content height & capture click link traps
-  const handleIframeLoaded = useCallback((frame: HTMLIFrameElement | null) => {
-    setIsLoaded(true);
-    if (!frame) return;
-
-    try {
-      const doc = frame.contentDocument;
-      if (!doc) return;
-
-      // Capture-phase link trapping to prevent accidental 404 navigation
-      doc.addEventListener(
-        "click",
-        (e: MouseEvent) => {
-          const link = (e.target as HTMLElement)?.closest("a");
-          if (!link) return;
-          const href = link.getAttribute("href");
-          if (!href) return;
-          if (href.startsWith("#")) {
-            const el = doc.querySelector(href);
-            if (el) {
-              e.preventDefault();
-              e.stopPropagation();
-              el.scrollIntoView({ behavior: "smooth" });
-            }
-            return;
-          }
-          e.preventDefault();
-          e.stopPropagation();
-          if (href.startsWith("http")) {
-            window.open(href, "_blank", "noopener,noreferrer");
-          }
-        },
-        true
-      );
-
-      const measureHeight = () => {
-        const wrap = doc.querySelector(".wrap") as HTMLElement | null;
-        if (wrap) {
-          const bottom = wrap.offsetTop + wrap.offsetHeight;
-          if (bottom > 600) {
-            setContentHeight(bottom + 24);
-            return;
-          }
-        }
-        if (doc.body) {
-          const scrollH = doc.body.scrollHeight;
-          if (scrollH > 600) {
-            setContentHeight(scrollH);
-          }
-        }
-      };
-
-      measureHeight();
-      setTimeout(measureHeight, 250);
-      setTimeout(measureHeight, 800);
-      setTimeout(measureHeight, 1800);
-
-      if (typeof ResizeObserver !== "undefined" && doc.body) {
-        const ro = new ResizeObserver(() => {
-          measureHeight();
-        });
-        ro.observe(doc.body);
-      }
-    } catch {
-      // ignore
-    }
-  }, []);
-
-  // Smoothly scroll to the corresponding section when activeIndex changes
-  useEffect(() => {
-    if (containerRef.current && !isMobile) {
-      let targetOffset = FALLBACK_OFFSETS[activeIndex] ?? 0;
-      try {
-        const doc = iframeRef.current?.contentDocument;
-        if (doc) {
-          const sections = doc.querySelectorAll(".wrap > section");
-          if (activeIndex === 0) {
-            targetOffset = 0;
-          } else if (activeIndex === 1 && sections[4]) {
-            targetOffset = Math.max(0, (sections[4] as HTMLElement).offsetTop - 20);
-          } else if (activeIndex === 2 && sections[2]) {
-            targetOffset = Math.max(0, (sections[2] as HTMLElement).offsetTop - 20);
-          } else if (activeIndex === 3 && sections[3]) {
-            targetOffset = Math.max(0, (sections[3] as HTMLElement).offsetTop - 20);
-          } else if (activeIndex === 4 && sections[0]) {
-            targetOffset = Math.max(0, (sections[0] as HTMLElement).offsetTop - 20);
-          }
-        }
-      } catch {
-        // fallback
-      }
-
-      containerRef.current.scrollTo({
-        top: targetOffset * scale,
-        behavior: "smooth"
-      });
-    }
-  }, [activeIndex, scale, isMobile]);
-
-  return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="bg-neutral-50 rounded-2xl border border-neutral-200/80 shadow-2xl overflow-hidden relative w-full flex flex-col group aspect-[4/3] lg:aspect-auto"
-        style={{
-          height: maxHeight && !isMobile ? `${maxHeight}px` : undefined,
-          maxHeight: maxHeight && !isMobile ? `${maxHeight}px` : undefined
-        }}
-      >
-        {/* Floating Fullscreen Button */}
-        <button
-          type="button"
-          onClick={() => setIsFullscreen(true)}
-          className="absolute top-3.5 right-3.5 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white text-neutral-800 text-xs font-semibold shadow-md shadow-neutral-900/5 border border-neutral-200/80 backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          title="Expand Fullscreen Demo"
-          aria-label="Expand Fullscreen"
-        >
-          <Maximize2 className="w-3.5 h-3.5 text-neutral-600" />
-          <span className="hidden sm:inline">Fullscreen</span>
-        </button>
-
-        {/* Scaled Viewport Container - 16:9 on mobile, full height on desktop, no scrollbars on mobile */}
-        <div
-          ref={containerRef}
-          className="relative w-full h-full overflow-hidden bg-[#F4F5F3]"
-        >
-          {/* Subtle loading placeholder */}
-          {!isLoaded && (
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-neutral-100/60 backdrop-blur-[1px]">
-              <div className="w-7 h-7 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+  const dashboard=<div ref={rootRef} className={`${styles.shell} ${fullscreen?styles.fullscreen:""}`} style={fullscreen?undefined:{height:Math.max(600,Math.min(maxHeight??760,920))}} role={fullscreen?"dialog":undefined} aria-modal={fullscreen?true:undefined} aria-label={fullscreen?"EVOLTICS dashboard fullscreen demo":"EVOLTICS interactive dashboard demo"}>
+    <aside className={styles.sidebar}><span className={styles.sideBrand}><Zap size={23} fill="currentColor"/></span><nav aria-label="Demo dashboard navigation">{navigation.map(({name,Icon})=><button key={name} type="button" title={name} aria-label={name} aria-current={view===name?"page":undefined} onClick={()=>navigate(name)} className={view===name?styles.navActive:""}><Icon size={19}/><span>{name}</span></button>)}</nav></aside>
+    <div className={styles.workspace}>
+      <header className={styles.header}><div className={styles.wordmark}>EVOLTICS<small>Powering sustainable mobility</small></div><span className={styles.demoBadge}>Interactive demo</span><div className={styles.headerActions}><button type="button" aria-label="Demo help" onClick={()=>setNotice("Explore the sidebar, filter reports, or select a connector. All actions use local sample data.")}><CircleHelp size={18}/></button><button type="button" aria-label="Demo notifications" onClick={()=>setNotice("Demo network: 2 charging sessions are in progress. Select Monitoring for connector activity.")}><Bell size={18}/></button><span className={styles.avatar}>DU</span><span className={styles.profile}>DEMO USER<small>Business account</small></span><button type="button" onClick={()=>setFullscreen(!fullscreen)} aria-label={fullscreen?"Exit fullscreen":"Expand Fullscreen"}>{fullscreen?<Minimize2 size={18}/>:<Maximize2 size={18}/>}</button></div></header>
+      <div className={styles.demoNotice}><span className={styles.dot}/>Sample data · Explore the real platform’s workflows</div>
+      {view==="Dashboard"?<div className={styles.tabbar} role="tablist" aria-label="Dashboard views">{["Analytics","Monitoring","Maps"].map(name=><button key={name} type="button" role="tab" aria-selected={tab===name} aria-controls="evoltics-dashboard-panel" id={`evoltics-tab-${name.toLowerCase()}`} onClick={()=>setTab(name)}>{name}</button>)}</div>:null}
+      <div className={styles.scrollArea}>
+        {view==="Dashboard"?<div id="evoltics-dashboard-panel" role="tabpanel" aria-labelledby={`evoltics-tab-${tab.toLowerCase()}`} className={styles.page}>
+          {tab==="Analytics"?<>
+            <div className={styles.overview}>
+              <section className={styles.panel}><PanelHeading title="Connector status" subtitle="Overall distribution across all connectors"/><div className={styles.donut} style={{background:`conic-gradient(#58ae68 0 ${connectorCounts[0]/totalConnectors*100}%,#3784e8 ${connectorCounts[0]/totalConnectors*100}% ${(connectorCounts[0]+connectorCounts[1])/totalConnectors*100}%,#efae4e ${(connectorCounts[0]+connectorCounts[1])/totalConnectors*100}% ${(connectorCounts[0]+connectorCounts[1]+connectorCounts[2])/totalConnectors*100}%,#b5bbc5 0)`}}><span>Connectors<strong>{totalConnectors}</strong></span></div><div className={styles.statusGrid}>{statuses.map((name,i)=><button type="button" key={name} onClick={()=>{navigate("Chargers");setStatus(name);}}><span className={statusClass(name)}><i/>{name}</span><strong>{connectorCounts[i]}</strong></button>)}</div></section>
+              <section className={styles.panel}><PanelHeading title="Network statistics" subtitle="Snapshot of your charging network"/><div className={styles.statistics}>{[["Total chargers",visibleChargers.length,PlugZap],["Total locations",location==="All"?8:1,MapPin],["Total admins",1,ShieldCheck],["Total managers",1,Users],["Total users",8,Users],["Total sessions",totals.sessions,ArrowLeftRight]].map(([name,value,Icon])=>{const StatIcon=Icon as typeof Zap;return <div key={String(name)}><span><StatIcon size={15}/>{String(name)}</span><strong>{String(value)}</strong></div>;})}<div className={styles.wideStat}><span><Zap size={16}/>Total energy dispensed</span><strong>{amounts.format(totals.energy)} <small>kWh</small></strong></div></div></section>
+              <section className={styles.panel}><div className={styles.panelTop}><PanelHeading title="Location activity" subtitle="Connector status distribution by location"/><label className={styles.srOnly} htmlFor="location-sort">Sort location activity</label><select id="location-sort" value={sort} onChange={e=>setSort(e.target.value)}><option>Total connectors</option><option>Available first</option><option>Charging first</option></select></div><p className={styles.hint}>Select a cube for connector details</p><div className={styles.cubes}>{[...demoLocations].filter(l=>location==="All"||l.name===location).sort((a,b)=>sort==="Total connectors"?b.chargers-a.chargers:demoChargers.filter(c=>c.location===b.name&&c.status===(sort==="Available first"?"Available":"Charging")).length-demoChargers.filter(c=>c.location===a.name&&c.status===(sort==="Available first"?"Available":"Charging")).length).map(l=><div key={l.id}>{demoChargers.filter(c=>c.location===l.name).map(c=><button key={c.id} type="button" className={statusClass(overrides[c.id]?.status??c.status)} title={`${l.name} · ${c.id} · ${overrides[c.id]?.status??c.status}`} aria-label={`${c.id} at ${l.name}: ${overrides[c.id]?.status??c.status}`} onClick={()=>setDetail({title:c.id,row:{...c,connectors:String(c.connectors),power:`${c.power} kW`,...overrides[c.id]}})}/>)}<small title={l.name}>{l.name}</small></div>)}</div></section>
             </div>
-          )}
-
-          {/* Scaled Artboard Surface */}
-          <div
-            style={{
-              width: "100%",
-              height: contentHeight * scale,
-              position: "relative"
-            }}
-          >
-            <iframe
-              ref={iframeRef}
-              src={targetUrl}
-              title="EVOLTICS CSMP Dashboard - Interactive Station Management Platform"
-              onLoad={() => handleIframeLoaded(iframeRef.current)}
-              sandbox="allow-scripts allow-same-origin allow-forms"
-              loading="lazy"
-              className="border-0 bg-[#F4F5F3] block"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: 1440,
-                height: contentHeight,
-                transform: `scale(${scale})`,
-                transformOrigin: "top left",
-                pointerEvents: isMobile ? "none" : "auto"
-              }}
-            />
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ═══ FULLSCREEN EXPANDED VIEW (PORTAL) ═══ */}
-      {mounted && isFullscreen && createPortal(
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[99999] bg-[#F4F5F3] flex flex-col select-none overflow-hidden"
-          >
-            {/* Floating Close Button */}
-            <button
-              type="button"
-              onClick={() => setIsFullscreen(false)}
-              className="absolute top-4 right-4 z-50 flex items-center gap-1.5 px-3 py-2 rounded-full bg-neutral-900/80 hover:bg-neutral-900 text-white text-xs font-semibold shadow-xl backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
-              aria-label="Exit Fullscreen"
-            >
-              <Minimize2 className="w-4 h-4" />
-              <span>Exit (ESC)</span>
-            </button>
-
-            {/* Fullscreen Viewport Area */}
-            <div
-              ref={fullscreenContainerRef}
-              className="relative w-full h-full overflow-auto bg-[#F4F5F3] flex justify-center"
-            >
-              <div
-                style={{
-                  width: 1440 * fullscreenScale,
-                  height: contentHeight * fullscreenScale,
-                  position: "relative"
-                }}
-              >
-                <iframe
-                  ref={fullscreenIframeRef}
-                  src={targetUrl}
-                  title="EVOLTICS CSMP Dashboard Fullscreen"
-                  onLoad={() => handleIframeLoaded(fullscreenIframeRef.current)}
-                  sandbox="allow-scripts allow-same-origin allow-forms"
-                  className="border-0 bg-[#F4F5F3] block"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: 1440,
-                    height: contentHeight,
-                    transform: `scale(${fullscreenScale})`,
-                    transformOrigin: "top left",
-                    pointerEvents: "auto"
-                  }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>,
-        document.body
-      )}
-    </>
-  );
+            <div className={styles.sectionTitle}><h3>Analytics</h3><div className={styles.filters}><label><span className={styles.srOnly}>Analytics location</span><select value={location} onChange={e=>setLocation(e.target.value)}><option value="All">All locations</option>{demoLocations.map(l=><option key={l.id}>{l.name}</option>)}</select></label><label><span className={styles.srOnly}>Analytics period</span><select value={period} onChange={e=>setPeriod(e.target.value)}><option>Today</option><option>Last 7 days</option><option>Last 30 days</option></select></label><button type="button" className={styles.iconButton} aria-label="Export analytics" onClick={exportRows}><ArrowDownToLine size={16}/></button></div></div>
+            <div className={styles.metricGrid}>{[["Revenue",`AED ${amounts.format(totals.revenue)}`,Wallet],["Sessions (hrs.)",amounts.format(totals.hours),Activity],["Number of sessions",totals.sessions,ArrowLeftRight],["Energy transferred",`${amounts.format(totals.energy)} kWh`,Zap]].map(([name,value,Icon])=>{const MetricIcon=Icon as typeof Zap;return <button type="button" key={String(name)} onClick={()=>setMetric(String(name))} className={`${styles.metric} ${metric===name?styles.metricSelected:""}`}><span><MetricIcon size={16}/>{String(name)}</span><strong>{String(value)}</strong><small>Illustrative · {period.toLowerCase()}</small></button>;})}</div>
+            <div className={styles.sectionTitle}><h3>Financial Analytics</h3></div><div className={styles.financial}>{[["Revenue",totals.revenue],["Tax liability",totals.revenue*.05],["Enterprise revenue share",totals.revenue*.15],["Input credits",totals.revenue*.01],["Tax payable",totals.revenue*.04],["Profit after tax",totals.revenue*.81]].map(([label,value])=><div key={String(label)}><span>{String(label)}</span><strong>AED {amounts.format(Number(value))}</strong></div>)}</div>
+            <section className={styles.panel}><div className={styles.sectionTitle}><h3>Business chart</h3><div className={styles.segment} aria-label="Chart mode">{["Split","Stacked"].map(mode=><button key={mode} type="button" aria-pressed={chartMode===mode} onClick={()=>setChartMode(mode)}>{mode}</button>)}</div></div><div className={styles.chartLegend}><span><i/>{metric}</span><span> {location==="All"?"All locations":location} · {period}</span></div><div className={styles.businessChart}>{chartValues.map((value,i)=><div key={i}><button type="button" title={`${String(i*2).padStart(2,'0')}:00 · ${metric}: ${value}`} aria-label={`View chart at ${i*2}:00`} onClick={()=>setNotice(`${metric} at ${String(i*2).padStart(2,'0')}:00 — ${amounts.format(value)} ${metric==="Revenue"?"AED":metric==="Energy transferred"?"kWh":""} (sample)`)} style={{height:`${value/chartMaximum*85}%`}} className={chartMode==="Split"?styles.splitBar:""}><span/></button><small>{String(i*2).padStart(2,'0')}</small></div>)}</div></section>
+          </>:tab==="Monitoring"?<>
+            <div className={styles.sectionTitle}><div><h3>Connector monitoring</h3><p className={styles.hint}>24-hour status history · select a connector to inspect</p></div><label><span className={styles.srOnly}>Monitoring date</span><select value={period} onChange={e=>setPeriod(e.target.value)}><option value="Today">Today</option><option value="Last 7 days">Yesterday</option><option value="Last 30 days">2 days ago</option></select></label></div>
+            <div className={styles.monitorLegend}>{statuses.map(s=><span key={s} className={statusClass(s)}><i/>{s}</span>)}</div><div className={styles.timelineWrap}><div className={styles.timeline}><div className={styles.hours}><strong>Location / connector</strong>{Array.from({length:24},(_,i)=><small key={i}>{String(i).padStart(2,'0')}</small>)}</div>{demoLocations.map(l=><section key={l.id}><h4>{l.name}</h4>{demoChargers.filter(c=>c.location===l.name).map((c,index)=><button type="button" key={c.id} onClick={()=>setDetail({title:c.id,row:{...c,power:`${c.power} kW`,connectors:String(c.connectors),status:overrides[c.id]?.status??c.status}})} className={styles.timelineRow}><strong>{c.id}<small>Connector 1</small></strong>{Array.from({length:24},(_,hour)=><span key={hour} title={`${hour}:00`} className={statusClass(hour<7?"Offline":hour>18?"Available":(hour+index+(period==='Today'?0:2))%8<3?"Charging":"Available")}/>)}</button>)}</section>)}</div></div>
+          </>:<>
+            <div className={styles.sectionTitle}><div><h3>Network map</h3><p className={styles.hint}>Illustrative UAE network · select a location</p></div><label className={styles.search}><Search size={15}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search locations" aria-label="Search map locations"/></label></div>
+            <div className={styles.mapLayout}><div className={styles.map}><svg viewBox="0 0 600 500" preserveAspectRatio="none" aria-hidden="true"><rect width="600" height="500" fill="#d5eaf3"/><path d="M0 500L600 500 600 0 435 30 379 100 318 153 272 214 240 252 194 295 139 335 60 394Z" fill="#edf0e7"/><path d="M10 480L102 390 206 330 282 235 367 152 430 90 570 20M90 500L210 385 330 300 420 230 600 215M265 500L300 400 330 300 355 190 415 120" stroke="white" strokeWidth="13" fill="none"/><path d="M10 480L102 390 206 330 282 235 367 152 430 90 570 20" stroke="#d1cfba" strokeWidth="2" fill="none"/></svg><span className={styles.seaLabel}>ARABIAN GULF</span>{demoLocations.filter(l=>l.name.toLowerCase().includes(search.toLowerCase())||l.city.toLowerCase().includes(search.toLowerCase())).map(l=><button key={l.id} type="button" style={{left:`${l.x}%`,top:`${l.y}%`}} className={`${styles.mapPin} ${selectedLocation===l.id?styles.pinSelected:""}`} aria-label={`Select ${l.name}`} onClick={()=>setSelectedLocation(l.id)}><MapPin size={22} fill="currentColor"/><span>{l.name}</span></button>)}</div><div className={styles.panel}>{(()=>{const l=demoLocations.find(l=>l.id===selectedLocation)!;return <><span className={styles.label}>Selected location</span><h3>{l.name}</h3><p className={styles.hint}>{l.city}, UAE</p><div className={styles.mapList}>{demoChargers.filter(c=>c.location===l.name).map(c=><button key={c.id} type="button" onClick={()=>setDetail({title:c.id,row:{...c,power:`${c.power} kW`,connectors:String(c.connectors)}})}><PlugZap size={18}/><span><strong>{c.id}</strong><small>{c.power} kW · {c.connectors} connector{c.connectors>1?'s':''}</small></span><span className={`${styles.badge} ${statusClass(c.status)}`}>{c.status}</span></button>)}</div><button type="button" className={styles.primaryButton} onClick={()=>{navigate("Chargers");setSearch(l.name);}}>View chargers<ArrowUpRight size={15}/></button></>;})()}</div></div>
+          </>}
+        </div>:<div className={styles.page}>
+          <div className={styles.sectionTitle}><h2>{view==="Plugin"?"Integrations":view}</h2><div className={styles.filters}><button type="button" className={styles.secondaryButton} onClick={exportRows}><ArrowDownToLine size={15}/>Export</button>{definition?.addLabel&&<button type="button" className={styles.primaryButton} onClick={()=>setCreating(true)}><Plus size={15}/>{definition.addLabel}</button>}</div></div>
+          {view==="Sessions"&&<div className={styles.summaryStrip}>{["Running","Idle","Completed"].map(s=><button type="button" key={s} onClick={()=>{setStatus(s);setPage(0);}}><span>{s}</span><strong>{allRows.filter(r=>r.status===s).length}</strong></button>)}</div>}
+          <div className={styles.tableToolbar}><label className={styles.search}><Search size={16}/><input aria-label={`Search ${view.toLowerCase()}`} placeholder={`Search ${view.toLowerCase()}`} value={search} onChange={e=>{setSearch(e.target.value);setPage(0);}}/></label><label className={styles.statusFilter}><Settings2 size={15}/><span className={styles.srOnly}>Filter {view.toLowerCase()} by status</span><select value={status} onChange={e=>{setStatus(e.target.value);setPage(0);}}><option value="All">All statuses</option>{[...new Set(allRows.map(r=>r.status))].map(s=><option key={s}>{s}</option>)}</select></label></div>
+          {view==="Carbon credits"&&<p className={styles.infoNote}>Illustrative emissions estimates using a sample factor. These records are not certified carbon credits.</p>}
+          <div className={styles.tableScroll}><table className={styles.table}><thead><tr>{definition?.columns.map(c=><th key={c.key} scope="col">{c.label}</th>)}<th scope="col">Details</th></tr></thead><tbody>{rows.slice(currentPage*8,currentPage*8+8).map(row=><tr key={row.id}>{definition?.columns.map((column,i)=><td key={column.key}>{i===0?<button type="button" className={styles.recordLink} onClick={()=>setDetail({title:row.id,row})}>{row[column.key]}</button>:column.key==="status"?<span className={`${styles.badge} ${statusClass(row.status)}`}>{row.status}</span>:row[column.key]}</td>)}<td><button type="button" className={styles.iconButton} aria-label={`View ${row.id}`} onClick={()=>setDetail({title:row.id,row})}><ArrowUpRight size={16}/></button></td></tr>)}</tbody></table>{!rows.length&&<div className={styles.empty}><Search size={26}/><strong>No matching records</strong><button type="button" onClick={()=>{setSearch("");setStatus("All");}}>Clear filters</button></div>}</div>
+          <div className={styles.pagination}><span>{rows.length?currentPage*8+1:0}–{Math.min((currentPage+1)*8,rows.length)} of {rows.length} records</span><div><button type="button" aria-label="Previous page" disabled={currentPage===0} onClick={()=>setPage(currentPage-1)}><ChevronLeft size={16}/></button><span>{currentPage+1} / {totalPages}</span><button type="button" aria-label="Next page" disabled={currentPage>=totalPages-1} onClick={()=>setPage(currentPage+1)}><ChevronRight size={16}/></button></div></div>
+        </div>}
+      </div>
+      <footer className={styles.demoFooter}><ShieldCheck size={12}/>Local demo environment<span>No live chargers are controlled</span></footer>
+    </div>
+    {notice&&<div className={styles.toast} role="status"><Check size={16}/>{notice}<button type="button" aria-label="Dismiss notification" onClick={()=>setNotice("")}><X size={15}/></button></div>}
+    {overlayOpen&&<div className={styles.overlay} onClick={()=>{setDetail(null);setCreating(false);}}><div ref={dialogRef} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="evoltics-record-title" onClick={e=>e.stopPropagation()}><div className={styles.sectionTitle}><h3 id="evoltics-record-title">{creating?definition?.addLabel:detail?.title}</h3><button type="button" aria-label="Close record" className={styles.iconButton} onClick={()=>{setDetail(null);setCreating(false);}}><X size={19}/></button></div>{creating?<form onSubmit={saveRecord} className={styles.form}><p>Creates a local demo record for this visit.</p><label>Name / identifier<input autoFocus name="name" required maxLength={80} placeholder="Enter a demo name"/></label><label>Location<select name="location">{demoLocations.map(l=><option key={l.id}>{l.name}</option>)}</select></label><button type="submit" className={styles.primaryButton}>Add to demo</button></form>:<><dl className={styles.details}>{Object.entries(detail?.row??{}).map(([key,value])=><div key={key}><dt>{key.replace(/([A-Z])/g,' $1')}</dt><dd>{value}</dd></div>)}</dl>{detail?.row.id.startsWith("CH-")&&<button type="button" className={styles.primaryButton} onClick={()=>{const next=detail.row.status==="Charging"?"Available":"Charging";setOverrides(previous=>({...previous,[detail.row.id]:{...previous[detail.row.id],status:next}}));setDetail({...detail,row:{...detail.row,status:next}});setNotice(`Demo connector updated to ${next.toLowerCase()}.`);}}>Simulate {detail.row.status==="Charging"?"session complete":"charging session"}</button>}{view==="Chargers"&&<button type="button" className={styles.secondaryButton} onClick={()=>{if(!detail)return;const next=detail.row.accessibility==="Private"?"Public":"Private";setOverrides(previous=>({...previous,[detail.row.id]:{...previous[detail.row.id],accessibility:next}}));setDetail({...detail,row:{...detail.row,accessibility:next}});}}>Switch to {detail?.row.accessibility==="Private"?"public":"private"} access</button>}</>}</div></div>}
+  </div>;
+  return fullscreen?createPortal(dashboard,document.body):dashboard;
 }
-
+function PanelHeading({title,subtitle}:{title:string;subtitle:string}){return <div className={styles.panelHeading}><h3>{title}</h3><p>{subtitle}</p></div>;}

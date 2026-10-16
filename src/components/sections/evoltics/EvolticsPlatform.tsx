@@ -92,7 +92,7 @@ export default function EvolticsPlatform() {
           >
             <div className="mb-2 text-center lg:text-left">
               <span className="text-[11px] font-bold text-primary tracking-widest uppercase mb-1.5 inline-flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-primary" /> Interactive CSMP Twin
+                <Sparkles className="w-3.5 h-3.5 text-primary" /> Interactive CSMP Demo
               </span>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground leading-tight">
                 Everything you need <br className="hidden lg:block" /> in one CSMP
@@ -110,6 +110,10 @@ export default function EvolticsPlatform() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
+                    role="button"
+                    tabIndex={0}
+                    aria-pressed={isActive}
+                    onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setActiveIndex(i); } }}
                     onClick={() => setActiveIndex(i)}
                     className={`p-3.5 sm:p-4 rounded-xl border transition-all flex items-start space-x-3 sm:space-x-4 cursor-pointer select-none group shadow-sm ${
                       isActive

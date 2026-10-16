@@ -233,11 +233,22 @@ export const cropifaiContent = {
         features: ["Wind Speed & Direction", "Humidity & Temperature", "Rainfall Measurement", "Solar-Powered"]
       },
       {
-        name: "Najhum Wireless Smart Valve NQT02",
+        name: "Solar-Powered Water Flow Controller",
         image: "/products/cropifai/SolarPoweredWaterFlowSensor.webp",
-        description: "A motorised valve with an integrated ultrasonic flow meter for wireless irrigation control.",
-        features: ["0–100% Valve Position Control", "Solar & Battery Power", "Group & Sequential Zone Control"],
-        href: "#nqt02"
+        description: "Autonomous solar-powered valve control for precision irrigation and flow management.",
+        features: ["Solar-Powered & Battery Backup", "0–100% Flow Control", "Autonomous Cycle Irrigation", "IP67 Weatherproof Rating"]
+      },
+      {
+        name: "Solenoid Valve Controller",
+        image: "/products/cropifai/solenoidValveController.webp",
+        description: "Automated irrigation control for multiple zones.",
+        features: ["0–100% Flow Control", "Open/Close Precision", "Multicast Control"]
+      },
+      {
+        name: "Smart Valve Controller",
+        image: "/products/cropifai/SmartValveController.webp",
+        description: "Intelligent autonomous operation for off-grid deployment.",
+        features: ["Autonomous Operation", "Battery Backup", "NFC Configuration"]
       }
     ],
     tags: ["Ruggedised for Desert", "LPWAN Connectivity", "IP67 Rated", "Low Maintenance", "NFC Configuration"],

@@ -1,5 +1,5 @@
 import { FooterLinks } from "./FooterLinks";
-import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -32,11 +32,9 @@ export default function Footer() {
             </a>
 
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500">
-              <a href={`mailto:${siteConfig.contact.email}?subject=Privacy%20enquiry`} className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Privacy enquiries</a>
+              <Link href="/privacy-policy" className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Privacy Policy</Link>
               <span className="text-slate-300">•</span>
-              <a href={`mailto:${siteConfig.contact.email}?subject=Terms%20enquiry`} className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Terms enquiries</a>
-              <span className="text-slate-300">•</span>
-              <a href={`mailto:${siteConfig.contact.email}?subject=Security%20enquiry`} className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Security enquiries</a>
+              <Link href="/terms-and-conditions" className="inline-flex min-h-11 items-center rounded-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Terms &amp; Conditions</Link>
             </div>
           </div>
         </div>
