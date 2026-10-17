@@ -13,8 +13,6 @@ interface ContactRequestBody {
   solution: string;
   goals: string;
   turnstileToken?: string;
-  captchaAnswer?: string;
-  captchaExpected?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -32,8 +30,6 @@ export async function POST(request: NextRequest) {
       solution,
       goals,
       turnstileToken,
-      captchaAnswer,
-      captchaExpected,
     } = body;
 
     // Validate required fields
@@ -88,32 +84,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate Cloudflare Turnstile token
-    if (turnstileToken) {
-      const clientIp =
-        request.headers.get("cf-connecting-ip") ||
-        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-        undefined;
-
-      const turnstileResult = await verifyTurnstileToken(turnstileToken, clientIp);
-      if (!turnstileResult.success) {
-        return NextResponse.json(
-          { error: turnstileResult.error || "Security verification failed. Please try again." },
-          { status: 400 }
-        );
-      }
-    } else if (captchaAnswer && captchaExpected) {
-      // Fallback for legacy captcha
-      if (captchaAnswer.trim().toUpperCase() !== captchaExpected.trim().toUpperCase()) {
-        return NextResponse.json(
-          { error: "Invalid captcha code. Please try again." },
-          { status: 400 }
-        );
-      }
-    } else {
+    // Every submission must be verified by Cloudflare on the server.
+    const clientIp = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || undefined;
+    const turnstileResult = await verifyTurnstileToken(turnstileToken || "", clientIp);
+    if (!turnstileResult.success) {
       return NextResponse.json(
-        { error: "Please complete the security verification challenge." },
-        { status: 400 }
+        { error: turnstileResult.error || "Security verification failed. Please try again." },
+        { status: turnstileResult.errorCodes?.includes("configuration-error") ? 503 : 400 }
       );
     }
 

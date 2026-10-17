@@ -26,6 +26,10 @@ export const pageSections = {
       "name": "Intelligent operations grid"
     },
     {
+      "id": "partners",
+      "name": "Our partners"
+    },
+    {
       "id": "faq",
       "name": "Frequently asked questions"
     },

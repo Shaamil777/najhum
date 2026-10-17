@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Sparkles
 } from "lucide-react";
+import PartnerLogos, { EVOLTICS_PARTNERS } from "@/components/shared/PartnerLogos";
 import EvolticsDashboardDemo from "./EvolticsDashboardDemo";
 
 const features = [
@@ -169,29 +170,27 @@ export default function EvolticsPlatform() {
               maxHeight={leftHeight}
             />
 
+
+
+          </div>
+
+        </div>
+
             {/* Enterprise Compatibility Footer & Prominent OCPP Badge */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 w-full"
+              className="mt-6 sm:mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 w-full"
             >
-              {/* Infrastructure Partners Card */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-4 w-full sm:w-auto bg-surface sm:bg-transparent border border-border sm:border-transparent px-4 py-3 sm:p-0 rounded-xl shadow-sm sm:shadow-none">
-                <span className="text-[10px] sm:text-xs font-semibold text-muted uppercase tracking-wider text-center sm:text-left">
-                  Infrastructure Partners:
-                </span>
-                <div className="flex items-center justify-center space-x-4 sm:space-x-5 opacity-90 mt-2 sm:mt-0">
-                  <Image src="/logo/client logos/dubaitaxi.png" alt="Dubai Taxi" width={70} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                  <Image src="/logo/client logos/du.png" alt="du" width={50} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                  <Image src="/logo/client logos/alrostamaniagroup.svg" alt="Al Rostamani Group" width={80} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                  <Image src="/logo/client logos/eand.webp" alt="e&" width={50} height={30} className="object-contain h-5 sm:h-7 w-auto hover:opacity-80 transition-opacity cursor-pointer" />
-                </div>
-              </div>
+              <section aria-labelledby="infrastructure-partners-heading" className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5 flex-1 w-full min-w-0">
+                <h3 id="infrastructure-partners-heading" className="font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-muted shrink-0">Infrastructure Partners:</h3>
+                <PartnerLogos logos={EVOLTICS_PARTNERS} compact />
+              </section>
 
               {/* Prominent Outside Certification Badge */}
-              <div className="flex items-center justify-center sm:justify-start space-x-3 sm:space-x-4 bg-surface border border-border px-4 sm:px-5 py-2 sm:py-3 rounded-xl shadow-sm cursor-pointer group hover:border-primary/40 transition-colors overflow-hidden shrink-0 w-full sm:w-auto">
+              <div className="flex items-center justify-center sm:justify-start space-x-3 sm:space-x-4 bg-surface border border-border px-4 sm:px-5 py-2 sm:py-3 rounded-full shadow-sm cursor-pointer group hover:border-primary/40 transition-colors overflow-hidden shrink-0 w-full sm:w-auto">
                 <div className="w-10 h-10 sm:w-14 sm:h-14 relative flex items-center justify-center -ml-1">
                   <Image
                     src="/logo/occplogo.png"
@@ -207,10 +206,6 @@ export default function EvolticsPlatform() {
                 </div>
               </div>
             </motion.div>
-
-          </div>
-
-        </div>
 
       </div>
     </section>

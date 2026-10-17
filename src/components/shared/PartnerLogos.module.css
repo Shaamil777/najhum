@@ -1,0 +1,53 @@
+.marquee {
+  --gap: 16px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 12px 0;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+}
+.marquee:focus-visible { outline: 2px solid #3b82f6; outline-offset: 4px; border-radius: 12px; }
+.track { display: flex; width: max-content; animation: partnerScroll 38s linear infinite; will-change: transform; }
+.group { display: flex; flex: none; gap: var(--gap); margin: 0; padding: 0 var(--gap) 0 0; list-style: none; }
+.tile {
+  flex: none;
+  width: clamp(190px, 17vw, 240px);
+  height: 126px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e7ebf0;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px -8px #18345045;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.artwork { position: relative; width: 100%; height: 100%; max-width: 180px; max-height: 70px; }
+.logo { object-fit: contain; filter: grayscale(1); opacity: .65; transition: filter .35s ease, opacity .35s ease; }
+.lightArtwork .logo { filter: brightness(0) saturate(100%); opacity: .55; }
+.tile:hover { border-color: #cbd5e1; box-shadow: 0 6px 16px -8px #18345050; }
+.tile:hover .logo, .marquee:focus-visible .logo { filter: none; opacity: 1; }
+/* White artwork keeps its original colours on hover, with an outline-like shadow
+   so it remains legible against the same light tile as every other partner. */
+.lightArtwork:hover .logo, .marquee:focus-visible .lightArtwork .logo {
+  filter: drop-shadow(1px 0 0 #64748b) drop-shadow(-1px 0 0 #64748b) drop-shadow(0 1px 1px #64748b);
+}
+.marquee:hover .track, .marquee:focus-within .track { animation-play-state: paused; }
+.compact { --gap: 24px; flex: 1; padding: 6px 0; }
+.compact .track { animation-duration: 48s; }
+.compact .tile { width: 112px; height: 48px; padding: 2px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.compact .artwork { max-width: 112px; max-height: 40px; }
+@keyframes partnerScroll { to { transform: translateX(-50%); } }
+@media (max-width: 639px) {
+  .marquee { --gap: 12px; }
+  .tile { width: 176px; height: 102px; padding: 18px; border-radius: 16px; }
+  .compact { --gap: 20px; flex: auto; }
+  .compact .tile { width: 100px; height: 44px; padding: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { overflow-x: auto; mask-image: none; }
+  .track { animation: none; will-change: auto; }
+  .group[aria-hidden="true"] { display: none; }
+  .tile, .logo { transition: none; }
+}

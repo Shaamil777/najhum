@@ -1,7 +1,7 @@
 /**
  * Cloudflare Turnstile Server-side Verification
  * 
- * Validates Turnstile challenge tokens against Cloudflare'\''s siteverify API.
+ * Validates Turnstile challenge tokens against Cloudflare's siteverify API.
  * Free tier supports unlimited challenges with privacy-preserving bot defense.
  */
 
@@ -34,7 +34,7 @@ export async function verifyTurnstileToken(
   token: string,
   remoteIp?: string
 ): Promise<TurnstileResult> {
-  if (!token || !token.trim()) {
+  if (typeof token !== "string" || !token.trim() || token.length > 2048) {
     return {
       success: false,
       error: "Verification token is missing. Please complete the security check.",
@@ -43,8 +43,14 @@ export async function verifyTurnstileToken(
 
   const secretKey =
     process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY?.trim() ||
-    CLOUDFLARE_TEST_SECRET_KEY;
+    (process.env.NODE_ENV !== "production" ? CLOUDFLARE_TEST_SECRET_KEY : "");
 
+  if (!secretKey || (process.env.NODE_ENV === "production" && /^[123]x0+/.test(secretKey))) {
+    console.error("[TURNSTILE_CONFIGURATION_ERROR] A production secret key is required.");
+    return { success: false, error: "Security verification is unavailable. Please contact us by email.", errorCodes: ["configuration-error"] };
+  }
+
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
   try {
     const formData = new URLSearchParams();
     formData.append("secret", secretKey);
@@ -54,12 +60,13 @@ export async function verifyTurnstileToken(
     }
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8-second timeout
+    timeoutId = setTimeout(() => controller.abort(), 8000); // 8-second timeout
 
     const response = await fetch(
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
       {
         method: "POST",
+        cache: "no-store",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -112,5 +119,7 @@ export async function verifyTurnstileToken(
       success: false,
       error: "An unexpected error occurred during security verification.",
     };
+  } finally {
+    clearTimeout(timeoutId);
   }
 }

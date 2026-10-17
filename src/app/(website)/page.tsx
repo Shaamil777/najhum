@@ -9,6 +9,7 @@ import Platforms from "@/components/sections/home/Platforms";
 import Impact from "@/components/sections/home/Impact";
 import WhyChoose from "@/components/sections/home/WhyChoose";
 import Analytics from "@/components/sections/home/Analytics";
+import Partners from "@/components/sections/home/Partners";
 import Faq from "@/components/sections/home/Faq";
 import Cta from "@/components/sections/home/Cta";
 
@@ -29,6 +30,7 @@ export default function Home() {
         <Impact />
         <WhyChoose />
         <Analytics />
+        <Partners />
         <Faq />
         <Cta />
       </div>
