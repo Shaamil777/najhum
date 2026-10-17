@@ -71,13 +71,13 @@ export default function IotricsHero() {
           className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-auto"
         >
           <a
-            href="#solutions"
+            href="#iotrics-pipeline"
             onClick={(e) => {
-              const el = document.getElementById("solutions");
+              const el = document.getElementById("iotrics-pipeline") || document.getElementById("solutions");
               if (el) {
                 e.preventDefault();
                 el.scrollIntoView({ behavior: "smooth" });
-                window.history.pushState(null, "", "#solutions");
+                window.history.pushState(null, "", "#iotrics-pipeline");
               }
             }}
             className="inline-flex items-center justify-center space-x-2 sm:space-x-2.5 bg-primary hover:bg-primary-hover text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"

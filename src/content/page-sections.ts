@@ -102,6 +102,10 @@ export const pageSections = {
       "name": "Io TRICs Hero"
     },
     {
+      "id": "iotrics-pipeline",
+      "name": "Io TRICs Architecture Pipeline"
+    },
+    {
       "id": "solutions",
       "name": "Io TRICs About"
     },

@@ -4,6 +4,7 @@ import { pageSections } from "@/content/page-sections";
 import StructuredData from "@/components/seo/StructuredData";
 import { Poppins } from "next/font/google";
 import IotricsHero from "@/components/sections/iotrics/IotricsHero";
+import IotricsPipeline from "@/components/sections/iotrics/IotricsPipeline";
 import IotricsAbout from "@/components/sections/iotrics/IotricsAbout";
 import IotricsCore from "@/components/sections/iotrics/IotricsCore";
 import IotricsMethodology from "@/components/sections/iotrics/IotricsMethodology";
@@ -39,6 +40,7 @@ export default function IotricsPage() {
         }
       `}</style>
       <IotricsHero />
+      <IotricsPipeline />
       <IotricsAbout />
       <IotricsCore />
       <PlatformProductsServer platformId="iotrics" />
