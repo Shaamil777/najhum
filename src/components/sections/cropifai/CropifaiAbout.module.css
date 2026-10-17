@@ -1,0 +1,50 @@
+.section { padding: 6rem 0; background: #fff; border-bottom: 1px solid #e4e4e7; }
+.layout { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: clamp(2rem,5vw,5rem); align-items: center; }
+.introduction { min-width: 0; }
+.mosaic { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .75rem; margin-top: 2rem; }
+.fieldTile { position: relative; min-width: 0; display: flex; align-items: center; overflow: hidden; border-radius: 1.25rem; background: #edf4ff; border: 1px solid #e0eafa; }
+.field { display: block; flex: none; width: 145%; margin-left: -22.5%; color: var(--color-primary); }
+.fieldBadge { position: absolute; bottom: 1rem; left: 1rem; display: flex; align-items: center; gap: .5rem; padding: .45rem .65rem; border-radius: .6rem; background: #ffffffdf; color: var(--color-primary); font-size: .7rem; font-weight: 600; }
+.readings { display: flex; flex-direction: column; gap: .75rem; min-width: 0; }
+.reading { display: grid; grid-template-columns: 2.25rem minmax(0,1fr); gap: .5rem .75rem; align-items: center; padding: 1rem; border-radius: 1rem; border: 1px solid #e0e8f3; background: white; }
+.readingIcon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: .65rem; color: var(--color-primary); background: #eff5ff; }
+.readingLabel { font-size: .75rem; font-weight: 500; line-height: 1.6; color: #536987; }
+.spark { grid-column: 2; height: .875rem; display: flex; gap: 4px; align-items: end; color: var(--color-primary); }
+.spark i { display: block; width: 5px; height: 5px; background: currentColor; opacity: .45; border-radius: 2px; animation: spark 2.5s ease-in-out infinite alternate; }
+.spark i:nth-child(2n) { animation-delay: -1s; }
+.spark i:nth-child(3n) { animation-delay: -2s; }
+.description { margin-top: 2rem; }
+.route { animation: route 8s linear infinite; }
+.marker { transform-box: fill-box; transform-origin: center; animation: marker 2.8s ease-in-out infinite; }
+.stack { isolation: isolate; position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2.25rem 0; min-width: 0; }
+.stack::before { content: ""; position: absolute; z-index: -1; inset: 0 0 0 3.5rem; border-radius: 2.5rem; background: #f3f6fc; }
+.card { display: grid; grid-template-columns: 3rem minmax(0,1fr); gap: 1.25rem; padding: 2rem; margin-right: 1.5rem; background: white; border: 1px solid #e0e7f2; border-radius: 1.5rem; box-shadow: 0 15px 35px -28px #284c9055; min-width: 0; }
+.card:nth-child(2) { margin-right: 0; margin-left: 1.5rem; }
+.primaryCard { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+.stepIcon { display: grid; place-items: center; position: relative; width: 3rem; height: 3rem; border-radius: .9rem; background: #eff5ff; color: var(--color-primary); }
+.primaryCard .stepIcon { background: #ffffff24; color: white; }
+.ring { position: absolute; inset: -5px; border: 1px solid currentColor; border-radius: 50%; opacity: 0; animation: ping 3s ease-out infinite; }
+.stepBody { min-width: 0; }
+.number { font-size: .75rem; font-weight: 600; letter-spacing: .1em; color: #91a5c1; }
+.primaryCard .number { color: #d5e5ff; }
+.card h3 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; line-height: 1.25; letter-spacing: -.03em; text-transform: lowercase; margin: .5rem 0 .75rem; }
+.primaryCard h3 { color: white; }
+.card h3::first-letter { text-transform: uppercase; }
+.card p { font-size: .9375rem; line-height: 1.8; color: #7e8da3; }
+.primaryCard p { color: #edf4ff; }
+.activity { height: 1rem; display: flex; align-items: end; gap: 5px; color: var(--color-primary); margin-bottom: .875rem; }
+.primaryCard .activity { color: white; }
+.activity i { display: block; width: 6px; height: 6px; border-radius: 3px; background: currentColor; opacity: .4; animation: meter 2s ease-in-out infinite alternate; }
+.activity i:nth-child(2) { animation-delay: -.6s; }
+.activity i:nth-child(3) { animation-delay: -1.2s; }
+.activity i:nth-child(4) { animation-delay: -.3s; }
+.activity i:nth-child(5) { animation-delay: -.9s; }
+@keyframes route { to { stroke-dashoffset: -110; } }
+@keyframes marker { 50% { opacity: .25; transform: scale(1.8); } }
+@keyframes spark { to { height: 14px; opacity: 1; } }
+@keyframes meter { from { height: 4px; opacity: .3; } to { height: 16px; opacity: .9; } }
+@keyframes ping { 0% { transform: scale(.75); opacity: .5; } 80%,100% { transform: scale(1.45); opacity: 0; } }
+@media (min-width: 768px) { .section { padding: 8rem 0; } }
+@media (max-width: 1023px) { .layout { grid-template-columns: minmax(0,1fr); gap: 2.5rem; max-width: 52rem; } .field { width: 100%; margin: 0; } .card { padding: 2rem; } }
+@media (max-width: 479px) { .section { padding: 4rem 0; } .mosaic { gap: .625rem; } .field { width: 185%; margin-left: -42.5%; } .reading { grid-template-columns: 1fr; gap: .5rem; padding: .875rem; } .readingIcon { width: 1.875rem; height: 1.875rem; } .readingLabel { font-size: .6875rem; } .spark { grid-column: 1; } .fieldBadge { bottom: .75rem; left: .625rem; font-size: .625rem; padding: .4rem; gap: .3rem; } .card { grid-template-columns: 2.5rem minmax(0,1fr); gap: 1rem; padding: 1.5rem 1.25rem; margin-right: .75rem; border-radius: 1.25rem; } .card:nth-child(2) { margin-left: .75rem; } .stepIcon { width: 2.5rem; height: 2.5rem; border-radius: .75rem; } .card h3 { font-size: 1.5rem; } .card p { font-size: .875rem; } .stack::before { left: 2rem; border-radius: 2rem; } }
+@media (prefers-reduced-motion: reduce) { .route,.marker,.spark i,.ring,.activity i { animation: none; } .ring { opacity: .15; } }

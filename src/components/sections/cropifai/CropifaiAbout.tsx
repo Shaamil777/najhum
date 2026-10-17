@@ -1,83 +1,82 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
-import { Database, Wifi, Lightbulb } from "lucide-react";
+import { CloudSun, Database, Droplets, Lightbulb, Wifi } from "lucide-react";
 import { cropifaiContent } from "@/content/cropifai";
+import styles from "./CropifaiAbout.module.css";
+
+function ConnectedField() {
+  return (
+    <svg viewBox="0 0 520 320" className={styles.field} fill="none" aria-hidden="true">
+      <defs>
+        <clipPath id="cropifai-field-boundary"><path d="M62 164 275 42 487 164 275 289Z" /></clipPath>
+      </defs>
+      <path d="M62 174 275 52 487 174 275 299Z" fill="#d1dbdc" />
+      <path d="M62 164 275 42 487 164 275 289Z" fill="#e3ece5" />
+      <g clipPath="url(#cropifai-field-boundary)">
+        {Array.from({ length: 7 }, (_, i) => (
+          <path key={i} d={`M${85 + i * 29} 106l85 49-130 75-85-49z`} fill={i % 2 ? "#b6d3bf" : "#c7ddce"} stroke="#f5faf6" strokeWidth="4" />
+        ))}
+      </g>
+      <path d="M79 181 271 70 462 180M274 278V190l-50-29" stroke="white" strokeWidth="10" />
+      <path className={styles.route} d="M110 168 271 75 446 176 275 272V190l-50-29" stroke="currentColor" strokeWidth="3" strokeDasharray="4 7" />
+      <path d="m326 105 36-21 39 22v43l-38 22-37-22z" fill="#edf4ff" stroke="#9abcf7" />
+      <path d="m326 105 37 22 38-21m-38 21v44" stroke="#9abcf7" />
+      <path d="m349 108 14 8 14-8-14-8z" fill="currentColor" />
+      {[[140, 171], [273, 231], [402, 183]].map(([cx, cy], i) => (
+        <g key={cx}>
+          <circle cx={cx} cy={cy} r="10" fill="white" stroke="currentColor" strokeWidth="2" />
+          <circle className={styles.marker} cx={cx} cy={cy} r="4" fill="currentColor" style={{ animationDelay: `${i * 0.8}s` }} />
+        </g>
+      ))}
+    </svg>
+  );
+}
 
 export default function CropifaiAbout() {
   const { about } = cropifaiContent;
-  const stepsConfig = about.steps;
-  const steps = [
-    { ...stepsConfig[0], icon: Database },
-    { ...stepsConfig[1], icon: Wifi },
-    { ...stepsConfig[2], icon: Lightbulb },
+  const steps = about.steps.map((step, index) => ({ ...step, icon: [Database, Wifi, Lightbulb][index] }));
+  // These labels are excerpts from the existing description, not new product claims.
+  const readings = [
+    { icon: Droplets, text: "moisture and salinity at root depth" },
+    { icon: Database, text: "flow through the irrigation main" },
+    { icon: CloudSun, text: "tank levels, valve position and local weather" },
   ];
 
   return (
-    <section id="cropifai-about" aria-label="cropif AI About" className="relative w-full min-h-[70vh] flex items-center bg-zinc-50 overflow-hidden py-24 md:py-32 border-b border-zinc-200">
-      
-      {/* Dynamic Angled Shape on the left */}
-      <div className="absolute left-0 top-0 bottom-0 w-1/2 sm:w-1/3 lg:w-[30%] z-0">
-        <svg 
-          viewBox="0 0 100 100" 
-          preserveAspectRatio="none"
-          className="w-full h-full text-primary overflow-visible drop-shadow-[10px_0_30px_rgba(34,197,94,0.15)]"
-        >
-          <polygon 
-            points="-5,-5 100,50 -5,105 0,75 50,50 0,25" 
-            fill="currentColor"
-          />
-        </svg>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row justify-end items-center">
-        <div className="w-full sm:w-[85%] md:w-3/4 lg:w-[75%] pl-6 sm:pl-16 md:pl-24 lg:pl-32 py-8">
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{about.header.tag}</p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 mb-6 leading-tight tracking-tight">
-              {about.header.titlePart1} <br />
-              {about.header.titlePart2} <span className="text-primary">{about.header.highlight}</span>
-            </h2>
-            
-            <p className="text-lg md:text-xl text-zinc-600 leading-relaxed font-medium mb-12 max-w-3xl">
-              {about.header.description}
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
-            {steps.map((step, i) => (
-              <motion.div 
-                key={step.num}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.5 }}
-                className="bg-white border border-zinc-100 rounded-2xl p-6 shadow-xl shadow-zinc-200/50 hover:border-primary/30 hover:shadow-primary/5 transition-all group relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none" />
-                
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-5 relative z-10 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <step.icon className="w-5 h-5" strokeWidth={2.5} />
+    <section id="cropifai-about" aria-labelledby="cropifai-about-heading" className={styles.section}>
+      <div className={`container mx-auto px-6 ${styles.layout}`}>
+        <div className={styles.introduction}>
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">{about.header.tag}</p>
+          <h2 id="cropifai-about-heading" className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-zinc-900 leading-tight tracking-tight">
+            {about.header.titlePart1}{" "}{about.header.titlePart2}{" "}<span className="text-primary">{about.header.highlight}</span>
+          </h2>
+          <div className={styles.mosaic} aria-hidden="true">
+            <div className={styles.fieldTile}>
+              <ConnectedField />
+              <span className={styles.fieldBadge}><Wifi size={16} />LPWAN</span>
+            </div>
+            <div className={styles.readings}>
+              {readings.map(({ icon: Icon, text }) => (
+                <div className={styles.reading} key={text}>
+                  <span className={styles.readingIcon}><Icon size={20} /></span>
+                  <span className={styles.readingLabel}>{text}</span>
+                  <span className={styles.spark}>{Array.from({ length: 5 }, (_, i) => <i key={i} />)}</span>
                 </div>
-                
-                <h3 className="text-sm font-black text-zinc-900 uppercase tracking-widest mb-3 relative z-10">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-zinc-500 font-medium leading-relaxed relative z-10">
-                  {step.desc}
-                </p>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
-          
+          <p className={`text-lg md:text-xl text-zinc-600 leading-relaxed font-medium ${styles.description}`}>{about.header.description}</p>
+        </div>
+        <div className={styles.stack}>
+          {steps.map(({ icon: Icon, ...step }, index) => (
+            <article className={`${styles.card} ${index === 0 ? styles.primaryCard : ""}`} key={step.num}>
+              <span className={styles.stepIcon}><span className={styles.ring} aria-hidden="true" /><Icon size={25} aria-hidden="true" /></span>
+              <div className={styles.stepBody}>
+                <span className={styles.number}>{step.num.padStart(2, "0")}</span>
+                <h3>{step.title}</h3>
+                <div className={styles.activity} aria-hidden="true">{Array.from({ length: 5 }, (_, i) => <i key={i} />)}</div>
+                <p>{step.desc}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
