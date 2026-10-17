@@ -17,7 +17,7 @@ export function buildMetadata({title,description,path,keywords=[],image,noIndex=
   const url=absoluteSiteUrl(path); const imageUrl=image?absoluteSiteUrl(image):siteConfig.ogImage;
   return { title:cleanTitle,description:summary,keywords:[...new Set(["Najhum",...keywords])],alternates:{canonical:url},
     robots:{index:!noIndex,follow:!noIndex,googleBot:{index:!noIndex,follow:!noIndex,"max-image-preview":"large","max-snippet":-1,"max-video-preview":-1}},
-    openGraph:{type:"website",locale:"en_GB",siteName:siteConfig.name,url,title:`${cleanTitle} | Najhum`,description:summary,images:[{url:imageUrl,alt:cleanTitle,...(!image?{width:1200,height:630}:{})}]},
+    openGraph:{type:"website",locale:"en_GB",siteName:siteConfig.name,url,title:`${cleanTitle} | Najhum`,description:summary,images:[{url:imageUrl,alt:cleanTitle,type:"image/png",...(!image?{width:1200,height:630}:{})}]},
     twitter:{card:"summary_large_image",title:`${cleanTitle} | Najhum`,description:summary,images:[imageUrl]},
   };
 }

@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Najhum",
   description: "Next Generation Digital Excellence and Sustainable Progress",
   url: "https://najhumgroup.com",
-  ogImage: "https://najhumgroup.com/opengraph-image",
+  ogImage: "https://najhumgroup.com/og-image.png",
   contact: {
     email: "info@najhumgroup.com",
     phone: "+971 55 617 7234",

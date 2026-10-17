@@ -17,7 +17,6 @@ export const EVOLTICS_PARTNERS: PartnerLogo[] = [
   { name: "Taqon Electric", src: "/logo/evoltics_client/taqon.png" },
   { name: "Energy Solutions", src: "/logo/evoltics_client/energy_solution.png" },
   { name: "Copak", src: "/logo/evoltics_client/copak.webp", dark: true },
-  { name: "EV Energy", src: "/logo/evoltics_client/evEnergy.png", dark: true },
   { name: "Forza Al Khaleej", src: "/logo/evoltics_client/forzaalkhaleej.jpg" },
   { name: "NeoTechniq", src: "/logo/evoltics_client/neotechniq.avif" },
   { name: "Polfrost Dubai", src: "/logo/evoltics_client/polforest.png" },

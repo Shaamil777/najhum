@@ -6,6 +6,7 @@
     "dev": "next dev",
     "dev:webpack": "next dev --webpack",
     "build": "prisma generate && next build",
+    "generate:og": "node scripts/generate-og-image.mjs",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run"
