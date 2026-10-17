@@ -1,5 +1,5 @@
-.desktopNav { display: flex; align-items: center; gap: 8px; }
-.trigger { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 999px; background: transparent; color: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .2s,color .2s; }
+.desktopNav { font-family: var(--font-sans-base),sans-serif; display: flex; align-items: center; gap: 8px; }
+.trigger { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 999px; background: transparent; color: inherit; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .2s,color .2s; }
 .trigger:hover, .trigger[aria-current=page], .selectedTrigger { color: #0f5fb0; background: #eff6ff; }
 .chevronOpen { transform: rotate(180deg); }
 .trigger svg, .mobileSectionTrigger svg { transition: transform .2s; }
@@ -7,7 +7,7 @@
 .mega { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); width: min(1200px,calc(100vw - 32px)); overflow-y: auto; overscroll-behavior: contain; background: white; color: #0b0f17; border: 1px solid #e6eaf0; border-radius: 24px; box-shadow: 0 30px 80px -24px #0b0f1759; color-scheme: light; animation: menuIn .2s ease-out; }
 .mega::before { content: ''; position: fixed; left: 0; right: 0; top: -12px; height: 12px; }
 .platformMega { width: min(1040px,calc(100vw - 32px)); }
-.content { --menu-blue: #167de4; color: #0b0f17; font-family: var(--font-poppins),var(--font-sans),sans-serif; }
+.content { --menu-blue: #167de4; color: #0b0f17; font-family: var(--font-sans-base),sans-serif; }
 .content a { text-decoration: none; }
 .content a:focus-visible, .content button:focus-visible, .trigger:focus-visible, .mobileOverlay a:focus-visible, .mobileOverlay button:focus-visible, .iconButton:focus-visible { outline: 2px solid #167de4; outline-offset: 3px; }
 .platformBody { display: grid; grid-template-columns: minmax(0,1fr) 340px; }
@@ -67,14 +67,14 @@
 .featured p { font-size: 13px; line-height: 1.55; color: #c3cedd; margin: 0; }
 .featured > a { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; font-weight: 600; color: white; }
 .mobileContent .mobileNote { margin: 10px 4px 0; font-size: 12px; line-height: 1.5; color: #5b6473; }
-.mobileOverlay { --menu-blue: #167de4; position: fixed; inset: 0; z-index: 100; height: 100dvh; display: flex; flex-direction: column; background: white; color: #0b0f17; color-scheme: light; font-family: var(--font-poppins),var(--font-sans),sans-serif; animation: mobileIn .2s ease-out; }
+.mobileOverlay { --menu-blue: #167de4; position: fixed; inset: 0; z-index: 100; height: 100dvh; display: flex; flex-direction: column; background: white; color: #0b0f17; color-scheme: light; font-family: var(--font-sans-base),sans-serif; animation: mobileIn .2s ease-out; }
 .mobileHeader { flex: none; height: 68px; padding: 0 16px 0 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #eef1f5; }
 .iconButton, .closeButton { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid #e3e8f0; background: white; color: #0b0f17; border-radius: 50%; cursor: pointer; }
 .closeButton { border-radius: 12px; }
 .mobileScroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px 16px 16px; }
 .mobileSection { border-bottom: 1px solid #eef1f5; }
 .mobileSection:has([aria-expanded=true]) { padding-bottom: 16px; }
-.mobileSectionTrigger, .mobileNavLink { width: 100%; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 4px; border: 0; background: transparent; font-size: 17px; font-weight: 600; color: #0b0f17; text-decoration: none; cursor: pointer; }
+.mobileSectionTrigger, .mobileNavLink { font-family: inherit; width: 100%; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 4px; border: 0; background: transparent; font-size: 17px; font-weight: 600; color: #0b0f17; text-decoration: none; cursor: pointer; }
 .mobileSectionTrigger[aria-expanded=true] { color: #0f5fb0; }
 .mobileNavLink { border-bottom: 1px solid #eef1f5; }
 .mobileContent .platformBody { display: block; }

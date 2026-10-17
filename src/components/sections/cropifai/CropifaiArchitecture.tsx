@@ -63,7 +63,7 @@ export default function CropifaiArchitecture() {
             {/* Traveling Glow Pulse Animation (desktop only) */}
             <div className="hidden lg:block absolute top-[36px] md:top-[40px] left-[8%] right-[8%] h-[2px] -z-10 overflow-visible pointer-events-none">
               <motion.div 
-                className="w-24 h-[3px] rounded-full bg-primary shadow-[0_0_14px_4px_rgba(59,130,246,0.65)] absolute top-0 -translate-y-1/2"
+                className="w-24 h-[3px] rounded-full bg-primary shadow-[0_0_14px_4px_rgba(22,163,74,0.65)] absolute top-0 -translate-y-1/2"
                 animate={{
                   left: ["0%", "100%"]
                 }}
@@ -94,7 +94,7 @@ export default function CropifaiArchitecture() {
                   >
                     <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center border-2 bg-white transition-all duration-500 ${
                       isActive 
-                        ? 'border-primary shadow-[0_0_24px_rgba(59,130,246,0.35)] scale-110' 
+                        ? 'border-primary shadow-[0_0_24px_rgba(22,163,74,0.35)] scale-110'
                         : isPast 
                           ? 'border-primary/40' 
                           : 'border-slate-100 text-slate-300'

@@ -1,9 +1,17 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, Minimize2 } from "lucide-react";
+import { useHydrated } from "@/lib/utils/use-hydrated";
+
+function subscribeToViewport(onChange: () => void) {
+  window.addEventListener("resize", onChange);
+  return () => window.removeEventListener("resize", onChange);
+}
+const readIsMobile = () => window.innerWidth < 1024;
+const serverIsMobile = () => false;
 
 export interface ModulePageConfig {
   index: number;
@@ -75,32 +83,27 @@ export default function IotricsDashboardDemo({
   const fullscreenIframeRef = useRef<HTMLIFrameElement>(null);
 
   const [scale, setScale] = useState(0.5);
+  const [inlineHeight, setInlineHeight] = useState(1100);
   const [fullscreenScale, setFullscreenScale] = useState(1);
+  const [fullscreenHeight, setFullscreenHeight] = useState(1100);
   const [isLoading, setIsLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHydrated();
 
   const currentConfig = MODULE_PAGES[activeIndex] || MODULE_PAGES[0];
   const targetUrl = `/dashboard_Demo/${currentConfig.file}`;
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useSyncExternalStore(subscribeToViewport, readIsMobile, serverIsMobile);
 
   // Compute scaling factor for inline container
   const updateScale = useCallback(() => {
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
       if (width > 0) {
-        setScale(Math.min(1, width / 1440));
+        const nextScale = Math.min(1, width / 1440);
+        setScale(nextScale);
+        // Match the iframe viewport to the available panel, not a page-height estimate.
+        setInlineHeight(Math.max(1, containerRef.current.clientHeight / nextScale));
       }
     }
   }, []);
@@ -110,7 +113,9 @@ export default function IotricsDashboardDemo({
     if (fullscreenContainerRef.current) {
       const width = fullscreenContainerRef.current.clientWidth;
       if (width > 0) {
-        setFullscreenScale(Math.min(1.2, width / 1440));
+        const nextScale = Math.min(1.2, width / 1440);
+        setFullscreenScale(nextScale);
+        setFullscreenHeight(Math.max(1, fullscreenContainerRef.current.clientHeight / nextScale));
       }
     }
   }, []);
@@ -174,6 +179,20 @@ export default function IotricsDashboardDemo({
         body { -webkit-user-select: none; user-select: none; }
         /* Smooth scrolling */
         html { scroll-behavior: smooth; }
+        /* Fill the actual embedded viewport; longer modules scroll inside the iframe. */
+        .wrap { min-height: 100vh; box-sizing: border-box; }
+        /* The building plan is the flexible content, rather than empty canvas below it. */
+        .wrap:has(.fp-vp) { padding-bottom: 22px !important; }
+        .wrap:has(.fp-vp) > header,
+        .wrap:has(.fp-vp) > nav,
+        .wrap:has(.fp-vp) > section:first-of-type { flex: none; }
+        .wrap:has(.fp-vp) > section:last-of-type { flex: 1 0 auto; align-items: stretch !important; }
+        .wrap:has(.fp-vp) > section:last-of-type > aside { align-self: flex-start; }
+        .wrap .tile:has(.fp-vp) { min-height: 100%; }
+        .wrap .fp-vp { flex: 1 0 580px; height: auto !important; min-height: 580px; }
+        @media (max-width: 760px) {
+          .wrap .fp-vp { flex-basis: 400px; min-height: 400px; }
+        }
       `;
       doc.head?.appendChild(style);
 
@@ -264,7 +283,7 @@ export default function IotricsDashboardDemo({
         {/* Scaled Viewport Container - 16:9 on mobile, full height on desktop, no scrollbars on mobile */}
         <div
           ref={containerRef}
-          className="relative w-full h-full overflow-hidden bg-[#F4F4F7]"
+          className="relative w-full h-full min-h-0 flex-1 overflow-hidden bg-[#F4F4F7]"
         >
           {/* Subtle loading placeholder */}
           {isLoading && (
@@ -277,7 +296,7 @@ export default function IotricsDashboardDemo({
           <div
             style={{
               width: "100%",
-              height: currentConfig.height * scale,
+              height: isMobile ? currentConfig.height * scale : "100%",
               position: "relative"
             }}
           >
@@ -295,7 +314,7 @@ export default function IotricsDashboardDemo({
                 top: 0,
                 left: 0,
                 width: 1440,
-                height: currentConfig.height,
+                height: isMobile ? currentConfig.height : inlineHeight,
                 transform: `scale(${scale})`,
                 transformOrigin: "top left",
                 pointerEvents: isMobile ? "none" : "auto"
@@ -328,12 +347,12 @@ export default function IotricsDashboardDemo({
             {/* Fullscreen Viewport Area */}
             <div
               ref={fullscreenContainerRef}
-              className="relative w-full h-full overflow-auto bg-[#F4F4F7] flex justify-center"
+              className="relative w-full h-full min-h-0 overflow-hidden bg-[#F4F4F7] flex justify-center"
             >
               <div
                 style={{
                   width: 1440 * fullscreenScale,
-                  height: currentConfig.height * fullscreenScale,
+                  height: "100%",
                   position: "relative"
                 }}
               >
@@ -350,7 +369,7 @@ export default function IotricsDashboardDemo({
                     top: 0,
                     left: 0,
                     width: 1440,
-                    height: currentConfig.height,
+                    height: fullscreenHeight,
                     transform: `scale(${fullscreenScale})`,
                     transformOrigin: "top left",
                     pointerEvents: "auto"

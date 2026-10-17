@@ -2,7 +2,6 @@
 
 import { useId, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import PlatformBrand from "@/components/ui/PlatformBrand";
 import { ArrowRight, ArrowUpRight, Check, ChevronRight, Cpu, Plug, Sprout, HelpCircle } from "lucide-react";
 import { buildSolutionGroups, type PublishedSolutionItem } from "./menu-data";
 import styles from "./Navigation.module.css";
@@ -31,7 +30,6 @@ export function PlatformMenuContent({ mobile = false, onNavigate }: { mobile?: b
         </div>
         {!mobile && <aside className={styles.platformPreview} style={{ background: current.dark }}>
           <div key={current.name} className={styles.previewCopy}>
-            {active < 2 && <PlatformBrand platform={active === 0 ? "iotrics" : "evoltics"} />}
             <span className={styles.previewTag}>{current.tag}</span><strong className={styles.previewName}>{current.name}</strong><p>{current.desc}</p>
             <ul>{current.points.map(point => <li key={point}><Check size={16} aria-hidden="true" />{point}</li>)}</ul>
             <Link href={current.href} onClick={onNavigate} className={styles.explore}>Explore {current.name}<ArrowUpRight size={16} aria-hidden="true" /></Link>

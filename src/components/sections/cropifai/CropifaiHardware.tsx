@@ -25,7 +25,7 @@ export default function CropifaiHardware() {
       
       {/* Decorative background blobs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-[100%] blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       <Container size="xl" className="relative z-10">
         

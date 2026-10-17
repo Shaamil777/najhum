@@ -1,6 +1,7 @@
 import { buildMetadata, pageSchema } from "@/lib/seo";
 import { pageSeo } from "@/content/page-seo";
 import { pageSections } from "@/content/page-sections";
+import styles from "./CropifaiTheme.module.css";
 import StructuredData from "@/components/seo/StructuredData";
 import CropifaiHero from "@/components/sections/cropifai/CropifaiHero";
 import CropifaiAbout from "@/components/sections/cropifai/CropifaiAbout";
@@ -15,7 +16,6 @@ import CropifaiImpact from "@/components/sections/cropifai/CropifaiImpact";
 import PlatformProductsServer from "@/components/shared/PlatformProductsServer";
 import PlatformSolutionsServer from "@/components/shared/PlatformSolutionsServer";
 
-import CropifaiBusinessModels from "@/components/sections/cropifai/CropifaiBusinessModels";
 import CropifaiClients from "@/components/sections/cropifai/CropifaiClients";
 import CropifaiFaq from "@/components/sections/cropifai/CropifaiFaq";
 import CropifaiCta from "@/components/sections/cropifai/CropifaiCta";
@@ -25,7 +25,7 @@ export const metadata = buildMetadata(pageSeo.cropifai);
 
 export default function CropifaiPage() {
   return (
-    <><StructuredData data={pageSchema(pageSeo.cropifai, pageSections.cropifai, { "@type": "SoftwareApplication", name: "cropifAI", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: pageSeo.cropifai.path, provider: { "@type": "Organization", name: "Najhum Technologies LLC" } })} /><div className="flex flex-col w-full">
+    <><StructuredData data={pageSchema(pageSeo.cropifai, pageSections.cropifai, { "@type": "SoftwareApplication", name: "cropifAI", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: pageSeo.cropifai.path, provider: { "@type": "Organization", name: "Najhum Technologies LLC" } })} /><div className={`flex flex-col w-full ${styles.page}`}>
       <CropifaiHero />
       <CropifaiAbout />
       <CropifaiArchitecture />
@@ -39,7 +39,6 @@ export default function CropifaiPage() {
       <CropifaiWhyChoose />
       {/* <CropifaiImpact /> */}
 
-      {/* <CropifaiBusinessModels /> */}
       {/* <CropifaiClients /> */}
       <CropifaiFaq />
       <CropifaiCta />

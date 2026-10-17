@@ -1,0 +1,15 @@
+.page {
+  --business-model-dark: #0a2617;
+  --theme-primary: #16a34a;
+  --theme-primary-hover: #15803d;
+  --theme-primary-light: #e7f7ec;
+  --color-primary: #16a34a;
+  --color-primary-hover: #15803d;
+  --color-primary-light: #e7f7ec;
+  --theme-accent: #15803d;
+  --theme-accent-hover: #166534;
+  --theme-accent-light: #f0fdf4;
+  --color-accent: #15803d;
+  --color-accent-hover: #166534;
+  --color-accent-light: #f0fdf4;
+}

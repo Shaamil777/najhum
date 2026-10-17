@@ -1,0 +1,19 @@
+.item { border-bottom: 1px solid #e5e5e5; min-width: 0; }
+.heading { margin: 0; }
+.trigger { width: 100%; display: flex; align-items: center; gap: .75rem; padding: 1rem 0; background: transparent; border: 0; color: #a3a3a3; font-family: inherit; font-size: .75rem; line-height: 1.5; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-align: left; cursor: pointer; }
+.trigger:hover { color: #525252; }
+.trigger.selected { color: #171717; }
+.trigger:focus-visible,.details:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; border-radius: 4px; }
+.details { padding: 0 .5rem 1.5rem 0; color: #737373; font-size: 13px; line-height: 1.65; overflow-wrap: break-word; }
+.cta { flex: none; }
+@media(min-width:640px) { .trigger { gap: 1rem; padding: 1.25rem 0; font-size: .875rem; } .details { padding-right: 1rem; font-size: .875rem; } }
+@media(min-width:1024px) {
+  /* Reserve one details viewport so module changes never resize either column. */
+  .accordion { height: clamp(860px,calc(100dvh - 8rem),960px); min-height: 0; }
+  .item { flex: none; }
+  .item.active { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
+  .heading { flex: none; }
+  .trigger { font-size: .875rem; padding: 1rem 0; }
+  .details { flex: 1 1 0; min-height: 0; padding: 0 .75rem 1rem 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; scrollbar-width: thin; }
+}
+@media(min-width:1280px) { .trigger { font-size: 1rem; } }

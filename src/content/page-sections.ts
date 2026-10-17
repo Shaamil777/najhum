@@ -118,10 +118,6 @@ export const pageSections = {
       "name": "Io TRICs Business Model"
     },
     {
-      "id": "iotrics-capabilities",
-      "name": "Io TRICs Capabilities"
-    },
-    {
       "id": "iotrics-industries",
       "name": "Industrial IoT monitoring for every industry"
     },

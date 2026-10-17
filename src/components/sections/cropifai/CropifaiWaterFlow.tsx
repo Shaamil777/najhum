@@ -33,7 +33,7 @@ export default function CropifaiWaterFlow() {
             <div className="relative w-[300px] sm:w-[340px] lg:w-[380px] h-[340px] sm:h-[400px] lg:h-[440px] bg-primary/10 rounded-[2.25rem] overflow-hidden shadow-xl shadow-primary/15 border border-primary/20 flex items-center justify-center p-6 lg:p-7">
 
               {/* Background gradient using brand color */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#e8f1ff] via-primary/30 to-primary" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#e7f7ec] via-primary/30 to-primary" />
 
               {/* Actual Image */}
               <div className="relative w-full h-full flex items-center justify-center">
@@ -60,7 +60,7 @@ export default function CropifaiWaterFlow() {
               <span className="text-primary font-black tracking-widest text-xs uppercase mb-2 block">
                 {waterFlow.header.tag}
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-4xl font-black text-[#1a2b4b] leading-tight tracking-tight mb-2">
+              <h2 className="text-3xl md:text-4xl lg:text-4xl font-black text-[#0a2617] leading-tight tracking-tight mb-2">
                 <AccentText text={waterFlow.header.title} accent="Smart Valve NQT02" />
               </h2>
             </div>
@@ -72,7 +72,7 @@ export default function CropifaiWaterFlow() {
                     <div className="w-3.5 h-3.5 rounded-full bg-primary" />
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#1a2b4b] mb-0.5">{control.title}</h4>
+                    <h4 className="text-base font-bold text-[#0a2617] mb-0.5">{control.title}</h4>
                     <p className="text-[#64748b] leading-relaxed text-[14px]">{control.desc}</p>
                   </div>
                 </li>

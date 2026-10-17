@@ -21,7 +21,7 @@ export default function CropifaiSolutions() {
       
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       <Container size="full" className="max-w-[1536px] px-4 sm:px-6 xl:px-8 relative z-10">
         
@@ -44,7 +44,7 @@ export default function CropifaiSolutions() {
             className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-slate-900 leading-tight tracking-tight mb-5"
           >
             {sols.header.titlePart1} <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">{sols.header.titlePart2}</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-600">{sols.header.titlePart2}</span>
           </motion.h2>
           
           <motion.p 
@@ -69,7 +69,7 @@ export default function CropifaiSolutions() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
-                className="group relative bg-[#edf4ff] border border-blue-100 rounded-[1.75rem] p-5 sm:p-6 xl:p-7 flex flex-col justify-between min-h-[250px] sm:min-h-[260px] xl:min-h-[270px] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+                className="group relative bg-[#f3fbf5] border border-green-100 rounded-[1.75rem] p-5 sm:p-6 xl:p-7 flex flex-col justify-between min-h-[250px] sm:min-h-[260px] xl:min-h-[270px] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
               >
                 {/* Background Image with smooth gradient fade matching About section */}
                 <div className="absolute top-0 right-0 bottom-0 w-[55%] sm:w-[58%] lg:w-[60%] pointer-events-none overflow-hidden rounded-r-[1.75rem]">
@@ -80,7 +80,7 @@ export default function CropifaiSolutions() {
                     className="object-cover object-right group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="(max-width: 1024px) 100vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#edf4ff] via-[#edf4ff]/85 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#f3fbf5] via-[#f3fbf5]/85 to-transparent" />
                 </div>
 
                 {/* Decorative Floating Icon Badge Overlay */}
