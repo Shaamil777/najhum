@@ -1,47 +1,47 @@
 import { NextResponse } from "next/server";
 import twilio from "twilio";
-
-// These should be configured in .env
-// We mock a successful response if they are not provided so the UI can be tested
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const verifyServiceSid = process.env.TWILIO_VERIFY_SERVICE_SID;
-
-function formatE164(phone: string): string {
-  const cleaned = phone.trim().replace(/[^\d+]/g, "");
-  if (!cleaned.startsWith("+")) {
-    return "+" + cleaned;
-  }
-  return cleaned;
-}
+import { normalizePhoneNumber, isValidE164 } from "@/lib/utils/phone";
 
 export async function POST(req: Request) {
   try {
-    const { phone, channel = "whatsapp" } = await req.json();
+    const { phone, countryCode, channel = "sms" } = await req.json();
 
     if (!phone) {
       return NextResponse.json(
-        { error: "Phone number is required" },
+        { error: "Phone number is required." },
         { status: 400 }
       );
     }
 
-    const formattedPhone = formatE164(phone);
+    // Read environment variables dynamically at request time
+    const accountSid = process.env.TWILIO_ACCOUNT_SID?.trim();
+    const authToken = process.env.TWILIO_AUTH_TOKEN?.trim();
+    const verifyServiceSid = process.env.TWILIO_VERIFY_SERVICE_SID?.trim();
+
+    // Robust E.164 normalization stripping local trunk 0s and fixing country code issues
+    const formattedPhone = normalizePhoneNumber(phone, countryCode || "+971");
+
+    if (!isValidE164(formattedPhone)) {
+      return NextResponse.json(
+        { error: "Please enter a valid phone number with the correct country code." },
+        { status: 400 }
+      );
+    }
 
     if (!accountSid || !authToken || !verifyServiceSid) {
       console.warn("Twilio credentials missing. Mocking success for OTP send.");
-      // MOCK SUCCESS FOR TESTING without credentials
       return NextResponse.json({
         success: true,
-        message: "Mock OTP sent (Twilio credentials not configured in .env)",
+        formattedPhone,
+        message: "Mock OTP sent (Twilio credentials not configured in .env). Use 123456 to verify.",
         mock: true,
       });
     }
 
     const client = twilio(accountSid, authToken);
 
-    // Try WhatsApp first, with automatic fallback to SMS
-    const preferredChannel = channel === "sms" ? "sms" : "whatsapp";
+    // Try requested channel (defaults to SMS for universal delivery)
+    const preferredChannel = channel === "whatsapp" ? "whatsapp" : "sms";
     let verification;
 
     try {
@@ -62,15 +62,39 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
+      formattedPhone,
       status: verification.status,
       channel: verification.channel,
     });
   } catch (error: unknown) {
     console.error("Twilio send error:", error);
-    const message = error instanceof Error ? error.message : "Failed to send OTP";
+
+    // Handle known Twilio error codes gracefully
+    const twilioErr = error as { code?: number; status?: number; message?: string };
+    if (twilioErr?.code === 60200) {
+      return NextResponse.json(
+        { error: "Invalid phone number. Please check the country code and digits." },
+        { status: 400 }
+      );
+    }
+    if (twilioErr?.code === 60203) {
+      return NextResponse.json(
+        { error: "Maximum send attempts reached for this number. Please wait a few minutes before trying again." },
+        { status: 429 }
+      );
+    }
+    if (twilioErr?.code === 60220 || twilioErr?.code === 20429) {
+      return NextResponse.json(
+        { error: "Rate limit exceeded. Please wait a few moments and try again." },
+        { status: 429 }
+      );
+    }
+
+    const message = error instanceof Error ? error.message : "Failed to send verification code.";
     return NextResponse.json(
       { error: message },
-      { status: 500 }
+      { status: 400 }
     );
   }
 }
+

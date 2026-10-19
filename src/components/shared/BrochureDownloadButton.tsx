@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { Download, X, ChevronDown } from "lucide-react";
+import { Download, X, ChevronDown, RotateCcw } from "lucide-react";
 import { ALL_COUNTRY_CODES } from "@/content/countryDialCodes";
+import { normalizePhoneNumber, isValidE164 } from "@/lib/utils/phone";
 
 interface BrochureDownloadButtonProps {
   brochureUrl?: string | null;
@@ -27,17 +28,18 @@ export default function BrochureDownloadButton({
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
   const [error, setError] = useState("");
 
-  const formatFullPhone = (rawPhone: string, code: string) => {
-    const trimmed = rawPhone.trim();
-    if (!trimmed) return "";
-    if (trimmed.startsWith("+")) {
-      return "+" + trimmed.replace(/[^\d]/g, "");
-    }
-    const cleanDigits = trimmed.replace(/[^\d]/g, "");
-    return `${code}${cleanDigits}`;
-  };
+  // Countdown timer for resend
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setInterval(() => {
+      setCooldown((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [cooldown]);
 
   const handleDownloadClick = () => {
     if (!brochureUrl) {
@@ -56,71 +58,125 @@ export default function BrochureDownloadButton({
       setPhoneCountryCode("+971");
       setSubmittedPhone("");
       setOtp("");
+      setCooldown(0);
     }
   };
 
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSendOtp = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
     if (!name.trim()) {
       setError("Please enter your name.");
       return;
     }
+
     const cleanDigits = phone.trim().replace(/[^\d]/g, "");
-    if (!cleanDigits || cleanDigits.length < 4) {
-      setError("Please enter a valid phone number.");
+    if (!cleanDigits || cleanDigits.length < 5) {
+      setError("Please enter a valid mobile number.");
       return;
     }
-    const fullPhone = formatFullPhone(phone, phoneCountryCode);
+
+    const fullPhone = normalizePhoneNumber(phone, phoneCountryCode);
+    if (!isValidE164(fullPhone)) {
+      setError("Please verify the country code and phone number format.");
+      return;
+    }
+
     setLoading(true);
     setError("");
+
     try {
       const res = await fetch("/api/verify/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: fullPhone }),
+        body: JSON.stringify({ 
+          phone: fullPhone, 
+          countryCode: phoneCountryCode,
+          channel: "sms" 
+        }),
       });
+
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to send OTP");
-      setSubmittedPhone(fullPhone);
+      if (!res.ok) throw new Error(data.error || "Failed to send verification code.");
+
+      const activePhone = data.formattedPhone || fullPhone;
+      setSubmittedPhone(activePhone);
       setStep("otp");
+      setCooldown(30); // 30s resend cooldown
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Failed to send OTP";
+      const msg = err instanceof Error ? err.message : "Failed to send verification code.";
       setError(msg);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleResendOtp = async () => {
+    if (cooldown > 0 || resending) return;
+    setResending(true);
+    setError("");
+
+    try {
+      const targetPhone = submittedPhone || normalizePhoneNumber(phone, phoneCountryCode);
+      const res = await fetch("/api/verify/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          phone: targetPhone, 
+          countryCode: phoneCountryCode,
+          channel: "sms" 
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to resend code.");
+
+      setCooldown(30);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to resend code.";
+      setError(msg);
+    } finally {
+      setResending(false);
+    }
+  };
+
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!otp.trim()) {
-      setError("Please enter the OTP.");
+    const cleanCode = otp.trim();
+
+    if (!cleanCode) {
+      setError("Please enter the 6-digit verification code.");
       return;
     }
+
     setLoading(true);
     setError("");
-    const targetPhone = submittedPhone || formatFullPhone(phone, phoneCountryCode);
+
+    const targetPhone = submittedPhone || normalizePhoneNumber(phone, phoneCountryCode);
+
     try {
       const res = await fetch("/api/verify/check-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           phone: targetPhone,
-          code: otp.trim(),
+          countryCode: phoneCountryCode,
+          code: cleanCode,
           name: name.trim(),
           productName,
           brochureUrl,
         }),
       });
+
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Invalid OTP");
+      if (!res.ok) throw new Error(data.error || "Invalid verification code.");
 
       // Success
       localStorage.setItem("is_phone_verified", "true");
       setShowModal(false);
       window.open(brochureUrl!, "_blank");
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Invalid OTP";
+      const msg = err instanceof Error ? err.message : "Invalid verification code.";
       setError(msg);
     } finally {
       setLoading(false);
@@ -144,13 +200,14 @@ export default function BrochureDownloadButton({
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="p-6 sm:p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {step === "phone" ? "WhatsApp Verification" : "Enter Verification Code"}
+                {step === "phone" ? "Mobile Verification" : "Enter Verification Code"}
               </h2>
               <p className="text-gray-500 mb-6 text-sm">
                 {step === "phone"
@@ -174,14 +231,14 @@ export default function BrochureDownloadButton({
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder=""
+                      placeholder="Your name"
                       className="w-full h-10 px-4 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-900"
                       required
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number *
+                      Mobile Number *
                     </label>
                     <div className="flex gap-2">
                       <div className="relative w-24 shrink-0">
@@ -213,7 +270,7 @@ export default function BrochureDownloadButton({
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          placeholder=""
+                          placeholder="50 123 4567"
                           className="w-full h-10 px-4 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-900"
                           required
                         />
@@ -221,7 +278,7 @@ export default function BrochureDownloadButton({
                     </div>
                   </div>
                   <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
-                    {loading ? "Sending..." : "Send Verification Code"}
+                    {loading ? "Sending Code..." : "Send Verification Code"}
                   </Button>
                 </form>
               ) : (
@@ -234,22 +291,44 @@ export default function BrochureDownloadButton({
                       type="text"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
-                      placeholder=""
-                      className="w-full h-10 px-4 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-900"
+                      placeholder="123456"
+                      className="w-full h-10 px-4 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-gray-900 tracking-widest text-center text-lg font-mono"
                       required
                       maxLength={6}
+                      autoFocus
                     />
                   </div>
+
                   <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
                     {loading ? "Verifying..." : "Verify & Download Brochure"}
                   </Button>
-                  <button
-                    type="button"
-                    onClick={() => setStep("phone")}
-                    className="w-full text-center text-sm text-blue-600 hover:text-blue-800 mt-4 font-medium cursor-pointer"
-                  >
-                    Change details
-                  </button>
+
+                  <div className="flex items-center justify-between pt-2">
+                    <button
+                      type="button"
+                      onClick={handleResendOtp}
+                      disabled={cooldown > 0 || resending}
+                      className={`text-xs inline-flex items-center gap-1 font-medium transition-colors ${
+                        cooldown > 0 || resending
+                          ? "text-gray-400 cursor-not-allowed"
+                          : "text-blue-600 hover:text-blue-800 cursor-pointer"
+                      }`}
+                    >
+                      <RotateCcw className={`w-3 h-3 ${resending ? "animate-spin" : ""}`} />
+                      {cooldown > 0 ? `Resend code in ${cooldown}s` : "Resend code"}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStep("phone");
+                        setError("");
+                      }}
+                      className="text-xs text-gray-500 hover:text-gray-700 font-medium cursor-pointer"
+                    >
+                      Change number
+                    </button>
+                  </div>
                 </form>
               )}
             </div>
@@ -259,3 +338,4 @@ export default function BrochureDownloadButton({
     </>
   );
 }
+

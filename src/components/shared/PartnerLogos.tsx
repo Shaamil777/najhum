@@ -7,7 +7,6 @@ export const HOME_PARTNERS: PartnerLogo[] = [
   { name: "MITTCO", src: "/logo/partners/mittco.png" },
   { name: "Polfrost UAE", src: "/logo/evoltics_client/polforest.png" },
   { name: "Prestige Saudi Co. Ltd.", src: "/logo/partners/prestigeSaudi.png" },
-  { name: "ReFarm Global", src: "/logo/partners/refarm.svg", dark: true },
   { name: "Space42", src: "/logo/partners/space42.svg", dark: true },
 ];
 export const EVOLTICS_PARTNERS: PartnerLogo[] = [
