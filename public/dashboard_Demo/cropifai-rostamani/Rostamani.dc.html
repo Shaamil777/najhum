@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rostamani · AAR Garden Villa</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F4F5F6}
+a{color:#0369A1}a:hover{color:#075985}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.tile{background:#FFFFFF;border-radius:24px;padding:22px;box-shadow:0 0 0 1px rgba(10,14,20,.04),0 1px 2px rgba(10,14,20,.04),0 16px 32px -20px rgba(10,14,20,.18);min-width:0}
+.tlabel{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#646D78}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap;background:#EEF0F2;color:#2A323C}
+.p-green{background:#E1F5EC;color:#05603F}.p-water{background:#DDF4F8;color:#0E5F73}.p-amber{background:#FCF0DC;color:#7C4204}.p-blue{background:#E0EFFA;color:#075985}.p-grey{background:#EEF0F2;color:#3D4650}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:#EEF0F2;color:#0A0E14;font:500 13.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap;transition:background .15s,transform .15s}
+.btn:hover{background:#E2E5E9}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand);filter:brightness(.92)}
+.btn-ink{background:#0A0E14;color:#fff}
+.btn-ink:hover{background:#252C36}
+.btn-white{background:#fff;color:#0A0E14}
+.btn-white:hover{background:#E8EBEE}
+.btn-ghostdark{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.btn-ghostdark:hover{background:rgba(255,255,255,.2)}
+.btn-danger{background:#FBE7E7;color:#9F1D1D}
+.btn-danger:hover{background:#F7D6D6}
+.nav{display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:9px 0 7px;border:0;border-radius:14px;background:transparent;color:#646D78;font:500 10.5px 'Geist',sans-serif;cursor:pointer;position:relative;text-decoration:none}
+.nav:hover{background:#F0F2F4;color:#0A0E14}
+.nav.on{background:#0A0E14;color:#fff}
+@media (max-width:760px){.rail{position:fixed!important;left:0;right:0;bottom:0;z-index:60;flex-wrap:nowrap!important;justify-content:space-around!important;align-content:center!important;padding:6px 4px calc(6px + env(safe-area-inset-bottom))!important;gap:0!important;box-shadow:0 -1px 0 rgba(10,14,20,.08),0 -10px 30px -16px rgba(10,14,20,.25)!important}.rail-logo{display:none!important}.nav{width:auto!important;flex:1 1 0;min-width:0;padding:7px 0 6px!important}.wrap{padding:16px 16px 104px!important;gap:16px!important}.h-hero{font-size:40px!important}.m-hide{display:none!important}.cp-vp{height:420px!important}}
+.seg{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#3D4650;font:500 12.5px/1 'Geist',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.seg:hover{background:rgba(10,14,20,.06)}
+.seg.on{background:#0A0E14;color:#fff}
+.chipbtn{display:inline-flex;align-items:center;justify-content:center;min-width:52px;height:36px;padding:0 10px;border:0;border-radius:12px;background:rgba(10,14,20,.05);color:#2A323C;font:500 13px 'Geist Mono',monospace;cursor:pointer}
+.chipbtn:hover{background:rgba(10,14,20,.09)}
+.chipbtn.on{background:#0A0E14;color:#fff}
+.chipbtn:disabled{opacity:.4;cursor:not-allowed}
+.switch{position:relative;width:40px;height:24px;border-radius:999px;border:0;background:#C8CED5;cursor:pointer;flex-shrink:0;transition:background .2s}
+.switch::after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s}
+.switch.on{background:var(--brand)}
+.switch.on::after{transform:translateX(16px)}
+.glass{background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,.7) inset,0 10px 30px -12px rgba(10,14,20,.25)}
+.zpill{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:#2A323C;font:500 13px 'Geist',sans-serif;cursor:pointer;white-space:nowrap}
+.zpill:hover{background:rgba(10,14,20,.06)}
+.zpill.on{background:#fff;color:#0A0E14;box-shadow:0 1px 3px rgba(10,14,20,.12)}
+.site{display:flex;align-items:center;gap:12px;min-width:0;text-align:left;border:0;border-radius:18px;padding:12px 16px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(10,14,20,.06);font:inherit;color:inherit;cursor:pointer}
+.site:hover{box-shadow:0 0 0 1px rgba(10,14,20,.14)}
+.site.on{box-shadow:0 0 0 2px var(--brand)}
+.run{position:absolute;top:8px;bottom:8px;border-radius:7px;min-width:10px}
+.run.done{background:var(--brand)}
+.run.live{background:repeating-linear-gradient(-45deg,#0891B2 0 6px,#67E8F9 6px 12px);background-size:17px 17px;animation:tl-run 1s linear infinite}
+@keyframes tl-run{to{background-position:17px 0}}
+/* Compound twin */
+.cp-vp{position:relative;height:540px;overflow:hidden;perspective:1800px;perspective-origin:50% 38%;cursor:grab;user-select:none;touch-action:none}
+.cp-vp.dragging{cursor:grabbing}
+.cp-world{position:absolute;left:50%;top:50%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.cp-vp.dragging .cp-world{transition:none}
+.cp-world *{transform-style:preserve-3d}
+.cp-ground{position:absolute;inset:0;border-radius:30px;background:linear-gradient(rgba(120,110,90,.06) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(120,110,90,.06) 1px,transparent 1px) 0 0/40px 40px,#ECE7DB;box-shadow:0 40px 80px -20px rgba(10,14,20,.25)}
+.cp-court{position:absolute;border-radius:10px;background:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px) 0 0/24px 24px,#E2DCCD}
+.cp-lawn{position:absolute;border-radius:6px;background:repeating-linear-gradient(90deg,#A4D48F 0 30px,#9ACB85 30px 60px);transition:background .4s}
+.cp-lawn.wet{background:repeating-linear-gradient(90deg,#7FBF73 0 30px,#76B66A 30px 60px)}
+.cp-lawn.dry{background:repeating-linear-gradient(90deg,#CFD49A 0 30px,#C6CB90 30px 60px)}
+.cp-bed{position:absolute;border-radius:5px;background:#8A6A4B;box-shadow:inset 0 0 0 3px #CFC6B4}
+.cp-bed.wet{background:#5E4630}
+.cp-bed.dry{background:#A88C6C}
+.cp-hit{position:absolute;border-radius:8px;cursor:pointer;transform:translateZ(5px)}
+.cp-hit.sel{box-shadow:0 0 0 3px var(--brand),0 0 0 7px rgba(2,132,199,.18)}
+.cp-face{position:absolute;backface-visibility:visible;pointer-events:none}
+.cp-wall{background-image:repeating-linear-gradient(90deg,transparent 0 18px,rgba(70,90,110,.30) 18px 32px,transparent 32px 46px);background-size:46px 44%;background-repeat:repeat-x;background-position:0 30%}
+.cp-roof{box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),inset 0 0 0 4px rgba(10,14,20,.06);display:flex;align-items:center;justify-content:center;font:600 13px 'Geist Mono',monospace;color:rgba(10,14,20,.35)}
+.cp-deck{position:absolute;border-radius:8px;background:#F3F0E8}
+.cp-pool{position:absolute;border-radius:6px;background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.45) 0 6%,transparent 18%) 0 0/60px 40px,linear-gradient(135deg,#5CC8E0,#2CA6C9);box-shadow:inset 0 0 0 3px #E8F7FB}
+.cp-canopy{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 35%,#7CC46B,#3E8A3A 70%);box-shadow:0 0 0 1px rgba(30,70,30,.2)}
+.cp-canopy.palm{background:radial-gradient(circle at 40% 40%,#9BCB6A,#4E8B2E 72%)}
+.cp-trunk{position:absolute;background:#7A5B3E;transform-origin:50% 100%;pointer-events:none}
+.cp-head{position:absolute;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#5B6470;transform:translateZ(2px)}
+.cp-spray{position:absolute;border-radius:50%;pointer-events:none}
+.cp-spray i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(103,232,249,.55) 0 30%,rgba(103,232,249,.18) 60%,transparent 70%);animation:cp-spray 1.4s ease-out infinite}
+@keyframes cp-spray{0%{transform:scale(.35);opacity:1}100%{transform:scale(1);opacity:.15}}
+.cp-pipe{position:absolute;border-radius:4px;background:#8A939D;transform:translateZ(1px)}
+.cp-pipe.h.on{background:repeating-linear-gradient(90deg,#0891B2 0 12px,#67E8F9 12px 20px);animation:cp-x .7s linear infinite;box-shadow:0 0 10px rgba(103,232,249,.7)}
+.cp-pipe.v.on{background:repeating-linear-gradient(0deg,#0891B2 0 12px,#67E8F9 12px 20px);animation:cp-y .7s linear infinite;box-shadow:0 0 10px rgba(103,232,249,.7)}
+@keyframes cp-x{to{background-position:20px 0}}
+@keyframes cp-y{to{background-position:0 -20px}}
+.cp-bill{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+.cp-hud{pointer-events:auto;display:block;text-align:left;border:0;border-radius:12px;padding:7px 11px;white-space:nowrap;font:500 11px/1.35 'Geist',sans-serif;color:#0A0E14;cursor:pointer;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 20px -6px rgba(10,14,20,.28)}
+.cp-hud strong{font-size:12px;font-weight:600}
+.cp-hud-sub{color:#646D78;font-size:10.5px}
+.cp-stem{width:1.5px;margin:0 auto;background:linear-gradient(to bottom,rgba(10,14,20,.45),rgba(10,14,20,0))}
+</style>
+</helmet>
+
+<div style="--brand: {{brand}}; min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: #F4F5F6; color: #0A0E14; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+  <!-- Rail -->
+  <nav aria-label="Main" class="rail" style="flex: 1 1 84px; background: #FFFFFF; box-shadow: 1px 0 0 rgba(10,14,20,.06); padding: 18px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 6px">
+    <div class="rail-logo" style="width: 44px; height: 44px; border-radius: 14px; background: {{brand}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin: 0 8px 14px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg>
+    </div>
+    <a href="Rostamani.dc.html" class="nav on" aria-current="page">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+      Overview
+    </a>
+    <a href="Rostamani-Sites.dc.html" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path></svg>
+      Sites
+    </a>
+    <a href="Rostamani-Schedule.dc.html" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+      Schedule
+    </a>
+    <a href="Rostamani-Analytics.dc.html" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg>
+      Analytics
+    </a>
+    <a href="Rostamani-Alarms.dc.html" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      Alarms
+      <sc-if value="{{alarm.active}}" hint-placeholder-val="{{ true }}"><span style="position: absolute; top: 7px; right: 17px; width: 8px; height: 8px; border-radius: 50%; background: #D97706; box-shadow: 0 0 0 2px #FFFFFF"></span></sc-if>
+    </a>
+    <a href="Rostamani-Devices.dc.html" class="nav">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"></path></svg>
+      Devices
+    </a>
+  </nav>
+
+  <div style="flex: 999 1 600px; min-width: 0">
+    <div class="wrap" style="max-width: 1360px; margin: 0 auto; padding: 22px 36px 56px; display: flex; flex-direction: column; gap: 22px">
+
+      <!-- Top bar -->
+      <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <button type="button" class="btn btn-white" style="box-shadow: 0 0 0 1px rgba(10,14,20,.08)">
+            <span style="color: #646D78">Rostamani</span>
+            <span style="color: #A2AAB3">/</span>
+            <strong style="font-weight: 600">AAR Garden Villa</strong>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <span class="pill p-green"><span class="dot" style="background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2)"></span>Live · synced 42 s ago</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 8px 0 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(10,14,20,.08); color: #646D78; min-width: 0">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+            <input type="search" placeholder="Search fields, valves, villas" style="border: 0; outline: 0; background: transparent; font: 400 13.5px 'Geist', sans-serif; color: #0A0E14; width: 210px; min-width: 0">
+            <span class="mono" style="font-size: 11px; padding: 3px 7px; border-radius: 7px; background: #EEF0F2; color: #3D4650">⌘K</span>
+          </label>
+          <button type="button" class="btn btn-white" style="box-shadow: 0 0 0 1px rgba(10,14,20,.08); padding: 0 12px" aria-label="Sync now">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
+          </button>
+          <button type="button" class="btn btn-danger" disabled="{{sim}}">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
+            Emergency stop
+          </button>
+          <button type="button" aria-label="Account: Rostamani Administrator" style="width: 40px; height: 40px; border-radius: 50%; border: 0; background: #0A0E14; color: #FFFFFF; font: 600 13px 'Geist', sans-serif; cursor: pointer">RA</button>
+        </div>
+      </header>
+
+      <sc-if value="{{sim}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: #FCF0DC; color: #6B3A05; font-size: 13.5px">
+          <span class="dot" style="background: #D97706"></span>
+          <span><strong style="font-weight: 600">Simulation mode</strong> · commands would not reach IoTRICs Cloud, so irrigation controls are off. An administrator can switch the connection to live.</span>
+        </div>
+      </sc-if>
+
+      <!-- Portfolio -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 10px">
+        <sc-for list="{{sites}}" as="st" hint-placeholder-count="3">
+          <button type="button" class="{{st.cls}}" onClick="{{st.pick}}">
+            <span style="width: 40px; height: 40px; border-radius: 12px; background: {{st.iconBg}}; color: {{st.iconFg}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path></svg>
+            </span>
+            <span style="min-width: 0; flex: 1">
+              <span style="display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{st.name}}</span>
+              <span style="display: block; font-size: 12.5px; color: #646D78; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{st.sub}}</span>
+            </span>
+            <span class="{{st.pillCls}}" style="height: 26px; font-size: 12px"><span class="dot" style="background: {{st.dot}}"></span>{{st.status}}</span>
+          </button>
+        </sc-for>
+      </section>
+
+      <sc-if value="{{plannedSite}}" hint-placeholder-val="{{ false }}">
+        <section class="tile" style="padding: 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
+          <div style="max-width: 640px">
+            <span class="pill p-grey">Planned site</span>
+            <h2 style="margin: 14px 0 6px; font-size: 36px; font-weight: 600; letter-spacing: -0.03em">{{plannedName}}</h2>
+            <p style="margin: 0; color: #4A535D; font-size: 15px">Hardware telemetry deployment is in progress. Fields, valves and live data appear here once the site's devices are connected to IoTRICs Cloud.</p>
+          </div>
+          <button type="button" class="btn btn-ink" onClick="{{backToLive}}">Back to AAR Garden Villa</button>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{liveSite}}" hint-placeholder-val="{{ true }}">
+      <!-- Status hero -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 18px; padding: 10px 4px 4px">
+          <div class="mono" style="font-size: 12.5px; color: #646D78; text-transform: uppercase; letter-spacing: .08em">Wed 7 Oct · 17:51 · Palm Jumeirah, Dubai</div>
+          <h1 class="h-hero" style="margin: 0; font-size: 56px; line-height: 1.02; font-weight: 600; letter-spacing: -0.035em; text-wrap: balance">{{hero.title}}</h1>
+          <p style="margin: 0; font-size: 17px; color: #4A535D; max-width: 640px; text-wrap: pretty">{{hero.sub}}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <span class="pill" style="background: #FFFFFF; box-shadow: 0 0 0 1px rgba(10,14,20,.08); padding: 0 6px 0 12px; height: 36px">
+              <label for="ar" style="cursor: pointer">Auto-run</label>
+              <button id="ar" type="button" class="{{autoRunCls}}" aria-pressed="{{autoRun}}" onClick="{{toggleAutoRun}}"></button>
+            </span>
+            <span class="pill p-water" style="height: 36px">TSE supply · 100% recycled</span>
+            <span class="pill" style="height: 36px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(10,14,20,.08)"><span class="dot" style="background: #10B981"></span>6 of 6 devices online</span>
+            <sc-if value="{{alarm.active}}" hint-placeholder-val="{{ true }}">
+              <a href="#alarms" class="pill p-amber" style="height: 36px; text-decoration: none"><span class="dot" style="background: #D97706"></span>1 alarm · Field R dry</a>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="flex: 1 1 360px; min-width: 0; border-radius: 28px; background: #0B1220; color: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 48px -24px rgba(10,14,20,.5)">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span style="font-size: 13px; color: rgba(255,255,255,.62)">{{now.label}}</span>
+            <span class="pill" style="background: rgba(255,255,255,.1); color: #FFFFFF; height: 28px"><span class="dot" style="background: {{now.dot}}"></span>{{now.chip}}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 22px">
+            <div style="position: relative; width: 112px; height: 112px; flex-shrink: 0">
+              <svg width="112" height="112" viewBox="0 0 112 112" aria-hidden="true">
+                <circle cx="56" cy="56" r="46" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"></circle>
+                <circle cx="56" cy="56" r="46" fill="none" stroke="{{now.ring}}" stroke-width="8" stroke-linecap="round" stroke-dasharray="{{now.dash}}" transform="rotate(-90 56 56)"></circle>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+                <span class="mono" style="font-size: 24px; font-weight: 500">{{now.big}}</span>
+                <span style="font-size: 11px; color: rgba(255,255,255,.6)">{{now.bigSub}}</span>
+              </div>
+            </div>
+            <div style="min-width: 0">
+              <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">{{now.title}}</div>
+              <div style="font-size: 13.5px; color: rgba(255,255,255,.66); margin-top: 4px">{{now.meta1}}</div>
+              <div class="mono" style="font-size: 13px; color: rgba(255,255,255,.66); margin-top: 2px">{{now.meta2}}</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <button type="button" class="btn btn-white" style="flex: 1" disabled="{{sim}}" onClick="{{now.act}}">{{now.btn}}</button>
+            <a href="Rostamani-Schedule.dc.html" class="btn btn-ghostdark" style="text-decoration: none">Schedule</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compound twin -->
+      <section style="border-radius: 28px; background: linear-gradient(180deg, #E6EEF3 0%, #F6F8F9 70%); box-shadow: 0 0 0 1px rgba(10,14,20,.05); padding: 14px; display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch">
+        <div ref="{{setVp}}" class="{{vpCls}}" style="flex: 999 1 560px; min-width: 0; border-radius: 20px" onPointerDown="{{onDown}}" onPointerMove="{{onMove}}" onPointerUp="{{onUp}}" onPointerLeave="{{onUp}}">
+          <div class="glass" style="position: absolute; left: 12px; top: 12px; z-index: 5; display: flex; gap: 2px; padding: 4px; border-radius: 999px">
+            <sc-for list="{{fieldPills}}" as="fp" hint-placeholder-count="3">
+              <button type="button" class="{{fp.cls}}" onClick="{{fp.pick}}"><span class="dot" style="background: {{fp.dot}}"></span>{{fp.label}}</button>
+            </sc-for>
+          </div>
+          <div class="m-hide" style="position: absolute; right: 16px; top: 20px; z-index: 5; font-size: 12px; color: #646D78">8 villas · pool to the east · drag to rotate</div>
+
+          <div class="cp-world" style="width: 1100px; height: 640px; transform: {{worldTf}}">
+            <div class="cp-ground"></div>
+            <div class="cp-court" style="left: 60px; top: 214px; width: 1000px; height: 212px"></div>
+            <div class="cp-deck" style="left: 776px; top: 248px; width: 258px; height: 136px"></div>
+            <div class="cp-pool" style="left: 790px; top: 262px; width: 230px; height: 108px"></div>
+            <sc-for list="{{fieldSurf}}" as="fs" hint-placeholder-count="3">
+              <div class="{{fs.cls}}" style="left: {{fs.x}}px; top: {{fs.y}}px; width: {{fs.w}}px; height: {{fs.h}}px"></div>
+            </sc-for>
+            <sc-for list="{{pipes}}" as="p" hint-placeholder-count="8">
+              <div class="{{p.cls}}" style="left: {{p.l}}px; top: {{p.t}}px; width: {{p.w}}px; height: {{p.h}}px"></div>
+            </sc-for>
+            <sc-for list="{{heads}}" as="hd" hint-placeholder-count="18">
+              <div class="cp-head" style="left: {{hd.x}}px; top: {{hd.y}}px"></div>
+            </sc-for>
+            <sc-for list="{{sprays}}" as="sp" hint-placeholder-count="0">
+              <div class="cp-spray" style="left: {{sp.l}}px; top: {{sp.t}}px; width: {{sp.d}}px; height: {{sp.d}}px; transform: translateZ(3px)"><i style="animation-delay: {{sp.delay}}s"></i></div>
+            </sc-for>
+            <sc-for list="{{trunks}}" as="tk" hint-placeholder-count="24">
+              <div class="cp-trunk" style="left: {{tk.l}}px; top: {{tk.t}}px; width: 3px; height: {{tk.h}}px; transform: rotateX(-90deg)"></div>
+            </sc-for>
+            <sc-for list="{{canopies}}" as="cn" hint-placeholder-count="24">
+              <div class="{{cn.cls}}" style="left: {{cn.l}}px; top: {{cn.t}}px; width: {{cn.d}}px; height: {{cn.d}}px; transform: translateZ({{cn.z}}px)"></div>
+            </sc-for>
+            <sc-for list="{{faces}}" as="fc" hint-placeholder-count="40">
+              <div class="{{fc.cls}}" style="left: {{fc.l}}px; top: {{fc.t}}px; width: {{fc.w}}px; height: {{fc.h}}px; transform-origin: {{fc.o}}; transform: {{fc.tf}}; background-color: {{fc.bg}}">{{fc.label}}</div>
+            </sc-for>
+            <sc-for list="{{hits}}" as="ht" hint-placeholder-count="3">
+              <div class="{{ht.cls}}" style="left: {{ht.x}}px; top: {{ht.y}}px; width: {{ht.w}}px; height: {{ht.h}}px" onClick="{{ht.pick}}"></div>
+            </sc-for>
+            <sc-for list="{{huds}}" as="h" hint-placeholder-count="3">
+              <div class="cp-bill" style="transform: {{h.tf}}">
+                <button type="button" class="cp-hud" onClick="{{h.pick}}">
+                  <span style="display: flex; align-items: center; gap: 6px"><span class="dot" style="background: {{h.dot}}"></span><strong>{{h.name}}</strong></span>
+                  <span class="cp-hud-sub" style="display: block">{{h.sub}}</span>
+                </button>
+                <div class="cp-stem" style="height: 30px"></div>
+              </div>
+            </sc-for>
+            <div class="cp-bill" style="transform: {{mainHud.tf}}">
+              <div class="cp-hud"><span style="display: flex; align-items: center; gap: 6px"><span class="dot" style="background: {{mainHud.dot}}"></span><strong>Master valve</strong></span><span class="cp-hud-sub" style="display: block">{{mainHud.sub}}</span></div>
+              <div class="cp-stem" style="height: 34px"></div>
+            </div>
+          </div>
+
+          <div class="glass" style="position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 5; display: flex; align-items: center; gap: 2px; padding: 4px; border-radius: 999px">
+            <button type="button" class="{{viewCls.d3}}" onClick="{{view3d}}">3D</button>
+            <button type="button" class="{{viewCls.side}}" onClick="{{viewSide}}">Side</button>
+            <button type="button" class="{{viewCls.plan}}" onClick="{{viewPlan}}">Plan</button>
+            <span style="width: 1px; height: 18px; background: rgba(10,14,20,.14); margin: 0 4px"></span>
+            <button type="button" class="seg" style="padding: 0 10px" onClick="{{zoomOut}}" aria-label="Zoom out">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg>
+            </button>
+            <button type="button" class="seg" style="padding: 0 10px" onClick="{{zoomIn}}" aria-label="Zoom in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+            </button>
+            <button type="button" class="seg" style="padding: 0 10px" onClick="{{resetView}}" aria-label="Reset view">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Field sheet -->
+        <aside class="glass" style="flex: 1 1 320px; min-width: 0; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 18px; background: rgba(255,255,255,.84)">
+          <div>
+            <span class="{{fsel.pillCls}}"><span class="dot" style="background: {{fsel.dot}}"></span>{{fsel.statusLabel}}</span>
+            <div style="margin-top: 12px; font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1">{{fsel.title}}</div>
+            <div style="margin-top: 4px; color: #646D78; font-size: 13.5px">{{fsel.meta}}</div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <div style="border-radius: 14px; background: rgba(10,14,20,.04); padding: 10px 12px"><div style="font-size: 12px; color: #646D78">Moisture</div><div class="mono" style="font-size: 18px; font-weight: 500; color: {{fsel.mColor}}">{{fsel.moisture}}</div></div>
+            <div style="border-radius: 14px; background: rgba(10,14,20,.04); padding: 10px 12px"><div style="font-size: 12px; color: #646D78">Soil temp</div><div class="mono" style="font-size: 18px; font-weight: 500">{{fsel.temp}}</div></div>
+            <div style="border-radius: 14px; background: rgba(10,14,20,.04); padding: 10px 12px"><div style="font-size: 12px; color: #646D78">EC</div><div class="mono" style="font-size: 18px; font-weight: 500">{{fsel.ec}}</div></div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+            <div>
+              <div style="font-weight: 600">{{fsel.valve}}</div>
+              <div style="font-size: 12.5px; color: #646D78">Reported {{fsel.reported}}</div>
+            </div>
+            <span class="{{fsel.valvePill}}">{{fsel.valveState}}</span>
+          </div>
+          <div>
+            <div style="font-size: 12.5px; color: #646D78; margin-bottom: 8px">Run for</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <sc-for list="{{durs}}" as="d" hint-placeholder-count="5">
+                <button type="button" class="{{d.cls}}" onClick="{{d.pick}}" disabled="{{sim}}">{{d.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <button type="button" class="btn btn-brand" style="flex: 1; min-height: 44px" disabled="{{sim}}" onClick="{{irrigate}}">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg>
+              Irrigate {{durLabel}}
+            </button>
+            <button type="button" class="btn" style="min-height: 44px" disabled="{{sim}}" onClick="{{stop}}">Stop</button>
+          </div>
+          <sc-if value="{{sentMsg}}" hint-placeholder-val="{{ false }}">
+            <div style="font-size: 13px; color: #0E5F73; background: #DDF4F8; border-radius: 12px; padding: 10px 12px">{{sentMsg}}</div>
+          </sc-if>
+          <div style="font-size: 12.5px; color: #646D78">IoTRICs Cloud opens the master valve first, then this field's valve; the run stops on its own.</div>
+          <div style="margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-top: 14px; border-top: 1px solid rgba(10,14,20,.08)">
+            <div><div style="font-size: 12px; color: #646D78">Last run</div><div class="mono" style="font-size: 14px; font-weight: 500">{{fsel.lastRun}}</div></div>
+            <div><div style="font-size: 12px; color: #646D78">Today</div><div class="mono" style="font-size: 14px; font-weight: 500">{{fsel.today}}</div></div>
+            <div><div style="font-size: 12px; color: #646D78">7 days</div><div class="mono" style="font-size: 14px; font-weight: 500">{{fsel.week}}</div></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Field cards -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 22px">
+        <sc-for list="{{fieldCards}}" as="f" hint-placeholder-count="3">
+          <div class="tile" style="display: flex; flex-direction: column; gap: 14px">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+              <div>
+                <div style="font-weight: 600; font-size: 16px">{{f.name}}</div>
+                <div style="font-size: 12.5px; color: #646D78">{{f.kind}}</div>
+              </div>
+              <span class="{{f.pillCls}}" style="height: 26px; font-size: 12px"><span class="dot" style="background: {{f.dot}}"></span>{{f.status}}</span>
+            </div>
+            <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
+              <div>
+                <div class="mono" style="font-size: 44px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: {{f.mColor}}">{{f.moisture}}<span style="font-size: 18px; color: #646D78">%</span></div>
+                <div style="font-size: 12.5px; color: #646D78; margin-top: 4px">soil moisture · target 10–25%</div>
+              </div>
+              <svg width="140" height="48" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true" style="flex-shrink: 1; min-width: 0">
+                <rect x="0" y="{{f.bandY}}" width="200" height="{{f.bandH}}" fill="rgba(16,185,129,.10)"></rect>
+                <path d="{{f.spark}}" fill="none" stroke="{{f.sparkColor}}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+              </svg>
+            </div>
+            <div style="position: relative; height: 8px; border-radius: 4px; background: #EEF0F2">
+              <div style="position: absolute; left: 20%; width: 30%; top: 0; bottom: 0; border-radius: 4px; background: rgba(16,185,129,.25)"></div>
+              <div style="position: absolute; left: {{f.markL}}%; top: -3px; width: 4px; height: 14px; margin-left: -2px; border-radius: 2px; background: {{f.mColor}}"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 13px; padding-top: 12px; border-top: 1px solid rgba(10,14,20,.06)">
+              <span style="color: #646D78">Temp <strong class="mono" style="color: #0A0E14; font-weight: 500">{{f.temp}}</strong></span>
+              <span style="color: #646D78">EC <strong class="mono" style="color: #0A0E14; font-weight: 500">{{f.ec}}</strong></span>
+              <span style="color: #646D78">Valve <strong class="mono" style="color: #0A0E14; font-weight: 500">{{f.valveShort}}</strong></span>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+
+      <!-- Water + Estidama + Weather -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div class="tile" style="flex: 999 1 560px; display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px">
+            <div>
+              <div class="tlabel">Water saved today · vs 3,400 L baseline</div>
+              <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap">
+                <span class="mono" style="font-size: 44px; font-weight: 500; letter-spacing: -0.04em; line-height: 1.05">540 L</span>
+                <span class="pill p-green">15.9% · AED 24.30</span>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <div style="font-size: 12.5px; color: #646D78">Month to date</div>
+              <div class="mono" style="font-size: 18px; font-weight: 500">6,920 L · AED 311.40</div>
+              <div style="font-size: 12px; color: #646D78">Tariff AED 0.045 / L</div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; align-items: flex-end; gap: 10px; height: 150px; padding-top: 22px">
+              <sc-for list="{{saveBars}}" as="sb" hint-placeholder-count="7">
+                <div style="flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px" title="{{sb.title}}">
+                  <span class="mono" style="font-size: 12px; color: #0A0E14; visibility: {{sb.labelVis}}">{{sb.pct}}</span>
+                  <div style="width: 100%; max-width: 44px; height: {{sb.h}}%; border-radius: 6px 6px 2px 2px; background: {{sb.color}}"></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 8px">
+              <sc-for list="{{saveBars}}" as="sb" hint-placeholder-count="7">
+                <div style="flex: 1; min-width: 0; text-align: center; font-size: 11.5px; color: #646D78">{{sb.day}}</div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="font-size: 12.5px; color: #646D78">Saved share of baseline per day, from the master valve's flow meter.</div>
+        </div>
+
+        <div class="tile" style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px">
+          <div class="tlabel">Estidama compliance</div>
+          <div style="display: flex; align-items: center; gap: 18px">
+            <div style="position: relative; width: 104px; height: 104px; flex-shrink: 0">
+              <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
+                <circle cx="52" cy="52" r="42" fill="none" stroke="#EEF0F2" stroke-width="10"></circle>
+                <circle cx="52" cy="52" r="42" fill="none" stroke="#10B981" stroke-width="10" stroke-linecap="round" stroke-dasharray="{{estidamaDash}}" transform="rotate(-90 52 52)"></circle>
+              </svg>
+              <div class="mono" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 500">96</div>
+            </div>
+            <div>
+              <div style="font-weight: 600; font-size: 16px">A+ Pearl</div>
+              <div style="font-size: 12.5px; color: #646D78">ESTIDAMA rating held</div>
+            </div>
+          </div>
+          <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px; font-size: 13px">
+            <div style="display: flex; justify-content: space-between"><span style="color: #646D78">Salinity limit</span><span class="mono">400 µS/cm</span></div>
+            <div style="display: flex; justify-content: space-between"><span style="color: #646D78">Heat-stress soil temp</span><span class="mono">34 °C</span></div>
+            <div style="display: flex; justify-content: space-between"><span style="color: #646D78">Critical moisture</span><span class="mono">4%</span></div>
+          </div>
+        </div>
+
+        <div class="tile" style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px">
+          <div class="tlabel">Outside · Palm Jumeirah</div>
+          <div style="display: flex; align-items: flex-end; gap: 10px">
+            <span class="mono" style="font-size: 64px; font-weight: 500; line-height: .95; letter-spacing: -0.04em">34°</span>
+            <span style="font-size: 15px; color: #4A535D; padding-bottom: 6px">Hazy sun</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <div style="border-radius: 14px; background: #F4F5F6; padding: 10px 12px"><div style="font-size: 12px; color: #646D78">Humidity</div><div class="mono" style="font-size: 16px; font-weight: 500">58%</div></div>
+            <div style="border-radius: 14px; background: #F4F5F6; padding: 10px 12px"><div style="font-size: 12px; color: #646D78">UV index</div><div class="mono" style="font-size: 16px; font-weight: 500">7</div></div>
+          </div>
+          <div style="margin-top: auto; font-size: 13px; color: #4A535D">Evaporation eases after sunset; evening and pre-dawn runs lose the least water.</div>
+        </div>
+      </section>
+
+      <!-- Timeline + Outlook -->
+      <section style="display: flex; flex-wrap: wrap; gap: 22px; align-items: stretch">
+        <div class="tile" style="flex: 999 1 640px">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px">
+            <div>
+              <div class="tlabel">Today</div>
+              <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em">{{tl.headline}}</div>
+            </div>
+            <span class="pill p-amber">Peak heat 11:00–16:00</span>
+          </div>
+          <div style="display: flex; gap: 12px">
+            <div style="flex: 0 0 64px; display: flex; flex-direction: column">
+              <sc-for list="{{tl.rows}}" as="r" hint-placeholder-count="3">
+                <div style="height: 46px; display: flex; align-items: center; font-size: 13px; font-weight: 500">{{r.name}}</div>
+              </sc-for>
+            </div>
+            <div style="flex: 1; min-width: 0; position: relative">
+              <div style="position: absolute; top: 0; bottom: 22px; left: 45.83%; width: 20.83%; background: repeating-linear-gradient(-45deg, rgba(217,119,6,.10) 0 6px, rgba(217,119,6,.03) 6px 12px); border-radius: 8px"></div>
+              <sc-for list="{{tl.rows}}" as="r" hint-placeholder-count="3">
+                <div style="position: relative; height: 46px; border-bottom: 1px dashed rgba(10,14,20,.08)">
+                  <sc-for list="{{r.runs}}" as="run" hint-placeholder-count="1">
+                    <div class="{{run.cls}}" style="left: {{run.left}}%; width: {{run.width}}%" title="{{run.title}}"></div>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <div style="position: absolute; top: -6px; bottom: 22px; left: {{tl.nowL}}%; width: 2px; background: #0A0E14; border-radius: 1px">
+                <span class="mono" style="position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 600; background: #0A0E14; color: #FFFFFF; padding: 2px 6px; border-radius: 6px">17:51</span>
+              </div>
+              <div class="mono" style="position: relative; height: 22px; font-size: 11px; color: #646D78">
+                <span class="m-hide" style="position: absolute; left: 0; top: 6px">00:00</span>
+                <span style="position: absolute; left: 25%; top: 6px; transform: translateX(-50%)">06:00</span>
+                <span style="position: absolute; left: 50%; top: 6px; transform: translateX(-50%)">12:00</span>
+                <span style="position: absolute; left: 75%; top: 6px; transform: translateX(-50%)">18:00</span>
+                <span class="m-hide" style="position: absolute; right: 0; top: 6px">24:00</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(10,14,20,.06)">
+            <sc-for list="{{programs}}" as="pg" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; border-radius: 16px; background: #F4F5F6">
+                <span class="mono" style="font-size: 15px; font-weight: 500">{{pg.time}}</span>
+                <span style="font-size: 12.5px; color: #646D78">{{pg.desc}}</span>
+                <button type="button" class="{{pg.switchCls}}" aria-pressed="{{pg.on}}" aria-label="{{pg.aria}}" onClick="{{pg.toggle}}" disabled="{{sim}}"></button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div class="tile" style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 14px">
+          <div class="tlabel">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg>
+            Next 12 hours
+          </div>
+          <div style="font-size: 20px; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance">Field R is already below its 10% threshold.</div>
+          <div style="font-size: 13.5px; color: #4A535D">Field L should hold until about 03:40; {{outlookC}} A 10-minute run on Field R tonight, after 19:00, brings it back into band with the lowest evaporation.</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto">
+            <button type="button" class="btn btn-ink" disabled="{{sim}}" onClick="{{planR}}">Schedule Field R · 19:30</button>
+            <button type="button" class="btn" onClick="{{pickR}}">View field</button>
+          </div>
+          <sc-if value="{{planned}}" hint-placeholder-val="{{ false }}">
+            <div style="font-size: 13px; color: #05603F; background: #E1F5EC; border-radius: 12px; padding: 10px 12px">Added: Field R · 19:30 · 10 min, once.</div>
+          </sc-if>
+        </div>
+      </section>
+
+      <!-- Devices · Alarms · Activity -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 22px">
+        <div class="tile" style="display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px">
+            <div class="tlabel">Devices</div>
+            <span class="mono" style="font-size: 13px; color: #05603F">6/6 online</span>
+          </div>
+          <sc-for list="{{devices}}" as="dv" hint-placeholder-count="6">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 1px solid rgba(10,14,20,.06)">
+              <div style="min-width: 0">
+                <div style="font-weight: 500; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dv.name}}</div>
+                <div style="font-size: 12px; color: #646D78">{{dv.seen}}</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0">
+                <div style="display: flex; align-items: flex-end; gap: 2px; height: 14px" title="{{dv.signal}}">
+                  <sc-for list="{{dv.bars}}" as="bar" hint-placeholder-count="4">
+                    <span style="width: 3px; height: {{bar.h}}px; border-radius: 1px; background: {{bar.c}}"></span>
+                  </sc-for>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px" title="Battery">
+                  <span style="position: relative; width: 26px; height: 12px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px #A2AAB3">
+                    <span style="position: absolute; left: 2px; top: 2px; bottom: 2px; width: {{dv.batW}}px; border-radius: 1.5px; background: {{dv.batC}}"></span>
+                  </span>
+                  <span class="mono" style="font-size: 12px; width: 30px">{{dv.battery}}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div id="alarms" class="tile" style="display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <div class="tlabel">Alarms</div>
+            <span class="{{alarm.countCls}}" style="height: 26px; font-size: 12px">{{alarm.count}}</span>
+          </div>
+          <sc-if value="{{alarm.open}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 10px; opacity: {{alarm.opacity}}">
+              <div style="display: flex; align-items: center; gap: 8px"><span class="dot" style="background: #D97706"></span><strong style="font-weight: 600">Field R below moisture threshold</strong></div>
+              <div style="font-size: 13px; color: #4A535D">Field R Sensor reads 9.1%, under the 10% minimum.</div>
+              <div style="font-size: 12.5px; color: #646D78">Warning · Platform · since 15:20</div>
+              <sc-if value="{{alarm.acked}}" hint-placeholder-val="{{ false }}"><span class="pill p-grey" style="align-self: flex-start; height: 26px; font-size: 12px">Acknowledged</span></sc-if>
+              <div style="display: flex; gap: 8px; margin-top: 4px">
+                <sc-if value="{{alarm.canAck}}" hint-placeholder-val="{{ true }}">
+                  <button type="button" class="btn btn-ink" style="min-height: 36px" onClick="{{ackAlarm}}">Acknowledge</button>
+                </sc-if>
+                <button type="button" class="btn" style="min-height: 36px" onClick="{{clearAlarm}}">Clear</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{alarm.none}}" hint-placeholder-val="{{ false }}">
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px">
+              <div style="font-size: 20px; font-weight: 600">All clear</div>
+              <div style="font-size: 13px; color: #646D78">No open alarms at this site.</div>
+            </div>
+          </sc-if>
+          <div style="margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(10,14,20,.06); display: flex; justify-content: space-between; font-size: 13px">
+            <span style="color: #646D78">Leak watch</span>
+            <span class="mono" style="color: #05603F">Normal · −15.9% vs baseline</span>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px">
+            <div class="tlabel">Activity</div>
+            <a href="Rostamani-Analytics.dc.html" style="font-size: 13px; font-weight: 500; text-decoration: none">Full history</a>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <sc-for list="{{activity}}" as="ac" hint-placeholder-count="5">
+              <div style="display: flex; gap: 12px">
+                <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 12px">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: {{ac.dot}}; margin-top: 5px; box-shadow: 0 0 0 3px {{ac.ring}}"></span>
+                  <span style="flex: 1; width: 1.5px; background: rgba(10,14,20,.08); margin-top: 6px"></span>
+                </div>
+                <div style="flex: 1; min-width: 0; padding-bottom: 16px">
+                  <div style="display: flex; justify-content: space-between; gap: 8px">
+                    <span style="font-weight: 500; font-size: 13.5px">{{ac.title}}</span>
+                    <span class="mono" style="font-size: 12px; color: #646D78; white-space: nowrap">{{ac.when}}</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: #646D78">{{ac.sub}}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"brand":{"editor":"color","default":"#0284C7","options":["#0284C7","#0F766E","#1D4ED8","#0A0E14"]},"fieldCIrrigating":{"editor":"boolean","default":true},"simulation":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    if (this._vp && typeof ResizeObserver !== 'undefined') {
+      this._ro = new ResizeObserver(function (es) {
+        var w = es[0].contentRect.width;
+        var cur = (self.state && self.state.vw) || 0;
+        if (Math.abs(w - cur) > 2) self.setState({ vw: w });
+      });
+      this._ro.observe(this._vp);
+    }
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var brand = this.props.brand ?? '#0284C7';
+    var sim = this.props.simulation ?? false;
+    var irrig = this.props.fieldCIrrigating ?? true;
+    var site = s.site ?? 0;
+    var sel = s.sel ?? 1;
+    var view = s.view || '3d';
+    var VIEWS = { '3d': [56, 74], side: [56, 0], plan: [0, 90] };
+    var pitch = s.pitch ?? 56;
+    var yaw = s.yaw ?? 74;
+    var fitYaw = s.fitYaw ?? 74;
+    var zoom = s.zoom ?? 1;
+    var vw = s.vw || 900;
+    var autoRun = s.autoRun ?? true;
+    var dur = s.dur ?? 10;
+
+    var ST = {
+      irrigating: { label: 'Irrigating', pill: 'pill p-water', dot: '#06B6D4', text: '#0E5F73' },
+      idle: { label: 'In band', pill: 'pill p-green', dot: '#10B981', text: '#0A0E14' },
+      dry: { label: 'Needs water', pill: 'pill p-amber', dot: '#D97706', text: '#9A5205' }
+    };
+
+    // ── Sites ──
+    var SITES = [
+      { name: 'AAR Garden Villa', sub: 'Palm Jumeirah · 3 fields · 6 devices', status: 'Live', live: true },
+      { name: 'AAR Waves Residents', sub: 'Dubai · tower landscape', status: 'Planned', live: false },
+      { name: 'AAR Hamriya Building', sub: 'Dubai · commercial grounds', status: 'Planned', live: false }
+    ];
+    var sites = SITES.map(function (x, i) {
+      return {
+        name: x.name, sub: x.sub, status: x.status, cls: 'site' + (i === site ? ' on' : ''),
+        pillCls: x.live ? 'pill p-green' : 'pill p-grey', dot: x.live ? '#10B981' : '#A2AAB3',
+        iconBg: x.live ? brand : '#EEF0F2', iconFg: x.live ? '#FFFFFF' : '#646D78',
+        pick: function () { self.setState({ site: i }); }
+      };
+    });
+
+    // ── Fields ──
+    var F = [
+      { id: 'R', name: 'Field R', kind: 'Trees · Villa 1–4 side', short: 'trees', rect: { x: 200, y: 220, w: 540, h: 30 }, hudX: 330,
+        status: 'dry', moisture: 9.1, temp: '31.2°', ec: '268', valve: 'ARP 7838 · Valve 2', valveShort: '7838·V2', valveState: 'Closed',
+        lastRun: '06:20', today: '1 run', week: '7 runs', runs: [380] },
+      { id: 'C', name: 'Field C', kind: 'Lawn · central', short: 'lawn', rect: { x: 200, y: 262, w: 540, h: 108 }, hudX: 470,
+        status: irrig ? 'irrigating' : 'idle', moisture: irrig ? 16.8 : 14.2, temp: '29.8°', ec: '312', valve: 'ARP 0041 · Valve 1', valveShort: '0041·V1',
+        valveState: irrig ? 'Open' : 'Closed', lastRun: irrig ? 'Now' : '17:45', today: '2 runs', week: '14 runs', runs: [300, 1065] },
+      { id: 'L', name: 'Field L', kind: 'Trees · Villa 5–8 side', short: 'trees', rect: { x: 200, y: 382, w: 540, h: 30 }, hudX: 610,
+        status: 'idle', moisture: 18.4, temp: '30.6°', ec: '241', valve: 'ARP 7838 · Valve 1', valveShort: '7838·V1', valveState: 'Closed',
+        lastRun: '06:05', today: '1 run', week: '7 runs', runs: [365] }
+    ];
+    var pick = function (i) {
+      return function () {
+        if (self._drag && self._drag.moved) return;
+        self.setState({ sel: i, sent: null });
+      };
+    };
+    var mid = function (f) { return f.rect.y + f.rect.h / 2; };
+
+    // ── Compound scene (world px; north is up) ──
+    var W = 1100, D = 640, VWd = 200, VDd = 160, VH = 44, COLS = [110, 336, 562, 788], ROWN = 48, ROWS = D - 48 - VDd;
+    var rad = pitch * Math.PI / 180, fy = fitYaw * Math.PI / 180;
+    var spanX = Math.abs(1040 * Math.cos(fy)) + Math.abs(360 * Math.sin(fy));
+    var spanY = Math.abs(1040 * Math.sin(fy)) + Math.abs(360 * Math.cos(fy));
+    var fit = Math.min((vw - 16) / spanX, 510 / (spanY * Math.cos(rad) + 120 * Math.sin(rad)), 1.15);
+    var worldTf = 'translate(-50%, -50%) scale(' + (fit * zoom).toFixed(3) + ') rotateX(' + pitch + 'deg) rotateZ(' + yaw + 'deg)';
+    var bill = function (x, y, z) {
+      return 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, ' + z + 'px) rotateZ(' + (-yaw) + 'deg) rotateX(' + (-pitch) + 'deg) translate(-50%, -100%)';
+    };
+
+    var fieldSurf = F.map(function (f) {
+      var wet = f.status === 'irrigating' ? ' wet' : f.status === 'dry' ? ' dry' : '';
+      return { cls: (f.short === 'lawn' ? 'cp-lawn' : 'cp-bed') + wet, x: f.rect.x, y: f.rect.y, w: f.rect.w, h: f.rect.h };
+    });
+    var hits = F.map(function (f, i) { return { cls: 'cp-hit' + (i === sel ? ' sel' : ''), x: f.rect.x - 4, y: f.rect.y - 4, w: f.rect.w + 8, h: f.rect.h + 8, pick: pick(i) }; });
+
+    var anyOn = F.some(function (f) { return f.status === 'irrigating'; });
+    var MAIN = { x: 140, y: 316 }, HX = 176;
+    var pipes = [
+      { cls: 'cp-pipe h' + (anyOn ? ' on' : ''), l: 20, t: MAIN.y - 3, w: HX - 20, h: 7 },
+      { cls: 'cp-pipe v' + (anyOn ? ' on' : ''), l: HX - 3, t: mid(F[0]), w: 6, h: mid(F[2]) - mid(F[0]) }
+    ];
+    F.forEach(function (f) {
+      var on = f.status === 'irrigating' ? ' on' : '';
+      pipes.push({ cls: 'cp-pipe h' + on, l: HX, t: mid(f) - 2.5, w: f.rect.x - HX + f.rect.w - 12, h: 5 });
+    });
+
+    var heads = [], sprays = [], trunks = [], canopies = [];
+    var fC = F[1];
+    [27, 81].forEach(function (ry) {
+      for (var i = 0; i < 9; i++) {
+        var hx = fC.rect.x + 30 + 60 * i, hy = fC.rect.y + ry;
+        heads.push({ x: hx, y: hy });
+        if (fC.status === 'irrigating') sprays.push({ l: hx - 30, t: hy - 30, d: 60, delay: ((i * 0.17 + ry * 0.01) % 1.4).toFixed(2) });
+      }
+    });
+    var tree = function (x, y, r, palm) {
+      var th = palm ? 40 : 22;
+      trunks.push({ l: x - 1.5, t: y - th, h: th });
+      canopies.push({ cls: 'cp-canopy' + (palm ? ' palm' : ''), l: x - r, t: y - r, d: 2 * r, z: th });
+    };
+    [F[0], F[2]].forEach(function (f) {
+      for (var i = 0; i < 9; i++) {
+        var x = f.rect.x + 30 + 60 * i, y = mid(f), r = i % 2 ? 13 : 15;
+        tree(x, y, r, false);
+        if (f.status === 'irrigating') sprays.push({ l: x - 18, t: y - 18, d: 36, delay: (i * 0.2 % 1.4).toFixed(2) });
+      }
+    });
+    tree(80, 236, 14, false); tree(80, 398, 14, false);
+    [[758, 236], [1044, 240], [758, 398], [1044, 402]].forEach(function (p) { tree(p[0], p[1], 17, true); });
+
+    var faces = [];
+    var vn = 0;
+    [ROWN, ROWS].forEach(function (y, row) {
+      COLS.forEach(function (x) {
+        vn++;
+        var lab = 'V' + (row === 0 ? vn : vn);
+        faces.push({ cls: 'cp-face cp-wall', l: x, t: y - VH, w: VWd, h: VH, o: '50% 100%', tf: 'rotateX(-90deg)', bg: '#E6E2D8', label: '' });
+        faces.push({ cls: 'cp-face cp-wall', l: x, t: y + VDd - VH, w: VWd, h: VH, o: '50% 100%', tf: 'rotateX(-90deg)', bg: '#D8D3C6', label: '' });
+        faces.push({ cls: 'cp-face', l: x, t: y, w: VH, h: VDd, o: '0 50%', tf: 'rotateY(-90deg)', bg: '#DFDACE', label: '' });
+        faces.push({ cls: 'cp-face', l: x + VWd, t: y, w: VH, h: VDd, o: '0 50%', tf: 'rotateY(-90deg)', bg: '#E9E5DC', label: '' });
+        faces.push({ cls: 'cp-face cp-roof', l: x, t: y, w: VWd, h: VDd, o: '50% 50%', tf: 'translateZ(' + VH + 'px)', bg: '#F8F6F1', label: lab });
+      });
+    });
+
+    var huds = F.map(function (f, i) {
+      var z = f.short === 'lawn' ? 8 : 40;
+      return { tf: bill(f.hudX, mid(f), z), dot: ST[f.status].dot, name: f.name, sub: ST[f.status].label + ' · ' + f.moisture.toFixed(1) + '%', pick: pick(i) };
+    });
+    var mainHud = { tf: bill(MAIN.x, MAIN.y, 0), dot: anyOn ? '#06B6D4' : '#10B981', sub: anyOn ? 'Open 90° · 38 L/min' : 'Closed' };
+
+    var fieldPills = F.map(function (f, i) { return { label: f.name, dot: ST[f.status].dot, cls: 'zpill' + (i === sel ? ' on' : ''), pick: pick(i) }; });
+    var fs = F[sel] || F[1];
+    var fsel = {
+      title: fs.name, meta: fs.kind + ' · target 10–25%', pillCls: ST[fs.status].pill, dot: ST[fs.status].dot, statusLabel: ST[fs.status].label,
+      moisture: fs.moisture.toFixed(1) + '%', mColor: ST[fs.status].text, temp: fs.temp, ec: fs.ec,
+      valve: fs.valve, reported: '42 s ago', valveState: fs.valveState, valvePill: fs.valveState === 'Open' ? 'pill p-water' : 'pill p-grey',
+      lastRun: fs.lastRun, today: fs.today, week: fs.week
+    };
+    var durs = [3, 5, 10, 15, 30].map(function (mn) { return { label: mn + 'm', cls: 'chipbtn' + (mn === dur ? ' on' : ''), pick: function () { self.setState({ dur: mn }); } }; });
+    var sentMsg = s.sent === 'open' ? 'Started: ' + fs.name + ' for ' + dur + ' min through IoTRICs Cloud.' : s.sent === 'close' ? 'Stop sent to IoTRICs Cloud.' : '';
+
+    // ── Field cards ──
+    var spark = function (f) {
+      var pts = [], v = f.moisture, vals = [];
+      for (var h = 24; h >= 0; h--) vals.push(0);
+      // walk backwards from now: moisture rises going back before each run, falls slowly between
+      var cur = f.moisture;
+      for (var k = 24; k >= 0; k--) {
+        vals[k] = cur;
+        var minute = (17 * 60 + 51) - (24 - k) * 60;
+        var hitRun = f.runs.some(function (r) { var d = minute - r; var dd = ((d % 1440) + 1440) % 1440; return dd < 60; });
+        cur = hitRun ? cur - 5.5 : cur + 0.28;
+      }
+      for (var j = 0; j <= 24; j++) {
+        var x = (j / 24 * 200).toFixed(1), y = (48 - Math.max(0, Math.min(30, vals[j])) / 30 * 48).toFixed(1);
+        pts.push(x + ',' + y);
+      }
+      return 'M' + pts.join('L');
+    };
+    var fieldCards = F.map(function (f) {
+      return {
+        name: f.name, kind: f.kind, status: ST[f.status].label, pillCls: ST[f.status].pill, dot: ST[f.status].dot,
+        moisture: f.moisture.toFixed(1), mColor: ST[f.status].text, temp: f.temp + 'C', ec: f.ec + ' µS', valveShort: f.valveShort,
+        markL: Math.min(100, f.moisture * 2).toFixed(1), spark: spark(f), sparkColor: f.status === 'dry' ? '#D97706' : f.status === 'irrigating' ? '#06B6D4' : '#10B981',
+        bandY: (48 - 25 / 30 * 48).toFixed(1), bandH: ((25 - 10) / 30 * 48).toFixed(1)
+      };
+    });
+
+    // ── Hero + now ──
+    var hero = irrig
+      ? { title: 'Field C lawn is being watered.', sub: 'The 17:45 evening run is on ARP 0041 through the master valve at 38 L/min. Field R has dipped below its threshold and is next in line.' }
+      : { title: 'Two of three fields are in band.', sub: 'Field R has dipped below its 10% threshold. Field C and Field L are holding; the next scheduled run is 05:00 tomorrow.' };
+    var C = 2 * Math.PI * 46;
+    var now = irrig
+      ? { label: 'Running now', chip: 'Field C', dot: '#67E8F9', ring: '#22D3EE', dash: (C * 0.5).toFixed(1) + ' ' + C.toFixed(1), big: '6:00', bigSub: 'left of 12:00',
+          title: 'Evening lawn run', meta1: 'ARP 0041 · Valve 1 · 18 heads', meta2: '228 L · 38 L/min', btn: 'Stop run', act: function () { self.setState({ sent: 'close', sel: 1 }); } }
+      : { label: 'Next run', chip: 'Field C', dot: '#10B981', ring: brand, dash: (C * 0.45).toFixed(1) + ' ' + C.toFixed(1), big: '05:00', bigSub: 'in 11 h 9 m',
+          title: 'Morning lawn run', meta1: 'Daily · 15 min · ARP 0041', meta2: 'Auto-run ' + (autoRun ? 'on' : 'off'), btn: 'Water Field R now', act: function () { self.setState({ sent: 'open', sel: 0 }); } };
+
+    // ── Alarm ──
+    var alarmState = s.alarm || 'active';
+    var openCount = alarmState === 'active' ? 1 : 0;
+    var alarm = {
+      active: openCount > 0, open: alarmState !== 'cleared', none: alarmState === 'cleared', acked: alarmState === 'acked', canAck: alarmState === 'active',
+      opacity: alarmState === 'acked' ? 0.65 : 1, count: openCount + ' active', countCls: openCount ? 'pill p-amber' : 'pill p-green'
+    };
+
+    // ── Water savings bars ──
+    var SAVE = [12, 18, 9, 15, 21, 14, 16];
+    var DAYS = ['Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Today'];
+    var saveBars = SAVE.map(function (v, i) {
+      var last = i === SAVE.length - 1;
+      return { h: (v / 25 * 100).toFixed(1), pct: v + '%', day: DAYS[i], color: last ? brand : 'rgba(2,132,199,.28)', labelVis: last ? 'visible' : 'hidden', title: DAYS[i] + ': ' + v + '% below baseline' };
+    });
+    var EC = 2 * Math.PI * 42;
+
+    // ── Timeline ──
+    var pct = function (min) { return (min / 1440 * 100).toFixed(2); };
+    var w = function (mins) { return (mins / 1440 * 100).toFixed(2); };
+    var tl = {
+      headline: irrig ? '4 runs · Field C watering now' : '4 runs · 47 min of water',
+      nowL: pct(17 * 60 + 51),
+      rows: [
+        { name: 'Field R', runs: [{ cls: 'run done', left: pct(380), width: w(10), title: '06:20 · 10 min' }] },
+        { name: 'Field C', runs: [
+          { cls: 'run done', left: pct(300), width: w(15), title: '05:00 · 15 min' },
+          { cls: irrig ? 'run live' : 'run done', left: pct(1065), width: w(12), title: irrig ? '17:45 · running' : '17:45 · 12 min' }
+        ] },
+        { name: 'Field L', runs: [{ cls: 'run done', left: pct(365), width: w(10), title: '06:05 · 10 min' }] }
+      ]
+    };
+    var progOn = s.progOn || [true, true, true];
+    var PROGS = [
+      { time: '05:00', desc: 'Daily · 15 min · Field C' },
+      { time: '06:05', desc: 'Daily · 10 min · Fields L, R' },
+      { time: '17:45', desc: 'Daily · 12 min · Field C' }
+    ];
+    var programs = PROGS.map(function (pg, i) {
+      return {
+        time: pg.time, desc: pg.desc, on: progOn[i], switchCls: 'switch' + (progOn[i] ? ' on' : ''),
+        aria: (progOn[i] ? 'Disable' : 'Enable') + ' the ' + pg.time + ' program',
+        toggle: function () { var next = progOn.slice(); next[i] = !next[i]; self.setState({ progOn: next }); }
+      };
+    });
+
+    // ── Devices ──
+    var mkBars = function (lvl) { return [5, 8, 11, 14].map(function (h, j) { return { h: h, c: j < lvl ? '#0A0E14' : '#D3D8DE' }; }); };
+    var dev = function (name, seen, b, lvl, sig) { return { name: name, seen: seen, battery: b + '%', batW: Math.round(20 * b / 100), batC: b < 30 ? '#D97706' : '#10B981', bars: mkBars(lvl), signal: sig }; };
+    var devices = [
+      dev('Field C Sensor', '42 s ago', 88, 4, 'Excellent signal'),
+      dev('Field L Sensor', '6 min ago', 71, 3, 'Good signal'),
+      dev('Field R Sensor', '11 min ago', 27, 2, 'Fair signal'),
+      dev('Master Water Valve', '42 s ago', 94, 4, 'Excellent signal'),
+      dev('ARP Controller 0041', '42 s ago', 83, 3, 'Good signal'),
+      dev('ARP Controller 7838', '4 min ago', 79, 3, 'Good signal')
+    ];
+
+    // ── Activity ──
+    var activity = [
+      irrig ? { title: 'Field C watering', sub: '17:45 program · confirmed by IoTRICs Cloud', when: '17:45', dot: '#06B6D4', ring: '#DDF4F8' }
+            : { title: 'Field C watered 12 min', sub: '17:45 program · 456 L', when: '17:45', dot: brand, ring: '#E0EFFA' },
+      { title: 'Field R below threshold', sub: 'Alarm raised · 9.6% → 9.1%', when: '15:20', dot: '#D97706', ring: '#FCF0DC' },
+      { title: 'Field R watered 10 min', sub: '06:05 program · 212 L', when: '06:20', dot: brand, ring: '#E0EFFA' },
+      { title: 'Field L watered 10 min', sub: '06:05 program · 218 L', when: '06:05', dot: brand, ring: '#E0EFFA' },
+      { title: 'Field C watered 15 min', sub: '05:00 program · 570 L', when: '05:00', dot: brand, ring: '#E0EFFA' }
+    ];
+
+    return {
+      brand: brand, sim: sim, sites: sites,
+      liveSite: site === 0, plannedSite: site !== 0, plannedName: SITES[site].name,
+      backToLive: function () { self.setState({ site: 0 }); },
+      autoRun: autoRun, autoRunCls: 'switch' + (autoRun ? ' on' : ''),
+      toggleAutoRun: function () { self.setState({ autoRun: !autoRun }); },
+      hero: hero, now: now, alarm: alarm,
+      ackAlarm: function () { self.setState({ alarm: 'acked' }); },
+      clearAlarm: function () { self.setState({ alarm: 'cleared' }); },
+      viewCls: { d3: 'seg' + (view === '3d' ? ' on' : ''), side: 'seg' + (view === 'side' ? ' on' : ''), plan: 'seg' + (view === 'plan' ? ' on' : '') },
+      view3d: function () { self.setState({ view: '3d', pitch: VIEWS['3d'][0], yaw: VIEWS['3d'][1], fitYaw: VIEWS['3d'][1] }); },
+      viewSide: function () { self.setState({ view: 'side', pitch: VIEWS.side[0], yaw: VIEWS.side[1], fitYaw: VIEWS.side[1] }); },
+      viewPlan: function () { self.setState({ view: 'plan', pitch: VIEWS.plan[0], yaw: VIEWS.plan[1], fitYaw: VIEWS.plan[1] }); },
+      zoomIn: function () { self.setState({ zoom: Math.min(2.2, +(zoom + 0.15).toFixed(2)) }); },
+      zoomOut: function () { self.setState({ zoom: Math.max(0.6, +(zoom - 0.15).toFixed(2)) }); },
+      resetView: function () { self.setState({ view: '3d', pitch: 56, yaw: 74, fitYaw: 74, zoom: 1 }); },
+      setVp: this._setVp || (this._setVp = function (el) { self._vp = el; }),
+      vpCls: 'cp-vp' + (s.dragging ? ' dragging' : ''),
+      onDown: function (e) {
+        if (e.target && e.target.closest && e.target.closest('button')) { self._drag = { on: false, moved: false }; return; }
+        self._drag = { x: e.clientX, y: e.clientY, pitch: pitch, yaw: yaw, moved: false, on: true };
+      },
+      onMove: function (e) {
+        var d = self._drag;
+        if (!d || !d.on) return;
+        var ddx = e.clientX - d.x, ddy = e.clientY - d.y;
+        if (!d.moved && Math.abs(ddx) + Math.abs(ddy) < 4) return;
+        d.moved = true;
+        self.setState({ dragging: true, view: 'custom', yaw: Math.round(d.yaw + ddx * 0.4), pitch: Math.round(Math.min(72, Math.max(0, d.pitch - ddy * 0.3))) });
+      },
+      onUp: function () {
+        if (self._drag) self._drag.on = false;
+        if (self.state && self.state.dragging) self.setState({ dragging: false });
+      },
+      worldTf: worldTf, fieldSurf: fieldSurf, hits: hits, pipes: pipes, heads: heads, sprays: sprays, trunks: trunks, canopies: canopies, faces: faces,
+      huds: huds, mainHud: mainHud, fieldPills: fieldPills, fsel: fsel,
+      durs: durs, durLabel: dur + ' min',
+      irrigate: function () { self.setState({ sent: 'open' }); },
+      stop: function () { self.setState({ sent: 'close' }); },
+      sentMsg: sentMsg, fieldCards: fieldCards, saveBars: saveBars,
+      estidamaDash: (EC * 0.96).toFixed(1) + ' ' + EC.toFixed(1),
+      tl: tl, programs: programs, devices: devices, activity: activity,
+      outlookC: irrig ? 'Field C is being watered now.' : 'Field C stays in band until its 05:00 run.',
+      planned: !!s.planned,
+      planR: function () { self.setState({ planned: true }); },
+      pickR: function () { self.setState({ sel: 0, sent: null }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
