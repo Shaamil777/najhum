@@ -7,6 +7,7 @@ import {
   FIELD_ERROR_STYLES,
   FIELD_FOCUS_STYLES,
   FIELD_WRAPPER_STYLES,
+  type FieldSize,
 } from "./formFieldVariants";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -19,6 +20,8 @@ export interface TextareaProps
   hint?: string;
   /** Error message — overrides hint, turns border danger-red */
   error?: string;
+  /** Field size scale — matches Input and Select */
+  size?: FieldSize;
   /**
    * Controls vertical resize behaviour.
    * - none     → fixed height (use rows prop to control)
@@ -34,6 +37,18 @@ const RESIZE_MAP: Record<"none" | "vertical" | "both", string> = {
   none:     "resize-none",
   vertical: "resize-y",
   both:     "resize",
+};
+
+/**
+ * Textarea size scale — matches the Input and Select size scale horizontal padding,
+ * with proportional vertical padding and typography.
+ */
+const TEXTAREA_SIZE_STYLES: Record<FieldSize, string> = {
+  xs: "px-2.5 py-1.5 text-xs",
+  sm: "px-3 py-2 text-xs",
+  md: "px-4 py-3 text-sm",
+  lg: "px-4 py-3.5 text-sm",
+  xl: "px-5 py-4 text-base",
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -60,6 +75,7 @@ export function Textarea({
   label,
   hint,
   error,
+  size = "md",
   resize = "vertical",
   required,
   id,
@@ -97,7 +113,8 @@ export function Textarea({
           className={cn(
             FIELD_BASE_STYLES,
             // Textarea-specific overrides
-            "items-start py-3 min-h-24",
+            "block min-h-24 leading-relaxed",
+            TEXTAREA_SIZE_STYLES[size],
             RESIZE_MAP[resize],
             hasError && FIELD_ERROR_STYLES,
             className
