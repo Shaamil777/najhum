@@ -4,7 +4,7 @@ import { normalizePhoneNumber, isValidE164 } from "@/lib/utils/phone";
 
 export async function POST(req: Request) {
   try {
-    const { phone, countryCode, channel = "sms" } = await req.json();
+    const { phone, countryCode } = await req.json();
 
     if (!phone) {
       return NextResponse.json(
@@ -40,25 +40,10 @@ export async function POST(req: Request) {
 
     const client = twilio(accountSid, authToken);
 
-    // Try requested channel (defaults to SMS for universal delivery)
-    const preferredChannel = channel === "whatsapp" ? "whatsapp" : "sms";
-    let verification;
-
-    try {
-      verification = await client.verify.v2
-        .services(verifyServiceSid)
-        .verifications.create({ to: formattedPhone, channel: preferredChannel });
-    } catch (err: unknown) {
-      const errMessage = err instanceof Error ? err.message : String(err);
-      if (preferredChannel === "whatsapp") {
-        console.warn("WhatsApp OTP delivery failed, falling back to SMS:", errMessage);
-        verification = await client.verify.v2
-          .services(verifyServiceSid)
-          .verifications.create({ to: formattedPhone, channel: "sms" });
-      } else {
-        throw err;
-      }
-    }
+    // Brochure verification uses WhatsApp only; surface delivery failures without sending SMS.
+    const verification = await client.verify.v2
+      .services(verifyServiceSid)
+      .verifications.create({ to: formattedPhone, channel: "whatsapp" });
 
     return NextResponse.json({
       success: true,
