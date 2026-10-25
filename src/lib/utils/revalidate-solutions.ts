@@ -4,6 +4,7 @@ import { getSolutionById } from '@/lib/db/queries/solutions';
 export function revalidateSolutions(slug?: string) {
   if (slug) revalidatePath(`/solutions/${slug}`);
   revalidatePath('/solutions');
+  for (const platform of ['iotrics', 'evoltics', 'cropifai']) revalidatePath(`/platforms/${platform}`);
   revalidatePath('/sitemap.xml');
 }
 

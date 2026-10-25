@@ -297,6 +297,21 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
         <div className="builder-panel-scroll">
           {rightTab === 'page' ? <>
             <ContentInspector solutionId={solutionId} value={{ title: doc.title, slug: doc.slug, metaDescription: doc.metaDescription, classification: doc.classification ?? 'INDUSTRY' }} onChange={value => change({ ...doc, ...(value as Pick<BuilderDocument, 'title' | 'slug' | 'metaDescription' | 'classification'>) })} />
+            <fieldset className="mb-6 space-y-3">
+              <legend className="text-sm font-semibold text-slate-800 mb-2">Target Platform Pages</legend>
+              <p className="text-xs text-slate-500">Select the platform solution carousels for this solution. Publish to apply changes. Leave all unchecked to remove it from every platform carousel.</p>
+              {[
+                { id: 'iotrics', label: 'IoTRICs' },
+                { id: 'evoltics', label: 'EVOLTICS' },
+                { id: 'cropifai', label: 'cropifAI' },
+              ].map(platform => <label key={platform.id} className="flex items-center gap-2 text-sm text-slate-700">
+                <input type="checkbox" disabled={busy} checked={(doc.targetPlatforms ?? []).includes(platform.id)} onChange={event => {
+                  const current = doc.targetPlatforms ?? [];
+                  change({ ...doc, targetPlatforms: event.target.checked ? [...current, platform.id] : current.filter(id => id !== platform.id) });
+                }} />
+                {platform.label}
+              </label>)}
+            </fieldset>
             <p className="text-[11px] text-slate-400 mb-6">Page URL: /solutions/{doc.slug}</p>
             <div className="border-t pt-5 space-y-3"><button className="builder-small-button w-full" disabled={busy} onClick={() => setConfirm('discard')}>Discard draft changes</button>{session.isPublished && <button className="builder-small-button w-full text-red-600" disabled={busy} onClick={() => setConfirm('unpublish')}>Unpublish solution</button>}<button className="builder-small-button w-full text-red-600 hover:bg-red-50 border-red-200" disabled={busy} onClick={() => setConfirm('delete')}>Delete solution</button></div>
           </> : selected ? <>

@@ -13,7 +13,7 @@ const db = vi.hoisted(() => ({
 vi.mock('@/lib/db/prisma', () => ({ prisma: db }));
 import { discardBuilderDraft, getBuilderSession, liveRevision, saveBuilderDocument } from './server';
 
-const fixture = () => ({ id: 'solution-1', title: 'Live title', slug: 'live-title', metaDescription: 'Live description', classification: 'BOTH' as const, isDraft: false, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01'), sections: [{ id: 'section-1', solutionId: 'solution-1', type: SectionType.HERO, order: 0, isDraft: false, content: { heading: 'Live heading', subheading: 'Live subtitle', ctaText: 'Contact', ctaLink: '/contact' }, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01') }] });
+const fixture = () => ({ id: 'solution-1', title: 'Live title', slug: 'live-title', metaDescription: 'Live description', classification: 'BOTH' as const, platforms: ['iotrics'], isDraft: false, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01'), sections: [{ id: 'section-1', solutionId: 'solution-1', type: SectionType.HERO, order: 0, isDraft: false, content: { heading: 'Live heading', subheading: 'Live subtitle', ctaText: 'Contact', ctaLink: '/contact' }, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01') }] });
 
 beforeEach(() => {
   vi.resetAllMocks();
@@ -99,5 +99,42 @@ describe('classification publication', () => {
     db.pageContent.findUnique.mockResolvedValue({ id: 'draft-1', content: { schemaVersion: 1, version: 1, baseRevision: liveRevision(fixture()), document: previewDocument() } });
     const session = await getBuilderSession('solution-1');
     expect(session.document.classification).toBe('BOTH');
+  });
+});
+
+
+describe('platform selection publication', () => {
+  it('loads existing platform assignments into page settings', async () => {
+    const session = await getBuilderSession('solution-1');
+    expect(session.document.targetPlatforms).toEqual(['iotrics']);
+  });
+  it('keeps changed selections in the draft until published', async () => {
+    const document = { ...previewDocument(), targetPlatforms: ['evoltics', 'cropifai'] };
+    const request = { document, version: 0, baseRevision: liveRevision(fixture()) };
+    await saveBuilderDocument('solution-1', { ...request, action: 'save' });
+    expect(db.solution.update).not.toHaveBeenCalled();
+    expect(db.pageContent.create).toHaveBeenCalledWith({ data: expect.objectContaining({ content: expect.objectContaining({ document: expect.objectContaining({ targetPlatforms: ['evoltics', 'cropifai'] }) }) }) });
+    await saveBuilderDocument('solution-1', { ...request, action: 'publish' });
+    expect(db.solution.update).toHaveBeenCalledWith({ where: { id: 'solution-1' }, data: expect.objectContaining({ platforms: ['evoltics', 'cropifai'] }) });
+  });
+  it('allows clearing every platform assignment', async () => {
+    await saveBuilderDocument('solution-1', { document: { ...previewDocument(), targetPlatforms: [] }, version: 0, baseRevision: liveRevision(fixture()), action: 'publish' });
+    expect(db.solution.update).toHaveBeenCalledWith({ where: { id: 'solution-1' }, data: expect.objectContaining({ platforms: [] }) });
+  });
+  it('preserves live assignments for legacy drafts even when their old platforms field defaulted to empty', async () => {
+    const document = { ...previewDocument(), platforms: [] };
+    db.pageContent.findUnique.mockResolvedValue({ id: 'draft-1', content: { schemaVersion: 1, version: 1, baseRevision: liveRevision(fixture()), document } });
+    expect((await getBuilderSession('solution-1')).document.targetPlatforms).toEqual(['iotrics']);
+    await saveBuilderDocument('solution-1', { document, version: 1, baseRevision: liveRevision(fixture()), action: 'publish' });
+    expect(db.solution.update).toHaveBeenCalledWith({ where: { id: 'solution-1' }, data: expect.objectContaining({ platforms: ['iotrics'] }) });
+  });
+  it('restores explicitly cleared selections when reopening a saved draft', async () => {
+    db.pageContent.findUnique.mockResolvedValue({ id: 'draft-1', content: { schemaVersion: 1, version: 1, baseRevision: liveRevision(fixture()), document: { ...previewDocument(), targetPlatforms: [] } } });
+    expect((await getBuilderSession('solution-1')).document.targetPlatforms).toEqual([]);
+  });
+  it('rejects unknown platform IDs before writing', async () => {
+    await expect(saveBuilderDocument('solution-1', { document: { ...previewDocument(), targetPlatforms: ['unknown'] }, version: 0, baseRevision: liveRevision(fixture()), action: 'save' })).rejects.toThrow();
+    expect(db.pageContent.create).not.toHaveBeenCalled();
+    expect(db.solution.update).not.toHaveBeenCalled();
   });
 });

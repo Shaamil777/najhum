@@ -33,6 +33,7 @@ export interface BuilderDocument {
   slug: string;
   metaDescription: string;
   classification?: SolutionClassification;
+  targetPlatforms?: string[];
   sections: BuilderSection[];
 }
 export interface BuilderSession {
@@ -90,6 +91,8 @@ const sectionSchema = z.object({
 export const builderDocumentSchema = createSolutionSchema.extend({
   metaDescription: z.string().max(300).default(''),
   classification: z.enum(solutionClassifications).optional(),
+  // Separate from the legacy `platforms` default so older drafts cannot clear live assignments.
+  targetPlatforms: z.array(z.enum(['iotrics', 'evoltics', 'cropifai'])).max(3).refine(values => new Set(values).size === values.length, 'Choose each platform only once.').optional(),
   sections: z.array(sectionSchema).max(60, 'A page can contain at most 60 sections.'),
 }).superRefine((doc, ctx) => {
   if (new Set(doc.sections.map(section => section.id)).size !== doc.sections.length) ctx.addIssue({ code: 'custom', path: ['sections'], message: 'Section IDs must be unique.' });
