@@ -72,6 +72,7 @@ export async function GET(request: NextRequest) {
       slug: solution.slug,
       coverImage: solution.coverImage,
       platforms: solution.platforms,
+      classification: solution.classification,
       isDraft: solution.isDraft,
       createdAt: solution.createdAt.toISOString(),
       updatedAt: solution.updatedAt.toISOString(),
@@ -184,6 +185,7 @@ export async function POST(request: NextRequest) {
         metaDescription: validatedData.metaDescription,
         coverImage: validatedData.coverImage,
         platforms: validatedData.platforms,
+        classification: validatedData.classification,
       });
       
       // Return created solution with 201 status
@@ -195,6 +197,7 @@ export async function POST(request: NextRequest) {
           metaDescription: solution.metaDescription,
           coverImage: solution.coverImage,
           platforms: solution.platforms,
+      classification: solution.classification,
           isDraft: solution.isDraft,
           createdAt: solution.createdAt.toISOString(),
           updatedAt: solution.updatedAt.toISOString(),

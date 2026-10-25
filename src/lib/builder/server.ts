@@ -18,6 +18,7 @@ export function liveRevision(solution: LiveSolution) {
 export function liveDocument(solution: LiveSolution): BuilderDocument {
   return {
     title: solution.title, slug: solution.slug, metaDescription: solution.metaDescription || '',
+    classification: solution.classification,
     sections: [...solution.sections].sort((a, b) => a.order - b.order).map(section => {
       const content = section.content as Record<string, unknown>;
       const { _design, ...fields } = content;
@@ -35,7 +36,7 @@ async function readSession(tx: Prisma.TransactionClient, id: string): Promise<Bu
   const products = await tx.product.findMany({ where: { isDraft: false, solutions: { has: solution.slug } }, orderBy: { order: 'asc' }, select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true } });
   const availableProducts = await tx.product.findMany({ where: { isDraft: false }, orderBy: { order: 'asc' }, select: { id: true, name: true, description: true, imageUrl: true, brochureUrl: true } });
   return {
-    document: envelope?.document || liveDocument(solution),
+    document: envelope ? { ...envelope.document, classification: envelope.document.classification ?? solution.classification } : liveDocument(solution),
     version: envelope?.version || 0, baseRevision: envelope?.baseRevision || liveRevision(solution),
     isPublished: !solution.isDraft, hasDraft: !!draft, products, availableProducts,
   };
@@ -71,7 +72,7 @@ export async function saveBuilderDocument(id: string, input: unknown) {
           id: section.id, solutionId: id, type: section.type, order, isDraft: section.isDraft,
           content: { ...section.content, _design: section.design } as Prisma.InputJsonObject,
         })) });
-        await tx.solution.update({ where: { id }, data: { title: request.document.title, slug: request.document.slug, metaDescription: request.document.metaDescription, isDraft: false } });
+        await tx.solution.update({ where: { id }, data: { title: request.document.title, slug: request.document.slug, metaDescription: request.document.metaDescription, classification: request.document.classification ?? solution.classification, isDraft: false } });
         // Product associations currently use slugs; keep them valid when a solution is renamed.
         if (solution.slug !== request.document.slug) {
           const linked = await tx.product.findMany({ where: { solutions: { has: solution.slug } } });

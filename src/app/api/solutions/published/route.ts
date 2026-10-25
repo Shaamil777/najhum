@@ -13,6 +13,7 @@ export async function GET() {
       where: { isDraft: false },
       select: {
         title: true,
+        classification: true,
         slug: true,
         metaDescription: true,
       },

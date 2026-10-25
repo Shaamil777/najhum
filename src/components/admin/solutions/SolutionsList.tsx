@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Trash2, Loader2 } from "lucide-react";
+import { classificationLabels, type SolutionClassification } from '@/lib/solution-classification';
 import { toast } from "sonner";
 
 interface Solution {
@@ -11,6 +12,7 @@ interface Solution {
   title: string;
   slug: string;
   platforms?: string[];
+  classification?: SolutionClassification;
   isDraft: boolean;
   createdAt: string;
   updatedAt: string;
@@ -239,6 +241,7 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
                       {solution.title}
+                      <span className="block text-xs font-normal text-gray-500 mt-1">{classificationLabels[solution.classification ?? 'INDUSTRY']}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

@@ -51,3 +51,20 @@ Keep the added enum labels; removing PostgreSQL enum labels requires rebuilding
 the type and is unnecessary. Hide/remove the new sections and publish the change
 before restoring older application code, so older renderers do not encounter
 unsupported section types. Existing content is not modified by this SQL script.
+
+## Solution classification
+
+Run `database/solution-classification.sql` in the Supabase SQL Editor before deploying
+this change, then run `npm run build` to regenerate Prisma and build the application.
+The SQL adds `Solution.classification` with `INDUSTRY`, `USE_CASE`, and `BOTH` values.
+Existing solutions default to `INDUSTRY`; the five previously hardcoded use-case
+solutions become `BOTH` to preserve navigation. Rerunning does not reset admin choices.
+Alternatively, installations already managed with Prisma migrations can run
+`npx prisma migrate deploy` to apply the checked-in migration through migration history.
+Use one migration method; if applying SQL manually in a Prisma-managed database,
+mark `20261026000000_add_solution_classification` applied with `prisma migrate resolve`.
+
+Choose classification on Admin → Solutions → New, or in the existing solution builder's
+page settings. Builder classification edits stay in the saved draft until Publish.
+Published solutions appear under the selected navigation tabs on desktop and mobile,
+and the public solutions catalog has a classification filter.

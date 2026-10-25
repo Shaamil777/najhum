@@ -64,6 +64,7 @@ export function SolutionsMenuContent({ solutions, mobile = false, onNavigate }: 
       <div className={styles.solutionPanel} id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-${active}`}>
         <div className={styles.solutionItems}>
           {!mobile && <div className={styles.listHeading}><strong>{current.heading}</strong><span>{current.subheading}</span></div>}
+          {current.items.length === 0 && <p role="status">No published solutions in this category yet.</p>}
           <div className={styles.solutionGrid}>
             {current.items.map(item => <Link key={item.href} href={item.href} onClick={onNavigate} className={styles.solutionRow}>
               <span className={styles.solutionIcon}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={item.d} /></svg></span>
@@ -71,10 +72,10 @@ export function SolutionsMenuContent({ solutions, mobile = false, onNavigate }: 
             </Link>)}
           </div>
         </div>
-        <aside className={styles.featured}>
+        {current.featured && <aside className={styles.featured}>
           <span className={styles.previewTag}>Featured</span><strong>{current.featured.title}</strong>{!mobile && <p>{current.featured.desc}</p>}
           <Link href={current.featured.href} onClick={onNavigate} aria-label={`Explore ${current.featured.title}`}> {mobile ? "Explore" : "Explore solution"}<ArrowRight size={17} aria-hidden="true" /></Link>
-        </aside>
+        </aside>}
       </div>
       {mobile && <Link href="/solutions" onClick={onNavigate} className={styles.viewAll}>View all solutions<ArrowRight size={16} aria-hidden="true" /></Link>}
     </div>

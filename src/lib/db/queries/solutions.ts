@@ -9,7 +9,7 @@
 
 import { prisma } from '../prisma';
 import { draftKey } from '@/lib/builder/document';
-import { Solution, Section, Prisma } from '@prisma/client';
+import { Solution, Section, Prisma, SolutionClassification } from '@prisma/client';
 
 /**
  * Solution with optional sections included
@@ -144,6 +144,7 @@ export async function createSolution(data: {
   metaDescription?: string;
   coverImage?: string | null;
   platforms?: string[];
+  classification?: SolutionClassification;
 }): Promise<Solution> {
   try {
     return await prisma.solution.create({
@@ -153,6 +154,7 @@ export async function createSolution(data: {
         metaDescription: data.metaDescription,
         coverImage: data.coverImage,
         platforms: data.platforms || [],
+        classification: data.classification ?? 'INDUSTRY',
         isDraft: true, // All new solutions start as drafts
       },
     });
@@ -196,6 +198,7 @@ export async function updateSolution(
     if (data.metaDescription !== undefined) updateData.metaDescription = data.metaDescription;
     if (data.coverImage !== undefined) updateData.coverImage = data.coverImage;
     if (data.platforms !== undefined) updateData.platforms = data.platforms;
+    if (data.classification !== undefined) updateData.classification = data.classification;
     if (data.isDraft !== undefined) updateData.isDraft = data.isDraft;
 
     return await prisma.solution.update({

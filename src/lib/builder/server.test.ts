@@ -13,7 +13,7 @@ const db = vi.hoisted(() => ({
 vi.mock('@/lib/db/prisma', () => ({ prisma: db }));
 import { discardBuilderDraft, getBuilderSession, liveRevision, saveBuilderDocument } from './server';
 
-const fixture = () => ({ id: 'solution-1', title: 'Live title', slug: 'live-title', metaDescription: 'Live description', isDraft: false, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01'), sections: [{ id: 'section-1', solutionId: 'solution-1', type: SectionType.HERO, order: 0, isDraft: false, content: { heading: 'Live heading', subheading: 'Live subtitle', ctaText: 'Contact', ctaLink: '/contact' }, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01') }] });
+const fixture = () => ({ id: 'solution-1', title: 'Live title', slug: 'live-title', metaDescription: 'Live description', classification: 'BOTH' as const, isDraft: false, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01'), sections: [{ id: 'section-1', solutionId: 'solution-1', type: SectionType.HERO, order: 0, isDraft: false, content: { heading: 'Live heading', subheading: 'Live subtitle', ctaText: 'Contact', ctaLink: '/contact' }, createdAt: new Date('2026-01-01'), updatedAt: new Date('2026-01-01') }] });
 
 beforeEach(() => {
   vi.resetAllMocks();
@@ -76,4 +76,28 @@ it('allows an intentionally empty product section without forcing product select
  section.content.displayMode = 'manual'; section.content.productIds = [];
  await saveBuilderDocument('solution-1', { document: { ...previewDocument(), sections: [section] }, version: 0, baseRevision: liveRevision(fixture()), action: 'publish' });
  expect(db.solution.update).toHaveBeenCalled();
+});
+
+
+describe('classification publication', () => {
+  it('keeps classification changes in drafts until publish', async () => {
+    const document = { ...previewDocument(), classification: 'USE_CASE' };
+    const request = { document, version: 0, baseRevision: liveRevision(fixture()) };
+    await saveBuilderDocument('solution-1', { ...request, action: 'save' });
+    expect(db.solution.update).not.toHaveBeenCalled();
+    expect(db.pageContent.create).toHaveBeenCalledWith({ data: expect.objectContaining({ content: expect.objectContaining({ document: expect.objectContaining({ classification: 'USE_CASE' }) }) }) });
+    await saveBuilderDocument('solution-1', { ...request, action: 'publish' });
+    expect(db.solution.update).toHaveBeenCalledWith({ where: { id: 'solution-1' }, data: expect.objectContaining({ classification: 'USE_CASE' }) });
+  });
+  it('preserves live classification when publishing a legacy document', async () => {
+    const document = previewDocument();
+    delete document.classification;
+    await saveBuilderDocument('solution-1', { document, version: 0, baseRevision: liveRevision(fixture()), action: 'publish' });
+    expect(db.solution.update).toHaveBeenCalledWith({ where: { id: 'solution-1' }, data: expect.objectContaining({ classification: 'BOTH' }) });
+  });
+  it('restores live classification into legacy saved drafts', async () => {
+    db.pageContent.findUnique.mockResolvedValue({ id: 'draft-1', content: { schemaVersion: 1, version: 1, baseRevision: liveRevision(fixture()), document: previewDocument() } });
+    const session = await getBuilderSession('solution-1');
+    expect(session.document.classification).toBe('BOTH');
+  });
 });

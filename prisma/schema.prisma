@@ -16,6 +16,7 @@ model Solution {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   platforms       String[]  @default([])
+  classification  SolutionClassification @default(INDUSTRY)
   images          Image[]
   sections        Section[]
 
@@ -90,6 +91,12 @@ model Customer {
 
   @@index([phone])
   @@index([createdAt])
+}
+
+enum SolutionClassification {
+  INDUSTRY
+  USE_CASE
+  BOTH
 }
 
 enum SectionType {

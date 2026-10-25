@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
+import type { PublishedSolutionItem } from "./menu-data";
 import { DesktopNav } from "./DesktopNav";
 import { MobileNav } from "./MobileNav";
 import { Search } from 'lucide-react';
@@ -25,7 +26,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [searchOpen,setSearchOpen] = useState(false);
   useEffect(() => { function shortcut(event: KeyboardEvent) { if (pathname.startsWith('/admin')) return; if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); setSearchOpen(true); } } window.addEventListener('keydown',shortcut); return () => window.removeEventListener('keydown',shortcut); }, [pathname]);
-  const [solutions, setSolutions] = useState<Array<{ title: string; slug: string; metaDescription: string | null }>>([]);
+  const [solutions, setSolutions] = useState<PublishedSolutionItem[]>([]);
 
   useEffect(() => {
     if (pathname.startsWith('/admin')) return;

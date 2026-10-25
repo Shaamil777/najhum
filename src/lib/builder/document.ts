@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { solutionClassifications, type SolutionClassification } from '@/lib/solution-classification';
 import { createSectionSchema } from '@/lib/validation/section-schemas';
 import { createSolutionSchema } from '@/lib/validation/solution-schemas';
 import { SectionType } from '@/types/section';
@@ -31,6 +32,7 @@ export interface BuilderDocument {
   title: string;
   slug: string;
   metaDescription: string;
+  classification?: SolutionClassification;
   sections: BuilderSection[];
 }
 export interface BuilderSession {
@@ -87,6 +89,7 @@ const sectionSchema = z.object({
 
 export const builderDocumentSchema = createSolutionSchema.extend({
   metaDescription: z.string().max(300).default(''),
+  classification: z.enum(solutionClassifications).optional(),
   sections: z.array(sectionSchema).max(60, 'A page can contain at most 60 sections.'),
 }).superRefine((doc, ctx) => {
   if (new Set(doc.sections.map(section => section.id)).size !== doc.sections.length) ctx.addIssue({ code: 'custom', path: ['sections'], message: 'Section IDs must be unique.' });

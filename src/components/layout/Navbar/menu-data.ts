@@ -1,32 +1,5 @@
-export interface PublishedSolutionItem { title: string; slug: string; metaDescription: string | null; }
-export const DEFAULT_SOLUTIONS: PublishedSolutionItem[] = [
-  {
-    title: "Facilities Management",
-    slug: "facilities-management",
-    metaDescription: "Connect comfort, utilities and critical assets with IoTRICs. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
-  },
-  {
-    title: "Hospitality & Hotels",
-    slug: "hospitality",
-    metaDescription: "Connected hotel operations for guest comfort, refrigeration, utilities and maintenance. Help service teams work from a shared view of the property.",
-  },
-  {
-    title: "Cold Storage",
-    slug: "cold-storage",
-    metaDescription: "Connect cold-room conditions, door activity and refrigeration demand. Understand exceptions with the context needed for a focused response.",
-  },
-  {
-    title: "Industrial & Manufacturing",
-    slug: "industrial",
-    metaDescription: "Connected industrial monitoring for materials, equipment and plant conditions. Give production and maintenance teams a shared view across shifts.",
-  },
-  {
-    title: "Energy Monitoring",
-    slug: "energy-monitoring",
-    metaDescription: "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICs.",
-  },
-];
-
+import { matchesClassification, type SolutionClassification } from '@/lib/solution-classification';
+export interface PublishedSolutionItem { title: string; slug: string; metaDescription: string | null; classification?: SolutionClassification; }
 const SOLUTION_ICONS: Record<string, string> = {
   "facilities-management":
     "M4 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17M16 9h3a1 1 0 0 1 1 1v11M2 21h20M8 7h4M8 11h4M8 15h4",
@@ -51,23 +24,13 @@ const shortDescriptions: Record<string, string> = {
   industrial: "Materials, equipment and plant conditions",
   "energy-monitoring": "Usage by site, circuit or asset",
 };
-const useCases = [
-  { slug: "cold-storage", title: "Cold Storage Monitoring" },
-  { slug: "energy-monitoring", title: "Energy Monitoring" },
-  { slug: "facilities-management", title: "Facility Water & HVAC Systems" },
-  { slug: "industrial", title: "Machine Condition & Vibration" },
-  { slug: "hospitality", title: "Hotel & Kitchen Operations" },
-];
 export function buildSolutionGroups(solutions: PublishedSolutionItem[]) {
-  const published = solutions.length ? solutions : DEFAULT_SOLUTIONS;
+  const published = solutions;
   const toItem = (s: PublishedSolutionItem) => ({ title: s.title, href: `/solutions/${s.slug}`, desc: shortDescriptions[s.slug] || s.metaDescription || "Connected monitoring for your operations", d: SOLUTION_ICONS[s.slug] || DEFAULT_ICON });
-  const industry = published.map(toItem);
-  const usecase = useCases.flatMap(c => {
-    const solution = published.find(s => s.slug === c.slug);
-    return solution ? [{ ...toItem(solution), title: c.title }] : [];
-  });
-  const hotel = industry.find(s => s.href.endsWith("/hospitality")) || industry[0];
-  const cold = usecase.find(s => s.href.endsWith("/cold-storage")) || usecase[0] || industry[0];
+  const industry = published.filter(s => matchesClassification(s.classification, 'industry')).map(toItem);
+  const usecase = published.filter(s => matchesClassification(s.classification, 'usecase')).map(toItem);
+  const hotel = industry.find(s => s.href.endsWith('/hospitality')) || industry[0];
+  const cold = usecase.find(s => s.href.endsWith('/cold-storage')) || usecase[0];
   return {
     industry: { label: "By industry", hint: "Where you operate", heading: "Solutions by industry", subheading: "Pick your sector", items: industry, featured: hotel },
     usecase: { label: "By use case", hint: "What you need to monitor", heading: "Solutions by use case", subheading: "Pick what you need to solve", items: usecase, featured: cold },

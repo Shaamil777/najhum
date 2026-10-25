@@ -7,6 +7,7 @@ import { Upload, Image as ImageIcon, X, FolderOpen, Check } from 'lucide-react';
 import { createSolutionSchema, type CreateSolutionData } from '@/lib/validation/solution-schemas';
 import type { z } from 'zod';
 import { toast } from 'sonner';
+import { solutionClassifications, classificationLabels } from '@/lib/solution-classification';
 import ImageBrowserModal from '../images/ImageBrowserModal';
 
 type SolutionFormInput = z.input<typeof createSolutionSchema>;
@@ -45,6 +46,7 @@ export default function SolutionMetadataForm({
       metaDescription: defaultValues?.metaDescription || '',
       coverImage: defaultValues?.coverImage || '',
       platforms: defaultValues?.platforms || [],
+      classification: defaultValues?.classification ?? 'INDUSTRY',
     },
   });
 
@@ -168,6 +170,15 @@ export default function SolutionMetadataForm({
         {errors.slug && (
           <p className="mt-1 text-sm text-red-600">{errors.slug.message}</p>
         )}
+      </div>
+
+      <div>
+        <label htmlFor="classification" className="block text-sm font-medium text-gray-700 mb-1">Solution classification</label>
+        <select id="classification" {...register('classification')} className="w-full px-4 py-2 border border-gray-300 rounded-md">
+          {solutionClassifications.map(value => <option key={value} value={value}>{classificationLabels[value]}</option>)}
+        </select>
+        <p className="mt-1 text-xs text-gray-500">Choose which solution navigation tabs show this solution after publishing.</p>
+        {errors.classification && <p className="mt-1 text-sm text-red-600">{errors.classification.message}</p>}
       </div>
 
       {/* Meta Description Field */}

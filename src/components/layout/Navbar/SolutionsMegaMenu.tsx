@@ -4,12 +4,14 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from "react"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ArrowRight, HelpCircle } from "lucide-react";
+import { matchesClassification, type SolutionClassification } from "@/lib/solution-classification";
 import { cn } from "@/lib/utils";
 
 export interface PublishedSolutionItem {
   title: string;
   slug: string;
   metaDescription: string | null;
+  classification?: SolutionClassification;
 }
 
 interface SolutionMenuItem {
@@ -32,26 +34,31 @@ interface TabData {
 
 const DEFAULT_SOLUTIONS: PublishedSolutionItem[] = [
   {
+    classification: 'BOTH',
     title: "Facilities Management",
     slug: "facilities-management",
     metaDescription: "Connect comfort, utilities and critical assets with IoTRICs. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
   },
   {
+    classification: 'BOTH',
     title: "Hospitality & Hotels",
     slug: "hospitality",
     metaDescription: "Connected hotel operations for guest comfort, refrigeration, utilities and maintenance. Help service teams work from a shared view of the property.",
   },
   {
+    classification: 'BOTH',
     title: "Cold Storage",
     slug: "cold-storage",
     metaDescription: "Connect cold-room conditions, door activity and refrigeration demand. Understand exceptions with the context needed for a focused response.",
   },
   {
+    classification: 'BOTH',
     title: "Industrial & Manufacturing",
     slug: "industrial",
     metaDescription: "Connected industrial monitoring for materials, equipment and plant conditions. Give production and maintenance teams a shared view across shifts.",
   },
   {
+    classification: 'BOTH',
     title: "Energy Monitoring",
     slug: "energy-monitoring",
     metaDescription: "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICs.",
@@ -125,7 +132,7 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
   // 100% Real Najhum Published Solutions & Published Operational Use Cases
   const solutionsData: Record<"industry" | "usecase", TabData> = useMemo(() => {
     // Generate industry items dynamically from real published solutions
-    const industryItems: SolutionMenuItem[] = liveSolutions.map((sol) => ({
+    const industryItems: SolutionMenuItem[] = liveSolutions.filter(sol => matchesClassification(sol.classification, 'industry')).map((sol) => ({
       title: sol.title,
       desc: sol.metaDescription?.trim() || "Explore connected operations with real-time telemetry.",
       d: SOLUTION_ICONS[sol.slug] || DEFAULT_ICON,
@@ -133,53 +140,9 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
     }));
 
     // Real operational use cases linking strictly to published solutions
-    const useCaseItems: SolutionMenuItem[] = [
-      {
-        title: "Cold Storage & Refrigeration",
-        desc: getDbMeta(
-          "cold-storage",
-          "Continuous temperature, humidity and door-open records for compliance."
-        ),
-        d: SOLUTION_ICONS["cold-storage"],
-        href: "/solutions/cold-storage",
-      },
-      {
-        title: "Energy & Sub-Metering",
-        desc: getDbMeta(
-          "energy-monitoring",
-          "Real-time electrical load profiling, power factor and peak demand alerts."
-        ),
-        d: SOLUTION_ICONS["energy-monitoring"],
-        href: "/solutions/energy-monitoring",
-      },
-      {
-        title: "Facility Water & HVAC Systems",
-        desc: getDbMeta(
-          "facilities-management",
-          "AHU performance, water tank levels, pump status and energy per floor."
-        ),
-        d: SOLUTION_ICONS["facilities-management"],
-        href: "/solutions/facilities-management",
-      },
-      {
-        title: "Machine Condition & Vibration",
-        desc: getDbMeta(
-          "industrial",
-          "Motor vibration, thermal thresholds, runtime hours and downtime prevention."
-        ),
-        d: SOLUTION_ICONS["industrial"],
-        href: "/solutions/industrial",
-      },
-      {
-        title: "Hotel & Kitchen Operations",
-        desc: getDbMeta(
-          "hospitality",
-          "Guest room comfort, kitchens, cold rooms and back-of-house operations."
-        ),
-        d: SOLUTION_ICONS["hospitality"],
-        href: "/solutions/hospitality",
-      },
-    ];
+    const useCaseItems: SolutionMenuItem[] = liveSolutions
+      .filter(sol => matchesClassification(sol.classification, 'usecase'))
+      .map(sol => ({ title: sol.title, desc: sol.metaDescription || 'Explore connected operations.', d: SOLUTION_ICONS[sol.slug] || DEFAULT_ICON, href: `/solutions/${sol.slug}` }));
 
     const featuredHospitality = liveSolutions.find((s) => s.slug === "hospitality") || liveSolutions[0] || DEFAULT_SOLUTIONS[1];
     const featuredColdStorage = liveSolutions.find((s) => s.slug === "cold-storage") || liveSolutions[2] || DEFAULT_SOLUTIONS[2];

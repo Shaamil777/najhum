@@ -296,7 +296,7 @@ export default function SolutionBuilder({ solutionId, initialSession, localPrevi
         {rightTab !== 'page' && <div className="builder-panel-tabs"><button className={rightTab === 'content' ? 'active' : ''} onClick={() => setRightTab('content')}>Content</button><button className={rightTab === 'design' ? 'active' : ''} onClick={() => setRightTab('design')}>Design</button></div>}
         <div className="builder-panel-scroll">
           {rightTab === 'page' ? <>
-            <ContentInspector solutionId={solutionId} value={{ title: doc.title, slug: doc.slug, metaDescription: doc.metaDescription }} onChange={value => change({ ...doc, ...(value as Pick<BuilderDocument, 'title' | 'slug' | 'metaDescription'>) })} />
+            <ContentInspector solutionId={solutionId} value={{ title: doc.title, slug: doc.slug, metaDescription: doc.metaDescription, classification: doc.classification ?? 'INDUSTRY' }} onChange={value => change({ ...doc, ...(value as Pick<BuilderDocument, 'title' | 'slug' | 'metaDescription' | 'classification'>) })} />
             <p className="text-[11px] text-slate-400 mb-6">Page URL: /solutions/{doc.slug}</p>
             <div className="border-t pt-5 space-y-3"><button className="builder-small-button w-full" disabled={busy} onClick={() => setConfirm('discard')}>Discard draft changes</button>{session.isPublished && <button className="builder-small-button w-full text-red-600" disabled={busy} onClick={() => setConfirm('unpublish')}>Unpublish solution</button>}<button className="builder-small-button w-full text-red-600 hover:bg-red-50 border-red-200" disabled={busy} onClick={() => setConfirm('delete')}>Delete solution</button></div>
           </> : selected ? <>

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { solutionClassifications } from '@/lib/solution-classification';
 
 export const createSolutionSchema = z.object({
   title: z
@@ -19,9 +20,15 @@ export const createSolutionSchema = z.object({
     .optional(),
   coverImage: z.string().optional().nullable().default(null),
   platforms: z.array(z.string()).default([]),
+  classification: z.enum(solutionClassifications).default('INDUSTRY'),
 });
 
-export const updateSolutionSchema = createSolutionSchema.partial();
+// Defaults belong to creation only; omitted fields must survive metadata-only edits.
+export const updateSolutionSchema = createSolutionSchema.partial().extend({
+  classification: z.enum(solutionClassifications).optional(),
+  platforms: z.array(z.string()).optional(),
+  coverImage: z.string().nullable().optional(),
+});
 
 export type CreateSolutionData = z.infer<typeof createSolutionSchema>;
 export type UpdateSolutionData = z.infer<typeof updateSolutionSchema>;
