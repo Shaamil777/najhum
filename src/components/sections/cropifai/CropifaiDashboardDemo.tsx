@@ -11,10 +11,10 @@ interface CropifaiDashboardDemoProps {
   maxHeight?: number;
 }
 
-const DASHBOARD_FILE = "Modern.dc.html";
+const DASHBOARD_FILE = "cropifai-rostamani/Rostamani.dc.html";
 const DEFAULT_HEIGHT = 2020;
 
-// Fallback section scroll targets inside Modern.dc.html (unscaled px)
+// Fallback section scroll targets inside the Rostamani dashboard (unscaled px).
 const FALLBACK_OFFSETS: Record<number, number> = {
   0: 0,     // 3D Twin & Overview
   1: 1180,  // Real-Time Telemetry & Sensors
@@ -192,12 +192,12 @@ export default function CropifaiDashboardDemo({
           const sections = doc.querySelectorAll(".wrap > section");
           if (activeIndex === 0) {
             targetOffset = 0;
-          } else if (activeIndex === 1 && sections[3]) {
-            targetOffset = Math.max(0, (sections[3] as HTMLElement).offsetTop - 20);
-          } else if (activeIndex === 2 && sections[2]) {
-            targetOffset = Math.max(0, (sections[2] as HTMLElement).offsetTop - 20);
-          } else if (activeIndex === 3 && sections[4]) {
+          } else if (activeIndex === 1 && sections[4]) {
             targetOffset = Math.max(0, (sections[4] as HTMLElement).offsetTop - 20);
+          } else if (activeIndex === 2 && sections[3]) {
+            targetOffset = Math.max(0, (sections[3] as HTMLElement).offsetTop - 20);
+          } else if (activeIndex === 3 && sections[5]) {
+            targetOffset = Math.max(0, (sections[5] as HTMLElement).offsetTop - 20);
           }
         }
       } catch {
@@ -209,7 +209,7 @@ export default function CropifaiDashboardDemo({
         behavior: "smooth"
       });
     }
-  }, [activeIndex, scale, isMobile]);
+  }, [activeIndex, scale, isMobile, isLoaded, contentHeight]);
 
   return (
     <>
@@ -259,7 +259,7 @@ export default function CropifaiDashboardDemo({
             <iframe
               ref={iframeRef}
               src={targetUrl}
-              title="cropifAI Dashboard - Modern Greenhouse Digital Twin"
+              title="cropifAI Dashboard - Rostamani Garden Villa Digital Twin"
               onLoad={() => handleIframeLoaded(iframeRef.current)}
               sandbox="allow-scripts allow-same-origin allow-forms"
               loading="lazy"

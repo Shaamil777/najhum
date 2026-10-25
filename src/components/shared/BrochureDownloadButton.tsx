@@ -92,7 +92,7 @@ export default function BrochureDownloadButton({
         body: JSON.stringify({ 
           phone: fullPhone, 
           countryCode: phoneCountryCode,
-          channel: "sms" 
+          channel: "whatsapp"
         }),
       });
 
@@ -124,7 +124,7 @@ export default function BrochureDownloadButton({
         body: JSON.stringify({ 
           phone: targetPhone, 
           countryCode: phoneCountryCode,
-          channel: "sms" 
+          channel: "whatsapp"
         }),
       });
 
@@ -211,8 +211,8 @@ export default function BrochureDownloadButton({
               </h2>
               <p className="text-gray-500 mb-6 text-sm">
                 {step === "phone"
-                  ? "Enter your name and mobile number to receive your OTP and download the brochure."
-                  : `We sent a 6-digit verification code to ${submittedPhone || phone}.`}
+                  ? "Enter your name and WhatsApp number to receive your OTP and download the brochure."
+                  : `We sent a 6-digit verification code via WhatsApp to ${submittedPhone || phone}.`}
               </p>
 
               {error && (
@@ -238,7 +238,7 @@ export default function BrochureDownloadButton({
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Mobile Number *
+                      WhatsApp Number *
                     </label>
                     <div className="flex gap-2">
                       <div className="relative w-24 shrink-0">
@@ -278,7 +278,7 @@ export default function BrochureDownloadButton({
                     </div>
                   </div>
                   <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
-                    {loading ? "Sending Code..." : "Send Verification Code"}
+                    {loading ? "Sending Code..." : "Send WhatsApp Code"}
                   </Button>
                 </form>
               ) : (
