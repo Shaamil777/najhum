@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, LayoutDashboard, Layers, Plus, X, LayoutTemplate, Package, Users } from "lucide-react";
+import { ArrowUpRight, LayoutDashboard, Layers, Plus, X, Package, Users } from "lucide-react";
 import { LogoutButton } from "@/components/admin/auth/LogoutButton";
 
 export default function AdminSidebar({ onClose }: { onClose?: () => void }) {
@@ -10,7 +10,6 @@ export default function AdminSidebar({ onClose }: { onClose?: () => void }) {
   const navigation = [
     { name: "Overview", href: "/admin/dashboard", icon: LayoutDashboard, active: pathname === "/admin/dashboard" },
     { name: "Solutions", href: "/admin/solutions", icon: Layers, active: pathname.startsWith("/admin/solutions") },
-    { name: "Pages", href: "/admin/pages", icon: LayoutTemplate, active: pathname.startsWith("/admin/pages") },
     { name: "Products", href: "/admin/products", icon: Package, active: pathname.startsWith("/admin/products") },
     { name: "Customers / Leads", href: "/admin/customers", icon: Users, active: pathname.startsWith("/admin/customers") },
   ];
