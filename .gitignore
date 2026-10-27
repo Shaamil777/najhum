@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Local solution import recovery backups
 /work/industry-import-backups/
+
+# Recovery snapshots for article illustration updates
+/work/blog-image-backups/

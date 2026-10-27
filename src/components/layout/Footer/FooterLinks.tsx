@@ -62,6 +62,7 @@ const solutions = [
 const companyLinks = [
   { title: "About Us", href: "/about" },
   { title: "Products", href: "/products" },
+  { title: "Journal", href: "/blogs" },
   { title: "Contact Us", href: "/contact" },
 ];
 

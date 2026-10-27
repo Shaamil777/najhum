@@ -2,12 +2,17 @@ import { describe, expect, it } from "vitest";
 import { getProductClassification } from "./product-classification";
 import { matchesProductCategory } from "./product-filters";
 
-describe("catalogue filter classifications", () => {
-  it("corrects blanket tags using the matching brochure model", () => {
+describe("saved product classifications", () => {
+  it("preserves saved platform selections even when a brochure model matches", () => {
     const classification = getProductClassification({ name: "Najhum AI Occupancy Sensor", platforms: ["iotrics", "evoltics", "cropifai"], details: { model: "NT321" } });
-    expect(classification).toEqual({ platforms: ["iotrics"], category: "Hardware" });
+    expect(classification).toEqual({ platforms: ["iotrics", "evoltics", "cropifai"], category: "Hardware" });
     expect(matchesProductCategory(classification, "Hardware")).toBe(true);
-    expect(matchesProductCategory(classification, "evoltics")).toBe(false);
+    expect(matchesProductCategory(classification, "evoltics")).toBe(true);
+  });
+  it("does not restore brochure platforms when an administrator clears the selections", () => {
+    const classification = getProductClassification({ name: "Najhum AI Occupancy Sensor", platforms: [], details: { model: "NT321" } });
+    expect(classification.platforms).toEqual([]);
+    expect(matchesProductCategory(classification, "iotrics")).toBe(false);
   });
   it("preserves explicitly categorised non-catalogue software", () => {
     const classification = getProductClassification({ name: "Site analytics", platforms: ["IoTRICs"], details: { category: "Software" } });

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronRight, LayoutDashboard, Layers, Menu, Plus } from "lucide-react";
+import { BookOpen, ArrowUpRight, ChevronRight, LayoutDashboard, Layers, Menu, Plus } from "lucide-react";
 import { Toaster } from "sonner";
 import AdminSidebar from "./AdminSidebar";
 
@@ -20,6 +20,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ? "Customers & Leads"
       : pathname.startsWith("/admin/products")
       ? "Products"
+      : pathname.startsWith("/admin/blogs")
+      ? pathname.endsWith("/edit") ? "Edit article" : pathname.endsWith("/new") ? "Create article" : pathname.endsWith("/settings") ? "Journal settings" : "Journal / Blogs"
       : isNew
       ? "New solution"
       : pathname.endsWith("/edit")
@@ -47,6 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const mobileLinks = [
     { name: "Overview", href: "/admin/dashboard", icon: LayoutDashboard, active: pathname === "/admin/dashboard" },
     { name: "Solutions", href: "/admin/solutions", icon: Layers, active: pathname.startsWith("/admin/solutions") && !isNew },
+    { name: "Journal", href: "/admin/blogs", icon: BookOpen, active: pathname.startsWith("/admin/blogs") },
     { name: "Create", href: "/admin/solutions/new", icon: Plus, active: isNew },
   ];
   return (
@@ -68,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <main ref={mainRef} id="admin-content" tabIndex={-1} className="min-h-0 flex-1 overflow-y-auto overscroll-contain focus:outline-none">
           <div className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-7 sm:py-8 lg:px-9 lg:py-9">{children}</div>
         </main>
-        <nav aria-label="Mobile workspace navigation" className="grid shrink-0 grid-cols-3 border-t border-slate-200 bg-white px-3 pt-2 pb-[max(8px,env(safe-area-inset-bottom))] lg:hidden">
+        <nav aria-label="Mobile workspace navigation" className="grid shrink-0 grid-cols-4 border-t border-slate-200 bg-white px-3 pt-2 pb-[max(8px,env(safe-area-inset-bottom))] lg:hidden">
           {mobileLinks.map(({ name, href, icon: Icon, active }) => <Link key={href} href={href} aria-current={active ? "page" : undefined} className={`flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary ${active ? "bg-primary/7 text-primary" : "text-slate-400 hover:text-slate-700"}`}><Icon size={19} aria-hidden="true" />{name}</Link>)}
         </nav>
       </div>

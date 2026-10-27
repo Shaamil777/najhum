@@ -1,7 +1,8 @@
-export type SearchCategory = 'Pages' | 'Platforms' | 'Solutions' | 'Products';
+export type SearchCategory = 'Pages' | 'Platforms' | 'Solutions' | 'Products' | 'Blogs';
 export interface SearchEntry { title: string; href: string; description: string; category: SearchCategory; keywords?: string }
 export const recommendedPages: SearchEntry[] = [
   { title: 'Solutions', href: '/solutions', description: 'Explore applications across industries and find the right solution.', category: 'Pages', keywords: 'facilities hospitality hotel cold storage industrial energy monitoring' },
+  { title: 'Blogs', href: '/blogs', description: 'Read insights on connected infrastructure, IoT, energy, EV charging, and agriculture.', category: 'Pages', keywords: 'blog blogs articles journal insights stories perspectives' },
   { title: 'IoTRICs', href: '/platforms/iotrics', description: 'Connected buildings, industrial monitoring, sensors, and operational intelligence.', category: 'Platforms', keywords: 'iot internet things smart building bms hvac temperature humidity occupancy water energy' },
   { title: 'EVOLTICS', href: '/platforms/evoltics', description: 'EV charging management, infrastructure, and smart mobility.', category: 'Platforms', keywords: 'electric vehicle ev charger charging parking ocpp' },
   { title: 'cropifAI', href: '/platforms/cropifai', description: 'Precision agriculture and automated growing environments.', category: 'Platforms', keywords: 'agriculture farming crop greenhouse irrigation climate' },

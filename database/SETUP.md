@@ -68,3 +68,29 @@ Choose classification on Admin → Solutions → New, or in the existing solutio
 page settings. Builder classification edits stay in the saved draft until Publish.
 Published solutions appear under the selected navigation tabs on desktop and mobile,
 and the public solutions catalog has a classification filter.
+
+## Journal / blog setup
+
+Run `database/blog.sql` in the Supabase SQL Editor before deploying the blog code.
+The same SQL is checked into `prisma/migrations/20261027000000_add_blog/migration.sql`.
+The script is rerunnable and inserts no articles. It creates BlogPost and BlogSettings,
+with RLS enabled and no client policies. Continue using the existing server-side
+Prisma PostgreSQL connection with the owner/service database role; do not expose it
+to the browser. The existing image upload integration stores cover images in R2.
+
+Run `npm run build`, then open Admin → Journal / Blogs. Create your first article,
+save a draft, preview, and publish. Page design & SEO edits the /blogs introduction
+and listing metadata. Article SEO fields include title, description, topic keywords,
+social image, and noindex. Canonical URLs, BlogPosting structured data, and sitemap
+entries are automatic. Drafts cannot be opened through public article URLs.
+
+Published article edits go live using Update published article. Move to draft
+unpublishes the article immediately. There is no separate draft revision of a live
+article. Preview shows saved content only. Changing a slug changes the public URL;
+retain published slugs if you need existing inbound links to continue working.
+There is no newsletter form or sample post content.
+
+If managing migration history with Prisma, use `prisma migrate deploy` through your
+normal workflow instead of running the SQL separately. After manual SQL in a
+Prisma-managed database, mark `20261027000000_add_blog` applied with
+`prisma migrate resolve --applied 20261027000000_add_blog` before subsequent migrations.

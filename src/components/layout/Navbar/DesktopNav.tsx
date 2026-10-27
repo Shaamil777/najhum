@@ -53,6 +53,7 @@ export function DesktopNav({ solutions = [] }: { solutions?: PublishedSolutionIt
       }}>{menu === "platforms" ? "Platforms" : "Solutions"}<ChevronDown size={15} className={open === menu ? styles.chevronOpen : ""} aria-hidden="true" /></button>
     </div>)}
     <Link href="/products" onMouseEnter={close} onFocus={close} className={styles.trigger} aria-current={pathname.startsWith("/products") ? "page" : undefined}>Products</Link>
+    <Link href="/blogs" onMouseEnter={close} onFocus={close} className={styles.trigger} aria-current={pathname.startsWith("/blogs") ? "page" : undefined}>Blogs</Link>
     <Link href="/about" onMouseEnter={close} onFocus={close} className={styles.trigger} aria-current={pathname.startsWith("/about") ? "page" : undefined}>About</Link>
     {mounted && open && createPortal(<>
       <div className={styles.backdrop} style={{ top: Math.max(top - 12, 0) }} aria-hidden="true" onClick={close} />

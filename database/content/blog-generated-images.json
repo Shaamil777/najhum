@@ -1,0 +1,141 @@
+{
+  "generator": "Built-in image_gen tool",
+  "purpose": "Original illustrative editorial images for five blog articles; not identified customer project photography.",
+  "articles": [
+    {
+      "slug": "industrial-iot-from-sensor-data-to-operational-decisions",
+      "title": "Industrial IoT: From Sensor Data to Better Operational Decisions",
+      "images": [
+        {
+          "role": "cover",
+          "path": "/images/blogs/industrial-iot/cover-v1.webp",
+          "alt": "Engineer inspecting a wireless sensor on pipework at an industrial processing site.",
+          "previousPath": "/solutions/industrial.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original landscape cover photograph for a Najhum technology blog article. Scene: A modern industrial processing plant with steel silos, pipes and conveyor systems, a field engineer in correct hard hat and high visibility clothing inspecting a small mounted wireless sensor on a pipe. Wide establishing view, convincing industrial scale. Style: premium editorial photography, natural materials, authentic operational details, subtle blue and neutral tones, realistic daylight, no exaggerated sci-fi. Composition: wide 16:9 landscape, main subject and critical objects within the central 70 percent for responsive cropping, visually complete composition, crisp detail. No text, logos, watermarks, graphic overlays or invented UI. Illustrative scene, not a claimed customer project."
+        },
+        {
+          "role": "detail-1",
+          "path": "/images/blogs/industrial-iot/detail-1-v1.webp",
+          "alt": "Wireless vibration sensor mounted on an industrial motor bearing housing.",
+          "previousPath": "/solutions/details/industrial-materials.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: Close editorial view of a rugged wireless vibration sensor securely installed on the bearing housing of an industrial electric motor, orderly steel pipes and equipment softly receding behind it, subtle signs of normal use, precise believable hardware. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        },
+        {
+          "role": "detail-2",
+          "path": "/images/blogs/industrial-iot/detail-2-v1.webp",
+          "alt": "Maintenance engineer reviewing monitoring trends beside factory control cabinets.",
+          "previousPath": "/solutions/details/energy-metering.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: An industrial maintenance engineer wearing hard hat and safety glasses reviewing sensor trends on a tablet next to closed control cabinets on a clean factory floor, screen only soft non-legible chart shapes, calm candid moment. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        }
+      ]
+    },
+    {
+      "slug": "smart-building-monitoring-hvac-water-and-comfort",
+      "title": "Smart Building Monitoring: Start with the Systems People Depend On",
+      "images": [
+        {
+          "role": "cover",
+          "path": "/images/blogs/smart-building/cover-v1.webp",
+          "alt": "Facilities engineer reviewing equipment in a building mechanical room.",
+          "previousPath": "/solutions/facilities-management.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original landscape cover photograph for a Najhum technology blog article. Scene: Modern commercial building mechanical plant room with orderly HVAC air handling equipment, blue and silver water pipes, pumps and a facilities engineer reviewing conditions on a tablet. Clear authentic environment and believable installation. Style: premium editorial photography, natural materials, authentic operational details, subtle blue and neutral tones, realistic daylight, no exaggerated sci-fi. Composition: wide 16:9 landscape, main subject and critical objects within the central 70 percent for responsive cropping, visually complete composition, crisp detail. No text, logos, watermarks, graphic overlays or invented UI. Illustrative scene, not a claimed customer project."
+        },
+        {
+          "role": "detail-1",
+          "path": "/images/blogs/smart-building/detail-1-v1.webp",
+          "alt": "Water circulation pumps, insulated pipes and pressure sensors in a mechanical room.",
+          "previousPath": "/solutions/details/facility-water-systems.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: Detailed view of commercial building water circulation pumps, insulated blue and silver pipes, small pressure sensors and proper valves in a clean mechanical room, practical service clearances, natural industrial texture. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        },
+        {
+          "role": "detail-2",
+          "path": "/images/blogs/smart-building/detail-2-v1.webp",
+          "alt": "Comfortable commercial workspace with a wall-mounted environmental sensor.",
+          "previousPath": "/solutions/details/energy-metering.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: A modern commercial interior with daylight, comfortable shared work area and large windows, an unobtrusive wall-mounted temperature and air-quality sensor visible in the foreground, building systems improving human comfort, no people necessary. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        }
+      ]
+    },
+    {
+      "slug": "energy-monitoring-baselines-and-submetering",
+      "title": "Energy Monitoring: Build a Baseline Before You Make Changes",
+      "images": [
+        {
+          "role": "cover",
+          "path": "/images/blogs/energy-monitoring/cover-v1.webp",
+          "alt": "Engineer reviewing energy metering on closed electrical switchgear.",
+          "previousPath": "/solutions/details/energy-metering.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original landscape cover photograph for a Najhum technology blog article. Scene: Commercial electrical plant room with enclosed switchgear panels, neatly installed submeter displays and a qualified engineer in appropriate work clothing reviewing a tablet safely outside the closed cabinets. Perspective along the equipment, realistic cabling, no exposed live conductors. Style: premium editorial photography, natural materials, authentic operational details, subtle blue and neutral tones, realistic daylight, no exaggerated sci-fi. Composition: wide 16:9 landscape, main subject and critical objects within the central 70 percent for responsive cropping, visually complete composition, crisp detail. No text, logos, watermarks, graphic overlays or invented UI. Illustrative scene, not a claimed customer project."
+        },
+        {
+          "role": "detail-1",
+          "path": "/images/blogs/energy-monitoring/detail-1-v1.webp",
+          "alt": "Electrical submeters installed behind a closed switchboard door.",
+          "previousPath": "/solutions/energy-monitoring.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: Close view of a practical row of electrical submeter units mounted neatly behind a closed glazed switchboard door, cables contained safely in trunking, tiny displays deliberately non-legible, crisp material details, authentic electrical installation. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        },
+        {
+          "role": "detail-2",
+          "path": "/images/blogs/energy-monitoring/detail-2-v1.webp",
+          "alt": "Engineer reviewing energy trends on a laptop in a commercial utility room.",
+          "previousPath": "/solutions/details/energy-metering.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: An engineer comparing simple energy consumption trend charts on a laptop at a workstation in a commercial utility room, closed switchgear in the background, three-quarter composition, screen content abstract and unlabelled, no legible characters. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        }
+      ]
+    },
+    {
+      "slug": "planning-ev-charging-infrastructure-and-operations",
+      "title": "Planning EV Charging: Think Beyond the Charger",
+      "images": [
+        {
+          "role": "cover",
+          "path": "/images/blogs/ev-charging/cover-v1.webp",
+          "alt": "Electric vehicles connected to chargers beneath a commercial parking canopy.",
+          "previousPath": "/solutions/expanded/ev-charging.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original landscape cover photograph for a Najhum technology blog article. Scene: Contemporary electric vehicle charging area outside a modern commercial building in a warm climate, two electric cars parked correctly in charging bays, charging connectors naturally connected to the vehicle charge ports, shaded parking canopy and restrained landscaping. Style: premium editorial photography, natural materials, authentic operational details, subtle blue and neutral tones, realistic daylight, no exaggerated sci-fi. Composition: wide 16:9 landscape, main subject and critical objects within the central 70 percent for responsive cropping, visually complete composition, crisp detail. No text, logos, watermarks, graphic overlays or invented UI. Illustrative scene, not a claimed customer project."
+        },
+        {
+          "role": "detail-1",
+          "path": "/images/blogs/ev-charging/detail-1-v1.webp",
+          "alt": "Charging connector seated in an electric vehicle charge port.",
+          "previousPath": "/solutions/details/hotel-ev-charging.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: Close view of a correctly seated electric car charging connector in a vehicle charge port, the cable has a natural curve and the charge point is softly visible in the background, polished but natural editorial product photography outdoors. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        },
+        {
+          "role": "detail-2",
+          "path": "/images/blogs/ev-charging/detail-2-v1.webp",
+          "alt": "Electric vehicles charging beneath a solar parking canopy.",
+          "previousPath": "/solutions/expanded/ev-charging.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: Wide view of several electric vehicle charging bays beneath a modern solar parking canopy beside a commercial campus, connected cars in correctly sized spaces, clear access and orderly realistic infrastructure, warm late afternoon daylight. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        }
+      ]
+    },
+    {
+      "slug": "precision-irrigation-soil-moisture-and-field-context",
+      "title": "Precision Irrigation: Put Soil Data in Context",
+      "images": [
+        {
+          "role": "cover",
+          "path": "/images/blogs/precision-irrigation/cover-v1.webp",
+          "alt": "Soil moisture monitoring device and drip irrigation lines among healthy crops.",
+          "previousPath": "/images/cropifai/smart_irrigation.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original landscape cover photograph for a Najhum technology blog article. Scene: Productive agricultural field with healthy green crop rows, drip irrigation tubing following the rows and a small practical soil moisture probe connected by cable to a weatherproof sensor gateway on a short stake, wide view with real soil texture and warm early morning light. Style: premium editorial photography, natural materials, authentic operational details, subtle blue and neutral tones, realistic daylight, no exaggerated sci-fi. Composition: wide 16:9 landscape, main subject and critical objects within the central 70 percent for responsive cropping, visually complete composition, crisp detail. No text, logos, watermarks, graphic overlays or invented UI. Illustrative scene, not a claimed customer project."
+        },
+        {
+          "role": "detail-1",
+          "path": "/images/blogs/precision-irrigation/detail-1-v1.webp",
+          "alt": "Soil moisture probe and field gateway beside a crop row and drip irrigation tubing.",
+          "previousPath": "/images/cropifai/precision_farming.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: Close low-angle view of a small weatherproof soil moisture sensor probe installed in soil beside crop roots and drip irrigation tubing, cable leads to a compact practical field gateway on a stake, natural moist earth texture, background crop rows softly blurred. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        },
+        {
+          "role": "detail-2",
+          "path": "/images/blogs/precision-irrigation/detail-2-v1.webp",
+          "alt": "Agronomist inspecting soil and a drip emitter between crop rows.",
+          "previousPath": "/solutions/expanded/smart-irrigation.jpg",
+          "prompt": "Use case: photorealistic-natural. Asset type: original supporting editorial photograph for a Najhum technology blog article. Scene: An agronomist kneeling between healthy crop rows inspecting damp soil near a drip emitter, small field monitoring gateway visible nearby, candid practical agriculture scene in soft morning daylight, clear context and believable tool scale. Style: photorealistic premium editorial photography, believable materials and scale, natural blue-neutral and earth tones, no sci-fi effects. Wide 16:9 landscape composition, key details centred with cropping room at all edges, clean visual hierarchy. No logos, words, lettering, watermark, holograms, graphic overlay, or invented dashboard text. Illustrative setting rather than an identified client location."
+        }
+      ]
+    }
+  ]
+}

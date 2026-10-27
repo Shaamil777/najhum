@@ -40,7 +40,7 @@ export function MobileNav({ onSearch, solutions = [] }: { onSearch: () => void; 
           <button type="button" className={styles.mobileSectionTrigger} aria-expanded={expanded === menu} aria-controls={`mobile-${menu}`} onClick={() => setExpanded(previous => previous === menu ? null : menu)}>{menu === "platforms" ? "Platforms" : "Solutions"}<ChevronDown size={18} className={expanded === menu ? styles.chevronOpen : ""} /></button>
           {expanded === menu && <div id={`mobile-${menu}`}>{menu === "platforms" ? <PlatformMenuContent mobile onNavigate={close} /> : <SolutionsMenuContent mobile solutions={solutions} onNavigate={close} />}</div>}
         </div>)}
-        <Link href="/products" className={styles.mobileNavLink} onClick={close}>Products</Link><Link href="/about" className={styles.mobileNavLink} onClick={close}>About</Link>
+        <Link href="/products" className={styles.mobileNavLink} onClick={close}>Products</Link><Link href="/blogs" className={styles.mobileNavLink} onClick={close}>Blogs</Link><Link href="/about" className={styles.mobileNavLink} onClick={close}>About</Link>
       </nav>
       <div className={styles.mobileFooter}><button type="button" onClick={() => { close(); onSearch(); }}><Search size={18} />Search</button><Link href="/contact" onClick={close}>Contact us</Link></div>
     </div></FocusLock>,document.body)}

@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import { Container } from "@/design-system/primitives/layout/Container";
 import {
   ArrowRight, Search, ChevronDown,
-  LayoutGrid, Radio, Router, Monitor, Box, HeadphonesIcon, Zap
+  LayoutGrid, Radio, Router, Box, HeadphonesIcon, Zap
 } from "lucide-react";
 import Link from "next/link";
 
@@ -21,63 +21,6 @@ export interface ProductItem {
   solutions?: string[];
   brochureUrl?: string | null;
 }
-
-const fallbackProducts: ProductItem[] = [
-  {
-    id: "1",
-    name: "NUO3 Oil Level Sensor",
-    category: "SENSOR",
-    categoryId: "Sensor",
-    description: "Ultrasonic liquid level monitoring for fuel tanks and storage containers.",
-    imageType: "sensor",
-    platforms: ["iotrics"]
-  },
-  {
-    id: "2",
-    name: "Edge Router X1",
-    category: "HARDWARE",
-    categoryId: "Hardware",
-    description: "High-performance enterprise networking solution for industrial telemetry.",
-    imageType: "router",
-    platforms: ["iotrics", "evoltics"]
-  },
-  {
-    id: "3",
-    name: "Data Insights Pro",
-    category: "SOFTWARE",
-    categoryId: "Software",
-    description: "Advanced analytics platform for remote fleet monitoring.",
-    imageType: "software",
-    platforms: ["evoltics"]
-  },
-  {
-    id: "4",
-    name: "cropifAI Soil Probe Node",
-    category: "SENSOR",
-    categoryId: "Sensor",
-    description: "Multi-depth volumetric soil moisture and temperature sensor node.",
-    imageType: "square_sensor",
-    platforms: ["cropifai"]
-  },
-  {
-    id: "5",
-    name: "AC Smart Wallbox 22kW",
-    category: "HARDWARE",
-    categoryId: "Hardware",
-    description: "High-power connected smart AC charging station with OCPP 2.0.1.",
-    imageType: "router",
-    platforms: ["evoltics"]
-  },
-  {
-    id: "6",
-    name: "Gateway Hub IoT-500",
-    category: "HARDWARE",
-    categoryId: "Hardware",
-    description: "LPWAN & Cellular industrial edge gateway.",
-    imageType: "router",
-    platforms: ["iotrics"]
-  },
-];
 
 // Helper to render placeholder visuals based on imageType
 const renderPlaceholder = (type?: string) => {
@@ -129,12 +72,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"name-asc" | "name-desc">("name-asc");
 
-  const allProducts = useMemo(() => {
-    if (initialProducts && initialProducts.length > 0) {
-      return initialProducts;
-    }
-    return fallbackProducts;
-  }, [initialProducts]);
+  const allProducts = useMemo(() => initialProducts ?? [], [initialProducts]);
 
   // Dynamic Categories calculation
   const categories = useMemo(() => {
@@ -143,8 +81,6 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
       { name: "IoTRICs", icon: Radio, id: "iotrics" },
       { name: "EVOLTICS", icon: Zap, id: "evoltics" },
       { name: "cropifAI", icon: Router, id: "cropifai" },
-      { name: "Hardware", icon: Box, id: "Hardware" },
-      { name: "Software", icon: Monitor, id: "Software" },
     ];
 
     return list.map(cat => {
@@ -188,7 +124,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
             {/* Categories */}
             <div>
               <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4 px-3">
-                Categories & Platforms
+                Platforms
               </h3>
               <ul className="flex flex-col gap-1.5">
                 {categories.map((cat) => {

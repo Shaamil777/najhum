@@ -118,3 +118,38 @@ enum SectionType {
   COMPARISON_TABLE
   PRODUCT_CARD
 }
+
+
+model BlogPost {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  excerpt        String   @default("")
+  content        String   @default("")
+  category       String   @default("Insights")
+  author         String   @default("Najhum Editorial")
+  coverImage     String   @default("")
+  coverAlt       String   @default("")
+  seoTitle       String   @default("")
+  seoDescription String   @default("")
+  ogImage        String   @default("")
+  tags           String[] @default([])
+  noIndex        Boolean  @default(false)
+  featured       Boolean  @default(false)
+  isDraft        Boolean  @default(true)
+  publishedAt    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([isDraft, publishedAt])
+}
+
+model BlogSettings {
+  id             String  @id @default("main")
+  heading        String  @default("Ideas for a connected world.")
+  introduction   String  @default("Perspectives on technology, infrastructure, and the systems that bring them together.")
+  seoTitle       String  @default("Journal | Najhum Technologies")
+  seoDescription String  @default("Explore insights on industrial IoT, EV charging, smart buildings, and precision agriculture from Najhum Technologies.")
+  ogImage        String  @default("")
+  noIndex        Boolean @default(false)
+}
