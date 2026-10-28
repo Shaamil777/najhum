@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowRight, Image as ImageIcon, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { demoContent } from "@/content/demo";
 
 export default function DemoHero() {
@@ -39,13 +40,13 @@ export default function DemoHero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
             >
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-black text-white text-[10px] font-bold tracking-widest uppercase rounded-lg shadow-xl shadow-black/10 hover:-translate-y-0.5 hover:shadow-2xl hover:bg-neutral-900 transition-all duration-300">
+              <Link href="#platform-demos" className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-black text-white text-[10px] font-bold tracking-widest uppercase rounded-lg shadow-xl shadow-black/10 hover:-translate-y-0.5 hover:shadow-2xl hover:bg-neutral-900 transition-all duration-300">
                 {hero.buttonExplore}
                 <ArrowRight className="w-4 h-4" />
-              </button>
-              <button className="w-full sm:w-auto flex items-center justify-center px-8 py-4 bg-white border-2 border-neutral-200 text-neutral-900 text-[10px] font-bold tracking-widest uppercase rounded-lg hover:border-neutral-300 hover:bg-neutral-50 transition-colors duration-300">
+              </Link>
+              <Link href="/contact#contact-form" className="w-full sm:w-auto flex items-center justify-center px-8 py-4 bg-white border-2 border-neutral-200 text-neutral-900 text-[10px] font-bold tracking-widest uppercase rounded-lg hover:border-neutral-300 hover:bg-neutral-50 transition-colors duration-300">
                 {hero.buttonDemo}
-              </button>
+              </Link>
             </motion.div>
           </div>
           

@@ -3,6 +3,7 @@
 import React from "react";
 import { Activity, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { demoContent } from "@/content/demo";
 
 export default function DemoModules() {
@@ -10,7 +11,7 @@ export default function DemoModules() {
   const items = modules.items;
 
   return (
-    <section className="w-full bg-white py-16 md:py-24  overflow-hidden font-sans relative">
+    <section id="platform-demos" className="scroll-mt-24 w-full bg-white py-16 md:py-24  overflow-hidden font-sans relative">
       
       <div className="container-base max-w-[1100px] relative z-10">
         
@@ -120,12 +121,12 @@ export default function DemoModules() {
                     {mod.description}
                   </p>
                   
-                  <button className="group flex items-center gap-2.5 px-6 py-3 bg-black text-white rounded-full font-bold uppercase tracking-wider text-[10px] hover:bg-neutral-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                  <Link href={mod.platform === "IoTRICs" ? "/platforms/iotrics#iotrics-core" : mod.platform === "EVOLTICS" ? "/platforms/evoltics#evoltics-platform" : "/platforms/cropifai#cropifai-interface"} className="group flex items-center gap-2.5 px-6 py-3 bg-black text-white rounded-full font-bold uppercase tracking-wider text-[10px] hover:bg-neutral-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
                     {modules.buttonLabel}
                     <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center transform group-hover:translate-x-1 transition-transform">
                       <ExternalLink className="w-2.5 h-2.5" />
                     </div>
-                  </button>
+                  </Link>
                 </motion.div>
 
               </div>

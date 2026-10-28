@@ -1,5 +1,4 @@
-import { Image as ImageIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import Link from "next/link";
 import { demoContent } from "@/content/demo";
 
 export default function DemoDashboardUI() {
@@ -11,15 +10,9 @@ export default function DemoDashboardUI() {
           
           {/* Dashboard Image Placeholder (Left) */}
           <div className="w-full lg:w-[65%] order-2 lg:order-1">
-            <div className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-[#f8f9fa] border-2 border-dashed border-neutral-200 rounded-3xl flex flex-col items-center justify-center overflow-hidden group hover:bg-neutral-50 hover:border-neutral-300 transition-all duration-300">
-              <ImageIcon className="w-12 h-12 text-neutral-300 mb-4 group-hover:scale-110 transition-transform duration-500" />
-              <p className="text-[10px] md:text-xs font-bold tracking-widest text-neutral-400 uppercase">
-                {dashboardUI.placeholderTitle}
-              </p>
-              <p className="text-[9px] md:text-[10px] text-neutral-400 mt-2 max-w-[200px] text-center">
-                {dashboardUI.placeholderDesc}
-              </p>
-            </div>
+            <Link href="/platforms/iotrics#iotrics-core" aria-label="Explore the IoTRICs dashboard" className="block rounded-2xl border border-neutral-200 bg-neutral-50 p-3 shadow-lg overflow-hidden">
+              <img src="/images/iotrics/dashboard-iotrics.webp" alt="IoTRICs monitoring dashboard preview" className="w-full h-auto rounded-xl" loading="lazy"/>
+            </Link>
           </div>
           
           {/* Content & Dummy Data (Right) */}
@@ -57,9 +50,9 @@ export default function DemoDashboardUI() {
               </div>
             </div>
             
-            <button className="px-8 py-4 bg-black text-white text-[10px] font-bold tracking-widest uppercase rounded-lg hover:bg-neutral-800 transition-colors w-full md:w-auto shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-300">
+            <Link href="/platforms/iotrics#iotrics-core" className="px-8 py-4 bg-black text-white text-[10px] font-bold tracking-widest uppercase rounded-lg hover:bg-neutral-800 transition-colors w-full md:w-auto shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-300">
               {dashboardUI.buttonLabel}
-            </button>
+            </Link>
           </div>
 
         </div>

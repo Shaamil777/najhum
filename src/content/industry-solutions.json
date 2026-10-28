@@ -91,7 +91,7 @@
               "description": "Review alerts, operating patterns and asset history in a shared view. Give the next shift the context behind a reading, rather than another isolated notification.",
               "image": "/images/iotrics/capability_6.jpg",
               "imageAlt": "Make the handover a little clearer.",
-              "link": "/demo",
+              "link": "/platforms/iotrics",
               "linkText": "Explore the platform"
             }
           ],

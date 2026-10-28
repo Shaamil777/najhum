@@ -1,4 +1,5 @@
 import { Share2 } from "lucide-react";
+import Link from "next/link";
 import { demoContent } from "@/content/demo";
 
 export default function DemoCta() {
@@ -15,9 +16,9 @@ export default function DemoCta() {
             <p className="text-base md:text-lg text-neutral-400 leading-relaxed mb-10 max-w-md">
               {cta.description}
             </p>
-            <button className="px-6 py-4 bg-white text-black text-[10px] font-bold tracking-widest uppercase rounded hover:bg-neutral-200 transition-colors">
+            <Link href="/contact#contact-form" className="px-6 py-4 bg-white text-black text-[10px] font-bold tracking-widest uppercase rounded hover:bg-neutral-200 transition-colors">
               {cta.buttonLabel}
-            </button>
+            </Link>
           </div>
           
           {/* Right Graphic */}
