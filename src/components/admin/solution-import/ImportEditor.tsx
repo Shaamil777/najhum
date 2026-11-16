@@ -20,7 +20,7 @@ export default function ImportEditor({initialSession}:{initialSession?:ImportSes
  const [step,setStep]=useState(0),[files,setFiles]=useState<File[]>([]),[assetEdits,setAssetEdits]=useState<Record<string,Edit>>({});
  const [busy,setBusy]=useState(false),[operation,setOperation]=useState(''),[error,setError]=useState(''),[message,setMessage]=useState('');
  const [dirty,setDirty]=useState(!initialSession?.document),[chosen,setChosen]=useState(initialSession?.baseRevisionId||'');
- const [runId,setRunId]=useState(''),[previewRevision,setPreviewRevision]=useState(''),[previewPage,setPreviewPage]=useState<ImportedDocument|null>(null);
+ const [runId,setRunId]=useState('');
  const [previewStatus,setPreviewStatus]=useState<'empty'|'loading'|'ready'|'error'>('empty'),[previewError,setPreviewError]=useState('');
  const previewWindow=useRef<Window|null>(null),panel=useRef<HTMLDivElement>(null),packagePicker=useRef<HTMLInputElement>(null),assetPicker=useRef<HTMLInputElement>(null);
  const activePreview=useRef({run:'',revision:''}),objectUrls=useRef(new Set<string>());
@@ -30,13 +30,13 @@ export default function ImportEditor({initialSession}:{initialSession?:ImportSes
   const current=activePreview.current;
   if(event.origin!==window.location.origin||event.source!==previewWindow.current||event.data?.type!=='solution-preview'||event.data.run!==current.run)return;
   if(event.data.error){setPreviewStatus('error');setPreviewError(String(event.data.error).slice(0,400));}
-  else {setPreviewStatus('ready');setPreviewRevision(current.revision);setPreviewError('');}
+  else {setPreviewStatus('ready');setPreviewError('');}
  };window.addEventListener('message',receive);return ()=>window.removeEventListener('message',receive);},[]);
  useEffect(()=>{if(previewStatus!=='loading')return;const timer=setTimeout(()=>{setPreviewStatus('error');setPreviewError('The preview did not finish loading. Reload the preview or check that the package has no missing resources.');},20000);return ()=>clearTimeout(timer);},[previewStatus,runId]);
  const hasPage=files.some(f=>/\.(zip|html?)$/i.test(f.name))||!!session?.document;
  const isSelectedLive=!!session&&!session.isDraft&&session.publishedRevisionId===chosen;
- const canPublish=!busy&&!dirty&&previewStatus==='ready'&&previewRevision===chosen&&!isSelectedLive;
- function invalidate(){setDirty(true);activePreview.current={run:'',revision:''};setPreviewStatus('empty');setPreviewRevision('');setChosen(session?.baseRevisionId||'');setMessage('');}
+ const canPublish=!busy&&hasPage&&(dirty||!isSelectedLive);
+ function invalidate(){setDirty(true);activePreview.current={run:'',revision:''};setPreviewStatus('empty');setChosen(session?.baseRevisionId||'');setMessage('');}
  function update<K extends keyof ImportMetadata>(key:K,value:ImportMetadata[K]){setMeta(old=>({...old,[key]:value}));invalidate();}
  function go(index:number){setStep(index);setError('');panel.current?.scrollIntoView({behavior:'smooth',block:'start'});}
  function validateDetails(){if(!meta.title.trim()||!meta.slug||!/^\w+(?:-\w+)*$/.test(meta.slug)||meta.slug!==slugify(meta.slug)){setError('Add a menu title and a URL slug using lowercase letters, numbers and hyphens.');setStep(0);return false;}return true;}
@@ -62,31 +62,40 @@ export default function ImportEditor({initialSession}:{initialSession?:ImportSes
   }catch(e){setError(e instanceof Error?e.message:'Could not save draft.');return null;}finally{setBusy(false);setOperation('');}
  }
  async function showPreview(){
-  // Open synchronously so saving a draft cannot trigger the browser's popup blocker.
+  if(!session?.document||!chosen){setError('Save a draft before opening a preview.');return;}
   const opened=window.open('about:blank','_blank');
   if(!opened){setError('Your browser blocked the preview tab. Allow pop-ups for this website, then try again.');return;}
-  let saved=session,revision=chosen;
-  if(dirty||!saved){saved=await saveDraft()||undefined;if(!saved){opened.close();return;}revision=saved.baseRevisionId;}
-  if(!saved||!revision){opened.close();return;}
+  const saved=session,revision=chosen;
   setStep(3);setBusy(true);setOperation('Opening preview…');setError('');setPreviewError('');setPreviewStatus('loading');
   try{
    const response=await fetch(`/api/admin/solutions/${saved.id}/revisions?revisionId=${encodeURIComponent(revision)}`,{cache:'no-store'});const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not load the saved page.');
    const page=data.document as ImportedDocument;if(!page?.html)throw new Error('This revision has no HTML content. Upload the package again.');
    const run=crypto.randomUUID();activePreview.current={run,revision};previewWindow.current=opened;
-   setPreviewPage(page);setRunId(run);setChosen(revision);
+   setRunId(run);
    opened.location.replace(`/api/admin/solutions/${saved.id}/preview?revisionId=${encodeURIComponent(revision)}&run=${encodeURIComponent(run)}`);
   }catch(e){opened.close();setPreviewStatus('error');setPreviewError(e instanceof Error?e.message:'Preview failed.');}finally{setBusy(false);setOperation('');}
  }
- async function publish(){if(!session||!canPublish)return;setBusy(true);setOperation('Publishing…');setError('');try{const response=await fetch(`/api/admin/solutions/${session.id}/revisions`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({revisionId:chosen})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not publish.');setSession({...session,isDraft:false,publishedRevisionId:chosen});setMessage(`Your page is live. Your solution is available at /solutions/${data.slug}.`);router.refresh();}catch(e){setError(e instanceof Error?e.message:'Could not publish.');}finally{setBusy(false);setOperation('');}}
+ async function publish(){
+  if(!canPublish)return;
+  let saved=session;
+  if(dirty||!saved){saved=await saveDraft()||undefined;if(!saved)return;}
+  if(!saved)return;
+  const revision=saved.baseRevisionId;
+  setBusy(true);setOperation('Publishing…');setError('');
+  try{
+   const response=await fetch(`/api/admin/solutions/${saved.id}/revisions`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({revisionId:revision})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not publish.');
+   setSession({...saved,isDraft:false,publishedRevisionId:revision});setChosen(revision);setMessage(`Your page is live. Your solution is available at /solutions/${data.slug}.`);router.refresh();
+  }catch(e){setError(e instanceof Error?e.message:'Could not publish.');}finally{setBusy(false);setOperation('');}
+ }
  async function unpublish(){if(!session)return;setBusy(true);setError('');try{const response=await fetch(`/api/admin/solutions/${session.id}/unpublish`,{method:'POST'});if(!response.ok)throw new Error('Could not unpublish.');setSession({...session,isDraft:true});setMessage('The solution is unpublished. Your working draft and last published page are retained.');router.refresh();}catch(e){setError(e instanceof Error?e.message:'Could not unpublish.');}finally{setBusy(false);}}
- const display=previewPage&&previewStatus!=='empty'?previewPage.metadata:meta;
+ const display=meta;
  return <div className={styles.editor}>
   <Link href="/admin/solutions" className={styles.back}><ArrowLeft size={14}/>Back to solutions</Link>
-  <header className={styles.header}><div><p className={styles.eyebrow}>Solution workspace</p><h1>{session?'Edit solution':'Create solution'}</h1><p>Build your page in four steps. Save a draft, check the preview, then publish when you’re ready.</p></div><span className={`${styles.badge} ${!dirty&&session&&!session.isDraft&&session.publishedRevisionId===session.baseRevisionId?styles.badgeLive:''}`}>{dirty?'Unsaved changes':session?.isDraft===false&&session.publishedRevisionId===session.baseRevisionId?<><CheckCircle2 size={13}/>Live</>:'Draft'}</span></header>
+  <header className={styles.header}><div><p className={styles.eyebrow}>Solution workspace</p><h1>{session?'Edit solution':'Create solution'}</h1><p>Build your page in four steps. Save your work as a draft or publish when you’re ready. Preview is optional.</p></div><span className={`${styles.badge} ${!dirty&&session&&!session.isDraft&&session.publishedRevisionId===session.baseRevisionId?styles.badgeLive:''}`}>{dirty?'Unsaved changes':session?.isDraft===false&&session.publishedRevisionId===session.baseRevisionId?<><CheckCircle2 size={13}/>Live</>:'Draft'}</span></header>
   <div className={styles.tabs} role="tablist" aria-label="Solution editor steps">{steps.map(([title,subtitle],i)=><button type="button" key={title} role="tab" id={`solution-step-${i}`} aria-controls={`solution-panel-${i}`} aria-selected={step===i} disabled={busy} className={styles.tab} onClick={()=>go(i)}><span className={styles.stepNumber}>{i<step?<Check size={14}/>:i+1}</span><span><strong>{title}</strong><small>{subtitle}</small></span></button>)}</div>
   {error&&<div role="alert" className={`${styles.notice} ${styles.error}`}><AlertCircle size={17}/><span>{error}</span></div>}{message&&<div role="status" className={`${styles.notice} ${styles.success}`}><CheckCircle2 size={17}/>{message}</div>}
   <div ref={panel} className={styles.panel} role="tabpanel" id={`solution-panel-${step}`} aria-labelledby={`solution-step-${step}`} style={{scrollMarginTop:100}}>
-   <div className={styles.panelHeader}><h2>{['Page details','Upload your page and manage images','Search, sharing and platforms','Review your page and publish'][step]}</h2><p>{['Set the name, address and navigation details visitors will see.','Upload a ZIP or HTML with assets. Replace individual images without uploading the whole package again. Saving replaces your working draft; no version history is kept.','Set how this page appears in search results and link previews, and where it belongs in your catalogue.','Preview loads your saved draft. Publishing is a separate action and is the only step that changes the live page.'][step]}</p></div>
+   <div className={styles.panelHeader}><h2>{['Page details','Upload your page and manage images','Search, sharing and platforms','Review your page and publish'][step]}</h2><p>{['Set the name, address and navigation details visitors will see.','Upload a ZIP or HTML with assets. Replace individual images without uploading the whole package again. Saving replaces your working draft; no version history is kept.','Set how this page appears in search results and link previews, and where it belongs in your catalogue.','Publish your latest changes, or save a draft to continue later. Preview is optional.'][step]}</p></div>
    {step===0&&<div className={styles.grid}><div className={styles.stack}>
     <label className={styles.field}>Menu title *<input value={meta.title} maxLength={200} onChange={e=>{const title=e.target.value;setMeta(old=>({...old,title,slug:!old.slug||old.slug===slugify(old.title)?slugify(title):old.slug,seoTitle:!old.seoTitle||old.seoTitle===old.title?title:old.seoTitle}));invalidate();}} placeholder="Cold Storage"/><small>A short name for the Solutions menu.</small></label>
     <label className={styles.field}>URL slug *<span className={styles.inlineInput}><input value={meta.slug} onChange={e=>update('slug',e.target.value)} placeholder="cold-storage"/><button type="button" onClick={()=>update('slug',slugify(meta.title))}>Generate</button></span><small>/solutions/{meta.slug||'your-solution'}</small></label>
@@ -110,15 +119,23 @@ export default function ImportEditor({initialSession}:{initialSession?:ImportSes
 
    </div>}
    {step===3&&<>
-    <div className={styles.reviewGrid}><div className={styles.stack}><div className={styles.notice}><Eye size={18}/><span>{dirty?'You have unsaved changes. “Save & preview” will create a draft and open it in a new tab.':session?.document?'Your saved draft is ready to preview. The live page stays unchanged until you publish.':'Upload your page in step 2, then save and open it in a new tab.'}</span></div><div className={styles.summaryActions}><button type="button" className={styles.primary} disabled={busy||!hasPage} onClick={showPreview}>{busy?<Loader2 size={16} className={styles.spinner}/>:<Eye size={16}/>} {busy?operation:dirty?'Save & preview':'Open preview'}</button><small className={styles.help}>Opens in a separate browser tab.</small></div></div>
-     <div className={styles.summary}><h3>Page summary</h3><dl><dt>Menu title</dt><dd>{display.title||'Not set'}</dd><dt>URL</dt><dd>/solutions/{display.slug||'…'}</dd><dt>SEO title</dt><dd>{display.seoTitle||'Not set'}</dd><dt>Platforms</dt><dd>{display.platforms.length?display.platforms.map(p=>p==='iotrics'?'IoTRICs':p==='evoltics'?'EVOLTICS':'cropifAI').join(', '):'None selected'}</dd></dl>{session&&!session.isDraft&&<div className={styles.summaryActions}><Link href={`/solutions/${session.document?.metadata.slug||meta.slug}`} target="_blank" className={styles.link}>View live page <ExternalLink size={12} style={{display:'inline'}}/></Link><button type="button" disabled={busy} onClick={unpublish} className={styles.dangerLink}>Unpublish</button></div>}</div>
+    <dl className={styles.publishSummary}>
+     <div><dt>Menu title</dt><dd>{display.title||'Not set'}</dd></div>
+     <div><dt>Page address</dt><dd>/solutions/{display.slug||'…'}</dd></div>
+     <div><dt>Platforms</dt><dd>{display.platforms.length?display.platforms.map(p=>p==='iotrics'?'IoTRICs':p==='evoltics'?'EVOLTICS':'cropifAI').join(', '):'None selected'}</dd></div>
+     <div className={styles.seoSummary}><dt>SEO page title</dt><dd>{display.seoTitle||'Not set'}</dd></div>
+    </dl>
+    <div className={styles.publishActions}>
+     <div><strong>Preview your saved draft <span>Optional</span></strong><p>{!session?.document?'Save a draft to preview it in a new tab.':dirty?'Preview shows your last saved draft. Save first to include your latest changes.':'Opens your saved page in a separate browser tab.'}</p>
+     {previewStatus!=='empty'&&<p role="status" className={previewStatus==='error'?styles.previewError:previewStatus==='ready'?styles.previewReady:''}>{previewStatus==='loading'?'Opening preview…':previewStatus==='ready'?'Preview opened in a new tab.':previewError}</p>}</div>
+     <button type="button" className={styles.secondary} disabled={busy||!session?.document} onClick={showPreview}><Eye size={16}/>Preview<ExternalLink size={13}/></button>
     </div>
-    <div className={styles.previewToolbar}><div className={`${styles.previewStatus} ${previewStatus==='ready'?styles.previewReady:previewStatus==='error'?styles.previewError:''}`}>{previewStatus==='loading'?<Loader2 size={15} className={styles.spinner}/>:previewStatus==='ready'?<CheckCircle2 size={15}/>:<ExternalLink size={15}/>} {previewStatus==='loading'?'Loading preview in a new tab…':previewStatus==='ready'?'Draft preview opened in a new tab':previewStatus==='error'?'Preview needs attention':'Preview opens in a new tab'}</div></div>
-    {previewStatus==='error'&&<div role="alert" className={`${styles.notice} ${styles.error}`}><AlertCircle size={17}/><span>{previewError} <button type="button" onClick={showPreview} className={styles.link}>Try again</button></span></div>}
-
+    {session&&!session.isDraft&&<div className={styles.liveActions}><Link href={`/solutions/${session.document?.metadata.slug||meta.slug}`} target="_blank" className={styles.link}>View live page <ExternalLink size={12}/></Link><button type="button" disabled={busy} onClick={unpublish} className={styles.dangerLink}>Unpublish</button></div>}
    </>}
+
   </div>
-  <footer className={styles.footer}><div className={styles.footerLeft}>{step>0?<button type="button" className={styles.secondary} disabled={busy} onClick={()=>go(step-1)}><ArrowLeft size={15}/>Back</button>:<span className={styles.footerNote}>Step {step+1} of 4</span>}</div><div className={styles.footerRight}>{hasPage&&<button type="button" className={styles.secondary} disabled={busy||!dirty} onClick={()=>void saveDraft()}><Save size={15}/>{busy&&operation==='Saving draft…'?'Saving…':'Save draft'}</button>}{step<3?<button type="button" className={styles.primary} disabled={busy} onClick={next}>Next<ArrowRight size={15}/></button>:<button type="button" className={styles.primary} disabled={!canPublish} onClick={publish}>{busy&&operation==='Publishing…'?<Loader2 size={15} className={styles.spinner}/>:<CheckCircle2 size={15}/>} {isSelectedLive&&!dirty?'This draft is live':session?.publishedRevisionId===chosen?'Publish again':'Publish draft'}</button>}</div></footer>
-  {step===3&&!canPublish&&<p className={styles.help} style={{textAlign:'right',marginTop:10}}>{dirty?'Save & preview your changes before publishing.':previewStatus!=='ready'?'Load the preview successfully to enable publishing.':isSelectedLive?'Make changes and save a draft to publish an update.':''}</p>}
+  <footer className={styles.footer}><div className={styles.footerLeft}>{step>0?<button type="button" className={styles.secondary} disabled={busy} onClick={()=>go(step-1)}><ArrowLeft size={15}/>Back</button>:<span className={styles.footerNote}>Step {step+1} of 4</span>}</div><div className={styles.footerRight}>{hasPage&&<button type="button" className={styles.secondary} disabled={busy||!dirty} onClick={()=>void saveDraft()}><Save size={15}/>{busy&&operation==='Saving draft…'?'Saving…':'Save draft'}</button>}{step<3?<button type="button" className={styles.primary} disabled={busy} onClick={next}>Next<ArrowRight size={15}/></button>:<button type="button" className={styles.primary} disabled={!canPublish} onClick={publish}>{busy&&operation==='Publishing…'?<Loader2 size={15} className={styles.spinner}/>:<CheckCircle2 size={15}/>} {isSelectedLive&&!dirty?'Already published':dirty?'Publish changes':'Publish draft'}</button>}</div></footer>
+  {step===3&&<p className={styles.publishHelp}>{dirty?'Publish changes saves and publishes your latest edits. Preview is not required.':isSelectedLive?'Your saved page is already live.':'Publish draft makes your saved page live. Preview is not required.'}</p>}
+
  </div>;
 }

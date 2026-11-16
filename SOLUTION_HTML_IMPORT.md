@@ -25,7 +25,7 @@ The code intentionally does not execute either migration/reset against your Supa
 
 Code import is available only through existing authenticated admin routes with same-origin mutation checks. Uploaded JavaScript is parsed for syntax, never executed on the server. Published scripts run with website-level browser privileges; this is a deployment capability for trusted administrators, not a customer-upload feature or a security sandbox.
 
-Preview is an opaque-origin iframe (`sandbox="allow-scripts"`, no same-origin flag); the script runs against its own document and cannot read the admin session. Preview errors prevent the UI's publish button becoming enabled. Publishing uses the current saved draft; unsaved edits cannot be published through the editor.
+Preview is an opaque-origin iframe (`sandbox="allow-scripts"`, no same-origin flag); the script runs against its own document and cannot read the admin session. Preview is optional and does not enable or block publishing. Preview opens only the last saved draft and never saves changes automatically. Publish changes first saves pending edits, then publishes the saved draft; a failed save prevents publishing.
 
 The live runtime retains original script logic and tracks its normal window/document listeners, RAFs, timers and observers for cleanup on navigation. Scripts that inject global CSS/DOM or register resources indirectly through third-party libraries must clean those up explicitly; arbitrary code cannot be automatically guaranteed harmless or perfectly reversible. Use page-local selectors and ordinary window/document event APIs. Module imports, inline event attributes and nested iframe/object/embed content are unsupported in this version. No silent removal of required scripts: import rejects unsupported cases with an error.
 
@@ -43,8 +43,8 @@ Menu title and SEO title are separate. Exact SEO title is preserved (no duplicat
 
 ## Operator workflow
 
-Upload → Save draft → Open preview in a new tab → Publish draft. Saving replaces the working draft and leaves the live page unchanged. Hide removes the published page from public routes and menus. Show restores the last published page; a solution which has never been published must be previewed and published in the editor first. List actions have separate edit, visibility and delete controls, with horizontal scrolling on narrow screens.
+Upload → Save draft or Publish changes. Preview in a new tab is optional. Saving replaces the working draft and leaves the live page unchanged. Hide removes the published page from public routes and menus. Show restores the last published page; a solution which has never been published must be previewed and published in the editor first. List actions have separate edit, visibility and delete controls, with horizontal scrolling on narrow screens.
 
 ### Preview in a separate tab
 
-Open preview (or Save & preview for unsaved changes) opens the saved revision in a new browser tab. Allow pop-ups for the admin website if prompted. The preview fills that tab and does not publish the page. Return to the editor to publish after the preview loads successfully. Uploaded scripts remain inside a sandboxed frame on the authenticated preview page.
+Preview opens the last saved draft in a separate browser tab without modifying it. Save draft first to include pending edits. Allow pop-ups for the admin website if prompted. The preview fills that tab and does not publish the page. Publishing is available independently of preview, including when preview has not been opened or reports an error. Uploaded scripts remain inside a sandboxed frame on the authenticated preview page.
