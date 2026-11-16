@@ -51,3 +51,10 @@ it('publishes a saved draft without opening a preview',async()=>{
  expect(container.textContent).toContain('Your page is live.');
  open.mockRestore();
 });
+
+it('uses the same four-step upload editor for portfolio projects',async()=>{
+ await act(async()=>root.render(<ImportEditor kind="portfolio" initialSession={session}/>));
+ expect(container.textContent).toContain('Edit project');expect(container.textContent).toContain('Client name');expect(container.textContent).not.toContain('Menu icon');
+ await act(async()=>container.querySelectorAll<HTMLButtonElement>('[role="tab"]')[3].click());
+ expect(button('Publish draft').disabled).toBe(false);expect(container.textContent).toContain('/portfolio/cold-storage');
+});

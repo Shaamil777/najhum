@@ -13,6 +13,10 @@ export const metadataSchema = z.object({
   socialImageAlt: z.string().max(200).default(''),
   classification: z.enum(['INDUSTRY','USE_CASE','BOTH']).default('INDUSTRY'),
   platforms: z.array(z.enum(['iotrics','evoltics','cropifai'])).max(3).default([]),
+  clientName: z.string().trim().max(200).optional(),
+  industry: z.string().trim().max(100).optional(),
+  location: z.string().trim().max(200).optional(),
+  year: z.string().trim().max(20).optional(),
   productIds: z.array(z.string().max(100)).max(100).default([]),
 });
 export type ImportMetadata = z.infer<typeof metadataSchema>;

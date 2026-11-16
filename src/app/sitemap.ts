@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     prisma.product.findMany({where:{isDraft:false},select:{id:true,name:true,updatedAt:true}}),
     prisma.blogPost.findMany({where:{isDraft:false,noIndex:false,publishedAt:{not:null}},select:{slug:true,updatedAt:true}}),
     prisma.blogSettings.findUnique({where:{id:"main"},select:{noIndex:true}}),
-    prisma.portfolioProject.findMany({where:{isDraft:false,noIndex:false,publishedAt:{not:null}},select:{slug:true,updatedAt:true}}),
+    prisma.portfolioProject.findMany({where:{isDraft:false,noIndex:false,publishedAt:{not:null},contentMode:"HTML",publishedRevisionId:{not:null}},select:{slug:true,updatedAt:true}}),
     prisma.portfolioSettings.findUnique({where:{id:"main"},select:{noIndex:true}}),
   ]);
   const solutionPages:MetadataRoute.Sitemap=solutions.status==="fulfilled"?solutions.value.map(solution=>({url:`${siteConfig.url}/solutions/${solution.slug}`,lastModified:solution.updatedAt,changeFrequency:"monthly",priority:.8})):[];

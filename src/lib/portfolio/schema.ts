@@ -26,7 +26,7 @@ export const projectSchema = z.object({
  technology: z.array(z.object({label:text(100),items:text(1000)})).max(30).default([]), outcomes:z.array(z.object({value:text(100),label:text(200),context:text(500)})).max(20).default([]),
  gallery:z.array(galleryImageSchema).max(100).default([]), caseStudy:caseStudySchema, galleryLayout:z.enum(['grid','full','mixed']).default('grid'),
  testimonialQuote:text(4000),testimonialName:text(),testimonialRole:text(),documentUrl:media,
- seoTitle:text(100),seoDescription:text(300),ogImage:media,noIndex:z.boolean().default(false),featured:z.boolean().default(false),order:z.number().int().min(0).max(100000).default(0),isDraft:z.boolean().default(true),
+ seoTitle:text(200),seoDescription:text(300),ogImage:media,noIndex:z.boolean().default(false),featured:z.boolean().default(false),order:z.number().int().min(0).max(100000).default(0),isDraft:z.boolean().default(true),
 });
 export type ProjectInput = z.infer<typeof projectSchema>;
 export type GalleryImage = z.infer<typeof galleryImageSchema>;

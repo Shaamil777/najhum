@@ -1,13 +1,26 @@
-import {portfolioResources} from '@/lib/portfolio/choices';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { prisma } from '@/lib/db/prisma';
-import { publishedProjects } from '@/lib/portfolio/server';
-import { projectSchema } from '@/lib/portfolio/schema';
-import { buildMetadata, pageSchema } from '@/lib/seo';
+import { buildMetadata,pageSchema } from '@/lib/seo';
 import StructuredData from '@/components/seo/StructuredData';
-import PortfolioView from '@/components/portfolio/PortfolioView';
+import HtmlSolution from '@/components/solutions/imported/HtmlSolution';
+import type { ImportedDocument } from '@/lib/solution-import/types';
 export const dynamic='force-dynamic';
-type Props={params:Promise<{slug:string}>};
-async function get(slug:string){return prisma.portfolioProject.findFirst({where:{slug,...publishedProjects}});}
-export async function generateMetadata({params}:Props){const project=await get((await params).slug);if(!project)notFound();return buildMetadata({title:project.seoTitle||project.title,description:project.seoDescription||project.summary,path:`/portfolio/${project.slug}`,image:project.ogImage||project.coverImage,noIndex:project.noIndex});}
-export default async function ProjectPage({params}:Props){const record=await get((await params).slug);if(!record)notFound();const project=projectSchema.parse(record);const [related,resources]=await Promise.all([prisma.portfolioProject.findMany({where:{...publishedProjects,id:{not:record.id},OR:[{platforms:{hasSome:project.platforms}},{industry:project.industry}]},orderBy:[{featured:'desc'},{publishedAt:'desc'}],take:3}),portfolioResources()]);return <><StructuredData data={pageSchema({title:project.title,description:project.summary,path:`/portfolio/${project.slug}`})}/><PortfolioView project={project} related={related.map(item=>projectSchema.parse(item))} resources={resources}/></>;}
+async function published(slug:string){
+ const solution=await prisma.portfolioProject.findFirst({where:{slug,isDraft:false,contentMode:'HTML',publishedRevisionId:{not:null}}});
+ if(!solution)return null;
+ const revision=await prisma.portfolioRevision.findFirst({where:{id:solution.publishedRevisionId!,projectId:solution.id}});
+ return revision?{solution,document:revision.document as unknown as ImportedDocument}:null;
+}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
+ const result=await published((await params).slug);if(!result)return {title:'Project not found',robots:{index:false,follow:false}};
+ const m=result.document.metadata,path=`/portfolio/${result.solution.slug}`;
+ const base=buildMetadata({title:m.seoTitle,description:m.metaDescription,path,image:m.socialImage||m.coverImage});
+ // The CMS SEO title is exact; do not append Najhum a second time.
+ return {...base,title:{absolute:m.seoTitle},openGraph:{...base.openGraph,title:m.seoTitle,images:m.socialImage?[{url:new URL(m.socialImage,process.env.NEXT_PUBLIC_APP_URL||'https://najhumgroup.com').href,width:1200,height:630,alt:m.socialImageAlt||m.title}]:base.openGraph?.images},twitter:{...base.twitter,title:m.seoTitle}};
+}
+export default async function ProjectPage({params}:{params:Promise<{slug:string}>}){
+ const result=await published((await params).slug);if(!result)notFound();
+ const m=result.document.metadata;
+ return <><StructuredData data={pageSchema({title:m.seoTitle,description:m.metaDescription,path:`/portfolio/${m.slug}`},[],{'@type':'CreativeWork',name:m.title,provider:{'@type':'Organization',name:'Najhum Technologies LLC'}})}/><main className="solution-page min-h-screen pt-20"><HtmlSolution key={result.solution.publishedRevisionId} document={result.document}/></main></>;
+}

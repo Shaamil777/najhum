@@ -35,5 +35,5 @@ it('includes published indexable projects and respects portfolio listing indexin
  db.solutions.mockResolvedValue([]);db.products.mockResolvedValue([]);db.projects.mockResolvedValue([{slug:'connected-campus',updatedAt:new Date()}]);db.portfolioSettings.mockResolvedValue({noIndex:true});
  const urls=(await sitemap()).map(item=>item.url);
  expect(urls).toContain('https://najhumgroup.com/portfolio/connected-campus');expect(urls).not.toContain('https://najhumgroup.com/portfolio');
- expect(db.projects).toHaveBeenCalledWith(expect.objectContaining({where:{isDraft:false,noIndex:false,publishedAt:{not:null}}}));
+ expect(db.projects).toHaveBeenCalledWith(expect.objectContaining({where:{isDraft:false,noIndex:false,publishedAt:{not:null},contentMode:'HTML',publishedRevisionId:{not:null}}}));
 });

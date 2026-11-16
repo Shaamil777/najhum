@@ -16,6 +16,7 @@ export async function saveImport(id:string|undefined,document:ImportedDocument,a
     const obsolete=await tx.solutionRevision.findMany({where:{solutionId:solution.id,id:{notIn:solution.publishedRevisionId?[solution.publishedRevisionId]:[]}}});
     const revision=await tx.solutionRevision.create({data:{solutionId:solution.id,number:(latest?.number||0)+1,document:document as unknown as Prisma.InputJsonValue,createdBy:actor}});
     await tx.solutionRevision.deleteMany({where:{id:{in:obsolete.map(row=>row.id)}}});
+    await tx.solution.update({where:{id:solution.id},data:{updatedAt:new Date()}});
     return {id:solution.id,revisionId:revision.id,number:revision.number,obsolete:obsolete.map(row=>row.document as unknown as ImportedDocument)};
   },{isolationLevel:Prisma.TransactionIsolationLevel.Serializable});
   await cleanUnusedImportAssets(result.obsolete).catch(error=>console.error('Unused solution media cleanup failed',error));
@@ -42,5 +43,5 @@ export async function getImportSession(id:string) {
   if(!solution)return null;
   const latest=solution.revisions[0];
   const revision=latest?await prisma.solutionRevision.findUnique({where:{id:latest.id}}):null;
-  return {id:solution.id,isDraft:solution.isDraft,publishedRevisionId:solution.publishedRevisionId,baseRevisionId:latest?.id||'',document:revision?describeAssets(revision.document as unknown as ImportedDocument):null,revisions:solution.revisions.map(r=>({...r,createdAt:r.createdAt.toISOString()}))};
+  return {id:solution.id,publishedSlug:solution.slug,isDraft:solution.isDraft,publishedRevisionId:solution.publishedRevisionId,baseRevisionId:latest?.id||'',document:revision?describeAssets(revision.document as unknown as ImportedDocument):null,revisions:solution.revisions.map(r=>({...r,createdAt:r.createdAt.toISOString()}))};
 }

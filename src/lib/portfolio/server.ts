@@ -4,7 +4,7 @@ import { projectSchema, settingsSchema } from './schema';
 import { sanitizeBlogContent } from '@/lib/blog/content';
 import { apiErrors } from '@/lib/utils/api-error';
 import { revalidatePath } from 'next/cache';
-export const publishedProjects = { isDraft:false,publishedAt:{not:null} } as const;
+export const publishedProjects = { isDraft:false,publishedAt:{not:null},contentMode:'HTML',publishedRevisionId:{not:null} } as const;
 export async function getPortfolioSettings() { return settingsSchema.parse(await prisma.portfolioSettings.findUnique({where:{id:'main'}}) ?? {}); }
 export function prepareProject(input:unknown) {
  const data=projectSchema.parse(input);

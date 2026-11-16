@@ -11,7 +11,7 @@ it('replaces the previous working draft while leaving the live page untouched',a
  await saveImport('solution',doc,'admin','old-draft');
  expect(m.revision.findMany).toHaveBeenCalledWith({where:{solutionId:'solution',id:{notIn:['live']}}});
  expect(m.revision.deleteMany).toHaveBeenCalledWith({where:{id:{in:['old-draft']}}});
- expect(m.solution.update).not.toHaveBeenCalled();expect(m.cleanup).toHaveBeenCalledWith([doc]);
+ expect(m.solution.update).toHaveBeenCalledWith({where:{id:'solution'},data:{updatedAt:expect.any(Date)}});expect(m.cleanup).toHaveBeenCalledWith([doc]);
  expect(m.revision.create.mock.calls[0][0].data.document.metadata.productIds).toEqual([]);
 });
 it('rejects stale draft saves before replacing any content',async()=>{m.revision.findFirst.mockResolvedValue({id:'newer',number:2});await expect(saveImport('solution',doc,'admin','older')).rejects.toThrow('newer draft');expect(m.revision.create).not.toHaveBeenCalled();expect(m.revision.deleteMany).not.toHaveBeenCalled();});

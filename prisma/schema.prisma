@@ -176,6 +176,9 @@ model BlogSettings {
 
 model PortfolioProject {
   id String @id @default(cuid())
+  contentMode String @default("LEGACY")
+  publishedRevisionId String?
+  revisions PortfolioRevision[]
   slug String @unique
   title String
   summary String @default("")
@@ -216,6 +219,18 @@ model PortfolioProject {
   updatedAt DateTime @updatedAt
   @@index([isDraft, publishedAt])
 }
+model PortfolioRevision {
+  id String @id @default(cuid())
+  projectId String
+  number Int
+  document Json
+  createdBy String
+  createdAt DateTime @default(now())
+  project PortfolioProject @relation(fields:[projectId], references:[id], onDelete:Cascade)
+  @@unique([projectId, number])
+  @@index([projectId, createdAt])
+}
+
 model PortfolioSettings {
   id String @id @default("main")
   heading String @default("Connected infrastructure. Proven in practice.")
