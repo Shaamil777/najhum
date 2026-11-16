@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes=["","/about","/contact","/privacy-policy","/terms-and-conditions","/products","/solutions","/blogs","/portfolio","/platforms/iotrics","/platforms/evoltics","/platforms/cropifai"];
   const staticPages:MetadataRoute.Sitemap=routes.map(route=>({url:`${siteConfig.url}${route}`,changeFrequency:"monthly",priority:route===""?1:.8}));
   const [solutions,products,blogs,blogSettings,projects,portfolioSettings]=await Promise.allSettled([
-    prisma.solution.findMany({where:{isDraft:false},select:{slug:true,updatedAt:true}}),
+    prisma.solution.findMany({where:{isDraft:false,contentMode:'HTML',publishedRevisionId:{not:null}},select:{slug:true,updatedAt:true}}),
     prisma.product.findMany({where:{isDraft:false},select:{id:true,name:true,updatedAt:true}}),
     prisma.blogPost.findMany({where:{isDraft:false,noIndex:false,publishedAt:{not:null}},select:{slug:true,updatedAt:true}}),
     prisma.blogSettings.findUnique({where:{id:"main"},select:{noIndex:true}}),

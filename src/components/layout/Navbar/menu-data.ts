@@ -1,5 +1,5 @@
 import { matchesClassification, type SolutionClassification } from '@/lib/solution-classification';
-export interface PublishedSolutionItem { title: string; slug: string; metaDescription: string | null; classification?: SolutionClassification; }
+export interface PublishedSolutionItem { title: string; slug: string; metaDescription: string | null; classification?: SolutionClassification; menuDescription?:string|null; menuIcon?:string|null; }
 const SOLUTION_ICONS: Record<string, string> = {
   "facilities-management":
     "M4 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17M16 9h3a1 1 0 0 1 1 1v11M2 21h20M8 7h4M8 11h4M8 15h4",
@@ -26,7 +26,7 @@ const shortDescriptions: Record<string, string> = {
 };
 export function buildSolutionGroups(solutions: PublishedSolutionItem[]) {
   const published = solutions;
-  const toItem = (s: PublishedSolutionItem) => ({ title: s.title, href: `/solutions/${s.slug}`, desc: shortDescriptions[s.slug] || s.metaDescription || "Connected monitoring for your operations", d: SOLUTION_ICONS[s.slug] || DEFAULT_ICON });
+  const toItem = (s: PublishedSolutionItem) => ({ title: s.title, href: `/solutions/${s.slug}`, desc: s.menuDescription || shortDescriptions[s.slug] || s.metaDescription || "Connected monitoring for your operations", d: iconPath(s.menuIcon) || SOLUTION_ICONS[s.slug] || DEFAULT_ICON, iconUrl: s.menuIcon?.startsWith('https://')||s.menuIcon?.startsWith('/')?s.menuIcon:undefined });
   const industry = published.filter(s => matchesClassification(s.classification, 'industry')).map(toItem);
   const usecase = published.filter(s => matchesClassification(s.classification, 'usecase')).map(toItem);
   const hotel = industry.find(s => s.href.endsWith('/hospitality')) || industry[0];
@@ -36,3 +36,5 @@ export function buildSolutionGroups(solutions: PublishedSolutionItem[]) {
     usecase: { label: "By use case", hint: "What you need to monitor", heading: "Solutions by use case", subheading: "Pick what you need to solve", items: usecase, featured: cold },
   };
 }
+
+export function iconPath(name?:string|null){return ({snowflake:'M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9',building:SOLUTION_ICONS['facilities-management'],factory:SOLUTION_ICONS.industrial,bolt:SOLUTION_ICONS['energy-monitoring'],leaf:'M20 4C8 2 2 8 6 16s14 2 14-12ZM6 16l9-8',warehouse:'M3 21V8l9-5 9 5v13M7 21V11h10v10'})[name||''];}

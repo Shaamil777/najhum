@@ -10,12 +10,14 @@ import { prisma } from '@/lib/db/prisma';
 export async function GET() {
   try {
     const solutions = await prisma.solution.findMany({
-      where: { isDraft: false },
+      where: { isDraft: false, contentMode: 'HTML', publishedRevisionId: { not: null } },
       select: {
         title: true,
         classification: true,
         slug: true,
         metaDescription: true,
+        menuDescription: true,
+        menuIcon: true,
       },
       orderBy: { title: 'asc' },
     });

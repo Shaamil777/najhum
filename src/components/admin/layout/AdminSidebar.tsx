@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, LayoutDashboard, Layers, Plus, X, Package, Users, BookOpen, BriefcaseBusiness } from "lucide-react";
+import { LayoutDashboard, Layers, Plus, X, Package, Users, BookOpen, BriefcaseBusiness } from "lucide-react";
 import { LogoutButton } from "@/components/admin/auth/LogoutButton";
 
 export default function AdminSidebar({ onClose }: { onClose?: () => void }) {
@@ -35,11 +35,6 @@ export default function AdminSidebar({ onClose }: { onClose?: () => void }) {
         </ul>
         <Link href="/admin/solutions/new" onClick={onClose} className="mt-6 flex min-h-11 items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 px-3 text-sm font-medium text-slate-600 transition-colors hover:border-primary hover:bg-primary/5 hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"><Plus size={17} aria-hidden="true" />New solution</Link>
       </nav>
-      <div className="m-4 mt-8 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-        <p className="text-xs font-semibold text-slate-700">From workspace to website</p>
-        <p className="mt-1 text-xs leading-5 text-slate-500">See how your published pages look to visitors.</p>
-        <Link href="/solutions" onClick={onClose} className="mt-3 flex min-h-10 items-center gap-2 text-xs font-semibold text-primary focus-visible:outline-2 focus-visible:outline-primary">View live solutions <ArrowUpRight size={15} aria-hidden="true" /></Link>
-      </div>
       <div className="border-t border-slate-100 px-4 py-4">
         <div className="mb-3 flex items-center gap-3 px-2">
           <div aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">NA</div>

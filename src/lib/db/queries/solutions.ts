@@ -359,7 +359,7 @@ export async function getSolutionsByPlatform(
         platforms: {
           has: platformSlug,
         },
-        ...(publishedOnly ? { isDraft: false } : {}),
+        ...(publishedOnly ? { isDraft: false, contentMode: 'HTML', publishedRevisionId: { not: null } } : {}),
       },
       include: {
         sections: {

@@ -1,10 +1,9 @@
 "use client";
 
-import PortfolioVisibilityButton from '@/components/admin/PortfolioVisibilityButton';
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Trash2, Loader2 } from "lucide-react";
+import { Trash2, Loader2, Eye, EyeOff } from "lucide-react";
 import { classificationLabels, type SolutionClassification } from '@/lib/solution-classification';
 import { toast } from "sonner";
 
@@ -15,6 +14,7 @@ interface Solution {
   platforms?: string[];
   classification?: SolutionClassification;
   isDraft: boolean;
+  publishedRevisionId?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -28,6 +28,18 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
   const [filter, setFilter] = useState<FilterType>(initialFilter);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const router = useRouter();
+  const [visibilityId, setVisibilityId] = useState<string | null>(null);
+  async function toggleVisibility(solution: Solution) {
+    setVisibilityId(solution.id);
+    try {
+      const response = await fetch(`/api/admin/solutions/${solution.id}/visibility`, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({visible:solution.isDraft})});
+      const data = await response.json();
+      if(!response.ok)throw new Error(data.error || "Could not update visibility.");
+      setSolutions(old=>old.map(item=>item.id===solution.id?{...item,isDraft:data.isDraft}:item));
+      toast.success(data.isDraft?"Solution hidden from the website.":"Last published page is visible again. Pending draft edits stay private.");
+    } catch(error) { toast.error(error instanceof Error?error.message:"Could not update visibility."); }
+    finally {setVisibilityId(null);}
+  }
 
   const handleDelete = async (e: React.MouseEvent, solution: Solution) => {
     e.stopPropagation();
@@ -169,8 +181,8 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
         </Link>
       </div>
 
-      <div className="border-b border-gray-200 overflow-x-auto">
-        <nav className="-mb-px flex space-x-8 min-w-max px-2">
+      <div className="border-b border-gray-200 overflow-x-auto overflow-y-hidden">
+        <nav className="flex gap-6 min-w-max px-2 pt-1">
           <button
             onClick={() => setFilter('all')}
             className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm ${filter === 'all' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
@@ -209,8 +221,8 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
             </p>
           </div>
         ) : (
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200" style={{width:"100%",minWidth:1000,borderCollapse:"collapse",tableLayout:"auto"}}>
+            <thead className="bg-gray-50" style={{backgroundColor:"#f8fafc"}}>
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Title
@@ -280,7 +292,7 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                   <td className="px-6 py-4 whitespace-nowrap">
                     {solution.isDraft ? (
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                        Draft
+                        {solution.publishedRevisionId ? "Hidden" : "Draft"}
                       </span>
                     ) : (
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -296,7 +308,11 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                     })}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" onClick={(e) => e.stopPropagation()}>
-                    <PortfolioVisibilityButton id={solution.id} kind="solutions" hidden={solution.isDraft}/>
+                    <div style={{display:"flex",alignItems:"center",justifyContent:"flex-end",gap:12,flexWrap:"nowrap"}}>
+                    <Link href={`/admin/solutions/${solution.id}/edit`} className="text-sm text-blue-600 whitespace-nowrap" onClick={e=>e.stopPropagation()}>Open editor</Link>
+                    <button type="button" onClick={()=>void toggleVisibility(solution)} disabled={visibilityId===solution.id || deletingId===solution.id || (solution.isDraft&&!solution.publishedRevisionId)} title={solution.isDraft&&!solution.publishedRevisionId?"Publish the draft in the editor first":solution.isDraft?"Show the last published page":"Hide from the website"} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-slate-600 hover:bg-slate-50 disabled:opacity-50 whitespace-nowrap">
+                      {visibilityId===solution.id?<Loader2 size={15} className="animate-spin"/>:solution.isDraft?<Eye size={15}/>:<EyeOff size={15}/>}{solution.isDraft?'Show':'Hide'}
+                    </button>
                     <button
                       type="button"
                       onClick={(e) => handleDelete(e, solution)}
@@ -311,6 +327,7 @@ export default function SolutionsList({ initialFilter = "all" }: { initialFilter
                         <Trash2 size={16} />
                       )}
                     </button>
+                    </div>
                   </td>
                 </tr>
               ))}

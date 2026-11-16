@@ -12,7 +12,7 @@ describe("public sitemap",()=>{
     expect(urls).not.toContain('https://najhumgroup.com/demo');
     expect(urls).toContain('https://najhumgroup.com/solutions/cold-storage');
     expect(urls).not.toContain('https://najhumgroup.com/platforms');
-    expect(db.solutions).toHaveBeenCalledWith(expect.objectContaining({where:{isDraft:false}}));
+    expect(db.solutions).toHaveBeenCalledWith(expect.objectContaining({where:{isDraft:false,contentMode:'HTML',publishedRevisionId:{not:null}}}));
     expect(db.products).toHaveBeenCalledWith(expect.objectContaining({where:{isDraft:false}}));
   });
   it("keeps static pages discoverable if the database is unavailable",async()=>{

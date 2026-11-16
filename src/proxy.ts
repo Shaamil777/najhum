@@ -10,6 +10,9 @@ export default async function middleware(request: NextRequest) {
     try {
       await requireAdmin(request);
       if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method)) requireSameOrigin(request);
+      if (/^\/api\/admin\/solutions\/[^/]+\/(builder|sections)(?:\/|$)/.test(pathname)) {
+        return NextResponse.json({error:'The section builder has been retired. Use the HTML import editor.'},{status:410});
+      }
       return addSecurityHeaders(NextResponse.next());
     } catch (error) { return addSecurityHeaders(handleApiError(error)); }
   }

@@ -12,12 +12,9 @@ import { revalidateSolutions } from '@/lib/utils/revalidate-solutions';
 import { verifyToken } from '@/lib/auth/jwt';
 import {
   getSolutionById,
-  updateSolution,
   deleteSolution,
 } from '@/lib/db/queries/solutions';
-import { updateSolutionSchema } from '@/lib/validation/solution-schemas';
 import { handleApiError, apiErrors } from '@/lib/utils/api-error';
-import { ZodError } from 'zod';
 
 /**
  * Extract and verify JWT token from request
@@ -129,86 +126,8 @@ export async function GET(
  * 
  * Requirements: 3.6, 10.8
  */
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  try {
-    // Authenticate request
-    await authenticateRequest(request);
-    
-    // Await params (Next.js 15 requirement)
-    const { id } = await params;
-    
-    // Parse request body
-    const body = await request.json();
-    
-    // Validate request body with Zod schema
-    let validatedData;
-    try {
-      validatedData = updateSolutionSchema.parse(body);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        throw error; // Will be handled by handleApiError
-      }
-      throw error;
-    }
-    
-    // Update solution in database
-    try {
-      const previous = await getSolutionById(id);
-      const solution = await updateSolution(id, validatedData);
-      revalidateSolutions(previous?.slug);
-      revalidateSolutions(solution.slug);
-      
-      // Format response
-      return NextResponse.json(
-        {
-          id: solution.id,
-          title: solution.title,
-          slug: solution.slug,
-          metaDescription: solution.metaDescription,
-          coverImage: solution.coverImage,
-          platforms: solution.platforms,
-      classification: solution.classification,
-          isDraft: solution.isDraft,
-          createdAt: solution.createdAt.toISOString(),
-          updatedAt: solution.updatedAt.toISOString(),
-        },
-        { status: 200 }
-      );
-    } catch (error) {
-      // Handle specific database errors
-      if (error instanceof Error) {
-        if (error.message === 'Solution not found') {
-          throw apiErrors.notFound('Solution not found');
-        }
-        if (error.message === 'A solution with this slug already exists') {
-          throw apiErrors.conflict('A solution with this slug already exists');
-        }
-      }
-      throw error;
-    }
-    
-  } catch (error) {
-    return handleApiError(error);
-  }
-}
+export async function PUT() { return NextResponse.json({error:'Use the HTML import editor to save versioned metadata.'},{status:410}); }
 
-/**
- * DELETE /api/admin/solutions/[id]
- * 
- * Deletes a solution and all associated sections and images (cascade).
- * 
- * @param id - Solution ID from URL params
- * @returns Empty response
- * @status 204 - Success (no content)
- * @status 401 - Unauthorized
- * @status 404 - Solution not found
- * @status 500 - Server error
- * 
- * Requirements: 3.7, 10.9
- */
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

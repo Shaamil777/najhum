@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ArrowRight, HelpCircle } from "lucide-react";
 import { matchesClassification, type SolutionClassification } from "@/lib/solution-classification";
+import { iconPath } from './menu-data';
 import { cn } from "@/lib/utils";
 
 export interface PublishedSolutionItem {
@@ -12,12 +13,15 @@ export interface PublishedSolutionItem {
   slug: string;
   metaDescription: string | null;
   classification?: SolutionClassification;
+  menuDescription?:string|null;
+  menuIcon?:string|null;
 }
 
 interface SolutionMenuItem {
   title: string;
   desc: string;
   d: string;
+  iconUrl?:string;
   href: string;
 }
 
@@ -31,39 +35,6 @@ interface TabData {
   featHref: string;
   items: SolutionMenuItem[];
 }
-
-const DEFAULT_SOLUTIONS: PublishedSolutionItem[] = [
-  {
-    classification: 'BOTH',
-    title: "Facilities Management",
-    slug: "facilities-management",
-    metaDescription: "Connect comfort, utilities and critical assets with IoTRICs. Give facilities teams a clearer building-wide view and a practical way to prioritise attention.",
-  },
-  {
-    classification: 'BOTH',
-    title: "Hospitality & Hotels",
-    slug: "hospitality",
-    metaDescription: "Connected hotel operations for guest comfort, refrigeration, utilities and maintenance. Help service teams work from a shared view of the property.",
-  },
-  {
-    classification: 'BOTH',
-    title: "Cold Storage",
-    slug: "cold-storage",
-    metaDescription: "Connect cold-room conditions, door activity and refrigeration demand. Understand exceptions with the context needed for a focused response.",
-  },
-  {
-    classification: 'BOTH',
-    title: "Industrial & Manufacturing",
-    slug: "industrial",
-    metaDescription: "Connected industrial monitoring for materials, equipment and plant conditions. Give production and maintenance teams a shared view across shifts.",
-  },
-  {
-    classification: 'BOTH',
-    title: "Energy Monitoring",
-    slug: "energy-monitoring",
-    metaDescription: "See electricity use by site, circuit or asset. Establish a baseline, investigate operating patterns and review the effect of changes with IoTRICs.",
-  },
-];
 
 const SOLUTION_ICONS: Record<string, string> = {
   "facilities-management":
@@ -91,7 +62,7 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
 
   // Active list of published solutions, initialized with passed prop or known defaults
   const [liveSolutions, setLiveSolutions] = useState<PublishedSolutionItem[]>(
-    solutions && solutions.length > 0 ? solutions : DEFAULT_SOLUTIONS
+    solutions
   );
 
   useEffect(() => {
@@ -104,7 +75,7 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
           return res.json();
         })
         .then((data) => {
-          if (Array.isArray(data.solutions) && data.solutions.length > 0) {
+          if (Array.isArray(data.solutions) && true) {
             setLiveSolutions(data.solutions);
           }
         })
@@ -116,7 +87,7 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
   const getDbMeta = useCallback(
     (slug: string, fallback: string) => {
       const found = liveSolutions.find((s) => s.slug === slug);
-      return found?.metaDescription?.trim() || fallback;
+      return found?.menuDescription?.trim() || found?.metaDescription?.trim() || fallback;
     },
     [liveSolutions]
   );
@@ -134,18 +105,18 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
     // Generate industry items dynamically from real published solutions
     const industryItems: SolutionMenuItem[] = liveSolutions.filter(sol => matchesClassification(sol.classification, 'industry')).map((sol) => ({
       title: sol.title,
-      desc: sol.metaDescription?.trim() || "Explore connected operations with real-time telemetry.",
-      d: SOLUTION_ICONS[sol.slug] || DEFAULT_ICON,
+      desc: sol.menuDescription?.trim() || sol.metaDescription?.trim() || "Explore connected operations with real-time telemetry.",
+      d: iconPath(sol.menuIcon) || SOLUTION_ICONS[sol.slug] || DEFAULT_ICON, iconUrl: sol.menuIcon?.startsWith('https://')||sol.menuIcon?.startsWith('/')?sol.menuIcon:undefined,
       href: `/solutions/${sol.slug}`,
     }));
 
     // Real operational use cases linking strictly to published solutions
     const useCaseItems: SolutionMenuItem[] = liveSolutions
       .filter(sol => matchesClassification(sol.classification, 'usecase'))
-      .map(sol => ({ title: sol.title, desc: sol.metaDescription || 'Explore connected operations.', d: SOLUTION_ICONS[sol.slug] || DEFAULT_ICON, href: `/solutions/${sol.slug}` }));
+      .map(sol => ({ title: sol.title, desc: sol.menuDescription || sol.metaDescription || 'Explore connected operations.', d: iconPath(sol.menuIcon) || SOLUTION_ICONS[sol.slug] || DEFAULT_ICON, iconUrl: sol.menuIcon?.startsWith('https://')||sol.menuIcon?.startsWith('/')?sol.menuIcon:undefined, href: `/solutions/${sol.slug}` }));
 
-    const featuredHospitality = liveSolutions.find((s) => s.slug === "hospitality") || liveSolutions[0] || DEFAULT_SOLUTIONS[1];
-    const featuredColdStorage = liveSolutions.find((s) => s.slug === "cold-storage") || liveSolutions[2] || DEFAULT_SOLUTIONS[2];
+    const featuredHospitality = liveSolutions.find((s) => s.slug === "hospitality") || liveSolutions[0] || {title:'Explore solutions',slug:'',metaDescription:''};
+    const featuredColdStorage = liveSolutions.find((s) => s.slug === "cold-storage") || liveSolutions[2] || {title:'Explore solutions',slug:'',metaDescription:''};
 
     return {
       industry: {
@@ -379,7 +350,7 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
                   >
                     {/* SVG Icon with blue background that turns filled blue on hover */}
                     <span className="flex-none w-11 h-11 rounded-[12px] bg-[#EAF3FD] text-[#167DE4] group-hover/item:bg-[#167DE4] group-hover/item:text-white flex items-center justify-center transition-colors duration-200">
-                      <svg
+                      {item.iconUrl ? <img src={item.iconUrl} alt="" className="h-6 w-6 object-contain"/> : (                      <svg
                         aria-hidden="true"
                         width="22"
                         height="22"
@@ -391,7 +362,7 @@ export function SolutionsMegaMenu({ solutions = [] }: { solutions?: PublishedSol
                         strokeLinejoin="round"
                       >
                         <path d={item.d} />
-                      </svg>
+                      </svg>)}
                     </span>
 
                     {/* Text Details */}

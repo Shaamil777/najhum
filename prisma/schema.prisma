@@ -17,11 +17,31 @@ model Solution {
   updatedAt       DateTime  @updatedAt
   platforms       String[]  @default([])
   classification  SolutionClassification @default(INDUSTRY)
+  contentMode     String @default("HTML")
+  seoTitle        String?
+  menuDescription String?
+  menuIcon        String?
+  socialImage     String?
+  socialImageAlt  String?
+  publishedRevisionId String?
+  revisions       SolutionRevision[]
   images          Image[]
   sections        Section[]
 
   @@index([slug])
   @@index([isDraft])
+}
+
+model SolutionRevision {
+  id          String @id @default(cuid())
+  solutionId  String
+  number      Int
+  document    Json
+  createdBy   String
+  createdAt   DateTime @default(now())
+  solution    Solution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  @@unique([solutionId, number])
+  @@index([solutionId, createdAt])
 }
 
 model Section {

@@ -1,3 +1,5 @@
+'use client';
+import { useEffect,useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
@@ -51,14 +53,6 @@ const platforms = [
   },
 ];
 
-const solutions = [
-  { title: "Facilities Management", href: "/solutions/facilities-management" },
-  { title: "Hospitality & Hotels", href: "/solutions/hospitality" },
-  { title: "Cold Storage", href: "/solutions/cold-storage" },
-  { title: "Industrial & Manufacturing", href: "/solutions/industrial" },
-  { title: "Energy Monitoring", href: "/solutions/energy-monitoring" },
-];
-
 const companyLinks = [
   { title: "About Us", href: "/about" },
   { title: "Products", href: "/products" },
@@ -68,6 +62,8 @@ const companyLinks = [
 ];
 
 export function FooterLinks() {
+  const [solutions,setSolutions]=useState<{title:string;href:string}[]>([]);
+  useEffect(()=>{const abort=new AbortController();fetch('/api/solutions/published',{signal:abort.signal}).then(r=>r.ok?r.json():{solutions:[]}).then(data=>setSolutions((data.solutions||[]).slice(0,5).map((s:{title:string;slug:string})=>({title:s.title,href:`/solutions/${s.slug}`})))).catch(()=>{});return ()=>abort.abort();},[]);
   return (
     <div className="w-full py-16 lg:py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto relative z-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 xl:gap-12">

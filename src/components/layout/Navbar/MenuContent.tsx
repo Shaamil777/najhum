@@ -67,7 +67,7 @@ export function SolutionsMenuContent({ solutions, mobile = false, onNavigate }: 
           {current.items.length === 0 && <p role="status">No published solutions in this category yet.</p>}
           <div className={styles.solutionGrid}>
             {current.items.map(item => <Link key={item.href} href={item.href} onClick={onNavigate} className={styles.solutionRow}>
-              <span className={styles.solutionIcon}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={item.d} /></svg></span>
+              <span className={styles.solutionIcon}>{item.iconUrl ? <img src={item.iconUrl} alt="" width="22" height="22" className="object-contain"/> : <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={item.d} /></svg>}</span>
               <span className={styles.solutionText}><strong>{item.title}</strong><span>{item.desc}</span></span><ChevronRight className={styles.rowArrow} size={16} aria-hidden="true" />
             </Link>)}
           </div>

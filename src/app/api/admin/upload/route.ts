@@ -7,6 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/lib/auth/jwt';
+import { verifyAsset } from '@/lib/solution-import/parse';
 import { uploadToR2 } from '@/lib/storage/r2';
 import { handleApiError } from '@/lib/utils/api-error';
 
@@ -62,6 +63,11 @@ export async function POST(req: NextRequest) {
         { error: `File type "${file.type}" is not supported. Allowed: PDF, JPG, PNG, WebP, GIF, SVG.` },
         { status: 400 }
       );
+    }
+
+    if(folder==='solution-media'){
+      if(file.size>4*1024*1024)return NextResponse.json({error:'Solution images must be under 4 MB.'},{status:400});
+      try{verifyAsset(new Uint8Array(await file.arrayBuffer()),file.type);}catch{return NextResponse.json({error:'The image file is invalid or contains unsupported SVG content.'},{status:400});}
     }
 
     // 5. Generate unique key

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   const category = request.nextUrl.searchParams.get('category') || 'All';
   const entries: SearchEntry[] = recommendedPages.map(entry => ({ ...entry, keywords: `${entry.keywords || ''} ${entry.href === '/platforms/iotrics' ? searchableText(iotricsContent) : entry.href === '/platforms/evoltics' ? searchableText(evolticsContent) : entry.href === '/platforms/cropifai' ? searchableText(cropifaiContent) : ''}` }));
   const results = await Promise.allSettled([
-    prisma.solution.findMany({ where: { isDraft: false }, select: { title: true, slug: true, metaDescription: true, platforms: true, sections: { where: { isDraft: false }, select: { content: true } } }, orderBy: { title: 'asc' } }),
+    prisma.solution.findMany({ where: { isDraft: false, contentMode: 'HTML', publishedRevisionId: { not: null } }, select: { title: true, slug: true, metaDescription: true, platforms: true, sections: { where: { isDraft: false }, select: { content: true } } }, orderBy: { title: 'asc' } }),
     prisma.blogPost.findMany({ where: { isDraft: false, publishedAt: { not: null } }, select: { title: true, slug: true, excerpt: true, category: true, author: true, tags: true, content: true }, orderBy: { publishedAt: 'desc' } }),
     prisma.product.findMany({ where: { isDraft: false }, select: { id: true, name: true, description: true, features: true, details: true, platforms: true }, orderBy: { order: 'asc' } }),
     prisma.portfolioProject.findMany({ where: { isDraft: false, publishedAt: { not: null } }, select: {title:true,slug:true,summary:true,clientName:true,industry:true,platforms:true,challenge:true,solution:true,results:true}, orderBy:{publishedAt:'desc'} }),
